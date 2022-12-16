@@ -1,7 +1,6 @@
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.FlowPane;
 import javafx.stage.Stage;
 
 import java.io.File;
@@ -32,6 +31,7 @@ public class CheckAction {
     public TextField txtf_TF;
     public TextField txtf_SR;
     public TextField txtf_SearchPath2;
+    public TabPane sp;
 
     TextField[] txtf_Sys_id_set = new TextField[12];
     TextField[] txtf_Sec_R_N_set = new TextField[12];
@@ -61,26 +61,16 @@ public class CheckAction {
             }
         }
 
-       /* Panel exjp1 = new Panel();
-        exjp1.setLayout(new FlowLayout(FlowLayout.LEFT, 10, 10));
-        Panel exjp2 = new Panel();
-        exjp2.setLayout(new FlowLayout(FlowLayout.LEFT, 10, 10));
-        Panel exjp3 = new Panel();
-        exjp3.setLayout(new FlowLayout(FlowLayout.LEFT, 10, 10));
-        Panel exjp4 = new Panel();
-        exjp4.setLayout(new FlowLayout(FlowLayout.LEFT, 10, 10));
-        Panel exjp5 = new Panel();
-        exjp5.setLayout(new FlowLayout(FlowLayout.LEFT, 10, 10));
-        Panel exjp6 = new Panel();
-        exjp6.setLayout(new FlowLayout(FlowLayout.LEFT, 10, 10));
-        Panel exjp7 = new Panel();
-        exjp7.setLayout(new FlowLayout(FlowLayout.LEFT, 10, 10));
-        Panel exjp8 = new Panel();
-        exjp8.setLayout(new FlowLayout(FlowLayout.LEFT, 10, 10));
-        Panel exjp9 = new Panel();
-        exjp9.setLayout(new FlowLayout(FlowLayout.LEFT, 10, 10));
-        Panel exjp10 = new Panel();
-        exjp10.setLayout(new FlowLayout(FlowLayout.LEFT, 10, 10));*/
+        FlowPane exjp1 = new FlowPane();
+        FlowPane exjp2 = new FlowPane();
+        FlowPane exjp3 = new FlowPane();
+        FlowPane exjp4 = new FlowPane();
+        FlowPane exjp5 = new FlowPane();
+        FlowPane exjp6 = new FlowPane();
+        FlowPane exjp7 = new FlowPane();
+        FlowPane exjp8 = new FlowPane();
+        FlowPane exjp9 = new FlowPane();
+        FlowPane exjp10 = new FlowPane();
 
         Label_sys_id = new Label("System_id");
         LabelRN = new Label("Security_Role_Name");
@@ -103,54 +93,30 @@ public class CheckAction {
             txtf_SR = new TextField("cognos");
             txtf_SearchPath2 = new TextField(SC_data_miner.Search_path_for_ehd_acs[0]);
 
-           /* exjp1.add(Label_sys_id);
-            exjp1.add(txtf_Sys_id);
-            exjp2.add(LabelRN);
-            exjp2.add(txtf_Sec_R_N);
-            exjp3.add(LabelRP);
-            exjp3.add(txtf_Sec_R_P);
-            exjp4.add(LabelSP);
-            exjp4.add(txtf_SearchPath);
-            exjp5.add(LabelSP2);
-            exjp5.add(txtf_SearchPath2);
-            exjp7.add(Label_Name);
-            exjp7.add(txtf_NAME);
+            exjp1.getChildren().addAll(Label_sys_id, txtf_Sys_id);
+            exjp2.getChildren().addAll(LabelRN, txtf_Sec_R_N);
+            exjp3.getChildren().addAll(LabelRP, txtf_Sec_R_P);
+            exjp4.getChildren().addAll(LabelSP, txtf_SearchPath);
+            exjp5.getChildren().addAll(LabelSP2, txtf_SearchPath2);
+            exjp7.getChildren().addAll(Label_Name, txtf_NAME);
             //exjp8.add(LabelPid);
             //exjp8.add(txtf_Pid);
-            exjp9.add(LabelTF);
-            exjp9.add(txtf_TF);
-            exjp10.add(LabelSR);
-            exjp10.add(txtf_SR);*/
+            exjp9.getChildren().addAll(LabelTF, txtf_TF);
+            exjp10.getChildren().addAll(LabelSR, txtf_SR);
 
-            /*cp2.add(exjp1);
-            cp2.add(exjp2);
-            cp2.add(exjp3);
-            cp2.add(exjp4);
-            cp2.add(exjp5);
-            cp2.add(exjp7);
-            cp2.add(exjp8);
-            cp2.add(exjp9);
-            cp2.add(exjp10);*/
+            root.getChildren().addAll(exjp1, exjp2, exjp3, exjp4, exjp5, exjp7, exjp8, exjp9, exjp10);
+            
         } else {
-            /*Panel[] PanelSet = new Panel[12];
-            Panel[] exjp1_set = new Panel[12];
-            exjp1.setLayout(new FlowLayout(FlowLayout.LEFT, 10, 10));
-            Panel[] exjp2_set = new Panel[12];
-            exjp2.setLayout(new FlowLayout(FlowLayout.LEFT, 10, 10));
-            Panel[] exjp3_set = new Panel[12];
-            exjp3.setLayout(new FlowLayout(FlowLayout.LEFT, 10, 10));
-            Panel[] exjp4_set = new Panel[12];
-            exjp4.setLayout(new FlowLayout(FlowLayout.LEFT, 10, 10));
-            Panel[] exjp5_set = new Panel[12];
-            exjp5.setLayout(new FlowLayout(FlowLayout.LEFT, 10, 10));
-            Panel[] exjp7_set= new Panel[12];
-            exjp7.setLayout(new FlowLayout(FlowLayout.LEFT, 10, 10));
-            Panel[] exjp8_set = new Panel[12];
-            exjp8.setLayout(new FlowLayout(FlowLayout.LEFT, 10, 10));
-            Panel[] exjp9_set = new Panel[12];
-            exjp9.setLayout(new FlowLayout(FlowLayout.LEFT, 10, 10));
-            Panel[] exjp10_set = new Panel[12];
-            exjp10.setLayout(new FlowLayout(FlowLayout.LEFT, 10, 10));*/
+            FlowPane[] PanelSet = new FlowPane[12];
+            FlowPane[] exjp1_set = new FlowPane[12];
+            FlowPane[] exjp2_set = new FlowPane[12];
+            FlowPane[] exjp3_set = new FlowPane[12];
+            FlowPane[] exjp4_set = new FlowPane[12];
+            FlowPane[] exjp5_set = new FlowPane[12];
+            FlowPane[] exjp7_set= new FlowPane[12];
+            FlowPane[] exjp8_set = new FlowPane[12];
+            FlowPane[] exjp9_set = new FlowPane[12];
+            FlowPane[] exjp10_set = new FlowPane[12];
 
             Label[] Label_sys_id_set = new Label[12];
             Label[] LabelRN_set = new Label[12];
@@ -163,16 +129,16 @@ public class CheckAction {
             Label[] LabelSP2_set = new Label[12];
 
             for(int t = 0; t<=11; t++){
-                /*PanelSet[t] = new Panel();
-                exjp1_set[t] = new Panel();
-                exjp2_set[t] = new Panel();
-                exjp3_set[t] = new Panel();
-                exjp4_set[t] = new Panel();
-                exjp5_set[t] = new Panel();
-                exjp7_set[t] = new Panel();
-                exjp8_set[t] = new Panel();
-                exjp9_set[t] = new Panel();
-                exjp10_set[t] = new Panel();*/
+                PanelSet[t] = new FlowPane();
+                exjp1_set[t] = new FlowPane();
+                exjp2_set[t] = new FlowPane();
+                exjp3_set[t] = new FlowPane();
+                exjp4_set[t] = new FlowPane();
+                exjp5_set[t] = new FlowPane();
+                exjp7_set[t] = new FlowPane();
+                exjp8_set[t] = new FlowPane();
+                exjp9_set[t] = new FlowPane();
+                exjp10_set[t] = new FlowPane();
 
                 txtf_Sys_id_set[t] = new TextField();
                 txtf_Sec_R_N_set[t] = new TextField();
@@ -194,8 +160,6 @@ public class CheckAction {
                 LabelSR_set[t] = new Label("SOURCE_REF(для EHD_ACS)");
                 LabelSP2_set[t] = new Label("Search_path(для EHD_ACS)");
             }
-            //JTabbedPane sp = new JTabbedPane(JTabbedPane.TOP, JTabbedPane.SCROLL_TAB_LAYOUT);
-            //sp.setPreferredSize(new Dimension(2000, 400));
 
             for(int o = 0; o <= count; o++){
                 System.out.print("o = " + o );
@@ -209,40 +173,21 @@ public class CheckAction {
                 txtf_SR_set[o].setText("cognos");
                 txtf_SearchPath2_set[o].setText(SC_data_miner.Search_path_for_ehd_acs[o]);
 
-                /*exjp1_set[o].add(Label_sys_id_set[o]);
-                exjp1_set[o].add(txtf_Sys_id_set[o]);
-                exjp2_set[o].add(LabelRN_set[o]);
-                exjp2_set[o].add(txtf_Sec_R_N_set[o]);
-                exjp3_set[o].add(Label_RP_set[o]);
-                exjp3_set[o].add(txtf_Sec_R_P_set[o]);
-                exjp4_set[o].add(Label_SP_set[o]);
-                exjp4_set[o].add(txtf_SearchPath_set[o]);
-                exjp5_set[o].add(LabelSP2_set[o]);
-                exjp5_set[o].add(txtf_SearchPath2_set[o]);
-                exjp7_set[o].add(Label_Name_set[o]);
-                exjp7_set[o].add(txtf_NAME_set[o]);
-                //exjp8_set[o].add(LabelPid_set[o]);
-                //exjp8_set[o].add(txtf_Pid_set[o]);
-                exjp9_set[o].add(LabelTF_set[o]);
-                exjp9_set[o].add(txtf_TF_set[o]);
-                exjp10_set[o].add(LabelSR_set[o]);
-                exjp10_set[o].add(txtf_SR_set[o]);
+                exjp1_set[o].getChildren().addAll(Label_sys_id_set[o], txtf_Sys_id_set[o]);
+                exjp2_set[o].getChildren().addAll(LabelRN_set[o], txtf_Sec_R_N_set[o]);
+                exjp3_set[o].getChildren().addAll(Label_RP_set[o], txtf_Sec_R_P_set[o]);
+                exjp4_set[o].getChildren().addAll(Label_SP_set[o], txtf_SearchPath_set[o]);
+                exjp5_set[o].getChildren().addAll(LabelSP2_set[o], txtf_SearchPath2_set[o]);
+                exjp7_set[o].getChildren().addAll(Label_Name_set[o], txtf_NAME_set[o]);
+                //exjp8_set[o]..getChildren().addAll(LabelPid_set[o]);
+                //exjp8_set[o]..getChildren().addAll(txtf_Pid_set[o]);
+                exjp9_set[o].getChildren().addAll(LabelTF_set[o],txtf_TF_set[o]);
+                exjp10_set[o].getChildren().addAll(LabelSR_set[o], txtf_SR_set[o]);
 
-                PanelSet[o].setLayout(new FlowLayout(FlowLayout.LEFT, 10, 10));
-
-                PanelSet[o].add(exjp1_set[o]);
-                PanelSet[o].add(exjp2_set[o]);
-                PanelSet[o].add(exjp3_set[o]);
-                PanelSet[o].add(exjp4_set[o]);
-                PanelSet[o].add(exjp5_set[o]);
-                PanelSet[o].add(exjp7_set[o]);
-                PanelSet[o].add(exjp8_set[o]);
-                PanelSet[o].add(exjp9_set[o]);
-                PanelSet[o].add(exjp10_set[o]);
-
-                sp.addTab("Форма " + (o+1), PanelSet[o]);*/
+                PanelSet[o].getChildren().addAll(exjp1_set[o], exjp2_set[o], exjp3_set[o], exjp4_set[o], exjp5_set[o], exjp7_set[o], exjp8_set[o], exjp9_set[o], exjp10_set[o]);
+                sp.getTabs().add(new Tab("Форма " + (o+1), PanelSet[o]));
             }
-            //cp2.add(sp);
+            root.getChildren().add(sp);
         }
 
         mnf.setWidth(2020);
@@ -250,9 +195,9 @@ public class CheckAction {
 
 
         ScrBtn2 = new Button("Создать скрипт");
-        //exjp6.add(ScrBtn2);
+        exjp6.getChildren().add(ScrBtn2);
 
-        //cp2.add(exjp6);
+        root.getChildren().add(exjp6);
 
         if(count == 0){
             //ScrBtn2.addActionListener(new ButtonListener3(path_u1, mnf, cp2, txtf_Sys_id, txtf_Sec_R_N, txtf_Sec_R_P, txtf_SearchPath, txtf_SearchPath2,  txtf_NAME /*, txtf_Pid*/, txtf_TF, txtf_SR));
