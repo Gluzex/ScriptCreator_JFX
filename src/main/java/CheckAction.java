@@ -1,6 +1,9 @@
+import javafx.geometry.Insets;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.io.File;
@@ -61,16 +64,16 @@ public class CheckAction {
             }
         }
 
-        FlowPane exjp1 = new FlowPane();
-        FlowPane exjp2 = new FlowPane();
-        FlowPane exjp3 = new FlowPane();
-        FlowPane exjp4 = new FlowPane();
-        FlowPane exjp5 = new FlowPane();
-        FlowPane exjp6 = new FlowPane();
-        FlowPane exjp7 = new FlowPane();
-        FlowPane exjp8 = new FlowPane();
-        FlowPane exjp9 = new FlowPane();
-        FlowPane exjp10 = new FlowPane();
+        HBox exjp1 = new HBox(15.0);
+        HBox exjp2 = new HBox(15.0);
+        HBox exjp3 = new HBox(15.0);
+        HBox exjp4 = new HBox(15.0);
+        HBox exjp5 = new HBox(15.0);
+        HBox exjp6 = new HBox(15.0);
+        HBox exjp7 = new HBox(15.0);
+        HBox exjp8 = new HBox(15.0);
+        HBox exjp9 = new HBox(15.0);
+        HBox exjp10 = new HBox(15.0);
 
         Label_sys_id = new Label("System_id");
         LabelRN = new Label("Security_Role_Name");
@@ -107,16 +110,17 @@ public class CheckAction {
             root.getChildren().addAll(exjp1, exjp2, exjp3, exjp4, exjp5, exjp7, exjp8, exjp9, exjp10);
             
         } else {
-            FlowPane[] PanelSet = new FlowPane[12];
-            FlowPane[] exjp1_set = new FlowPane[12];
-            FlowPane[] exjp2_set = new FlowPane[12];
-            FlowPane[] exjp3_set = new FlowPane[12];
-            FlowPane[] exjp4_set = new FlowPane[12];
-            FlowPane[] exjp5_set = new FlowPane[12];
-            FlowPane[] exjp7_set= new FlowPane[12];
-            FlowPane[] exjp8_set = new FlowPane[12];
-            FlowPane[] exjp9_set = new FlowPane[12];
-            FlowPane[] exjp10_set = new FlowPane[12];
+            sp = new TabPane();
+            VBox[] PanelSet = new VBox[12];
+            HBox[] exjp1_set = new HBox[12];
+            HBox[] exjp2_set = new HBox[12];
+            HBox[] exjp3_set = new HBox[12];
+            HBox[] exjp4_set = new HBox[12];
+            HBox[] exjp5_set = new HBox[12];
+            HBox[] exjp7_set= new HBox[12];
+            HBox[] exjp8_set = new HBox[12];
+            HBox[] exjp9_set = new HBox[12];
+            HBox[] exjp10_set = new HBox[12];
 
             Label[] Label_sys_id_set = new Label[12];
             Label[] LabelRN_set = new Label[12];
@@ -129,16 +133,17 @@ public class CheckAction {
             Label[] LabelSP2_set = new Label[12];
 
             for(int t = 0; t<=11; t++){
-                PanelSet[t] = new FlowPane();
-                exjp1_set[t] = new FlowPane();
-                exjp2_set[t] = new FlowPane();
-                exjp3_set[t] = new FlowPane();
-                exjp4_set[t] = new FlowPane();
-                exjp5_set[t] = new FlowPane();
-                exjp7_set[t] = new FlowPane();
-                exjp8_set[t] = new FlowPane();
-                exjp9_set[t] = new FlowPane();
-                exjp10_set[t] = new FlowPane();
+                PanelSet[t] = new VBox(15.0);
+                PanelSet[t].setPadding(new Insets(10.0));
+                exjp1_set[t] = new HBox(15.0);
+                exjp2_set[t] = new HBox(15.0);
+                exjp3_set[t] = new HBox(15.0);
+                exjp4_set[t] = new HBox(15.0);
+                exjp5_set[t] = new HBox(15.0);
+                exjp7_set[t] = new HBox(15.0);
+                exjp8_set[t] = new HBox(15.0);
+                exjp9_set[t] = new HBox(15.0);
+                exjp10_set[t] = new HBox(15.0);
 
                 txtf_Sys_id_set[t] = new TextField();
                 txtf_Sec_R_N_set[t] = new TextField();
@@ -166,7 +171,11 @@ public class CheckAction {
                 txtf_Sys_id_set[o].setText(SC_data_miner.System_id[o]);
                 txtf_Sec_R_N_set[o].setText(SC_data_miner.Security_role_name[o]);
                 txtf_Sec_R_P_set[o].setText(SC_data_miner.Security_role_path[o]);
+                txtf_Sec_R_P_set[o].setMinWidth(75.0);
+                txtf_Sec_R_P_set[o].setPrefColumnCount(125);
                 txtf_SearchPath_set[o].setText(SC_data_miner.Search_path[o]);
+                txtf_SearchPath_set[o].setMinWidth(75.0);
+                txtf_SearchPath_set[o].setPrefColumnCount(125);
                 txtf_NAME_set[o].setText(FName2);
                 //txtf_Pid_set[o].setText("Введите parent_id");
                 txtf_TF_set[o].setText("cognos");
@@ -188,9 +197,11 @@ public class CheckAction {
                 sp.getTabs().add(new Tab("Форма " + (o+1), PanelSet[o]));
             }
             root.getChildren().add(sp);
+            sp.setLayoutX(15);
+            sp.setLayoutY(140);
         }
 
-        mnf.setWidth(2020);
+        mnf.setWidth(1720);
         mnf.setHeight(600);
 
 
@@ -198,6 +209,8 @@ public class CheckAction {
         exjp6.getChildren().add(ScrBtn2);
 
         root.getChildren().add(exjp6);
+        exjp6.setLayoutY(95);
+        exjp6.setLayoutX(140);
 
         if(count == 0){
             //ScrBtn2.addActionListener(new ButtonListener3(path_u1, mnf, cp2, txtf_Sys_id, txtf_Sec_R_N, txtf_Sec_R_P, txtf_SearchPath, txtf_SearchPath2,  txtf_NAME /*, txtf_Pid*/, txtf_TF, txtf_SR));
