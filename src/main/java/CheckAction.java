@@ -1,3 +1,5 @@
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
@@ -11,10 +13,10 @@ import java.util.Objects;
 
 public class CheckAction {
     public File file11;
-    public String path_u1;
+    private static String path_u1;
     public String FName2;
-    public Stage mnf;
-    public AnchorPane root;
+    private static Stage mnf;
+    private static AnchorPane root;
     public Button ScrBtn2;
     public Label Label_sys_id;
     public Label LabelRN;
@@ -25,26 +27,28 @@ public class CheckAction {
     public Label LabelTF;
     public Label LabelSR;
     public Label LabelSP2;
-    public TextField txtf_Sys_id;
-    public TextField txtf_Sec_R_N;
-    public TextField txtf_Sec_R_P;
-    public TextField txtf_SearchPath;
-    public TextField txtf_NAME;
+    private static TextField txtf_Sys_id;
+    private static TextField txtf_Sec_R_N;
+    private static TextField txtf_Sec_R_P;
+    private static TextField txtf_SearchPath;
+    private static TextField txtf_NAME;
     //public TextField txtf_Pid;
-    public TextField txtf_TF;
-    public TextField txtf_SR;
-    public TextField txtf_SearchPath2;
+    private static TextField txtf_TF;
+    private static TextField txtf_SR;
+    private static TextField txtf_SearchPath2;
     public TabPane sp;
 
-    TextField[] txtf_Sys_id_set = new TextField[12];
-    TextField[] txtf_Sec_R_N_set = new TextField[12];
-    TextField[] txtf_Sec_R_P_set = new TextField[12];
-    TextField[] txtf_SearchPath_set = new TextField[12];
-    TextField[] txtf_NAME_set = new TextField[12];
+    private static int count = 0;
+
+    private static TextField[] txtf_Sys_id_set = new TextField[12];
+    private static TextField[] txtf_Sec_R_N_set = new TextField[12];
+    private static TextField[] txtf_Sec_R_P_set = new TextField[12];
+    private static TextField[] txtf_SearchPath_set = new TextField[12];
+    private static TextField[] txtf_NAME_set = new TextField[12];
     //TextField[] txtf_Pid_set = new TextField[12];
-    TextField[] txtf_TF_set = new TextField[12];
-    TextField[] txtf_SR_set = new TextField[12];
-    TextField[] txtf_SearchPath2_set = new TextField[12];
+    private static TextField[] txtf_TF_set = new TextField[12];
+    private static TextField[] txtf_SR_set = new TextField[12];
+    private static TextField[] txtf_SearchPath2_set = new TextField[12];
     public CheckAction(File file1, String fname1, String path_u, Stage primaryStage, AnchorPane root) {
         this.file11 = file1;
         this.path_u1 = path_u;
@@ -54,7 +58,6 @@ public class CheckAction {
 
         new SC_FEx(file11);
 
-        int count = 0;
         for (int y = 0; y<= SC_data_miner.Form_formal_code.length-1; y++) {
             if (SC_data_miner.Form_formal_code[y] == null || Objects.equals(SC_data_miner.Form_formal_code[y], "") || Objects.equals(SC_data_miner.Form_formal_code[y], " ")) {
                 count = y - 1;
@@ -206,17 +209,73 @@ public class CheckAction {
 
 
         ScrBtn2 = new Button("Создать скрипт");
+        //ScrBtn2.setOnAction(new PreCreateSc());
         exjp6.getChildren().add(ScrBtn2);
 
         root.getChildren().add(exjp6);
         exjp6.setLayoutY(95);
         exjp6.setLayoutX(140);
+    }
+    public static String getPath_u1(){
+        return CheckAction.path_u1;
+    }
+    public static int getCount(){
+        return CheckAction.count;
+    }
+    public static Stage getMnf(){
+        return CheckAction.mnf;
+    }
+    public static AnchorPane getRoot(){
+        return CheckAction.root;
+    }
+    public static TextField getTxtf_Sys_id(){
+        return CheckAction.txtf_Sys_id;
+    }
+    public static TextField getTxtf_Sec_R_N(){
+        return CheckAction.txtf_Sec_R_N;
+    }
+    public static TextField getTxtf_Sec_R_P(){
+        return CheckAction.txtf_Sec_R_P;
+    }
+    public static TextField getTxtf_SearchPath(){
+        return CheckAction.txtf_SearchPath;
+    }
+    public static TextField getTxtf_SearchPath2(){
+        return CheckAction.txtf_SearchPath2;
+    }
+    public static TextField getTxtf_NAME(){
+        return CheckAction.txtf_NAME;
+    }
+    public static TextField getTxtf_TF(){
+        return CheckAction.txtf_TF;
+    }
+    public static TextField getTxtf_SR(){
+        return CheckAction.txtf_SR;
+    }
 
-        if(count == 0){
-            //ScrBtn2.addActionListener(new ButtonListener3(path_u1, mnf, cp2, txtf_Sys_id, txtf_Sec_R_N, txtf_Sec_R_P, txtf_SearchPath, txtf_SearchPath2,  txtf_NAME /*, txtf_Pid*/, txtf_TF, txtf_SR));
-        } else {
-            //ScrBtn2.addActionListener(new ButtonListener3(path_u1, mnf, cp2, txtf_Sys_id_set, txtf_Sec_R_N_set, txtf_Sec_R_P_set, txtf_SearchPath_set, txtf_SearchPath2_set,  txtf_NAME_set /*, txtf_Pid_set*/, txtf_TF_set, txtf_SR_set));
-        }
+    public static TextField[] getTxtf_Sys_id_set(){
+        return CheckAction.txtf_Sys_id_set;
+    }
+    public static TextField[] getTxtf_Sec_R_N_set(){
+        return CheckAction.txtf_Sec_R_N_set;
+    }
+    public static TextField[] getTxtf_Sec_R_P_set(){
+        return CheckAction.txtf_Sec_R_P_set;
+    }
+    public static TextField[] getTxtf_SearchPath_set(){
+        return CheckAction.txtf_SearchPath_set;
+    }
+    public static TextField[] getTxtf_SearchPath2_set(){
+        return CheckAction.txtf_SearchPath2_set;
+    }
+    public static TextField[] getTxtf_NAME_set(){
+        return CheckAction.txtf_NAME_set;
+    }
+    public static TextField[] getTxtf_TF_set(){
+        return CheckAction.txtf_TF_set;
+    }
+    public static TextField[] getTxtf_SR_set(){
+        return CheckAction.txtf_SR_set;
     }
 
 }
