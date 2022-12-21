@@ -21,7 +21,7 @@ public class ScriptEXP {
 
         Date dateNow = new Date();
         SimpleDateFormat format_sql = new SimpleDateFormat("dd/MM/YY");
-        
+        String path2 = path;
         String iod = "";
         String pdn = "";
         String okud_rep_form = "";
@@ -893,16 +893,19 @@ public class ScriptEXP {
         }
 
         String fileData = text;
-        String filePath = path + "\\reg_Code_SQL.txt";
+        int j = path2.lastIndexOf("\\");
+        path2 = path2.substring(0,j);
+        System.out.print("path2 = " + path2);
+        String filePath = path2 + "\\reg_Code_SQL.txt";
         File file = new File(filePath);
         if(isFileExists(file)){
             for(int i = 1; i<=50;){
-                String filePath2 = path + "\\reg_Code_SQL(" + i + ").txt";
+                String filePath2 = path2 + "\\reg_Code_SQL(" + i + ").txt";
                 File file2 = new File(filePath2);
                 if(isFileExists((file2))){
                     i++;
                 } else{
-                    FileOutputStream fos = new FileOutputStream(path + "\\reg_Code_SQL(" + i + ").txt");
+                    FileOutputStream fos = new FileOutputStream(path2 + "\\reg_Code_SQL(" + i + ").txt");
                     fos.write(fileData.getBytes());
                     fos.flush();
                     fos.close();
@@ -910,7 +913,7 @@ public class ScriptEXP {
                 }
             }
         } else {
-            FileOutputStream fos = new FileOutputStream(path + "\\reg_Code_SQL.txt");
+            FileOutputStream fos = new FileOutputStream(path2 + "\\reg_Code_SQL.txt");
             fos.write(fileData.getBytes());
             fos.flush();
             fos.close();

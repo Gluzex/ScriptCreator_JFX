@@ -1,8 +1,14 @@
+import javafx.fxml.FXML;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.Dialog;
+import javafx.scene.control.DialogPane;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import javax.swing.*;
+import java.awt.*;
 import java.io.IOException;
 
 
@@ -93,7 +99,16 @@ public class PreCreateSc {
             throw new RuntimeException(ex);
         }
 
-        /*JOptionPane.showMessageDialog(mnf, "Скрипт создан и записан в файл reg_Code_SQL.txt по пути исходного Excel файла");
+        Dialog<ButtonType> dialog = new Dialog<ButtonType>();
+        dialog.setTitle("Скрипт создан");
+        dialog.setHeaderText("SUCCESS!!!");
+        DialogPane dialogPane = dialog.getDialogPane();
+        //dialog.setGraphic(new ImageView(createImage(16, 16, Color.BLUE)));
+        dialog.setContentText("Скрипт успешно создан в файле reg_Code_SQL.txt по пути исходного Excel файла");
+        dialogPane.getButtonTypes().add(ButtonType.OK);
+        dialog.show();
+
+        /*
         JButton Reset = new JButton("Сброс");
         cp3.add(Reset);
 

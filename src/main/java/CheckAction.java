@@ -1,9 +1,7 @@
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
+
 import javafx.geometry.Insets;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -12,6 +10,7 @@ import java.io.File;
 import java.util.Objects;
 
 public class CheckAction {
+    public Button ScrBtn3;
     public File file11;
     private static String path_u1;
     public String FName2;
@@ -49,12 +48,13 @@ public class CheckAction {
     private static TextField[] txtf_TF_set = new TextField[12];
     private static TextField[] txtf_SR_set = new TextField[12];
     private static TextField[] txtf_SearchPath2_set = new TextField[12];
-    public CheckAction(File file1, String fname1, String path_u, Stage primaryStage, AnchorPane root) {
+    public CheckAction(File file1, String fname1, String path_u, Stage primaryStage, AnchorPane root, Button scrBtn3) {
         this.file11 = file1;
         this.path_u1 = path_u;
         this.FName2 = fname1;
         this.mnf = primaryStage;
         this.root = root;
+        this.ScrBtn3 = scrBtn3;
 
         new SC_FEx(file11);
 
@@ -206,15 +206,17 @@ public class CheckAction {
 
         mnf.setWidth(1720);
         mnf.setHeight(600);
+        mnf.centerOnScreen();
 
-
-        ScrBtn2 = new Button("Создать скрипт");
+        ScrBtn3.setVisible(true);
+        ScrBtn3.setDisable(false);
+        /*ScrBtn2 = new Button("Создать скрипт");
         //ScrBtn2.setOnAction(new PreCreateSc());
         exjp6.getChildren().add(ScrBtn2);
 
         root.getChildren().add(exjp6);
         exjp6.setLayoutY(95);
-        exjp6.setLayoutX(140);
+        exjp6.setLayoutX(140);*/
     }
     public static String getPath_u1(){
         return CheckAction.path_u1;

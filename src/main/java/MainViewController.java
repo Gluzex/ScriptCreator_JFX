@@ -24,6 +24,8 @@ public class MainViewController {
     private Button Browse;
     @FXML
     private Button ChckBtn1;
+    @FXML
+    public Button ScrBtn3;
 
     public void MainViewController(ActionEvent actionEvent) {
         primaryStage = SCJFXApp.getPrimaryStage();
@@ -52,7 +54,7 @@ public class MainViewController {
         File file1 = BrowseAction.getFile();
         String fname1 = BrowseAction.getFName1();
         String path_u = BrowseAction.getPath_u();
-        new CheckAction(file1, fname1, path_u, primaryStage, root);
+        new CheckAction(file1, fname1, path_u, primaryStage, root, ScrBtn3);
     }
     public void CreateClicked(){
         int count = CheckAction.getCount();
