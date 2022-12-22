@@ -27,7 +27,7 @@ public class ScriptEXP {
         String okud_rep_form = "";
 
         for(int u = 0; u<=11; u++){
-        FName_def[u] = PreCreateSc.UFName[0];
+        FName_def[u] = CreateSc.UFName[0];
         Pid_def[u] = "null";
         TR_def[u] = "cognos";
         SR_def[u] = "cognos";
@@ -43,24 +43,24 @@ public class ScriptEXP {
             }
         }
         if(count == 0){
-            if(PreCreateSc.UFName[0] != null)
-                FName_def[0] = PreCreateSc.UFName[0];
+            if(CreateSc.UFName[0] != null)
+                FName_def[0] = CreateSc.UFName[0];
             //if(PreCreateSc.Pid[0] != null)
                 //Pid_def[0] = PreCreateSc.Pid[0];
-            if(PreCreateSc.TR[0] != null)
-                TR_def[0] = PreCreateSc.TR[0];
-            if(PreCreateSc.SR[0] != null)
-                SR_def[0] = PreCreateSc.SR[0];
+            if(CreateSc.TR[0] != null)
+                TR_def[0] = CreateSc.TR[0];
+            if(CreateSc.SR[0] != null)
+                SR_def[0] = CreateSc.SR[0];
         } else {
             for(int q = 0; q<=count; q++){
-                if(PreCreateSc.UFName[q] != null)
-                    FName_def[q] = PreCreateSc.UFName[q];
+                if(CreateSc.UFName[q] != null)
+                    FName_def[q] = CreateSc.UFName[q];
                 //if(PreCreateSc.Pid[q] != null)
                     //Pid_def[q] = PreCreateSc.Pid[q];
-                if(PreCreateSc.TR[q] != null)
-                    TR_def[q] = PreCreateSc.TR[q];
-                if(PreCreateSc.SR[q] != null)
-                    SR_def[q] = PreCreateSc.SR[q];
+                if(CreateSc.TR[q] != null)
+                    TR_def[q] = CreateSc.TR[q];
+                if(CreateSc.SR[q] != null)
+                    SR_def[q] = CreateSc.SR[q];
             }
         }
         //Все листы есть и все заполнены

@@ -35,7 +35,7 @@ public class CheckAction {
     private static TextField txtf_TF;
     private static TextField txtf_SR;
     private static TextField txtf_SearchPath2;
-    public TabPane sp;
+    private static TabPane sp;
 
     private static int count = 0;
 
@@ -278,6 +278,9 @@ public class CheckAction {
     }
     public static TextField[] getTxtf_SR_set(){
         return CheckAction.txtf_SR_set;
+    }
+    public static TabPane getSp(){
+        return CheckAction.sp;
     }
 
 }

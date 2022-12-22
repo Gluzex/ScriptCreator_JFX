@@ -1,21 +1,15 @@
-import javafx.fxml.FXML;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.Dialog;
-import javafx.scene.control.DialogPane;
-import javafx.scene.control.TextField;
-import javafx.scene.image.ImageView;
+import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-import javax.swing.*;
-import java.awt.*;
 import java.io.IOException;
 
 
-public class PreCreateSc {
+public class CreateSc {
     public String path_u2;
     public Stage mnf;
     public AnchorPane root;
+    public Button resetBtn;
     public TextField txtf_Sys_id;
     public TextField txtf_Sec_R_N;
     public TextField txtf_Sec_R_P;
@@ -36,10 +30,11 @@ public class PreCreateSc {
     public static String[] TR = new String[12];
     public static String[] SR = new String[12];
     public int p;
-    public PreCreateSc(String path_u2, Stage mnf, AnchorPane root, TextField txtf_sys_id, TextField txtf_sec_r_n, TextField txtf_sec_r_p, TextField txtf_searchPath, TextField txtf_searchPath2, TextField txtf_name, TextField txtf_tf, TextField txtf_sr) {
+    public CreateSc(String path_u2, Stage mnf, AnchorPane root, TextField txtf_sys_id, TextField txtf_sec_r_n, TextField txtf_sec_r_p, TextField txtf_searchPath, TextField txtf_searchPath2, TextField txtf_name, TextField txtf_tf, TextField txtf_sr, Button resetBtn) {
         this.path_u2 = path_u2;
         this.mnf = mnf;
         this.root = root;
+        this.resetBtn = resetBtn;
         this.txtf_Sys_id = txtf_sys_id;
         this.txtf_Sec_R_N = txtf_sec_r_n;
         this.txtf_Sec_R_P = txtf_sec_r_p;
@@ -52,10 +47,11 @@ public class PreCreateSc {
         PreCreateSc_go();
     }
 
-    public PreCreateSc(String path_u2, Stage mnf, AnchorPane root, TextField[] txtf_sys_id_set, TextField[] txtf_sec_r_n_set, TextField[] txtf_sec_r_p_set, TextField[] txtf_searchPath_set, TextField[] txtf_searchPath2_set, TextField[] txtf_name_set, TextField[] txtf_tf_set, TextField[] txtf_sr_set){
+    public CreateSc(String path_u2, Stage mnf, AnchorPane root, TextField[] txtf_sys_id_set, TextField[] txtf_sec_r_n_set, TextField[] txtf_sec_r_p_set, TextField[] txtf_searchPath_set, TextField[] txtf_searchPath2_set, TextField[] txtf_name_set, TextField[] txtf_tf_set, TextField[] txtf_sr_set, Button resetBtn){
         this.path_u2 = path_u2;
         this.mnf = mnf;
         this.root = root;
+        this.resetBtn = resetBtn;
         this.txtf_Sys_id_set = txtf_sys_id_set;
         this.txtf_Sec_R_N_set = txtf_sec_r_n_set;
         this.txtf_Sec_R_P_set = txtf_sec_r_p_set;
@@ -108,11 +104,8 @@ public class PreCreateSc {
         dialogPane.getButtonTypes().add(ButtonType.OK);
         dialog.show();
 
-        /*
-        JButton Reset = new JButton("Сброс");
-        cp3.add(Reset);
-
-        Reset.addActionListener(new ButtonListener4(cp3, mnf));*/
+        resetBtn.setDisable(false);
+        resetBtn.setVisible(true);
     }
 }
 
