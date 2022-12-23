@@ -83,7 +83,6 @@ public class CheckAction {
         LabelRP = new Label("Security_role_path");
         LabelSP = new Label("Search_path");
         Label_Name = new Label("NAME(для EHD_ACS)");
-        //LabelPid = new Label("PARENT_ID(для EHD_ACS)");
         LabelTF = new Label("TYPE_REF(для EHD_ACS)");
         LabelSR = new Label("SOURCE_REF(для EHD_ACS)");
         LabelSP2 = new Label("Search_path(для EHD_ACS)");
@@ -94,7 +93,6 @@ public class CheckAction {
             txtf_Sec_R_P = new TextField(SC_data_miner.Security_role_path[0]);
             txtf_SearchPath = new TextField(SC_data_miner.Search_path[0]);
             txtf_NAME = new TextField(FName2);
-            //txtf_Pid = new TextField("Введите parent_id");
             txtf_TF = new TextField("cognos");
             txtf_SR = new TextField("cognos");
             txtf_SearchPath2 = new TextField(SC_data_miner.Search_path_for_ehd_acs[0]);
@@ -105,8 +103,6 @@ public class CheckAction {
             exjp4.getChildren().addAll(LabelSP, txtf_SearchPath);
             exjp5.getChildren().addAll(LabelSP2, txtf_SearchPath2);
             exjp7.getChildren().addAll(Label_Name, txtf_NAME);
-            //exjp8.add(LabelPid);
-            //exjp8.add(txtf_Pid);
             exjp9.getChildren().addAll(LabelTF, txtf_TF);
             exjp10.getChildren().addAll(LabelSR, txtf_SR);
 
@@ -130,7 +126,6 @@ public class CheckAction {
             Label[] Label_RP_set = new Label[12];
             Label[] Label_SP_set = new Label[12];
             Label[] Label_Name_set = new Label[12];
-            //Label[] LabelPid_set = new Label[12];
             Label[] LabelTF_set = new Label[12];
             Label[] LabelSR_set = new Label[12];
             Label[] LabelSP2_set = new Label[12];
@@ -153,7 +148,6 @@ public class CheckAction {
                 txtf_Sec_R_P_set[t] = new TextField();
                 txtf_SearchPath_set[t] = new TextField();
                 txtf_NAME_set[t] = new TextField();
-                //txtf_Pid_set[t] = new TextField();
                 txtf_TF_set[t] = new TextField();
                 txtf_SR_set[t] = new TextField();
                 txtf_SearchPath2_set[t] = new TextField();
@@ -180,7 +174,6 @@ public class CheckAction {
                 txtf_SearchPath_set[o].setMinWidth(75.0);
                 txtf_SearchPath_set[o].setPrefColumnCount(125);
                 txtf_NAME_set[o].setText(FName2);
-                //txtf_Pid_set[o].setText("Введите parent_id");
                 txtf_TF_set[o].setText("cognos");
                 txtf_SR_set[o].setText("cognos");
                 txtf_SearchPath2_set[o].setText(SC_data_miner.Search_path_for_ehd_acs[o]);
@@ -191,8 +184,6 @@ public class CheckAction {
                 exjp4_set[o].getChildren().addAll(Label_SP_set[o], txtf_SearchPath_set[o]);
                 exjp5_set[o].getChildren().addAll(LabelSP2_set[o], txtf_SearchPath2_set[o]);
                 exjp7_set[o].getChildren().addAll(Label_Name_set[o], txtf_NAME_set[o]);
-                //exjp8_set[o]..getChildren().addAll(LabelPid_set[o]);
-                //exjp8_set[o]..getChildren().addAll(txtf_Pid_set[o]);
                 exjp9_set[o].getChildren().addAll(LabelTF_set[o],txtf_TF_set[o]);
                 exjp10_set[o].getChildren().addAll(LabelSR_set[o], txtf_SR_set[o]);
 
@@ -210,13 +201,6 @@ public class CheckAction {
 
         ScrBtn3.setVisible(true);
         ScrBtn3.setDisable(false);
-        /*ScrBtn2 = new Button("Создать скрипт");
-        //ScrBtn2.setOnAction(new PreCreateSc());
-        exjp6.getChildren().add(ScrBtn2);
-
-        root.getChildren().add(exjp6);
-        exjp6.setLayoutY(95);
-        exjp6.setLayoutX(140);*/
     }
     public static String getPath_u1(){
         return CheckAction.path_u1;

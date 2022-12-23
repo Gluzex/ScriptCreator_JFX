@@ -335,7 +335,7 @@ public class SC_data_miner {
                     }
                     //System.out.print("Search_path[" + h + "] = " + Search_path[h] + "\n");
                     Search_path_for_ehd_acs[h] = "/content/folder[@name=''Приложение НИКА'']/folder[@name=''КО'']" + Search_path[h];
-                    Search_path[h] = "/content/folder[@name=''ФПС ИАППР'']/folder[@name=''ППК ОАД'']" + Search_path[h];
+                    Search_path[h] = "/content/folder[@name=''Приложение НИКА'']/folder[@name=''КО'']" + Search_path[h];
                 } else {
                     int coc = 0;
                     for(int ut = 0; ut<=Search_path[h].lastIndexOf("'");){
@@ -357,20 +357,20 @@ public class SC_data_miner {
                         //System.out.print("Search_path[" + h + "] = " + Search_path[h] + "\n");
                     }
                     int u = 0;
-                    System.out.print("vid = " + vid + "\n");
+                    //System.out.print("vid = " + vid + "\n");
                     switch (vid){
                         case 1:
                             u = Search_path[h].indexOf("/folder[@name=''Нерегламентированные");
-                            System.out.print("u = " + u + "\n");
+                            //System.out.print("u = " + u + "\n");
                             break;
                         case 2:
                             u = Search_path[h].indexOf("/folder[@name=''Регламентированные");
-                            System.out.print("u = " + u + "\n");
+                            //System.out.print("u = " + u + "\n");
                             break;
                     }
-                    System.out.print("Search_path[" + h + "] = " + Search_path[h] + "\n");
+                    //System.out.print("Search_path[" + h + "] = " + Search_path[h] + "\n");
                     Search_path_for_ehd_acs[h] = "/content/folder[@name=''Приложение НИКА'']/folder[@name=''КО'']" + Search_path[h].substring(u);
-                    System.out.print("Search_path_for_ehd_acs[" + h + "] = " + Search_path_for_ehd_acs[h] + "\n");
+                    //System.out.print("Search_path_for_ehd_acs[" + h + "] = " + Search_path_for_ehd_acs[h] + "\n");
                 }
             }
             //System.out.print("Search_path_for_ehd_acs[" + h + "] = " + Search_path_for_ehd_acs[h] + "\n");

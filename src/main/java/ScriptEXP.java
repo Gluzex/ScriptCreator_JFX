@@ -216,7 +216,7 @@ public class ScriptEXP {
                         "  (select t.id from EHD_ACS_OBJECTS t where t.type_ref in ('forms','ko_ao','apl_ao','ko_av') and t.code='"+ SC_data_miner.Form_cd[0] +"') as PARENT_ID,\n" +
                         "  '" + TR_def[0] + "' as TYPE_REF,\n" +
                         "  '" + SR_def[0] + "' as SOURCE_REF,\n" +
-                        "  '" + format_sql.format(dateNow) + "' as CREATE_DATE,\n" +
+                        "  TO_DATE('" + format_sql.format(dateNow) + "', 'DD/MM/YY') as CREATE_DATE,\n" +
                         "  null as UPDATE_DATE,\n" +
                         "  '" + SC_data_miner.Search_path_for_ehd_acs[0] + "' as SEARCH_PATH,\n" +
                         "  null as FLAG_EXP\n" +
@@ -231,30 +231,6 @@ public class ScriptEXP {
                         "   WHEN NOT MATCHED THEN INSERT (O.NAME, O.CODE, O.PARENT_ID, O.TYPE_REF, O.SOURCE_REF, O.CREATE_DATE, O.UPDATE_DATE, O.SEARCH_PATH, O.FLAG_EXP)\n" +
                         "   VALUES (S.NAME, S.CODE, S.PARENT_ID, S.TYPE_REF, S.SOURCE_REF, S.CREATE_DATE, S.UPDATE_DATE, S.SEARCH_PATH, S.FLAG_EXP);" ;
 
-
-                /*"\n" +
-                        "INSERT INTO REP_FORM (FORM_CD, FORM_NAME, FORM_OKUD) VALUES ('"+ SC_data_miner.Form_cd[0] +"', '"+ SC_data_miner.Form_name[0] +"', '"+ SC_data_miner.Form_okud[0] +"');\n" +
-                        "\n" +
-                        "INSERT INTO REP_FORM_COGNOS (FORM_CD, REP_FORM_CD) VALUES ('"+ SC_data_miner.Form_cd[0] + "', '"+ SC_data_miner.Rep_form_cd[0] + "');\n" +
-                        "\n" +
-                        "INSERT INTO REP_FORM_OKI (FORM_CD, FLAG_IOD, FLAG_PDN) VALUES ('"+ SC_data_miner.Form_cd[0] + "', '"+ SC_data_miner.Flag_IOD[0] +"', '"+ SC_data_miner.Flag_PDN[0] +"');\n" +
-                        "\n" +
-                        "INSERT INTO REP_FORM_DEP_OWNER (FORM_CD, DEP_NAME, REASON) VALUES ('"+ SC_data_miner.Form_cd[0] + "', '"+ SC_data_miner.Dep_name[0] +"', '"+ SC_data_miner.reason[0] +"');\n" +
-                        "\n" +
-                        "INSERT INTO REG_REPORT_FORM (SYSTEM_ID, SECURITY_ROLE_NAME, SECURITY_ROLE_PATH, SEARCH_PATH, FORM_CODE, FORM_FORMAL_CODE, DESCRIPTION, FLAG_IOD, FLAG_PDN) VALUES ('"+ SC_data_miner.System_id[0] +"', '"+ SC_data_miner.Security_role_name[0] +"', '"+ SC_data_miner.Security_role_path[0] +"', '"+ SC_data_miner.Search_path[0] +"', '"+ SC_data_miner.Form_cd[0] +"', '"+ SC_data_miner.Form_formal_code[0] +"', '"+ SC_data_miner.Desc[0] +"', '"+ SC_data_miner.Flag_IOD[0] +"', '"+ SC_data_miner.Flag_PDN[0] +"');\n" +
-                        "\n" +
-                        "INSERT INTO REPORT_OKUD_CODE (FORM_FORMAL_CODE, OKUD_CODE, PERIOD) VALUES ('"+ SC_data_miner.Form_formal_code[0] +"', '"+ SC_data_miner.Form_okud[0] +"', '"+ SC_data_miner.period[0] +"');\n" +
-                        "\n" +
-                        "INSERT INTO REPORT_FORM_SRC (FORM_FORMAL_CODE, REG_FORM_CODE) VALUES ('"+ SC_data_miner.Form_formal_code[0] +"', '"+ SC_data_miner.Reg_form_code[0] +"');\n" +
-                        "\n" +
-                        "INSERT INTO REPORT_REP_SUBJ_TYPE (FORM_FORMAL_CODE, REP_SUBJ_TYPE) VALUES ('"+ SC_data_miner.Form_formal_code[0] +"', '"+ SC_data_miner.rep_subj_type[0] +"');\n" +
-                        "\n" +
-                        "\n" +
-                        "--TechDB_EHD_ACS\n" +
-                        "\n" +
-                        "INSERT INTO EHD_ACS_OBJECTS (NAME, CODE, PARENT_ID, TYPE_REF, SOURCE_REF, SEARCH_PATH) " +
-                        "VALUES ('"+ FName_def[0] +"', '"+ SC_data_miner.Form_formal_code[0] +"', " + Pid_def[0] + ", '" + TR_def[0] + "', '" + SR_def[0] + "', " +
-                        "'" + SC_data_miner.Search_path_for_ehd_acs[0] + "')";*/
             } else{
                 if(SC_data_miner.Flag_IOD[0] == null){
                     iod = "null as FLAG_IOD";
@@ -411,7 +387,7 @@ public class ScriptEXP {
                         "  (select t.id from EHD_ACS_OBJECTS t where t.type_ref in ('forms','ko_ao','apl_ao','ko_av') and t.code='"+ SC_data_miner.Form_cd[0] +"') as PARENT_ID,\n" +
                         "  '" + TR_def[0] + "' as TYPE_REF,\n" +
                         "  '" + SR_def[0] + "' as SOURCE_REF,\n" +
-                        "  '" + format_sql.format(dateNow) + "' as CREATE_DATE,\n" +
+                        "  TO_DATE('" + format_sql.format(dateNow) + "', 'DD/MM/YY') as CREATE_DATE,\n" +
                         "  null as UPDATE_DATE,\n" +
                         "  '" + SC_data_miner.Search_path_for_ehd_acs[0] + "' as SEARCH_PATH,\n" +
                         "  null as FLAG_EXP\n" +
@@ -525,7 +501,7 @@ public class ScriptEXP {
                                     "  (select t.id from EHD_ACS_OBJECTS t where t.type_ref in ('forms','ko_ao','apl_ao','ko_av') and t.code='"+ SC_data_miner.Form_cd[n] +"') as PARENT_ID,\n" +
                                     "  '" + TR_def[n] + "' as TYPE_REF,\n" +
                                     "  '" + SR_def[n] + "' as SOURCE_REF,\n" +
-                                    "  '" + format_sql.format(dateNow) + "' as CREATE_DATE,\n" +
+                                    "  TO_DATE('" + format_sql.format(dateNow) + "', 'DD/MM/YY') as CREATE_DATE,\n" +
                                     "  null as UPDATE_DATE,\n" +
                                     "  '" + SC_data_miner.Search_path_for_ehd_acs[n] + "' as SEARCH_PATH,\n" +
                                     "  null as FLAG_EXP\n" +
@@ -644,7 +620,7 @@ public class ScriptEXP {
                         "  (select t.id from EHD_ACS_OBJECTS t where t.type_ref in ('forms','ko_ao','apl_ao','ko_av') and t.code='"+ SC_data_miner.Form_cd[0] +"') as PARENT_ID,\n" +
                         "  '" + TR_def[0] + "' as TYPE_REF,\n" +
                         "  '" + SR_def[0] + "' as SOURCE_REF,\n" +
-                        "  '" + format_sql.format(dateNow) + "' as CREATE_DATE,\n" +
+                        "  TO_DATE('" + format_sql.format(dateNow) + "', 'DD/MM/YY') as CREATE_DATE,\n" +
                         "  null as UPDATE_DATE,\n" +
                         "  '" + SC_data_miner.Search_path_for_ehd_acs[0] + "' as SEARCH_PATH,\n" +
                         "  null as FLAG_EXP\n" +
@@ -760,7 +736,7 @@ public class ScriptEXP {
                         "  (select t.id from EHD_ACS_OBJECTS t where t.type_ref in ('forms','ko_ao','apl_ao','ko_av') and t.code='"+ SC_data_miner.Form_cd[0] +"') as PARENT_ID,\n" +
                         "  '" + TR_def[0] + "' as TYPE_REF,\n" +
                         "  '" + SR_def[0] + "' as SOURCE_REF,\n" +
-                        "  '" + format_sql.format(dateNow) + "' as CREATE_DATE,\n" +
+                        "  TO_DATE('" + format_sql.format(dateNow) + "', 'DD/MM/YY') as CREATE_DATE,\n" +
                         "  null as UPDATE_DATE,\n" +
                         "  '" + SC_data_miner.Search_path_for_ehd_acs[0] + "' as SEARCH_PATH,\n" +
                         "  null as FLAG_EXP\n" +
@@ -874,7 +850,7 @@ public class ScriptEXP {
                             "  (select t.id from EHD_ACS_OBJECTS t where t.type_ref in ('forms','ko_ao','apl_ao','ko_av') and t.code='"+ SC_data_miner.Form_cd[n] +"') as PARENT_ID,\n" +
                             "  '" + TR_def[n] + "' as TYPE_REF,\n" +
                             "  '" + SR_def[n] + "' as SOURCE_REF,\n" +
-                            "  '" + format_sql.format(dateNow) + "' as CREATE_DATE,\n" +
+                            "  TO_DATE('" + format_sql.format(dateNow) + "', 'DD/MM/YY') as CREATE_DATE,\n" +
                             "  null as UPDATE_DATE,\n" +
                             "  '" + SC_data_miner.Search_path_for_ehd_acs[n] + "' as SEARCH_PATH,\n" +
                             "  null as FLAG_EXP\n" +
