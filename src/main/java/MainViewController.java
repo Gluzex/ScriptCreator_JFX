@@ -52,6 +52,8 @@ public class MainViewController {
     public void BrowseClicked(){
         new BrowseAction(txt_fld1, primaryStage, ChckBtn1, txtf1);
         txtf1.setDisable(true);
+        resetBtn.setVisible(true);
+        resetBtn.setDisable(false);
 
     }
     public void CheckClicked(){
@@ -107,6 +109,9 @@ public class MainViewController {
         ScrBtn3.setVisible(false);
         ScrBtn3.setDisable(true);
         cmbx1.setValue("");
+        cmbx1.setDisable(false);
+        txt_fld1.setText("");
+        txt_fld1.setDisable(false);
         primaryStage.setWidth(520);
         primaryStage.setHeight(240);
         Stage mnf = primaryStage;
