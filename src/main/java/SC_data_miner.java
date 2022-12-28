@@ -14,6 +14,7 @@ public class SC_data_miner {
     public static String[] Flag_IOD= new String[12];
     public static String[] Flag_PDN= new String[12];
     public static String[] Dep_name= new String[12];
+    public static String[] Dep_u_name= new String[12];
     public static String[] reason= new String[12];
     public static String[] Reg_form_code= new String[12];
     public static String[] System_id= new String[12];
@@ -150,6 +151,9 @@ public class SC_data_miner {
                                                             break;
                                                         case 3:
                                                             Dep_name[g - 1] = cell.getStringCellValue();
+                                                            break;
+                                                        case 4:
+                                                            Dep_u_name[g - 1] = cell.getStringCellValue();
                                                             break;
                                                         case 5:
                                                             Search_path[g - 1] = cell.getStringCellValue();
