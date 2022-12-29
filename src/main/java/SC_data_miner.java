@@ -9,6 +9,7 @@ public class SC_data_miner {
     public static String[] Form_cd = new String[12];
     public static String[] Form_name= new String[12];
     public static String[] Form_okud= new String[12];
+    public static String[] okud_form_cd= new String[12];
     public static String[] Form_cd_cog= new String[12];
     public static String[] Rep_form_cd= new String[12];
     public static String[] Flag_IOD= new String[12];
@@ -58,6 +59,9 @@ public class SC_data_miner {
                                                     switch (f) {
                                                         case 5:
                                                             Form_formal_code[g - 1] = cell.getStringCellValue();
+                                                            break;
+                                                        case 7:
+                                                            okud_form_cd[g - 1] = cell.getStringCellValue();
                                                             break;
                                                     }
                                                     break;
@@ -135,6 +139,9 @@ public class SC_data_miner {
                                                         case 5:
                                                             Form_formal_code[g - 1] = cell.getStringCellValue();
                                                             //System.out.print("\nform_formal_code[" + (g-1) + "] = " +  Form_formal_code[g - 1] + "\n");
+                                                            break;
+                                                        case 7:
+                                                            okud_form_cd[g - 1] = cell.getStringCellValue();
                                                             break;
                                                     }
                                                     break;
@@ -221,6 +228,9 @@ public class SC_data_miner {
                                                     switch (f) {
                                                         case 0:
                                                             Form_formal_code[g - 1] = cell.getStringCellValue();
+                                                            break;
+                                                        case 7:
+                                                            okud_form_cd[g - 1] = cell.getStringCellValue();
                                                             break;
                                                     }
                                                     break;
