@@ -119,6 +119,11 @@ public class ScriptEXP {
                         "minus select * from REP_FORM_DEP_OWNER;" +
                         "\n" +
                         "\n" +
+                        "INSERT INTO REP_FORM_DEP_USER\n" +
+                        "SELECT '"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, '"+ SC_data_miner.Dep_u_name[0] +"' as DEP_NAME, '"+ SC_data_miner.reason[0] +"'as REASON FROM dual\n" +
+                        "minus select * from REP_FORM_DEP_OWNER;" +
+                        "\n" +
+                        "\n" +
                         "MERGE INTO REG_REPORT_FORM R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.System_id[0] +"' as SYSTEM_ID, \n" +
@@ -212,6 +217,14 @@ public class ScriptEXP {
                         "INSERT INTO  REPORT_REP_SUBJ_TYPE \n" +
                         "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE FROM dual\n" +
                         "minus select * from REPORT_REP_SUBJ_TYPE;" +
+                        "\n" +
+                        "\n" +
+                        "--DM_NIKA_KO_DATA\n" +
+                        "\n" +
+                        "\n" +
+                        "INSERT INTO REP_FORM_COGNOS\n" +
+                        "SELECT '"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, '"+ SC_data_miner.Rep_form_cd[0] + "' as REP_FORM_CD FROM dual\n" +
+                        "minus select * from REP_FORM_COGNOS;" +
                         "\n" +
                         "\n" +
                         "--TechDB_EHD_ACS\n" +
@@ -283,6 +296,12 @@ public class ScriptEXP {
                         "minus select * from REP_FORM_DEP_OWNER;" +
                         "\n" +
                         "\n" +
+                        "INSERT INTO REP_FORM_DEP_USER\n" +
+                        "SELECT '"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, '"+ SC_data_miner.Dep_u_name[0] +"' as DEP_NAME, '"+ SC_data_miner.reason[0] +"'as REASON FROM dual\n" +
+                        "minus select * from REP_FORM_DEP_OWNER;" +
+                        "\n" +
+                        "\n" +
+                        "--$" +
                         "MERGE INTO REG_REPORT_FORM R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.System_id[0] +"' as SYSTEM_ID, \n" +
@@ -345,6 +364,12 @@ public class ScriptEXP {
                         "minus select * from REP_FORM_DEP_OWNER;" +
                         "\n" +
                         "\n" +
+                        "INSERT INTO REP_FORM_DEP_USER\n" +
+                        "SELECT '"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, '"+ SC_data_miner.Dep_u_name[0] +"' as DEP_NAME, '"+ SC_data_miner.reason[0] +"'as REASON FROM dual\n" +
+                        "minus select * from REP_FORM_DEP_OWNER;" +
+                        "\n" +
+                        "\n" +
+                        "--$" +
                         "MERGE INTO REG_REPORT_FORM R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.System_id[0] +"' as SYSTEM_ID, \n" +
@@ -382,6 +407,14 @@ public class ScriptEXP {
                         "minus select * from REPORT_REP_SUBJ_TYPE;" +
                         "\n" +
                         "\n" +
+                        "--DM_NIKA_KO_DATA\n" +
+                        "\n" +
+                        "\n" +
+                        "INSERT INTO REP_FORM_COGNOS\n" +
+                        "SELECT '"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, '"+ SC_data_miner.Rep_form_cd[0] + "' as REP_FORM_CD FROM dual\n" +
+                        "minus select * from REP_FORM_COGNOS;" +
+                        "\n" +
+                        "\n" +
                         "--#\n" +
                         "--TechDB_EHD_ACS\n" +
                         "\n" +
@@ -408,6 +441,35 @@ public class ScriptEXP {
                         "                                O.FLAG_EXP = S.FLAG_EXP\n" +
                         "   WHEN NOT MATCHED THEN INSERT (O.NAME, O.CODE, O.PARENT_ID, O.TYPE_REF, O.SOURCE_REF, O.CREATE_DATE, O.UPDATE_DATE, O.SEARCH_PATH, O.FLAG_EXP)\n" +
                         "   VALUES (S.NAME, S.CODE, S.PARENT_ID, S.TYPE_REF, S.SOURCE_REF, S.CREATE_DATE, S.UPDATE_DATE, S.SEARCH_PATH, S.FLAG_EXP);" ;
+                        String[] textset1;
+                        int kol=0;
+                        for (int t = 0; t<=SC_data_miner.Dep_u_name.length-1; t++){
+                         if(SC_data_miner.Dep_u_name[t] == null || Objects.equals(SC_data_miner.Dep_u_name[t], "") || Objects.equals(SC_data_miner.Dep_u_name[t], " ")){
+                         //кол-во добавляемых форм
+                         kol=t-1;
+                         break;
+                         } else {
+                            kol = t;
+                          }
+                         }
+                        if(kol!=0){
+                            for(int h = 1; h<=kol;h++){
+                                textset1 = text.split("$");
+                                text = textset1[0] + "\n" +
+                                        "\n" +
+                                        "INSERT INTO REP_FORM_DEP_USER\n" +
+                                        "SELECT '"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, '"+ SC_data_miner.Dep_u_name[h] +"' as DEP_NAME, '"+ SC_data_miner.reason[0] +"'as REASON FROM dual\n" +
+                                        "minus select * from REP_FORM_DEP_OWNER;" +
+                                        "--$" +
+                                        textset1[1] +
+                                        "\n" +
+                                        "INSERT INTO REP_FORM_DEP_USER\n" +
+                                        "SELECT '"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, '"+ SC_data_miner.Dep_u_name[h] +"' as DEP_NAME, '"+ SC_data_miner.reason[0] +"'as REASON FROM dual\n" +
+                                        "minus select * from REP_FORM_DEP_OWNER;" +
+                                        "--$" +
+                                        textset1[2];
+                            }
+                        }
                         String[] textset;
                         for(int n = 1; n<=count; n++){
                             if (SC_data_miner.Form_cd[n] == null){
@@ -618,6 +680,14 @@ public class ScriptEXP {
                         "minus select * from REPORT_REP_SUBJ_TYPE;" +
                         "\n" +
                         "\n" +
+                        "--DM_NIKA_KO_DATA\n" +
+                        "\n" +
+                        "\n" +
+                        "INSERT INTO REP_FORM_COGNOS\n" +
+                        "SELECT '"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, '"+ SC_data_miner.Rep_form_cd[0] + "' as REP_FORM_CD FROM dual\n" +
+                        "minus select * from REP_FORM_COGNOS;" +
+                        "\n" +
+                        "\n" +
                         "--TechDB_EHD_ACS\n" +
                         "\n" +
                         "MERGE INTO EHD_ACS_OBJECTS O\n" +
@@ -732,6 +802,14 @@ public class ScriptEXP {
                         "INSERT INTO  REPORT_REP_SUBJ_TYPE \n" +
                         "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE FROM dual\n" +
                         "minus select * from REPORT_REP_SUBJ_TYPE;" +
+                        "\n" +
+                        "--DM_NIKA_KO_DATA\n" +
+                        "\n" +
+                        "\n" +
+                        "INSERT INTO REP_FORM_COGNOS\n" +
+                        "SELECT '"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, '"+ SC_data_miner.Rep_form_cd[0] + "' as REP_FORM_CD FROM dual\n" +
+                        "minus select * from REP_FORM_COGNOS;" +
+                        "\n" +
                         "\n" +
                         "--#\n" +
                         "--TechDB_EHD_ACS\n" +
