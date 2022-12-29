@@ -11,6 +11,8 @@ public class MainViewController {
     @FXML
     private Label lab1;
     @FXML
+    private Label devlab;
+    @FXML
     private TextField txt_fld1;
     @FXML
     private ComboBox<String> cmbx1;
@@ -35,9 +37,12 @@ public class MainViewController {
         //txt_fld1.setText("action perfomed");
         if (Objects.equals(cmbx1.getValue(), "Из файла")){
             fromFile();
+        } else {
+            devlab.setVisible(true);
         }
     }
     public void fromFile(){
+        devlab.setVisible(false);
         cmbx1.setDisable(true);
         lab1.setVisible(true);
         txtf1.setVisible(true);

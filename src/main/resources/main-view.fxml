@@ -4,6 +4,7 @@
 <?import javafx.collections.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
 <AnchorPane prefHeight="240.0" prefWidth="584.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MainViewController">
     <children>
@@ -14,7 +15,7 @@
             <items>
                 <FXCollections fx:factory="observableArrayList">
                     <String fx:value="Из файла" />
-                    <String fx:value="Ручной" />
+                    <String fx:value="Ручной(В разработке)" />
                 </FXCollections>
             </items>
         </ComboBox>
@@ -24,5 +25,10 @@
       <Button fx:id="ChckBtn1" disable="true" layoutX="25.0" layoutY="95.0" mnemonicParsing="false" onAction="#CheckClicked" text="Проверить файл" visible="false" />
       <Button fx:id="ScrBtn3" disable="true" layoutX="144.0" layoutY="95.0" mnemonicParsing="false" onAction="#CreateClicked" prefHeight="25.0" prefWidth="108.0" text="Создать скрипт" visible="false" />
       <Button fx:id="resetBtn" disable="true" layoutX="268.0" layoutY="95.0" mnemonicParsing="false" onAction="#ResetClicked" prefHeight="25.0" prefWidth="81.0" text="Сброс" visible="false" />
+      <Label fx:id="devlab" layoutX="37.0" layoutY="87.0" prefHeight="17.0" prefWidth="615.0" text="Данный режим находится в разработке" visible="false">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
     </children>
 </AnchorPane>

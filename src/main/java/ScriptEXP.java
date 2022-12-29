@@ -25,11 +25,12 @@ public class ScriptEXP {
         String iod = "";
         String pdn = "";
         String okud_rep_form = "";
+        String techdb_code = "";
 
         for(int u = 0; u<=11; u++){
         FName_def[u] = CreateSc.UFName[0];
         Pid_def[u] = "null";
-        TR_def[u] = "cognos";
+        TR_def[u] = "cognos";//вопрос.не всегда тайпреф это когнос
         SR_def[u] = "cognos";
         }
         //считаем сколько форм добавляется
@@ -63,9 +64,15 @@ public class ScriptEXP {
                     SR_def[q] = CreateSc.SR[q];
             }
         }
+
         //Все листы есть и все заполнены
         if(chk == 1){
             if(count == 0){
+                if(Objects.equals(TR_def[0], "cognos")){
+                    techdb_code = SC_data_miner.Form_formal_code[0];
+                } else {
+                    techdb_code = SC_data_miner.Form_cd[0];
+                }
                 if(SC_data_miner.Flag_IOD[0] == null){
                     iod = "null as FLAG_IOD";
                 } else {
@@ -212,7 +219,7 @@ public class ScriptEXP {
                         "MERGE INTO EHD_ACS_OBJECTS O\n" +
                         "   USING (SELECT \n" +
                         "'"+ FName_def[0] +"' as NAME,\n" +
-                        "   '"+ SC_data_miner.Form_formal_code[0] +"' as CODE,\n" +
+                        "   '"+ techdb_code +"' as CODE,\n" +
                         "  (select t.id from EHD_ACS_OBJECTS t where t.type_ref in ('forms','ko_ao','apl_ao','ko_av') and t.code='"+ SC_data_miner.Form_cd[0] +"') as PARENT_ID,\n" +
                         "  '" + TR_def[0] + "' as TYPE_REF,\n" +
                         "  '" + SR_def[0] + "' as SOURCE_REF,\n" +
