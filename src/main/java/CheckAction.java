@@ -177,6 +177,8 @@ public class CheckAction {
                 txtf_TF_set[o].setText("cognos");
                 txtf_SR_set[o].setText("cognos");
                 txtf_SearchPath2_set[o].setText(SC_data_miner.Search_path_for_ehd_acs[o]);
+                txtf_SearchPath2_set[o].setMinWidth(75.0);
+                txtf_SearchPath2_set[o].setPrefColumnCount(125);
 
                 exjp1_set[o].getChildren().addAll(Label_sys_id_set[o], txtf_Sys_id_set[o]);
                 exjp2_set[o].getChildren().addAll(LabelRN_set[o], txtf_Sec_R_N_set[o]);

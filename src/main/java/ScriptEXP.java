@@ -84,16 +84,16 @@ public class ScriptEXP {
                     pdn = "'"+ SC_data_miner.Flag_PDN[0] + "' as FLAG_PDN";
                 }
                 int l = SC_data_miner.Form_cd[0].length();
-                System.out.print("\nl = " + l + "\n");
+                //System.out.print("\nl = " + l + "\n");
 
                 if(SC_data_miner.Form_cd[0].startsWith("0409")){
                     okud_rep_form = "null as FORM_OKUD";
-                    System.out.print("\nokud_rep_form = " + okud_rep_form + "\n");
-                    System.out.print("SC_data_miner.Form_cd[0].startsWith(\"0409\") = " + SC_data_miner.Form_cd[0].startsWith("0409"));
+                    //System.out.print("\nokud_rep_form = " + okud_rep_form + "\n");
+                    //System.out.print("SC_data_miner.Form_cd[0].startsWith(\"0409\") = " + SC_data_miner.Form_cd[0].startsWith("0409"));
                 } else {
                     okud_rep_form = "'"+ SC_data_miner.Form_okud[0] + "' as FORM_OKUD";
-                    System.out.print("\nokud_rep_form = " + okud_rep_form + "\n");
-                    System.out.print("SC_data_miner.Form_cd[0].startsWith(\"0409\") = " + SC_data_miner.Form_cd[0].startsWith("0409"));
+                    //System.out.print("\nokud_rep_form = " + okud_rep_form + "\n");
+                    //System.out.print("SC_data_miner.Form_cd[0].startsWith(\"0409\") = " + SC_data_miner.Form_cd[0].startsWith("0409"));
                 }
                 text =  "--" + FName_def[0] +"\n" +
                         "\n" +
@@ -265,12 +265,12 @@ public class ScriptEXP {
                 int l = SC_data_miner.Form_cd[0].length();
                 if(SC_data_miner.Form_cd[0].startsWith("0409")){
                     okud_rep_form = "null as FORM_OKUD";
-                    System.out.print("\nokud_rep_form = " + okud_rep_form + "\n");
-                    System.out.print("SC_data_miner.Form_cd[0].startsWith(\"0409\") = " + SC_data_miner.Form_cd[0].startsWith("0409"));
+                    //System.out.print("\nokud_rep_form = " + okud_rep_form + "\n");
+                    //System.out.print("SC_data_miner.Form_cd[0].startsWith(\"0409\") = " + SC_data_miner.Form_cd[0].startsWith("0409"));
                 } else {
                     okud_rep_form = "'"+ SC_data_miner.Form_okud[0] + "' as FORM_OKUD";
-                    System.out.print("\nokud_rep_form = " + okud_rep_form + "\n");
-                    System.out.print("SC_data_miner.Form_cd[0].startsWith(\"0409\") = " + SC_data_miner.Form_cd[0].startsWith("0409"));
+                    //System.out.print("\nokud_rep_form = " + okud_rep_form + "\n");
+                    //System.out.print("SC_data_miner.Form_cd[0].startsWith(\"0409\") = " + SC_data_miner.Form_cd[0].startsWith("0409"));
                 }
                 text = "--" + FName_def[0] + "\n" +
                         "\n" +
@@ -301,7 +301,7 @@ public class ScriptEXP {
                         "minus select * from REP_FORM_DEP_OWNER;" +
                         "\n" +
                         "\n" +
-                        "--$" +
+                        "--№\n" +
                         "MERGE INTO REG_REPORT_FORM R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.System_id[0] +"' as SYSTEM_ID, \n" +
@@ -370,7 +370,7 @@ public class ScriptEXP {
                         "minus select * from REP_FORM_DEP_OWNER;" +
                         "\n" +
                         "\n" +
-                        "--$" +
+                        "--№\n" +
                         "MERGE INTO REG_REPORT_FORM R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.System_id[0] +"' as SYSTEM_ID, \n" +
@@ -443,6 +443,7 @@ public class ScriptEXP {
                         "                                O.FLAG_EXP = S.FLAG_EXP\n" +
                         "   WHEN NOT MATCHED THEN INSERT (O.NAME, O.CODE, O.PARENT_ID, O.TYPE_REF, O.SOURCE_REF, O.CREATE_DATE, O.UPDATE_DATE, O.SEARCH_PATH, O.FLAG_EXP)\n" +
                         "   VALUES (S.NAME, S.CODE, S.PARENT_ID, S.TYPE_REF, S.SOURCE_REF, S.CREATE_DATE, S.UPDATE_DATE, S.SEARCH_PATH, S.FLAG_EXP);" ;
+                        //System.out.print("\ntext = " + text);
                         String[] textset2;
                         int kol2=0;
                         for(int hj = 0; hj<=SC_data_miner.Form_okud.length-1; hj++){
@@ -454,15 +455,22 @@ public class ScriptEXP {
                                 kol2 = hj;
                             }
                         }
-                        String okud_text = "";
-
+                        String[] okud_text = new String[10];
+                        for(int r = 0; r<=9; r++){
+                            okud_text[r] = "";
+                        }
+                        System.out.print("\nkol2 = " + kol2);
                         if(kol2 !=0){
-                            String[][] okud_pair = new String[count][kol2];
+                            String[][] okud_pair = new String[count+1][kol2+2];
                             for(int q = 0; q<=count; q++){
                                 okud_pair[q][0] = SC_data_miner.Form_formal_code[q];
+                                System.out.print("\nokud_pair[" + q + "][0] = " + okud_pair[q][0]);
+                                int y = 1;
                                 for(int i = 0; i<=kol2; i++){
                                     if(Objects.equals(SC_data_miner.okud_form_cd[i], SC_data_miner.Form_formal_code[q])){
-                                        okud_pair[q][i+1] = SC_data_miner.Form_okud[i];
+                                        okud_pair[q][y] = SC_data_miner.Form_okud[i];
+                                        y++;
+                                        System.out.print("\nokud_pair[" + q + "][" + (y) + "] = " + okud_pair[q][y]);
                                     }
                                 }
                             }
@@ -472,13 +480,16 @@ public class ScriptEXP {
                             }
                             for(int q = 0; q<=count; q++){
                                 for(int i = 0; i<=kol2; i++){
+                                    System.out.print("\nSC_data_miner.okud_form_cd[" +  i  + "] = " + SC_data_miner.okud_form_cd[i]);
+                                    System.out.print("\nSC_data_miner.Form_formal_code[" +  q  + "] = " + SC_data_miner.Form_formal_code[q]);
                                     if(Objects.equals(SC_data_miner.okud_form_cd[i], SC_data_miner.Form_formal_code[q])){
-                                        kol3[count]++;
+                                        kol3[q]++;
                                     }
                                 }
                             }
+                            System.out.print("\nkol3[0] = " + kol3[0]);
 
-                            for(int w = 0; w <= kol3[0]-1; w++){
+                            for(int w = 2; w <= kol3[0]; w++){
                                 textset2 = text.split("&");
                                 text = textset2[0] + "\n" +
                                         "\n" +
@@ -495,17 +506,19 @@ public class ScriptEXP {
                                         textset2[2];
 
                             }
+                            //System.out.print("\ntext2 = " + text);
                             for(int q = 0; q<=count; q++){
                                 for(int i = 0; i<=kol2; i++){
-                                    if (i+1 == kol3[q]){
+                                    if (i == kol3[q]){
                                      break;
                                     }
-                            okud_text = okud_text + "\n" +
+                                    okud_text[q] = okud_text[q] + "\n" +
                                     "\n" +
                                     "INSERT INTO REPORT_OKUD_CODE \n" +
                                     "SELECT '"+ SC_data_miner.Form_formal_code[q] +"' as FORM_FORMAL_CODE, '" + okud_pair[q][i+1] + "' as OKUD_CODE, '"+ SC_data_miner.period[i] +"'as PERIOD, null as FORM_CD FROM dual\n" +
                                     "minus select * from REPORT_OKUD_CODE;\n";
                                 }
+                                System.out.print("\nokud_text[" + q + "] = " + okud_text[q]);
                             }
 
                         }
@@ -524,31 +537,25 @@ public class ScriptEXP {
                          }
                         if(kol!=0){
                             for(int h = 1; h<=kol;h++){
-                                textset1 = text.split("$");
+                                textset1 = text.split("№");
                                 text = textset1[0] + "\n" +
                                         "\n" +
                                         "INSERT INTO REP_FORM_DEP_USER\n" +
                                         "SELECT '"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, '"+ SC_data_miner.Dep_u_name[h] +"' as DEP_NAME, '"+ SC_data_miner.reason[0] +"'as REASON FROM dual\n" +
-                                        "minus select * from REP_FORM_DEP_OWNER;" +
-                                        "--$" +
+                                        "minus select * from REP_FORM_DEP_OWNER;\n" +
+                                        "--№\n" +
                                         textset1[1] +
                                         "\n" +
                                         "INSERT INTO REP_FORM_DEP_USER\n" +
                                         "SELECT '"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, '"+ SC_data_miner.Dep_u_name[h] +"' as DEP_NAME, '"+ SC_data_miner.reason[0] +"'as REASON FROM dual\n" +
-                                        "minus select * from REP_FORM_DEP_OWNER;" +
-                                        "--$" +
+                                        "minus select * from REP_FORM_DEP_OWNER;\n" +
+                                        "--№\n" +
                                         textset1[2];
                             }
                         }
+                        //System.out.print("\ntext3 = " + text);
                         String[] textset;
                         for(int n = 1; n<=count; n++){
-                            if(kol2==0){
-                                okud_text = "\n" +
-                                        "INSERT INTO REPORT_OKUD_CODE \n" +
-                                        "SELECT '"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud[n] +"' as OKUD_CODE, '"+ SC_data_miner.period[n] +"'as PERIOD, null as FORM_CD FROM dual\n" +
-                                        "minus select * from REPORT_OKUD_CODE;\n" +
-                                        "\n";
-                            }
                             if (SC_data_miner.Form_cd[n] == null){
                                 SC_data_miner.Form_cd[n] = SC_data_miner.Form_cd[0];
                             }
@@ -580,7 +587,8 @@ public class ScriptEXP {
                                     "   WHEN NOT MATCHED THEN INSERT (R.SYSTEM_ID, R.SECURITY_ROLE_NAME, R.SECURITY_ROLE_PATH, R.SEARCH_PATH, R.FORM_CODE, R.FORM_FORMAL_CODE, R.DESCRIPTION, R.FLAG_IOD, R.FLAG_PDN)\n" +
                                     "   VALUES (S.SYSTEM_ID, S.SECURITY_ROLE_NAME, S.SECURITY_ROLE_PATH, S.SEARCH_PATH, S.FORM_CODE, S.FORM_FORMAL_CODE, S.DESCRIPTION, S.FLAG_IOD, S.FLAG_PDN);\n" +
                                     "\n" +
-                                    okud_text +
+                                    okud_text[n] +
+                                    "\n" +
                                     "INSERT INTO REPORT_FORM_SRC \n" +
                                     "SELECT '"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Reg_form_code[n] +"' as REG_FORM_CODE FROM dual\n" +
                                     "minus select * from REPORT_FORM_SRC;\n" +
@@ -671,8 +679,8 @@ public class ScriptEXP {
                 } else {
                     pdn = "'"+ SC_data_miner.Flag_PDN[0] + "' as FLAG_PDN";
                 }
-                System.out.print("\n iod = " + iod + "\n");
-                System.out.print("pdn = " + pdn+ "\n");
+                //System.out.print("\n iod = " + iod + "\n");
+                //System.out.print("pdn = " + pdn+ "\n");
                 text =  "--" + FName_def[0] +"\n" +
                         "\n" +
                         "--OAD_SECURITY\n" +
@@ -795,8 +803,8 @@ public class ScriptEXP {
                 } else {
                     pdn = "'"+ SC_data_miner.Flag_PDN[0] + "' as FLAG_PDN";
                 }
-                System.out.print("\n iod = " + iod + "\n");
-                System.out.print("pdn = " + pdn+ "\n");
+                //System.out.print("\n iod = " + iod + "\n");
+                //System.out.print("pdn = " + pdn+ "\n");
                 text ="--" + FName_def[0] +"\n" +
                         "\n" +
                         "--OAD_SECURITY\n" +
@@ -913,8 +921,8 @@ public class ScriptEXP {
                     if (SC_data_miner.Form_cd[n] == null){
                         SC_data_miner.Form_cd[n] = SC_data_miner.Form_cd[0];
                     }
-                    System.out.print("\n iod = " + iod + "\n");
-                    System.out.print("pdn = " + pdn+ "\n");
+                    //System.out.print("\n iod = " + iod + "\n");
+                    //System.out.print("pdn = " + pdn+ "\n");
                     textset = text.split("#");
                     text = textset[0] + "\n" +
                             "\n" +
@@ -1029,7 +1037,7 @@ public class ScriptEXP {
         String fileData = text;
         int j = path2.lastIndexOf("\\");
         path2 = path2.substring(0,j);
-        System.out.print("path2 = " + path2);
+        //System.out.print("path2 = " + path2);
         String filePath = path2 + "\\reg_Code_SQL.txt";
         File file = new File(filePath);
         if(isFileExists(file)){
