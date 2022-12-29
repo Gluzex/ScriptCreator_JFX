@@ -21,16 +21,16 @@ public class SC_data_checker {
                         XSSFCell cell = sheet.getRow(1).getCell(0);
                         if(cell.getCellType() != CellType.STRING){
                             if(cell.getCellType() != CellType.NUMERIC){
-                                cellValue = String.valueOf(cell.getNumericCellValue());
-                            } else {
                                 cellValue= "";
+                            } else {
+                                cellValue = String.valueOf(cell.getNumericCellValue());
                             }
                         } else {
                             cellValue = cell.getStringCellValue();
                         }
 
                         String tst = cellValue;
-                        if(tst == null || tst.equals("") || tst.equals(" ")){
+                        if(tst == null || tst.equals("") || tst.equals(" ") || tst.equals("0.0") || tst.equals("0")){
                             check=0;
                             break;
                         } else
