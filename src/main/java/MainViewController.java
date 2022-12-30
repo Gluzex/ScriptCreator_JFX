@@ -121,6 +121,7 @@ public class MainViewController {
         primaryStage.setHeight(240);
         Stage mnf = primaryStage;
         new ResetAction(mnf);
+        devlab.setVisible(false);
     }
     /*public void setPrimaryStage(Stage primaryStage) {
         this.primaryStage = primaryStage;

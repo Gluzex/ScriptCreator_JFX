@@ -323,9 +323,9 @@ public class SC_data_miner {
             if(rep_subj_type[y] != null && !rep_subj_type[y].equals("") && !rep_subj_type[y].equals(" "))
                 rep_subj_type[y] = rep_subj_type[y].trim();
         }
-        System.out.print("\nForm_cd.length-1 = " + (Form_cd.length-1) + "\n");
+        //System.out.print("\nForm_cd.length-1 = " + (Form_cd.length-1) + "\n");
         for(int h=0; h<=Form_cd.length-1; h++){
-            System.out.print("h = " + h + "\n");
+            //System.out.print("h = " + h + "\n");
             if(Search_path[h] != null && !Objects.equals(Search_path[h], "") && !Objects.equals(Search_path[h], " ")){
                 if(!Search_path[h].contains("/content/")){
                     int coc = 0;
@@ -339,7 +339,7 @@ public class SC_data_miner {
                             ut++;
                         }
                     }
-                    System.out.print("coc = " + coc + "\n");
+                    //System.out.print("coc = " + coc + "\n");
                     String[] subs = Search_path[h].split("'");
                     Search_path[h] = subs[0];
                     //System.out.print("Search_path["+ h +"] = " + Search_path[h] + "\n");

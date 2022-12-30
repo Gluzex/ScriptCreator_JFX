@@ -164,7 +164,7 @@ public class CheckAction {
             }
 
             for(int o = 0; o <= count; o++){
-                System.out.print("o = " + o );
+                //System.out.print("o = " + o );
                 txtf_Sys_id_set[o].setText(SC_data_miner.System_id[o]);
                 txtf_Sec_R_N_set[o].setText(SC_data_miner.Security_role_name[o]);
                 txtf_Sec_R_P_set[o].setText(SC_data_miner.Security_role_path[o]);

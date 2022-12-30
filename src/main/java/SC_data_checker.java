@@ -15,7 +15,7 @@ public class SC_data_checker {
             case 1:
                 //если полный файл с метаданными(но не факт, что заполнены все листы)
                 for (int i=0; i<=2; i++){
-                    System.out.print("i = " + i + "\n");
+                    //System.out.print("i = " + i + "\n");
                     XSSFSheet sheet = wb.getSheetAt(i);
                     if (sheet.getRow(1).getCell(0) != null){
                         XSSFCell cell = sheet.getRow(1).getCell(0);
@@ -38,17 +38,17 @@ public class SC_data_checker {
                     } else
                         check=0;
                 }
-                System.out.print("check = " + check + "\n");
+                //System.out.print("check = " + check + "\n");
                 new SC_data_miner(wb, check);
                 break;
             case 2:
                 //если не полный файл (скорее всего 3 главных листа только)
                 check=2;
-                System.out.print("check = " + check + "\n");
+                //System.out.print("check = " + check + "\n");
                 new SC_data_miner(wb, check);
                 break;
             case 3:
-                System.out.print("check = " + check + "\n");
+                //System.out.print("check = " + check + "\n");
                 check=-1;      //неизвестная конфишурация файла
                 Dialog<ButtonType> dialog = new Dialog<ButtonType>();
                 dialog.setTitle("Error");
