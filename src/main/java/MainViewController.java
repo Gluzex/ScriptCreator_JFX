@@ -28,6 +28,91 @@ public class MainViewController {
     private Button resetBtn;
     @FXML
     public Button ScrBtn3;
+    @FXML
+    private Label form_cd_lbl;
+    @FXML
+    private Label form_cd_name_lbl;
+    @FXML
+    private Label OKUD_lbl;
+    @FXML
+    private Label form_cd_cog_lbl;
+    @FXML
+    private Label Flag_IOD_lbl;
+    @FXML
+    private Label Flag_PDN_lbl;
+    @FXML
+    private Label Dep_name_lbl;
+    @FXML
+    private Label Dep_u_name_lbl;
+    @FXML
+    private Label reason_lbl;
+    @FXML
+    private Label System_id_lbl;
+    @FXML
+    private Label Security_role_path_lbl;
+    @FXML
+    private Label Search_path_lbl;
+    @FXML
+    private Label Form_formal_code_lbl;
+    @FXML
+    private Label Desc_lbl;
+    @FXML
+    private Label period_lbl;
+    @FXML
+    private Label rep_subj_type_lbl;
+    @FXML
+    private Label p_parent_code_lbl;
+    @FXML
+    private Label p_parent_type_ref_lbl;
+    @FXML
+    private Label p_type_ref_lbl;
+    @FXML
+    private Label p_source_ref_lbl;
+    @FXML
+    private Label Security_role_name_lbl;
+    @FXML
+    private TextField Form_cd_txtf;
+    @FXML
+    private TextField Form_cd_name_txtf;
+    @FXML
+    private TextField Form_okud_txtf;
+    @FXML
+    private TextField Form_cd_cog_txtf;
+    @FXML
+    private TextField Flag_IOD_txtf;
+    @FXML
+    private TextField Flag_PDN_txtf;
+    @FXML
+    private TextField Dep_name_txtf;
+    @FXML
+    private TextField Dep_u_name_txtf;
+    @FXML
+    private TextField reason_txtf;
+    @FXML
+    private TextField System_id_txtf;
+    @FXML
+    private TextField Security_role_path_txtf;
+    @FXML
+    private TextField Search_path_txtf;
+    @FXML
+    private TextField Form_formal_code_txtf;
+    @FXML
+    private TextField Desc_txtf;
+    @FXML
+    private TextField period_txtf;
+    @FXML
+    private TextField rep_subj_type_txtf;
+    @FXML
+    private TextField p_parent_code_txtf;
+    @FXML
+    private TextField p_parent_type_ref_txtf;
+    @FXML
+    private TextField p_type_ref_txtf;
+    @FXML
+    private TextField p_source_ref_txtf;
+    @FXML
+    private TextField Security_role_name_txtf;
+
 
     public void MainViewController(ActionEvent actionEvent) {
         primaryStage = SCJFXApp.getPrimaryStage();
@@ -35,6 +120,8 @@ public class MainViewController {
         //txt_fld1.setText("action perfomed");
         if (Objects.equals(cmbx1.getValue(), "Из файла")){
             fromFile();
+        }else if(Objects.equals(cmbx1.getValue(), "Ручной")){
+            fromManual();
         }
     }
     public void fromFile(){
@@ -47,6 +134,74 @@ public class MainViewController {
         ChckBtn1.setVisible(true);
         primaryStage.setWidth(1020);
         primaryStage.setHeight(300);
+    }
+    public void fromManual(){
+        cmbx1.setDisable(true);
+        form_cd_lbl.setVisible(true);
+        form_cd_name_lbl.setVisible(true);
+        OKUD_lbl.setVisible(true);
+        form_cd_cog_lbl.setVisible(true);
+        Flag_IOD_lbl.setVisible(true);
+        Flag_PDN_lbl.setVisible(true);
+        Dep_name_lbl.setVisible(true);
+        Dep_u_name_lbl.setVisible(true);
+        reason_lbl.setVisible(true);
+        System_id_lbl.setVisible(true);
+        Security_role_path_lbl.setVisible(true);
+        Search_path_lbl.setVisible(true);
+        Form_formal_code_lbl.setVisible(true);
+        Desc_lbl.setVisible(true);
+        period_lbl.setVisible(true);
+        rep_subj_type_lbl.setVisible(true);
+        p_parent_code_lbl.setVisible(true);
+        p_parent_type_ref_lbl.setVisible(true);
+        p_type_ref_lbl.setVisible(true);
+        p_source_ref_lbl.setVisible(true);
+        Security_role_name_lbl.setVisible(true);
+        Form_cd_txtf.setVisible(true);
+        Form_cd_name_txtf.setVisible(true);
+        Form_okud_txtf.setVisible(true);
+        Form_cd_cog_txtf.setVisible(true);
+        Flag_IOD_txtf.setVisible(true);
+        Flag_PDN_txtf.setVisible(true);
+        Dep_name_txtf.setVisible(true);
+        Dep_u_name_txtf.setVisible(true);
+        reason_txtf.setVisible(true);
+        System_id_txtf.setVisible(true);
+        Security_role_path_txtf.setVisible(true);
+        Search_path_txtf.setVisible(true);
+        Form_formal_code_txtf.setVisible(true);
+        Desc_txtf.setVisible(true);
+        period_txtf.setVisible(true);
+        rep_subj_type_txtf.setVisible(true);
+        p_parent_code_txtf.setVisible(true);
+        p_parent_type_ref_txtf.setVisible(true);
+        p_type_ref_txtf.setVisible(true);
+        p_source_ref_txtf.setVisible(true);
+        Security_role_name_txtf.setVisible(true);
+        Form_cd_txtf.setDisable(false);
+        Form_cd_name_txtf.setDisable(false);
+        Form_okud_txtf.setDisable(false);
+        Form_cd_cog_txtf.setDisable(false);
+        Flag_IOD_txtf.setDisable(false);
+        Flag_PDN_txtf.setDisable(false);
+        Dep_name_txtf.setDisable(false);
+        Dep_u_name_txtf.setDisable(false);
+        reason_txtf.setDisable(false);
+        System_id_txtf.setDisable(false);
+        Security_role_path_txtf.setDisable(false);
+        Search_path_txtf.setDisable(false);
+        Form_formal_code_txtf.setDisable(false);
+        Desc_txtf.setDisable(false);
+        period_txtf.setDisable(false);
+        rep_subj_type_txtf.setDisable(false);
+        p_parent_code_txtf.setDisable(false);
+        p_parent_type_ref_txtf.setDisable(false);
+        p_type_ref_txtf.setDisable(false);
+        p_source_ref_txtf.setDisable(false);
+        Security_role_name_txtf.setDisable(false);
+        primaryStage.setWidth(1020);
+        primaryStage.setHeight(700);
     }
 
     public void BrowseClicked(){
