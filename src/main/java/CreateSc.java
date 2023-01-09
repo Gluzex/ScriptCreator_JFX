@@ -96,11 +96,11 @@ public class CreateSc {
         }
 
         Dialog<ButtonType> dialog = new Dialog<ButtonType>();
-        dialog.setTitle("Скрипт создан");
+        dialog.setTitle("Скрипты созданы");
         dialog.setHeaderText("SUCCESS!!!");
         DialogPane dialogPane = dialog.getDialogPane();
         //dialog.setGraphic(new ImageView(createImage(16, 16, Color.BLUE)));
-        dialog.setContentText("Скрипт успешно создан в файле reg_Code_SQL.txt по пути исходного Excel файла");
+        dialog.setContentText("Скрипты успешно созданы и находятся по пути исходного Excel файла");
         dialogPane.getButtonTypes().add(ButtonType.OK);
         dialog.show();
 

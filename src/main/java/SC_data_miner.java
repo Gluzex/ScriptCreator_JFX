@@ -9,6 +9,7 @@ public class SC_data_miner {
     public static String[] Form_cd = new String[12];
     public static String[] Form_name= new String[12];
     public static String[] Form_okud= new String[12];
+    public static String[] okud_form_cd= new String[12];
     public static String[] Form_cd_cog= new String[12];
     public static String[] Rep_form_cd= new String[12];
     public static String[] Flag_IOD= new String[12];
@@ -58,6 +59,9 @@ public class SC_data_miner {
                                                     switch (f) {
                                                         case 5:
                                                             Form_formal_code[g - 1] = cell.getStringCellValue();
+                                                            break;
+                                                        case 7:
+                                                            okud_form_cd[g - 1] = cell.getStringCellValue();
                                                             break;
                                                     }
                                                     break;
@@ -135,6 +139,9 @@ public class SC_data_miner {
                                                         case 5:
                                                             Form_formal_code[g - 1] = cell.getStringCellValue();
                                                             //System.out.print("\nform_formal_code[" + (g-1) + "] = " +  Form_formal_code[g - 1] + "\n");
+                                                            break;
+                                                        case 7:
+                                                            okud_form_cd[g - 1] = cell.getStringCellValue();
                                                             break;
                                                     }
                                                     break;
@@ -221,6 +228,9 @@ public class SC_data_miner {
                                                     switch (f) {
                                                         case 0:
                                                             Form_formal_code[g - 1] = cell.getStringCellValue();
+                                                            break;
+                                                        case 7:
+                                                            okud_form_cd[g - 1] = cell.getStringCellValue();
                                                             break;
                                                     }
                                                     break;
@@ -313,9 +323,9 @@ public class SC_data_miner {
             if(rep_subj_type[y] != null && !rep_subj_type[y].equals("") && !rep_subj_type[y].equals(" "))
                 rep_subj_type[y] = rep_subj_type[y].trim();
         }
-        System.out.print("\nForm_cd.length-1 = " + (Form_cd.length-1) + "\n");
+        //System.out.print("\nForm_cd.length-1 = " + (Form_cd.length-1) + "\n");
         for(int h=0; h<=Form_cd.length-1; h++){
-            System.out.print("h = " + h + "\n");
+            //System.out.print("h = " + h + "\n");
             if(Search_path[h] != null && !Objects.equals(Search_path[h], "") && !Objects.equals(Search_path[h], " ")){
                 if(!Search_path[h].contains("/content/")){
                     int coc = 0;
@@ -329,7 +339,7 @@ public class SC_data_miner {
                             ut++;
                         }
                     }
-                    System.out.print("coc = " + coc + "\n");
+                    //System.out.print("coc = " + coc + "\n");
                     String[] subs = Search_path[h].split("'");
                     Search_path[h] = subs[0];
                     //System.out.print("Search_path["+ h +"] = " + Search_path[h] + "\n");

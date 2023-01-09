@@ -11,6 +11,8 @@ public class MainViewController {
     @FXML
     private Label lab1;
     @FXML
+    private Label devlab;
+    @FXML
     private TextField txt_fld1;
     @FXML
     private ComboBox<String> cmbx1;
@@ -122,9 +124,12 @@ public class MainViewController {
             fromFile();
         }else if(Objects.equals(cmbx1.getValue(), "Ручной")){
             fromManual();
+        } else {
+            devlab.setVisible(true);
         }
     }
     public void fromFile(){
+        devlab.setVisible(false);
         cmbx1.setDisable(true);
         lab1.setVisible(true);
         txtf1.setVisible(true);
@@ -271,6 +276,7 @@ public class MainViewController {
         primaryStage.setHeight(240);
         Stage mnf = primaryStage;
         new ResetAction(mnf);
+        devlab.setVisible(false);
     }
     /*public void setPrimaryStage(Stage primaryStage) {
         this.primaryStage = primaryStage;

@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.collections.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <?import java.lang.String?>
 <?import javafx.collections.FXCollections?>
 <?import javafx.scene.control.Button?>
@@ -17,7 +22,7 @@
             <items>
                 <FXCollections fx:factory="observableArrayList">
                     <String fx:value="Из файла" />
-                    <String fx:value="Ручной" />
+                    <String fx:value="Ручной(В разработке)" />
                 </FXCollections>
             </items>
         </ComboBox>
@@ -25,8 +30,13 @@
       <TextField fx:id="txtf1" disable="true" layoutX="95.0" layoutY="57.0" prefHeight="25.0" prefWidth="528.0" text="C:" visible="false" />
       <Button fx:id="Browse" disable="true" layoutX="640.0" layoutY="57.0" mnemonicParsing="false" onAction="#BrowseClicked" text="Обзор" visible="false" />
       <Button fx:id="ChckBtn1" disable="true" layoutX="25.0" layoutY="95.0" mnemonicParsing="false" onAction="#CheckClicked" text="Проверить файл" visible="false" />
-      <Button fx:id="ScrBtn3" disable="true" layoutX="144.0" layoutY="95.0" mnemonicParsing="false" onAction="#CreateClicked" prefHeight="25.0" prefWidth="108.0" text="Создать скрипт" visible="false" />
+      <Button fx:id="ScrBtn3" disable="true" layoutX="144.0" layoutY="95.0" mnemonicParsing="false" onAction="#CreateClicked" prefHeight="25.0" prefWidth="114.0" text="Создать скрипты" visible="false" />
       <Button fx:id="resetBtn" disable="true" layoutX="268.0" layoutY="95.0" mnemonicParsing="false" onAction="#ResetClicked" prefHeight="25.0" prefWidth="81.0" text="Сброс" visible="false" />
+      <Label fx:id="devlab" layoutX="37.0" layoutY="87.0" prefHeight="17.0" prefWidth="615.0" text="Данный режим находится в разработке" visible="false">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
       <Label fx:id="form_cd_lbl" layoutX="14.0" layoutY="61.0" text="Код доступа: " visible="false" />
       <Label fx:id="form_cd_name_lbl" layoutX="14.0" layoutY="87.0" text="Наименование кода доступа: " visible="false" />
       <Label fx:id="OKUD_lbl" layoutX="13.0" layoutY="118.0" text="ОКУД: " visible="false" />
