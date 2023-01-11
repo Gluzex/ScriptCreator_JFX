@@ -29,91 +29,21 @@ public class MainViewController {
     @FXML
     private Button resetBtn;
     @FXML
-    public Button ScrBtn3;
+    private Button ScrBtn3;
     @FXML
-    private Label form_cd_lbl;
+    private ComboBox<Integer> countCmbx;
     @FXML
-    private Label form_cd_name_lbl;
+    private Label countLbl;
     @FXML
-    private Label OKUD_lbl;
+    private Label pathLbl;
     @FXML
-    private Label form_cd_cog_lbl;
+    private TextField pathTxtf;
     @FXML
-    private Label Flag_IOD_lbl;
+    private Button fldchs_btn;
     @FXML
-    private Label Flag_PDN_lbl;
+    private Button OK_btn;
     @FXML
-    private Label Dep_name_lbl;
-    @FXML
-    private Label Dep_u_name_lbl;
-    @FXML
-    private Label reason_lbl;
-    @FXML
-    private Label System_id_lbl;
-    @FXML
-    private Label Security_role_path_lbl;
-    @FXML
-    private Label Search_path_lbl;
-    @FXML
-    private Label Form_formal_code_lbl;
-    @FXML
-    private Label Desc_lbl;
-    @FXML
-    private Label period_lbl;
-    @FXML
-    private Label rep_subj_type_lbl;
-    @FXML
-    private Label p_parent_code_lbl;
-    @FXML
-    private Label p_parent_type_ref_lbl;
-    @FXML
-    private Label p_type_ref_lbl;
-    @FXML
-    private Label p_source_ref_lbl;
-    @FXML
-    private Label Security_role_name_lbl;
-    @FXML
-    private TextField Form_cd_txtf;
-    @FXML
-    private TextField Form_cd_name_txtf;
-    @FXML
-    private TextField Form_okud_txtf;
-    @FXML
-    private TextField Form_cd_cog_txtf;
-    @FXML
-    private TextField Flag_IOD_txtf;
-    @FXML
-    private TextField Flag_PDN_txtf;
-    @FXML
-    private TextField Dep_name_txtf;
-    @FXML
-    private TextField Dep_u_name_txtf;
-    @FXML
-    private TextField reason_txtf;
-    @FXML
-    private TextField System_id_txtf;
-    @FXML
-    private TextField Security_role_path_txtf;
-    @FXML
-    private TextField Search_path_txtf;
-    @FXML
-    private TextField Form_formal_code_txtf;
-    @FXML
-    private TextField Desc_txtf;
-    @FXML
-    private TextField period_txtf;
-    @FXML
-    private TextField rep_subj_type_txtf;
-    @FXML
-    private TextField p_parent_code_txtf;
-    @FXML
-    private TextField p_parent_type_ref_txtf;
-    @FXML
-    private TextField p_type_ref_txtf;
-    @FXML
-    private TextField p_source_ref_txtf;
-    @FXML
-    private TextField Security_role_name_txtf;
+    private Button createBtn;
 
 
     public void MainViewController(ActionEvent actionEvent) {
@@ -122,8 +52,8 @@ public class MainViewController {
         //txt_fld1.setText("action perfomed");
         if (Objects.equals(cmbx1.getValue(), "Из файла")){
             fromFile();
-        /*}else if(Objects.equals(cmbx1.getValue(), "Ручной(В разработке)")){
-            fromManual();*/
+        }else if(Objects.equals(cmbx1.getValue(), "Ручной(В разработке)")){
+            fromManual();
         } else {
             devlab.setVisible(true);
         }
@@ -142,71 +72,16 @@ public class MainViewController {
     }
     public void fromManual(){
         cmbx1.setDisable(true);
-        form_cd_lbl.setVisible(true);
-        form_cd_name_lbl.setVisible(true);
-        OKUD_lbl.setVisible(true);
-        form_cd_cog_lbl.setVisible(true);
-        Flag_IOD_lbl.setVisible(true);
-        Flag_PDN_lbl.setVisible(true);
-        Dep_name_lbl.setVisible(true);
-        Dep_u_name_lbl.setVisible(true);
-        reason_lbl.setVisible(true);
-        System_id_lbl.setVisible(true);
-        Security_role_path_lbl.setVisible(true);
-        Search_path_lbl.setVisible(true);
-        Form_formal_code_lbl.setVisible(true);
-        Desc_lbl.setVisible(true);
-        period_lbl.setVisible(true);
-        rep_subj_type_lbl.setVisible(true);
-        p_parent_code_lbl.setVisible(true);
-        p_parent_type_ref_lbl.setVisible(true);
-        p_type_ref_lbl.setVisible(true);
-        p_source_ref_lbl.setVisible(true);
-        Security_role_name_lbl.setVisible(true);
-        Form_cd_txtf.setVisible(true);
-        Form_cd_name_txtf.setVisible(true);
-        Form_okud_txtf.setVisible(true);
-        Form_cd_cog_txtf.setVisible(true);
-        Flag_IOD_txtf.setVisible(true);
-        Flag_PDN_txtf.setVisible(true);
-        Dep_name_txtf.setVisible(true);
-        Dep_u_name_txtf.setVisible(true);
-        reason_txtf.setVisible(true);
-        System_id_txtf.setVisible(true);
-        Security_role_path_txtf.setVisible(true);
-        Search_path_txtf.setVisible(true);
-        Form_formal_code_txtf.setVisible(true);
-        Desc_txtf.setVisible(true);
-        period_txtf.setVisible(true);
-        rep_subj_type_txtf.setVisible(true);
-        p_parent_code_txtf.setVisible(true);
-        p_parent_type_ref_txtf.setVisible(true);
-        p_type_ref_txtf.setVisible(true);
-        p_source_ref_txtf.setVisible(true);
-        Security_role_name_txtf.setVisible(true);
-        Form_cd_txtf.setDisable(false);
-        Form_cd_name_txtf.setDisable(false);
-        Form_okud_txtf.setDisable(false);
-        Form_cd_cog_txtf.setDisable(false);
-        Flag_IOD_txtf.setDisable(false);
-        Flag_PDN_txtf.setDisable(false);
-        Dep_name_txtf.setDisable(false);
-        Dep_u_name_txtf.setDisable(false);
-        reason_txtf.setDisable(false);
-        System_id_txtf.setDisable(false);
-        Security_role_path_txtf.setDisable(false);
-        Search_path_txtf.setDisable(false);
-        Form_formal_code_txtf.setDisable(false);
-        Desc_txtf.setDisable(false);
-        period_txtf.setDisable(false);
-        rep_subj_type_txtf.setDisable(false);
-        p_parent_code_txtf.setDisable(false);
-        p_parent_type_ref_txtf.setDisable(false);
-        p_type_ref_txtf.setDisable(false);
-        p_source_ref_txtf.setDisable(false);
-        Security_role_name_txtf.setDisable(false);
+        countLbl.setVisible(true);
+        pathLbl.setVisible(true);
+        countCmbx.setVisible(true);
+        pathTxtf.setVisible(true);
+        fldchs_btn.setVisible(true);
+        countCmbx.setDisable(false);
+        pathTxtf.setDisable(false);
+        fldchs_btn.setDisable(false);
         primaryStage.setWidth(1020);
-        primaryStage.setHeight(700);
+        primaryStage.setHeight(300);
     }
 
     public void BrowseClicked(){
@@ -254,7 +129,9 @@ public class MainViewController {
             new CreateSc(path_u1, mnf, root, txtf_Sys_id_set, txtf_Sec_R_N_set, txtf_Sec_R_P_set, txtf_SearchPath_set, txtf_SearchPath2_set,  txtf_NAME_set, txtf_TF_set, txtf_SR_set, resetBtn);
         }
     }
+    public void CreateClicked2(){
 
+    }
     public void ResetClicked(){
         TabPane sp = CheckAction.getSp();
         root.getChildren().remove(sp);
@@ -278,7 +155,29 @@ public class MainViewController {
         new ResetAction(mnf);
         devlab.setVisible(false);
     }
-    /*public void setPrimaryStage(Stage primaryStage) {
-        this.primaryStage = primaryStage;
-    }*/
+    public void BrowseFldClicked(){
+        new BrowseFldAction (pathTxtf, primaryStage, OK_btn);
+        pathTxtf.setDisable(true);
+        cmbx1.setDisable(true);
+        txt_fld1.setDisable(true);
+    }
+    public void OKClicked(){
+        int count = countCmbx.getValue();
+        System.out.print("count = " + count);
+        if(count !=0 || pathTxtf.getText() != null || pathTxtf.getText() != ""){
+            new OK_Action (count, root, primaryStage, createBtn);
+            OK_btn.setDisable(true);
+            countCmbx.setDisable(true);
+            fldchs_btn.setDisable(true);
+
+        } else {
+            Dialog<ButtonType> dialog = new Dialog<ButtonType>();
+            dialog.setTitle("Ошибка");
+            dialog.setHeaderText("ERROR!!!");
+            DialogPane dialogPane = dialog.getDialogPane();
+            dialog.setContentText("Пожалуйста, проверьте выбранное кол-во и путь для сохранения");
+            dialogPane.getButtonTypes().add(ButtonType.OK);
+            dialog.show();
+        }
+    }
 }

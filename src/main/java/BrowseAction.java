@@ -25,8 +25,6 @@ public class BrowseAction {
         path_u = file1.getPath();
         chckBtn1.setDisable(false);
         txtf1.setText(path_u);
-
-        //ScrBtn11.addActionListener(new ButtonListener2(file1, path_u, FName1, cp1, mnf));
     }
     public static File getFile(){
         return BrowseAction.file1;
