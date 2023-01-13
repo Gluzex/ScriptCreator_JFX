@@ -116,8 +116,7 @@ public class MainViewController {
             TextField txtf_SR = CheckAction.getTxtf_SR();
             TextField txtf_SearchPath2 = CheckAction.getTxtf_SearchPath2();
             new CreateSc(path_u1, mnf, root, txtf_Sys_id, txtf_Sec_R_N, txtf_Sec_R_P, txtf_SearchPath, txtf_SearchPath2,  txtf_NAME, txtf_TF, txtf_SR, resetBtn);
-        }
-        else {
+        } else {
             TextField[] txtf_Sys_id_set = CheckAction.getTxtf_Sys_id_set();
             TextField[] txtf_Sec_R_N_set = CheckAction.getTxtf_Sec_R_N_set();
             TextField[] txtf_Sec_R_P_set = CheckAction.getTxtf_Sec_R_P_set();
@@ -130,6 +129,19 @@ public class MainViewController {
         }
     }
     public void CreateClicked2(){
+        int count = countCmbx.getValue();
+        String path_fld = BrowseFldAction.getPath_fld();
+        Stage mnf = primaryStage;
+        AnchorPane main_root = root;
+
+        if(count == 1){
+            //SC_data_miner.Form_cd =;
+
+        } else {
+            for(int k=1; k<=count; k++){
+
+            }
+        }
 
     }
     public void ResetClicked(){

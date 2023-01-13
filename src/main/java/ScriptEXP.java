@@ -20,7 +20,7 @@ public class ScriptEXP {
     public ScriptEXP(int chk, String path) throws IOException {
 
         Date dateNow = new Date();
-        SimpleDateFormat format_sql = new SimpleDateFormat("dd/MM/YY");
+        SimpleDateFormat format_sql = new SimpleDateFormat("dd/MM/yy");
         String path2 = path;
         String iod = "";
         String pdn = "";
