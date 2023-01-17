@@ -26,7 +26,11 @@ public class SC_data_miner {
     public static String[] Form_formal_code= new String[12];
     public static String[] Desc= new String[12];
     public static String[] period= new String[12];
-    public static String[] rep_subj_type= new String[12];
+    public static String[] rep_subj_type = new String[12];
+    public static String[] p_parent_code_txtf =  new String[12];
+    public static String[]p_parent_type_ref_txtf =  new String[12];
+    public static String[]p_type_ref_txtf =  new String[12];
+    public static String[]p_source_ref_txtf = new String[12];
 
     public String cellValue;
     public int vid;

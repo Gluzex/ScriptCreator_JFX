@@ -8,11 +8,34 @@ import javafx.stage.Stage;
 public class OK_Action {
     private static TabPane sp;
     private Stage mnf;
+    private static TextField[] Form_name_txtf = new TextField[12];
+    private static TextField[] Form_cd_txtf = new TextField[12];
+    private static TextField[] Form_cd_name_txtf = new TextField[12];
+    private static TextField[] Form_okud_txtf = new TextField[12];
+    private static TextField[] Form_cd_cog_txtf = new TextField[12];
+    private static TextField[] Flag_IOD_txtf = new TextField[12];
+    private static TextField[] Flag_PDN_txtf = new TextField[12];
+    private static TextField[] Dep_name_txtf = new TextField[12];
+    private static TextField[] Dep_u_name_txtf = new TextField[12];
+    private static TextField[] reason_txtf = new TextField[12];
+    private static TextField[] System_id_txtf = new TextField[12];
+    private static TextField[] Security_role_path_txtf = new TextField[12];
+    private static TextField[] Search_path_txtf = new TextField[12];
+    private static TextField[] Form_formal_code_txtf = new TextField[12];
+    private static TextField[] Desc_txtf = new TextField[12];
+    private static TextField[] period_txtf = new TextField[12];
+    private static TextField[] rep_subj_type_txtf = new TextField[12];
+    private static TextField[] p_parent_code_txtf = new TextField[12];
+    private static TextField[] p_parent_type_ref_txtf = new TextField[12];
+    private static TextField[] p_type_ref_txtf = new TextField[12];
+    private static TextField[] p_source_ref_txtf = new TextField[12];
+    private static TextField[] Security_role_name_txtf = new TextField[12];
 
     public OK_Action(int count, AnchorPane root, Stage primaryStage, Button createBtn){
         this.mnf = primaryStage;
         sp = new TabPane();
         VBox[] PanelSet = new VBox[12];
+        HBox[] exjp0_set = new HBox[12];
         HBox[] exjp1_set = new HBox[12];
         HBox[] exjp2_set = new HBox[12];
         HBox[] exjp3_set = new HBox[12];
@@ -36,6 +59,7 @@ public class OK_Action {
         HBox[] exjp21_set = new HBox[12];
         HBox[] exjp22_set = new HBox[12];
 
+        Label[] form_name_lbl = new Label[12];
         Label[] form_cd_lbl = new Label[12];
         Label[] form_cd_name_lbl = new Label[12];
         Label[] OKUD_lbl = new Label[12];
@@ -58,31 +82,10 @@ public class OK_Action {
         Label[] p_source_ref_lbl = new Label[12];
         Label[] Security_role_name_lbl = new Label[12];
 
-        TextField[] Form_cd_txtf = new TextField[12];
-        TextField[] Form_cd_name_txtf = new TextField[12];
-        TextField[] Form_okud_txtf = new TextField[12];
-        TextField[] Form_cd_cog_txtf = new TextField[12];
-        TextField[] Flag_IOD_txtf = new TextField[12];
-        TextField[] Flag_PDN_txtf = new TextField[12];
-        TextField[] Dep_name_txtf = new TextField[12];
-        TextField[] Dep_u_name_txtf = new TextField[12];
-        TextField[] reason_txtf = new TextField[12];
-        TextField[] System_id_txtf = new TextField[12];
-        TextField[] Security_role_path_txtf = new TextField[12];
-        TextField[] Search_path_txtf = new TextField[12];
-        TextField[] Form_formal_code_txtf = new TextField[12];
-        TextField[] Desc_txtf = new TextField[12];
-        TextField[] period_txtf = new TextField[12];
-        TextField[] rep_subj_type_txtf = new TextField[12];
-        TextField[] p_parent_code_txtf = new TextField[12];
-        TextField[] p_parent_type_ref_txtf = new TextField[12];
-        TextField[] p_type_ref_txtf = new TextField[12];
-        TextField[] p_source_ref_txtf = new TextField[12];
-        TextField[] Security_role_name_txtf = new TextField[12];
-
         for(int t = 0; t<=11; t++){
             PanelSet[t] = new VBox(5.0);
             PanelSet[t].setPadding(new Insets(10.0));
+            exjp0_set[t] = new HBox(15.0);
             exjp1_set[t] = new HBox(15.0);
             exjp2_set[t] = new HBox(15.0);
             exjp3_set[t] = new HBox(15.0);
@@ -106,6 +109,7 @@ public class OK_Action {
             exjp21_set[t] = new HBox(15.0);
             exjp22_set[t] = new HBox(15.0);
 
+            Form_name_txtf[t] = new TextField();
             Form_cd_txtf[t] =  new TextField();
             Form_cd_name_txtf[t] =  new TextField();
             Form_okud_txtf[t] =  new TextField();
@@ -128,6 +132,7 @@ public class OK_Action {
             p_source_ref_txtf[t] =  new TextField();
             Security_role_name_txtf[t] =  new TextField();
 
+            form_name_lbl[t] = new Label("Имя формы: ");
             form_cd_lbl[t] = new Label("Код доступа: ");
             form_cd_name_lbl[t] = new Label("Наименование кода доступа: ");
             OKUD_lbl[t] = new Label("ОКУД: ");
@@ -154,6 +159,7 @@ public class OK_Action {
 
             //System.out.print("o = " + o );
 
+            exjp0_set[o].getChildren().addAll(form_name_lbl[o], Form_name_txtf[o]);
             exjp1_set[o].getChildren().addAll(form_cd_lbl[o], Form_cd_txtf[o]);
             exjp2_set[o].getChildren().addAll(form_cd_name_lbl[o], Form_cd_name_txtf[o]);
             exjp3_set[o].getChildren().addAll(OKUD_lbl[o], Form_okud_txtf[o]);
@@ -176,9 +182,9 @@ public class OK_Action {
             exjp21_set[o].getChildren().addAll(p_source_ref_lbl[o], p_source_ref_txtf[o]);
             exjp22_set[o].getChildren().addAll(Security_role_name_lbl[o], Security_role_name_txtf[o]);
 
-            PanelSet[o].getChildren().addAll(exjp1_set[o], exjp2_set[o], exjp3_set[o], exjp4_set[o], exjp5_set[o], exjp7_set[o], exjp8_set[o], exjp9_set[o], exjp10_set[o],
-                    exjp11_set[o], exjp12_set[o], exjp13_set[o], exjp14_set[o], exjp15_set[o], exjp16_set[o], exjp17_set[o], exjp18_set[o], exjp19_set[o], exjp20_set[o],
-                    exjp21_set[o], exjp22_set[o]);
+            PanelSet[o].getChildren().addAll(exjp0_set[o], exjp1_set[o], exjp2_set[o], exjp3_set[o], exjp4_set[o], exjp5_set[o], exjp7_set[o], exjp8_set[o], exjp9_set[o],
+                    exjp10_set[o], exjp11_set[o], exjp12_set[o], exjp13_set[o], exjp14_set[o], exjp15_set[o], exjp16_set[o], exjp17_set[o], exjp18_set[o], exjp19_set[o],
+                    exjp20_set[o], exjp21_set[o], exjp22_set[o]);
             sp.getTabs().add(new Tab("Форма " + (o), PanelSet[o]));
         }
         root.getChildren().add(sp);
@@ -186,10 +192,78 @@ public class OK_Action {
         sp.setLayoutY(160);
 
         mnf.setWidth(1720);
-        mnf.setHeight(850);
+        mnf.setHeight(880);
         mnf.centerOnScreen();
 
         createBtn.setVisible(true);
         createBtn.setDisable(false);
         }
+
+    public static TextField[] getForm_name_txtf(){
+        return OK_Action.Form_name_txtf;
     }
+    public static TextField[] getForm_cd_txtf(){
+        return OK_Action.Form_cd_txtf;
+    }
+    public static TextField[] getForm_cd_name_txtf(){
+        return OK_Action.Form_cd_name_txtf;
+    }
+    public static TextField[] getForm_okud_txtf(){
+        return OK_Action.Form_okud_txtf;
+    }
+    public static TextField[] getForm_cd_cog_txtf(){
+        return OK_Action.Form_cd_cog_txtf;
+    }
+    public static TextField[] getFlag_IOD_txtf(){
+        return OK_Action.Flag_IOD_txtf;
+    }
+    public static TextField[] getFlag_PDN_txtf(){
+        return OK_Action.Flag_PDN_txtf;
+    }
+    public static TextField[] getDep_name_txtf(){
+        return OK_Action.Dep_name_txtf;
+    }
+    public static TextField[] getDep_u_name_txtf(){
+        return OK_Action.Dep_u_name_txtf;
+    }
+    public static TextField[] getReason_txtf(){
+        return OK_Action.reason_txtf;
+    }
+    public static TextField[] getSystem_id_txtf(){
+        return OK_Action.System_id_txtf;
+    }
+    public static TextField[] getSecurity_role_path_txtf(){
+        return OK_Action.Security_role_path_txtf;
+    }
+    public static TextField[] getSearch_path_txtf(){
+        return OK_Action.Search_path_txtf;
+    }
+    public static TextField[] getForm_formal_code_txtf(){
+        return OK_Action.Form_formal_code_txtf;
+    }
+    public static TextField[] getDesc_txtf(){
+        return OK_Action.Desc_txtf;
+    }
+    public static TextField[] getPeriod_txtf(){
+        return OK_Action.period_txtf;
+    }
+    public static TextField[] getRep_subj_type_txtf(){
+        return OK_Action.rep_subj_type_txtf;
+    }
+    public static TextField[] getP_parent_code_txtf(){
+        return OK_Action.p_parent_code_txtf;
+    }
+    public static TextField[] getP_parent_type_ref_txtf(){
+        return OK_Action.p_parent_type_ref_txtf;
+    }
+    public static TextField[] getP_type_ref_txtf(){
+        return OK_Action.p_type_ref_txtf;
+    }
+    public static TextField[] getP_source_ref_txtf(){
+        return OK_Action.p_source_ref_txtf;
+    }
+    public static TextField[] getSecurity_role_name_txtf(){
+        return OK_Action.Security_role_name_txtf;
+    }
+    }
+

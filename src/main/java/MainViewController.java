@@ -5,6 +5,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.Objects;
 
 public class MainViewController {
@@ -44,6 +45,8 @@ public class MainViewController {
     private Button OK_btn;
     @FXML
     private Button createBtn;
+
+    private static byte type = 0;
 
 
     public void MainViewController(ActionEvent actionEvent) {
@@ -128,20 +131,119 @@ public class MainViewController {
             new CreateSc(path_u1, mnf, root, txtf_Sys_id_set, txtf_Sec_R_N_set, txtf_Sec_R_P_set, txtf_SearchPath_set, txtf_SearchPath2_set,  txtf_NAME_set, txtf_TF_set, txtf_SR_set, resetBtn);
         }
     }
-    public void CreateClicked2(){
+    public void CreateClicked2() throws IOException {
         int count = countCmbx.getValue();
         String path_fld = BrowseFldAction.getPath_fld();
-        Stage mnf = primaryStage;
-        AnchorPane main_root = root;
+        //Stage mnf = primaryStage;
+        //AnchorPane main_root = root;
+        TextField[] Form_name_txtf = new TextField[12];
+        TextField[] Form_cd_txtf = new TextField[12];
+        TextField[] Form_cd_name_txtf = new TextField[12];
+        TextField[] Form_okud_txtf = new TextField[12];
+        TextField[] Form_cd_cog_txtf = new TextField[12];
+        TextField[] Flag_IOD_txtf = new TextField[12];
+        TextField[] Flag_PDN_txtf = new TextField[12];
+        TextField[] Dep_name_txtf = new TextField[12];
+        TextField[] Dep_u_name_txtf = new TextField[12];
+        TextField[] reason_txtf = new TextField[12];
+        TextField[] System_id_txtf = new TextField[12];
+        TextField[] Security_role_path_txtf = new TextField[12];
+        TextField[] Search_path_txtf = new TextField[12];
+        TextField[] Form_formal_code_txtf = new TextField[12];
+        TextField[] Desc_txtf = new TextField[12];
+        TextField[] period_txtf = new TextField[12];
+        TextField[] rep_subj_type_txtf = new TextField[12];
+        TextField[] p_parent_code_txtf = new TextField[12];
+        TextField[] p_parent_type_ref_txtf = new TextField[12];
+        TextField[] p_type_ref_txtf = new TextField[12];
+        TextField[] p_source_ref_txtf = new TextField[12];
+        TextField[] Security_role_name_txtf = new TextField[12];
+
+        Form_name_txtf = OK_Action.getForm_name_txtf();
+        Form_cd_txtf =  OK_Action.getForm_cd_txtf();
+        Form_cd_name_txtf =  OK_Action.getForm_cd_name_txtf();
+        Form_okud_txtf =  OK_Action.getForm_okud_txtf();
+        Form_cd_cog_txtf =  OK_Action.getForm_cd_cog_txtf();
+        Flag_IOD_txtf =  OK_Action.getFlag_IOD_txtf();
+        Flag_PDN_txtf =  OK_Action.getFlag_PDN_txtf();
+        Dep_name_txtf =  OK_Action.getDep_name_txtf();
+        Dep_u_name_txtf =  OK_Action.getDep_u_name_txtf();
+        reason_txtf =  OK_Action.getReason_txtf();
+        System_id_txtf =  OK_Action.getSystem_id_txtf();
+        Security_role_path_txtf =  OK_Action.getSecurity_role_path_txtf();
+        Search_path_txtf =  OK_Action.getSearch_path_txtf();
+        Form_formal_code_txtf =  OK_Action.getForm_formal_code_txtf();
+        Desc_txtf =  OK_Action.getDesc_txtf();
+        period_txtf =  OK_Action.getPeriod_txtf();
+        rep_subj_type_txtf =  OK_Action.getRep_subj_type_txtf();
+        p_parent_code_txtf =  OK_Action.getP_parent_code_txtf();
+        p_parent_type_ref_txtf =  OK_Action.getP_parent_type_ref_txtf();
+        p_type_ref_txtf =  OK_Action.getP_type_ref_txtf();
+        p_source_ref_txtf =  OK_Action.getP_source_ref_txtf();
+        Security_role_name_txtf =  OK_Action.getSecurity_role_name_txtf();
 
         if(count == 1){
-            //SC_data_miner.Form_cd =;
-
+             CreateSc.UFName[0] = Form_name_txtf[0].getText();
+             SC_data_miner.Form_cd[0] = Form_cd_txtf[0].getText();
+             SC_data_miner.Form_name[0] = Form_cd_name_txtf[0].getText();
+             SC_data_miner.Form_okud[0] = Form_okud_txtf[0].getText();
+             SC_data_miner.Form_cd_cog[0] = Form_cd_cog_txtf[0].getText();
+             SC_data_miner.Flag_IOD[0] = Flag_IOD_txtf[0].getText();
+             SC_data_miner.Flag_PDN[0] = Flag_PDN_txtf[0].getText();
+             SC_data_miner.Dep_name[0] = Dep_name_txtf[0].getText();
+             SC_data_miner.Dep_u_name[0] = Dep_u_name_txtf[0].getText();
+             SC_data_miner.reason[0] = reason_txtf[0].getText();
+             SC_data_miner.System_id[0] = System_id_txtf[0].getText();
+             SC_data_miner.Security_role_name[0] = Security_role_name_txtf[0].getText();
+             SC_data_miner.Security_role_path[0] = Security_role_path_txtf[0].getText();
+             SC_data_miner.Search_path[0] = Search_path_txtf[0].getText();
+             SC_data_miner.Search_path_for_ehd_acs[0] = Search_path_txtf[0].getText();
+             SC_data_miner.Form_formal_code[0] = Form_formal_code_txtf[0].getText();
+             SC_data_miner.Desc[0] = Desc_txtf[0].getText();
+             SC_data_miner.period[0] = period_txtf[0].getText();
+             SC_data_miner.rep_subj_type[0] = rep_subj_type_txtf[0].getText();
+             SC_data_miner.p_parent_code_txtf[0] = p_parent_code_txtf[0].getText();
+             SC_data_miner.p_type_ref_txtf[0] = p_type_ref_txtf[0].getText();
+             SC_data_miner.p_source_ref_txtf[0] = p_source_ref_txtf[0].getText();
+             SC_data_miner.p_parent_type_ref_txtf[0] = p_parent_type_ref_txtf[0].getText();
+             if(SC_data_miner.p_parent_code_txtf[0] != null && SC_data_miner.p_type_ref_txtf[0] != null && SC_data_miner.p_source_ref_txtf[0] != null && SC_data_miner.p_parent_type_ref_txtf[0] != null){
+                 type = 1;
+             } else{
+                 type = 0;
+             }
         } else {
             for(int k=1; k<=count; k++){
-
+                CreateSc.UFName[k] = Form_name_txtf[k].getText();
+                SC_data_miner.Form_cd[k] = Form_cd_txtf[k].getText();
+                SC_data_miner.Form_name[k] = Form_cd_name_txtf[k].getText();
+                SC_data_miner.Form_okud[k] = Form_okud_txtf[k].getText();
+                SC_data_miner.Form_cd_cog[k] = Form_cd_cog_txtf[k].getText();
+                SC_data_miner.Flag_IOD[k] = Flag_IOD_txtf[k].getText();
+                SC_data_miner.Flag_PDN[k] = Flag_PDN_txtf[k].getText();
+                SC_data_miner.Dep_name[k] = Dep_name_txtf[k].getText();
+                SC_data_miner.Dep_u_name[k] = Dep_u_name_txtf[k].getText();
+                SC_data_miner.reason[k] = reason_txtf[k].getText();
+                SC_data_miner.System_id[k] = System_id_txtf[k].getText();
+                SC_data_miner.Security_role_name[k] = Security_role_name_txtf[k].getText();
+                SC_data_miner.Security_role_path[k] = Security_role_path_txtf[k].getText();
+                SC_data_miner.Search_path[k] = Search_path_txtf[k].getText();
+                SC_data_miner.Search_path_for_ehd_acs[k] = Search_path_txtf[k].getText();
+                SC_data_miner.Form_formal_code[k] = Form_formal_code_txtf[k].getText();
+                SC_data_miner.Desc[k] = Desc_txtf[k].getText();
+                SC_data_miner.period[k] = period_txtf[k].getText();
+                SC_data_miner.rep_subj_type[k] = rep_subj_type_txtf[k].getText();
+                SC_data_miner.p_parent_code_txtf[k] = p_parent_code_txtf[k].getText();
+                SC_data_miner.p_type_ref_txtf[k] = p_type_ref_txtf[k].getText();
+                SC_data_miner.p_source_ref_txtf[k] = p_source_ref_txtf[k].getText();
+                SC_data_miner.p_parent_type_ref_txtf[k] = p_parent_type_ref_txtf[k].getText();
+                if(SC_data_miner.p_parent_code_txtf[k] != null && SC_data_miner.p_type_ref_txtf[k] != null && SC_data_miner.p_source_ref_txtf[k] != null && SC_data_miner.p_parent_type_ref_txtf[k] != null){
+                    type = 1;
+                } else{
+                    type = 0;
+                }
             }
         }
+        new ScriptEXP(3, path_fld);
 
     }
     public void ResetClicked(){
@@ -176,7 +278,7 @@ public class MainViewController {
     public void OKClicked(){
         int count = countCmbx.getValue();
         System.out.print("count = " + count);
-        if(count !=0 || pathTxtf.getText() != null || pathTxtf.getText() != ""){
+        if(count !=0 || pathTxtf.getText() != null || !Objects.equals(pathTxtf.getText(), "")){
             new OK_Action (count, root, primaryStage, createBtn);
             OK_btn.setDisable(true);
             countCmbx.setDisable(true);
@@ -191,5 +293,9 @@ public class MainViewController {
             dialogPane.getButtonTypes().add(ButtonType.OK);
             dialog.show();
         }
+    }
+
+    public static byte getType(){
+        return MainViewController.type;
     }
 }
