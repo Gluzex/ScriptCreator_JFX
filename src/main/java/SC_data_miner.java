@@ -7,6 +7,7 @@ import java.util.Objects;
 
 public class SC_data_miner {
     public static String[] Form_cd = new String[12];
+    public static String[] Form_cd_name = new String[12];
     public static String[] Form_name= new String[12];
     public static String[] Form_okud= new String[12];
     public static String[] okud_form_cd= new String[12];

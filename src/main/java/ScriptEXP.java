@@ -12,7 +12,7 @@ public class ScriptEXP {
     String[] TR_def = new String[12];
     String[] SR_def = new String[12];
     int count = 0;
-    byte type = MainViewController.getType();
+    byte type = PreCreateScr.getType();
 
     public static boolean isFileExists(File file) {
         return file.exists() && !file.isDirectory();
@@ -1857,7 +1857,7 @@ public class ScriptEXP {
             fos.flush();
             fos.close();
         }
-        if(chk !=1){
+        if(chk ==1){
             if(isFileExists(file3)){
                 for(int i = 1; i<=50;){
                     String filePath32 = path2 + "\\V001_" + format_2.format(dateNow) + "_202000_0002__DM_DM_NIKA_KO_DATA_sc__reg_meta_" + SC_data_miner.Form_cd[0] + "(" + i + ").sql";

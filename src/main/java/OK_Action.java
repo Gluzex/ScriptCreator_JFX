@@ -31,7 +31,7 @@ public class OK_Action {
     private static TextField[] p_source_ref_txtf = new TextField[12];
     private static TextField[] Security_role_name_txtf = new TextField[12];
 
-    public OK_Action(int count, AnchorPane root, Stage primaryStage, Button createBtn){
+    public OK_Action(int count, AnchorPane root, Stage primaryStage, Button apruvBtn){
         this.mnf = primaryStage;
         sp = new TabPane();
         VBox[] PanelSet = new VBox[12];
@@ -195,75 +195,260 @@ public class OK_Action {
         mnf.setHeight(880);
         mnf.centerOnScreen();
 
-        createBtn.setVisible(true);
-        createBtn.setDisable(false);
+        apruvBtn.setVisible(true);
+        apruvBtn.setDisable(false);
         }
 
+    public static void GetValues(){
+        /*System.out.print("Form_name_txtf[0].getText() = " + Form_name_txtf[0].getText() + "\n");
+        System.out.print("Form_cd_txtf[0].getText() = " + Form_cd_txtf[0].getText() + "\n");
+        System.out.print("Form_cd_name_txtf[0].getText() = " + Form_cd_name_txtf[0].getText() + "\n");
+        System.out.print("Form_okud_txtf[0].getText() = " + Form_okud_txtf[0].getText() + "\n");
+        System.out.print("Dep_u_name_txtf[0].getText() = " + Dep_u_name_txtf[0].getText() + "\n");
+        for(int h = 0; h<=11; h++){
+            Form_name_txtf[h].setText(OK_Action.Form_name_txtf[h].getText());
+            Form_cd_txtf[h].setText(OK_Action.Form_cd_txtf[h].getText());
+            Form_cd_name_txtf[h].setText(OK_Action.Form_cd_name_txtf[h].getText());
+            Form_okud_txtf[h].setText(OK_Action.Form_okud_txtf[h].getText());
+            Form_cd_cog_txtf[h].setText(OK_Action.Form_cd_cog_txtf[h].getText());
+            Flag_IOD_txtf[h].setText(OK_Action.Flag_IOD_txtf[h].getText());
+            Flag_PDN_txtf[h].setText(OK_Action.Flag_PDN_txtf[h].getText());
+            Dep_name_txtf[h].setText(OK_Action.Dep_name_txtf[h].getText());
+            Dep_u_name_txtf[h].setText(OK_Action.Dep_u_name_txtf[h].getText());
+            reason_txtf[h].setText(OK_Action.reason_txtf[h].getText());
+            System_id_txtf[h].setText(OK_Action.System_id_txtf[h].getText());
+            Security_role_path_txtf[h].setText(OK_Action.Security_role_path_txtf[h].getText());
+            Search_path_txtf[h].setText(OK_Action.Search_path_txtf[h].getText());
+            Form_formal_code_txtf[h].setText(OK_Action.Form_formal_code_txtf[h].getText());
+            Desc_txtf[h].setText(OK_Action.Desc_txtf[h].getText());
+            period_txtf[h].setText(OK_Action.period_txtf[h].getText());
+            rep_subj_type_txtf[h].setText(OK_Action.rep_subj_type_txtf[h].getText());
+            p_parent_code_txtf[h].setText(OK_Action.p_parent_code_txtf[h].getText());
+            p_parent_type_ref_txtf[h].setText(OK_Action.p_parent_type_ref_txtf[h].getText());
+            p_type_ref_txtf[h].setText(OK_Action.p_type_ref_txtf[h].getText());
+            p_source_ref_txtf[h].setText(OK_Action.p_source_ref_txtf[h].getText());
+            Security_role_name_txtf[h].setText(OK_Action.Security_role_name_txtf[h].getText());
+        }*/
+    }
     public static TextField[] getForm_name_txtf(){
-        return OK_Action.Form_name_txtf;
+            return OK_Action.Form_name_txtf;
     }
     public static TextField[] getForm_cd_txtf(){
-        return OK_Action.Form_cd_txtf;
+            return OK_Action.Form_cd_txtf;
     }
     public static TextField[] getForm_cd_name_txtf(){
-        return OK_Action.Form_cd_name_txtf;
+            return OK_Action.Form_cd_name_txtf;
     }
     public static TextField[] getForm_okud_txtf(){
-        return OK_Action.Form_okud_txtf;
+            return OK_Action.Form_okud_txtf;
     }
     public static TextField[] getForm_cd_cog_txtf(){
-        return OK_Action.Form_cd_cog_txtf;
+            return OK_Action.Form_cd_cog_txtf;
     }
     public static TextField[] getFlag_IOD_txtf(){
-        return OK_Action.Flag_IOD_txtf;
+            return OK_Action.Flag_IOD_txtf;
     }
     public static TextField[] getFlag_PDN_txtf(){
-        return OK_Action.Flag_PDN_txtf;
+            return OK_Action.Flag_PDN_txtf;
     }
     public static TextField[] getDep_name_txtf(){
-        return OK_Action.Dep_name_txtf;
+            return OK_Action.Dep_name_txtf;
     }
     public static TextField[] getDep_u_name_txtf(){
-        return OK_Action.Dep_u_name_txtf;
+            return OK_Action.Dep_u_name_txtf;
     }
     public static TextField[] getReason_txtf(){
-        return OK_Action.reason_txtf;
+            return OK_Action.reason_txtf;
     }
     public static TextField[] getSystem_id_txtf(){
-        return OK_Action.System_id_txtf;
+            return OK_Action.System_id_txtf;
     }
     public static TextField[] getSecurity_role_path_txtf(){
-        return OK_Action.Security_role_path_txtf;
+            return OK_Action.Security_role_path_txtf;
     }
     public static TextField[] getSearch_path_txtf(){
-        return OK_Action.Search_path_txtf;
+            return OK_Action.Search_path_txtf;
     }
     public static TextField[] getForm_formal_code_txtf(){
-        return OK_Action.Form_formal_code_txtf;
+            return OK_Action.Form_formal_code_txtf;
     }
     public static TextField[] getDesc_txtf(){
-        return OK_Action.Desc_txtf;
+            return OK_Action.Desc_txtf;
     }
     public static TextField[] getPeriod_txtf(){
-        return OK_Action.period_txtf;
+            return OK_Action.period_txtf;
     }
     public static TextField[] getRep_subj_type_txtf(){
-        return OK_Action.rep_subj_type_txtf;
+            return OK_Action.rep_subj_type_txtf;
     }
     public static TextField[] getP_parent_code_txtf(){
-        return OK_Action.p_parent_code_txtf;
+            return OK_Action.p_parent_code_txtf;
     }
     public static TextField[] getP_parent_type_ref_txtf(){
-        return OK_Action.p_parent_type_ref_txtf;
+            return OK_Action.p_parent_type_ref_txtf;
     }
     public static TextField[] getP_type_ref_txtf(){
-        return OK_Action.p_type_ref_txtf;
+            return OK_Action.p_type_ref_txtf;
     }
     public static TextField[] getP_source_ref_txtf(){
-        return OK_Action.p_source_ref_txtf;
+            return OK_Action.p_source_ref_txtf;
     }
     public static TextField[] getSecurity_role_name_txtf(){
         return OK_Action.Security_role_name_txtf;
     }
+    /*public static String[] getForm_name_txtf(){
+        String[] result = new String[12];
+        for(int l = 0; l<=11; l++){
+            result[l] = OK_Action.Form_name_txtf[0].getText();
+        }
+        return result;
+    }
+    public static String[] getForm_cd_txtf(){
+        String[] result = new String[12];
+        for(int l = 0; l<=11; l++){
+            result[l] = OK_Action.Form_cd_txtf[0].getText();
+        }
+        return result;
+    }
+    public static String[] getForm_cd_name_txtf(){
+        String[] result = new String[12];
+        for(int l = 0; l<=11; l++){
+            result[l] = OK_Action.Form_cd_name_txtf[0].getText();
+        }
+        return result;
+    }
+    public static String[] getForm_okud_txtf(){
+        String[] result = new String[12];
+        for(int l = 0; l<=11; l++){
+            result[l] = OK_Action.Form_okud_txtf[0].getText();
+        }
+        return result;
+    }
+    public static String[] getForm_cd_cog_txtf(){
+        String[] result = new String[12];
+        for(int l = 0; l<=11; l++){
+            result[l] = OK_Action.Form_cd_cog_txtf[0].getText();
+        }
+        return result;
+    }
+    public static String[] getFlag_IOD_txtf(){
+        String[] result = new String[12];
+        for(int l = 0; l<=11; l++){
+            result[l] = OK_Action.Flag_IOD_txtf[0].getText();
+        }
+        return result;
+    }
+    public static String[] getFlag_PDN_txtf(){
+        String[] result = new String[12];
+        for(int l = 0; l<=11; l++){
+            result[l] = OK_Action.Flag_PDN_txtf[0].getText();
+        }
+        return result;
+    }
+    public static String[] getDep_name_txtf(){
+        String[] result = new String[12];
+        for(int l = 0; l<=11; l++){
+            result[l] = OK_Action.Dep_name_txtf[0].getText();
+        }
+        return result;
+    }
+    public static String[] getDep_u_name_txtf(){
+        String[] result = new String[12];
+        for(int l = 0; l<=11; l++){
+            result[l] = OK_Action.Dep_u_name_txtf[0].getText();
+        }
+        return result;
+    }
+    public static String[] getReason_txtf(){
+        String[] result = new String[12];
+        for(int l = 0; l<=11; l++){
+            result[l] = OK_Action.reason_txtf[0].getText();
+        }
+        return result;
+    }
+    public static String[] getSystem_id_txtf(){
+        String[] result = new String[12];
+        for(int l = 0; l<=11; l++){
+            result[l] = OK_Action.System_id_txtf[0].getText();
+        }
+        return result;
+    }
+    public static String[] getSecurity_role_path_txtf(){
+        String[] result = new String[12];
+        for(int l = 0; l<=11; l++){
+            result[l] = OK_Action.Security_role_path_txtf[0].getText();
+        }
+        return result;
+    }
+    public static String[] getSearch_path_txtf(){
+        String[] result = new String[12];
+        for(int l = 0; l<=11; l++){
+            result[l] = OK_Action.Search_path_txtf[0].getText();
+        }
+        return result;
+    }
+    public static String[] getForm_formal_code_txtf(){
+        String[] result = new String[12];
+        for(int l = 0; l<=11; l++){
+            result[l] = OK_Action.Form_formal_code_txtf[0].getText();
+        }
+        return result;
+    }
+    public static String[] getDesc_txtf(){
+        String[] result = new String[12];
+        for(int l = 0; l<=11; l++){
+            result[l] = OK_Action.Desc_txtf[0].getText();
+        }
+        return result;
+    }
+    public static String[] getPeriod_txtf(){
+        String[] result = new String[12];
+        for(int l = 0; l<=11; l++){
+            result[l] = OK_Action.period_txtf[0].getText();
+        }
+        return result;
+    }
+    public static String[] getRep_subj_type_txtf(){
+        String[] result = new String[12];
+        for(int l = 0; l<=11; l++){
+            result[l] = OK_Action.rep_subj_type_txtf[0].getText();
+        }
+        return result;
+    }
+    public static String[] getP_parent_code_txtf(){
+        String[] result = new String[12];
+        for(int l = 0; l<=11; l++){
+            result[l] = OK_Action.p_parent_code_txtf[0].getText();
+        }
+        return result;
+    }
+    public static String[] getP_parent_type_ref_txtf(){
+        String[] result = new String[12];
+        for(int l = 0; l<=11; l++){
+            result[l] = OK_Action.p_parent_type_ref_txtf[0].getText();
+        }
+        return result;
+    }
+    public static String[] getP_type_ref_txtf(){
+        String[] result = new String[12];
+        for(int l = 0; l<=11; l++){
+            result[l] = OK_Action.p_type_ref_txtf[0].getText();
+        }
+        return result;
+    }
+    public static String[] getP_source_ref_txtf(){
+        String[] result = new String[12];
+        for(int l = 0; l<=11; l++){
+            result[l] = OK_Action.p_source_ref_txtf[0].getText();
+        }
+        return result;
+    }
+    public static String[] getSecurity_role_name_txtf(){
+        String[] result = new String[12];
+        for(int l = 0; l<=11; l++){
+            result[l] = OK_Action.Security_role_name_txtf[0].getText();
+        }
+        return result;
+    }*/
     }
 
