@@ -31,7 +31,7 @@ public class OK_Action {
     private static TextField[] p_source_ref_txtf = new TextField[12];
     private static TextField[] Security_role_name_txtf = new TextField[12];
 
-    public OK_Action(int count, AnchorPane root, Stage primaryStage, Button apruvBtn){
+    public OK_Action(int count, AnchorPane root, Stage primaryStage, Button createBtn){
         this.mnf = primaryStage;
         sp = new TabPane();
         VBox[] PanelSet = new VBox[12];
@@ -43,7 +43,7 @@ public class OK_Action {
         HBox[] exjp5_set = new HBox[12];
         HBox[] exjp6_set = new HBox[12];
         HBox[] exjp7_set= new HBox[12];
-        HBox[] exjp8_set = new HBox[12];
+        //HBox[] exjp8_set = new HBox[12];
         HBox[] exjp9_set = new HBox[12];
         HBox[] exjp10_set = new HBox[12];
         HBox[] exjp11_set = new HBox[12];
@@ -58,6 +58,16 @@ public class OK_Action {
         HBox[] exjp20_set = new HBox[12];
         HBox[] exjp21_set = new HBox[12];
         HBox[] exjp22_set = new HBox[12];
+        VBox[] p_tbl_1 = new VBox[12];
+        VBox[] p_tbl_2 = new VBox[12];
+        VBox[] p_tbl_3 = new VBox[12];
+        VBox[] p_tbl_4 = new VBox[12];
+        //VBox[] p_tbl_5 = new VBox[12];
+        VBox[] p_tbl_6 = new VBox[12];
+        VBox[] p_tbl_7 = new VBox[12];
+        //VBox[] p_tbl_8 = new VBox[12];
+        VBox[] p_tbl_9 = new VBox[12];
+        VBox[] p_tbl_10 = new VBox[12];
 
         Label[] form_name_lbl = new Label[12];
         Label[] form_cd_lbl = new Label[12];
@@ -81,6 +91,16 @@ public class OK_Action {
         Label[] p_type_ref_lbl = new Label[12];
         Label[] p_source_ref_lbl = new Label[12];
         Label[] Security_role_name_lbl = new Label[12];
+        Label[] tbl1_lbl = new Label[12];
+        Label[] tbl2_lbl = new Label[12];
+        Label[] tbl3_lbl = new Label[12];
+        Label[] tbl4_lbl = new Label[12];
+        //Label[] tbl5_lbl = new Label[12];
+        Label[] tbl6_lbl = new Label[12];
+        Label[] tbl7_lbl = new Label[12];
+        //Label[] tbl8_lbl = new Label[12];
+        Label[] tbl9_lbl = new Label[12];
+        Label[] tbl10_lbl = new Label[12];
 
         for(int t = 0; t<=11; t++){
             PanelSet[t] = new VBox(5.0);
@@ -93,7 +113,7 @@ public class OK_Action {
             exjp5_set[t] = new HBox(15.0);
             exjp6_set[t] = new HBox(15.0);
             exjp7_set[t] = new HBox(15.0);
-            exjp8_set[t] = new HBox(15.0);
+            //exjp8_set[t] = new HBox(15.0);
             exjp9_set[t] = new HBox(15.0);
             exjp10_set[t] = new HBox(15.0);
             exjp11_set[t] = new HBox(15.0);
@@ -108,6 +128,26 @@ public class OK_Action {
             exjp20_set[t] = new HBox(15.0);
             exjp21_set[t] = new HBox(15.0);
             exjp22_set[t] = new HBox(15.0);
+            p_tbl_1[t] = new VBox(15.0);
+            p_tbl_2[t] = new VBox(15.0);
+            p_tbl_3[t] = new VBox(15.0);
+            p_tbl_4[t] = new VBox(15.0);
+            //p_tbl_5[t] = new VBox(15.0);
+            p_tbl_6[t] = new VBox(15.0);
+            p_tbl_7[t] = new VBox(15.0);
+            //p_tbl_8[t] = new VBox(15.0);
+            p_tbl_9[t] = new VBox(15.0);
+            p_tbl_10[t] = new VBox(15.0);
+            p_tbl_1[t].setPadding(new Insets(10.0));
+            p_tbl_2[t].setPadding(new Insets(10.0));
+            p_tbl_3[t].setPadding(new Insets(10.0));
+            p_tbl_4[t].setPadding(new Insets(10.0));
+            //p_tbl_5[t].setPadding(new Insets(10.0));
+            p_tbl_6[t].setPadding(new Insets(10.0));
+            p_tbl_7[t].setPadding(new Insets(10.0));
+            //p_tbl_8[t].setPadding(new Insets(10.0));
+            p_tbl_9[t].setPadding(new Insets(10.0));
+            p_tbl_10[t].setPadding(new Insets(10.0));
 
             Form_name_txtf[t] = new TextField();
             Form_cd_txtf[t] =  new TextField();
@@ -132,6 +172,15 @@ public class OK_Action {
             p_source_ref_txtf[t] =  new TextField();
             Security_role_name_txtf[t] =  new TextField();
 
+            reason_txtf[t].setMinWidth(50.0);
+            reason_txtf[t].setPrefColumnCount(70);
+            Security_role_path_txtf[t].setMinWidth(75.0);
+            Security_role_path_txtf[t].setPrefColumnCount(100);
+            Search_path_txtf[t].setMinWidth(75.0);
+            Search_path_txtf[t].setPrefColumnCount(125);
+            Desc_txtf[t].setMinWidth(75.0);
+            Desc_txtf[t].setPrefColumnCount(125);
+
             form_name_lbl[t] = new Label("Имя формы: ");
             form_cd_lbl[t] = new Label("Код доступа: ");
             form_cd_name_lbl[t] = new Label("Наименование кода доступа: ");
@@ -144,18 +193,28 @@ public class OK_Action {
             reason_lbl[t] = new Label("Документ-основание: ");
             System_id_lbl[t] = new Label("System_id: ");
             Security_role_path_lbl[t] = new Label("Security_role_path: ");
-            Search_path_lbl[t] = new Label("Search_path: ");
+            Search_path_lbl[t] = new Label("Полный путь отчета/папки(Search_path): ");
             Form_formal_code_lbl[t] = new Label("Уникальный код отчета: ");
             Desc_lbl[t] = new Label("Описание: ");
-            period_lbl[t] = new Label("Период: ");
+            period_lbl[t] = new Label("Период сбора: ");
             rep_subj_type_lbl[t] = new Label("Разрез: ");
             p_parent_code_lbl[t] = new Label("p_parent_code: ");
             p_parent_type_ref_lbl[t] = new Label("p_parent_type_ref: ");
             p_type_ref_lbl[t] = new Label("p_type_ref: ");
             p_source_ref_lbl[t] = new Label("p_source_ref: ");
             Security_role_name_lbl[t] = new Label("Security_role_name: ");
+            tbl1_lbl[t] = new Label("---Данные для таблицы REP_FORM---");
+            tbl2_lbl[t] = new Label("---Данные для таблицы REP_FORM_COGNOS---");
+            tbl3_lbl[t] = new Label("---Данные для таблицы REP_FORM_OKI---");
+            tbl4_lbl[t] = new Label("---Данные для таблиц REP_FORM_DEP_OWNER и REP_FORM_DEP_USER---");
+            //tbl5_lbl[t] = new Label("---Данные для таблицы REP_FORM_DEP_USER---");
+            tbl6_lbl[t] = new Label("---Данные для таблицы REG_REPORT_FORM---");
+            tbl7_lbl[t] = new Label("---Данные для таблицы REPORT_OKUD_CODE---");
+            //tbl8_lbl[t] = new Label("---Данные для таблицы REPORT_FORM_SRC---");
+            tbl9_lbl[t] = new Label("---Данные для таблицы REPORT_REP_SUBJ_TYPE---");
+            tbl10_lbl[t] = new Label("---Данные для таблицы EHD_ACS_OBJECTS---");
         }
-        for(int o = 1; o <= count; o++){
+        for(int o = 0; o <= count-1;){
 
             //System.out.print("o = " + o );
 
@@ -181,55 +240,38 @@ public class OK_Action {
             exjp20_set[o].getChildren().addAll(p_type_ref_lbl[o], p_type_ref_txtf[o]);
             exjp21_set[o].getChildren().addAll(p_source_ref_lbl[o], p_source_ref_txtf[o]);
             exjp22_set[o].getChildren().addAll(Security_role_name_lbl[o], Security_role_name_txtf[o]);
+            p_tbl_1[o].getChildren().addAll(tbl1_lbl[o]);
+            p_tbl_2[o].getChildren().addAll(tbl2_lbl[o]);
+            p_tbl_3[o].getChildren().addAll(tbl3_lbl[o]);
+            p_tbl_4[o].getChildren().addAll(tbl4_lbl[o]);
+            //p_tbl_5[o].getChildren().addAll(tbl5_lbl[o]);
+            p_tbl_6[o].getChildren().addAll(tbl6_lbl[o]);
+            p_tbl_7[o].getChildren().addAll(tbl7_lbl[o]);
+            //p_tbl_8[o].getChildren().addAll(tbl8_lbl[o]);
+            p_tbl_9[o].getChildren().addAll(tbl9_lbl[o]);
+            p_tbl_10[o].getChildren().addAll(tbl10_lbl[o]);
 
-            PanelSet[o].getChildren().addAll(exjp0_set[o], exjp1_set[o], exjp2_set[o], exjp3_set[o], exjp4_set[o], exjp5_set[o], exjp7_set[o], exjp8_set[o], exjp9_set[o],
-                    exjp10_set[o], exjp11_set[o], exjp12_set[o], exjp13_set[o], exjp14_set[o], exjp15_set[o], exjp16_set[o], exjp17_set[o], exjp18_set[o], exjp19_set[o],
-                    exjp20_set[o], exjp21_set[o], exjp22_set[o]);
-            sp.getTabs().add(new Tab("Форма " + (o), PanelSet[o]));
+            PanelSet[o].getChildren().addAll(p_tbl_1[o], exjp1_set[o], exjp2_set[o], p_tbl_2[o], exjp4_set[o], p_tbl_3[o], exjp5_set[o], exjp6_set[o], p_tbl_4[o], exjp7_set[o], exjp9_set[o], exjp10_set[o], p_tbl_6[o],
+                    exjp13_set[o], exjp14_set[o], exjp15_set[o], exjp11_set[o], exjp22_set[o], exjp12_set[o], p_tbl_7[o], exjp3_set[o], exjp16_set[o], p_tbl_9[o], exjp17_set[o], p_tbl_10[o], exjp0_set[o], exjp18_set[o],
+                    exjp19_set[o], exjp20_set[o], exjp21_set[o]);
+            sp.getTabs().add(new Tab("Форма " + (o+1), PanelSet[o]));
+            o++;
         }
         root.getChildren().add(sp);
         sp.setLayoutX(15);
         sp.setLayoutY(160);
 
         mnf.setWidth(1720);
-        mnf.setHeight(880);
+        mnf.setHeight(1270);
         mnf.centerOnScreen();
 
-        apruvBtn.setVisible(true);
-        apruvBtn.setDisable(false);
+        createBtn.setVisible(true);
+        createBtn.setDisable(false);
         }
 
-    public static void GetValues(){
-        /*System.out.print("Form_name_txtf[0].getText() = " + Form_name_txtf[0].getText() + "\n");
-        System.out.print("Form_cd_txtf[0].getText() = " + Form_cd_txtf[0].getText() + "\n");
-        System.out.print("Form_cd_name_txtf[0].getText() = " + Form_cd_name_txtf[0].getText() + "\n");
-        System.out.print("Form_okud_txtf[0].getText() = " + Form_okud_txtf[0].getText() + "\n");
-        System.out.print("Dep_u_name_txtf[0].getText() = " + Dep_u_name_txtf[0].getText() + "\n");
-        for(int h = 0; h<=11; h++){
-            Form_name_txtf[h].setText(OK_Action.Form_name_txtf[h].getText());
-            Form_cd_txtf[h].setText(OK_Action.Form_cd_txtf[h].getText());
-            Form_cd_name_txtf[h].setText(OK_Action.Form_cd_name_txtf[h].getText());
-            Form_okud_txtf[h].setText(OK_Action.Form_okud_txtf[h].getText());
-            Form_cd_cog_txtf[h].setText(OK_Action.Form_cd_cog_txtf[h].getText());
-            Flag_IOD_txtf[h].setText(OK_Action.Flag_IOD_txtf[h].getText());
-            Flag_PDN_txtf[h].setText(OK_Action.Flag_PDN_txtf[h].getText());
-            Dep_name_txtf[h].setText(OK_Action.Dep_name_txtf[h].getText());
-            Dep_u_name_txtf[h].setText(OK_Action.Dep_u_name_txtf[h].getText());
-            reason_txtf[h].setText(OK_Action.reason_txtf[h].getText());
-            System_id_txtf[h].setText(OK_Action.System_id_txtf[h].getText());
-            Security_role_path_txtf[h].setText(OK_Action.Security_role_path_txtf[h].getText());
-            Search_path_txtf[h].setText(OK_Action.Search_path_txtf[h].getText());
-            Form_formal_code_txtf[h].setText(OK_Action.Form_formal_code_txtf[h].getText());
-            Desc_txtf[h].setText(OK_Action.Desc_txtf[h].getText());
-            period_txtf[h].setText(OK_Action.period_txtf[h].getText());
-            rep_subj_type_txtf[h].setText(OK_Action.rep_subj_type_txtf[h].getText());
-            p_parent_code_txtf[h].setText(OK_Action.p_parent_code_txtf[h].getText());
-            p_parent_type_ref_txtf[h].setText(OK_Action.p_parent_type_ref_txtf[h].getText());
-            p_type_ref_txtf[h].setText(OK_Action.p_type_ref_txtf[h].getText());
-            p_source_ref_txtf[h].setText(OK_Action.p_source_ref_txtf[h].getText());
-            Security_role_name_txtf[h].setText(OK_Action.Security_role_name_txtf[h].getText());
-        }*/
-    }
+   public static TabPane getSp(){
+        return OK_Action.sp;
+   }
     public static TextField[] getForm_name_txtf(){
             return OK_Action.Form_name_txtf;
     }
@@ -296,159 +338,5 @@ public class OK_Action {
     public static TextField[] getSecurity_role_name_txtf(){
         return OK_Action.Security_role_name_txtf;
     }
-    /*public static String[] getForm_name_txtf(){
-        String[] result = new String[12];
-        for(int l = 0; l<=11; l++){
-            result[l] = OK_Action.Form_name_txtf[0].getText();
-        }
-        return result;
-    }
-    public static String[] getForm_cd_txtf(){
-        String[] result = new String[12];
-        for(int l = 0; l<=11; l++){
-            result[l] = OK_Action.Form_cd_txtf[0].getText();
-        }
-        return result;
-    }
-    public static String[] getForm_cd_name_txtf(){
-        String[] result = new String[12];
-        for(int l = 0; l<=11; l++){
-            result[l] = OK_Action.Form_cd_name_txtf[0].getText();
-        }
-        return result;
-    }
-    public static String[] getForm_okud_txtf(){
-        String[] result = new String[12];
-        for(int l = 0; l<=11; l++){
-            result[l] = OK_Action.Form_okud_txtf[0].getText();
-        }
-        return result;
-    }
-    public static String[] getForm_cd_cog_txtf(){
-        String[] result = new String[12];
-        for(int l = 0; l<=11; l++){
-            result[l] = OK_Action.Form_cd_cog_txtf[0].getText();
-        }
-        return result;
-    }
-    public static String[] getFlag_IOD_txtf(){
-        String[] result = new String[12];
-        for(int l = 0; l<=11; l++){
-            result[l] = OK_Action.Flag_IOD_txtf[0].getText();
-        }
-        return result;
-    }
-    public static String[] getFlag_PDN_txtf(){
-        String[] result = new String[12];
-        for(int l = 0; l<=11; l++){
-            result[l] = OK_Action.Flag_PDN_txtf[0].getText();
-        }
-        return result;
-    }
-    public static String[] getDep_name_txtf(){
-        String[] result = new String[12];
-        for(int l = 0; l<=11; l++){
-            result[l] = OK_Action.Dep_name_txtf[0].getText();
-        }
-        return result;
-    }
-    public static String[] getDep_u_name_txtf(){
-        String[] result = new String[12];
-        for(int l = 0; l<=11; l++){
-            result[l] = OK_Action.Dep_u_name_txtf[0].getText();
-        }
-        return result;
-    }
-    public static String[] getReason_txtf(){
-        String[] result = new String[12];
-        for(int l = 0; l<=11; l++){
-            result[l] = OK_Action.reason_txtf[0].getText();
-        }
-        return result;
-    }
-    public static String[] getSystem_id_txtf(){
-        String[] result = new String[12];
-        for(int l = 0; l<=11; l++){
-            result[l] = OK_Action.System_id_txtf[0].getText();
-        }
-        return result;
-    }
-    public static String[] getSecurity_role_path_txtf(){
-        String[] result = new String[12];
-        for(int l = 0; l<=11; l++){
-            result[l] = OK_Action.Security_role_path_txtf[0].getText();
-        }
-        return result;
-    }
-    public static String[] getSearch_path_txtf(){
-        String[] result = new String[12];
-        for(int l = 0; l<=11; l++){
-            result[l] = OK_Action.Search_path_txtf[0].getText();
-        }
-        return result;
-    }
-    public static String[] getForm_formal_code_txtf(){
-        String[] result = new String[12];
-        for(int l = 0; l<=11; l++){
-            result[l] = OK_Action.Form_formal_code_txtf[0].getText();
-        }
-        return result;
-    }
-    public static String[] getDesc_txtf(){
-        String[] result = new String[12];
-        for(int l = 0; l<=11; l++){
-            result[l] = OK_Action.Desc_txtf[0].getText();
-        }
-        return result;
-    }
-    public static String[] getPeriod_txtf(){
-        String[] result = new String[12];
-        for(int l = 0; l<=11; l++){
-            result[l] = OK_Action.period_txtf[0].getText();
-        }
-        return result;
-    }
-    public static String[] getRep_subj_type_txtf(){
-        String[] result = new String[12];
-        for(int l = 0; l<=11; l++){
-            result[l] = OK_Action.rep_subj_type_txtf[0].getText();
-        }
-        return result;
-    }
-    public static String[] getP_parent_code_txtf(){
-        String[] result = new String[12];
-        for(int l = 0; l<=11; l++){
-            result[l] = OK_Action.p_parent_code_txtf[0].getText();
-        }
-        return result;
-    }
-    public static String[] getP_parent_type_ref_txtf(){
-        String[] result = new String[12];
-        for(int l = 0; l<=11; l++){
-            result[l] = OK_Action.p_parent_type_ref_txtf[0].getText();
-        }
-        return result;
-    }
-    public static String[] getP_type_ref_txtf(){
-        String[] result = new String[12];
-        for(int l = 0; l<=11; l++){
-            result[l] = OK_Action.p_type_ref_txtf[0].getText();
-        }
-        return result;
-    }
-    public static String[] getP_source_ref_txtf(){
-        String[] result = new String[12];
-        for(int l = 0; l<=11; l++){
-            result[l] = OK_Action.p_source_ref_txtf[0].getText();
-        }
-        return result;
-    }
-    public static String[] getSecurity_role_name_txtf(){
-        String[] result = new String[12];
-        for(int l = 0; l<=11; l++){
-            result[l] = OK_Action.Security_role_name_txtf[0].getText();
-        }
-        return result;
-    }*/
-    }
+}
 

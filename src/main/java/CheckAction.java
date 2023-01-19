@@ -240,7 +240,6 @@ public class CheckAction {
     public static TextField getTxtf_SR(){
         return CheckAction.txtf_SR;
     }
-
     public static TextField[] getTxtf_Sys_id_set(){
         return CheckAction.txtf_Sys_id_set;
     }

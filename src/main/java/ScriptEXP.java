@@ -267,10 +267,9 @@ public class ScriptEXP {
                         "  '" + SC_data_miner.Search_path_for_ehd_acs[0] + "' as SEARCH_PATH,\n" +
                         "  null as FLAG_EXP\n" +
                         "FROM dual) S\n" +
-                        "   ON (O.CODE = S.CODE)\n" +
+                        "   ON (O.CODE = S.CODE AND O.TYPE_REF = S.TYPE_REF)\n" +
                         "   WHEN MATCHED THEN UPDATE SET O.NAME = S.NAME,\n" +
                         "                                O.PARENT_ID = S.PARENT_ID,\n" +
-                        "                                O.TYPE_REF = S.TYPE_REF,\n" +
                         "                                O.SOURCE_REF = S.SOURCE_REF,\n" +
                         "                                O.SEARCH_PATH = S.SEARCH_PATH,\n" +
                         "                                O.FLAG_EXP = S.FLAG_EXP\n" +
@@ -459,10 +458,9 @@ public class ScriptEXP {
                         "  '" + SC_data_miner.Search_path_for_ehd_acs[0] + "' as SEARCH_PATH,\n" +
                         "  null as FLAG_EXP\n" +
                         "FROM dual) S\n" +
-                        "   ON (O.CODE = S.CODE)\n" +
+                        "   ON (O.CODE = S.CODE AND O.TYPE_REF = S.TYPE_REF)\n" +
                         "   WHEN MATCHED THEN UPDATE SET O.NAME = S.NAME,\n" +
                         "                                O.PARENT_ID = S.PARENT_ID,\n" +
-                        "                                O.TYPE_REF = S.TYPE_REF,\n" +
                         "                                O.SOURCE_REF = S.SOURCE_REF,\n" +
                         "                                O.SEARCH_PATH = S.SEARCH_PATH,\n" +
                         "                                O.FLAG_EXP = S.FLAG_EXP\n" +
@@ -804,10 +802,9 @@ public class ScriptEXP {
                         "  '" + SC_data_miner.Search_path_for_ehd_acs[0] + "' as SEARCH_PATH,\n" +
                         "  null as FLAG_EXP\n" +
                         "FROM dual) S\n" +
-                        "   ON (O.CODE = S.CODE)\n" +
+                        "   ON (O.CODE = S.CODE AND O.TYPE_REF = S.TYPE_REF)\n" +
                         "   WHEN MATCHED THEN UPDATE SET O.NAME = S.NAME,\n" +
                         "                                O.PARENT_ID = S.PARENT_ID,\n" +
-                        "                                O.TYPE_REF = S.TYPE_REF,\n" +
                         "                                O.SOURCE_REF = S.SOURCE_REF,\n" +
                         "                                O.SEARCH_PATH = S.SEARCH_PATH,\n" +
                         "                                O.FLAG_EXP = S.FLAG_EXP\n" +
@@ -933,10 +930,9 @@ public class ScriptEXP {
                         "  '" + SC_data_miner.Search_path_for_ehd_acs[0] + "' as SEARCH_PATH,\n" +
                         "  null as FLAG_EXP\n" +
                         "FROM dual) S\n" +
-                        "   ON (O.CODE = S.CODE)\n" +
+                        "   ON (O.CODE = S.CODE AND O.TYPE_REF = S.TYPE_REF)\n" +
                         "   WHEN MATCHED THEN UPDATE SET O.NAME = S.NAME,\n" +
                         "                                O.PARENT_ID = S.PARENT_ID,\n" +
-                        "                                O.TYPE_REF = S.TYPE_REF,\n" +
                         "                                O.SOURCE_REF = S.SOURCE_REF,\n" +
                         "                                O.SEARCH_PATH = S.SEARCH_PATH,\n" +
                         "                                O.FLAG_EXP = S.FLAG_EXP\n" +
@@ -1318,10 +1314,9 @@ public class ScriptEXP {
                             "  '" + SC_data_miner.Search_path_for_ehd_acs[0] + "' as SEARCH_PATH,\n" +
                             "  null as FLAG_EXP\n" +
                             "FROM dual) S\n" +
-                            "   ON (O.CODE = S.CODE)\n" +
+                            "   ON (O.CODE = S.CODE AND O.TYPE_REF = S.TYPE_REF)\n" +
                             "   WHEN MATCHED THEN UPDATE SET O.NAME = S.NAME,\n" +
                             "                                O.PARENT_ID = S.PARENT_ID,\n" +
-                            "                                O.TYPE_REF = S.TYPE_REF,\n" +
                             "                                O.SOURCE_REF = S.SOURCE_REF,\n" +
                             "                                O.SEARCH_PATH = S.SEARCH_PATH,\n" +
                             "                                O.FLAG_EXP = S.FLAG_EXP\n" +
@@ -1531,10 +1526,9 @@ public class ScriptEXP {
                             "  '" + SC_data_miner.Search_path_for_ehd_acs[0] + "' as SEARCH_PATH,\n" +
                             "  null as FLAG_EXP\n" +
                             "FROM dual) S\n" +
-                            "   ON (O.CODE = S.CODE)\n" +
+                            "   ON (O.CODE = S.CODE AND O.TYPE_REF = S.TYPE_REF)\n" +
                             "   WHEN MATCHED THEN UPDATE SET O.NAME = S.NAME,\n" +
                             "                                O.PARENT_ID = S.PARENT_ID,\n" +
-                            "                                O.TYPE_REF = S.TYPE_REF,\n" +
                             "                                O.SOURCE_REF = S.SOURCE_REF,\n" +
                             "                                O.SEARCH_PATH = S.SEARCH_PATH,\n" +
                             "                                O.FLAG_EXP = S.FLAG_EXP\n" +

@@ -46,7 +46,7 @@ public class MainViewController {
     @FXML
     private Button createBtn;
     @FXML
-    private Button apruvBtn;
+    private Button resetBtn2;
     public void MainViewController(ActionEvent actionEvent) {
         primaryStage = SCJFXApp.getPrimaryStage();
         root = SCJFXApp.getRoot();
@@ -68,19 +68,6 @@ public class MainViewController {
         Browse.setVisible(true);
         Browse.setDisable(false);
         ChckBtn1.setVisible(true);
-        primaryStage.setWidth(1020);
-        primaryStage.setHeight(300);
-    }
-    public void fromManual(){
-        cmbx1.setDisable(true);
-        countLbl.setVisible(true);
-        pathLbl.setVisible(true);
-        countCmbx.setVisible(true);
-        pathTxtf.setVisible(true);
-        fldchs_btn.setVisible(true);
-        countCmbx.setDisable(false);
-        pathTxtf.setDisable(false);
-        fldchs_btn.setDisable(false);
         primaryStage.setWidth(1020);
         primaryStage.setHeight(300);
     }
@@ -128,11 +115,73 @@ public class MainViewController {
             new CreateSc(path_u1, mnf, root, txtf_Sys_id_set, txtf_Sec_R_N_set, txtf_Sec_R_P_set, txtf_SearchPath_set, txtf_SearchPath2_set,  txtf_NAME_set, txtf_TF_set, txtf_SR_set, resetBtn);
         }
     }
+    public void ResetClicked(){
+        TabPane sp = CheckAction.getSp();
+        Stage mnf = primaryStage;
+        root.getChildren().remove(sp);
+        lab1.setVisible(false);
+        txtf1.setVisible(false);
+        txtf1.setText("C:");
+        txt_fld1.clear();
+        devlab.setVisible(false);
+        Browse.setVisible(false);
+        ChckBtn1.setVisible(false);
+        resetBtn.setVisible(false);
+        resetBtn.setDisable(true);
+        ScrBtn3.setVisible(false);
+        ScrBtn3.setDisable(true);
+        cmbx1.setValue("");
+        cmbx1.setDisable(false);
+        txt_fld1.setText("");
+        txt_fld1.setDisable(false);
+        primaryStage.setWidth(520);
+        primaryStage.setHeight(240);
+        new ResetAction(mnf);
+    }
+    public void fromManual(){
+        cmbx1.setDisable(true);
+        countLbl.setVisible(true);
+        pathLbl.setVisible(true);
+        countCmbx.setVisible(true);
+        pathTxtf.setVisible(true);
+        fldchs_btn.setVisible(true);
+        countCmbx.setDisable(false);
+        pathTxtf.setDisable(false);
+        fldchs_btn.setDisable(false);
+        primaryStage.setWidth(1020);
+        primaryStage.setHeight(300);
+    }
+    public void BrowseFldClicked(){
+        new BrowseFldAction (pathTxtf, primaryStage, OK_btn);
+        pathTxtf.setDisable(true);
+        cmbx1.setDisable(true);
+        txt_fld1.setDisable(true);
+    }
+    public void OKClicked(){
+        int count = countCmbx.getValue();
+        System.out.print("count = " + count + "\n");
+        if(count !=0 || pathTxtf.getText() != null || !Objects.equals(pathTxtf.getText(), "")){
+            new OK_Action (count, root, primaryStage, createBtn);
+            OK_btn.setDisable(true);
+            countCmbx.setDisable(true);
+            fldchs_btn.setDisable(true);
+
+        } else {
+            Dialog<ButtonType> dialog = new Dialog<ButtonType>();
+            dialog.setTitle("Ошибка");
+            dialog.setHeaderText("ERROR!!!");
+            DialogPane dialogPane = dialog.getDialogPane();
+            dialog.setContentText("Пожалуйста, проверьте выбранное кол-во и путь для сохранения");
+            dialogPane.getButtonTypes().add(ButtonType.OK);
+            dialog.show();
+        }
+    }
     public void CreateClicked2() throws IOException {
         int count = countCmbx.getValue();
         String path_fld = BrowseFldAction.getPath_fld();
         Stage mnf = primaryStage;
         AnchorPane main_root = root;
+        Button resetBtn = resetBtn2;
 
         TextField[] Form_name_txtf = OK_Action.getForm_name_txtf();
         TextField[] Form_cd_txtf =  OK_Action.getForm_cd_txtf();
@@ -157,68 +206,36 @@ public class MainViewController {
         TextField[] p_source_ref_txtf =  OK_Action.getP_source_ref_txtf();
         TextField[] Security_role_name_txtf =  OK_Action.getSecurity_role_name_txtf();
 
-        System.out.print("Form_name_txtf[0].getText() = " + Form_name_txtf[0].getText() + "\n");
-        System.out.print("Form_cd_txtf[0].getText() = " + Form_cd_txtf[0].getText() + "\n");
-        System.out.print("Form_cd_name_txtf[0].getText() = " + Form_cd_name_txtf[0].getText() + "\n");
-        System.out.print("Form_okud_txtf[0].getText() = " + Form_okud_txtf[0].getText() + "\n");
-        System.out.print("Dep_u_name_txtf[0].getText() = " + Dep_u_name_txtf[0].getText() + "\n");
-
-        new PreCreateScr(count, path_fld, mnf, main_root, Form_name_txtf, Form_cd_txtf, Form_cd_name_txtf, Form_okud_txtf, Form_cd_cog_txtf, Flag_IOD_txtf, Flag_PDN_txtf, Dep_name_txtf, Dep_u_name_txtf, reason_txtf, System_id_txtf,
+        new PreCreateScr(count, path_fld, mnf, main_root, resetBtn, Form_name_txtf, Form_cd_txtf, Form_cd_name_txtf, Form_okud_txtf, Form_cd_cog_txtf, Flag_IOD_txtf, Flag_PDN_txtf, Dep_name_txtf, Dep_u_name_txtf, reason_txtf, System_id_txtf,
                 Security_role_path_txtf, Search_path_txtf, Form_formal_code_txtf, Desc_txtf, period_txtf, rep_subj_type_txtf, p_parent_code_txtf, p_parent_type_ref_txtf, p_type_ref_txtf, p_source_ref_txtf, Security_role_name_txtf);
-
     }
-    public void ResetClicked(){
-        TabPane sp = CheckAction.getSp();
+    public void ResetClicked2(){
+        TabPane sp = OK_Action.getSp();
+        Stage mnf = primaryStage;
         root.getChildren().remove(sp);
-        lab1.setVisible(false);
-        txtf1.setVisible(false);
-        txtf1.setText("C:");
-        txt_fld1.clear();
-        Browse.setVisible(false);
-        ChckBtn1.setVisible(false);
-        resetBtn.setVisible(false);
-        resetBtn.setDisable(true);
-        ScrBtn3.setVisible(false);
-        ScrBtn3.setDisable(true);
-        cmbx1.setValue("");
+        createBtn.setVisible(false);
+        OK_btn.setVisible(false);
+        fldchs_btn.setVisible(false);
+        countLbl.setVisible(false);
+        pathLbl.setVisible(false);
+        countCmbx.setVisible(false);
+        pathTxtf.setVisible(false);
+        resetBtn2.setVisible(false);
+        devlab.setVisible(false);
+        createBtn.setDisable(true);
+        OK_btn.setDisable(true);
+        fldchs_btn.setDisable(true);
+        countCmbx.setDisable(true);
+        pathTxtf.setDisable(true);
+        resetBtn2.setDisable(true);
         cmbx1.setDisable(false);
-        txt_fld1.setText("");
         txt_fld1.setDisable(false);
+        cmbx1.setValue("");
+        txt_fld1.setText("");
         primaryStage.setWidth(520);
         primaryStage.setHeight(240);
-        Stage mnf = primaryStage;
         new ResetAction(mnf);
-        devlab.setVisible(false);
     }
-    public void BrowseFldClicked(){
-        new BrowseFldAction (pathTxtf, primaryStage, OK_btn);
-        pathTxtf.setDisable(true);
-        cmbx1.setDisable(true);
-        txt_fld1.setDisable(true);
-    }
-    public void OKClicked(){
-        int count = countCmbx.getValue();
-        System.out.print("count = " + count + "\n");
-        if(count !=0 || pathTxtf.getText() != null || !Objects.equals(pathTxtf.getText(), "")){
-            new OK_Action (count, root, primaryStage, apruvBtn);
-            OK_btn.setDisable(true);
-            countCmbx.setDisable(true);
-            fldchs_btn.setDisable(true);
 
-        } else {
-            Dialog<ButtonType> dialog = new Dialog<ButtonType>();
-            dialog.setTitle("Ошибка");
-            dialog.setHeaderText("ERROR!!!");
-            DialogPane dialogPane = dialog.getDialogPane();
-            dialog.setContentText("Пожалуйста, проверьте выбранное кол-во и путь для сохранения");
-            dialogPane.getButtonTypes().add(ButtonType.OK);
-            dialog.show();
-        }
-    }
-    public void ApproveClicked(){
-        OK_Action.GetValues();
-        createBtn.setVisible(true);
-        createBtn.setDisable(false);
-        apruvBtn.setDisable(true);
-    }
+
 }

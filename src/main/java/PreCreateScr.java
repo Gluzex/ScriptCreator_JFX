@@ -1,7 +1,4 @@
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.Dialog;
-import javafx.scene.control.DialogPane;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -12,6 +9,7 @@ public class PreCreateScr {
     public String path_fld;
     public Stage mnf;
     public AnchorPane main_root;
+    public Button resetBtn;
     public TextField[] Form_name_txtf;
     public TextField[] Form_cd_txtf;
     public TextField[] Form_cd_name_txtf;
@@ -37,14 +35,15 @@ public class PreCreateScr {
     public static String[] UFName = new String[12];
     private static byte type = 0;
 
-    public PreCreateScr(int count, String path_fld, Stage mnf, AnchorPane main_root, TextField[] form_name_txtf, TextField[] form_cd_txtf, TextField[] form_cd_name_txtf, TextField[] form_okud_txtf,
-                        TextField[] form_cd_cog_txtf, TextField[] flag_iod_txtf, TextField[] flag_pdn_txtf, TextField[] dep_name_txtf,  TextField[] dep_u_name_txtf, TextField[] reason_txtf, TextField[] system_id_txtf,
+    public PreCreateScr(int count, String path_fld, Stage mnf, AnchorPane main_root, Button resetBtn, TextField[] form_name_txtf, TextField[] form_cd_txtf, TextField[] form_cd_name_txtf, TextField[] form_okud_txtf,
+                        TextField[] form_cd_cog_txtf, TextField[] flag_iod_txtf, TextField[] flag_pdn_txtf, TextField[] dep_name_txtf, TextField[] dep_u_name_txtf, TextField[] reason_txtf, TextField[] system_id_txtf,
                         TextField[] security_role_path_txtf, TextField[] search_path_txtf, TextField[] form_formal_code_txtf, TextField[] desc_txtf, TextField[] period_txtf, TextField[] rep_subj_type_txtf,
                         TextField[] p_parent_code_txtf, TextField[] p_parent_type_ref_txtf, TextField[] p_type_ref_txtf, TextField[] p_source_ref_txtf, TextField[] security_role_name_txtf) {
         this.count = count-1;
         this.path_fld = path_fld;
         this.mnf = mnf;
         this.main_root = main_root;
+        this.resetBtn = resetBtn;
         this.Form_name_txtf = form_name_txtf;
         this.Form_cd_txtf = form_cd_txtf;
         this.Form_cd_name_txtf = form_cd_name_txtf;
@@ -107,12 +106,6 @@ public class PreCreateScr {
             i++;
         }
 
-        System.out.print("SC_data_miner.Form_cd[0] = " + SC_data_miner.Form_cd[0] + "\n");
-        System.out.print("SC_data_miner.Form_name[0] = " + SC_data_miner.Form_name[0] + "\n");
-        System.out.print("SC_data_miner.Form_cd_name[0] = " + SC_data_miner.Form_cd_name[0] + "\n");
-        System.out.print("SC_data_miner.okud_form_cd[0] = " + SC_data_miner.okud_form_cd[0] + "\n");
-        System.out.print("SC_data_miner.Dep_u_name[0] = " + SC_data_miner.Dep_u_name[0] + "\n");
-
         try {
             new ScriptEXP(3, path_fld);
         } catch (IOException ex) {
@@ -127,6 +120,9 @@ public class PreCreateScr {
         dialog.setContentText("Скрипты успешно созданы и находятся по казанному Вами пути");
         dialogPane.getButtonTypes().add(ButtonType.OK);
         dialog.show();
+
+        resetBtn.setDisable(false);
+        resetBtn.setVisible(true);
     }
     public static byte getType(){
         return PreCreateScr.type;

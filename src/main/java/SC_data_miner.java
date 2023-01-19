@@ -418,6 +418,13 @@ public class SC_data_miner {
             Desc[t] = null;
             period[t] = null;
             rep_subj_type[t] = null;
+            Form_cd_name[t] = null;
+            okud_form_cd[t] = null;
+            Dep_u_name[t] = null;
+            p_parent_code_txtf[t] = null;
+            p_parent_type_ref_txtf[t] = null;
+            p_type_ref_txtf[t] = null;
+            p_source_ref_txtf[t] = null;
         }
     }
 }
