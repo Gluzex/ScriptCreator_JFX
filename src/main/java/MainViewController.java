@@ -188,8 +188,8 @@ public class MainViewController {
         TextField[] Form_cd_name_txtf =  OK_Action.getForm_cd_name_txtf();
         TextField[] Form_okud_txtf =  OK_Action.getForm_okud_txtf();
         TextField[] Form_cd_cog_txtf =  OK_Action.getForm_cd_cog_txtf();
-        TextField[] Flag_IOD_txtf =  OK_Action.getFlag_IOD_txtf();
-        TextField[] Flag_PDN_txtf =  OK_Action.getFlag_PDN_txtf();
+        ComboBox<String>[] Flag_IOD_cmbx =  OK_Action.getFlag_IOD_cmbx();
+        ComboBox<String>[] Flag_PDN_cmbx =  OK_Action.getFlag_PDN_cmbx();
         TextField[] Dep_name_txtf =  OK_Action.getDep_name_txtf();
         TextField[] Dep_u_name_txtf =  OK_Action.getDep_u_name_txtf();
         TextField[] reason_txtf =  OK_Action.getReason_txtf();
@@ -198,16 +198,16 @@ public class MainViewController {
         TextField[] Search_path_txtf =  OK_Action.getSearch_path_txtf();
         TextField[] Form_formal_code_txtf =  OK_Action.getForm_formal_code_txtf();
         TextField[] Desc_txtf =  OK_Action.getDesc_txtf();
-        TextField[] period_txtf =  OK_Action.getPeriod_txtf();
-        TextField[] rep_subj_type_txtf =  OK_Action.getRep_subj_type_txtf();
+        ComboBox<String>[] period_cmbx =  OK_Action.getPeriod_txtf();
+        ComboBox<String>[] rep_subj_type_cmbx =  OK_Action.getRep_subj_type_txtf();
         TextField[] p_parent_code_txtf =  OK_Action.getP_parent_code_txtf();
         TextField[] p_parent_type_ref_txtf =  OK_Action.getP_parent_type_ref_txtf();
         TextField[] p_type_ref_txtf =  OK_Action.getP_type_ref_txtf();
         TextField[] p_source_ref_txtf =  OK_Action.getP_source_ref_txtf();
         TextField[] Security_role_name_txtf =  OK_Action.getSecurity_role_name_txtf();
 
-        new PreCreateScr(count, path_fld, mnf, main_root, resetBtn, Form_name_txtf, Form_cd_txtf, Form_cd_name_txtf, Form_okud_txtf, Form_cd_cog_txtf, Flag_IOD_txtf, Flag_PDN_txtf, Dep_name_txtf, Dep_u_name_txtf, reason_txtf, System_id_txtf,
-                Security_role_path_txtf, Search_path_txtf, Form_formal_code_txtf, Desc_txtf, period_txtf, rep_subj_type_txtf, p_parent_code_txtf, p_parent_type_ref_txtf, p_type_ref_txtf, p_source_ref_txtf, Security_role_name_txtf);
+        new PreCreateScr(count, path_fld, mnf, main_root, resetBtn, Form_name_txtf, Form_cd_txtf, Form_cd_name_txtf, Form_okud_txtf, Form_cd_cog_txtf, Flag_IOD_cmbx, Flag_PDN_cmbx, Dep_name_txtf, Dep_u_name_txtf, reason_txtf, System_id_txtf,
+                Security_role_path_txtf, Search_path_txtf, Form_formal_code_txtf, Desc_txtf, period_cmbx, rep_subj_type_cmbx, p_parent_code_txtf, p_parent_type_ref_txtf, p_type_ref_txtf, p_source_ref_txtf, Security_role_name_txtf);
     }
     public void ResetClicked2(){
         TabPane sp = OK_Action.getSp();

@@ -15,8 +15,8 @@ public class PreCreateScr {
     public TextField[] Form_cd_name_txtf;
     public TextField[] Form_okud_txtf;
     public TextField[] Form_cd_cog_txtf;
-    public TextField[] Flag_IOD_txtf;
-    public TextField[] Flag_PDN_txtf;
+    public ComboBox<String>[] Flag_IOD_cmbx;
+    public ComboBox<String>[] Flag_PDN_cmbx;
     public TextField[] Dep_name_txtf;
     public TextField[] Dep_u_name_txtf;
     public TextField[] reason_txtf;
@@ -25,8 +25,8 @@ public class PreCreateScr {
     public TextField[] Search_path_txtf;
     public TextField[] Form_formal_code_txtf;
     public TextField[] Desc_txtf;
-    public TextField[] period_txtf;
-    public TextField[] rep_subj_type_txtf;
+    public ComboBox<String>[] period_cmbx;
+    public ComboBox<String>[] rep_subj_type_cmbx;
     public TextField[] p_parent_code_txtf;
     public TextField[] p_parent_type_ref_txtf;
     public TextField[] p_type_ref_txtf;
@@ -36,8 +36,8 @@ public class PreCreateScr {
     private static byte type = 0;
 
     public PreCreateScr(int count, String path_fld, Stage mnf, AnchorPane main_root, Button resetBtn, TextField[] form_name_txtf, TextField[] form_cd_txtf, TextField[] form_cd_name_txtf, TextField[] form_okud_txtf,
-                        TextField[] form_cd_cog_txtf, TextField[] flag_iod_txtf, TextField[] flag_pdn_txtf, TextField[] dep_name_txtf, TextField[] dep_u_name_txtf, TextField[] reason_txtf, TextField[] system_id_txtf,
-                        TextField[] security_role_path_txtf, TextField[] search_path_txtf, TextField[] form_formal_code_txtf, TextField[] desc_txtf, TextField[] period_txtf, TextField[] rep_subj_type_txtf,
+                        TextField[] form_cd_cog_txtf, ComboBox<String>[] flag_iod_cmbx, ComboBox<String>[] flag_pdn_cmbx, TextField[] dep_name_txtf, TextField[] dep_u_name_txtf, TextField[] reason_txtf, TextField[] system_id_txtf,
+                        TextField[] security_role_path_txtf, TextField[] search_path_txtf, TextField[] form_formal_code_txtf, TextField[] desc_txtf, ComboBox<String>[] period_cmbx, ComboBox<String>[] rep_subj_type_cmbx,
                         TextField[] p_parent_code_txtf, TextField[] p_parent_type_ref_txtf, TextField[] p_type_ref_txtf, TextField[] p_source_ref_txtf, TextField[] security_role_name_txtf) {
         this.count = count-1;
         this.path_fld = path_fld;
@@ -49,8 +49,8 @@ public class PreCreateScr {
         this.Form_cd_name_txtf = form_cd_name_txtf;
         this.Form_okud_txtf = form_okud_txtf;
         this.Form_cd_cog_txtf = form_cd_cog_txtf;
-        this.Flag_IOD_txtf = flag_iod_txtf;
-        this.Flag_PDN_txtf = flag_pdn_txtf;
+        this.Flag_IOD_cmbx = flag_iod_cmbx;
+        this.Flag_PDN_cmbx = flag_pdn_cmbx;
         this.Dep_name_txtf = dep_name_txtf;
         this.Dep_u_name_txtf = dep_u_name_txtf;
         this.reason_txtf = reason_txtf;
@@ -59,8 +59,8 @@ public class PreCreateScr {
         this.Search_path_txtf = search_path_txtf;
         this.Form_formal_code_txtf = form_formal_code_txtf;
         this.Desc_txtf = desc_txtf;
-        this.period_txtf = period_txtf;
-        this.rep_subj_type_txtf = rep_subj_type_txtf;
+        this.period_cmbx = period_cmbx;
+        this.rep_subj_type_cmbx = rep_subj_type_cmbx;
         this.p_parent_code_txtf = p_parent_code_txtf;
         this.p_parent_type_ref_txtf = p_parent_type_ref_txtf;
         this.p_type_ref_txtf = p_type_ref_txtf;
@@ -78,16 +78,16 @@ public class PreCreateScr {
             SC_data_miner.okud_form_cd[i] = Form_okud_txtf[i].getText();
             SC_data_miner.Form_cd_cog[i]  = Form_cd_cog_txtf[i].getText();
             //SC_data_miner.Rep_form_cd[i] = Form_cd_txtf[i].getText();
-            SC_data_miner.Flag_IOD[i] = Flag_IOD_txtf[i].getText();
-            SC_data_miner.Flag_PDN[i] = Flag_PDN_txtf[i].getText();
+            SC_data_miner.Flag_IOD[i] = Flag_IOD_cmbx[i].getValue();
+            SC_data_miner.Flag_PDN[i] = Flag_PDN_cmbx[i].getValue();
             SC_data_miner.Dep_name[i] = Dep_name_txtf[i].getText();
             SC_data_miner.Dep_u_name[i] = Dep_u_name_txtf[i].getText();
             SC_data_miner.reason[i] = reason_txtf[i].getText();
             //SC_data_miner.Reg_form_code[i] = Form_cd_txtf[i].getText();
             SC_data_miner.Form_formal_code[i] = Form_formal_code_txtf[i].getText();
             SC_data_miner.Desc[i] = Desc_txtf[i].getText();
-            SC_data_miner.period[i] = period_txtf[i].getText();
-            SC_data_miner.rep_subj_type[i] = rep_subj_type_txtf[i].getText();
+            SC_data_miner.period[i] = period_cmbx[i].getValue();
+            SC_data_miner.rep_subj_type[i] = rep_subj_type_cmbx[i].getValue();
             SC_data_miner.p_parent_code_txtf[i] =  p_parent_code_txtf[i].getText();
             SC_data_miner.p_parent_type_ref_txtf[i] =  p_parent_type_ref_txtf[i].getText();
             SC_data_miner.p_type_ref_txtf[i] =  p_type_ref_txtf[i].getText();

@@ -4,6 +4,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 public class OK_Action {
     private static TabPane sp;
@@ -13,8 +14,8 @@ public class OK_Action {
     private static TextField[] Form_cd_name_txtf = new TextField[12];
     private static TextField[] Form_okud_txtf = new TextField[12];
     private static TextField[] Form_cd_cog_txtf = new TextField[12];
-    private static TextField[] Flag_IOD_txtf = new TextField[12];
-    private static TextField[] Flag_PDN_txtf = new TextField[12];
+    private static ComboBox<String>[] Flag_IOD_cmbx = new ComboBox[12];
+    private static ComboBox<String>[] Flag_PDN_cmbx = new ComboBox[12];
     private static TextField[] Dep_name_txtf = new TextField[12];
     private static TextField[] Dep_u_name_txtf = new TextField[12];
     private static TextField[] reason_txtf = new TextField[12];
@@ -23,8 +24,8 @@ public class OK_Action {
     private static TextField[] Search_path_txtf = new TextField[12];
     private static TextField[] Form_formal_code_txtf = new TextField[12];
     private static TextField[] Desc_txtf = new TextField[12];
-    private static TextField[] period_txtf = new TextField[12];
-    private static TextField[] rep_subj_type_txtf = new TextField[12];
+    private static ComboBox<String>[] period_cmbx = new ComboBox[12];
+    private static ComboBox<String>[] rep_subj_type_cmbx = new ComboBox[12];
     private static TextField[] p_parent_code_txtf = new TextField[12];
     private static TextField[] p_parent_type_ref_txtf = new TextField[12];
     private static TextField[] p_type_ref_txtf = new TextField[12];
@@ -102,6 +103,28 @@ public class OK_Action {
         Label[] tbl9_lbl = new Label[12];
         Label[] tbl10_lbl = new Label[12];
 
+        Tooltip tooltip1 = new Tooltip ("Флаг (Y/N) - признак наличия данных категории ИОД в отчетах доступных по данному коду, принимает значения \"Y\" или \"N\"");
+        tooltip1.setShowDuration(Duration.seconds(8.0));
+        Tooltip tooltip1_1 = new Tooltip ("Флаг (Y/N) - признак наличия данных категории ПДН в отчетах доступных по данному коду, принимает значения \"Y\" или \"N\"");
+        tooltip1_1.setShowDuration(Duration.seconds(8.0));
+        Tooltip tooltip2 = new Tooltip ("Период сбора регламентированной формы");
+        tooltip2.setShowDuration(Duration.seconds(8.0));
+        Tooltip tooltip3 = new Tooltip ("Разрез, в котором представлены данные отчета");
+        tooltip3.setShowDuration(Duration.seconds(8.0));
+        Tooltip tooltip4 = new Tooltip ("Код доступа - технический код доступа к отчету/папке/группе отчетов/витрине");
+        tooltip4.setShowDuration(Duration.seconds(8.0));
+        Tooltip tooltip5 = new Tooltip ("Наименование кода доступа - наименование для данного кода доступа, видимое пользователю");
+        tooltip5.setShowDuration(Duration.seconds(8.0));
+        Tooltip tooltip6 = new Tooltip ("Код потока - Код, поставленный в соответсвие коду доступа (form_cd таблицы rep и других таблиц, на которые наложены политики по коду потока)");
+        tooltip6.setShowDuration(Duration.seconds(8.0));
+        Tooltip tooltip7 = new Tooltip ("Сокращенное наименование департамента-владельца для отчетов, доступных по данному коду доступа");
+        tooltip7.setShowDuration(Duration.seconds(8.0));
+        Tooltip tooltip8 = new Tooltip ("Документ-основание - на основе какого документа тот или иной департамент является владельцем");
+        tooltip8.setShowDuration(Duration.seconds(8.0));
+        Tooltip tooltip9 = new Tooltip ("Уникальный код отчета - уникальный буквенно-цифровой код присвоенный отчету в задаче на разработку, однозначно определяющий его");
+        tooltip9.setShowDuration(Duration.seconds(8.0));
+        Tooltip tooltip10 = new Tooltip ("ОКУД всех регламентированных форм-источников данного отчета");
+        tooltip10.setShowDuration(Duration.seconds(8.0));
         for(int t = 0; t<=11; t++){
             PanelSet[t] = new VBox(5.0);
             PanelSet[t].setPadding(new Insets(10.0));
@@ -151,21 +174,37 @@ public class OK_Action {
 
             Form_name_txtf[t] = new TextField();
             Form_cd_txtf[t] =  new TextField();
+            Form_cd_txtf[t].setTooltip(tooltip4);
             Form_cd_name_txtf[t] =  new TextField();
+            Form_cd_name_txtf[t].setTooltip(tooltip5);
             Form_okud_txtf[t] =  new TextField();
+            Form_okud_txtf[t].setTooltip(tooltip10);
             Form_cd_cog_txtf[t] =  new TextField();
-            Flag_IOD_txtf[t] =  new TextField();
-            Flag_PDN_txtf[t] =  new TextField();
+            Form_cd_cog_txtf[t].setTooltip(tooltip6);
+            Flag_IOD_cmbx[t] =  new ComboBox<String>();
+            Flag_IOD_cmbx[t].getItems().addAll("Y", "N");
+            Flag_IOD_cmbx[t].setTooltip(tooltip1);
+            Flag_PDN_cmbx[t] =  new ComboBox<String>();
+            Flag_PDN_cmbx[t].getItems().addAll("Y", "N");
+            Flag_PDN_cmbx[t].setTooltip(tooltip1_1);
             Dep_name_txtf[t] =  new TextField();
+            Dep_name_txtf[t].setTooltip(tooltip7);
             Dep_u_name_txtf[t] =  new TextField();
+            Dep_u_name_txtf[t].setTooltip(tooltip7);
             reason_txtf[t] =  new TextField();
+            reason_txtf[t].setTooltip(tooltip8);
             System_id_txtf[t] =  new TextField();
             Security_role_path_txtf[t] =  new TextField();
             Search_path_txtf[t] =  new TextField();
             Form_formal_code_txtf[t] =  new TextField();
+            Form_formal_code_txtf[t].setTooltip(tooltip9);
             Desc_txtf[t] =  new TextField();
-            period_txtf[t] =  new TextField();
-            rep_subj_type_txtf[t] =  new TextField();
+            period_cmbx[t] =  new ComboBox<String>();
+            period_cmbx[t].getItems().addAll("квартальная", "месячная", "нерегулярная");
+            period_cmbx[t].setTooltip(tooltip2);
+            rep_subj_type_cmbx[t] =  new ComboBox<String>();
+            rep_subj_type_cmbx[t].getItems().addAll("КО", "ОПДС", "ОПС", "ТУ", "Холдинги", "БГ", "Филиалы КО", "СП БР");
+            rep_subj_type_cmbx[t].setTooltip(tooltip3);
             p_parent_code_txtf[t] =  new TextField();
             p_parent_type_ref_txtf[t] =  new TextField();
             p_type_ref_txtf[t] =  new TextField();
@@ -223,8 +262,8 @@ public class OK_Action {
             exjp2_set[o].getChildren().addAll(form_cd_name_lbl[o], Form_cd_name_txtf[o]);
             exjp3_set[o].getChildren().addAll(OKUD_lbl[o], Form_okud_txtf[o]);
             exjp4_set[o].getChildren().addAll(form_cd_cog_lbl[o], Form_cd_cog_txtf[o]);
-            exjp5_set[o].getChildren().addAll(Flag_IOD_lbl[o], Flag_IOD_txtf[o]);
-            exjp6_set[o].getChildren().addAll(Flag_PDN_lbl[o], Flag_PDN_txtf[o]);
+            exjp5_set[o].getChildren().addAll(Flag_IOD_lbl[o], Flag_IOD_cmbx[o]);
+            exjp6_set[o].getChildren().addAll(Flag_PDN_lbl[o], Flag_PDN_cmbx[o]);
             exjp7_set[o].getChildren().addAll(Dep_name_lbl[o], Dep_name_txtf[o]);
             exjp9_set[o].getChildren().addAll(Dep_u_name_lbl[o], Dep_u_name_txtf[o]);
             exjp10_set[o].getChildren().addAll(reason_lbl[o], reason_txtf[o]);
@@ -233,8 +272,8 @@ public class OK_Action {
             exjp13_set[o].getChildren().addAll(Search_path_lbl[o], Search_path_txtf[o]);
             exjp14_set[o].getChildren().addAll(Form_formal_code_lbl[o], Form_formal_code_txtf[o]);
             exjp15_set[o].getChildren().addAll(Desc_lbl[o], Desc_txtf[o]);
-            exjp16_set[o].getChildren().addAll(period_lbl[o], period_txtf[o]);
-            exjp17_set[o].getChildren().addAll(rep_subj_type_lbl[o], rep_subj_type_txtf[o]);
+            exjp16_set[o].getChildren().addAll(period_lbl[o], period_cmbx[o]);
+            exjp17_set[o].getChildren().addAll(rep_subj_type_lbl[o], rep_subj_type_cmbx[o]);
             exjp18_set[o].getChildren().addAll(p_parent_code_lbl[o], p_parent_code_txtf[o]);
             exjp19_set[o].getChildren().addAll(p_parent_type_ref_lbl[o], p_parent_type_ref_txtf[o]);
             exjp20_set[o].getChildren().addAll(p_type_ref_lbl[o], p_type_ref_txtf[o]);
@@ -287,11 +326,11 @@ public class OK_Action {
     public static TextField[] getForm_cd_cog_txtf(){
             return OK_Action.Form_cd_cog_txtf;
     }
-    public static TextField[] getFlag_IOD_txtf(){
-            return OK_Action.Flag_IOD_txtf;
+    public static ComboBox<String>[] getFlag_IOD_cmbx(){
+            return OK_Action.Flag_IOD_cmbx;
     }
-    public static TextField[] getFlag_PDN_txtf(){
-            return OK_Action.Flag_PDN_txtf;
+    public static ComboBox<String>[] getFlag_PDN_cmbx(){
+            return OK_Action.Flag_PDN_cmbx;
     }
     public static TextField[] getDep_name_txtf(){
             return OK_Action.Dep_name_txtf;
@@ -317,11 +356,11 @@ public class OK_Action {
     public static TextField[] getDesc_txtf(){
             return OK_Action.Desc_txtf;
     }
-    public static TextField[] getPeriod_txtf(){
-            return OK_Action.period_txtf;
+    public static ComboBox<String>[] getPeriod_txtf(){
+            return OK_Action.period_cmbx;
     }
-    public static TextField[] getRep_subj_type_txtf(){
-            return OK_Action.rep_subj_type_txtf;
+    public static ComboBox<String>[] getRep_subj_type_txtf(){
+            return OK_Action.rep_subj_type_cmbx;
     }
     public static TextField[] getP_parent_code_txtf(){
             return OK_Action.p_parent_code_txtf;
