@@ -31,7 +31,7 @@ public class SC_FEx {
         } else{
             type=3;
         }
-        //System.out.print("type = " + type + "\n");
+        System.out.print("type = " + type + "\n");
         new SC_data_checker(workbook, type);
     }
 }

@@ -36,7 +36,7 @@ public class SC_data_miner {
     public String cellValue;
     public int vid;
     public SC_data_miner(XSSFWorkbook wb, int c) {
-        //System.out.print("c = " + c + "\n");
+        System.out.print("c = " + c + "\n");
         switch(c){
             case -1:
                 //что-то пошло не так)

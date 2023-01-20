@@ -66,7 +66,10 @@ public class CheckAction {
                 count = y;
             }
         }
-
+        System.out.print("count = " + count + "\n");
+        VBox Panel_s = new VBox(15.0);
+        Panel_s.setLayoutX(15);
+        Panel_s.setLayoutY(140);
         HBox exjp1 = new HBox(15.0);
         HBox exjp2 = new HBox(15.0);
         HBox exjp3 = new HBox(15.0);
@@ -96,6 +99,12 @@ public class CheckAction {
             txtf_TF = new TextField("cognos");
             txtf_SR = new TextField("cognos");
             txtf_SearchPath2 = new TextField(SC_data_miner.Search_path_for_ehd_acs[0]);
+            txtf_Sec_R_P.setMinWidth(75.0);
+            txtf_Sec_R_P.setPrefColumnCount(125);
+            txtf_SearchPath.setMinWidth(75.0);
+            txtf_SearchPath.setPrefColumnCount(125);
+            txtf_SearchPath2.setMinWidth(75.0);
+            txtf_SearchPath2.setPrefColumnCount(125);
 
             exjp1.getChildren().addAll(Label_sys_id, txtf_Sys_id);
             exjp2.getChildren().addAll(LabelRN, txtf_Sec_R_N);
@@ -106,7 +115,8 @@ public class CheckAction {
             exjp9.getChildren().addAll(LabelTF, txtf_TF);
             exjp10.getChildren().addAll(LabelSR, txtf_SR);
 
-            root.getChildren().addAll(exjp1, exjp2, exjp3, exjp4, exjp5, exjp7, exjp8, exjp9, exjp10);
+            Panel_s.getChildren().addAll(exjp1, exjp2, exjp3, exjp4, exjp5, exjp7, exjp8, exjp9, exjp10);
+            root.getChildren().addAll(Panel_s);
             
         } else {
             sp = new TabPane();

@@ -176,7 +176,7 @@ public class ScriptEXP {
                         "INSERT INTO  REPORT_REP_SUBJ_TYPE \n" +
                         "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE FROM dual\n" +
                         "minus select * from REPORT_REP_SUBJ_TYPE;" +
-                        "\n";
+                        "\n" + "commit;";
                 text[1] = "--" + FName_def[0] +"\n" +
                         "\n" +
                         "--DM_NIKA_KO\n" +
@@ -240,7 +240,7 @@ public class ScriptEXP {
                         "INSERT INTO  REPORT_REP_SUBJ_TYPE \n" +
                         "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE FROM dual\n" +
                         "minus select * from REPORT_REP_SUBJ_TYPE;" +
-                        "\n";
+                        "\n" + "commit;";
 
                 text[2] = "--" + FName_def[0] +"\n" +
                         "\n" +
@@ -250,7 +250,7 @@ public class ScriptEXP {
                         "INSERT INTO REP_FORM_COGNOS\n" +
                         "SELECT '"+ SC_data_miner.Form_cd_cog[0] +"' as FORM_CD, '"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD FROM dual\n" +
                         "minus select * from REP_FORM_COGNOS;" +
-                        "\n";
+                        "\n" + "commit;";
                 text[3] = "--" + FName_def[0] +"\n" +
                         "\n" +
                         "--TechDB_EHD_ACS\n" +
@@ -274,7 +274,7 @@ public class ScriptEXP {
                         "                                O.SEARCH_PATH = S.SEARCH_PATH,\n" +
                         "                                O.FLAG_EXP = S.FLAG_EXP\n" +
                         "   WHEN NOT MATCHED THEN INSERT (O.NAME, O.CODE, O.PARENT_ID, O.TYPE_REF, O.SOURCE_REF, O.CREATE_DATE, O.UPDATE_DATE, O.SEARCH_PATH, O.FLAG_EXP)\n" +
-                        "   VALUES (S.NAME, S.CODE, S.PARENT_ID, S.TYPE_REF, S.SOURCE_REF, S.CREATE_DATE, S.UPDATE_DATE, S.SEARCH_PATH, S.FLAG_EXP);" ;
+                        "   VALUES (S.NAME, S.CODE, S.PARENT_ID, S.TYPE_REF, S.SOURCE_REF, S.CREATE_DATE, S.UPDATE_DATE, S.SEARCH_PATH, S.FLAG_EXP);\n" + "commit;" ;
 
             } else{
                 if(SC_data_miner.Flag_IOD[0] == null){
@@ -364,7 +364,7 @@ public class ScriptEXP {
                         "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE FROM dual\n" +
                         "minus select * from REPORT_REP_SUBJ_TYPE;" +
                         "\n" +
-                        "\n";
+                        "\n" + "commit;";
                 text[1] = "--" + FName_def[0] + "\n" +
                         "\n" +
                         "--DM_NIKA_KO\n" +
@@ -434,7 +434,7 @@ public class ScriptEXP {
                         "INSERT INTO  REPORT_REP_SUBJ_TYPE \n" +
                         "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE FROM dual\n" +
                         "minus select * from REPORT_REP_SUBJ_TYPE;" +
-                        "\n";
+                        "\n" + "commit;";
                 text[2] = "--" + FName_def[0] + "\n" +
                         "\n" +
                         "--DM_NIKA_KO_DATA\n" +
@@ -443,7 +443,7 @@ public class ScriptEXP {
                         "INSERT INTO REP_FORM_COGNOS\n" +
                         "SELECT '"+ SC_data_miner.Form_cd_cog[0] +"' as FORM_CD, '"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD FROM dual\n" +
                         "minus select * from REP_FORM_COGNOS;" +
-                        "\n";
+                        "\n" + "commit;";
                 text[3] = "--" + FName_def[0] + "\n" +
                         "\n" +"--TechDB_EHD_ACS\n" +
                         "MERGE INTO EHD_ACS_OBJECTS O\n" +
@@ -465,7 +465,7 @@ public class ScriptEXP {
                         "                                O.SEARCH_PATH = S.SEARCH_PATH,\n" +
                         "                                O.FLAG_EXP = S.FLAG_EXP\n" +
                         "   WHEN NOT MATCHED THEN INSERT (O.NAME, O.CODE, O.PARENT_ID, O.TYPE_REF, O.SOURCE_REF, O.CREATE_DATE, O.UPDATE_DATE, O.SEARCH_PATH, O.FLAG_EXP)\n" +
-                        "   VALUES (S.NAME, S.CODE, S.PARENT_ID, S.TYPE_REF, S.SOURCE_REF, S.CREATE_DATE, S.UPDATE_DATE, S.SEARCH_PATH, S.FLAG_EXP);" ;
+                        "   VALUES (S.NAME, S.CODE, S.PARENT_ID, S.TYPE_REF, S.SOURCE_REF, S.CREATE_DATE, S.UPDATE_DATE, S.SEARCH_PATH, S.FLAG_EXP);\n" + "commit;" ;
                         String[] textset2;
                         int kol2=0;
                         for(int hj = 0; hj<=SC_data_miner.Form_okud.length-1; hj++){
@@ -617,7 +617,7 @@ public class ScriptEXP {
                                     "SELECT '"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type[n] +"' as REP_SUBJ_TYPE FROM dual\n" +
                                     "minus select * from REPORT_REP_SUBJ_TYPE;" +
                                     "\n" +
-                                    "\n";
+                                    "\n" + "commit;";
                             text[1] = text[1] + "\n" +
                                     "--" + FName_def[n] + "\n" +
                                     "\n" +
@@ -655,7 +655,7 @@ public class ScriptEXP {
                                     "SELECT '"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type[n] +"' as REP_SUBJ_TYPE FROM dual\n" +
                                     "minus select * from REPORT_REP_SUBJ_TYPE;" +
                                     "\n" +
-                                    "\n";
+                                    "\n" + "commit;";
                             text[3] = text[3] + "\n" +
                                     "\n" +
                                     "--" + FName_def[n] + "\n" +
@@ -680,7 +680,7 @@ public class ScriptEXP {
                                     "                                O.SEARCH_PATH = S.SEARCH_PATH,\n" +
                                     "                                O.FLAG_EXP = S.FLAG_EXP\n" +
                                     "   WHEN NOT MATCHED THEN INSERT (O.NAME, O.CODE, O.PARENT_ID, O.TYPE_REF, O.SOURCE_REF, O.CREATE_DATE, O.UPDATE_DATE, O.SEARCH_PATH, O.FLAG_EXP)\n" +
-                                    "   VALUES (S.NAME, S.CODE, S.PARENT_ID, S.TYPE_REF, S.SOURCE_REF, S.CREATE_DATE, S.UPDATE_DATE, S.SEARCH_PATH, S.FLAG_EXP);" ;
+                                    "   VALUES (S.NAME, S.CODE, S.PARENT_ID, S.TYPE_REF, S.SOURCE_REF, S.CREATE_DATE, S.UPDATE_DATE, S.SEARCH_PATH, S.FLAG_EXP);\n" + "commit;";
                         }
             }
         } else if(chk==2 || chk==0){//Есть только 3 листа
@@ -736,7 +736,7 @@ public class ScriptEXP {
                         "INSERT INTO  REPORT_REP_SUBJ_TYPE \n" +
                         "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE FROM dual\n" +
                         "minus select * from REPORT_REP_SUBJ_TYPE;" +
-                        "\n";
+                        "\n" + "commit;";
                 text[1] = "--" + FName_def[0] +"\n" +
                         "\n" +
                         "--DM_NIKA_KO\n" +
@@ -776,7 +776,7 @@ public class ScriptEXP {
                         "INSERT INTO  REPORT_REP_SUBJ_TYPE \n" +
                         "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE FROM dual\n" +
                         "minus select * from REPORT_REP_SUBJ_TYPE;" +
-                        "\n";
+                        "\n" + "commit;";
                 /*text[2] = "--" + FName_def[0] +"\n" +
                         "\n" +
                         "--DM_NIKA_KO_DATA\n" +
@@ -863,7 +863,7 @@ public class ScriptEXP {
                         "INSERT INTO  REPORT_REP_SUBJ_TYPE \n" +
                         "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE FROM dual\n" +
                         "minus select * from REPORT_REP_SUBJ_TYPE;" +
-                        "\n";
+                        "\n" + "commit;";
                 text[1] = "--" + FName_def[0] +"\n" +
                         "\n" +
                         "--DM_NIKA_KO\n" +
@@ -904,7 +904,7 @@ public class ScriptEXP {
                         "INSERT INTO  REPORT_REP_SUBJ_TYPE \n" +
                         "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE FROM dual\n" +
                         "minus select * from REPORT_REP_SUBJ_TYPE;" +
-                        "\n";
+                        "\n" + "commit;";
                 /*text[2] = "--" + FName_def[0] +"\n" +
                         "\n" +
                         "--DM_NIKA_KO_DATA\n" +
@@ -937,7 +937,7 @@ public class ScriptEXP {
                         "                                O.SEARCH_PATH = S.SEARCH_PATH,\n" +
                         "                                O.FLAG_EXP = S.FLAG_EXP\n" +
                         "   WHEN NOT MATCHED THEN INSERT (O.NAME, O.CODE, O.PARENT_ID, O.TYPE_REF, O.SOURCE_REF, O.CREATE_DATE, O.UPDATE_DATE, O.SEARCH_PATH, O.FLAG_EXP)\n" +
-                        "   VALUES (S.NAME, S.CODE, S.PARENT_ID, S.TYPE_REF, S.SOURCE_REF, S.CREATE_DATE, S.UPDATE_DATE, S.SEARCH_PATH, S.FLAG_EXP);";
+                        "   VALUES (S.NAME, S.CODE, S.PARENT_ID, S.TYPE_REF, S.SOURCE_REF, S.CREATE_DATE, S.UPDATE_DATE, S.SEARCH_PATH, S.FLAG_EXP);\n" + "commit;";
                 String[] textset;
                 int kol2=0;
                 for(int hj = 0; hj<=SC_data_miner.Form_okud.length-1; hj++){
@@ -1063,7 +1063,7 @@ public class ScriptEXP {
                             "INSERT INTO  REPORT_REP_SUBJ_TYPE \n" +
                             "SELECT '"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type[n] +"' as REP_SUBJ_TYPE FROM dual\n" +
                             "minus select * from REPORT_REP_SUBJ_TYPE;" +
-                            "\n";
+                            "\n" + "commit;";
                     text[1] = text[1] + "\n" +
                             "--" + FName_def[n] +"\n" +
                             "\n" +
@@ -1100,7 +1100,7 @@ public class ScriptEXP {
                             "INSERT INTO  REPORT_REP_SUBJ_TYPE \n" +
                             "SELECT '"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type[n] +"' as REP_SUBJ_TYPE FROM dual\n" +
                             "minus select * from REPORT_REP_SUBJ_TYPE;" +
-                            "\n";
+                            "\n" + "commit;";
                     text[3] = text[3] + "\n" +
                             "\n" +
                             "--" + FName_def[n] +"\n" +
@@ -1125,7 +1125,7 @@ public class ScriptEXP {
                             "                                O.SEARCH_PATH = S.SEARCH_PATH,\n" +
                             "                                O.FLAG_EXP = S.FLAG_EXP\n" +
                             "   WHEN NOT MATCHED THEN INSERT (O.NAME, O.CODE, O.PARENT_ID, O.TYPE_REF, O.SOURCE_REF, O.CREATE_DATE, O.UPDATE_DATE, O.SEARCH_PATH, O.FLAG_EXP)\n" +
-                            "   VALUES (S.NAME, S.CODE, S.PARENT_ID, S.TYPE_REF, S.SOURCE_REF, S.CREATE_DATE, S.UPDATE_DATE, S.SEARCH_PATH, S.FLAG_EXP);";
+                            "   VALUES (S.NAME, S.CODE, S.PARENT_ID, S.TYPE_REF, S.SOURCE_REF, S.CREATE_DATE, S.UPDATE_DATE, S.SEARCH_PATH, S.FLAG_EXP);\n" + "commit;";
                 }
             }
         } else if (chk == 3){//Руной режим
@@ -1221,7 +1221,7 @@ public class ScriptEXP {
                         "INSERT INTO  REPORT_REP_SUBJ_TYPE \n" +
                         "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE FROM dual\n" +
                         "minus select * from REPORT_REP_SUBJ_TYPE;" +
-                        "\n";
+                        "\n" + "commit;";
                 text[1] = "--" + FName_def[0] +"\n" +
                         "\n" +
                         "--DM_NIKA_KO\n" +
@@ -1285,7 +1285,7 @@ public class ScriptEXP {
                         "INSERT INTO  REPORT_REP_SUBJ_TYPE \n" +
                         "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE FROM dual\n" +
                         "minus select * from REPORT_REP_SUBJ_TYPE;" +
-                        "\n";
+                        "\n" + "commit;";
 
                 text[2] = "--" + FName_def[0] +"\n" +
                         "\n" +
@@ -1295,7 +1295,7 @@ public class ScriptEXP {
                         "INSERT INTO REP_FORM_COGNOS\n" +
                         "SELECT '"+ SC_data_miner.Form_cd_cog[0] +"' as FORM_CD, '"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD FROM dual\n" +
                         "minus select * from REP_FORM_COGNOS;" +
-                        "\n";
+                        "\n" + "commit;";
 
                 if(type == 0){
                     text[3] = "--" + FName_def[0] +"\n" +
@@ -1321,7 +1321,7 @@ public class ScriptEXP {
                             "                                O.SEARCH_PATH = S.SEARCH_PATH,\n" +
                             "                                O.FLAG_EXP = S.FLAG_EXP\n" +
                             "   WHEN NOT MATCHED THEN INSERT (O.NAME, O.CODE, O.PARENT_ID, O.TYPE_REF, O.SOURCE_REF, O.CREATE_DATE, O.UPDATE_DATE, O.SEARCH_PATH, O.FLAG_EXP)\n" +
-                            "   VALUES (S.NAME, S.CODE, S.PARENT_ID, S.TYPE_REF, S.SOURCE_REF, S.CREATE_DATE, S.UPDATE_DATE, S.SEARCH_PATH, S.FLAG_EXP);" ;
+                            "   VALUES (S.NAME, S.CODE, S.PARENT_ID, S.TYPE_REF, S.SOURCE_REF, S.CREATE_DATE, S.UPDATE_DATE, S.SEARCH_PATH, S.FLAG_EXP);\n" + "commit;" ;
                 } else if(type == 1){
                     text[3] = "--" + FName_def[0] +"\n" +
                             "\n" +
@@ -1429,7 +1429,7 @@ public class ScriptEXP {
                         "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE FROM dual\n" +
                         "minus select * from REPORT_REP_SUBJ_TYPE;" +
                         "\n" +
-                        "\n";
+                        "\n" + "commit;";
                 text[1] = "--" + FName_def[0] + "\n" +
                         "\n" +
                         "--DM_NIKA_KO\n" +
@@ -1499,7 +1499,7 @@ public class ScriptEXP {
                         "INSERT INTO  REPORT_REP_SUBJ_TYPE \n" +
                         "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE FROM dual\n" +
                         "minus select * from REPORT_REP_SUBJ_TYPE;" +
-                        "\n";
+                        "\n" + "commit;";
                 text[2] = "--" + FName_def[0] + "\n" +
                         "\n" +
                         "--DM_NIKA_KO_DATA\n" +
@@ -1508,7 +1508,7 @@ public class ScriptEXP {
                         "INSERT INTO REP_FORM_COGNOS\n" +
                         "SELECT '"+ SC_data_miner.Form_cd_cog[0] +"' as FORM_CD, '"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD FROM dual\n" +
                         "minus select * from REP_FORM_COGNOS;" +
-                        "\n";
+                        "\ncommit;";
                 if(type == 0){
                     text[3] = "--" + FName_def[0] +"\n" +
                             "\n" +
@@ -1533,7 +1533,8 @@ public class ScriptEXP {
                             "                                O.SEARCH_PATH = S.SEARCH_PATH,\n" +
                             "                                O.FLAG_EXP = S.FLAG_EXP\n" +
                             "   WHEN NOT MATCHED THEN INSERT (O.NAME, O.CODE, O.PARENT_ID, O.TYPE_REF, O.SOURCE_REF, O.CREATE_DATE, O.UPDATE_DATE, O.SEARCH_PATH, O.FLAG_EXP)\n" +
-                            "   VALUES (S.NAME, S.CODE, S.PARENT_ID, S.TYPE_REF, S.SOURCE_REF, S.CREATE_DATE, S.UPDATE_DATE, S.SEARCH_PATH, S.FLAG_EXP);" ;
+                            "   VALUES (S.NAME, S.CODE, S.PARENT_ID, S.TYPE_REF, S.SOURCE_REF, S.CREATE_DATE, S.UPDATE_DATE, S.SEARCH_PATH, S.FLAG_EXP);\n" +
+                    "commit;";
                 } else if(type == 1){
                     text[3] = "--" + FName_def[0] +"\n" +
                             "\n" +
@@ -1703,7 +1704,7 @@ public class ScriptEXP {
                             "SELECT '"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type[n] +"' as REP_SUBJ_TYPE FROM dual\n" +
                             "minus select * from REPORT_REP_SUBJ_TYPE;" +
                             "\n" +
-                            "\n";
+                    "commit;";
                     text[1] = text[1] + "\n" +
                             "--" + FName_def[n] + "\n" +
                             "\n" +
@@ -1741,7 +1742,7 @@ public class ScriptEXP {
                             "SELECT '"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type[n] +"' as REP_SUBJ_TYPE FROM dual\n" +
                             "minus select * from REPORT_REP_SUBJ_TYPE;" +
                             "\n" +
-                            "\n";
+                    "commit;";
                     if(type == 0){
                         text[3] = text[3] + "\n" +
                                 "\n" +
@@ -1767,7 +1768,8 @@ public class ScriptEXP {
                                 "                                O.SEARCH_PATH = S.SEARCH_PATH,\n" +
                                 "                                O.FLAG_EXP = S.FLAG_EXP\n" +
                                 "   WHEN NOT MATCHED THEN INSERT (O.NAME, O.CODE, O.PARENT_ID, O.TYPE_REF, O.SOURCE_REF, O.CREATE_DATE, O.UPDATE_DATE, O.SEARCH_PATH, O.FLAG_EXP)\n" +
-                                "   VALUES (S.NAME, S.CODE, S.PARENT_ID, S.TYPE_REF, S.SOURCE_REF, S.CREATE_DATE, S.UPDATE_DATE, S.SEARCH_PATH, S.FLAG_EXP);" ;
+                                "   VALUES (S.NAME, S.CODE, S.PARENT_ID, S.TYPE_REF, S.SOURCE_REF, S.CREATE_DATE, S.UPDATE_DATE, S.SEARCH_PATH, S.FLAG_EXP);\n" +
+                        "commit;";
                     } else if(type == 1){
                         text[3] = "--" + FName_def[n] +"\n" +
                                 "\n" +
@@ -1805,7 +1807,7 @@ public class ScriptEXP {
         String filePath1 = path2 + "\\V004_" + format_2.format(dateNow) + "_202000_01__reg_" + SC_data_miner.Form_cd[0] + "_OAD_SECURITY.sql";
         String filePath2 = path2 + "\\V001_" + format_2.format(dateNow) + "_202000_0001__DM_DM_NIKA_KO_sc__reg_meta_" + SC_data_miner.Form_cd[0] + ".sql";
         String filePath3 = path2 + "\\V001_" + format_2.format(dateNow) + "_202000_0002__DM_DM_NIKA_KO_DATA_sc__reg_meta_" + SC_data_miner.Form_cd[0] + ".sql";
-        String filePath4 = path2 + "\\V004_" + format_2.format(dateNow) + "_01_reg_" + SC_data_miner.Form_cd[0] + "_TechDB_EHD_ACS.sql";
+        String filePath4 = path2 + "\\V004_" + format_2.format(dateNow) + "_202000_01__reg_" + SC_data_miner.Form_cd[0] + "_TechDB_EHD_ACS.sql";
 
         File file1 = new File(filePath1);
         File file2 = new File(filePath2);
@@ -1875,7 +1877,7 @@ public class ScriptEXP {
         }
         if(isFileExists(file4)){
             for(int i = 1; i<=50;){
-                String filePath42 = path2 + "\\V004_" + format_2.format(dateNow) + "_01_reg_" + SC_data_miner.Form_cd[0] + "_TechDB_EHD_ACS(" + i + ").sql";
+                String filePath42 = path2 + "\\V004_" + format_2.format(dateNow) + "_202000_01__reg_" + SC_data_miner.Form_cd[0] + "_TechDB_EHD_ACS(" + i + ").sql";
                 File file42 = new File(filePath42);
                 if(isFileExists((file42))){
                     i++;

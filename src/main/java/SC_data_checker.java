@@ -44,7 +44,7 @@ public class SC_data_checker {
             case 2:
                 //если не полный файл (скорее всего 3 главных листа только)
                 check=2;
-                //System.out.print("check = " + check + "\n");
+                System.out.print("check = " + check + "\n");
                 new SC_data_miner(wb, check);
                 break;
             case 3:
