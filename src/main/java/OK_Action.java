@@ -1,13 +1,15 @@
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import javafx.util.Duration;
 
 public class OK_Action {
     private static TabPane sp;
+    private Tab[] tabs = new Tab[12];
     private Stage mnf;
     private static TextField[] Form_name_txtf = new TextField[12];
     private static TextField[] Form_cd_txtf = new TextField[12];
@@ -32,99 +34,109 @@ public class OK_Action {
     private static TextField[] p_source_ref_txtf = new TextField[12];
     private static TextField[] Security_role_name_txtf = new TextField[12];
 
+    private VBox[] PanelSet = new VBox[12];
+    private VBox PanelNull = new VBox();
+    private HBox[] exjp0_set = new HBox[12];
+    private HBox[] exjp1_set = new HBox[12];
+    private HBox[] exjp2_set = new HBox[12];
+    private HBox[] exjp3_set = new HBox[12];
+    private HBox[] exjp4_set = new HBox[12];
+    private HBox[] exjp5_set = new HBox[12];
+    private HBox[] exjp6_set = new HBox[12];
+    private HBox[] exjp7_set= new HBox[12];
+    //HBox[] exjp8_set = new HBox[12];
+    private HBox[] exjp9_set = new HBox[12];
+    private HBox[] exjp10_set = new HBox[12];
+    private HBox[] exjp11_set = new HBox[12];
+    private HBox[] exjp12_set = new HBox[12];
+    private HBox[] exjp13_set = new HBox[12];
+    private HBox[] exjp14_set = new HBox[12];
+    private HBox[] exjp15_set = new HBox[12];
+    private HBox[] exjp16_set = new HBox[12];
+    private HBox[] exjp17_set = new HBox[12];
+    private HBox[] exjp18_set = new HBox[12];
+    private HBox[] exjp19_set = new HBox[12];
+    private HBox[] exjp20_set = new HBox[12];
+    private HBox[] exjp21_set = new HBox[12];
+    private HBox[] exjp22_set = new HBox[12];
+    private HBox[] radioBtn_set = new HBox[12];
+    private HBox[] radioBtn_set_2 = new HBox[12];
+    private VBox[] p_tbl_1 = new VBox[12];
+    private VBox[] p_tbl_2 = new VBox[12];
+    private VBox[] p_tbl_3 = new VBox[12];
+    private VBox[] p_tbl_4 = new VBox[12];
+    //VBox[] p_tbl_5 = new VBox[12];
+    private VBox[] p_tbl_6 = new VBox[12];
+    private VBox[] p_tbl_7 = new VBox[12];
+    //VBox[] p_tbl_8 = new VBox[12];
+    private VBox[] p_tbl_9 = new VBox[12];
+    private VBox[] p_tbl_10 = new VBox[12];
+
+    private Label[] form_name_lbl = new Label[12];
+    private Label[] form_cd_lbl = new Label[12];
+    private Label[] form_cd_name_lbl = new Label[12];
+    private Label[] OKUD_lbl = new Label[12];
+    private Label[] form_cd_cog_lbl = new Label[12];
+    private Label[] Flag_IOD_lbl = new Label[12];
+    private Label[] Flag_PDN_lbl = new Label[12];
+    private Label[] Dep_name_lbl = new Label[12];
+    private Label[] Dep_u_name_lbl = new Label[12];
+    private Label[] reason_lbl = new Label[12];
+    private Label[] System_id_lbl = new Label[12];
+    private Label[] Security_role_path_lbl = new Label[12];
+    private Label[] Search_path_lbl = new Label[12];
+    private Label[] Form_formal_code_lbl = new Label[12];
+    private Label[] Desc_lbl = new Label[12];
+    private Label[] period_lbl = new Label[12];
+    private Label[] rep_subj_type_lbl = new Label[12];
+    private Label[] p_parent_code_lbl = new Label[12];
+    private Label[] p_parent_type_ref_lbl = new Label[12];
+    private Label[] p_type_ref_lbl = new Label[12];
+    private Label[] p_source_ref_lbl = new Label[12];
+    private Label[] Security_role_name_lbl = new Label[12];
+    private Label[] tbl1_lbl = new Label[12];
+    private Label[] tbl2_lbl = new Label[12];
+    private Label[] tbl3_lbl = new Label[12];
+    private Label[] tbl4_lbl = new Label[12];
+    //Label[] tbl5_lbl = new Label[12];
+    private Label[] tbl6_lbl = new Label[12];
+    private Label[] tbl7_lbl = new Label[12];
+    //Label[] tbl8_lbl = new Label[12];
+    private Label[] tbl9_lbl = new Label[12];
+    private Label[] tbl10_lbl = new Label[12];
+
+    private Tooltip tooltip1 = new Tooltip ("Флаг (Y/N) - признак наличия данных категории ИОД в отчетах доступных по данному коду, принимает значения \"Y\" или \"N\"");
+    private Tooltip tooltip1_1 = new Tooltip ("Флаг (Y/N) - признак наличия данных категории ПДН в отчетах доступных по данному коду, принимает значения \"Y\" или \"N\"");
+    private Tooltip tooltip2 = new Tooltip ("Период сбора регламентированной формы");
+    private Tooltip tooltip3 = new Tooltip ("Разрез, в котором представлены данные отчета");
+    private Tooltip tooltip4 = new Tooltip ("Код доступа - технический код доступа к отчету/папке/группе отчетов/витрине");
+    private Tooltip tooltip5 = new Tooltip ("Наименование кода доступа - наименование для данного кода доступа, видимое пользователю");
+    private Tooltip tooltip6 = new Tooltip ("Код потока - Код, поставленный в соответсвие коду доступа (form_cd таблицы rep и других таблиц, на которые наложены политики по коду потока)");
+    private Tooltip tooltip7 = new Tooltip ("Сокращенное наименование департамента-владельца для отчетов, доступных по данному коду доступа");
+    private Tooltip tooltip8 = new Tooltip ("Документ-основание - на основе какого документа тот или иной департамент является владельцем");
+    private Tooltip tooltip9 = new Tooltip ("Уникальный код отчета - уникальный буквенно-цифровой код присвоенный отчету в задаче на разработку, однозначно определяющий его");
+    private Tooltip tooltip10 = new Tooltip ("ОКУД всех регламентированных форм-источников данного отчета");
+    private int count;
+    private RadioButton[] caseReport = new RadioButton[12];
+    private RadioButton[] caseCode = new RadioButton[12];
+    private RadioButton[] caseR = new RadioButton[12];
+    private RadioButton[] caseNR = new RadioButton[12];
+
     public OK_Action(int count, AnchorPane root, Stage primaryStage, Button createBtn){
         this.mnf = primaryStage;
+        this.count = count;
         sp = new TabPane();
-        VBox[] PanelSet = new VBox[12];
-        HBox[] exjp0_set = new HBox[12];
-        HBox[] exjp1_set = new HBox[12];
-        HBox[] exjp2_set = new HBox[12];
-        HBox[] exjp3_set = new HBox[12];
-        HBox[] exjp4_set = new HBox[12];
-        HBox[] exjp5_set = new HBox[12];
-        HBox[] exjp6_set = new HBox[12];
-        HBox[] exjp7_set= new HBox[12];
-        //HBox[] exjp8_set = new HBox[12];
-        HBox[] exjp9_set = new HBox[12];
-        HBox[] exjp10_set = new HBox[12];
-        HBox[] exjp11_set = new HBox[12];
-        HBox[] exjp12_set = new HBox[12];
-        HBox[] exjp13_set = new HBox[12];
-        HBox[] exjp14_set = new HBox[12];
-        HBox[] exjp15_set = new HBox[12];
-        HBox[] exjp16_set = new HBox[12];
-        HBox[] exjp17_set = new HBox[12];
-        HBox[] exjp18_set = new HBox[12];
-        HBox[] exjp19_set = new HBox[12];
-        HBox[] exjp20_set = new HBox[12];
-        HBox[] exjp21_set = new HBox[12];
-        HBox[] exjp22_set = new HBox[12];
-        VBox[] p_tbl_1 = new VBox[12];
-        VBox[] p_tbl_2 = new VBox[12];
-        VBox[] p_tbl_3 = new VBox[12];
-        VBox[] p_tbl_4 = new VBox[12];
-        //VBox[] p_tbl_5 = new VBox[12];
-        VBox[] p_tbl_6 = new VBox[12];
-        VBox[] p_tbl_7 = new VBox[12];
-        //VBox[] p_tbl_8 = new VBox[12];
-        VBox[] p_tbl_9 = new VBox[12];
-        VBox[] p_tbl_10 = new VBox[12];
-
-        Label[] form_name_lbl = new Label[12];
-        Label[] form_cd_lbl = new Label[12];
-        Label[] form_cd_name_lbl = new Label[12];
-        Label[] OKUD_lbl = new Label[12];
-        Label[] form_cd_cog_lbl = new Label[12];
-        Label[] Flag_IOD_lbl = new Label[12];
-        Label[] Flag_PDN_lbl = new Label[12];
-        Label[] Dep_name_lbl = new Label[12];
-        Label[] Dep_u_name_lbl = new Label[12];
-        Label[] reason_lbl = new Label[12];
-        Label[] System_id_lbl = new Label[12];
-        Label[] Security_role_path_lbl = new Label[12];
-        Label[] Search_path_lbl = new Label[12];
-        Label[] Form_formal_code_lbl = new Label[12];
-        Label[] Desc_lbl = new Label[12];
-        Label[] period_lbl = new Label[12];
-        Label[] rep_subj_type_lbl = new Label[12];
-        Label[] p_parent_code_lbl = new Label[12];
-        Label[] p_parent_type_ref_lbl = new Label[12];
-        Label[] p_type_ref_lbl = new Label[12];
-        Label[] p_source_ref_lbl = new Label[12];
-        Label[] Security_role_name_lbl = new Label[12];
-        Label[] tbl1_lbl = new Label[12];
-        Label[] tbl2_lbl = new Label[12];
-        Label[] tbl3_lbl = new Label[12];
-        Label[] tbl4_lbl = new Label[12];
-        //Label[] tbl5_lbl = new Label[12];
-        Label[] tbl6_lbl = new Label[12];
-        Label[] tbl7_lbl = new Label[12];
-        //Label[] tbl8_lbl = new Label[12];
-        Label[] tbl9_lbl = new Label[12];
-        Label[] tbl10_lbl = new Label[12];
-
-        Tooltip tooltip1 = new Tooltip ("Флаг (Y/N) - признак наличия данных категории ИОД в отчетах доступных по данному коду, принимает значения \"Y\" или \"N\"");
-        tooltip1.setShowDuration(Duration.seconds(8.0));
-        Tooltip tooltip1_1 = new Tooltip ("Флаг (Y/N) - признак наличия данных категории ПДН в отчетах доступных по данному коду, принимает значения \"Y\" или \"N\"");
+        /*tooltip1.setShowDuration(Duration.seconds(8.0));
         tooltip1_1.setShowDuration(Duration.seconds(8.0));
-        Tooltip tooltip2 = new Tooltip ("Период сбора регламентированной формы");
         tooltip2.setShowDuration(Duration.seconds(8.0));
-        Tooltip tooltip3 = new Tooltip ("Разрез, в котором представлены данные отчета");
         tooltip3.setShowDuration(Duration.seconds(8.0));
-        Tooltip tooltip4 = new Tooltip ("Код доступа - технический код доступа к отчету/папке/группе отчетов/витрине");
         tooltip4.setShowDuration(Duration.seconds(8.0));
-        Tooltip tooltip5 = new Tooltip ("Наименование кода доступа - наименование для данного кода доступа, видимое пользователю");
         tooltip5.setShowDuration(Duration.seconds(8.0));
-        Tooltip tooltip6 = new Tooltip ("Код потока - Код, поставленный в соответсвие коду доступа (form_cd таблицы rep и других таблиц, на которые наложены политики по коду потока)");
         tooltip6.setShowDuration(Duration.seconds(8.0));
-        Tooltip tooltip7 = new Tooltip ("Сокращенное наименование департамента-владельца для отчетов, доступных по данному коду доступа");
         tooltip7.setShowDuration(Duration.seconds(8.0));
-        Tooltip tooltip8 = new Tooltip ("Документ-основание - на основе какого документа тот или иной департамент является владельцем");
         tooltip8.setShowDuration(Duration.seconds(8.0));
-        Tooltip tooltip9 = new Tooltip ("Уникальный код отчета - уникальный буквенно-цифровой код присвоенный отчету в задаче на разработку, однозначно определяющий его");
         tooltip9.setShowDuration(Duration.seconds(8.0));
-        Tooltip tooltip10 = new Tooltip ("ОКУД всех регламентированных форм-источников данного отчета");
-        tooltip10.setShowDuration(Duration.seconds(8.0));
+        tooltip10.setShowDuration(Duration.seconds(8.0));*/
         for(int t = 0; t<=11; t++){
             PanelSet[t] = new VBox(5.0);
             PanelSet[t].setPadding(new Insets(10.0));
@@ -161,6 +173,8 @@ public class OK_Action {
             //p_tbl_8[t] = new VBox(15.0);
             p_tbl_9[t] = new VBox(15.0);
             p_tbl_10[t] = new VBox(15.0);
+            radioBtn_set[t] = new HBox(25.0);
+            radioBtn_set_2[t] = new HBox(25.0);
             p_tbl_1[t].setPadding(new Insets(10.0));
             p_tbl_2[t].setPadding(new Insets(10.0));
             p_tbl_3[t].setPadding(new Insets(10.0));
@@ -252,11 +266,59 @@ public class OK_Action {
             //tbl8_lbl[t] = new Label("---Данные для таблицы REPORT_FORM_SRC---");
             tbl9_lbl[t] = new Label("---Данные для таблицы REPORT_REP_SUBJ_TYPE---");
             tbl10_lbl[t] = new Label("---Данные для таблицы EHD_ACS_OBJECTS---");
+
+            caseCode[t] = new RadioButton("Код доступа");
+            //caseCode[t].setOnAction(this::onChoose1);
+            int fT = t;
+            caseCode[t].setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent event) {
+                    Case_code(fT);
+                    //caseCode[fT].setDisable(true);
+                    caseCode[fT].setSelected(true);
+                    caseReport[fT].setSelected(false);
+                    //caseReport[fT].setDisable(true);
+                }
+            });
+            caseReport[t] = new RadioButton("Отчёт");
+            caseReport[t].setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent event) {
+                    Case_report(fT);
+                    //caseReport[fT].setDisable(true);
+                    caseReport[fT].setSelected(true);
+                    caseCode[fT].setSelected(false);
+                    //caseCode[fT].setDisable(true);
+                }
+            });
+            caseR[t] = new RadioButton("Регламентированный");
+            caseR[t].setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent event) {
+                    Case_RNR(fT, true);
+                    //caseCode[fT].setDisable(true);
+                    caseR[fT].setSelected(true);
+                    caseNR[fT].setSelected(false);
+                    //caseReport[fT].setDisable(true);
+                }
+            });
+            caseNR[t] = new RadioButton("Нерегламентированный");
+            caseNR[t].setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent event) {
+                    Case_RNR(fT, false);
+                    //caseCode[fT].setDisable(true);
+                    caseNR[fT].setSelected(true);
+                    caseR[fT].setSelected(false);
+                    //caseReport[fT].setDisable(true);
+                }
+            });
+            caseReport[t].setSelected(true);
+
+            tabs[t] = new Tab();
         }
         for(int o = 0; o <= count-1;){
-
             //System.out.print("o = " + o );
-
             exjp0_set[o].getChildren().addAll(form_name_lbl[o], Form_name_txtf[o]);
             exjp1_set[o].getChildren().addAll(form_cd_lbl[o], Form_cd_txtf[o]);
             exjp2_set[o].getChildren().addAll(form_cd_name_lbl[o], Form_cd_name_txtf[o]);
@@ -289,13 +351,18 @@ public class OK_Action {
             //p_tbl_8[o].getChildren().addAll(tbl8_lbl[o]);
             p_tbl_9[o].getChildren().addAll(tbl9_lbl[o]);
             p_tbl_10[o].getChildren().addAll(tbl10_lbl[o]);
+            radioBtn_set[o].getChildren().addAll(caseReport[o], caseCode[o]);
+            radioBtn_set_2[o].getChildren().addAll(caseR[o], caseNR[o]);
 
-            PanelSet[o].getChildren().addAll(p_tbl_1[o], exjp1_set[o], exjp2_set[o], p_tbl_2[o], exjp4_set[o], p_tbl_3[o], exjp5_set[o], exjp6_set[o], p_tbl_4[o], exjp7_set[o], exjp9_set[o], exjp10_set[o], p_tbl_6[o],
-                    exjp13_set[o], exjp14_set[o], exjp15_set[o], exjp11_set[o], exjp22_set[o], exjp12_set[o], p_tbl_7[o], exjp3_set[o], exjp16_set[o], p_tbl_9[o], exjp17_set[o], p_tbl_10[o], exjp0_set[o], exjp18_set[o],
-                    exjp19_set[o], exjp20_set[o], exjp21_set[o]);
-            sp.getTabs().add(new Tab("Форма " + (o+1), PanelSet[o]));
+            PanelSet[o].getChildren().addAll(radioBtn_set[o], p_tbl_1[o], exjp1_set[o], exjp2_set[o], p_tbl_2[o], exjp4_set[o], p_tbl_3[o], exjp5_set[o], exjp6_set[o], p_tbl_4[o], exjp7_set[o], exjp9_set[o], exjp10_set[o], radioBtn_set_2[o],
+                    p_tbl_6[o], exjp13_set[o], exjp14_set[o], exjp15_set[o], exjp11_set[o], exjp22_set[o], exjp12_set[o], p_tbl_7[o], exjp3_set[o], exjp16_set[o], p_tbl_9[o], exjp17_set[o], p_tbl_10[o], exjp0_set[o], exjp18_set[o], exjp19_set[o],
+                    exjp20_set[o], exjp21_set[o]);
+            tabs[o].setText("Форма " + (o+1));
+            tabs[o].setContent(PanelSet[o]);
+            sp.getTabs().add(tabs[o]);
             o++;
         }
+
         root.getChildren().add(sp);
         sp.setLayoutX(15);
         sp.setLayoutY(160);
@@ -306,7 +373,53 @@ public class OK_Action {
 
         createBtn.setVisible(true);
         createBtn.setDisable(false);
+    }
+
+    public void Case_report(int t){
+        
+            tabs[t].setContent(PanelNull);
+            PanelSet[t].getChildren().removeAll(radioBtn_set[t], p_tbl_1[t], exjp1_set[t], exjp2_set[t], p_tbl_2[t], exjp4_set[t], p_tbl_3[t], exjp5_set[t], exjp6_set[t], p_tbl_4[t], exjp7_set[t], exjp9_set[t], exjp10_set[t], p_tbl_6[t],
+                    exjp13_set[t], exjp14_set[t], exjp15_set[t], exjp11_set[t], exjp22_set[t], exjp12_set[t], p_tbl_7[t], exjp3_set[t], exjp16_set[t], p_tbl_9[t], exjp17_set[t], p_tbl_10[t], exjp0_set[t], exjp18_set[t],
+                    exjp19_set[t], exjp20_set[t], exjp21_set[t]);
+
+            //System.out.print("o = " + o );
+
+            PanelSet[t].getChildren().addAll(radioBtn_set[t], p_tbl_1[t], exjp1_set[t], exjp2_set[t], p_tbl_2[t], exjp4_set[t], p_tbl_3[t], exjp5_set[t], exjp6_set[t], p_tbl_4[t], exjp7_set[t], exjp9_set[t], exjp10_set[t], p_tbl_6[t],
+                    exjp13_set[t], exjp14_set[t], exjp15_set[t], exjp11_set[t], exjp22_set[t], exjp12_set[t], p_tbl_7[t], exjp3_set[t], exjp16_set[t], p_tbl_9[t], exjp17_set[t], p_tbl_10[t], exjp0_set[t], exjp18_set[t],
+                    exjp19_set[t], exjp20_set[t], exjp21_set[t]);
+            tabs[t].setContent(PanelSet[t]);
+            //sp.getTabs().add(new Tab("Форма " + (o+1), PanelSet[o]));
+        
+    }
+    public void Case_code(int t){
+            tabs[t].setContent(PanelNull);
+            PanelSet[t].getChildren().removeAll(radioBtn_set[t], p_tbl_1[t], exjp1_set[t], exjp2_set[t], p_tbl_2[t], exjp4_set[t], p_tbl_3[t], exjp5_set[t], exjp6_set[t], p_tbl_4[t], exjp7_set[t], exjp9_set[t], exjp10_set[t], p_tbl_6[t],
+                    exjp13_set[t], exjp14_set[t], exjp15_set[t], exjp11_set[t], exjp22_set[t], exjp12_set[t], p_tbl_7[t], exjp3_set[t], exjp16_set[t], p_tbl_9[t], exjp17_set[t], p_tbl_10[t], exjp0_set[t], exjp18_set[t],
+                    exjp19_set[t], exjp20_set[t], exjp21_set[t]);
+
+            //System.out.print("o = " + o );
+
+            //exjp0_set[t].getChildren().addAll(form_name_lbl[t], Form_name_txtf[t]);
+
+            PanelSet[t].getChildren().addAll(radioBtn_set[t], p_tbl_1[t], exjp1_set[t], exjp2_set[t], p_tbl_10[t], /*exjp0_set[t],*/ exjp18_set[t],
+                    exjp19_set[t], exjp20_set[t], exjp21_set[t]);
+            tabs[t].setContent(PanelSet[t]);
+            //sp.getTabs().add(new Tab("Форма " + (o+1), PanelSet[o]));
+    }
+    public void Case_RNR(int t, boolean reg){
+        if(reg){
+            System_id_txtf[t].setText("OAD");
+            Security_role_name_txtf[t].setText("OAD_" + Form_cd_txtf[0].getText());
+            Security_role_path_txtf[t].setText("CAMID(\":\")/namespaceFolder[@name=''FPS_IAPPR'']/namespaceFolder[@name=''PPK_OAD'']/namespaceFolder[@name=''REP_ROLES'']");
+            Search_path_txtf[t].setText("/content/folder[@name=''Приложение НИКА'']/folder[@name=''КО'']/folder[@name=''Регламентированные отчеты']/...");
+        } else{
+            System_id_txtf[t].setText("OAD");
+            Security_role_name_txtf[t].setText("OAD_" + Form_cd_txtf[0].getText());
+            Security_role_path_txtf[t].setText("CAMID(\":\")/namespaceFolder[@name=''FPS_IAPPR'']/namespaceFolder[@name=''PPK_OAD'']/namespaceFolder[@name=''REP_NR_ROLES'']");
+            Search_path_txtf[t].setText("/content/folder[@name=''Приложение НИКА'']/folder[@name=''КО'']/folder[@name=''Нерегламентированные отчеты']/...");
         }
+
+    }
 
    public static TabPane getSp(){
         return OK_Action.sp;
