@@ -33,7 +33,7 @@ public class OK_Action {
     private static TextField[] p_type_ref_txtf = new TextField[12];
     private static TextField[] p_source_ref_txtf = new TextField[12];
     private static TextField[] Security_role_name_txtf = new TextField[12];
-
+    private ScrollPane[] PanelScroll = new ScrollPane[12];
     private VBox[] PanelSet = new VBox[12];
     private VBox PanelNull = new VBox();
     private HBox[] exjp0_set = new HBox[12];
@@ -126,6 +126,7 @@ public class OK_Action {
         this.mnf = primaryStage;
         this.count = count;
         sp = new TabPane();
+        sp.setPrefSize(1680, 740);
         /*tooltip1.setShowDuration(Duration.seconds(8.0));
         tooltip1_1.setShowDuration(Duration.seconds(8.0));
         tooltip2.setShowDuration(Duration.seconds(8.0));
@@ -314,7 +315,6 @@ public class OK_Action {
                 }
             });
             caseReport[t].setSelected(true);
-
             tabs[t] = new Tab();
         }
         for(int o = 0; o <= count-1;){
@@ -357,8 +357,9 @@ public class OK_Action {
             PanelSet[o].getChildren().addAll(radioBtn_set[o], p_tbl_1[o], exjp1_set[o], exjp2_set[o], p_tbl_2[o], exjp4_set[o], p_tbl_3[o], exjp5_set[o], exjp6_set[o], p_tbl_4[o], exjp7_set[o], exjp9_set[o], exjp10_set[o], radioBtn_set_2[o],
                     p_tbl_6[o], exjp13_set[o], exjp14_set[o], exjp15_set[o], exjp11_set[o], exjp22_set[o], exjp12_set[o], p_tbl_7[o], exjp3_set[o], exjp16_set[o], p_tbl_9[o], exjp17_set[o], p_tbl_10[o], exjp0_set[o], exjp18_set[o], exjp19_set[o],
                     exjp20_set[o], exjp21_set[o]);
+            PanelScroll[o] = new ScrollPane(PanelSet[o]);
             tabs[o].setText("Форма " + (o+1));
-            tabs[o].setContent(PanelSet[o]);
+            tabs[o].setContent(PanelScroll[o]);
             sp.getTabs().add(tabs[o]);
             o++;
         }
@@ -368,7 +369,7 @@ public class OK_Action {
         sp.setLayoutY(160);
 
         mnf.setWidth(1720);
-        mnf.setHeight(1270);
+        mnf.setHeight(970);
         mnf.centerOnScreen();
 
         createBtn.setVisible(true);
@@ -376,35 +377,31 @@ public class OK_Action {
     }
 
     public void Case_report(int t){
-        
-            tabs[t].setContent(PanelNull);
-            PanelSet[t].getChildren().removeAll(radioBtn_set[t], p_tbl_1[t], exjp1_set[t], exjp2_set[t], p_tbl_2[t], exjp4_set[t], p_tbl_3[t], exjp5_set[t], exjp6_set[t], p_tbl_4[t], exjp7_set[t], exjp9_set[t], exjp10_set[t], p_tbl_6[t],
-                    exjp13_set[t], exjp14_set[t], exjp15_set[t], exjp11_set[t], exjp22_set[t], exjp12_set[t], p_tbl_7[t], exjp3_set[t], exjp16_set[t], p_tbl_9[t], exjp17_set[t], p_tbl_10[t], exjp0_set[t], exjp18_set[t],
-                    exjp19_set[t], exjp20_set[t], exjp21_set[t]);
+        PanelScroll[t] = new ScrollPane(PanelNull);
+        tabs[t].setContent(PanelScroll[t]);
+        PanelSet[t].getChildren().removeAll(radioBtn_set[t], p_tbl_1[t], exjp1_set[t], exjp2_set[t], p_tbl_2[t], exjp4_set[t], p_tbl_3[t], exjp5_set[t], exjp6_set[t], p_tbl_4[t], exjp7_set[t], exjp9_set[t], exjp10_set[t], radioBtn_set_2[t],
+                p_tbl_6[t], exjp13_set[t], exjp14_set[t], exjp15_set[t], exjp11_set[t], exjp22_set[t], exjp12_set[t], p_tbl_7[t], exjp3_set[t], exjp16_set[t], p_tbl_9[t], exjp17_set[t], p_tbl_10[t], exjp0_set[t], exjp18_set[t], exjp19_set[t],
+                exjp20_set[t], exjp21_set[t]);
 
-            //System.out.print("o = " + o );
-
-            PanelSet[t].getChildren().addAll(radioBtn_set[t], p_tbl_1[t], exjp1_set[t], exjp2_set[t], p_tbl_2[t], exjp4_set[t], p_tbl_3[t], exjp5_set[t], exjp6_set[t], p_tbl_4[t], exjp7_set[t], exjp9_set[t], exjp10_set[t], p_tbl_6[t],
-                    exjp13_set[t], exjp14_set[t], exjp15_set[t], exjp11_set[t], exjp22_set[t], exjp12_set[t], p_tbl_7[t], exjp3_set[t], exjp16_set[t], p_tbl_9[t], exjp17_set[t], p_tbl_10[t], exjp0_set[t], exjp18_set[t],
-                    exjp19_set[t], exjp20_set[t], exjp21_set[t]);
-            tabs[t].setContent(PanelSet[t]);
-            //sp.getTabs().add(new Tab("Форма " + (o+1), PanelSet[o]));
+        PanelSet[t].getChildren().addAll(radioBtn_set[t], p_tbl_1[t], exjp1_set[t], exjp2_set[t], p_tbl_2[t], exjp4_set[t], p_tbl_3[t], exjp5_set[t], exjp6_set[t], p_tbl_4[t], exjp7_set[t], exjp9_set[t], exjp10_set[t], radioBtn_set_2[t],
+                p_tbl_6[t], exjp13_set[t], exjp14_set[t], exjp15_set[t], exjp11_set[t], exjp22_set[t], exjp12_set[t], p_tbl_7[t], exjp3_set[t], exjp16_set[t], p_tbl_9[t], exjp17_set[t], p_tbl_10[t], exjp0_set[t], exjp18_set[t], exjp19_set[t],
+                exjp20_set[t], exjp21_set[t]);
+        PanelScroll[t] = new ScrollPane(PanelSet[t]);
+        tabs[t].setContent(PanelScroll[t]);
+        //sp.getTabs().add(new Tab("Форма " + (o+1), PanelSet[o]));
         
     }
     public void Case_code(int t){
-            tabs[t].setContent(PanelNull);
-            PanelSet[t].getChildren().removeAll(radioBtn_set[t], p_tbl_1[t], exjp1_set[t], exjp2_set[t], p_tbl_2[t], exjp4_set[t], p_tbl_3[t], exjp5_set[t], exjp6_set[t], p_tbl_4[t], exjp7_set[t], exjp9_set[t], exjp10_set[t], p_tbl_6[t],
-                    exjp13_set[t], exjp14_set[t], exjp15_set[t], exjp11_set[t], exjp22_set[t], exjp12_set[t], p_tbl_7[t], exjp3_set[t], exjp16_set[t], p_tbl_9[t], exjp17_set[t], p_tbl_10[t], exjp0_set[t], exjp18_set[t],
-                    exjp19_set[t], exjp20_set[t], exjp21_set[t]);
+        PanelScroll[t] = new ScrollPane(PanelNull);
+        tabs[t].setContent(PanelScroll[t]);
+        PanelSet[t].getChildren().removeAll(radioBtn_set[t], p_tbl_1[t], exjp1_set[t], exjp2_set[t], p_tbl_2[t], exjp4_set[t], p_tbl_3[t], exjp5_set[t], exjp6_set[t], p_tbl_4[t], exjp7_set[t], exjp9_set[t], exjp10_set[t], radioBtn_set_2[t],
+                p_tbl_6[t], exjp13_set[t], exjp14_set[t], exjp15_set[t], exjp11_set[t], exjp22_set[t], exjp12_set[t], p_tbl_7[t], exjp3_set[t], exjp16_set[t], p_tbl_9[t], exjp17_set[t], p_tbl_10[t], exjp0_set[t], exjp18_set[t], exjp19_set[t],
+                exjp20_set[t], exjp21_set[t]);
 
-            //System.out.print("o = " + o );
-
-            //exjp0_set[t].getChildren().addAll(form_name_lbl[t], Form_name_txtf[t]);
-
-            PanelSet[t].getChildren().addAll(radioBtn_set[t], p_tbl_1[t], exjp1_set[t], exjp2_set[t], p_tbl_10[t], /*exjp0_set[t],*/ exjp18_set[t],
-                    exjp19_set[t], exjp20_set[t], exjp21_set[t]);
-            tabs[t].setContent(PanelSet[t]);
-            //sp.getTabs().add(new Tab("Форма " + (o+1), PanelSet[o]));
+        PanelSet[t].getChildren().addAll(radioBtn_set[t], p_tbl_1[t], exjp1_set[t], exjp2_set[t], p_tbl_10[t], /*exjp0_set[t],*/ exjp18_set[t],
+                exjp19_set[t], exjp20_set[t], exjp21_set[t]);
+        PanelScroll[t] = new ScrollPane(PanelSet[t]);
+        tabs[t].setContent(PanelScroll[t]);
     }
     public void Case_RNR(int t, boolean reg){
         if(reg){
