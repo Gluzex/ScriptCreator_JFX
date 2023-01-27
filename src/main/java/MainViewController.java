@@ -187,6 +187,13 @@ public class MainViewController {
         TextField[] Form_cd_txtf =  OK_Action.getForm_cd_txtf();
         TextField[] Form_cd_name_txtf =  OK_Action.getForm_cd_name_txtf();
         TextField[] Form_okud_txtf =  OK_Action.getForm_okud_txtf();
+        TextField[] Form_okud2_txtf =  OK_Action.getForm_okud2_txtf();
+        TextField[] Form_okud3_txtf =  OK_Action.getForm_okud3_txtf();
+        TextField[] Form_okud4_txtf =  OK_Action.getForm_okud4_txtf();
+        TextField[] Form_okud5_txtf =  OK_Action.getForm_okud5_txtf();
+        TextField[] Form_okud6_txtf =  OK_Action.getForm_okud6_txtf();
+        TextField[] Form_okud7_txtf =  OK_Action.getForm_okud7_txtf();
+        TextField[] Form_okud8_txtf =  OK_Action.getForm_okud8_txtf();
         TextField[] Form_cd_cog_txtf =  OK_Action.getForm_cd_cog_txtf();
         ComboBox<String>[] Flag_IOD_cmbx =  OK_Action.getFlag_IOD_cmbx();
         ComboBox<String>[] Flag_PDN_cmbx =  OK_Action.getFlag_PDN_cmbx();
@@ -212,18 +219,37 @@ public class MainViewController {
         TextField[] Search_path_txtf =  OK_Action.getSearch_path_txtf();
         TextField[] Form_formal_code_txtf =  OK_Action.getForm_formal_code_txtf();
         TextField[] Desc_txtf =  OK_Action.getDesc_txtf();
-        ComboBox<String>[] period_cmbx =  OK_Action.getPeriod_txtf();
-        ComboBox<String>[] rep_subj_type_cmbx =  OK_Action.getRep_subj_type_txtf();
+        ComboBox<String>[] period_cmbx =  OK_Action.getPeriod_cmbx();
+        ComboBox<String>[] period2_cmbx =  OK_Action.getPeriod2_cmbx();
+        ComboBox<String>[] period3_cmbx =  OK_Action.getPeriod3_cmbx();
+        ComboBox<String>[] period4_cmbx =  OK_Action.getPeriod4_cmbx();
+        ComboBox<String>[] period5_cmbx =  OK_Action.getPeriod5_cmbx();
+        ComboBox<String>[] period6_cmbx =  OK_Action.getPeriod6_cmbx();
+        ComboBox<String>[] period7_cmbx =  OK_Action.getPeriod7_cmbx();
+        ComboBox<String>[] period8_cmbx =  OK_Action.getPeriod8_cmbx();
+        ComboBox<String>[] rep_subj_type_cmbx =  OK_Action.getRep_subj_type_cmbx();
+        ComboBox<String>[] rep_subj_type2_cmbx =  OK_Action.getRep_subj_type2_cmbx();
+        ComboBox<String>[] rep_subj_type3_cmbx =  OK_Action.getRep_subj_type3_cmbx();
+        ComboBox<String>[] rep_subj_type4_cmbx =  OK_Action.getRep_subj_type4_cmbx();
+        ComboBox<String>[] rep_subj_type5_cmbx =  OK_Action.getRep_subj_type5_cmbx();
+        ComboBox<String>[] rep_subj_type6_cmbx =  OK_Action.getRep_subj_type6_cmbx();
+        ComboBox<String>[] rep_subj_type7_cmbx =  OK_Action.getRep_subj_type7_cmbx();
+        ComboBox<String>[] rep_subj_type8_cmbx =  OK_Action.getRep_subj_type8_cmbx();
         TextField[] p_parent_code_txtf =  OK_Action.getP_parent_code_txtf();
         TextField[] p_parent_type_ref_txtf =  OK_Action.getP_parent_type_ref_txtf();
         TextField[] p_type_ref_txtf =  OK_Action.getP_type_ref_txtf();
         TextField[] p_source_ref_txtf =  OK_Action.getP_source_ref_txtf();
         TextField[] Security_role_name_txtf =  OK_Action.getSecurity_role_name_txtf();
 
-        new PreCreateScr(count, path_fld, mnf, main_root, resetBtn, Form_name_txtf, Form_cd_txtf, Form_cd_name_txtf, Form_okud_txtf, Form_cd_cog_txtf, Flag_IOD_cmbx, Flag_PDN_cmbx, Dep_name_txtf,
-                Dep_name2_txtf, Dep_name3_txtf, Dep_name4_txtf, Dep_name5_txtf, Dep_name6_txtf, Dep_name7_txtf, Dep_name8_txtf,
+        new PreCreateScr(count, path_fld, mnf, main_root, resetBtn, Form_name_txtf, Form_cd_txtf, Form_cd_name_txtf,
+                Form_okud_txtf, Form_okud2_txtf, Form_okud3_txtf, Form_okud4_txtf, Form_okud5_txtf, Form_okud6_txtf, Form_okud7_txtf, Form_okud8_txtf,
+                Form_cd_cog_txtf, Flag_IOD_cmbx, Flag_PDN_cmbx,
+                Dep_name_txtf, Dep_name2_txtf, Dep_name3_txtf, Dep_name4_txtf, Dep_name5_txtf, Dep_name6_txtf, Dep_name7_txtf, Dep_name8_txtf,
                 Dep_u_name_txtf, Dep_u_name2_txtf, Dep_u_name3_txtf, Dep_u_name4_txtf, Dep_u_name5_txtf, Dep_u_name6_txtf, Dep_u_name7_txtf, Dep_u_name8_txtf,
-                reason_txtf, System_id_txtf, Security_role_path_txtf, Search_path_txtf, Form_formal_code_txtf, Desc_txtf, period_cmbx, rep_subj_type_cmbx, p_parent_code_txtf, p_parent_type_ref_txtf,
+                reason_txtf, System_id_txtf, Security_role_path_txtf, Search_path_txtf, Form_formal_code_txtf, Desc_txtf,
+                period_cmbx, period2_cmbx, period3_cmbx, period4_cmbx, period5_cmbx, period6_cmbx, period7_cmbx, period8_cmbx,
+                rep_subj_type_cmbx, rep_subj_type2_cmbx, rep_subj_type3_cmbx, rep_subj_type4_cmbx, rep_subj_type5_cmbx, rep_subj_type6_cmbx, rep_subj_type7_cmbx, rep_subj_type8_cmbx,
+                p_parent_code_txtf, p_parent_type_ref_txtf,
                 p_type_ref_txtf, p_source_ref_txtf, Security_role_name_txtf);
     }
     public void ResetClicked2(){

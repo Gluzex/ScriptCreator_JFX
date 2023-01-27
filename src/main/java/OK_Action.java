@@ -16,6 +16,13 @@ public class OK_Action {
     private static TextField[] Form_cd_txtf = new TextField[12];
     private static TextField[] Form_cd_name_txtf = new TextField[12];
     private static TextField[] Form_okud_txtf = new TextField[12];
+    private static TextField[] Form_okud2_txtf = new TextField[12];
+    private static TextField[] Form_okud3_txtf = new TextField[12];
+    private static TextField[] Form_okud4_txtf = new TextField[12];
+    private static TextField[] Form_okud5_txtf = new TextField[12];
+    private static TextField[] Form_okud6_txtf = new TextField[12];
+    private static TextField[] Form_okud7_txtf = new TextField[12];
+    private static TextField[] Form_okud8_txtf = new TextField[12];
     private static TextField[] Form_cd_cog_txtf = new TextField[12];
     private static ComboBox<String>[] Flag_IOD_cmbx = new ComboBox[12];
     private static ComboBox<String>[] Flag_PDN_cmbx = new ComboBox[12];
@@ -42,22 +49,49 @@ public class OK_Action {
     private static TextField[] Form_formal_code_txtf = new TextField[12];
     private static TextField[] Desc_txtf = new TextField[12];
     private static ComboBox<String>[] period_cmbx = new ComboBox[12];
+    private static ComboBox<String>[] period2_cmbx = new ComboBox[12];
+    private static ComboBox<String>[] period3_cmbx = new ComboBox[12];
+    private static ComboBox<String>[] period4_cmbx = new ComboBox[12];
+    private static ComboBox<String>[] period5_cmbx = new ComboBox[12];
+    private static ComboBox<String>[] period6_cmbx = new ComboBox[12];
+    private static ComboBox<String>[] period7_cmbx = new ComboBox[12];
+    private static ComboBox<String>[] period8_cmbx = new ComboBox[12];
     private static ComboBox<String>[] rep_subj_type_cmbx = new ComboBox[12];
+    private static ComboBox<String>[] rep_subj_type2_cmbx = new ComboBox[12];
+    private static ComboBox<String>[] rep_subj_type3_cmbx = new ComboBox[12];
+    private static ComboBox<String>[] rep_subj_type4_cmbx = new ComboBox[12];
+    private static ComboBox<String>[] rep_subj_type5_cmbx = new ComboBox[12];
+    private static ComboBox<String>[] rep_subj_type6_cmbx = new ComboBox[12];
+    private static ComboBox<String>[] rep_subj_type7_cmbx = new ComboBox[12];
+    private static ComboBox<String>[] rep_subj_type8_cmbx = new ComboBox[12];
     private static TextField[] p_parent_code_txtf = new TextField[12];
     private static TextField[] p_parent_type_ref_txtf = new TextField[12];
     private static TextField[] p_type_ref_txtf = new TextField[12];
     private static TextField[] p_source_ref_txtf = new TextField[12];
     private static TextField[] Security_role_name_txtf = new TextField[12];
+    private static int[] dep_count = new int[12];
+    private static int[] dep_u_count = new int[12];
+    private static int[] okud_count = new int[12];
+    private static int[] subj_count = new int[12];
     private ScrollPane[] PanelScroll = new ScrollPane[12];
     private VBox[] PanelSet = new VBox[12];
     private VBox PanelNull = new VBox();
     private HBox[] exjp0_set = new HBox[12];
     private HBox[] exjp1_set = new HBox[12];
     private HBox[] exjp2_set = new HBox[12];
+    private VBox[] exjp3_V_set= new VBox[12];
     private HBox[] exjp3_set = new HBox[12];
+    private HBox[] exjp3_2_set = new HBox[12];
+    private HBox[] exjp3_3_set = new HBox[12];
+    private HBox[] exjp3_4_set = new HBox[12];
+    private HBox[] exjp3_5_set = new HBox[12];
+    private HBox[] exjp3_6_set = new HBox[12];
+    private HBox[] exjp3_7_set = new HBox[12];
+    private HBox[] exjp3_8_set = new HBox[12];
     private HBox[] exjp4_set = new HBox[12];
     private HBox[] exjp5_set = new HBox[12];
     private HBox[] exjp6_set = new HBox[12];
+    private VBox[] exjp7_V_set= new VBox[12];
     private HBox[] exjp7_set= new HBox[12];
     private HBox[] exjp7_2_set= new HBox[12];
     private HBox[] exjp7_3_set= new HBox[12];
@@ -67,6 +101,7 @@ public class OK_Action {
     private HBox[] exjp7_7_set= new HBox[12];
     private HBox[] exjp7_8_set= new HBox[12];
     //HBox[] exjp8_set = new HBox[12];
+    private VBox[] exjp9_V_set= new VBox[12];
     private HBox[] exjp9_set = new HBox[12];
     private HBox[] exjp9_2_set = new HBox[12];
     private HBox[] exjp9_3_set = new HBox[12];
@@ -82,7 +117,22 @@ public class OK_Action {
     private HBox[] exjp14_set = new HBox[12];
     private HBox[] exjp15_set = new HBox[12];
     private HBox[] exjp16_set = new HBox[12];
+    private HBox[] exjp16_2_set = new HBox[12];
+    private HBox[] exjp16_3_set = new HBox[12];
+    private HBox[] exjp16_4_set = new HBox[12];
+    private HBox[] exjp16_5_set = new HBox[12];
+    private HBox[] exjp16_6_set = new HBox[12];
+    private HBox[] exjp16_7_set = new HBox[12];
+    private HBox[] exjp16_8_set = new HBox[12];
+    private VBox[] exjp17_V_set= new VBox[12];
     private HBox[] exjp17_set = new HBox[12];
+    private HBox[] exjp17_2_set = new HBox[12];
+    private HBox[] exjp17_3_set = new HBox[12];
+    private HBox[] exjp17_4_set = new HBox[12];
+    private HBox[] exjp17_5_set = new HBox[12];
+    private HBox[] exjp17_6_set = new HBox[12];
+    private HBox[] exjp17_7_set = new HBox[12];
+    private HBox[] exjp17_8_set = new HBox[12];
     private HBox[] exjp18_set = new HBox[12];
     private HBox[] exjp19_set = new HBox[12];
     private HBox[] exjp20_set = new HBox[12];
@@ -102,11 +152,20 @@ public class OK_Action {
     private VBox[] p_tbl_10 = new VBox[12];
     private HBox[] p_cmbx_dep_1 = new HBox[12];
     private HBox[] p_cmbx_dep_2 = new HBox[12];
+    private HBox[] p_cmbx_okud = new HBox[12];
+    private HBox[] p_cmbx_subj = new HBox[12];
 
     private Label[] form_name_lbl = new Label[12];
     private Label[] form_cd_lbl = new Label[12];
     private Label[] form_cd_name_lbl = new Label[12];
     private Label[] OKUD_lbl = new Label[12];
+    private Label[] OKUD2_lbl = new Label[12];
+    private Label[] OKUD3_lbl = new Label[12];
+    private Label[] OKUD4_lbl = new Label[12];
+    private Label[] OKUD5_lbl = new Label[12];
+    private Label[] OKUD6_lbl = new Label[12];
+    private Label[] OKUD7_lbl = new Label[12];
+    private Label[] OKUD8_lbl = new Label[12];
     private Label[] form_cd_cog_lbl = new Label[12];
     private Label[] Flag_IOD_lbl = new Label[12];
     private Label[] Flag_PDN_lbl = new Label[12];
@@ -133,7 +192,21 @@ public class OK_Action {
     private Label[] Form_formal_code_lbl = new Label[12];
     private Label[] Desc_lbl = new Label[12];
     private Label[] period_lbl = new Label[12];
+    private Label[] period2_lbl = new Label[12];
+    private Label[] period3_lbl = new Label[12];
+    private Label[] period4_lbl = new Label[12];
+    private Label[] period5_lbl = new Label[12];
+    private Label[] period6_lbl = new Label[12];
+    private Label[] period7_lbl = new Label[12];
+    private Label[] period8_lbl = new Label[12];
     private Label[] rep_subj_type_lbl = new Label[12];
+    private Label[] rep_subj_type2_lbl = new Label[12];
+    private Label[] rep_subj_type3_lbl = new Label[12];
+    private Label[] rep_subj_type4_lbl = new Label[12];
+    private Label[] rep_subj_type5_lbl = new Label[12];
+    private Label[] rep_subj_type6_lbl = new Label[12];
+    private Label[] rep_subj_type7_lbl = new Label[12];
+    private Label[] rep_subj_type8_lbl = new Label[12];
     private Label[] p_parent_code_lbl = new Label[12];
     private Label[] p_parent_type_ref_lbl = new Label[12];
     private Label[] p_type_ref_lbl = new Label[12];
@@ -151,6 +224,8 @@ public class OK_Action {
     private Label[] tbl10_lbl = new Label[12];
     private Label[] cmbx_dep_1_lbl = new Label[12];
     private Label[] cmbx_dep_2_lbl = new Label[12];
+    private Label[] cmbx_okud_lbl = new Label[12];
+    private Label[] cmbx_subj_lbl = new Label[12];
 
     private Tooltip tooltip1 = new Tooltip ("Флаг (Y/N) - признак наличия данных категории ИОД в отчетах доступных по данному коду, принимает значения \"Y\" или \"N\"");
     private Tooltip tooltip1_1 = new Tooltip ("Флаг (Y/N) - признак наличия данных категории ПДН в отчетах доступных по данному коду, принимает значения \"Y\" или \"N\"");
@@ -171,13 +246,15 @@ public class OK_Action {
     private RadioButton[] caseNR = new RadioButton[12];
     private ComboBox<Integer>[] Cmbx_dep_1 = new ComboBox[12];
     private ComboBox<Integer>[] Cmbx_dep_2 = new ComboBox[12];
+    private ComboBox<Integer>[] Cmbx_okud = new ComboBox[12];
+    private ComboBox<Integer>[] Cmbx_subj = new ComboBox[12];
 
     public OK_Action(int count, AnchorPane root, Stage primaryStage, Button createBtn){
         this.mnf = primaryStage;
         this.count = count;
         sp = new TabPane();
         sp.setPrefSize(1680, 740);
-        tooltip1.setShowDuration(Duration.seconds(8.0));
+        /*tooltip1.setShowDuration(Duration.seconds(8.0));
         tooltip1_1.setShowDuration(Duration.seconds(8.0));
         tooltip2.setShowDuration(Duration.seconds(8.0));
         tooltip3.setShowDuration(Duration.seconds(8.0));
@@ -188,17 +265,26 @@ public class OK_Action {
         tooltip7_2.setShowDuration(Duration.seconds(8.0));
         tooltip8.setShowDuration(Duration.seconds(8.0));
         tooltip9.setShowDuration(Duration.seconds(8.0));
-        tooltip10.setShowDuration(Duration.seconds(8.0));
+        tooltip10.setShowDuration(Duration.seconds(8.0));*/
         for(int t = 0; t<=11; t++){
             PanelSet[t] = new VBox(5.0);
             PanelSet[t].setPadding(new Insets(10.0));
             exjp0_set[t] = new HBox(15.0);
             exjp1_set[t] = new HBox(15.0);
             exjp2_set[t] = new HBox(15.0);
+            exjp3_V_set[t] = new VBox(15.0);
             exjp3_set[t] = new HBox(15.0);
+            exjp3_2_set[t] = new HBox(15.0);
+            exjp3_3_set[t] = new HBox(15.0);
+            exjp3_4_set[t] = new HBox(15.0);
+            exjp3_5_set[t] = new HBox(15.0);
+            exjp3_6_set[t] = new HBox(15.0);
+            exjp3_7_set[t] = new HBox(15.0);
+            exjp3_8_set[t] = new HBox(15.0);
             exjp4_set[t] = new HBox(15.0);
             exjp5_set[t] = new HBox(15.0);
             exjp6_set[t] = new HBox(15.0);
+            exjp7_V_set[t] = new VBox(15.0);
             exjp7_set[t] = new HBox(15.0);
             exjp7_2_set[t] = new HBox(15.0);
             exjp7_3_set[t] = new HBox(15.0);
@@ -208,6 +294,7 @@ public class OK_Action {
             exjp7_7_set[t] = new HBox(15.0);
             exjp7_8_set[t] = new HBox(15.0);
             //exjp8_set[t] = new HBox(15.0);
+            exjp9_V_set[t] = new VBox(15.0);
             exjp9_set[t] = new HBox(15.0);
             exjp9_2_set[t] = new HBox(15.0);
             exjp9_3_set[t] = new HBox(15.0);
@@ -223,7 +310,22 @@ public class OK_Action {
             exjp14_set[t] = new HBox(15.0);
             exjp15_set[t] = new HBox(15.0);
             exjp16_set[t] = new HBox(15.0);
+            exjp16_2_set[t] = new HBox(15.0);
+            exjp16_3_set[t] = new HBox(15.0);
+            exjp16_4_set[t] = new HBox(15.0);
+            exjp16_5_set[t] = new HBox(15.0);
+            exjp16_6_set[t] = new HBox(15.0);
+            exjp16_7_set[t] = new HBox(15.0);
+            exjp16_8_set[t] = new HBox(15.0);
+            exjp17_V_set[t] = new VBox(15.0);
             exjp17_set[t] = new HBox(15.0);
+            exjp17_2_set[t] = new HBox(15.0);
+            exjp17_3_set[t] = new HBox(15.0);
+            exjp17_4_set[t] = new HBox(15.0);
+            exjp17_5_set[t] = new HBox(15.0);
+            exjp17_6_set[t] = new HBox(15.0);
+            exjp17_7_set[t] = new HBox(15.0);
+            exjp17_8_set[t] = new HBox(15.0);
             exjp18_set[t] = new HBox(15.0);
             exjp19_set[t] = new HBox(15.0);
             exjp20_set[t] = new HBox(15.0);
@@ -253,8 +355,8 @@ public class OK_Action {
             p_tbl_10[t].setPadding(new Insets(10.0));
             p_cmbx_dep_1[t] = new HBox(15.0);
             p_cmbx_dep_2[t] = new HBox(15.0);
-
-
+            p_cmbx_okud[t] = new HBox(15.0);
+            p_cmbx_subj[t] = new HBox(15.0);
             Form_name_txtf[t] = new TextField();
             Form_cd_txtf[t] =  new TextField();
             Form_cd_txtf[t].setTooltip(tooltip4);
@@ -262,6 +364,20 @@ public class OK_Action {
             Form_cd_name_txtf[t].setTooltip(tooltip5);
             Form_okud_txtf[t] =  new TextField();
             Form_okud_txtf[t].setTooltip(tooltip10);
+            Form_okud2_txtf[t] =  new TextField();
+            Form_okud2_txtf[t].setTooltip(tooltip10);
+            Form_okud3_txtf[t] =  new TextField();
+            Form_okud3_txtf[t].setTooltip(tooltip10);
+            Form_okud4_txtf[t] =  new TextField();
+            Form_okud4_txtf[t].setTooltip(tooltip10);
+            Form_okud5_txtf[t] =  new TextField();
+            Form_okud5_txtf[t].setTooltip(tooltip10);
+            Form_okud6_txtf[t] =  new TextField();
+            Form_okud6_txtf[t].setTooltip(tooltip10);
+            Form_okud7_txtf[t] =  new TextField();
+            Form_okud7_txtf[t].setTooltip(tooltip10);
+            Form_okud8_txtf[t] =  new TextField();
+            Form_okud8_txtf[t].setTooltip(tooltip10);
             Form_cd_cog_txtf[t] =  new TextField();
             Form_cd_cog_txtf[t].setTooltip(tooltip6);
             Flag_IOD_cmbx[t] =  new ComboBox<String>();
@@ -313,9 +429,51 @@ public class OK_Action {
             period_cmbx[t] =  new ComboBox<String>();
             period_cmbx[t].getItems().addAll("квартальная", "месячная", "нерегулярная");
             period_cmbx[t].setTooltip(tooltip2);
+            period2_cmbx[t] =  new ComboBox<String>();
+            period2_cmbx[t].getItems().addAll("квартальная", "месячная", "нерегулярная");
+            period2_cmbx[t].setTooltip(tooltip2);
+            period3_cmbx[t] =  new ComboBox<String>();
+            period3_cmbx[t].getItems().addAll("квартальная", "месячная", "нерегулярная");
+            period3_cmbx[t].setTooltip(tooltip2);
+            period4_cmbx[t] =  new ComboBox<String>();
+            period4_cmbx[t].getItems().addAll("квартальная", "месячная", "нерегулярная");
+            period4_cmbx[t].setTooltip(tooltip2);
+            period5_cmbx[t] =  new ComboBox<String>();
+            period5_cmbx[t].getItems().addAll("квартальная", "месячная", "нерегулярная");
+            period5_cmbx[t].setTooltip(tooltip2);
+            period6_cmbx[t] =  new ComboBox<String>();
+            period6_cmbx[t].getItems().addAll("квартальная", "месячная", "нерегулярная");
+            period6_cmbx[t].setTooltip(tooltip2);
+            period7_cmbx[t] =  new ComboBox<String>();
+            period7_cmbx[t].getItems().addAll("квартальная", "месячная", "нерегулярная");
+            period7_cmbx[t].setTooltip(tooltip2);
+            period8_cmbx[t] =  new ComboBox<String>();
+            period8_cmbx[t].getItems().addAll("квартальная", "месячная", "нерегулярная");
+            period8_cmbx[t].setTooltip(tooltip2);
             rep_subj_type_cmbx[t] =  new ComboBox<String>();
             rep_subj_type_cmbx[t].getItems().addAll("КО", "ОПДС", "ОПС", "ТУ", "Холдинги", "БГ", "Филиалы КО", "СП БР");
             rep_subj_type_cmbx[t].setTooltip(tooltip3);
+            rep_subj_type2_cmbx[t] =  new ComboBox<String>();
+            rep_subj_type2_cmbx[t].getItems().addAll("КО", "ОПДС", "ОПС", "ТУ", "Холдинги", "БГ", "Филиалы КО", "СП БР");
+            rep_subj_type2_cmbx[t].setTooltip(tooltip3);
+            rep_subj_type3_cmbx[t] =  new ComboBox<String>();
+            rep_subj_type3_cmbx[t].getItems().addAll("КО", "ОПДС", "ОПС", "ТУ", "Холдинги", "БГ", "Филиалы КО", "СП БР");
+            rep_subj_type3_cmbx[t].setTooltip(tooltip3);
+            rep_subj_type4_cmbx[t] =  new ComboBox<String>();
+            rep_subj_type4_cmbx[t].getItems().addAll("КО", "ОПДС", "ОПС", "ТУ", "Холдинги", "БГ", "Филиалы КО", "СП БР");
+            rep_subj_type4_cmbx[t].setTooltip(tooltip3);
+            rep_subj_type5_cmbx[t] =  new ComboBox<String>();
+            rep_subj_type5_cmbx[t].getItems().addAll("КО", "ОПДС", "ОПС", "ТУ", "Холдинги", "БГ", "Филиалы КО", "СП БР");
+            rep_subj_type5_cmbx[t].setTooltip(tooltip3);
+            rep_subj_type6_cmbx[t] =  new ComboBox<String>();
+            rep_subj_type6_cmbx[t].getItems().addAll("КО", "ОПДС", "ОПС", "ТУ", "Холдинги", "БГ", "Филиалы КО", "СП БР");
+            rep_subj_type6_cmbx[t].setTooltip(tooltip3);
+            rep_subj_type7_cmbx[t] =  new ComboBox<String>();
+            rep_subj_type7_cmbx[t].getItems().addAll("КО", "ОПДС", "ОПС", "ТУ", "Холдинги", "БГ", "Филиалы КО", "СП БР");
+            rep_subj_type7_cmbx[t].setTooltip(tooltip3);
+            rep_subj_type8_cmbx[t] =  new ComboBox<String>();
+            rep_subj_type8_cmbx[t].getItems().addAll("КО", "ОПДС", "ОПС", "ТУ", "Холдинги", "БГ", "Филиалы КО", "СП БР");
+            rep_subj_type8_cmbx[t].setTooltip(tooltip3);
             p_parent_code_txtf[t] =  new TextField();
             p_parent_type_ref_txtf[t] =  new TextField();
             p_type_ref_txtf[t] =  new TextField();
@@ -335,6 +493,13 @@ public class OK_Action {
             form_cd_lbl[t] = new Label("Код доступа: ");
             form_cd_name_lbl[t] = new Label("Наименование кода доступа: ");
             OKUD_lbl[t] = new Label("ОКУД: ");
+            OKUD2_lbl[t] = new Label("ОКУД: ");
+            OKUD3_lbl[t] = new Label("ОКУД: ");
+            OKUD4_lbl[t] = new Label("ОКУД: ");
+            OKUD5_lbl[t] = new Label("ОКУД: ");
+            OKUD6_lbl[t] = new Label("ОКУД: ");
+            OKUD7_lbl[t] = new Label("ОКУД: ");
+            OKUD8_lbl[t] = new Label("ОКУД: ");
             form_cd_cog_lbl[t] = new Label("Код потока(Когнос): ");
             Flag_IOD_lbl[t] = new Label("Флаг ИОД: ");
             Flag_PDN_lbl[t] = new Label("Флаг ПДН: ");
@@ -361,7 +526,21 @@ public class OK_Action {
             Form_formal_code_lbl[t] = new Label("Уникальный код отчета: ");
             Desc_lbl[t] = new Label("Описание: ");
             period_lbl[t] = new Label("Период сбора: ");
+            period2_lbl[t] = new Label("Период сбора: ");
+            period3_lbl[t] = new Label("Период сбора: ");
+            period4_lbl[t] = new Label("Период сбора: ");
+            period5_lbl[t] = new Label("Период сбора: ");
+            period6_lbl[t] = new Label("Период сбора: ");
+            period7_lbl[t] = new Label("Период сбора: ");
+            period8_lbl[t] = new Label("Период сбора: ");
             rep_subj_type_lbl[t] = new Label("Разрез: ");
+            rep_subj_type2_lbl[t] = new Label("Разрез: ");
+            rep_subj_type3_lbl[t] = new Label("Разрез: ");
+            rep_subj_type4_lbl[t] = new Label("Разрез: ");
+            rep_subj_type5_lbl[t] = new Label("Разрез: ");
+            rep_subj_type6_lbl[t] = new Label("Разрез: ");
+            rep_subj_type7_lbl[t] = new Label("Разрез: ");
+            rep_subj_type8_lbl[t] = new Label("Разрез: ");
             p_parent_code_lbl[t] = new Label("p_parent_code: ");
             p_parent_type_ref_lbl[t] = new Label("p_parent_type_ref: ");
             p_type_ref_lbl[t] = new Label("p_type_ref: ");
@@ -379,6 +558,8 @@ public class OK_Action {
             tbl10_lbl[t] = new Label("---Данные для таблицы EHD_ACS_OBJECTS---");
             cmbx_dep_1_lbl[t] = new Label("Кол-во департаментов-владельцев для кода доступа");
             cmbx_dep_2_lbl[t] = new Label("Кол-во департаментов-пользователей для кода доступа");
+            cmbx_okud_lbl[t] = new Label("Кол-во ОКУД для данного отчета");
+            cmbx_subj_lbl[t] = new Label("Кол-во разрезов для данного отчета");
 
             caseCode[t] = new RadioButton("Код доступа");
             //caseCode[t].setOnAction(this::onChoose1);
@@ -435,8 +616,8 @@ public class OK_Action {
             Cmbx_dep_1[t].setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
-                    int fC = Cmbx_dep_1[fT].getValue();
-                    Dep_count(fT, fC);
+                    dep_count[fT] = Cmbx_dep_1[fT].getValue();
+                    Dep_count(fT);
                 }
             });
 
@@ -446,8 +627,29 @@ public class OK_Action {
             Cmbx_dep_2[t].setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
-                    int fC = Cmbx_dep_2[fT].getValue();
-                    Dep_u_count(fT, fC);
+                    dep_u_count[fT] = Cmbx_dep_2[fT].getValue();
+                    Dep_u_count(fT);
+                }
+            });
+            Cmbx_okud[t] = new ComboBox<Integer>();
+            Cmbx_okud[t].getItems().addAll(1, 2, 3, 4, 5, 6, 7, 8);
+            Cmbx_okud[t].setValue(1);
+            Cmbx_okud[t].setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent event) {
+                    okud_count[fT] = Cmbx_okud[fT].getValue();
+                    Okud_count(fT);
+                }
+            });
+
+            Cmbx_subj[t] = new ComboBox<Integer>();
+            Cmbx_subj[t].getItems().addAll(1, 2, 3, 4, 5, 6, 7, 8);
+            Cmbx_subj[t].setValue(1);
+            Cmbx_subj[t].setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent event) {
+                    subj_count[fT] = Cmbx_subj[fT].getValue();
+                    Subj_count(fT);
                 }
             });
         }
@@ -457,6 +659,13 @@ public class OK_Action {
             exjp1_set[o].getChildren().addAll(form_cd_lbl[o], Form_cd_txtf[o]);
             exjp2_set[o].getChildren().addAll(form_cd_name_lbl[o], Form_cd_name_txtf[o]);
             exjp3_set[o].getChildren().addAll(OKUD_lbl[o], Form_okud_txtf[o]);
+            exjp3_2_set[o].getChildren().addAll(OKUD2_lbl[o], Form_okud2_txtf[o]);
+            exjp3_3_set[o].getChildren().addAll(OKUD3_lbl[o], Form_okud3_txtf[o]);
+            exjp3_4_set[o].getChildren().addAll(OKUD4_lbl[o], Form_okud4_txtf[o]);
+            exjp3_5_set[o].getChildren().addAll(OKUD5_lbl[o], Form_okud5_txtf[o]);
+            exjp3_6_set[o].getChildren().addAll(OKUD6_lbl[o], Form_okud6_txtf[o]);
+            exjp3_7_set[o].getChildren().addAll(OKUD7_lbl[o], Form_okud7_txtf[o]);
+            exjp3_8_set[o].getChildren().addAll(OKUD8_lbl[o], Form_okud8_txtf[o]);
             exjp4_set[o].getChildren().addAll(form_cd_cog_lbl[o], Form_cd_cog_txtf[o]);
             exjp5_set[o].getChildren().addAll(Flag_IOD_lbl[o], Flag_IOD_cmbx[o]);
             exjp6_set[o].getChildren().addAll(Flag_PDN_lbl[o], Flag_PDN_cmbx[o]);
@@ -483,7 +692,21 @@ public class OK_Action {
             exjp14_set[o].getChildren().addAll(Form_formal_code_lbl[o], Form_formal_code_txtf[o]);
             exjp15_set[o].getChildren().addAll(Desc_lbl[o], Desc_txtf[o]);
             exjp16_set[o].getChildren().addAll(period_lbl[o], period_cmbx[o]);
+            exjp16_2_set[o].getChildren().addAll(period2_lbl[o], period2_cmbx[o]);
+            exjp16_3_set[o].getChildren().addAll(period3_lbl[o], period3_cmbx[o]);
+            exjp16_4_set[o].getChildren().addAll(period4_lbl[o], period4_cmbx[o]);
+            exjp16_5_set[o].getChildren().addAll(period5_lbl[o], period5_cmbx[o]);
+            exjp16_6_set[o].getChildren().addAll(period6_lbl[o], period6_cmbx[o]);
+            exjp16_7_set[o].getChildren().addAll(period7_lbl[o], period7_cmbx[o]);
+            exjp16_8_set[o].getChildren().addAll(period8_lbl[o], period8_cmbx[o]);
             exjp17_set[o].getChildren().addAll(rep_subj_type_lbl[o], rep_subj_type_cmbx[o]);
+            exjp17_2_set[o].getChildren().addAll(rep_subj_type2_lbl[o], rep_subj_type2_cmbx[o]);
+            exjp17_3_set[o].getChildren().addAll(rep_subj_type3_lbl[o], rep_subj_type3_cmbx[o]);
+            exjp17_4_set[o].getChildren().addAll(rep_subj_type4_lbl[o], rep_subj_type4_cmbx[o]);
+            exjp17_5_set[o].getChildren().addAll(rep_subj_type5_lbl[o], rep_subj_type5_cmbx[o]);
+            exjp17_6_set[o].getChildren().addAll(rep_subj_type6_lbl[o], rep_subj_type6_cmbx[o]);
+            exjp17_7_set[o].getChildren().addAll(rep_subj_type7_lbl[o], rep_subj_type7_cmbx[o]);
+            exjp17_8_set[o].getChildren().addAll(rep_subj_type8_lbl[o], rep_subj_type8_cmbx[o]);
             exjp18_set[o].getChildren().addAll(p_parent_code_lbl[o], p_parent_code_txtf[o]);
             exjp19_set[o].getChildren().addAll(p_parent_type_ref_lbl[o], p_parent_type_ref_txtf[o]);
             exjp20_set[o].getChildren().addAll(p_type_ref_lbl[o], p_type_ref_txtf[o]);
@@ -503,9 +726,17 @@ public class OK_Action {
             radioBtn_set_2[o].getChildren().addAll(caseR[o], caseNR[o]);
             p_cmbx_dep_1[o].getChildren().addAll(cmbx_dep_1_lbl[o], Cmbx_dep_1[o]);
             p_cmbx_dep_2[o].getChildren().addAll(cmbx_dep_2_lbl[o], Cmbx_dep_2[o]);
+            p_cmbx_okud[o].getChildren().addAll(cmbx_okud_lbl[o], Cmbx_okud[o]);
+            p_cmbx_subj[o].getChildren().addAll(cmbx_subj_lbl[o], Cmbx_subj[o]);
+            exjp3_V_set[o].getChildren().addAll(exjp3_set[o], exjp16_set[o]);
+            exjp7_V_set[o].getChildren().addAll(exjp7_set[o]);
+            exjp9_V_set[o].getChildren().addAll(exjp9_set[o]);
+            exjp17_V_set[o].getChildren().addAll(exjp17_set[o]);
 
-            PanelSet[o].getChildren().addAll(radioBtn_set[o], radioBtn_set_2[o], p_tbl_6[o], exjp13_set[o], exjp14_set[o], exjp15_set[o], exjp11_set[o], exjp22_set[o], exjp12_set[o], p_tbl_7[o], exjp3_set[o], 
-                    exjp16_set[o], p_tbl_9[o], exjp17_set[o], p_tbl_10[o], exjp0_set[o], exjp18_set[o], exjp19_set[o], exjp20_set[o], exjp21_set[o]);
+            PanelSet[o].getChildren().addAll(radioBtn_set[o], radioBtn_set_2[o], p_tbl_6[o], exjp13_set[o], exjp14_set[o], exjp15_set[o], exjp11_set[o], exjp22_set[o], exjp12_set[o],
+                    p_tbl_7[o], p_cmbx_okud[o], exjp3_V_set[o],
+                    p_tbl_9[o], p_cmbx_subj[o], exjp17_V_set[o],
+                    p_tbl_10[o], exjp0_set[o], exjp18_set[o], exjp19_set[o], exjp20_set[o], exjp21_set[o]);
             PanelScroll[o] = new ScrollPane(PanelSet[o]);
             tabs[o].setText("Форма " + (o+1));
             tabs[o].setContent(PanelScroll[o]);
@@ -526,28 +757,36 @@ public class OK_Action {
     }
 
     public void Case_report(int t){
+        Cmbx_okud[t].setValue(1);
+        Cmbx_subj[t].setValue(1);
         PanelScroll[t] = new ScrollPane(PanelNull);
         tabs[t].setContent(PanelScroll[t]);
-        PanelSet[t].getChildren().removeAll(radioBtn_set[t], p_tbl_1[t], exjp1_set[t], exjp2_set[t], p_tbl_2[t], exjp4_set[t], p_tbl_3[t], exjp5_set[t], exjp6_set[t], p_tbl_4[t], p_cmbx_dep_1[t], exjp7_set[t],
-                p_cmbx_dep_2[t], exjp9_set[t], exjp10_set[t], radioBtn_set_2[t], p_tbl_6[t], exjp13_set[t], exjp14_set[t], exjp15_set[t], exjp11_set[t], exjp22_set[t], exjp12_set[t], p_tbl_7[t], exjp3_set[t],
-                exjp16_set[t], p_tbl_9[t], exjp17_set[t], p_tbl_10[t], exjp0_set[t], exjp18_set[t], exjp19_set[t], exjp20_set[t], exjp21_set[t]);
-
-        PanelSet[t].getChildren().addAll(radioBtn_set[t], radioBtn_set_2[t], p_tbl_6[t], exjp13_set[t], exjp14_set[t], exjp15_set[t], exjp11_set[t], exjp22_set[t], exjp12_set[t], p_tbl_7[t], exjp3_set[t],
-                exjp16_set[t], p_tbl_9[t], exjp17_set[t], p_tbl_10[t], exjp0_set[t], exjp18_set[t], exjp19_set[t], exjp20_set[t], exjp21_set[t]);
+        PanelSet[t].getChildren().removeAll(radioBtn_set[t], p_tbl_1[t], exjp1_set[t], exjp2_set[t], p_tbl_2[t], exjp4_set[t], p_tbl_3[t], exjp5_set[t], exjp6_set[t], p_tbl_4[t], p_cmbx_dep_1[t],
+                exjp7_V_set[t],
+                p_cmbx_dep_2[t], exjp9_V_set[t],
+                exjp10_set[t], p_tbl_10[t], /*exjp0_set[t],*/ exjp18_set[t], exjp19_set[t], exjp20_set[t], exjp21_set[t]);
         PanelScroll[t] = new ScrollPane(PanelSet[t]);
+
+        PanelSet[t].getChildren().addAll(radioBtn_set[t], radioBtn_set_2[t], p_tbl_6[t], exjp13_set[t], exjp14_set[t], exjp15_set[t], exjp11_set[t], exjp22_set[t], exjp12_set[t],
+                p_tbl_7[t], p_cmbx_okud[t], exjp3_V_set[t],
+                p_tbl_9[t], p_cmbx_subj[t], exjp17_V_set[t],
+                p_tbl_10[t], exjp0_set[t], exjp18_set[t], exjp19_set[t], exjp20_set[t], exjp21_set[t]);
         tabs[t].setContent(PanelScroll[t]);
         //sp.getTabs().add(new Tab("Форма " + (o+1), PanelSet[t]));
         
     }
     public void Case_code(int t){
+        Cmbx_dep_1[t].setValue(1);
+        Cmbx_dep_2[t].setValue(1);
         PanelScroll[t] = new ScrollPane(PanelNull);
         tabs[t].setContent(PanelScroll[t]);
-        PanelSet[t].getChildren().removeAll(radioBtn_set[t], p_tbl_1[t], exjp1_set[t], exjp2_set[t], p_tbl_2[t], exjp4_set[t], p_tbl_3[t], exjp5_set[t], exjp6_set[t], p_tbl_4[t], p_cmbx_dep_1[t], exjp7_set[t],
-                p_cmbx_dep_2[t], exjp9_set[t], exjp10_set[t], radioBtn_set_2[t], p_tbl_6[t], exjp13_set[t], exjp14_set[t], exjp15_set[t], exjp11_set[t], exjp22_set[t], exjp12_set[t], p_tbl_7[t], exjp3_set[t],
-                exjp16_set[t], p_tbl_9[t], exjp17_set[t], p_tbl_10[t], exjp0_set[t], exjp18_set[t], exjp19_set[t], exjp20_set[t], exjp21_set[t]);
+        PanelSet[t].getChildren().removeAll(radioBtn_set[t], radioBtn_set_2[t], p_tbl_6[t], exjp13_set[t], exjp14_set[t], exjp15_set[t], exjp11_set[t], exjp22_set[t], exjp12_set[t],
+                p_tbl_7[t], p_cmbx_okud[t], exjp3_V_set[t],
+                p_tbl_9[t], p_cmbx_subj[t], exjp17_V_set[t],
+                p_tbl_10[t], exjp0_set[t], exjp18_set[t], exjp19_set[t], exjp20_set[t], exjp21_set[t]);
 
-        PanelSet[t].getChildren().addAll(radioBtn_set[t], p_tbl_1[t], exjp1_set[t], exjp2_set[t], p_tbl_2[t], exjp4_set[t], p_tbl_3[t], exjp5_set[t], exjp6_set[t], p_tbl_4[t], p_cmbx_dep_1[t], exjp7_set[t], 
-                p_cmbx_dep_2[t], exjp9_set[t], exjp10_set[t], p_tbl_10[t], /*exjp0_set[t],*/ exjp18_set[t], exjp19_set[t], exjp20_set[t], exjp21_set[t]);
+        PanelSet[t].getChildren().addAll(radioBtn_set[t], p_tbl_1[t], exjp1_set[t], exjp2_set[t], p_tbl_2[t], exjp4_set[t], p_tbl_3[t], exjp5_set[t], exjp6_set[t], p_tbl_4[t], p_cmbx_dep_1[t], exjp7_V_set[t],
+                p_cmbx_dep_2[t], exjp9_V_set[t], exjp10_set[t], p_tbl_10[t], /*exjp0_set[t],*/ exjp18_set[t], exjp19_set[t], exjp20_set[t], exjp21_set[t]);
         PanelScroll[t] = new ScrollPane(PanelSet[t]);
         tabs[t].setContent(PanelScroll[t]);
     }
@@ -565,115 +804,131 @@ public class OK_Action {
         }
 
     }
-    public void Dep_count(int t, int c){
-        PanelScroll[t] = new ScrollPane(PanelNull);
-        tabs[t].setContent(PanelScroll[t]);
-        PanelSet[t].getChildren().removeAll(radioBtn_set[t], p_tbl_1[t], exjp1_set[t], exjp2_set[t], p_tbl_2[t], exjp4_set[t], p_tbl_3[t], exjp5_set[t], exjp6_set[t], p_tbl_4[t], p_cmbx_dep_1[t], exjp7_set[t],
-                exjp7_2_set[t], exjp7_3_set[t], exjp7_4_set[t], exjp7_5_set[t], exjp7_6_set[t], exjp7_7_set[t], exjp7_8_set[t],
-                p_cmbx_dep_2[t], exjp9_set[t], exjp10_set[t], radioBtn_set_2[t], p_tbl_6[t], exjp13_set[t], exjp14_set[t], exjp15_set[t], exjp11_set[t], exjp22_set[t], exjp12_set[t], p_tbl_7[t], exjp3_set[t],
-                exjp16_set[t], p_tbl_9[t], exjp17_set[t], p_tbl_10[t], exjp0_set[t], exjp18_set[t], exjp19_set[t], exjp20_set[t], exjp21_set[t]);
+    public void Dep_count(int t){
+        int c = dep_count[t];
+        exjp7_V_set[t].getChildren().removeAll(exjp7_set[t], exjp7_2_set[t], exjp7_3_set[t], exjp7_4_set[t], exjp7_5_set[t], exjp7_6_set[t], exjp7_7_set[t], exjp7_8_set[t]);
         switch (c){
             case 1:
-                PanelSet[t].getChildren().addAll(radioBtn_set[t], p_tbl_1[t], exjp1_set[t], exjp2_set[t], p_tbl_2[t], exjp4_set[t], p_tbl_3[t], exjp5_set[t], exjp6_set[t], p_tbl_4[t], p_cmbx_dep_1[t], exjp7_set[t],
-                        p_cmbx_dep_2[t], exjp9_set[t], exjp10_set[t], p_tbl_10[t], /*exjp0_set[t],*/ exjp18_set[t], exjp19_set[t], exjp20_set[t], exjp21_set[t]);
+                exjp7_V_set[t].getChildren().addAll(exjp7_set[t]);
                 break;
             case 2:
-                PanelSet[t].getChildren().addAll(radioBtn_set[t], p_tbl_1[t], exjp1_set[t], exjp2_set[t], p_tbl_2[t], exjp4_set[t], p_tbl_3[t], exjp5_set[t], exjp6_set[t], p_tbl_4[t], p_cmbx_dep_1[t], exjp7_set[t],
-                        exjp7_2_set[t],
-                        p_cmbx_dep_2[t], exjp9_set[t], exjp10_set[t], p_tbl_10[t], /*exjp0_set[t],*/ exjp18_set[t], exjp19_set[t], exjp20_set[t], exjp21_set[t]);
+                exjp7_V_set[t].getChildren().addAll(exjp7_set[t], exjp7_2_set[t]);
                 break;
             case 3:
-                PanelSet[t].getChildren().addAll(radioBtn_set[t], p_tbl_1[t], exjp1_set[t], exjp2_set[t], p_tbl_2[t], exjp4_set[t], p_tbl_3[t], exjp5_set[t], exjp6_set[t], p_tbl_4[t], p_cmbx_dep_1[t], exjp7_set[t],
-                        exjp7_2_set[t], exjp7_3_set[t],
-                        p_cmbx_dep_2[t], exjp9_set[t], exjp10_set[t], p_tbl_10[t], /*exjp0_set[t],*/ exjp18_set[t], exjp19_set[t], exjp20_set[t], exjp21_set[t]);
+                exjp7_V_set[t].getChildren().addAll(exjp7_set[t], exjp7_2_set[t], exjp7_3_set[t]);
                 break;
             case 4:
-                PanelSet[t].getChildren().addAll(radioBtn_set[t], p_tbl_1[t], exjp1_set[t], exjp2_set[t], p_tbl_2[t], exjp4_set[t], p_tbl_3[t], exjp5_set[t], exjp6_set[t], p_tbl_4[t], p_cmbx_dep_1[t], exjp7_set[t],
-                        exjp7_2_set[t], exjp7_3_set[t], exjp7_4_set[t],
-                        p_cmbx_dep_2[t], exjp9_set[t], exjp10_set[t], p_tbl_10[t], /*exjp0_set[t],*/ exjp18_set[t], exjp19_set[t], exjp20_set[t], exjp21_set[t]);
+                exjp7_V_set[t].getChildren().addAll(exjp7_set[t], exjp7_2_set[t], exjp7_3_set[t], exjp7_4_set[t]);
                 break;
             case 5:
-                PanelSet[t].getChildren().addAll(radioBtn_set[t], p_tbl_1[t], exjp1_set[t], exjp2_set[t], p_tbl_2[t], exjp4_set[t], p_tbl_3[t], exjp5_set[t], exjp6_set[t], p_tbl_4[t], p_cmbx_dep_1[t], exjp7_set[t],
-                        exjp7_2_set[t], exjp7_3_set[t], exjp7_4_set[t], exjp7_5_set[t],
-                        p_cmbx_dep_2[t], exjp9_set[t], exjp10_set[t], p_tbl_10[t], /*exjp0_set[t],*/ exjp18_set[t], exjp19_set[t], exjp20_set[t], exjp21_set[t]);
+                exjp7_V_set[t].getChildren().addAll(exjp7_set[t], exjp7_2_set[t], exjp7_3_set[t], exjp7_4_set[t], exjp7_5_set[t]);
                 break;
             case 6:
-                PanelSet[t].getChildren().addAll(radioBtn_set[t], p_tbl_1[t], exjp1_set[t], exjp2_set[t], p_tbl_2[t], exjp4_set[t], p_tbl_3[t], exjp5_set[t], exjp6_set[t], p_tbl_4[t], p_cmbx_dep_1[t], exjp7_set[t],
-                        exjp7_2_set[t], exjp7_3_set[t], exjp7_4_set[t], exjp7_5_set[t], exjp7_6_set[t],
-                        p_cmbx_dep_2[t], exjp9_set[t], exjp10_set[t], p_tbl_10[t], /*exjp0_set[t],*/ exjp18_set[t], exjp19_set[t], exjp20_set[t], exjp21_set[t]);
+                exjp7_V_set[t].getChildren().addAll(exjp7_set[t], exjp7_2_set[t], exjp7_3_set[t], exjp7_4_set[t], exjp7_5_set[t], exjp7_6_set[t]);
                 break;
             case 7:
-                PanelSet[t].getChildren().addAll(radioBtn_set[t], p_tbl_1[t], exjp1_set[t], exjp2_set[t], p_tbl_2[t], exjp4_set[t], p_tbl_3[t], exjp5_set[t], exjp6_set[t], p_tbl_4[t], p_cmbx_dep_1[t], exjp7_set[t],
-                        exjp7_2_set[t], exjp7_3_set[t], exjp7_4_set[t], exjp7_5_set[t], exjp7_6_set[t], exjp7_7_set[t],
-                        p_cmbx_dep_2[t], exjp9_set[t], exjp10_set[t], p_tbl_10[t], /*exjp0_set[t],*/ exjp18_set[t], exjp19_set[t], exjp20_set[t], exjp21_set[t]);
+                exjp7_V_set[t].getChildren().addAll(exjp7_set[t], exjp7_2_set[t], exjp7_3_set[t], exjp7_4_set[t], exjp7_5_set[t], exjp7_6_set[t], exjp7_7_set[t]);
                 break;
             case 8:
-                PanelSet[t].getChildren().addAll(radioBtn_set[t], p_tbl_1[t], exjp1_set[t], exjp2_set[t], p_tbl_2[t], exjp4_set[t], p_tbl_3[t], exjp5_set[t], exjp6_set[t], p_tbl_4[t], p_cmbx_dep_1[t], exjp7_set[t],
-                        exjp7_2_set[t], exjp7_3_set[t], exjp7_4_set[t], exjp7_5_set[t], exjp7_6_set[t], exjp7_7_set[t], exjp7_8_set[t],
-                        p_cmbx_dep_2[t], exjp9_set[t], exjp10_set[t], p_tbl_10[t], /*exjp0_set[t],*/ exjp18_set[t], exjp19_set[t], exjp20_set[t], exjp21_set[t]);
+                exjp7_V_set[t].getChildren().addAll(exjp7_set[t], exjp7_2_set[t], exjp7_3_set[t], exjp7_4_set[t], exjp7_5_set[t], exjp7_6_set[t], exjp7_7_set[t], exjp7_8_set[t]);
                 break;
         }
-        PanelScroll[t] = new ScrollPane(PanelSet[t]);
-        tabs[t].setContent(PanelScroll[t]);
     }
-    public void Dep_u_count(int t, int c){
-        PanelScroll[t] = new ScrollPane(PanelNull);
-        tabs[t].setContent(PanelScroll[t]);
-        PanelSet[t].getChildren().removeAll(radioBtn_set[t], p_tbl_1[t], exjp1_set[t], exjp2_set[t], p_tbl_2[t], exjp4_set[t], p_tbl_3[t], exjp5_set[t], exjp6_set[t], p_tbl_4[t], p_cmbx_dep_1[t], exjp7_set[t],
-                p_cmbx_dep_2[t], exjp9_set[t],
-                exjp9_2_set[t], exjp9_3_set[t], exjp9_4_set[t], exjp9_5_set[t], exjp9_6_set[t], exjp9_7_set[t], exjp9_8_set[t],
-                exjp10_set[t], radioBtn_set_2[t], p_tbl_6[t], exjp13_set[t], exjp14_set[t], exjp15_set[t], exjp11_set[t], exjp22_set[t], exjp12_set[t], p_tbl_7[t], exjp3_set[t],
-                exjp16_set[t], p_tbl_9[t], exjp17_set[t], p_tbl_10[t], exjp0_set[t], exjp18_set[t], exjp19_set[t], exjp20_set[t], exjp21_set[t]);
-        switch (c){
+    public void Dep_u_count(int t){
+        int c = dep_u_count[t];
+        exjp9_V_set[t].getChildren().removeAll(exjp9_set[t], exjp9_2_set[t], exjp9_3_set[t], exjp9_4_set[t], exjp9_5_set[t], exjp9_6_set[t], exjp9_7_set[t], exjp9_8_set[t]);
+        switch (c) {
             case 1:
-                PanelSet[t].getChildren().addAll(radioBtn_set[t], p_tbl_1[t], exjp1_set[t], exjp2_set[t], p_tbl_2[t], exjp4_set[t], p_tbl_3[t], exjp5_set[t], exjp6_set[t], p_tbl_4[t], p_cmbx_dep_1[t], exjp7_set[t],
-                        p_cmbx_dep_2[t], exjp9_set[t], exjp10_set[t], p_tbl_10[t], /*exjp0_set[t],*/ exjp18_set[t], exjp19_set[t], exjp20_set[t], exjp21_set[t]);
+                exjp9_V_set[t].getChildren().addAll(exjp9_set[t]);
                 break;
             case 2:
-                PanelSet[t].getChildren().addAll(radioBtn_set[t], p_tbl_1[t], exjp1_set[t], exjp2_set[t], p_tbl_2[t], exjp4_set[t], p_tbl_3[t], exjp5_set[t], exjp6_set[t], p_tbl_4[t], p_cmbx_dep_1[t], exjp7_set[t],
-                        p_cmbx_dep_2[t], exjp9_set[t],
-                        exjp9_2_set[t],
-                        exjp10_set[t], p_tbl_10[t], /*exjp0_set[t],*/ exjp18_set[t], exjp19_set[t], exjp20_set[t], exjp21_set[t]);
+                exjp9_V_set[t].getChildren().addAll(exjp9_set[t], exjp9_2_set[t]);
                 break;
             case 3:
-                PanelSet[t].getChildren().addAll(radioBtn_set[t], p_tbl_1[t], exjp1_set[t], exjp2_set[t], p_tbl_2[t], exjp4_set[t], p_tbl_3[t], exjp5_set[t], exjp6_set[t], p_tbl_4[t], p_cmbx_dep_1[t], exjp7_set[t],
-                        p_cmbx_dep_2[t], exjp9_set[t],
-                        exjp9_2_set[t], exjp9_3_set[t],
-                        exjp10_set[t], p_tbl_10[t], /*exjp0_set[t],*/ exjp18_set[t], exjp19_set[t], exjp20_set[t], exjp21_set[t]);
+                exjp9_V_set[t].getChildren().addAll(exjp9_set[t], exjp9_2_set[t], exjp9_3_set[t]);
                 break;
             case 4:
-                PanelSet[t].getChildren().addAll(radioBtn_set[t], p_tbl_1[t], exjp1_set[t], exjp2_set[t], p_tbl_2[t], exjp4_set[t], p_tbl_3[t], exjp5_set[t], exjp6_set[t], p_tbl_4[t], p_cmbx_dep_1[t], exjp7_set[t],
-                        p_cmbx_dep_2[t], exjp9_set[t],
-                        exjp9_2_set[t], exjp9_3_set[t], exjp9_4_set[t],
-                        exjp10_set[t], p_tbl_10[t], /*exjp0_set[t],*/ exjp18_set[t], exjp19_set[t], exjp20_set[t], exjp21_set[t]);
+                exjp9_V_set[t].getChildren().addAll(exjp9_set[t], exjp9_2_set[t], exjp9_3_set[t], exjp9_4_set[t]);
                 break;
             case 5:
-                PanelSet[t].getChildren().addAll(radioBtn_set[t], p_tbl_1[t], exjp1_set[t], exjp2_set[t], p_tbl_2[t], exjp4_set[t], p_tbl_3[t], exjp5_set[t], exjp6_set[t], p_tbl_4[t], p_cmbx_dep_1[t], exjp7_set[t],
-                        p_cmbx_dep_2[t], exjp9_set[t],
-                        exjp9_2_set[t], exjp9_3_set[t], exjp9_4_set[t], exjp9_5_set[t],
-                        exjp10_set[t], p_tbl_10[t], /*exjp0_set[t],*/ exjp18_set[t], exjp19_set[t], exjp20_set[t], exjp21_set[t]);
+                exjp9_V_set[t].getChildren().addAll(exjp9_set[t], exjp9_2_set[t], exjp9_3_set[t], exjp9_4_set[t], exjp9_5_set[t]);
                 break;
             case 6:
-                PanelSet[t].getChildren().addAll(radioBtn_set[t], p_tbl_1[t], exjp1_set[t], exjp2_set[t], p_tbl_2[t], exjp4_set[t], p_tbl_3[t], exjp5_set[t], exjp6_set[t], p_tbl_4[t], p_cmbx_dep_1[t], exjp7_set[t],
-                        p_cmbx_dep_2[t], exjp9_set[t],
-                        exjp9_2_set[t], exjp9_3_set[t], exjp9_4_set[t], exjp9_5_set[t], exjp9_6_set[t],
-                        exjp10_set[t], p_tbl_10[t], /*exjp0_set[t],*/ exjp18_set[t], exjp19_set[t], exjp20_set[t], exjp21_set[t]);
+                exjp9_V_set[t].getChildren().addAll(exjp9_set[t], exjp9_2_set[t], exjp9_3_set[t], exjp9_4_set[t], exjp9_5_set[t], exjp9_6_set[t]);
                 break;
             case 7:
-                PanelSet[t].getChildren().addAll(radioBtn_set[t], p_tbl_1[t], exjp1_set[t], exjp2_set[t], p_tbl_2[t], exjp4_set[t], p_tbl_3[t], exjp5_set[t], exjp6_set[t], p_tbl_4[t], p_cmbx_dep_1[t], exjp7_set[t],
-                        p_cmbx_dep_2[t], exjp9_set[t],
-                        exjp9_2_set[t], exjp9_3_set[t], exjp9_4_set[t], exjp9_5_set[t], exjp9_6_set[t], exjp9_7_set[t],
-                        exjp10_set[t], p_tbl_10[t], /*exjp0_set[t],*/ exjp18_set[t], exjp19_set[t], exjp20_set[t], exjp21_set[t]);
+                exjp9_V_set[t].getChildren().addAll(exjp9_set[t], exjp9_2_set[t], exjp9_3_set[t], exjp9_4_set[t], exjp9_5_set[t], exjp9_6_set[t], exjp9_7_set[t]);
                 break;
             case 8:
-                PanelSet[t].getChildren().addAll(radioBtn_set[t], p_tbl_1[t], exjp1_set[t], exjp2_set[t], p_tbl_2[t], exjp4_set[t], p_tbl_3[t], exjp5_set[t], exjp6_set[t], p_tbl_4[t], p_cmbx_dep_1[t], exjp7_set[t],
-                        p_cmbx_dep_2[t], exjp9_set[t],
-                        exjp9_2_set[t], exjp9_3_set[t], exjp9_4_set[t], exjp9_5_set[t], exjp9_6_set[t], exjp9_7_set[t], exjp9_8_set[t],
-                        exjp10_set[t], p_tbl_10[t], /*exjp0_set[t],*/ exjp18_set[t], exjp19_set[t], exjp20_set[t], exjp21_set[t]);
+                exjp9_V_set[t].getChildren().addAll(exjp9_set[t], exjp9_2_set[t], exjp9_3_set[t], exjp9_4_set[t], exjp9_5_set[t], exjp9_6_set[t], exjp9_7_set[t], exjp9_8_set[t]);
                 break;
         }
-        PanelScroll[t] = new ScrollPane(PanelSet[t]);
-        tabs[t].setContent(PanelScroll[t]);
+    }
+    public void Okud_count(int t){
+        int c = okud_count[t];
+        exjp3_V_set[t].getChildren().removeAll(exjp3_set[t], exjp16_set[t], exjp3_2_set[t], exjp16_2_set[t], exjp3_3_set[t], exjp16_3_set[t], exjp3_4_set[t], exjp16_4_set[t], 
+                exjp3_5_set[t], exjp16_5_set[t], exjp3_6_set[t], exjp16_6_set[t], exjp3_7_set[t], exjp16_7_set[t], exjp3_8_set[t], exjp16_8_set[t]);
+        switch (c) {
+            case 1:
+                exjp3_V_set[t].getChildren().addAll(exjp3_set[t], exjp16_set[t]);
+                break;
+            case 2:
+                exjp3_V_set[t].getChildren().addAll(exjp3_set[t], exjp16_set[t], exjp3_2_set[t], exjp16_2_set[t]);
+                break;
+            case 3:
+                exjp3_V_set[t].getChildren().addAll(exjp3_set[t], exjp16_set[t], exjp3_2_set[t], exjp16_2_set[t], exjp3_3_set[t], exjp16_3_set[t]);
+                break;
+            case 4:
+                exjp3_V_set[t].getChildren().addAll(exjp3_set[t], exjp16_set[t], exjp3_2_set[t], exjp16_2_set[t], exjp3_3_set[t], exjp16_3_set[t], exjp3_4_set[t], exjp16_4_set[t]);
+                break;
+            case 5:
+                exjp3_V_set[t].getChildren().addAll(exjp3_set[t], exjp16_set[t], exjp3_2_set[t], exjp16_2_set[t], exjp3_3_set[t], exjp16_3_set[t], exjp3_4_set[t], exjp16_4_set[t],
+                        exjp3_5_set[t], exjp16_5_set[t]);
+                break;
+            case 6:
+                exjp3_V_set[t].getChildren().addAll(exjp3_set[t], exjp16_set[t], exjp3_2_set[t], exjp16_2_set[t], exjp3_3_set[t], exjp16_3_set[t], exjp3_4_set[t], exjp16_4_set[t],
+                        exjp3_5_set[t], exjp16_5_set[t], exjp3_6_set[t], exjp16_6_set[t]);
+                break;
+            case 7:
+                exjp3_V_set[t].getChildren().addAll(exjp3_set[t], exjp16_set[t], exjp3_2_set[t], exjp16_2_set[t], exjp3_3_set[t], exjp16_3_set[t], exjp3_4_set[t], exjp16_4_set[t],
+                        exjp3_5_set[t], exjp16_5_set[t], exjp3_6_set[t], exjp16_6_set[t], exjp3_7_set[t], exjp16_7_set[t]);
+                break;
+            case 8:
+                exjp3_V_set[t].getChildren().addAll(exjp3_set[t], exjp16_set[t], exjp3_2_set[t], exjp16_2_set[t], exjp3_3_set[t], exjp16_3_set[t], exjp3_4_set[t], exjp16_4_set[t],
+                        exjp3_5_set[t], exjp16_5_set[t], exjp3_6_set[t], exjp16_6_set[t], exjp3_7_set[t], exjp16_7_set[t], exjp3_8_set[t], exjp16_8_set[t]);
+                break;
+        }
+        
+    }
+    public void Subj_count(int t){
+        int c = subj_count[t];
+        exjp17_V_set[t].getChildren().removeAll(exjp17_set[t], exjp17_2_set[t], exjp17_3_set[t], exjp17_4_set[t], exjp17_5_set[t], exjp17_6_set[t], exjp17_7_set[t], exjp17_8_set[t]);
+        switch (c) {
+            case 1:
+                exjp17_V_set[t].getChildren().addAll(exjp17_set[t]);
+                break;
+            case 2:
+                exjp17_V_set[t].getChildren().addAll(exjp17_set[t], exjp17_2_set[t]);
+                break;
+            case 3:
+                exjp17_V_set[t].getChildren().addAll(exjp17_set[t], exjp17_2_set[t], exjp17_3_set[t]);
+                break;
+            case 4:
+                exjp17_V_set[t].getChildren().addAll(exjp17_set[t], exjp17_2_set[t], exjp17_3_set[t], exjp17_4_set[t]);
+                break;
+            case 5:
+                exjp17_V_set[t].getChildren().addAll(exjp17_set[t], exjp17_2_set[t], exjp17_3_set[t], exjp17_4_set[t], exjp17_5_set[t]);
+                break;
+            case 6:
+                exjp17_V_set[t].getChildren().addAll(exjp17_set[t], exjp17_2_set[t], exjp17_3_set[t], exjp17_4_set[t], exjp17_5_set[t], exjp17_6_set[t]);
+                break;
+            case 7:
+                exjp17_V_set[t].getChildren().addAll(exjp17_set[t], exjp17_2_set[t], exjp17_3_set[t], exjp17_4_set[t], exjp17_5_set[t], exjp17_6_set[t], exjp17_7_set[t]);
+                break;
+            case 8:
+                exjp17_V_set[t].getChildren().addAll(exjp17_set[t], exjp17_2_set[t], exjp17_3_set[t], exjp17_4_set[t], exjp17_5_set[t], exjp17_6_set[t], exjp17_7_set[t], exjp17_8_set[t]);
+                break;
+        }
     }
 
    public static TabPane getSp(){
@@ -690,6 +945,27 @@ public class OK_Action {
     }
     public static TextField[] getForm_okud_txtf(){
             return OK_Action.Form_okud_txtf;
+    }
+    public static TextField[] getForm_okud2_txtf(){
+        return OK_Action.Form_okud2_txtf;
+    }
+    public static TextField[] getForm_okud3_txtf(){
+        return OK_Action.Form_okud3_txtf;
+    }
+    public static TextField[] getForm_okud4_txtf(){
+        return OK_Action.Form_okud4_txtf;
+    }
+    public static TextField[] getForm_okud5_txtf(){
+        return OK_Action.Form_okud5_txtf;
+    }
+    public static TextField[] getForm_okud6_txtf(){
+        return OK_Action.Form_okud6_txtf;
+    }
+    public static TextField[] getForm_okud7_txtf(){
+        return OK_Action.Form_okud7_txtf;
+    }
+    public static TextField[] getForm_okud8_txtf(){
+        return OK_Action.Form_okud8_txtf;
     }
     public static TextField[] getForm_cd_cog_txtf(){
             return OK_Action.Form_cd_cog_txtf;
@@ -766,11 +1042,53 @@ public class OK_Action {
     public static TextField[] getDesc_txtf(){
             return OK_Action.Desc_txtf;
     }
-    public static ComboBox<String>[] getPeriod_txtf(){
+    public static ComboBox<String>[] getPeriod_cmbx(){
             return OK_Action.period_cmbx;
     }
-    public static ComboBox<String>[] getRep_subj_type_txtf(){
+    public static ComboBox<String>[] getPeriod2_cmbx(){
+        return OK_Action.period2_cmbx;
+    }
+    public static ComboBox<String>[] getPeriod3_cmbx(){
+        return OK_Action.period3_cmbx;
+    }
+    public static ComboBox<String>[] getPeriod4_cmbx(){
+        return OK_Action.period4_cmbx;
+    }
+    public static ComboBox<String>[] getPeriod5_cmbx(){
+        return OK_Action.period5_cmbx;
+    }
+    public static ComboBox<String>[] getPeriod6_cmbx(){
+        return OK_Action.period6_cmbx;
+    }
+    public static ComboBox<String>[] getPeriod7_cmbx(){
+        return OK_Action.period7_cmbx;
+    }
+    public static ComboBox<String>[] getPeriod8_cmbx(){
+        return OK_Action.period8_cmbx;
+    }
+    public static ComboBox<String>[] getRep_subj_type_cmbx(){
             return OK_Action.rep_subj_type_cmbx;
+    }
+    public static ComboBox<String>[] getRep_subj_type2_cmbx(){
+        return OK_Action.rep_subj_type2_cmbx;
+    }
+    public static ComboBox<String>[] getRep_subj_type3_cmbx(){
+        return OK_Action.rep_subj_type3_cmbx;
+    }
+    public static ComboBox<String>[] getRep_subj_type4_cmbx(){
+        return OK_Action.rep_subj_type4_cmbx;
+    }
+    public static ComboBox<String>[] getRep_subj_type5_cmbx(){
+        return OK_Action.rep_subj_type5_cmbx;
+    }
+    public static ComboBox<String>[] getRep_subj_type6_cmbx(){
+        return OK_Action.rep_subj_type6_cmbx;
+    }
+    public static ComboBox<String>[] getRep_subj_type7_cmbx(){
+        return OK_Action.rep_subj_type7_cmbx;
+    }
+    public static ComboBox<String>[] getRep_subj_type8_cmbx(){
+        return OK_Action.rep_subj_type8_cmbx;
     }
     public static TextField[] getP_parent_code_txtf(){
             return OK_Action.p_parent_code_txtf;
@@ -786,6 +1104,18 @@ public class OK_Action {
     }
     public static TextField[] getSecurity_role_name_txtf(){
         return OK_Action.Security_role_name_txtf;
+    }
+    public static int getDep_count(int y){
+        return OK_Action.dep_count[y];
+    }
+    public static int getDep_u_count(int y){
+        return OK_Action.dep_u_count[y];
+    }
+    public static int getOkud_count(int y){
+        return OK_Action.okud_count[y];
+    }
+    public static int getSubj_count(int y){
+        return OK_Action.subj_count[y];
     }
 }
 
