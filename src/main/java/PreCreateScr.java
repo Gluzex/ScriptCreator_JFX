@@ -147,6 +147,7 @@ public class PreCreateScr {
         for(int i=0;i<=count;){
             UFName[i] = Form_name_txtf[i].getText();
             SC_data_miner.Form_cd_name[i] = Form_cd_name_txtf[i].getText();
+            System.out.print("Form_cd_name_txtf[i].getText() = " + Form_cd_name_txtf[i].getText() + "\n");
             SC_data_miner.Form_cd[i] = Form_cd_txtf[i].getText();
             SC_data_miner.Form_name[i] = Form_name_txtf[i].getText();
             SC_data_miner.Form_okud[i] = Form_okud_txtf[i].getText();
@@ -217,7 +218,7 @@ public class PreCreateScr {
         }
 
         try {
-            new ScriptEXP(3, path_fld);
+            new ScriptEXP(3, path_fld, count);
         } catch (IOException ex) {
             throw new RuntimeException(ex);
         }

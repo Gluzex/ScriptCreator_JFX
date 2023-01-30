@@ -90,7 +90,7 @@ public class CreateSc {
         }
 
         try {
-            new ScriptEXP(SC_data_checker.check, path_u2);
+            new ScriptEXP(SC_data_checker.check, path_u2, 0);
         } catch (IOException ex) {
             throw new RuntimeException(ex);
         }
