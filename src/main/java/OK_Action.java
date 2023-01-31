@@ -427,28 +427,28 @@ public class OK_Action {
             Form_formal_code_txtf[t].setTooltip(tooltip9);
             Desc_txtf[t] =  new TextField();
             period_cmbx[t] =  new ComboBox<String>();
-            period_cmbx[t].getItems().addAll("квартальная", "месячная", "нерегулярная");
+            period_cmbx[t].getItems().addAll("квартальная", "месячная", "суточная", "нерегулярная");
             period_cmbx[t].setTooltip(tooltip2);
             period2_cmbx[t] =  new ComboBox<String>();
-            period2_cmbx[t].getItems().addAll("квартальная", "месячная", "нерегулярная");
+            period2_cmbx[t].getItems().addAll("квартальная", "месячная", "суточная", "нерегулярная");
             period2_cmbx[t].setTooltip(tooltip2);
             period3_cmbx[t] =  new ComboBox<String>();
-            period3_cmbx[t].getItems().addAll("квартальная", "месячная", "нерегулярная");
+            period3_cmbx[t].getItems().addAll("квартальная", "месячная", "суточная", "нерегулярная");
             period3_cmbx[t].setTooltip(tooltip2);
             period4_cmbx[t] =  new ComboBox<String>();
-            period4_cmbx[t].getItems().addAll("квартальная", "месячная", "нерегулярная");
+            period4_cmbx[t].getItems().addAll("квартальная", "месячная", "суточная", "нерегулярная");
             period4_cmbx[t].setTooltip(tooltip2);
             period5_cmbx[t] =  new ComboBox<String>();
-            period5_cmbx[t].getItems().addAll("квартальная", "месячная", "нерегулярная");
+            period5_cmbx[t].getItems().addAll("квартальная", "месячная", "суточная", "нерегулярная");
             period5_cmbx[t].setTooltip(tooltip2);
             period6_cmbx[t] =  new ComboBox<String>();
-            period6_cmbx[t].getItems().addAll("квартальная", "месячная", "нерегулярная");
+            period6_cmbx[t].getItems().addAll("квартальная", "месячная", "суточная", "нерегулярная");
             period6_cmbx[t].setTooltip(tooltip2);
             period7_cmbx[t] =  new ComboBox<String>();
-            period7_cmbx[t].getItems().addAll("квартальная", "месячная", "нерегулярная");
+            period7_cmbx[t].getItems().addAll("квартальная", "месячная", "суточная", "нерегулярная");
             period7_cmbx[t].setTooltip(tooltip2);
             period8_cmbx[t] =  new ComboBox<String>();
-            period8_cmbx[t].getItems().addAll("квартальная", "месячная", "нерегулярная");
+            period8_cmbx[t].getItems().addAll("квартальная", "месячная", "суточная", "нерегулярная");
             period8_cmbx[t].setTooltip(tooltip2);
             rep_subj_type_cmbx[t] =  new ComboBox<String>();
             rep_subj_type_cmbx[t].getItems().addAll("КО", "ОПДС", "ОПС", "ТУ", "Холдинги", "БГ", "Филиалы КО", "СП БР");
@@ -480,6 +480,8 @@ public class OK_Action {
             p_source_ref_txtf[t] =  new TextField();
             Security_role_name_txtf[t] =  new TextField();
 
+            Form_name_txtf[t].setMinWidth(50.0);
+            Form_name_txtf[t].setPrefColumnCount(70);
             reason_txtf[t].setMinWidth(50.0);
             reason_txtf[t].setPrefColumnCount(70);
             Security_role_path_txtf[t].setMinWidth(75.0);
@@ -489,7 +491,7 @@ public class OK_Action {
             Desc_txtf[t].setMinWidth(75.0);
             Desc_txtf[t].setPrefColumnCount(125);
 
-            form_name_lbl[t] = new Label("Имя отчета: ");
+            form_name_lbl[t] = new Label("Имя отчета(или кода доступа): ");
             form_cd_lbl[t] = new Label("Код доступа: ");
             form_cd_name_lbl[t] = new Label("Наименование кода доступа: ");
             OKUD_lbl[t] = new Label("ОКУД: ");
@@ -613,6 +615,7 @@ public class OK_Action {
             Cmbx_dep_1[t] = new ComboBox<Integer>();
             Cmbx_dep_1[t].getItems().addAll(1, 2, 3, 4, 5, 6, 7, 8);
             Cmbx_dep_1[t].setValue(1);
+            dep_count[t] = 1;
             Cmbx_dep_1[t].setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
@@ -624,6 +627,7 @@ public class OK_Action {
             Cmbx_dep_2[t] = new ComboBox<Integer>();
             Cmbx_dep_2[t].getItems().addAll(1, 2, 3, 4, 5, 6, 7, 8);
             Cmbx_dep_2[t].setValue(1);
+            dep_u_count[t] = 1;
             Cmbx_dep_2[t].setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
@@ -634,6 +638,7 @@ public class OK_Action {
             Cmbx_okud[t] = new ComboBox<Integer>();
             Cmbx_okud[t].getItems().addAll(1, 2, 3, 4, 5, 6, 7, 8);
             Cmbx_okud[t].setValue(1);
+            okud_count[t] = 1;
             Cmbx_okud[t].setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
@@ -645,6 +650,7 @@ public class OK_Action {
             Cmbx_subj[t] = new ComboBox<Integer>();
             Cmbx_subj[t].getItems().addAll(1, 2, 3, 4, 5, 6, 7, 8);
             Cmbx_subj[t].setValue(1);
+            subj_count[t] = 1;
             Cmbx_subj[t].setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
@@ -733,7 +739,10 @@ public class OK_Action {
             exjp9_V_set[o].getChildren().addAll(exjp9_set[o]);
             exjp17_V_set[o].getChildren().addAll(exjp17_set[o]);
 
-            PanelSet[o].getChildren().addAll(radioBtn_set[o], radioBtn_set_2[o], p_tbl_6[o], exjp13_set[o], exjp14_set[o], exjp15_set[o], exjp11_set[o], exjp22_set[o], exjp12_set[o],
+            form_cd_lbl[o].setText("Код доступа для отчета: ");
+            p_type_ref_txtf[o].setText("cognos");
+            p_source_ref_txtf[o].setText("cognos");
+            PanelSet[o].getChildren().addAll(radioBtn_set[o], radioBtn_set_2[o], exjp1_set[o], p_tbl_6[o], exjp13_set[o], exjp14_set[o], exjp15_set[o], exjp11_set[o], exjp22_set[o], exjp12_set[o],
                     p_tbl_7[o], p_cmbx_okud[o], exjp3_V_set[o],
                     p_tbl_9[o], p_cmbx_subj[o], exjp17_V_set[o],
                     p_tbl_10[o], exjp0_set[o], exjp18_set[o], exjp19_set[o], exjp20_set[o], exjp21_set[o]);
@@ -761,13 +770,17 @@ public class OK_Action {
         Cmbx_subj[t].setValue(1);
         PanelScroll[t] = new ScrollPane(PanelNull);
         tabs[t].setContent(PanelScroll[t]);
+        form_cd_lbl[t].setText("Код доступа для отчета: ");
+        tbl10_lbl[t].setText("---Данные для таблицы EHD_ACS_OBJECTS---");
+        p_type_ref_txtf[t].setText("cognos");
+        p_source_ref_txtf[t].setText("cognos");
         PanelSet[t].getChildren().removeAll(radioBtn_set[t], p_tbl_1[t], exjp1_set[t], exjp2_set[t], p_tbl_2[t], exjp4_set[t], p_tbl_3[t], exjp5_set[t], exjp6_set[t], p_tbl_4[t], p_cmbx_dep_1[t],
                 exjp7_V_set[t],
                 p_cmbx_dep_2[t], exjp9_V_set[t],
-                exjp10_set[t], p_tbl_10[t], /*exjp0_set[t],*/ exjp18_set[t], exjp19_set[t], exjp20_set[t], exjp21_set[t]);
+                exjp10_set[t], p_tbl_10[t], exjp0_set[t], exjp18_set[t], exjp19_set[t], exjp20_set[t], exjp21_set[t]);
         PanelScroll[t] = new ScrollPane(PanelSet[t]);
 
-        PanelSet[t].getChildren().addAll(radioBtn_set[t], radioBtn_set_2[t], p_tbl_6[t], exjp13_set[t], exjp14_set[t], exjp15_set[t], exjp11_set[t], exjp22_set[t], exjp12_set[t],
+        PanelSet[t].getChildren().addAll(radioBtn_set[t], radioBtn_set_2[t], exjp1_set[t], p_tbl_6[t], exjp13_set[t], exjp14_set[t], exjp15_set[t], exjp11_set[t], exjp22_set[t], exjp12_set[t],
                 p_tbl_7[t], p_cmbx_okud[t], exjp3_V_set[t],
                 p_tbl_9[t], p_cmbx_subj[t], exjp17_V_set[t],
                 p_tbl_10[t], exjp0_set[t], exjp18_set[t], exjp19_set[t], exjp20_set[t], exjp21_set[t]);
@@ -780,27 +793,31 @@ public class OK_Action {
         Cmbx_dep_2[t].setValue(1);
         PanelScroll[t] = new ScrollPane(PanelNull);
         tabs[t].setContent(PanelScroll[t]);
-        PanelSet[t].getChildren().removeAll(radioBtn_set[t], radioBtn_set_2[t], p_tbl_6[t], exjp13_set[t], exjp14_set[t], exjp15_set[t], exjp11_set[t], exjp22_set[t], exjp12_set[t],
+        form_cd_lbl[t].setText("Код доступа: ");
+        tbl10_lbl[t].setText("---Данные для таблицы EHD_ACS_OBJECTS--- обязательно к заполнению, если код доступа ранее не был зарегистрирован");
+        p_type_ref_txtf[t].clear();//setText("");
+        p_source_ref_txtf[t].clear();//setText("");
+        PanelSet[t].getChildren().removeAll(radioBtn_set[t], radioBtn_set_2[t], exjp1_set[t], p_tbl_6[t], exjp13_set[t], exjp14_set[t], exjp15_set[t], exjp11_set[t], exjp22_set[t], exjp12_set[t],
                 p_tbl_7[t], p_cmbx_okud[t], exjp3_V_set[t],
                 p_tbl_9[t], p_cmbx_subj[t], exjp17_V_set[t],
                 p_tbl_10[t], exjp0_set[t], exjp18_set[t], exjp19_set[t], exjp20_set[t], exjp21_set[t]);
 
         PanelSet[t].getChildren().addAll(radioBtn_set[t], p_tbl_1[t], exjp1_set[t], exjp2_set[t], p_tbl_2[t], exjp4_set[t], p_tbl_3[t], exjp5_set[t], exjp6_set[t], p_tbl_4[t], p_cmbx_dep_1[t], exjp7_V_set[t],
-                p_cmbx_dep_2[t], exjp9_V_set[t], exjp10_set[t], p_tbl_10[t], /*exjp0_set[t],*/ exjp18_set[t], exjp19_set[t], exjp20_set[t], exjp21_set[t]);
+                p_cmbx_dep_2[t], exjp9_V_set[t], exjp10_set[t], p_tbl_10[t], exjp0_set[t], exjp18_set[t], exjp19_set[t], exjp20_set[t], exjp21_set[t]);
         PanelScroll[t] = new ScrollPane(PanelSet[t]);
         tabs[t].setContent(PanelScroll[t]);
     }
     public void Case_RNR(int t, boolean reg){
         if(reg){
             System_id_txtf[t].setText("OAD");
-            Security_role_name_txtf[t].setText("OAD_" + Form_cd_txtf[0].getText());
+            Security_role_name_txtf[t].setText("OAD_" + Form_cd_txtf[t].getText());
             Security_role_path_txtf[t].setText("CAMID(\":\")/namespaceFolder[@name=''FPS_IAPPR'']/namespaceFolder[@name=''PPK_OAD'']/namespaceFolder[@name=''REP_ROLES'']");
-            Search_path_txtf[t].setText("/content/folder[@name=''Приложение НИКА'']/folder[@name=''КО'']/folder[@name=''Регламентированные отчеты']/...");
+            Search_path_txtf[t].setText("/content/folder[@name='Приложение НИКА']/folder[@name='КО']/folder[@name='Регламентированные отчеты']/...");
         } else{
             System_id_txtf[t].setText("OAD");
-            Security_role_name_txtf[t].setText("OAD_" + Form_cd_txtf[0].getText());
+            Security_role_name_txtf[t].setText("OAD_" + Form_cd_txtf[t].getText());
             Security_role_path_txtf[t].setText("CAMID(\":\")/namespaceFolder[@name=''FPS_IAPPR'']/namespaceFolder[@name=''PPK_OAD'']/namespaceFolder[@name=''REP_NR_ROLES'']");
-            Search_path_txtf[t].setText("/content/folder[@name=''Приложение НИКА'']/folder[@name=''КО'']/folder[@name=''Нерегламентированные отчеты']/...");
+            Search_path_txtf[t].setText("/content/folder[@name='Приложение НИКА']/folder[@name='КО']/folder[@name='Нерегламентированные отчеты']/...");
         }
 
     }

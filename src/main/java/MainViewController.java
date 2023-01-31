@@ -12,8 +12,6 @@ public class MainViewController {
     @FXML
     private Label lab1;
     @FXML
-    private Label devlab;
-    @FXML
     private TextField txt_fld1;
     @FXML
     private ComboBox<String> cmbx1;
@@ -55,12 +53,9 @@ public class MainViewController {
             fromFile();
         }else if(Objects.equals(cmbx1.getValue(), "Ручной(В разработке)")){
             fromManual();
-        } else {
-            devlab.setVisible(true);
         }
     }
     public void fromFile(){
-        devlab.setVisible(false);
         cmbx1.setDisable(true);
         lab1.setVisible(true);
         txtf1.setVisible(true);
@@ -123,7 +118,6 @@ public class MainViewController {
         txtf1.setVisible(false);
         txtf1.setText("C:");
         txt_fld1.clear();
-        devlab.setVisible(false);
         Browse.setVisible(false);
         ChckBtn1.setVisible(false);
         resetBtn.setVisible(false);
@@ -264,7 +258,6 @@ public class MainViewController {
         countCmbx.setVisible(false);
         pathTxtf.setVisible(false);
         resetBtn2.setVisible(false);
-        devlab.setVisible(false);
         createBtn.setDisable(true);
         OK_btn.setDisable(true);
         fldchs_btn.setDisable(true);

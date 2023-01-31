@@ -29,7 +29,19 @@ public class ScriptEXP {
         String techdb_code = "";
 
         for(int u = 0; u<=11; u++){
-        FName_def[u] = CreateSc.UFName[0];
+        if(chk==3){
+                if(PreCreateScr.UFName[u] == null || Objects.equals(PreCreateScr.UFName[u], "") || Objects.equals(PreCreateScr.UFName[u], " ")){
+                    FName_def[u] = PreCreateScr.UFName[0];
+                } else{
+                    FName_def[u] = PreCreateScr.UFName[u];
+                }
+            } else{
+                if(CreateSc.UFName[u] == null || Objects.equals(CreateSc.UFName[u], "") || Objects.equals(CreateSc.UFName[u], " ")){
+                    FName_def[u] = CreateSc.UFName[0];
+                } else{
+                    FName_def[u] = CreateSc.UFName[u];
+                }
+            }
         TR_def[u] = "cognos";
         SR_def[u] = "cognos";
         if(chk != 3){
@@ -47,8 +59,6 @@ public class ScriptEXP {
             }
         }
         if(count == 0){
-            if(CreateSc.UFName[0] != null)
-                FName_def[0] = CreateSc.UFName[0];
             //if(PreCreateSc.Pid[0] != null)
                 //Pid_def[0] = PreCreateSc.Pid[0];
             if(chk!=3){
@@ -57,16 +67,23 @@ public class ScriptEXP {
                 if(CreateSc.SR[0] != null)
                     SR_def[0] = CreateSc.SR[0];
             } else{
-                if(SC_data_miner.p_type_ref_txtf[0] != null)
+                if(SC_data_miner.p_type_ref_txtf[0] == null || Objects.equals(SC_data_miner.p_type_ref_txtf[0], "") || Objects.equals(SC_data_miner.p_type_ref_txtf[0], " ")){
+                    TR_def[0] = "cognos";
+                } else{
                     TR_def[0] = SC_data_miner.p_type_ref_txtf[0];
-                if(SC_data_miner.p_source_ref_txtf[0] != null)
+                }
+                if(SC_data_miner.p_source_ref_txtf[0] == null || Objects.equals(SC_data_miner.p_source_ref_txtf[0], "") || Objects.equals(SC_data_miner.p_source_ref_txtf[0], " ")){
+                    SR_def[0] = "cognos";
+                } else{
                     SR_def[0] = SC_data_miner.p_source_ref_txtf[0];
+                }
+                System.out.print("TR_def[0] = " + TR_def[0] + "\n");
+                System.out.print("SR_def[0] = " + SR_def[0] + "\n");
+
             }
 
         } else {
             for(int q = 0; q<=count; q++){
-                if(CreateSc.UFName[q] != null)
-                    FName_def[q] = CreateSc.UFName[q];
                 //if(PreCreateSc.Pid[q] != null)
                     //Pid_def[q] = PreCreateSc.Pid[q];
                 if(chk!=3){
@@ -75,10 +92,18 @@ public class ScriptEXP {
                     if(CreateSc.SR[q] != null)
                         SR_def[q] = CreateSc.SR[q];
                 } else{
-                    if(SC_data_miner.p_type_ref_txtf[q] != null)
+                    if(SC_data_miner.p_type_ref_txtf[q] == null || Objects.equals(SC_data_miner.p_type_ref_txtf[q], "") || Objects.equals(SC_data_miner.p_type_ref_txtf[q], " ")){
+                        TR_def[q] = "cognos";
+                    } else{
                         TR_def[q] = SC_data_miner.p_type_ref_txtf[q];
-                    if(SC_data_miner.p_source_ref_txtf[q] != null)
+                    }
+                    if(SC_data_miner.p_source_ref_txtf[q] == null || Objects.equals(SC_data_miner.p_source_ref_txtf[q], "") || Objects.equals(SC_data_miner.p_source_ref_txtf[q], " ")){
+                        SR_def[q] = "cognos";
+                    } else{
                         SR_def[q] = SC_data_miner.p_source_ref_txtf[q];
+                    }
+                    System.out.print("TR_def[" + q + "] = " + TR_def[q] + "\n");
+                    System.out.print("SR_def[" + q + "] = " + SR_def[q] + "\n");
                 }
             }
         }
@@ -167,7 +192,7 @@ public class ScriptEXP {
                         "\n" +
                         "\n" +
                         "INSERT INTO REPORT_OKUD_CODE \n" +
-                        "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, '"+ SC_data_miner.period[0] +"'as PERIOD, null as FORM_CD FROM dual\n" +
+                        "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, '"+ SC_data_miner.period[0] + "' as PERIOD, null as FORM_CD FROM dual\n" +
                         "minus select * from REPORT_OKUD_CODE;\n" +
                         "\n" +
                         "INSERT INTO  REPORT_FORM_SRC \n" +
@@ -231,7 +256,7 @@ public class ScriptEXP {
                         "\n" +
                         "\n" +
                         "INSERT INTO REPORT_OKUD_CODE \n" +
-                        "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, '"+ SC_data_miner.period[0] +"'as PERIOD, null as FORM_CD FROM dual\n" +
+                        "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, '"+ SC_data_miner.period[0] + "' as PERIOD, null as FORM_CD FROM dual\n" +
                         "minus select * from REPORT_OKUD_CODE;\n" +
                         "\n" +
                         "INSERT INTO  REPORT_FORM_SRC \n" +
@@ -353,7 +378,7 @@ public class ScriptEXP {
                         "\n" +
                         "\n" +
                         "INSERT INTO REPORT_OKUD_CODE \n" +
-                        "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, '"+ SC_data_miner.period[0] +"'as PERIOD, null as FORM_CD FROM dual\n" +
+                        "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, '"+ SC_data_miner.period[0] + "' as PERIOD, null as FORM_CD FROM dual\n" +
                         "minus select * from REPORT_OKUD_CODE;\n" +
                         "--&" +
                         "\n" +
@@ -423,7 +448,7 @@ public class ScriptEXP {
                         "\n" +
                         "\n" +
                         "INSERT INTO REPORT_OKUD_CODE \n" +
-                        "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, '"+ SC_data_miner.period[0] +"'as PERIOD, null as FORM_CD FROM dual\n" +
+                        "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, '"+ SC_data_miner.period[0] + "' as PERIOD, null as FORM_CD FROM dual\n" +
                         "minus select * from REPORT_OKUD_CODE;\n" +
                         "\n" +
                         "--&" +
@@ -519,7 +544,7 @@ public class ScriptEXP {
                                     text[u] = textset2[0] + "\n" +
                                             "\n" +
                                             "INSERT INTO REPORT_OKUD_CODE \n" +
-                                            "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '" + okud_pair[0][w] + "' as OKUD_CODE, '"+ SC_data_miner.period[0] +"'as PERIOD, null as FORM_CD FROM dual\n" +
+                                            "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '" + okud_pair[0][w] + "' as OKUD_CODE, '"+ SC_data_miner.period[0] + "' as PERIOD, null as FORM_CD FROM dual\n" +
                                             "minus select * from REPORT_OKUD_CODE;\n" +
                                             "--&" +
                                             textset2[1];
@@ -538,7 +563,7 @@ public class ScriptEXP {
                                     okud_text[q] = okud_text[q] + "\n" +
                                     "\n" +
                                     "INSERT INTO REPORT_OKUD_CODE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[q] +"' as FORM_FORMAL_CODE, '" + okud_pair[q][i+1] + "' as OKUD_CODE, '"+ SC_data_miner.period[i] +"'as PERIOD, null as FORM_CD FROM dual\n" +
+                                    "SELECT '"+ SC_data_miner.Form_formal_code[q] +"' as FORM_FORMAL_CODE, '" + okud_pair[q][i+1] + "' as OKUD_CODE, '"+ SC_data_miner.period[i] + "' as PERIOD, null as FORM_CD FROM dual\n" +
                                     "minus select * from REPORT_OKUD_CODE;\n";
                                 }
                                 //System.out.print("\nokud_text[" + q + "] = " + okud_text[q]);
@@ -727,7 +752,7 @@ public class ScriptEXP {
                         "\n" +
                         "\n" +
                         "INSERT INTO REPORT_OKUD_CODE \n" +
-                        "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, '"+ SC_data_miner.period[0] +"'as PERIOD, null as FORM_CD FROM dual\n" +
+                        "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, '"+ SC_data_miner.period[0] + "' as PERIOD, null as FORM_CD FROM dual\n" +
                         "minus select * from REPORT_OKUD_CODE;\n" +
                         "\n" +
                         "INSERT INTO  REPORT_FORM_SRC \n" +
@@ -767,7 +792,7 @@ public class ScriptEXP {
                         "\n" +
                         "\n" +
                         "INSERT INTO REPORT_OKUD_CODE \n" +
-                        "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, '"+ SC_data_miner.period[0] +"'as PERIOD, null as FORM_CD FROM dual\n" +
+                        "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, '"+ SC_data_miner.period[0] + "' as PERIOD, null as FORM_CD FROM dual\n" +
                         "minus select * from REPORT_OKUD_CODE;\n" +
                         "\n" +
                         "INSERT INTO  REPORT_FORM_SRC \n" +
@@ -853,7 +878,7 @@ public class ScriptEXP {
                         "\n" +
                         "\n" +
                         "INSERT INTO REPORT_OKUD_CODE \n" +
-                        "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, '"+ SC_data_miner.period[0] +"'as PERIOD, null as FORM_CD FROM dual\n" +
+                        "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, '"+ SC_data_miner.period[0] + "' as PERIOD, null as FORM_CD FROM dual\n" +
                         "minus select * from REPORT_OKUD_CODE;\n" +
                         "--&" +
                         "\n" +
@@ -894,7 +919,7 @@ public class ScriptEXP {
                         "\n" +
                         "\n" +
                         "INSERT INTO REPORT_OKUD_CODE \n" +
-                        "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, '"+ SC_data_miner.period[0] +"'as PERIOD, null as FORM_CD FROM dual\n" +
+                        "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, '"+ SC_data_miner.period[0] + "' as PERIOD, null as FORM_CD FROM dual\n" +
                         "minus select * from REPORT_OKUD_CODE;\n" +
                         "--&" +
                         "\n" +
@@ -989,13 +1014,13 @@ public class ScriptEXP {
                             text[u] = textset[0] + "\n" +
                                     "\n" +
                                     "INSERT INTO REPORT_OKUD_CODE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '" + okud_pair[0][w] + "' as OKUD_CODE, '"+ SC_data_miner.period[0] +"'as PERIOD, null as FORM_CD FROM dual\n" +
+                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '" + okud_pair[0][w] + "' as OKUD_CODE, '"+ SC_data_miner.period[0] + "' as PERIOD, null as FORM_CD FROM dual\n" +
                                     "minus select * from REPORT_OKUD_CODE;\n" +
                                     "--&" +
                                     textset[1] +
                                     "\n" +
                                     "INSERT INTO REPORT_OKUD_CODE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '" + okud_pair[0][w] + "' as OKUD_CODE, '"+ SC_data_miner.period[0] +"'as PERIOD, null as FORM_CD FROM dual\n" +
+                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '" + okud_pair[0][w] + "' as OKUD_CODE, '"+ SC_data_miner.period[0] + "' as PERIOD, null as FORM_CD FROM dual\n" +
                                     "minus select * from REPORT_OKUD_CODE;\n" +
                                     "--&" +
                                     textset[2];
@@ -1012,7 +1037,7 @@ public class ScriptEXP {
                             okud_text[q] = okud_text[q] + "\n" +
                                     "\n" +
                                     "INSERT INTO REPORT_OKUD_CODE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[q] +"' as FORM_FORMAL_CODE, '" + okud_pair[q][i+1] + "' as OKUD_CODE, '"+ SC_data_miner.period[i] +"'as PERIOD, null as FORM_CD FROM dual\n" +
+                                    "SELECT '"+ SC_data_miner.Form_formal_code[q] +"' as FORM_FORMAL_CODE, '" + okud_pair[q][i+1] + "' as OKUD_CODE, '"+ SC_data_miner.period[i] + "' as PERIOD, null as FORM_CD FROM dual\n" +
                                     "minus select * from REPORT_OKUD_CODE;\n";
                         }
                         //System.out.print("\nokud_text[" + q + "] = " + okud_text[q]);
@@ -1190,7 +1215,7 @@ public class ScriptEXP {
                         for(int d =1; d<=coc; d++) {
                             //System.out.print("subs[" + d + "] = " + subs[d] + "\n");
                             SC_data_miner.Search_path[h] = SC_data_miner.Search_path[h] + "''" + subs[d];
-                            //System.out.print("Search_path[" + h + "] = " + Search_path[h] + "\n");
+                            //System.out.print("Search_path[" + h + "] = " + SC_data_miner.Search_path[h] + "\n");
                         }
                         int u = 0;
                         //System.out.print("vid = " + vid + "\n");
@@ -1204,20 +1229,15 @@ public class ScriptEXP {
                                 //System.out.print("u = " + u + "\n");
                                 break;
                         }
-                        //System.out.print("Search_path[" + h + "] = " + Search_path[h] + "\n");
+                        //System.out.print("Search_path[" + h + "] = " + SC_data_miner.Search_path[h] + "\n");
                         SC_data_miner.Search_path_for_ehd_acs[h] = "/content/folder[@name=''Приложение НИКА'']/folder[@name=''КО'']" + SC_data_miner.Search_path[h].substring(u);
-                        //System.out.print("Search_path_for_ehd_acs[" + h + "] = " + Search_path_for_ehd_acs[h] + "\n");
+                        //System.out.print("Search_path_for_ehd_acs[" + h + "] = " + SC_data_miner.Search_path_for_ehd_acs[h] + "\n");
                     }
                 }
                 //System.out.print("Search_path_for_ehd_acs[" + h + "] = " + Search_path_for_ehd_acs[h] + "\n");
             }
-            System.out.print("count = " + count + "\n");
+            //System.out.print("count = " + count + "\n");
             if(count == 0){
-                if(Objects.equals(TR_def[0], "cognos")){
-                    techdb_code = SC_data_miner.Form_formal_code[0];
-                } else {
-                    techdb_code = SC_data_miner.Form_cd[0];
-                }
                 if(SC_data_miner.Flag_IOD[0] == null){
                     iod = "null as FLAG_IOD";
                 } else {
@@ -1253,9 +1273,9 @@ public class ScriptEXP {
                 String ehd_acs_script = "";
                 String ehd_acs_script2 = "";
 
-                System.out.print("SC_data_miner.Form_cd[0] = " + SC_data_miner.Form_cd[0] + "\n");
-                if(SC_data_miner.Form_cd[0] == null || !Objects.equals(SC_data_miner.Form_cd[0], "") || !Objects.equals(SC_data_miner.Form_cd[0], " ")){
-                    rep_form_script = "--Не указаны данные для таблицы REP_FORM\n\n";
+                //System.out.print("SC_data_miner.Form_cd[0] = " + SC_data_miner.Form_cd[0] + "\n");
+                if((SC_data_miner.Form_cd_name[0]== null) || Objects.equals(SC_data_miner.Form_cd_name[0], "") || Objects.equals(SC_data_miner.Form_cd_name[0], " ")){
+                    rep_form_script = "--Warning: Не указаны данные для таблицы REP_FORM\n\n";
                 } else {
                     rep_form_script = "INSERT INTO REP_FORM \n" +
                             "SELECT '"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, '"+ SC_data_miner.Form_cd_name[0] +"' as FORM_NAME, " + okud_rep_form + " FROM dual\n" +
@@ -1264,7 +1284,7 @@ public class ScriptEXP {
                             "\n" ;
                 }
                 if(Objects.equals(iod, "null as FLAG_IOD") || Objects.equals(pdn, "null as FLAG_PDN")){
-                    rep_form_oki_script = "--Не указаны данные для таблицы REP_FORM_OKI\n\n";
+                    rep_form_oki_script = "--Warning: Не указаны данные для таблицы REP_FORM_OKI\n\n";
                 } else{
                     rep_form_oki_script = "INSERT INTO REP_FORM_OKI\n" +
                             "SELECT '"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, " + iod + ",  " + pdn + " FROM  dual\n" +
@@ -1272,9 +1292,9 @@ public class ScriptEXP {
                             "\n" +
                             "\n" ;
                 }
-                System.out.print("SC_data_miner.Form_cd_cog[0] = " + SC_data_miner.Form_cd_cog[0] + "\n");
-                if(SC_data_miner.Form_cd_cog[0] == null || !Objects.equals(SC_data_miner.Form_cd_cog[0], "") || !Objects.equals(SC_data_miner.Form_cd_cog[0], " ")){
-                    rep_form_cognos_script = "--Не указаны данные для таблицы REP_FORM_COGNOS\n\n";
+                //System.out.print("SC_data_miner.Form_cd_cog[0] = " + SC_data_miner.Form_cd_cog[0] + "\n");
+                if(SC_data_miner.Form_cd_cog[0] == null || Objects.equals(SC_data_miner.Form_cd_cog[0], "") || Objects.equals(SC_data_miner.Form_cd_cog[0], " ")){
+                    rep_form_cognos_script = "--Warning: Не указаны данные для таблицы REP_FORM_COGNOS\n\n";
                 } else {
                     rep_form_cognos_script = "INSERT INTO REP_FORM_COGNOS\n" +
                             "SELECT '"+ SC_data_miner.Form_cd_cog[0] +"' as FORM_CD, '"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD FROM dual\n" +
@@ -1282,9 +1302,9 @@ public class ScriptEXP {
                             "\n" +
                             "\n";
                 }
-                System.out.print("SC_data_miner.Dep_name[0] = " + SC_data_miner.Dep_name[0] + "\n");
-                if(SC_data_miner.Dep_name[0] == null || !Objects.equals(SC_data_miner.Dep_name[0], "") || !Objects.equals(SC_data_miner.Dep_name[0], " ")){
-                    rep_form_dep_owner_script = "--Не указаны данные для таблицы REP_FORM_DEP_OWNER\n\n";
+                //System.out.print("SC_data_miner.Dep_name[0] = " + SC_data_miner.Dep_name[0] + "\n");
+                if(SC_data_miner.Dep_name[0] == null || Objects.equals(SC_data_miner.Dep_name[0], "") || Objects.equals(SC_data_miner.Dep_name[0], " ")){
+                    rep_form_dep_owner_script = "--Warning: Не указаны данные для таблицы REP_FORM_DEP_OWNER\n\n";
                 } else {
                     int c = OK_Action.getDep_count(0);
                     switch (c){
@@ -1431,9 +1451,9 @@ public class ScriptEXP {
 
                     }
                 }
-                System.out.print("SC_data_miner.Dep_u_name[0] = " + SC_data_miner.Dep_u_name[0] + "\n");
-                if(SC_data_miner.Dep_u_name[0] == null || !Objects.equals(SC_data_miner.Dep_u_name[0], "") || !Objects.equals(SC_data_miner.Dep_u_name[0], " ")){
-                    rep_form_dep_user_script = "--Не указаны данные для таблицы REP_FORM_DEP_USER\n\n";
+                //System.out.print("SC_data_miner.Dep_u_name[0] = " + SC_data_miner.Dep_u_name[0] + "\n");
+                if(SC_data_miner.Dep_u_name[0] == null || Objects.equals(SC_data_miner.Dep_u_name[0], "") || Objects.equals(SC_data_miner.Dep_u_name[0], " ")){
+                    rep_form_dep_user_script = "--Warning: Не указаны данные для таблицы REP_FORM_DEP_USER\n\n";
                 } else {
                     int c = OK_Action.getDep_u_count(0);
                     switch (c){
@@ -1580,19 +1600,19 @@ public class ScriptEXP {
 
                     }
                 }
-                System.out.print("SC_data_miner.System_id[0] = " + SC_data_miner.System_id[0] + "\n");
-                System.out.print("SC_data_miner.Security_role_name[0] = " + SC_data_miner.Security_role_name[0] + "\n");
-                System.out.print("SC_data_miner.Security_role_path[0] = " + SC_data_miner.Security_role_path[0] + "\n");
-                System.out.print("SC_data_miner.Search_path[0] = " + SC_data_miner.Search_path[0] + "\n");
-                System.out.print("SC_data_miner.Form_formal_code[0] = " + SC_data_miner.Form_formal_code[0] + "\n");
-                System.out.print("SC_data_miner.Desc[0] = " + SC_data_miner.Desc[0] + "\n");
-                if(SC_data_miner.System_id[0] == null || !Objects.equals(SC_data_miner.System_id[0], "") || !Objects.equals(SC_data_miner.System_id[0], " ") ||
-                        SC_data_miner.Security_role_name[0] == null || !Objects.equals(SC_data_miner.Security_role_name[0], "") || !Objects.equals(SC_data_miner.Security_role_name[0], " ") ||
-                        SC_data_miner.Security_role_path[0] == null || !Objects.equals(SC_data_miner.Security_role_path[0], "") || !Objects.equals(SC_data_miner.Security_role_path[0], " ") ||
-                        SC_data_miner.Search_path[0] == null || !Objects.equals(SC_data_miner.Search_path[0], "") || !Objects.equals(SC_data_miner.Search_path[0], " ") ||
-                        SC_data_miner.Form_formal_code[0] == null || !Objects.equals(SC_data_miner.Form_formal_code[0], "") || !Objects.equals(SC_data_miner.Form_formal_code[0], " ") ||
-                        SC_data_miner.Desc[0] == null || !Objects.equals(SC_data_miner.Desc[0], "") || !Objects.equals(SC_data_miner.Desc[0], " ")){
-                    reg_report_form_script = "--Не указаны данные для таблицы REG_REPORT_FORM\n\n";
+                //System.out.print("SC_data_miner.System_id[0] = " + SC_data_miner.System_id[0] + "\n");
+                //System.out.print("SC_data_miner.Security_role_name[0] = " + SC_data_miner.Security_role_name[0] + "\n");
+                //System.out.print("SC_data_miner.Security_role_path[0] = " + SC_data_miner.Security_role_path[0] + "\n");
+                //System.out.print("SC_data_miner.Search_path[0] = " + SC_data_miner.Search_path[0] + "\n");
+                //System.out.print("SC_data_miner.Form_formal_code[0] = " + SC_data_miner.Form_formal_code[0] + "\n");
+                //System.out.print("SC_data_miner.Desc[0] = " + SC_data_miner.Desc[0] + "\n");
+                if(SC_data_miner.System_id[0] == null || Objects.equals(SC_data_miner.System_id[0], "") || Objects.equals(SC_data_miner.System_id[0], " ") ||
+                        SC_data_miner.Security_role_name[0] == null || Objects.equals(SC_data_miner.Security_role_name[0], "") || Objects.equals(SC_data_miner.Security_role_name[0], " ") ||
+                        SC_data_miner.Security_role_path[0] == null || Objects.equals(SC_data_miner.Security_role_path[0], "") || Objects.equals(SC_data_miner.Security_role_path[0], " ") ||
+                        SC_data_miner.Search_path[0] == null || Objects.equals(SC_data_miner.Search_path[0], "") || Objects.equals(SC_data_miner.Search_path[0], " ") ||
+                        SC_data_miner.Form_formal_code[0] == null || Objects.equals(SC_data_miner.Form_formal_code[0], "") || Objects.equals(SC_data_miner.Form_formal_code[0], " ") ||
+                        SC_data_miner.Desc[0] == null || Objects.equals(SC_data_miner.Desc[0], "") || Objects.equals(SC_data_miner.Desc[0], " ")){
+                    reg_report_form_script = "--Warning: Не указаны данные для таблицы REG_REPORT_FORM\n\n";
                 } else {
                     reg_report_form_script = "MERGE INTO REG_REPORT_FORM R\n" +
                             "   USING (SELECT \n" +
@@ -1619,361 +1639,361 @@ public class ScriptEXP {
                             "\n" +
                             "\n";
                 }
-                System.out.print("SC_data_miner.Form_okud[0] = " + SC_data_miner.Form_okud[0] + "\n");
-                if(SC_data_miner.Form_okud[0] == null  || !Objects.equals(SC_data_miner.Form_okud[0], "") || !Objects.equals(SC_data_miner.Form_okud[0], " ")){
-                    report_okud_code_script = "--Не указаны данные для таблицы REPORT_OKUD_CODE\n\n";
+                //System.out.print("SC_data_miner.Form_okud[0] = " + SC_data_miner.Form_okud[0] + "\n");
+                if(SC_data_miner.Form_okud[0] == null  || Objects.equals(SC_data_miner.Form_okud[0], "") || Objects.equals(SC_data_miner.Form_okud[0], " ")){
+                    report_okud_code_script = "--Warning: Не указаны данные для таблицы REPORT_OKUD_CODE\n\n";
                 } else {
                     int c = OK_Action.getOkud_count(0);
                     switch(c){
                         case 1:
                             report_okud_code_script = "INSERT INTO REPORT_OKUD_CODE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, '"+ SC_data_miner.period[0] +"'as PERIOD, null as FORM_CD FROM dual\n" +
+                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, '"+ SC_data_miner.period[0] + "' as PERIOD, null as FORM_CD FROM dual\n" +
                                     "minus select * from REPORT_OKUD_CODE;\n" +
                                     "\n";
                             break;
                         case 2:
                             report_okud_code_script = "INSERT INTO REPORT_OKUD_CODE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, '"+ SC_data_miner.period[0] +"'as PERIOD, null as FORM_CD FROM dual\n" +
+                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, '"+ SC_data_miner.period[0] + "' as PERIOD, null as FORM_CD FROM dual\n" +
                                     "minus select * from REPORT_OKUD_CODE;\n" +
                                     "\n" +
                                     "INSERT INTO REPORT_OKUD_CODE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud2[0] +"' as OKUD_CODE, '"+ SC_data_miner.period2[0] +"'as PERIOD, null as FORM_CD FROM dual\n" +
+                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud2[0] +"' as OKUD_CODE, '"+ SC_data_miner.period2[0] + "' as PERIOD, null as FORM_CD FROM dual\n" +
                                     "minus select * from REPORT_OKUD_CODE;\n" +
                                     "\n" ;
                             break;
                         case 3:
                             report_okud_code_script = "INSERT INTO REPORT_OKUD_CODE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, '"+ SC_data_miner.period[0] +"'as PERIOD, null as FORM_CD FROM dual\n" +
+                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, '"+ SC_data_miner.period[0] + "' as PERIOD, null as FORM_CD FROM dual\n" +
                                     "minus select * from REPORT_OKUD_CODE;\n" +
                                     "\n" +
                                     "INSERT INTO REPORT_OKUD_CODE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud2[0] +"' as OKUD_CODE, '"+ SC_data_miner.period2[0] +"'as PERIOD, null as FORM_CD FROM dual\n" +
+                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud2[0] +"' as OKUD_CODE, '"+ SC_data_miner.period2[0] + "' as PERIOD, null as FORM_CD FROM dual\n" +
                                     "minus select * from REPORT_OKUD_CODE;\n" +
                                     "\n" +
                                     "INSERT INTO REPORT_OKUD_CODE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud3[0] +"' as OKUD_CODE, '"+ SC_data_miner.period3[0] +"'as PERIOD, null as FORM_CD FROM dual\n" +
+                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud3[0] +"' as OKUD_CODE, '"+ SC_data_miner.period3[0] + "' as PERIOD, null as FORM_CD FROM dual\n" +
                                     "minus select * from REPORT_OKUD_CODE;\n" +
                                     "\n";
                             break;
                         case 4:
                             report_okud_code_script = "INSERT INTO REPORT_OKUD_CODE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, '"+ SC_data_miner.period[0] +"'as PERIOD, null as FORM_CD FROM dual\n" +
+                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, '"+ SC_data_miner.period[0] + "' as PERIOD, null as FORM_CD FROM dual\n" +
                                     "minus select * from REPORT_OKUD_CODE;\n" +
                                     "\n" +
                                     "INSERT INTO REPORT_OKUD_CODE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud2[0] +"' as OKUD_CODE, '"+ SC_data_miner.period2[0] +"'as PERIOD, null as FORM_CD FROM dual\n" +
+                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud2[0] +"' as OKUD_CODE, '"+ SC_data_miner.period2[0] + "' as PERIOD, null as FORM_CD FROM dual\n" +
                                     "minus select * from REPORT_OKUD_CODE;\n" +
                                     "\n" +
                                     "INSERT INTO REPORT_OKUD_CODE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud3[0] +"' as OKUD_CODE, '"+ SC_data_miner.period3[0] +"'as PERIOD, null as FORM_CD FROM dual\n" +
+                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud3[0] +"' as OKUD_CODE, '"+ SC_data_miner.period3[0] + "' as PERIOD, null as FORM_CD FROM dual\n" +
                                     "minus select * from REPORT_OKUD_CODE;\n" +
                                     "\n" +
                                     "INSERT INTO REPORT_OKUD_CODE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud4[0] +"' as OKUD_CODE, '"+ SC_data_miner.period4[0] +"'as PERIOD, null as FORM_CD FROM dual\n" +
+                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud4[0] +"' as OKUD_CODE, '"+ SC_data_miner.period4[0] + "' as PERIOD, null as FORM_CD FROM dual\n" +
                                     "minus select * from REPORT_OKUD_CODE;\n" +
                                     "\n";
                             break;
                         case 5:
                             report_okud_code_script = "INSERT INTO REPORT_OKUD_CODE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, '"+ SC_data_miner.period[0] +"'as PERIOD, null as FORM_CD FROM dual\n" +
+                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, '"+ SC_data_miner.period[0] + "' as PERIOD, null as FORM_CD FROM dual\n" +
                                     "minus select * from REPORT_OKUD_CODE;\n" +
                                     "\n" +
                                     "INSERT INTO REPORT_OKUD_CODE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud2[0] +"' as OKUD_CODE, '"+ SC_data_miner.period2[0] +"'as PERIOD, null as FORM_CD FROM dual\n" +
+                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud2[0] +"' as OKUD_CODE, '"+ SC_data_miner.period2[0] + "' as PERIOD, null as FORM_CD FROM dual\n" +
                                     "minus select * from REPORT_OKUD_CODE;\n" +
                                     "\n" +
                                     "INSERT INTO REPORT_OKUD_CODE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud3[0] +"' as OKUD_CODE, '"+ SC_data_miner.period3[0] +"'as PERIOD, null as FORM_CD FROM dual\n" +
+                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud3[0] +"' as OKUD_CODE, '"+ SC_data_miner.period3[0] + "' as PERIOD, null as FORM_CD FROM dual\n" +
                                     "minus select * from REPORT_OKUD_CODE;\n" +
                                     "\n" +
                                     "INSERT INTO REPORT_OKUD_CODE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud4[0] +"' as OKUD_CODE, '"+ SC_data_miner.period4[0] +"'as PERIOD, null as FORM_CD FROM dual\n" +
+                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud4[0] +"' as OKUD_CODE, '"+ SC_data_miner.period4[0] + "' as PERIOD, null as FORM_CD FROM dual\n" +
                                     "minus select * from REPORT_OKUD_CODE;\n" +
                                     "\n" +
                                     "INSERT INTO REPORT_OKUD_CODE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud5[0] +"' as OKUD_CODE, '"+ SC_data_miner.period5[0] +"'as PERIOD, null as FORM_CD FROM dual\n" +
+                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud5[0] +"' as OKUD_CODE, '"+ SC_data_miner.period5[0] + "' as PERIOD, null as FORM_CD FROM dual\n" +
                                     "minus select * from REPORT_OKUD_CODE;\n" +
                                     "\n";
                             break;
                         case 6:
                             report_okud_code_script = "INSERT INTO REPORT_OKUD_CODE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, '"+ SC_data_miner.period[0] +"'as PERIOD, null as FORM_CD FROM dual\n" +
+                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, '"+ SC_data_miner.period[0] + "' as PERIOD, null as FORM_CD FROM dual\n" +
                                     "minus select * from REPORT_OKUD_CODE;\n" +
                                     "\n" +
                                     "INSERT INTO REPORT_OKUD_CODE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud2[0] +"' as OKUD_CODE, '"+ SC_data_miner.period2[0] +"'as PERIOD, null as FORM_CD FROM dual\n" +
+                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud2[0] +"' as OKUD_CODE, '"+ SC_data_miner.period2[0] + "' as PERIOD, null as FORM_CD FROM dual\n" +
                                     "minus select * from REPORT_OKUD_CODE;\n" +
                                     "\n" +
                                     "INSERT INTO REPORT_OKUD_CODE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud3[0] +"' as OKUD_CODE, '"+ SC_data_miner.period3[0] +"'as PERIOD, null as FORM_CD FROM dual\n" +
+                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud3[0] +"' as OKUD_CODE, '"+ SC_data_miner.period3[0] + "' as PERIOD, null as FORM_CD FROM dual\n" +
                                     "minus select * from REPORT_OKUD_CODE;\n" +
                                     "\n" +
                                     "INSERT INTO REPORT_OKUD_CODE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud4[0] +"' as OKUD_CODE, '"+ SC_data_miner.period4[0] +"'as PERIOD, null as FORM_CD FROM dual\n" +
+                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud4[0] +"' as OKUD_CODE, '"+ SC_data_miner.period4[0] + "' as PERIOD, null as FORM_CD FROM dual\n" +
                                     "minus select * from REPORT_OKUD_CODE;\n" +
                                     "\n" +
                                     "INSERT INTO REPORT_OKUD_CODE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud5[0] +"' as OKUD_CODE, '"+ SC_data_miner.period5[0] +"'as PERIOD, null as FORM_CD FROM dual\n" +
+                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud5[0] +"' as OKUD_CODE, '"+ SC_data_miner.period5[0] + "' as PERIOD, null as FORM_CD FROM dual\n" +
                                     "minus select * from REPORT_OKUD_CODE;\n" +
                                     "\n" +
                                     "INSERT INTO REPORT_OKUD_CODE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud6[0] +"' as OKUD_CODE, '"+ SC_data_miner.period6[0] +"'as PERIOD, null as FORM_CD FROM dual\n" +
+                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud6[0] +"' as OKUD_CODE, '"+ SC_data_miner.period6[0] + "' as PERIOD, null as FORM_CD FROM dual\n" +
                                     "minus select * from REPORT_OKUD_CODE;\n" +
                                     "\n";
                             break;
                         case 7:
                             report_okud_code_script = "INSERT INTO REPORT_OKUD_CODE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, '"+ SC_data_miner.period[0] +"'as PERIOD, null as FORM_CD FROM dual\n" +
+                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, '"+ SC_data_miner.period[0] + "' as PERIOD, null as FORM_CD FROM dual\n" +
                                     "minus select * from REPORT_OKUD_CODE;\n" +
                                     "\n" +
                                     "INSERT INTO REPORT_OKUD_CODE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud2[0] +"' as OKUD_CODE, '"+ SC_data_miner.period2[0] +"'as PERIOD, null as FORM_CD FROM dual\n" +
+                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud2[0] +"' as OKUD_CODE, '"+ SC_data_miner.period2[0] + "' as PERIOD, null as FORM_CD FROM dual\n" +
                                     "minus select * from REPORT_OKUD_CODE;\n" +
                                     "\n" +
                                     "INSERT INTO REPORT_OKUD_CODE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud3[0] +"' as OKUD_CODE, '"+ SC_data_miner.period3[0] +"'as PERIOD, null as FORM_CD FROM dual\n" +
+                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud3[0] +"' as OKUD_CODE, '"+ SC_data_miner.period3[0] + "' as PERIOD, null as FORM_CD FROM dual\n" +
                                     "minus select * from REPORT_OKUD_CODE;\n" +
                                     "\n" +
                                     "INSERT INTO REPORT_OKUD_CODE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud4[0] +"' as OKUD_CODE, '"+ SC_data_miner.period4[0] +"'as PERIOD, null as FORM_CD FROM dual\n" +
+                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud4[0] +"' as OKUD_CODE, '"+ SC_data_miner.period4[0] + "' as PERIOD, null as FORM_CD FROM dual\n" +
                                     "minus select * from REPORT_OKUD_CODE;\n" +
                                     "\n" +
                                     "INSERT INTO REPORT_OKUD_CODE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud5[0] +"' as OKUD_CODE, '"+ SC_data_miner.period5[0] +"'as PERIOD, null as FORM_CD FROM dual\n" +
+                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud5[0] +"' as OKUD_CODE, '"+ SC_data_miner.period5[0] + "' as PERIOD, null as FORM_CD FROM dual\n" +
                                     "minus select * from REPORT_OKUD_CODE;\n" +
                                     "\n" +
                                     "INSERT INTO REPORT_OKUD_CODE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud6[0] +"' as OKUD_CODE, '"+ SC_data_miner.period6[0] +"'as PERIOD, null as FORM_CD FROM dual\n" +
+                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud6[0] +"' as OKUD_CODE, '"+ SC_data_miner.period6[0] + "' as PERIOD, null as FORM_CD FROM dual\n" +
                                     "minus select * from REPORT_OKUD_CODE;\n" +
                                     "\n" +
                                     "INSERT INTO REPORT_OKUD_CODE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud7[0] +"' as OKUD_CODE, '"+ SC_data_miner.period7[0] +"'as PERIOD, null as FORM_CD FROM dual\n" +
+                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud7[0] +"' as OKUD_CODE, '"+ SC_data_miner.period7[0] + "' as PERIOD, null as FORM_CD FROM dual\n" +
                                     "minus select * from REPORT_OKUD_CODE;\n" +
                                     "\n";
                             break;
                         case 8:
                             report_okud_code_script = "INSERT INTO REPORT_OKUD_CODE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, '"+ SC_data_miner.period[0] +"'as PERIOD, null as FORM_CD FROM dual\n" +
+                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, '"+ SC_data_miner.period[0] + "' as PERIOD, null as FORM_CD FROM dual\n" +
                                     "minus select * from REPORT_OKUD_CODE;\n" +
                                     "\n" +
                                     "INSERT INTO REPORT_OKUD_CODE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud2[0] +"' as OKUD_CODE, '"+ SC_data_miner.period2[0] +"'as PERIOD, null as FORM_CD FROM dual\n" +
+                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud2[0] +"' as OKUD_CODE, '"+ SC_data_miner.period2[0] + "' as PERIOD, null as FORM_CD FROM dual\n" +
                                     "minus select * from REPORT_OKUD_CODE;\n" +
                                     "\n" +
                                     "INSERT INTO REPORT_OKUD_CODE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud3[0] +"' as OKUD_CODE, '"+ SC_data_miner.period3[0] +"'as PERIOD, null as FORM_CD FROM dual\n" +
+                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud3[0] +"' as OKUD_CODE, '"+ SC_data_miner.period3[0] + "' as PERIOD, null as FORM_CD FROM dual\n" +
                                     "minus select * from REPORT_OKUD_CODE;\n" +
                                     "\n" +
                                     "INSERT INTO REPORT_OKUD_CODE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud4[0] +"' as OKUD_CODE, '"+ SC_data_miner.period4[0] +"'as PERIOD, null as FORM_CD FROM dual\n" +
+                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud4[0] +"' as OKUD_CODE, '"+ SC_data_miner.period4[0] + "' as PERIOD, null as FORM_CD FROM dual\n" +
                                     "minus select * from REPORT_OKUD_CODE;\n" +
                                     "\n" +
                                     "INSERT INTO REPORT_OKUD_CODE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud5[0] +"' as OKUD_CODE, '"+ SC_data_miner.period5[0] +"'as PERIOD, null as FORM_CD FROM dual\n" +
+                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud5[0] +"' as OKUD_CODE, '"+ SC_data_miner.period5[0] + "' as PERIOD, null as FORM_CD FROM dual\n" +
                                     "minus select * from REPORT_OKUD_CODE;\n" +
                                     "\n" +
                                     "INSERT INTO REPORT_OKUD_CODE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud6[0] +"' as OKUD_CODE, '"+ SC_data_miner.period6[0] +"'as PERIOD, null as FORM_CD FROM dual\n" +
+                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud6[0] +"' as OKUD_CODE, '"+ SC_data_miner.period6[0] + "' as PERIOD, null as FORM_CD FROM dual\n" +
                                     "minus select * from REPORT_OKUD_CODE;\n" +
                                     "\n" +
                                     "INSERT INTO REPORT_OKUD_CODE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud7[0] +"' as OKUD_CODE, '"+ SC_data_miner.period7[0] +"'as PERIOD, null as FORM_CD FROM dual\n" +
+                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud7[0] +"' as OKUD_CODE, '"+ SC_data_miner.period7[0] + "' as PERIOD, null as FORM_CD FROM dual\n" +
                                     "minus select * from REPORT_OKUD_CODE;\n" +
                                     "\n" +
                                     "INSERT INTO REPORT_OKUD_CODE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud8[0] +"' as OKUD_CODE, '"+ SC_data_miner.period8[0] +"'as PERIOD, null as FORM_CD FROM dual\n" +
+                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud8[0] +"' as OKUD_CODE, '"+ SC_data_miner.period8[0] + "' as PERIOD, null as FORM_CD FROM dual\n" +
                                     "minus select * from REPORT_OKUD_CODE;\n" +
                                     "\n";
                             break;
                     }
                 }
-                System.out.print("SC_data_miner.Form_formal_code[0] = " + SC_data_miner.Form_formal_code[0] + "\n");
-                if(SC_data_miner.Form_cd[0] == null  || !Objects.equals(SC_data_miner.Form_cd[0], "") || !Objects.equals(SC_data_miner.Form_cd[0], " ") ||
-                        SC_data_miner.Form_formal_code[0] == null  || !Objects.equals(SC_data_miner.Form_formal_code[0], "") || !Objects.equals(SC_data_miner.Form_formal_code[0], " ")){
-                    report_form_src_script = "--Не указаны данные для таблицы REPORT_FORM_SRC\n\n";
+                //System.out.print("SC_data_miner.Form_formal_code[0] = " + SC_data_miner.Form_formal_code[0] + "\n");
+                if(SC_data_miner.Form_cd[0] == null  || Objects.equals(SC_data_miner.Form_cd[0], "") || Objects.equals(SC_data_miner.Form_cd[0], " ") ||
+                        SC_data_miner.Form_formal_code[0] == null  || Objects.equals(SC_data_miner.Form_formal_code[0], "") || Objects.equals(SC_data_miner.Form_formal_code[0], " ")){
+                    report_form_src_script = "--Warning: Не указаны данные для таблицы REPORT_FORM_SRC\n\n";
                 } else {
                     report_form_src_script = "INSERT INTO  REPORT_FORM_SRC \n" +
                             "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_cd[0] +"' as REG_FORM_CODE FROM dual\n" +
                             "minus select * from REPORT_FORM_SRC;\n" +
                             "\n" ;
                 }
-                System.out.print("SC_data_miner.rep_subj_type[0] = " + SC_data_miner.rep_subj_type[0] + "\n");
-                if(SC_data_miner.rep_subj_type[0] == null || !Objects.equals(SC_data_miner.rep_subj_type[0], "") || !Objects.equals(SC_data_miner.rep_subj_type[0], " ")){
-                    report_rep_subj_type_script = "--Не указаны данные для таблицы REPORT_REP_SUBJ_TYPE\n\n";
+                //System.out.print("SC_data_miner.rep_subj_type[0] = " + SC_data_miner.rep_subj_type[0] + "\n");
+                if(SC_data_miner.rep_subj_type[0] == null || Objects.equals(SC_data_miner.rep_subj_type[0], "") || Objects.equals(SC_data_miner.rep_subj_type[0], " ")){
+                    report_rep_subj_type_script = "--Warning: Не указаны данные для таблицы REPORT_REP_SUBJ_TYPE\n\n";
                 } else {
                     int c = OK_Action.getSubj_count(0);
                     switch(c){
                         case 1:
-                            report_rep_subj_type_script = "INSERT INTO  REPORT_REP_SUBJ_TYPE \n" +
+                            report_rep_subj_type_script = "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
                                     "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE FROM dual\n" +
-                                    "minus select * from REPORT_REP_SUBJ_TYPE;" +
+                                    "minus select * from REPORT_REP_SUBJ_TYPE;\n" +
                                     "\n";
                             break;
                         case 2:
-                            report_rep_subj_type_script = "INSERT INTO  REPORT_REP_SUBJ_TYPE \n" +
+                            report_rep_subj_type_script = "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
                                     "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE FROM dual\n" +
-                                    "minus select * from REPORT_REP_SUBJ_TYPE;" +
+                                    "minus select * from REPORT_REP_SUBJ_TYPE;\n" +
                                     "\n" +
-                                    "INSERT INTO  REPORT_REP_SUBJ_TYPE \n" +
+                                    "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
                                     "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type2[0] +"' as REP_SUBJ_TYPE FROM dual\n" +
-                                    "minus select * from REPORT_REP_SUBJ_TYPE;" +
+                                    "minus select * from REPORT_REP_SUBJ_TYPE;\n" +
                                     "\n" ;
                             break;
                         case 3:
-                            report_rep_subj_type_script = "INSERT INTO  REPORT_REP_SUBJ_TYPE \n" +
+                            report_rep_subj_type_script = "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
                                     "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE FROM dual\n" +
-                                    "minus select * from REPORT_REP_SUBJ_TYPE;" +
+                                    "minus select * from REPORT_REP_SUBJ_TYPE;\n" +
                                     "\n" +
-                                    "INSERT INTO  REPORT_REP_SUBJ_TYPE \n" +
+                                    "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
                                     "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type2[0] +"' as REP_SUBJ_TYPE FROM dual\n" +
-                                    "minus select * from REPORT_REP_SUBJ_TYPE;" +
+                                    "minus select * from REPORT_REP_SUBJ_TYPE;\n" +
                                     "\n" +
-                                    "INSERT INTO  REPORT_REP_SUBJ_TYPE \n" +
+                                    "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
                                     "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type3[0] +"' as REP_SUBJ_TYPE FROM dual\n" +
-                                    "minus select * from REPORT_REP_SUBJ_TYPE;" +
+                                    "minus select * from REPORT_REP_SUBJ_TYPE;\n" +
                                     "\n" ;
                             break;
                         case 4:
-                            report_rep_subj_type_script = "INSERT INTO  REPORT_REP_SUBJ_TYPE \n" +
+                            report_rep_subj_type_script = "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
                                     "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE FROM dual\n" +
-                                    "minus select * from REPORT_REP_SUBJ_TYPE;" +
+                                    "minus select * from REPORT_REP_SUBJ_TYPE;\n" +
                                     "\n" +
-                                    "INSERT INTO  REPORT_REP_SUBJ_TYPE \n" +
+                                    "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
                                     "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type2[0] +"' as REP_SUBJ_TYPE FROM dual\n" +
-                                    "minus select * from REPORT_REP_SUBJ_TYPE;" +
+                                    "minus select * from REPORT_REP_SUBJ_TYPE;\n" +
                                     "\n" +
-                                    "INSERT INTO  REPORT_REP_SUBJ_TYPE \n" +
+                                    "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
                                     "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type3[0] +"' as REP_SUBJ_TYPE FROM dual\n" +
-                                    "minus select * from REPORT_REP_SUBJ_TYPE;" +
+                                    "minus select * from REPORT_REP_SUBJ_TYPE;\n" +
                                     "\n" +
-                                    "INSERT INTO  REPORT_REP_SUBJ_TYPE \n" +
+                                    "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
                                     "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type4[0] +"' as REP_SUBJ_TYPE FROM dual\n" +
-                                    "minus select * from REPORT_REP_SUBJ_TYPE;" +
+                                    "minus select * from REPORT_REP_SUBJ_TYPE;\n" +
                                     "\n" ;
                             break;
                         case 5:
-                            report_rep_subj_type_script = "INSERT INTO  REPORT_REP_SUBJ_TYPE \n" +
+                            report_rep_subj_type_script = "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
                                     "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE FROM dual\n" +
-                                    "minus select * from REPORT_REP_SUBJ_TYPE;" +
+                                    "minus select * from REPORT_REP_SUBJ_TYPE;\n" +
                                     "\n" +
-                                    "INSERT INTO  REPORT_REP_SUBJ_TYPE \n" +
+                                    "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
                                     "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type2[0] +"' as REP_SUBJ_TYPE FROM dual\n" +
-                                    "minus select * from REPORT_REP_SUBJ_TYPE;" +
+                                    "minus select * from REPORT_REP_SUBJ_TYPE;\n" +
                                     "\n" +
-                                    "INSERT INTO  REPORT_REP_SUBJ_TYPE \n" +
+                                    "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
                                     "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type3[0] +"' as REP_SUBJ_TYPE FROM dual\n" +
-                                    "minus select * from REPORT_REP_SUBJ_TYPE;" +
+                                    "minus select * from REPORT_REP_SUBJ_TYPE;\n" +
                                     "\n" +
-                                    "INSERT INTO  REPORT_REP_SUBJ_TYPE \n" +
+                                    "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
                                     "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type4[0] +"' as REP_SUBJ_TYPE FROM dual\n" +
-                                    "minus select * from REPORT_REP_SUBJ_TYPE;" +
+                                    "minus select * from REPORT_REP_SUBJ_TYPE;\n" +
                                     "\n" +
-                                    "INSERT INTO  REPORT_REP_SUBJ_TYPE \n" +
+                                    "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
                                     "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type5[0] +"' as REP_SUBJ_TYPE FROM dual\n" +
-                                    "minus select * from REPORT_REP_SUBJ_TYPE;" +
+                                    "minus select * from REPORT_REP_SUBJ_TYPE;\n" +
                                     "\n" ;
                             break;
                         case 6:
-                            report_rep_subj_type_script = "INSERT INTO  REPORT_REP_SUBJ_TYPE \n" +
+                            report_rep_subj_type_script = "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
                                     "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE FROM dual\n" +
-                                    "minus select * from REPORT_REP_SUBJ_TYPE;" +
+                                    "minus select * from REPORT_REP_SUBJ_TYPE;\n" +
                                     "\n" +
-                                    "INSERT INTO  REPORT_REP_SUBJ_TYPE \n" +
+                                    "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
                                     "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type2[0] +"' as REP_SUBJ_TYPE FROM dual\n" +
-                                    "minus select * from REPORT_REP_SUBJ_TYPE;" +
+                                    "minus select * from REPORT_REP_SUBJ_TYPE;\n" +
                                     "\n" +
-                                    "INSERT INTO  REPORT_REP_SUBJ_TYPE \n" +
+                                    "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
                                     "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type3[0] +"' as REP_SUBJ_TYPE FROM dual\n" +
-                                    "minus select * from REPORT_REP_SUBJ_TYPE;" +
+                                    "minus select * from REPORT_REP_SUBJ_TYPE;\n" +
                                     "\n" +
-                                    "INSERT INTO  REPORT_REP_SUBJ_TYPE \n" +
+                                    "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
                                     "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type4[0] +"' as REP_SUBJ_TYPE FROM dual\n" +
-                                    "minus select * from REPORT_REP_SUBJ_TYPE;" +
+                                    "minus select * from REPORT_REP_SUBJ_TYPE;\n" +
                                     "\n" +
-                                    "INSERT INTO  REPORT_REP_SUBJ_TYPE \n" +
+                                    "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
                                     "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type5[0] +"' as REP_SUBJ_TYPE FROM dual\n" +
-                                    "minus select * from REPORT_REP_SUBJ_TYPE;" +
+                                    "minus select * from REPORT_REP_SUBJ_TYPE;\n" +
                                     "\n" +
-                                    "INSERT INTO  REPORT_REP_SUBJ_TYPE \n" +
+                                    "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
                                     "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type6[0] +"' as REP_SUBJ_TYPE FROM dual\n" +
-                                    "minus select * from REPORT_REP_SUBJ_TYPE;" +
+                                    "minus select * from REPORT_REP_SUBJ_TYPE;\n" +
                                     "\n" ;
                             break;
                         case 7:
-                            report_rep_subj_type_script = "INSERT INTO  REPORT_REP_SUBJ_TYPE \n" +
+                            report_rep_subj_type_script = "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
                                     "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE FROM dual\n" +
-                                    "minus select * from REPORT_REP_SUBJ_TYPE;" +
+                                    "minus select * from REPORT_REP_SUBJ_TYPE;\n" +
                                     "\n" +
-                                    "INSERT INTO  REPORT_REP_SUBJ_TYPE \n" +
+                                    "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
                                     "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type2[0] +"' as REP_SUBJ_TYPE FROM dual\n" +
-                                    "minus select * from REPORT_REP_SUBJ_TYPE;" +
+                                    "minus select * from REPORT_REP_SUBJ_TYPE;\n" +
                                     "\n" +
-                                    "INSERT INTO  REPORT_REP_SUBJ_TYPE \n" +
+                                    "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
                                     "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type3[0] +"' as REP_SUBJ_TYPE FROM dual\n" +
-                                    "minus select * from REPORT_REP_SUBJ_TYPE;" +
+                                    "minus select * from REPORT_REP_SUBJ_TYPE;\n" +
                                     "\n" +
-                                    "INSERT INTO  REPORT_REP_SUBJ_TYPE \n" +
+                                    "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
                                     "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type4[0] +"' as REP_SUBJ_TYPE FROM dual\n" +
-                                    "minus select * from REPORT_REP_SUBJ_TYPE;" +
+                                    "minus select * from REPORT_REP_SUBJ_TYPE;\n" +
                                     "\n" +
-                                    "INSERT INTO  REPORT_REP_SUBJ_TYPE \n" +
+                                    "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
                                     "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type5[0] +"' as REP_SUBJ_TYPE FROM dual\n" +
-                                    "minus select * from REPORT_REP_SUBJ_TYPE;" +
+                                    "minus select * from REPORT_REP_SUBJ_TYPE;\n" +
                                     "\n" +
-                                    "INSERT INTO  REPORT_REP_SUBJ_TYPE \n" +
+                                    "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
                                     "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type6[0] +"' as REP_SUBJ_TYPE FROM dual\n" +
-                                    "minus select * from REPORT_REP_SUBJ_TYPE;" +
+                                    "minus select * from REPORT_REP_SUBJ_TYPE;\n" +
                                     "\n" +
-                                    "INSERT INTO  REPORT_REP_SUBJ_TYPE \n" +
+                                    "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
                                     "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type7[0] +"' as REP_SUBJ_TYPE FROM dual\n" +
-                                    "minus select * from REPORT_REP_SUBJ_TYPE;" +
+                                    "minus select * from REPORT_REP_SUBJ_TYPE;\n" +
                                     "\n";
                             break;
                         case 8:
-                            report_rep_subj_type_script = "INSERT INTO  REPORT_REP_SUBJ_TYPE \n" +
+                            report_rep_subj_type_script = "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
                                     "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE FROM dual\n" +
-                                    "minus select * from REPORT_REP_SUBJ_TYPE;" +
+                                    "minus select * from REPORT_REP_SUBJ_TYPE;\n" +
                                     "\n" +
-                                    "INSERT INTO  REPORT_REP_SUBJ_TYPE \n" +
+                                    "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
                                     "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type2[0] +"' as REP_SUBJ_TYPE FROM dual\n" +
-                                    "minus select * from REPORT_REP_SUBJ_TYPE;" +
+                                    "minus select * from REPORT_REP_SUBJ_TYPE;\n" +
                                     "\n" +
-                                    "INSERT INTO  REPORT_REP_SUBJ_TYPE \n" +
+                                    "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
                                     "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type3[0] +"' as REP_SUBJ_TYPE FROM dual\n" +
-                                    "minus select * from REPORT_REP_SUBJ_TYPE;" +
+                                    "minus select * from REPORT_REP_SUBJ_TYPE;\n" +
                                     "\n" +
-                                    "INSERT INTO  REPORT_REP_SUBJ_TYPE \n" +
+                                    "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
                                     "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type4[0] +"' as REP_SUBJ_TYPE FROM dual\n" +
-                                    "minus select * from REPORT_REP_SUBJ_TYPE;" +
+                                    "minus select * from REPORT_REP_SUBJ_TYPE;\n" +
                                     "\n" +
-                                    "INSERT INTO  REPORT_REP_SUBJ_TYPE \n" +
+                                    "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
                                     "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type5[0] +"' as REP_SUBJ_TYPE FROM dual\n" +
-                                    "minus select * from REPORT_REP_SUBJ_TYPE;" +
+                                    "minus select * from REPORT_REP_SUBJ_TYPE;\n" +
                                     "\n" +
-                                    "INSERT INTO  REPORT_REP_SUBJ_TYPE \n" +
+                                    "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
                                     "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type6[0] +"' as REP_SUBJ_TYPE FROM dual\n" +
-                                    "minus select * from REPORT_REP_SUBJ_TYPE;" +
+                                    "minus select * from REPORT_REP_SUBJ_TYPE;\n" +
                                     "\n" +
-                                    "INSERT INTO  REPORT_REP_SUBJ_TYPE \n" +
+                                    "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
                                     "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type7[0] +"' as REP_SUBJ_TYPE FROM dual\n" +
-                                    "minus select * from REPORT_REP_SUBJ_TYPE;" +
+                                    "minus select * from REPORT_REP_SUBJ_TYPE;\n" +
                                     "\n" +
-                                    "INSERT INTO  REPORT_REP_SUBJ_TYPE \n" +
+                                    "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
                                     "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type8[0] +"' as REP_SUBJ_TYPE FROM dual\n" +
-                                    "minus select * from REPORT_REP_SUBJ_TYPE;" +
+                                    "minus select * from REPORT_REP_SUBJ_TYPE;\n" +
                                     "\n" ;
                             break;
 
                     }
                 }
-                System.out.print("SC_data_miner.Search_path[0] = " + SC_data_miner.Search_path[0] + "\n");
-                if(SC_data_miner.Search_path[0] == null || !Objects.equals(SC_data_miner.Search_path[0], "") || !Objects.equals(SC_data_miner.Search_path[0], " ")){
-                    ehd_acs_script = "--Не указаны данные для таблицы EHD_ACS_OBJECTS\n\n";
+                //System.out.print("SC_data_miner.Search_path[0] = " + SC_data_miner.Search_path[0] + "\n");
+                if(SC_data_miner.Search_path[0] == null || Objects.equals(SC_data_miner.Search_path[0], "") || Objects.equals(SC_data_miner.Search_path[0], " ")){
+                    ehd_acs_script = "--Warning: Не указаны данные для таблицы EHD_ACS_OBJECTS\n\n";
                 } else {
                     ehd_acs_script = "MERGE INTO EHD_ACS_OBJECTS O\n" +
                             "   USING (SELECT \n" +
                             "'"+ FName_def[0] +"' as NAME,\n" +
-                            "   '"+ techdb_code +"' as CODE,\n" +
+                            "   '"+ SC_data_miner.Form_formal_code[0] +"' as CODE,\n" +
                             "  (select t.id from EHD_ACS_OBJECTS t where t.type_ref in ('forms','ko_ao','apl_ao','ko_av') and t.code='"+ SC_data_miner.Form_cd[0] +"') as PARENT_ID,\n" +
                             "  '" + TR_def[0] + "' as TYPE_REF,\n" +
                             "  '" + SR_def[0] + "' as SOURCE_REF,\n" +
@@ -1991,30 +2011,44 @@ public class ScriptEXP {
                             "   WHEN NOT MATCHED THEN INSERT (O.NAME, O.CODE, O.PARENT_ID, O.TYPE_REF, O.SOURCE_REF, O.CREATE_DATE, O.UPDATE_DATE, O.SEARCH_PATH, O.FLAG_EXP)\n" +
                             "   VALUES (S.NAME, S.CODE, S.PARENT_ID, S.TYPE_REF, S.SOURCE_REF, S.CREATE_DATE, S.UPDATE_DATE, S.SEARCH_PATH, S.FLAG_EXP);\n" + "commit;" ;
                 }
-                System.out.print("SC_data_miner.p_parent_code_txtf[0] = " + SC_data_miner.p_parent_code_txtf[0] + "\n");
-                System.out.print("SC_data_miner.p_parent_type_ref_txtf[0] = " + SC_data_miner.p_parent_type_ref_txtf[0] + "\n");
-                System.out.print("SC_data_miner.p_type_ref_txtf[0] = " + SC_data_miner.p_type_ref_txtf[0] + "\n");
-                System.out.print("SC_data_miner.p_source_ref_txtf[0] = " + SC_data_miner.p_source_ref_txtf[0] + "\n");
-                System.out.print("SC_data_miner.Search_path[0] = " + SC_data_miner.Search_path[0] + "\n");
-                if(SC_data_miner.p_parent_code_txtf[0] == null || !Objects.equals(SC_data_miner.p_parent_code_txtf[0], "") || !Objects.equals(SC_data_miner.p_parent_code_txtf[0], " ") ||
-                        SC_data_miner.p_parent_type_ref_txtf[0] == null || !Objects.equals(SC_data_miner.p_parent_type_ref_txtf[0], "") || !Objects.equals(SC_data_miner.p_parent_type_ref_txtf[0], " ") ||
-                        SC_data_miner.p_type_ref_txtf[0] == null || !Objects.equals(SC_data_miner.p_type_ref_txtf[0], "") || !Objects.equals(SC_data_miner.p_type_ref_txtf[0], " ") ||
-                        SC_data_miner.p_source_ref_txtf[0] == null || !Objects.equals(SC_data_miner.p_source_ref_txtf[0], "") || !Objects.equals(SC_data_miner.p_source_ref_txtf[0], " ") ||
-                        SC_data_miner.Search_path[0] == null || !Objects.equals(SC_data_miner.Search_path[0], "") || !Objects.equals(SC_data_miner.Search_path[0], " ")){
-                    ehd_acs_script2 = "--Не указаны данные для таблицы EHD_ACS_OBJECTS\n\n";
+                //System.out.print("SC_data_miner.p_parent_code_txtf[0] = " + SC_data_miner.p_parent_code_txtf[0] + "\n");
+                //System.out.print("SC_data_miner.p_parent_type_ref_txtf[0] = " + SC_data_miner.p_parent_type_ref_txtf[0] + "\n");
+                //System.out.print("SC_data_miner.p_type_ref_txtf[0] = " + SC_data_miner.p_type_ref_txtf[0] + "\n");
+                //System.out.print("SC_data_miner.p_source_ref_txtf[0] = " + SC_data_miner.p_source_ref_txtf[0] + "\n");
+                //System.out.print("SC_data_miner.Search_path[0] = " + SC_data_miner.Search_path[0] + "\n");
+                if(SC_data_miner.p_parent_code_txtf[0] == null || Objects.equals(SC_data_miner.p_parent_code_txtf[0], "") || Objects.equals(SC_data_miner.p_parent_code_txtf[0], " ") ||
+                        SC_data_miner.p_parent_type_ref_txtf[0] == null || Objects.equals(SC_data_miner.p_parent_type_ref_txtf[0], "") || Objects.equals(SC_data_miner.p_parent_type_ref_txtf[0], " ") ||
+                        SC_data_miner.p_type_ref_txtf[0] == null || Objects.equals(SC_data_miner.p_type_ref_txtf[0], "") || Objects.equals(SC_data_miner.p_type_ref_txtf[0], " ") ||
+                        SC_data_miner.p_source_ref_txtf[0] == null || Objects.equals(SC_data_miner.p_source_ref_txtf[0], "") || Objects.equals(SC_data_miner.p_source_ref_txtf[0], " ") ){
+                    ehd_acs_script2 = "--Warning: Не указаны данные для таблицы EHD_ACS_OBJECTS\n\n";
                 } else {
-                    ehd_acs_script2 = "begin\n" +
-                            "utils.add_object_node\n" +
-                            "                            (p_name => '" + SC_data_miner.Form_name[0] + "'\n" +
-                            "                            ,p_code => '" + SC_data_miner.Form_cd[0] + "'\n" +
-                            "                            ,p_parent_code => '" + SC_data_miner.p_parent_code_txtf[0] + "' --родительский элемент (код доступа)\n" +
-                            "                            ,p_parent_type_ref =>'" + SC_data_miner.p_parent_type_ref_txtf[0] + "'\n" +
-                            "                            ,p_type_ref => '" + SC_data_miner.p_type_ref_txtf[0] + "'\n" +
-                            "                            ,p_source_ref => '" + SC_data_miner.p_source_ref_txtf[0] + "'\n" +
-                            "                            ,p_search_path => '" + SC_data_miner.Search_path[0] + "\n" +
-                            ");\n" +
-                            "                    end;\n" +
-                            "/";
+                    if((SC_data_miner.Search_path[0] == null || Objects.equals(SC_data_miner.Search_path[0], "") || Objects.equals(SC_data_miner.Search_path[0], " ")) && (!Objects.equals(SC_data_miner.p_type_ref_txtf[0], "cognos") && !Objects.equals(SC_data_miner.p_source_ref_txtf[0], "cognos"))){
+                        ehd_acs_script2 = "begin\n" +
+                                "utils.add_object_node\n" +
+                                "                            (p_name => '" + SC_data_miner.Form_name[0] + "'\n" +
+                                "                            ,p_code => '" + SC_data_miner.Form_cd[0] + "'\n" +
+                                "                            ,p_parent_code => '" + SC_data_miner.p_parent_code_txtf[0] + "' --родительский элемент (код доступа)\n" +
+                                "                            ,p_parent_type_ref =>'" + SC_data_miner.p_parent_type_ref_txtf[0] + "'\n" +
+                                "                            ,p_type_ref => '" + SC_data_miner.p_type_ref_txtf[0] + "'\n" +
+                                "                            ,p_source_ref => '" + SC_data_miner.p_source_ref_txtf[0] + "'\n" +
+                                ");\n" +
+                                "                    end;\n" +
+                                "/";
+                    } else {
+                        ehd_acs_script2 = "begin\n" +
+                                "utils.add_object_node\n" +
+                                "                            (p_name => '" + SC_data_miner.Form_name[0] + "'\n" +
+                                "                            ,p_code => '" + SC_data_miner.Form_cd[0] + "'\n" +
+                                "                            ,p_parent_code => '" + SC_data_miner.p_parent_code_txtf[0] + "' --родительский элемент (код доступа)\n" +
+                                "                            ,p_parent_type_ref =>'" + SC_data_miner.p_parent_type_ref_txtf[0] + "'\n" +
+                                "                            ,p_type_ref => '" + SC_data_miner.p_type_ref_txtf[0] + "'\n" +
+                                "                            ,p_source_ref => '" + SC_data_miner.p_source_ref_txtf[0] + "'\n" +
+                                "                            ,p_search_path => '" + SC_data_miner.Search_path[0] + "\n" +
+                                ");\n" +
+                                "                    end;\n" +
+                                "/";
+                    }
+
                 }
 
                 text[0] =  "--" + FName_def[0] +"\n" +
@@ -2029,7 +2063,7 @@ public class ScriptEXP {
                         reg_report_form_script +
                         report_okud_code_script +
                         report_form_src_script +
-                        report_rep_subj_type_script + "commit;";
+                        report_rep_subj_type_script + "\n\n" + "commit;";
                 text[1] = "--" + FName_def[0] +"\n" +
                         "\n" +
                         "--DM_NIKA_KO\n" +
@@ -2042,24 +2076,24 @@ public class ScriptEXP {
                         reg_report_form_script +
                         report_okud_code_script +
                         report_form_src_script +
-                        report_rep_subj_type_script + "commit;";;
+                        report_rep_subj_type_script + "\n\n" + "commit;";;
 
                 text[2] = "--" + FName_def[0] +"\n" +
                         "\n" +
                         "--DM_NIKA_KO_DATA\n" +
                         "\n" +
-                        rep_form_cognos_script + "commit;";
-
+                        rep_form_cognos_script + "\n\n" + "commit;";
+                System.out.print("type = " + type + "\n");
                 if(type == 0){
                     text[3] = "--" + FName_def[0] +"\n" +
                             "\n" +
                             "--TechDB_EHD_ACS\n" +
-                            "\n" + ehd_acs_script + "commit;" ;
+                            "\n" + ehd_acs_script + "\n\n" + "commit;" ;
                 } else if(type == 1){
                     text[3] = "--" + FName_def[0] +"\n" +
                             "\n" +
                             "--TechDB_EHD_ACS\n" +
-                            "\n" + ehd_acs_script2 ;
+                            "\n" + ehd_acs_script2 + "\n\n" + "commit;" ;
                 }
 
             } else{
@@ -2095,23 +2129,26 @@ public class ScriptEXP {
                 String[] ehd_acs_script = new String[12];
                 String[] ehd_acs_script2 = new String[12];
 
-                if(SC_data_miner.Form_cd[0] == null){
-                    rep_form_script[0] = "--Не указаны данные для таблицы REP_FORM";
-                    rep_form_oki_script[0] = "--Не указаны данные для таблицы REP_FORM_OKI";
+                if((SC_data_miner.Form_cd_name[0]== null) || Objects.equals(SC_data_miner.Form_cd_name[0], "") || Objects.equals(SC_data_miner.Form_cd_name[0], " ")){
+                    rep_form_script[0] = "--Warning: Не указаны данные для таблицы REP_FORM\n\n";
                 } else {
                     rep_form_script[0] = "INSERT INTO REP_FORM \n" +
-                            "SELECT '"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, '"+ SC_data_miner.Form_name[0] +"' as FORM_NAME, " + okud_rep_form + " FROM dual\n" +
+                            "SELECT '"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, '"+ SC_data_miner.Form_cd_name[0] +"' as FORM_NAME, " + okud_rep_form + " FROM dual\n" +
                             "minus select * from REP_FORM;" +
                             "\n" +
                             "\n" ;
+                }
+                if(Objects.equals(iod, "null as FLAG_IOD") || Objects.equals(pdn, "null as FLAG_PDN")){
+                    rep_form_oki_script[0] = "--Warning: Не указаны данные для таблицы REP_FORM_OKI\n\n";
+                } else{
                     rep_form_oki_script[0] = "INSERT INTO REP_FORM_OKI\n" +
                             "SELECT '"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, " + iod + ",  " + pdn + " FROM  dual\n" +
                             "minus select * from REP_FORM_OKI;" +
                             "\n" +
                             "\n" ;
                 }
-                if(SC_data_miner.Form_cd_cog[0] == null){
-                    rep_form_cognos_script[0] = "--Не указаны данные для таблицы REP_FORM_COGNOS";
+                if(SC_data_miner.Form_cd_cog[0] == null || Objects.equals(SC_data_miner.Form_cd_cog[0], "") || Objects.equals(SC_data_miner.Form_cd_cog[0], " ")){
+                    rep_form_cognos_script[0] = "--Warning: Не указаны данные для таблицы REP_FORM_COGNOS\n\n";
                 } else {
                     rep_form_cognos_script[0] = "INSERT INTO REP_FORM_COGNOS\n" +
                             "SELECT '"+ SC_data_miner.Form_cd_cog[0] +"' as FORM_CD, '"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD FROM dual\n" +
@@ -2119,8 +2156,8 @@ public class ScriptEXP {
                             "\n" +
                             "\n";
                 }
-                if(SC_data_miner.Dep_name[0] == null){
-                    rep_form_dep_owner_script[0] = "--Не указаны данные для таблицы REP_FORM_DEP_OWNER";
+                if(SC_data_miner.Dep_name[0] == null || Objects.equals(SC_data_miner.Dep_name[0], "") || Objects.equals(SC_data_miner.Dep_name[0], " ")){
+                    rep_form_dep_owner_script[0] = "--Warning: Не указаны данные для таблицы REP_FORM_DEP_OWNER\n\n";
                 } else {
                     int c = OK_Action.getDep_count(0);
                     switch (c){
@@ -2267,8 +2304,8 @@ public class ScriptEXP {
 
                     }
                 }
-                if(SC_data_miner.Dep_u_name[0] == null){
-                    rep_form_dep_user_script[0] = "--Не указаны данные для таблицы REP_FORM_DEP_USER";
+                if(SC_data_miner.Dep_u_name[0] == null || Objects.equals(SC_data_miner.Dep_u_name[0], "") || Objects.equals(SC_data_miner.Dep_u_name[0], " ")){
+                    rep_form_dep_user_script[0] = "--Warning: Не указаны данные для таблицы REP_FORM_DEP_USER\n\n";
                 } else {
                     int c = OK_Action.getDep_u_count(0);
                     switch (c){
@@ -2415,9 +2452,13 @@ public class ScriptEXP {
 
                     }
                 }
-                if(SC_data_miner.System_id[0] == null || SC_data_miner.Security_role_name[0] == null || SC_data_miner.Security_role_path[0] == null ||
-                        SC_data_miner.Search_path[0] == null || SC_data_miner.Form_formal_code[0] == null || SC_data_miner.Desc[0] == null){
-                    reg_report_form_script[0] = "--Не указаны данные для таблицы REG_REPORT_FORM";
+                if(SC_data_miner.System_id[0] == null || Objects.equals(SC_data_miner.System_id[0], "") || Objects.equals(SC_data_miner.System_id[0], " ") ||
+                        SC_data_miner.Security_role_name[0] == null || Objects.equals(SC_data_miner.Security_role_name[0], "") || Objects.equals(SC_data_miner.Security_role_name[0], " ") ||
+                        SC_data_miner.Security_role_path[0] == null || Objects.equals(SC_data_miner.Security_role_path[0], "") || Objects.equals(SC_data_miner.Security_role_path[0], " ") ||
+                        SC_data_miner.Search_path[0] == null || Objects.equals(SC_data_miner.Search_path[0], "") || Objects.equals(SC_data_miner.Search_path[0], " ") ||
+                        SC_data_miner.Form_formal_code[0] == null || Objects.equals(SC_data_miner.Form_formal_code[0], "") || Objects.equals(SC_data_miner.Form_formal_code[0], " ") ||
+                        SC_data_miner.Desc[0] == null || Objects.equals(SC_data_miner.Desc[0], "") || Objects.equals(SC_data_miner.Desc[0], " ")){
+                    reg_report_form_script[0] = "--Warning: Не указаны данные для таблицы REG_REPORT_FORM\n\n";
                 } else {
                     reg_report_form_script[0] = "MERGE INTO REG_REPORT_FORM R\n" +
                             "   USING (SELECT \n" +
@@ -2444,357 +2485,357 @@ public class ScriptEXP {
                             "\n" +
                             "\n";
                 }
-                if(SC_data_miner.Form_okud[0] == null){
-                    report_okud_code_script[0] = "--Не указаны данные для таблицы REPORT_OKUD_CODE";
+                if(SC_data_miner.Form_okud[0] == null  || Objects.equals(SC_data_miner.Form_okud[0], "") || Objects.equals(SC_data_miner.Form_okud[0], " ")){
+                    report_okud_code_script[0] = "--Warning: Не указаны данные для таблицы REPORT_OKUD_CODE\n\n";
                 } else {
                     int c = OK_Action.getOkud_count(0);
                     switch(c){
                         case 1:
                             report_okud_code_script[0] = "INSERT INTO REPORT_OKUD_CODE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, '"+ SC_data_miner.period[0] +"'as PERIOD, null as FORM_CD FROM dual\n" +
+                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, '"+ SC_data_miner.period[0] + "' as PERIOD, null as FORM_CD FROM dual\n" +
                                     "minus select * from REPORT_OKUD_CODE;\n" +
                                     "\n";
                             break;
                         case 2:
                             report_okud_code_script[0] = "INSERT INTO REPORT_OKUD_CODE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, '"+ SC_data_miner.period[0] +"'as PERIOD, null as FORM_CD FROM dual\n" +
+                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, '"+ SC_data_miner.period[0] + "' as PERIOD, null as FORM_CD FROM dual\n" +
                                     "minus select * from REPORT_OKUD_CODE;\n" +
                                     "\n" +
                                     "INSERT INTO REPORT_OKUD_CODE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud2[0] +"' as OKUD_CODE, '"+ SC_data_miner.period2[0] +"'as PERIOD, null as FORM_CD FROM dual\n" +
+                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud2[0] +"' as OKUD_CODE, '"+ SC_data_miner.period2[0] + "' as PERIOD, null as FORM_CD FROM dual\n" +
                                     "minus select * from REPORT_OKUD_CODE;\n" +
                                     "\n" ;
                             break;
                         case 3:
                             report_okud_code_script[0] = "INSERT INTO REPORT_OKUD_CODE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, '"+ SC_data_miner.period[0] +"'as PERIOD, null as FORM_CD FROM dual\n" +
+                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, '"+ SC_data_miner.period[0] + "' as PERIOD, null as FORM_CD FROM dual\n" +
                                     "minus select * from REPORT_OKUD_CODE;\n" +
                                     "\n" +
                                     "INSERT INTO REPORT_OKUD_CODE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud2[0] +"' as OKUD_CODE, '"+ SC_data_miner.period2[0] +"'as PERIOD, null as FORM_CD FROM dual\n" +
+                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud2[0] +"' as OKUD_CODE, '"+ SC_data_miner.period2[0] + "' as PERIOD, null as FORM_CD FROM dual\n" +
                                     "minus select * from REPORT_OKUD_CODE;\n" +
                                     "\n" +
                                     "INSERT INTO REPORT_OKUD_CODE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud3[0] +"' as OKUD_CODE, '"+ SC_data_miner.period3[0] +"'as PERIOD, null as FORM_CD FROM dual\n" +
+                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud3[0] +"' as OKUD_CODE, '"+ SC_data_miner.period3[0] + "' as PERIOD, null as FORM_CD FROM dual\n" +
                                     "minus select * from REPORT_OKUD_CODE;\n" +
                                     "\n";
                             break;
                         case 4:
                             report_okud_code_script[0] = "INSERT INTO REPORT_OKUD_CODE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, '"+ SC_data_miner.period[0] +"'as PERIOD, null as FORM_CD FROM dual\n" +
+                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, '"+ SC_data_miner.period[0] + "' as PERIOD, null as FORM_CD FROM dual\n" +
                                     "minus select * from REPORT_OKUD_CODE;\n" +
                                     "\n" +
                                     "INSERT INTO REPORT_OKUD_CODE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud2[0] +"' as OKUD_CODE, '"+ SC_data_miner.period2[0] +"'as PERIOD, null as FORM_CD FROM dual\n" +
+                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud2[0] +"' as OKUD_CODE, '"+ SC_data_miner.period2[0] + "' as PERIOD, null as FORM_CD FROM dual\n" +
                                     "minus select * from REPORT_OKUD_CODE;\n" +
                                     "\n" +
                                     "INSERT INTO REPORT_OKUD_CODE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud3[0] +"' as OKUD_CODE, '"+ SC_data_miner.period3[0] +"'as PERIOD, null as FORM_CD FROM dual\n" +
+                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud3[0] +"' as OKUD_CODE, '"+ SC_data_miner.period3[0] + "' as PERIOD, null as FORM_CD FROM dual\n" +
                                     "minus select * from REPORT_OKUD_CODE;\n" +
                                     "\n" +
                                     "INSERT INTO REPORT_OKUD_CODE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud4[0] +"' as OKUD_CODE, '"+ SC_data_miner.period4[0] +"'as PERIOD, null as FORM_CD FROM dual\n" +
+                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud4[0] +"' as OKUD_CODE, '"+ SC_data_miner.period4[0] + "' as PERIOD, null as FORM_CD FROM dual\n" +
                                     "minus select * from REPORT_OKUD_CODE;\n" +
                                     "\n";
                             break;
                         case 5:
                             report_okud_code_script[0] = "INSERT INTO REPORT_OKUD_CODE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, '"+ SC_data_miner.period[0] +"'as PERIOD, null as FORM_CD FROM dual\n" +
+                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, '"+ SC_data_miner.period[0] + "' as PERIOD, null as FORM_CD FROM dual\n" +
                                     "minus select * from REPORT_OKUD_CODE;\n" +
                                     "\n" +
                                     "INSERT INTO REPORT_OKUD_CODE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud2[0] +"' as OKUD_CODE, '"+ SC_data_miner.period2[0] +"'as PERIOD, null as FORM_CD FROM dual\n" +
+                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud2[0] +"' as OKUD_CODE, '"+ SC_data_miner.period2[0] + "' as PERIOD, null as FORM_CD FROM dual\n" +
                                     "minus select * from REPORT_OKUD_CODE;\n" +
                                     "\n" +
                                     "INSERT INTO REPORT_OKUD_CODE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud3[0] +"' as OKUD_CODE, '"+ SC_data_miner.period3[0] +"'as PERIOD, null as FORM_CD FROM dual\n" +
+                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud3[0] +"' as OKUD_CODE, '"+ SC_data_miner.period3[0] + "' as PERIOD, null as FORM_CD FROM dual\n" +
                                     "minus select * from REPORT_OKUD_CODE;\n" +
                                     "\n" +
                                     "INSERT INTO REPORT_OKUD_CODE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud4[0] +"' as OKUD_CODE, '"+ SC_data_miner.period4[0] +"'as PERIOD, null as FORM_CD FROM dual\n" +
+                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud4[0] +"' as OKUD_CODE, '"+ SC_data_miner.period4[0] + "' as PERIOD, null as FORM_CD FROM dual\n" +
                                     "minus select * from REPORT_OKUD_CODE;\n" +
                                     "\n" +
                                     "INSERT INTO REPORT_OKUD_CODE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud5[0] +"' as OKUD_CODE, '"+ SC_data_miner.period5[0] +"'as PERIOD, null as FORM_CD FROM dual\n" +
+                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud5[0] +"' as OKUD_CODE, '"+ SC_data_miner.period5[0] + "' as PERIOD, null as FORM_CD FROM dual\n" +
                                     "minus select * from REPORT_OKUD_CODE;\n" +
                                     "\n";
                             break;
                         case 6:
                             report_okud_code_script[0] = "INSERT INTO REPORT_OKUD_CODE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, '"+ SC_data_miner.period[0] +"'as PERIOD, null as FORM_CD FROM dual\n" +
+                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, '"+ SC_data_miner.period[0] + "' as PERIOD, null as FORM_CD FROM dual\n" +
                                     "minus select * from REPORT_OKUD_CODE;\n" +
                                     "\n" +
                                     "INSERT INTO REPORT_OKUD_CODE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud2[0] +"' as OKUD_CODE, '"+ SC_data_miner.period2[0] +"'as PERIOD, null as FORM_CD FROM dual\n" +
+                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud2[0] +"' as OKUD_CODE, '"+ SC_data_miner.period2[0] + "' as PERIOD, null as FORM_CD FROM dual\n" +
                                     "minus select * from REPORT_OKUD_CODE;\n" +
                                     "\n" +
                                     "INSERT INTO REPORT_OKUD_CODE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud3[0] +"' as OKUD_CODE, '"+ SC_data_miner.period3[0] +"'as PERIOD, null as FORM_CD FROM dual\n" +
+                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud3[0] +"' as OKUD_CODE, '"+ SC_data_miner.period3[0] + "' as PERIOD, null as FORM_CD FROM dual\n" +
                                     "minus select * from REPORT_OKUD_CODE;\n" +
                                     "\n" +
                                     "INSERT INTO REPORT_OKUD_CODE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud4[0] +"' as OKUD_CODE, '"+ SC_data_miner.period4[0] +"'as PERIOD, null as FORM_CD FROM dual\n" +
+                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud4[0] +"' as OKUD_CODE, '"+ SC_data_miner.period4[0] + "' as PERIOD, null as FORM_CD FROM dual\n" +
                                     "minus select * from REPORT_OKUD_CODE;\n" +
                                     "\n" +
                                     "INSERT INTO REPORT_OKUD_CODE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud5[0] +"' as OKUD_CODE, '"+ SC_data_miner.period5[0] +"'as PERIOD, null as FORM_CD FROM dual\n" +
+                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud5[0] +"' as OKUD_CODE, '"+ SC_data_miner.period5[0] + "' as PERIOD, null as FORM_CD FROM dual\n" +
                                     "minus select * from REPORT_OKUD_CODE;\n" +
                                     "\n" +
                                     "INSERT INTO REPORT_OKUD_CODE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud6[0] +"' as OKUD_CODE, '"+ SC_data_miner.period6[0] +"'as PERIOD, null as FORM_CD FROM dual\n" +
+                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud6[0] +"' as OKUD_CODE, '"+ SC_data_miner.period6[0] + "' as PERIOD, null as FORM_CD FROM dual\n" +
                                     "minus select * from REPORT_OKUD_CODE;\n" +
                                     "\n";
                             break;
                         case 7:
                             report_okud_code_script[0] = "INSERT INTO REPORT_OKUD_CODE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, '"+ SC_data_miner.period[0] +"'as PERIOD, null as FORM_CD FROM dual\n" +
+                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, '"+ SC_data_miner.period[0] + "' as PERIOD, null as FORM_CD FROM dual\n" +
                                     "minus select * from REPORT_OKUD_CODE;\n" +
                                     "\n" +
                                     "INSERT INTO REPORT_OKUD_CODE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud2[0] +"' as OKUD_CODE, '"+ SC_data_miner.period2[0] +"'as PERIOD, null as FORM_CD FROM dual\n" +
+                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud2[0] +"' as OKUD_CODE, '"+ SC_data_miner.period2[0] + "' as PERIOD, null as FORM_CD FROM dual\n" +
                                     "minus select * from REPORT_OKUD_CODE;\n" +
                                     "\n" +
                                     "INSERT INTO REPORT_OKUD_CODE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud3[0] +"' as OKUD_CODE, '"+ SC_data_miner.period3[0] +"'as PERIOD, null as FORM_CD FROM dual\n" +
+                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud3[0] +"' as OKUD_CODE, '"+ SC_data_miner.period3[0] + "' as PERIOD, null as FORM_CD FROM dual\n" +
                                     "minus select * from REPORT_OKUD_CODE;\n" +
                                     "\n" +
                                     "INSERT INTO REPORT_OKUD_CODE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud4[0] +"' as OKUD_CODE, '"+ SC_data_miner.period4[0] +"'as PERIOD, null as FORM_CD FROM dual\n" +
+                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud4[0] +"' as OKUD_CODE, '"+ SC_data_miner.period4[0] + "' as PERIOD, null as FORM_CD FROM dual\n" +
                                     "minus select * from REPORT_OKUD_CODE;\n" +
                                     "\n" +
                                     "INSERT INTO REPORT_OKUD_CODE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud5[0] +"' as OKUD_CODE, '"+ SC_data_miner.period5[0] +"'as PERIOD, null as FORM_CD FROM dual\n" +
+                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud5[0] +"' as OKUD_CODE, '"+ SC_data_miner.period5[0] + "' as PERIOD, null as FORM_CD FROM dual\n" +
                                     "minus select * from REPORT_OKUD_CODE;\n" +
                                     "\n" +
                                     "INSERT INTO REPORT_OKUD_CODE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud6[0] +"' as OKUD_CODE, '"+ SC_data_miner.period6[0] +"'as PERIOD, null as FORM_CD FROM dual\n" +
+                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud6[0] +"' as OKUD_CODE, '"+ SC_data_miner.period6[0] + "' as PERIOD, null as FORM_CD FROM dual\n" +
                                     "minus select * from REPORT_OKUD_CODE;\n" +
                                     "\n" +
                                     "INSERT INTO REPORT_OKUD_CODE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud7[0] +"' as OKUD_CODE, '"+ SC_data_miner.period7[0] +"'as PERIOD, null as FORM_CD FROM dual\n" +
+                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud7[0] +"' as OKUD_CODE, '"+ SC_data_miner.period7[0] + "' as PERIOD, null as FORM_CD FROM dual\n" +
                                     "minus select * from REPORT_OKUD_CODE;\n" +
                                     "\n";
                             break;
                         case 8:
                             report_okud_code_script[0] = "INSERT INTO REPORT_OKUD_CODE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, '"+ SC_data_miner.period[0] +"'as PERIOD, null as FORM_CD FROM dual\n" +
+                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, '"+ SC_data_miner.period[0] + "' as PERIOD, null as FORM_CD FROM dual\n" +
                                     "minus select * from REPORT_OKUD_CODE;\n" +
                                     "\n" +
                                     "INSERT INTO REPORT_OKUD_CODE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud2[0] +"' as OKUD_CODE, '"+ SC_data_miner.period2[0] +"'as PERIOD, null as FORM_CD FROM dual\n" +
+                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud2[0] +"' as OKUD_CODE, '"+ SC_data_miner.period2[0] + "' as PERIOD, null as FORM_CD FROM dual\n" +
                                     "minus select * from REPORT_OKUD_CODE;\n" +
                                     "\n" +
                                     "INSERT INTO REPORT_OKUD_CODE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud3[0] +"' as OKUD_CODE, '"+ SC_data_miner.period3[0] +"'as PERIOD, null as FORM_CD FROM dual\n" +
+                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud3[0] +"' as OKUD_CODE, '"+ SC_data_miner.period3[0] + "' as PERIOD, null as FORM_CD FROM dual\n" +
                                     "minus select * from REPORT_OKUD_CODE;\n" +
                                     "\n" +
                                     "INSERT INTO REPORT_OKUD_CODE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud4[0] +"' as OKUD_CODE, '"+ SC_data_miner.period4[0] +"'as PERIOD, null as FORM_CD FROM dual\n" +
+                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud4[0] +"' as OKUD_CODE, '"+ SC_data_miner.period4[0] + "' as PERIOD, null as FORM_CD FROM dual\n" +
                                     "minus select * from REPORT_OKUD_CODE;\n" +
                                     "\n" +
                                     "INSERT INTO REPORT_OKUD_CODE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud5[0] +"' as OKUD_CODE, '"+ SC_data_miner.period5[0] +"'as PERIOD, null as FORM_CD FROM dual\n" +
+                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud5[0] +"' as OKUD_CODE, '"+ SC_data_miner.period5[0] + "' as PERIOD, null as FORM_CD FROM dual\n" +
                                     "minus select * from REPORT_OKUD_CODE;\n" +
                                     "\n" +
                                     "INSERT INTO REPORT_OKUD_CODE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud6[0] +"' as OKUD_CODE, '"+ SC_data_miner.period6[0] +"'as PERIOD, null as FORM_CD FROM dual\n" +
+                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud6[0] +"' as OKUD_CODE, '"+ SC_data_miner.period6[0] + "' as PERIOD, null as FORM_CD FROM dual\n" +
                                     "minus select * from REPORT_OKUD_CODE;\n" +
                                     "\n" +
                                     "INSERT INTO REPORT_OKUD_CODE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud7[0] +"' as OKUD_CODE, '"+ SC_data_miner.period7[0] +"'as PERIOD, null as FORM_CD FROM dual\n" +
+                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud7[0] +"' as OKUD_CODE, '"+ SC_data_miner.period7[0] + "' as PERIOD, null as FORM_CD FROM dual\n" +
                                     "minus select * from REPORT_OKUD_CODE;\n" +
                                     "\n" +
                                     "INSERT INTO REPORT_OKUD_CODE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud8[0] +"' as OKUD_CODE, '"+ SC_data_miner.period8[0] +"'as PERIOD, null as FORM_CD FROM dual\n" +
+                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud8[0] +"' as OKUD_CODE, '"+ SC_data_miner.period8[0] + "' as PERIOD, null as FORM_CD FROM dual\n" +
                                     "minus select * from REPORT_OKUD_CODE;\n" +
                                     "\n";
                             break;
                     }
                 }
-                if(SC_data_miner.Form_cd[0] == null || SC_data_miner.Form_formal_code[0] == null){
-                    report_form_src_script[0] = "--Не указаны данные для таблицы REPORT_FORM_SRC";
+                if(SC_data_miner.Form_cd[0] == null  || Objects.equals(SC_data_miner.Form_cd[0], "") || Objects.equals(SC_data_miner.Form_cd[0], " ") ||
+                        SC_data_miner.Form_formal_code[0] == null  || Objects.equals(SC_data_miner.Form_formal_code[0], "") || Objects.equals(SC_data_miner.Form_formal_code[0], " ")){
+                    report_form_src_script[0] = "--Warning: Не указаны данные для таблицы REPORT_FORM_SRC\n\n";
                 } else {
                     report_form_src_script[0] = "INSERT INTO  REPORT_FORM_SRC \n" +
                             "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_cd[0] +"' as REG_FORM_CODE FROM dual\n" +
                             "minus select * from REPORT_FORM_SRC;\n" +
                             "\n" ;
                 }
-                if(SC_data_miner.rep_subj_type[0] == null){
-                    report_rep_subj_type_script[0] = "--Не указаны данные для таблицы REPORT_REP_SUBJ_TYPE";
+                if(SC_data_miner.rep_subj_type[0] == null || Objects.equals(SC_data_miner.rep_subj_type[0], "") || Objects.equals(SC_data_miner.rep_subj_type[0], " ")){
+                    report_rep_subj_type_script[0] = "--Warning: Не указаны данные для таблицы REPORT_REP_SUBJ_TYPE\n\n";
                 } else {
                     int c = OK_Action.getSubj_count(0);
                     switch(c){
                         case 1:
-                            report_rep_subj_type_script[0] = "INSERT INTO  REPORT_REP_SUBJ_TYPE \n" +
+                            report_rep_subj_type_script[0] = "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
                                     "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE FROM dual\n" +
-                                    "minus select * from REPORT_REP_SUBJ_TYPE;" +
+                                    "minus select * from REPORT_REP_SUBJ_TYPE;\n" +
                                     "\n";
                             break;
                         case 2:
-                            report_rep_subj_type_script[0] = "INSERT INTO  REPORT_REP_SUBJ_TYPE \n" +
+                            report_rep_subj_type_script[0] = "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
                                     "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE FROM dual\n" +
-                                    "minus select * from REPORT_REP_SUBJ_TYPE;" +
+                                    "minus select * from REPORT_REP_SUBJ_TYPE;\n" +
                                     "\n" +
-                                    "INSERT INTO  REPORT_REP_SUBJ_TYPE \n" +
+                                    "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
                                     "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type2[0] +"' as REP_SUBJ_TYPE FROM dual\n" +
-                                    "minus select * from REPORT_REP_SUBJ_TYPE;" +
+                                    "minus select * from REPORT_REP_SUBJ_TYPE;\n" +
                                     "\n" ;
                             break;
                         case 3:
-                            report_rep_subj_type_script[0] = "INSERT INTO  REPORT_REP_SUBJ_TYPE \n" +
+                            report_rep_subj_type_script[0] = "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
                                     "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE FROM dual\n" +
-                                    "minus select * from REPORT_REP_SUBJ_TYPE;" +
+                                    "minus select * from REPORT_REP_SUBJ_TYPE;\n" +
                                     "\n" +
-                                    "INSERT INTO  REPORT_REP_SUBJ_TYPE \n" +
+                                    "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
                                     "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type2[0] +"' as REP_SUBJ_TYPE FROM dual\n" +
-                                    "minus select * from REPORT_REP_SUBJ_TYPE;" +
+                                    "minus select * from REPORT_REP_SUBJ_TYPE;\n" +
                                     "\n" +
-                                    "INSERT INTO  REPORT_REP_SUBJ_TYPE \n" +
+                                    "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
                                     "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type3[0] +"' as REP_SUBJ_TYPE FROM dual\n" +
-                                    "minus select * from REPORT_REP_SUBJ_TYPE;" +
+                                    "minus select * from REPORT_REP_SUBJ_TYPE;\n" +
                                     "\n" ;
                             break;
                         case 4:
-                            report_rep_subj_type_script[0] = "INSERT INTO  REPORT_REP_SUBJ_TYPE \n" +
+                            report_rep_subj_type_script[0] = "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
                                     "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE FROM dual\n" +
-                                    "minus select * from REPORT_REP_SUBJ_TYPE;" +
+                                    "minus select * from REPORT_REP_SUBJ_TYPE;\n" +
                                     "\n" +
-                                    "INSERT INTO  REPORT_REP_SUBJ_TYPE \n" +
+                                    "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
                                     "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type2[0] +"' as REP_SUBJ_TYPE FROM dual\n" +
-                                    "minus select * from REPORT_REP_SUBJ_TYPE;" +
+                                    "minus select * from REPORT_REP_SUBJ_TYPE;\n" +
                                     "\n" +
-                                    "INSERT INTO  REPORT_REP_SUBJ_TYPE \n" +
+                                    "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
                                     "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type3[0] +"' as REP_SUBJ_TYPE FROM dual\n" +
-                                    "minus select * from REPORT_REP_SUBJ_TYPE;" +
+                                    "minus select * from REPORT_REP_SUBJ_TYPE;\n" +
                                     "\n" +
-                                    "INSERT INTO  REPORT_REP_SUBJ_TYPE \n" +
+                                    "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
                                     "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type4[0] +"' as REP_SUBJ_TYPE FROM dual\n" +
-                                    "minus select * from REPORT_REP_SUBJ_TYPE;" +
+                                    "minus select * from REPORT_REP_SUBJ_TYPE;\n" +
                                     "\n" ;
                             break;
                         case 5:
-                            report_rep_subj_type_script[0] = "INSERT INTO  REPORT_REP_SUBJ_TYPE \n" +
+                            report_rep_subj_type_script[0] = "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
                                     "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE FROM dual\n" +
-                                    "minus select * from REPORT_REP_SUBJ_TYPE;" +
+                                    "minus select * from REPORT_REP_SUBJ_TYPE;\n" +
                                     "\n" +
-                                    "INSERT INTO  REPORT_REP_SUBJ_TYPE \n" +
+                                    "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
                                     "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type2[0] +"' as REP_SUBJ_TYPE FROM dual\n" +
-                                    "minus select * from REPORT_REP_SUBJ_TYPE;" +
+                                    "minus select * from REPORT_REP_SUBJ_TYPE;\n" +
                                     "\n" +
-                                    "INSERT INTO  REPORT_REP_SUBJ_TYPE \n" +
+                                    "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
                                     "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type3[0] +"' as REP_SUBJ_TYPE FROM dual\n" +
-                                    "minus select * from REPORT_REP_SUBJ_TYPE;" +
+                                    "minus select * from REPORT_REP_SUBJ_TYPE;\n" +
                                     "\n" +
-                                    "INSERT INTO  REPORT_REP_SUBJ_TYPE \n" +
+                                    "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
                                     "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type4[0] +"' as REP_SUBJ_TYPE FROM dual\n" +
-                                    "minus select * from REPORT_REP_SUBJ_TYPE;" +
+                                    "minus select * from REPORT_REP_SUBJ_TYPE;\n" +
                                     "\n" +
-                                    "INSERT INTO  REPORT_REP_SUBJ_TYPE \n" +
+                                    "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
                                     "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type5[0] +"' as REP_SUBJ_TYPE FROM dual\n" +
-                                    "minus select * from REPORT_REP_SUBJ_TYPE;" +
+                                    "minus select * from REPORT_REP_SUBJ_TYPE;\n" +
                                     "\n" ;
                             break;
                         case 6:
-                            report_rep_subj_type_script[0] = "INSERT INTO  REPORT_REP_SUBJ_TYPE \n" +
+                            report_rep_subj_type_script[0] = "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
                                     "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE FROM dual\n" +
-                                    "minus select * from REPORT_REP_SUBJ_TYPE;" +
+                                    "minus select * from REPORT_REP_SUBJ_TYPE;\n" +
                                     "\n" +
-                                    "INSERT INTO  REPORT_REP_SUBJ_TYPE \n" +
+                                    "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
                                     "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type2[0] +"' as REP_SUBJ_TYPE FROM dual\n" +
-                                    "minus select * from REPORT_REP_SUBJ_TYPE;" +
+                                    "minus select * from REPORT_REP_SUBJ_TYPE;\n" +
                                     "\n" +
-                                    "INSERT INTO  REPORT_REP_SUBJ_TYPE \n" +
+                                    "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
                                     "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type3[0] +"' as REP_SUBJ_TYPE FROM dual\n" +
-                                    "minus select * from REPORT_REP_SUBJ_TYPE;" +
+                                    "minus select * from REPORT_REP_SUBJ_TYPE;\n" +
                                     "\n" +
-                                    "INSERT INTO  REPORT_REP_SUBJ_TYPE \n" +
+                                    "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
                                     "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type4[0] +"' as REP_SUBJ_TYPE FROM dual\n" +
-                                    "minus select * from REPORT_REP_SUBJ_TYPE;" +
+                                    "minus select * from REPORT_REP_SUBJ_TYPE;\n" +
                                     "\n" +
-                                    "INSERT INTO  REPORT_REP_SUBJ_TYPE \n" +
+                                    "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
                                     "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type5[0] +"' as REP_SUBJ_TYPE FROM dual\n" +
-                                    "minus select * from REPORT_REP_SUBJ_TYPE;" +
+                                    "minus select * from REPORT_REP_SUBJ_TYPE;\n" +
                                     "\n" +
-                                    "INSERT INTO  REPORT_REP_SUBJ_TYPE \n" +
+                                    "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
                                     "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type6[0] +"' as REP_SUBJ_TYPE FROM dual\n" +
-                                    "minus select * from REPORT_REP_SUBJ_TYPE;" +
+                                    "minus select * from REPORT_REP_SUBJ_TYPE;\n" +
                                     "\n" ;
                             break;
                         case 7:
-                            report_rep_subj_type_script[0] = "INSERT INTO  REPORT_REP_SUBJ_TYPE \n" +
+                            report_rep_subj_type_script[0] = "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
                                     "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE FROM dual\n" +
-                                    "minus select * from REPORT_REP_SUBJ_TYPE;" +
+                                    "minus select * from REPORT_REP_SUBJ_TYPE;\n" +
                                     "\n" +
-                                    "INSERT INTO  REPORT_REP_SUBJ_TYPE \n" +
+                                    "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
                                     "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type2[0] +"' as REP_SUBJ_TYPE FROM dual\n" +
-                                    "minus select * from REPORT_REP_SUBJ_TYPE;" +
+                                    "minus select * from REPORT_REP_SUBJ_TYPE;\n" +
                                     "\n" +
-                                    "INSERT INTO  REPORT_REP_SUBJ_TYPE \n" +
+                                    "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
                                     "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type3[0] +"' as REP_SUBJ_TYPE FROM dual\n" +
-                                    "minus select * from REPORT_REP_SUBJ_TYPE;" +
+                                    "minus select * from REPORT_REP_SUBJ_TYPE;\n" +
                                     "\n" +
-                                    "INSERT INTO  REPORT_REP_SUBJ_TYPE \n" +
+                                    "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
                                     "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type4[0] +"' as REP_SUBJ_TYPE FROM dual\n" +
-                                    "minus select * from REPORT_REP_SUBJ_TYPE;" +
+                                    "minus select * from REPORT_REP_SUBJ_TYPE;\n" +
                                     "\n" +
-                                    "INSERT INTO  REPORT_REP_SUBJ_TYPE \n" +
+                                    "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
                                     "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type5[0] +"' as REP_SUBJ_TYPE FROM dual\n" +
-                                    "minus select * from REPORT_REP_SUBJ_TYPE;" +
+                                    "minus select * from REPORT_REP_SUBJ_TYPE;\n" +
                                     "\n" +
-                                    "INSERT INTO  REPORT_REP_SUBJ_TYPE \n" +
+                                    "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
                                     "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type6[0] +"' as REP_SUBJ_TYPE FROM dual\n" +
-                                    "minus select * from REPORT_REP_SUBJ_TYPE;" +
+                                    "minus select * from REPORT_REP_SUBJ_TYPE;\n" +
                                     "\n" +
-                                    "INSERT INTO  REPORT_REP_SUBJ_TYPE \n" +
+                                    "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
                                     "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type7[0] +"' as REP_SUBJ_TYPE FROM dual\n" +
-                                    "minus select * from REPORT_REP_SUBJ_TYPE;" +
+                                    "minus select * from REPORT_REP_SUBJ_TYPE;\n" +
                                     "\n";
                             break;
                         case 8:
-                            report_rep_subj_type_script[0] = "INSERT INTO  REPORT_REP_SUBJ_TYPE \n" +
+                            report_rep_subj_type_script[0] = "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
                                     "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE FROM dual\n" +
-                                    "minus select * from REPORT_REP_SUBJ_TYPE;" +
+                                    "minus select * from REPORT_REP_SUBJ_TYPE;\n" +
                                     "\n" +
-                                    "INSERT INTO  REPORT_REP_SUBJ_TYPE \n" +
+                                    "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
                                     "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type2[0] +"' as REP_SUBJ_TYPE FROM dual\n" +
-                                    "minus select * from REPORT_REP_SUBJ_TYPE;" +
+                                    "minus select * from REPORT_REP_SUBJ_TYPE;\n" +
                                     "\n" +
-                                    "INSERT INTO  REPORT_REP_SUBJ_TYPE \n" +
+                                    "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
                                     "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type3[0] +"' as REP_SUBJ_TYPE FROM dual\n" +
-                                    "minus select * from REPORT_REP_SUBJ_TYPE;" +
+                                    "minus select * from REPORT_REP_SUBJ_TYPE;\n" +
                                     "\n" +
-                                    "INSERT INTO  REPORT_REP_SUBJ_TYPE \n" +
+                                    "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
                                     "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type4[0] +"' as REP_SUBJ_TYPE FROM dual\n" +
-                                    "minus select * from REPORT_REP_SUBJ_TYPE;" +
+                                    "minus select * from REPORT_REP_SUBJ_TYPE;\n" +
                                     "\n" +
-                                    "INSERT INTO  REPORT_REP_SUBJ_TYPE \n" +
+                                    "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
                                     "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type5[0] +"' as REP_SUBJ_TYPE FROM dual\n" +
-                                    "minus select * from REPORT_REP_SUBJ_TYPE;" +
+                                    "minus select * from REPORT_REP_SUBJ_TYPE;\n" +
                                     "\n" +
-                                    "INSERT INTO  REPORT_REP_SUBJ_TYPE \n" +
+                                    "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
                                     "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type6[0] +"' as REP_SUBJ_TYPE FROM dual\n" +
-                                    "minus select * from REPORT_REP_SUBJ_TYPE;" +
+                                    "minus select * from REPORT_REP_SUBJ_TYPE;\n" +
                                     "\n" +
-                                    "INSERT INTO  REPORT_REP_SUBJ_TYPE \n" +
+                                    "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
                                     "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type7[0] +"' as REP_SUBJ_TYPE FROM dual\n" +
-                                    "minus select * from REPORT_REP_SUBJ_TYPE;" +
+                                    "minus select * from REPORT_REP_SUBJ_TYPE;\n" +
                                     "\n" +
-                                    "INSERT INTO  REPORT_REP_SUBJ_TYPE \n" +
+                                    "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
                                     "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type8[0] +"' as REP_SUBJ_TYPE FROM dual\n" +
-                                    "minus select * from REPORT_REP_SUBJ_TYPE;" +
+                                    "minus select * from REPORT_REP_SUBJ_TYPE;\n" +
                                     "\n" ;
                             break;
 
                     }
                 }
-
-                if(SC_data_miner.Search_path[0] == null){
-                    ehd_acs_script[0] = "--Не указаны данные для таблицы EHD_ACS_OBJECTS";
+                if(SC_data_miner.Search_path[0] == null || Objects.equals(SC_data_miner.Search_path[0], "") || Objects.equals(SC_data_miner.Search_path[0], " ")){
+                    ehd_acs_script[0] = "--Warning: Не указаны данные для таблицы EHD_ACS_OBJECTS\n\n";
                 } else {
                     ehd_acs_script[0] = "MERGE INTO EHD_ACS_OBJECTS O\n" +
                             "   USING (SELECT \n" +
                             "'"+ FName_def[0] +"' as NAME,\n" +
-                            "   '"+ techdb_code +"' as CODE,\n" +
+                            "   '"+ SC_data_miner.Form_formal_code[0] +"' as CODE,\n" +
                             "  (select t.id from EHD_ACS_OBJECTS t where t.type_ref in ('forms','ko_ao','apl_ao','ko_av') and t.code='"+ SC_data_miner.Form_cd[0] +"') as PARENT_ID,\n" +
                             "  '" + TR_def[0] + "' as TYPE_REF,\n" +
                             "  '" + SR_def[0] + "' as SOURCE_REF,\n" +
@@ -2812,9 +2853,12 @@ public class ScriptEXP {
                             "   WHEN NOT MATCHED THEN INSERT (O.NAME, O.CODE, O.PARENT_ID, O.TYPE_REF, O.SOURCE_REF, O.CREATE_DATE, O.UPDATE_DATE, O.SEARCH_PATH, O.FLAG_EXP)\n" +
                             "   VALUES (S.NAME, S.CODE, S.PARENT_ID, S.TYPE_REF, S.SOURCE_REF, S.CREATE_DATE, S.UPDATE_DATE, S.SEARCH_PATH, S.FLAG_EXP);\n" + "commit;" ;
                 }
-                if(SC_data_miner.p_parent_code_txtf[0] == null || SC_data_miner.p_parent_type_ref_txtf[0] == null || SC_data_miner.p_type_ref_txtf[0] == null ||
-                        SC_data_miner.p_source_ref_txtf[0] == null || SC_data_miner.Search_path[0] == null){
-                    ehd_acs_script2[0] = "--Не указаны данные для таблицы EHD_ACS_OBJECTS";
+                if(SC_data_miner.p_parent_code_txtf[0] == null || Objects.equals(SC_data_miner.p_parent_code_txtf[0], "") || Objects.equals(SC_data_miner.p_parent_code_txtf[0], " ") ||
+                        SC_data_miner.p_parent_type_ref_txtf[0] == null || Objects.equals(SC_data_miner.p_parent_type_ref_txtf[0], "") || Objects.equals(SC_data_miner.p_parent_type_ref_txtf[0], " ") ||
+                        SC_data_miner.p_type_ref_txtf[0] == null || Objects.equals(SC_data_miner.p_type_ref_txtf[0], "") || Objects.equals(SC_data_miner.p_type_ref_txtf[0], " ") ||
+                        SC_data_miner.p_source_ref_txtf[0] == null || Objects.equals(SC_data_miner.p_source_ref_txtf[0], "") || Objects.equals(SC_data_miner.p_source_ref_txtf[0], " ") ||
+                        SC_data_miner.Search_path[0] == null || Objects.equals(SC_data_miner.Search_path[0], "") || Objects.equals(SC_data_miner.Search_path[0], " ")){
+                    ehd_acs_script2[0] = "--Warning: Не указаны данные для таблицы EHD_ACS_OBJECTS\n\n";
                 } else {
                     ehd_acs_script2[0] = "begin\n" +
                             "utils.add_object_node\n" +
@@ -2842,7 +2886,7 @@ public class ScriptEXP {
                         reg_report_form_script[0] +
                         report_okud_code_script[0] +
                         report_form_src_script[0] +
-                        report_rep_subj_type_script[0] + "commit;";
+                        report_rep_subj_type_script[0] + "\n\ncommit;";
                 text[1] = "--" + FName_def[0] +"\n" +
                         "\n" +
                         "--DM_NIKA_KO\n" +
@@ -2855,13 +2899,13 @@ public class ScriptEXP {
                         reg_report_form_script[0] +
                         report_okud_code_script[0] +
                         report_form_src_script[0] +
-                        report_rep_subj_type_script[0] + "commit;";;
+                        report_rep_subj_type_script[0] + "\n\ncommit;";;
 
                 text[2] = "--" + FName_def[0] +"\n" +
                         "\n" +
                         "--DM_NIKA_KO_DATA\n" +
                         "\n" +
-                        rep_form_cognos_script[0] + "commit;";
+                        rep_form_cognos_script[0] + "\n\n" + "commit;";
 
                 if(type == 0){
                     text[3] = "--" + FName_def[0] +"\n" +
@@ -2876,24 +2920,29 @@ public class ScriptEXP {
                 }
                 
                 for(int n = 1; n<=count; n++){
-
-                    if(SC_data_miner.Form_cd[n] == null){
-                        rep_form_script[n] = "--Не указаны данные для таблицы REP_FORM";
-                        rep_form_oki_script[n] = "--Не указаны данные для таблицы REP_FORM_OKI";
+                    if (SC_data_miner.Form_cd[n] == null){
+                        SC_data_miner.Form_cd[n] = SC_data_miner.Form_cd[0];
+                    }
+                    if((SC_data_miner.Form_cd_name[n]== null) || Objects.equals(SC_data_miner.Form_cd_name[n], "") || Objects.equals(SC_data_miner.Form_cd_name[n], " ")){
+                        rep_form_script[n] = "--Warning: Не указаны данные для таблицы REP_FORM\n\n";
                     } else {
                         rep_form_script[n] = "INSERT INTO REP_FORM \n" +
-                                "SELECT '"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, '"+ SC_data_miner.Form_name[n] +"' as FORM_NAME, " + okud_rep_form + " FROM dual\n" +
+                                "SELECT '"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, '"+ SC_data_miner.Form_cd_name[n] +"' as FORM_NAME, " + okud_rep_form + " FROM dual\n" +
                                 "minus select * from REP_FORM;" +
                                 "\n" +
                                 "\n" ;
+                    }
+                    if(Objects.equals(iod, "null as FLAG_IOD") || Objects.equals(pdn, "null as FLAG_PDN")){
+                        rep_form_oki_script[n] = "--Warning: Не указаны данные для таблицы REP_FORM_OKI\n\n";
+                    } else{
                         rep_form_oki_script[n] = "INSERT INTO REP_FORM_OKI\n" +
                                 "SELECT '"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, " + iod + ",  " + pdn + " FROM  dual\n" +
                                 "minus select * from REP_FORM_OKI;" +
                                 "\n" +
                                 "\n" ;
                     }
-                    if(SC_data_miner.Form_cd_cog[n] == null){
-                        rep_form_cognos_script[n] = "--Не указаны данные для таблицы REP_FORM_COGNOS";
+                    if(SC_data_miner.Form_cd_cog[n] == null || Objects.equals(SC_data_miner.Form_cd_cog[n], "") || Objects.equals(SC_data_miner.Form_cd_cog[n], " ")){
+                        rep_form_cognos_script[n] = "--Warning: Не указаны данные для таблицы REP_FORM_COGNOS\n\n";
                     } else {
                         rep_form_cognos_script[n] = "INSERT INTO REP_FORM_COGNOS\n" +
                                 "SELECT '"+ SC_data_miner.Form_cd_cog[n] +"' as FORM_CD, '"+ SC_data_miner.Form_cd[n] + "' as REP_FORM_CD FROM dual\n" +
@@ -2901,8 +2950,8 @@ public class ScriptEXP {
                                 "\n" +
                                 "\n";
                     }
-                    if(SC_data_miner.Dep_name[n] == null){
-                        rep_form_dep_owner_script[n] = "--Не указаны данные для таблицы REP_FORM_DEP_OWNER";
+                    if(SC_data_miner.Dep_name[n] == null || Objects.equals(SC_data_miner.Dep_name[n], "") || Objects.equals(SC_data_miner.Dep_name[n], " ")){
+                        rep_form_dep_owner_script[n] = "--Warning: Не указаны данные для таблицы REP_FORM_DEP_OWNER\n\n";
                     } else {
                         int c = OK_Action.getDep_count(0);
                         switch (c){
@@ -3049,8 +3098,8 @@ public class ScriptEXP {
 
                         }
                     }
-                    if(SC_data_miner.Dep_u_name[n] == null){
-                        rep_form_dep_user_script[n] = "--Не указаны данные для таблицы REP_FORM_DEP_USER";
+                    if(SC_data_miner.Dep_u_name[n] == null || Objects.equals(SC_data_miner.Dep_u_name[n], "") || Objects.equals(SC_data_miner.Dep_u_name[n], " ")){
+                        rep_form_dep_user_script[n] = "--Warning: Не указаны данные для таблицы REP_FORM_DEP_USER\n\n";
                     } else {
                         int c = OK_Action.getDep_u_count(0);
                         switch (c){
@@ -3197,9 +3246,13 @@ public class ScriptEXP {
 
                         }
                     }
-                    if(SC_data_miner.System_id[n] == null || SC_data_miner.Security_role_name[n] == null || SC_data_miner.Security_role_path[n] == null ||
-                            SC_data_miner.Search_path[n] == null || SC_data_miner.Form_formal_code[n] == null || SC_data_miner.Desc[n] == null){
-                        reg_report_form_script[n] = "--Не указаны данные для таблицы REG_REPORT_FORM";
+                    if(SC_data_miner.System_id[n] == null || Objects.equals(SC_data_miner.System_id[n], "") || Objects.equals(SC_data_miner.System_id[n], " ") ||
+                            SC_data_miner.Security_role_name[n] == null || Objects.equals(SC_data_miner.Security_role_name[n], "") || Objects.equals(SC_data_miner.Security_role_name[n], " ") ||
+                            SC_data_miner.Security_role_path[n] == null || Objects.equals(SC_data_miner.Security_role_path[n], "") || Objects.equals(SC_data_miner.Security_role_path[n], " ") ||
+                            SC_data_miner.Search_path[n] == null || Objects.equals(SC_data_miner.Search_path[n], "") || Objects.equals(SC_data_miner.Search_path[n], " ") ||
+                            SC_data_miner.Form_formal_code[n] == null || Objects.equals(SC_data_miner.Form_formal_code[n], "") || Objects.equals(SC_data_miner.Form_formal_code[n], " ") ||
+                            SC_data_miner.Desc[n] == null || Objects.equals(SC_data_miner.Desc[n], "") || Objects.equals(SC_data_miner.Desc[n], " ")){
+                        reg_report_form_script[n] = "--Warning: Не указаны данные для таблицы REG_REPORT_FORM\n\n";
                     } else {
                         reg_report_form_script[n] = "MERGE INTO REG_REPORT_FORM R\n" +
                                 "   USING (SELECT \n" +
@@ -3226,357 +3279,361 @@ public class ScriptEXP {
                                 "\n" +
                                 "\n";
                     }
-                    if(SC_data_miner.Form_okud[n] == null){
-                        report_okud_code_script[n] = "--Не указаны данные для таблицы REPORT_OKUD_CODE";
+                    if(SC_data_miner.Form_okud[n] == null  || Objects.equals(SC_data_miner.Form_okud[n], "") || Objects.equals(SC_data_miner.Form_okud[n], " ")){
+                        report_okud_code_script[n] = "--Warning: Не указаны данные для таблицы REPORT_OKUD_CODE\n\n";
                     } else {
-                        int c = OK_Action.getOkud_count(0);
+                        //System.out.print("n =" + n + "\n");
+                        int c = OK_Action.getOkud_count(n);
+                        //System.out.print("c =" + c + "\n");
                         switch(c){
                             case 1:
                                 report_okud_code_script[n] = "INSERT INTO REPORT_OKUD_CODE \n" +
-                                        "SELECT '"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud[n] +"' as OKUD_CODE, '"+ SC_data_miner.period[n] +"'as PERIOD, null as FORM_CD FROM dual\n" +
+                                        "SELECT '"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud[n] +"' as OKUD_CODE, '"+ SC_data_miner.period[n] + "' as PERIOD, null as FORM_CD FROM dual\n" +
                                         "minus select * from REPORT_OKUD_CODE;\n" +
                                         "\n";
                                 break;
                             case 2:
                                 report_okud_code_script[n] = "INSERT INTO REPORT_OKUD_CODE \n" +
-                                        "SELECT '"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud[n] +"' as OKUD_CODE, '"+ SC_data_miner.period[n] +"'as PERIOD, null as FORM_CD FROM dual\n" +
+                                        "SELECT '"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud[n] +"' as OKUD_CODE, '"+ SC_data_miner.period[n] + "' as PERIOD, null as FORM_CD FROM dual\n" +
                                         "minus select * from REPORT_OKUD_CODE;\n" +
                                         "\n" +
                                         "INSERT INTO REPORT_OKUD_CODE \n" +
-                                        "SELECT '"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud2[n] +"' as OKUD_CODE, '"+ SC_data_miner.period2[n] +"'as PERIOD, null as FORM_CD FROM dual\n" +
+                                        "SELECT '"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud2[n] +"' as OKUD_CODE, '"+ SC_data_miner.period2[n] + "' as PERIOD, null as FORM_CD FROM dual\n" +
                                         "minus select * from REPORT_OKUD_CODE;\n" +
                                         "\n" ;
                                 break;
                             case 3:
                                 report_okud_code_script[n] = "INSERT INTO REPORT_OKUD_CODE \n" +
-                                        "SELECT '"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud[n] +"' as OKUD_CODE, '"+ SC_data_miner.period[n] +"'as PERIOD, null as FORM_CD FROM dual\n" +
+                                        "SELECT '"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud[n] +"' as OKUD_CODE, '"+ SC_data_miner.period[n] + "' as PERIOD, null as FORM_CD FROM dual\n" +
                                         "minus select * from REPORT_OKUD_CODE;\n" +
                                         "\n" +
                                         "INSERT INTO REPORT_OKUD_CODE \n" +
-                                        "SELECT '"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud2[n] +"' as OKUD_CODE, '"+ SC_data_miner.period2[n] +"'as PERIOD, null as FORM_CD FROM dual\n" +
+                                        "SELECT '"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud2[n] +"' as OKUD_CODE, '"+ SC_data_miner.period2[n] + "' as PERIOD, null as FORM_CD FROM dual\n" +
                                         "minus select * from REPORT_OKUD_CODE;\n" +
                                         "\n" +
                                         "INSERT INTO REPORT_OKUD_CODE \n" +
-                                        "SELECT '"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud3[n] +"' as OKUD_CODE, '"+ SC_data_miner.period3[n] +"'as PERIOD, null as FORM_CD FROM dual\n" +
+                                        "SELECT '"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud3[n] +"' as OKUD_CODE, '"+ SC_data_miner.period3[n] + "' as PERIOD, null as FORM_CD FROM dual\n" +
                                         "minus select * from REPORT_OKUD_CODE;\n" +
                                         "\n";
                                 break;
                             case 4:
                                 report_okud_code_script[n] = "INSERT INTO REPORT_OKUD_CODE \n" +
-                                        "SELECT '"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud[n] +"' as OKUD_CODE, '"+ SC_data_miner.period[n] +"'as PERIOD, null as FORM_CD FROM dual\n" +
+                                        "SELECT '"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud[n] +"' as OKUD_CODE, '"+ SC_data_miner.period[n] + "' as PERIOD, null as FORM_CD FROM dual\n" +
                                         "minus select * from REPORT_OKUD_CODE;\n" +
                                         "\n" +
                                         "INSERT INTO REPORT_OKUD_CODE \n" +
-                                        "SELECT '"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud2[n] +"' as OKUD_CODE, '"+ SC_data_miner.period2[n] +"'as PERIOD, null as FORM_CD FROM dual\n" +
+                                        "SELECT '"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud2[n] +"' as OKUD_CODE, '"+ SC_data_miner.period2[n] + "' as PERIOD, null as FORM_CD FROM dual\n" +
                                         "minus select * from REPORT_OKUD_CODE;\n" +
                                         "\n" +
                                         "INSERT INTO REPORT_OKUD_CODE \n" +
-                                        "SELECT '"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud3[n] +"' as OKUD_CODE, '"+ SC_data_miner.period3[n] +"'as PERIOD, null as FORM_CD FROM dual\n" +
+                                        "SELECT '"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud3[n] +"' as OKUD_CODE, '"+ SC_data_miner.period3[n] + "' as PERIOD, null as FORM_CD FROM dual\n" +
                                         "minus select * from REPORT_OKUD_CODE;\n" +
                                         "\n" +
                                         "INSERT INTO REPORT_OKUD_CODE \n" +
-                                        "SELECT '"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud4[n] +"' as OKUD_CODE, '"+ SC_data_miner.period4[n] +"'as PERIOD, null as FORM_CD FROM dual\n" +
+                                        "SELECT '"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud4[n] +"' as OKUD_CODE, '"+ SC_data_miner.period4[n] + "' as PERIOD, null as FORM_CD FROM dual\n" +
                                         "minus select * from REPORT_OKUD_CODE;\n" +
                                         "\n";
                                 break;
                             case 5:
                                 report_okud_code_script[n] = "INSERT INTO REPORT_OKUD_CODE \n" +
-                                        "SELECT '"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud[n] +"' as OKUD_CODE, '"+ SC_data_miner.period[n] +"'as PERIOD, null as FORM_CD FROM dual\n" +
+                                        "SELECT '"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud[n] +"' as OKUD_CODE, '"+ SC_data_miner.period[n] + "' as PERIOD, null as FORM_CD FROM dual\n" +
                                         "minus select * from REPORT_OKUD_CODE;\n" +
                                         "\n" +
                                         "INSERT INTO REPORT_OKUD_CODE \n" +
-                                        "SELECT '"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud2[n] +"' as OKUD_CODE, '"+ SC_data_miner.period2[n] +"'as PERIOD, null as FORM_CD FROM dual\n" +
+                                        "SELECT '"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud2[n] +"' as OKUD_CODE, '"+ SC_data_miner.period2[n] + "' as PERIOD, null as FORM_CD FROM dual\n" +
                                         "minus select * from REPORT_OKUD_CODE;\n" +
                                         "\n" +
                                         "INSERT INTO REPORT_OKUD_CODE \n" +
-                                        "SELECT '"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud3[n] +"' as OKUD_CODE, '"+ SC_data_miner.period3[n] +"'as PERIOD, null as FORM_CD FROM dual\n" +
+                                        "SELECT '"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud3[n] +"' as OKUD_CODE, '"+ SC_data_miner.period3[n] + "' as PERIOD, null as FORM_CD FROM dual\n" +
                                         "minus select * from REPORT_OKUD_CODE;\n" +
                                         "\n" +
                                         "INSERT INTO REPORT_OKUD_CODE \n" +
-                                        "SELECT '"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud4[n] +"' as OKUD_CODE, '"+ SC_data_miner.period4[n] +"'as PERIOD, null as FORM_CD FROM dual\n" +
+                                        "SELECT '"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud4[n] +"' as OKUD_CODE, '"+ SC_data_miner.period4[n] + "' as PERIOD, null as FORM_CD FROM dual\n" +
                                         "minus select * from REPORT_OKUD_CODE;\n" +
                                         "\n" +
                                         "INSERT INTO REPORT_OKUD_CODE \n" +
-                                        "SELECT '"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud5[n] +"' as OKUD_CODE, '"+ SC_data_miner.period5[n] +"'as PERIOD, null as FORM_CD FROM dual\n" +
+                                        "SELECT '"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud5[n] +"' as OKUD_CODE, '"+ SC_data_miner.period5[n] + "' as PERIOD, null as FORM_CD FROM dual\n" +
                                         "minus select * from REPORT_OKUD_CODE;\n" +
                                         "\n";
                                 break;
                             case 6:
                                 report_okud_code_script[n] = "INSERT INTO REPORT_OKUD_CODE \n" +
-                                        "SELECT '"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud[n] +"' as OKUD_CODE, '"+ SC_data_miner.period[n] +"'as PERIOD, null as FORM_CD FROM dual\n" +
+                                        "SELECT '"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud[n] +"' as OKUD_CODE, '"+ SC_data_miner.period[n] + "' as PERIOD, null as FORM_CD FROM dual\n" +
                                         "minus select * from REPORT_OKUD_CODE;\n" +
                                         "\n" +
                                         "INSERT INTO REPORT_OKUD_CODE \n" +
-                                        "SELECT '"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud2[n] +"' as OKUD_CODE, '"+ SC_data_miner.period2[n] +"'as PERIOD, null as FORM_CD FROM dual\n" +
+                                        "SELECT '"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud2[n] +"' as OKUD_CODE, '"+ SC_data_miner.period2[n] + "' as PERIOD, null as FORM_CD FROM dual\n" +
                                         "minus select * from REPORT_OKUD_CODE;\n" +
                                         "\n" +
                                         "INSERT INTO REPORT_OKUD_CODE \n" +
-                                        "SELECT '"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud3[n] +"' as OKUD_CODE, '"+ SC_data_miner.period3[n] +"'as PERIOD, null as FORM_CD FROM dual\n" +
+                                        "SELECT '"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud3[n] +"' as OKUD_CODE, '"+ SC_data_miner.period3[n] + "' as PERIOD, null as FORM_CD FROM dual\n" +
                                         "minus select * from REPORT_OKUD_CODE;\n" +
                                         "\n" +
                                         "INSERT INTO REPORT_OKUD_CODE \n" +
-                                        "SELECT '"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud4[n] +"' as OKUD_CODE, '"+ SC_data_miner.period4[n] +"'as PERIOD, null as FORM_CD FROM dual\n" +
+                                        "SELECT '"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud4[n] +"' as OKUD_CODE, '"+ SC_data_miner.period4[n] + "' as PERIOD, null as FORM_CD FROM dual\n" +
                                         "minus select * from REPORT_OKUD_CODE;\n" +
                                         "\n" +
                                         "INSERT INTO REPORT_OKUD_CODE \n" +
-                                        "SELECT '"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud5[n] +"' as OKUD_CODE, '"+ SC_data_miner.period5[n] +"'as PERIOD, null as FORM_CD FROM dual\n" +
+                                        "SELECT '"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud5[n] +"' as OKUD_CODE, '"+ SC_data_miner.period5[n] + "' as PERIOD, null as FORM_CD FROM dual\n" +
                                         "minus select * from REPORT_OKUD_CODE;\n" +
                                         "\n" +
                                         "INSERT INTO REPORT_OKUD_CODE \n" +
-                                        "SELECT '"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud6[n] +"' as OKUD_CODE, '"+ SC_data_miner.period6[n] +"'as PERIOD, null as FORM_CD FROM dual\n" +
+                                        "SELECT '"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud6[n] +"' as OKUD_CODE, '"+ SC_data_miner.period6[n] + "' as PERIOD, null as FORM_CD FROM dual\n" +
                                         "minus select * from REPORT_OKUD_CODE;\n" +
                                         "\n";
                                 break;
                             case 7:
                                 report_okud_code_script[n] = "INSERT INTO REPORT_OKUD_CODE \n" +
-                                        "SELECT '"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud[n] +"' as OKUD_CODE, '"+ SC_data_miner.period[n] +"'as PERIOD, null as FORM_CD FROM dual\n" +
+                                        "SELECT '"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud[n] +"' as OKUD_CODE, '"+ SC_data_miner.period[n] + "' as PERIOD, null as FORM_CD FROM dual\n" +
                                         "minus select * from REPORT_OKUD_CODE;\n" +
                                         "\n" +
                                         "INSERT INTO REPORT_OKUD_CODE \n" +
-                                        "SELECT '"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud2[n] +"' as OKUD_CODE, '"+ SC_data_miner.period2[n] +"'as PERIOD, null as FORM_CD FROM dual\n" +
+                                        "SELECT '"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud2[n] +"' as OKUD_CODE, '"+ SC_data_miner.period2[n] + "' as PERIOD, null as FORM_CD FROM dual\n" +
                                         "minus select * from REPORT_OKUD_CODE;\n" +
                                         "\n" +
                                         "INSERT INTO REPORT_OKUD_CODE \n" +
-                                        "SELECT '"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud3[n] +"' as OKUD_CODE, '"+ SC_data_miner.period3[n] +"'as PERIOD, null as FORM_CD FROM dual\n" +
+                                        "SELECT '"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud3[n] +"' as OKUD_CODE, '"+ SC_data_miner.period3[n] + "' as PERIOD, null as FORM_CD FROM dual\n" +
                                         "minus select * from REPORT_OKUD_CODE;\n" +
                                         "\n" +
                                         "INSERT INTO REPORT_OKUD_CODE \n" +
-                                        "SELECT '"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud4[n] +"' as OKUD_CODE, '"+ SC_data_miner.period4[n] +"'as PERIOD, null as FORM_CD FROM dual\n" +
+                                        "SELECT '"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud4[n] +"' as OKUD_CODE, '"+ SC_data_miner.period4[n] + "' as PERIOD, null as FORM_CD FROM dual\n" +
                                         "minus select * from REPORT_OKUD_CODE;\n" +
                                         "\n" +
                                         "INSERT INTO REPORT_OKUD_CODE \n" +
-                                        "SELECT '"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud5[n] +"' as OKUD_CODE, '"+ SC_data_miner.period5[n] +"'as PERIOD, null as FORM_CD FROM dual\n" +
+                                        "SELECT '"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud5[n] +"' as OKUD_CODE, '"+ SC_data_miner.period5[n] + "' as PERIOD, null as FORM_CD FROM dual\n" +
                                         "minus select * from REPORT_OKUD_CODE;\n" +
                                         "\n" +
                                         "INSERT INTO REPORT_OKUD_CODE \n" +
-                                        "SELECT '"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud6[n] +"' as OKUD_CODE, '"+ SC_data_miner.period6[n] +"'as PERIOD, null as FORM_CD FROM dual\n" +
+                                        "SELECT '"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud6[n] +"' as OKUD_CODE, '"+ SC_data_miner.period6[n] + "' as PERIOD, null as FORM_CD FROM dual\n" +
                                         "minus select * from REPORT_OKUD_CODE;\n" +
                                         "\n" +
                                         "INSERT INTO REPORT_OKUD_CODE \n" +
-                                        "SELECT '"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud7[n] +"' as OKUD_CODE, '"+ SC_data_miner.period7[n] +"'as PERIOD, null as FORM_CD FROM dual\n" +
+                                        "SELECT '"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud7[n] +"' as OKUD_CODE, '"+ SC_data_miner.period7[n] + "' as PERIOD, null as FORM_CD FROM dual\n" +
                                         "minus select * from REPORT_OKUD_CODE;\n" +
                                         "\n";
                                 break;
                             case 8:
                                 report_okud_code_script[n] = "INSERT INTO REPORT_OKUD_CODE \n" +
-                                        "SELECT '"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud[n] +"' as OKUD_CODE, '"+ SC_data_miner.period[n] +"'as PERIOD, null as FORM_CD FROM dual\n" +
+                                        "SELECT '"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud[n] +"' as OKUD_CODE, '"+ SC_data_miner.period[n] + "' as PERIOD, null as FORM_CD FROM dual\n" +
                                         "minus select * from REPORT_OKUD_CODE;\n" +
                                         "\n" +
                                         "INSERT INTO REPORT_OKUD_CODE \n" +
-                                        "SELECT '"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud2[n] +"' as OKUD_CODE, '"+ SC_data_miner.period2[n] +"'as PERIOD, null as FORM_CD FROM dual\n" +
+                                        "SELECT '"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud2[n] +"' as OKUD_CODE, '"+ SC_data_miner.period2[n] + "' as PERIOD, null as FORM_CD FROM dual\n" +
                                         "minus select * from REPORT_OKUD_CODE;\n" +
                                         "\n" +
                                         "INSERT INTO REPORT_OKUD_CODE \n" +
-                                        "SELECT '"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud3[n] +"' as OKUD_CODE, '"+ SC_data_miner.period3[n] +"'as PERIOD, null as FORM_CD FROM dual\n" +
+                                        "SELECT '"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud3[n] +"' as OKUD_CODE, '"+ SC_data_miner.period3[n] + "' as PERIOD, null as FORM_CD FROM dual\n" +
                                         "minus select * from REPORT_OKUD_CODE;\n" +
                                         "\n" +
                                         "INSERT INTO REPORT_OKUD_CODE \n" +
-                                        "SELECT '"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud4[n] +"' as OKUD_CODE, '"+ SC_data_miner.period4[n] +"'as PERIOD, null as FORM_CD FROM dual\n" +
+                                        "SELECT '"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud4[n] +"' as OKUD_CODE, '"+ SC_data_miner.period4[n] + "' as PERIOD, null as FORM_CD FROM dual\n" +
                                         "minus select * from REPORT_OKUD_CODE;\n" +
                                         "\n" +
                                         "INSERT INTO REPORT_OKUD_CODE \n" +
-                                        "SELECT '"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud5[n] +"' as OKUD_CODE, '"+ SC_data_miner.period5[n] +"'as PERIOD, null as FORM_CD FROM dual\n" +
+                                        "SELECT '"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud5[n] +"' as OKUD_CODE, '"+ SC_data_miner.period5[n] + "' as PERIOD, null as FORM_CD FROM dual\n" +
                                         "minus select * from REPORT_OKUD_CODE;\n" +
                                         "\n" +
                                         "INSERT INTO REPORT_OKUD_CODE \n" +
-                                        "SELECT '"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud6[n] +"' as OKUD_CODE, '"+ SC_data_miner.period6[n] +"'as PERIOD, null as FORM_CD FROM dual\n" +
+                                        "SELECT '"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud6[n] +"' as OKUD_CODE, '"+ SC_data_miner.period6[n] + "' as PERIOD, null as FORM_CD FROM dual\n" +
                                         "minus select * from REPORT_OKUD_CODE;\n" +
                                         "\n" +
                                         "INSERT INTO REPORT_OKUD_CODE \n" +
-                                        "SELECT '"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud7[n] +"' as OKUD_CODE, '"+ SC_data_miner.period7[n] +"'as PERIOD, null as FORM_CD FROM dual\n" +
+                                        "SELECT '"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud7[n] +"' as OKUD_CODE, '"+ SC_data_miner.period7[n] + "' as PERIOD, null as FORM_CD FROM dual\n" +
                                         "minus select * from REPORT_OKUD_CODE;\n" +
                                         "\n" +
                                         "INSERT INTO REPORT_OKUD_CODE \n" +
-                                        "SELECT '"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud8[n] +"' as OKUD_CODE, '"+ SC_data_miner.period8[n] +"'as PERIOD, null as FORM_CD FROM dual\n" +
+                                        "SELECT '"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud8[n] +"' as OKUD_CODE, '"+ SC_data_miner.period8[n] + "' as PERIOD, null as FORM_CD FROM dual\n" +
                                         "minus select * from REPORT_OKUD_CODE;\n" +
                                         "\n";
                                 break;
                         }
                     }
-                    if(SC_data_miner.Form_cd[n] == null || SC_data_miner.Form_formal_code[n] == null){
-                        report_form_src_script[n] = "--Не указаны данные для таблицы REPORT_FORM_SRC";
+                    if(SC_data_miner.Form_cd[n] == null  || Objects.equals(SC_data_miner.Form_cd[n], "") || Objects.equals(SC_data_miner.Form_cd[n], " ") ||
+                            SC_data_miner.Form_formal_code[n] == null  || Objects.equals(SC_data_miner.Form_formal_code[n], "") || Objects.equals(SC_data_miner.Form_formal_code[n], " ")){
+                        report_form_src_script[n] = "--Warning: Не указаны данные для таблицы REPORT_FORM_SRC\n\n";
                     } else {
                         report_form_src_script[n] = "INSERT INTO  REPORT_FORM_SRC \n" +
                                 "SELECT '"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_cd[n] +"' as REG_FORM_CODE FROM dual\n" +
                                 "minus select * from REPORT_FORM_SRC;\n" +
                                 "\n" ;
                     }
-                    if(SC_data_miner.rep_subj_type[n] == null){
-                        report_rep_subj_type_script[n] = "--Не указаны данные для таблицы REPORT_REP_SUBJ_TYPE";
+                    if(SC_data_miner.rep_subj_type[n] == null || Objects.equals(SC_data_miner.rep_subj_type[n], "") || Objects.equals(SC_data_miner.rep_subj_type[n], " ")){
+                        report_rep_subj_type_script[n] = "--Warning: Не указаны данные для таблицы REPORT_REP_SUBJ_TYPE\n\n";
                     } else {
-                        int c = OK_Action.getSubj_count(0);
+                        //System.out.print("n =" + n + "\n");
+                        int c = OK_Action.getSubj_count(n);
+                        //System.out.print("c =" + c + "\n");
                         switch(c){
                             case 1:
-                                report_rep_subj_type_script[n] = "INSERT INTO  REPORT_REP_SUBJ_TYPE \n" +
+                                report_rep_subj_type_script[n] = "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
                                         "SELECT '"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type[n] +"' as REP_SUBJ_TYPE FROM dual\n" +
                                         "minus select * from REPORT_REP_SUBJ_TYPE;" +
-                                        "\n";
+                                        "\n\n";
                                 break;
                             case 2:
-                                report_rep_subj_type_script[n] = "INSERT INTO  REPORT_REP_SUBJ_TYPE \n" +
+                                report_rep_subj_type_script[n] = "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
                                         "SELECT '"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type[n] +"' as REP_SUBJ_TYPE FROM dual\n" +
                                         "minus select * from REPORT_REP_SUBJ_TYPE;" +
-                                        "\n" +
-                                        "INSERT INTO  REPORT_REP_SUBJ_TYPE \n" +
+                                        "\n\n" +
+                                        "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
                                         "SELECT '"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type2[n] +"' as REP_SUBJ_TYPE FROM dual\n" +
                                         "minus select * from REPORT_REP_SUBJ_TYPE;" +
-                                        "\n" ;
+                                        "\n\n" ;
                                 break;
                             case 3:
-                                report_rep_subj_type_script[n] = "INSERT INTO  REPORT_REP_SUBJ_TYPE \n" +
+                                report_rep_subj_type_script[n] = "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
                                         "SELECT '"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type[n] +"' as REP_SUBJ_TYPE FROM dual\n" +
                                         "minus select * from REPORT_REP_SUBJ_TYPE;" +
-                                        "\n" +
-                                        "INSERT INTO  REPORT_REP_SUBJ_TYPE \n" +
+                                        "\n\n" +
+                                        "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
                                         "SELECT '"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type2[n] +"' as REP_SUBJ_TYPE FROM dual\n" +
                                         "minus select * from REPORT_REP_SUBJ_TYPE;" +
-                                        "\n" +
-                                        "INSERT INTO  REPORT_REP_SUBJ_TYPE \n" +
+                                        "\n\n" +
+                                        "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
                                         "SELECT '"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type3[n] +"' as REP_SUBJ_TYPE FROM dual\n" +
                                         "minus select * from REPORT_REP_SUBJ_TYPE;" +
-                                        "\n" ;
+                                        "\n\n" ;
                                 break;
                             case 4:
-                                report_rep_subj_type_script[n] = "INSERT INTO  REPORT_REP_SUBJ_TYPE \n" +
+                                report_rep_subj_type_script[n] = "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
                                         "SELECT '"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type[n] +"' as REP_SUBJ_TYPE FROM dual\n" +
                                         "minus select * from REPORT_REP_SUBJ_TYPE;" +
-                                        "\n" +
-                                        "INSERT INTO  REPORT_REP_SUBJ_TYPE \n" +
+                                        "\n\n" +
+                                        "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
                                         "SELECT '"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type2[n] +"' as REP_SUBJ_TYPE FROM dual\n" +
                                         "minus select * from REPORT_REP_SUBJ_TYPE;" +
-                                        "\n" +
-                                        "INSERT INTO  REPORT_REP_SUBJ_TYPE \n" +
+                                        "\n\n" +
+                                        "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
                                         "SELECT '"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type3[n] +"' as REP_SUBJ_TYPE FROM dual\n" +
                                         "minus select * from REPORT_REP_SUBJ_TYPE;" +
-                                        "\n" +
-                                        "INSERT INTO  REPORT_REP_SUBJ_TYPE \n" +
+                                        "\n\n" +
+                                        "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
                                         "SELECT '"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type4[n] +"' as REP_SUBJ_TYPE FROM dual\n" +
                                         "minus select * from REPORT_REP_SUBJ_TYPE;" +
-                                        "\n" ;
+                                        "\n\n" ;
                                 break;
                             case 5:
-                                report_rep_subj_type_script[n] = "INSERT INTO  REPORT_REP_SUBJ_TYPE \n" +
+                                report_rep_subj_type_script[n] = "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
                                         "SELECT '"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type[n] +"' as REP_SUBJ_TYPE FROM dual\n" +
                                         "minus select * from REPORT_REP_SUBJ_TYPE;" +
-                                        "\n" +
-                                        "INSERT INTO  REPORT_REP_SUBJ_TYPE \n" +
+                                        "\n\n" +
+                                        "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
                                         "SELECT '"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type2[n] +"' as REP_SUBJ_TYPE FROM dual\n" +
                                         "minus select * from REPORT_REP_SUBJ_TYPE;" +
-                                        "\n" +
-                                        "INSERT INTO  REPORT_REP_SUBJ_TYPE \n" +
+                                        "\n\n" +
+                                        "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
                                         "SELECT '"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type3[n] +"' as REP_SUBJ_TYPE FROM dual\n" +
                                         "minus select * from REPORT_REP_SUBJ_TYPE;" +
-                                        "\n" +
-                                        "INSERT INTO  REPORT_REP_SUBJ_TYPE \n" +
+                                        "\n\n" +
+                                        "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
                                         "SELECT '"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type4[n] +"' as REP_SUBJ_TYPE FROM dual\n" +
                                         "minus select * from REPORT_REP_SUBJ_TYPE;" +
-                                        "\n" +
-                                        "INSERT INTO  REPORT_REP_SUBJ_TYPE \n" +
+                                        "\n\n" +
+                                        "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
                                         "SELECT '"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type5[n] +"' as REP_SUBJ_TYPE FROM dual\n" +
                                         "minus select * from REPORT_REP_SUBJ_TYPE;" +
-                                        "\n" ;
+                                        "\n\n" ;
                                 break;
                             case 6:
-                                report_rep_subj_type_script[n] = "INSERT INTO  REPORT_REP_SUBJ_TYPE \n" +
+                                report_rep_subj_type_script[n] = "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
                                         "SELECT '"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type[n] +"' as REP_SUBJ_TYPE FROM dual\n" +
                                         "minus select * from REPORT_REP_SUBJ_TYPE;" +
-                                        "\n" +
-                                        "INSERT INTO  REPORT_REP_SUBJ_TYPE \n" +
+                                        "\n\n" +
+                                        "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
                                         "SELECT '"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type2[n] +"' as REP_SUBJ_TYPE FROM dual\n" +
                                         "minus select * from REPORT_REP_SUBJ_TYPE;" +
-                                        "\n" +
-                                        "INSERT INTO  REPORT_REP_SUBJ_TYPE \n" +
+                                        "\n\n" +
+                                        "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
                                         "SELECT '"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type3[n] +"' as REP_SUBJ_TYPE FROM dual\n" +
                                         "minus select * from REPORT_REP_SUBJ_TYPE;" +
-                                        "\n" +
-                                        "INSERT INTO  REPORT_REP_SUBJ_TYPE \n" +
+                                        "\n\n" +
+                                        "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
                                         "SELECT '"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type4[n] +"' as REP_SUBJ_TYPE FROM dual\n" +
                                         "minus select * from REPORT_REP_SUBJ_TYPE;" +
-                                        "\n" +
-                                        "INSERT INTO  REPORT_REP_SUBJ_TYPE \n" +
+                                        "\n\n" +
+                                        "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
                                         "SELECT '"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type5[n] +"' as REP_SUBJ_TYPE FROM dual\n" +
                                         "minus select * from REPORT_REP_SUBJ_TYPE;" +
-                                        "\n" +
-                                        "INSERT INTO  REPORT_REP_SUBJ_TYPE \n" +
+                                        "\n\n" +
+                                        "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
                                         "SELECT '"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type6[n] +"' as REP_SUBJ_TYPE FROM dual\n" +
                                         "minus select * from REPORT_REP_SUBJ_TYPE;" +
-                                        "\n" ;
+                                        "\n\n" ;
                                 break;
                             case 7:
-                                report_rep_subj_type_script[n] = "INSERT INTO  REPORT_REP_SUBJ_TYPE \n" +
+                                report_rep_subj_type_script[n] = "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
                                         "SELECT '"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type[n] +"' as REP_SUBJ_TYPE FROM dual\n" +
                                         "minus select * from REPORT_REP_SUBJ_TYPE;" +
-                                        "\n" +
-                                        "INSERT INTO  REPORT_REP_SUBJ_TYPE \n" +
+                                        "\n\n" +
+                                        "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
                                         "SELECT '"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type2[n] +"' as REP_SUBJ_TYPE FROM dual\n" +
                                         "minus select * from REPORT_REP_SUBJ_TYPE;" +
-                                        "\n" +
-                                        "INSERT INTO  REPORT_REP_SUBJ_TYPE \n" +
+                                        "\n\n" +
+                                        "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
                                         "SELECT '"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type3[n] +"' as REP_SUBJ_TYPE FROM dual\n" +
                                         "minus select * from REPORT_REP_SUBJ_TYPE;" +
-                                        "\n" +
-                                        "INSERT INTO  REPORT_REP_SUBJ_TYPE \n" +
+                                        "\n\n" +
+                                        "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
                                         "SELECT '"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type4[n] +"' as REP_SUBJ_TYPE FROM dual\n" +
                                         "minus select * from REPORT_REP_SUBJ_TYPE;" +
-                                        "\n" +
-                                        "INSERT INTO  REPORT_REP_SUBJ_TYPE \n" +
+                                        "\n\n" +
+                                        "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
                                         "SELECT '"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type5[n] +"' as REP_SUBJ_TYPE FROM dual\n" +
                                         "minus select * from REPORT_REP_SUBJ_TYPE;" +
-                                        "\n" +
-                                        "INSERT INTO  REPORT_REP_SUBJ_TYPE \n" +
+                                        "\n\n" +
+                                        "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
                                         "SELECT '"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type6[n] +"' as REP_SUBJ_TYPE FROM dual\n" +
                                         "minus select * from REPORT_REP_SUBJ_TYPE;" +
-                                        "\n" +
-                                        "INSERT INTO  REPORT_REP_SUBJ_TYPE \n" +
+                                        "\n\n" +
+                                        "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
                                         "SELECT '"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type7[n] +"' as REP_SUBJ_TYPE FROM dual\n" +
                                         "minus select * from REPORT_REP_SUBJ_TYPE;" +
-                                        "\n";
+                                        "\n\n";
                                 break;
                             case 8:
-                                report_rep_subj_type_script[n] = "INSERT INTO  REPORT_REP_SUBJ_TYPE \n" +
+                                report_rep_subj_type_script[n] = "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
                                         "SELECT '"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type[n] +"' as REP_SUBJ_TYPE FROM dual\n" +
                                         "minus select * from REPORT_REP_SUBJ_TYPE;" +
-                                        "\n" +
-                                        "INSERT INTO  REPORT_REP_SUBJ_TYPE \n" +
+                                        "\n\n" +
+                                        "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
                                         "SELECT '"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type2[n] +"' as REP_SUBJ_TYPE FROM dual\n" +
                                         "minus select * from REPORT_REP_SUBJ_TYPE;" +
-                                        "\n" +
-                                        "INSERT INTO  REPORT_REP_SUBJ_TYPE \n" +
+                                        "\n\n" +
+                                        "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
                                         "SELECT '"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type3[n] +"' as REP_SUBJ_TYPE FROM dual\n" +
                                         "minus select * from REPORT_REP_SUBJ_TYPE;" +
-                                        "\n" +
-                                        "INSERT INTO  REPORT_REP_SUBJ_TYPE \n" +
+                                        "\n\n" +
+                                        "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
                                         "SELECT '"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type4[n] +"' as REP_SUBJ_TYPE FROM dual\n" +
                                         "minus select * from REPORT_REP_SUBJ_TYPE;" +
-                                        "\n" +
-                                        "INSERT INTO  REPORT_REP_SUBJ_TYPE \n" +
+                                        "\n\n" +
+                                        "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
                                         "SELECT '"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type5[n] +"' as REP_SUBJ_TYPE FROM dual\n" +
                                         "minus select * from REPORT_REP_SUBJ_TYPE;" +
-                                        "\n" +
-                                        "INSERT INTO  REPORT_REP_SUBJ_TYPE \n" +
+                                        "\n\n" +
+                                        "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
                                         "SELECT '"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type6[n] +"' as REP_SUBJ_TYPE FROM dual\n" +
                                         "minus select * from REPORT_REP_SUBJ_TYPE;" +
-                                        "\n" +
-                                        "INSERT INTO  REPORT_REP_SUBJ_TYPE \n" +
+                                        "\n\n" +
+                                        "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
                                         "SELECT '"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type7[n] +"' as REP_SUBJ_TYPE FROM dual\n" +
                                         "minus select * from REPORT_REP_SUBJ_TYPE;" +
-                                        "\n" +
-                                        "INSERT INTO  REPORT_REP_SUBJ_TYPE \n" +
+                                        "\n\n" +
+                                        "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
                                         "SELECT '"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type8[n] +"' as REP_SUBJ_TYPE FROM dual\n" +
                                         "minus select * from REPORT_REP_SUBJ_TYPE;" +
-                                        "\n" ;
+                                        "\n\n" ;
                                 break;
 
                         }
                     }
-
-                    if(SC_data_miner.Search_path[n] == null){
-                        ehd_acs_script[n] = "--Не указаны данные для таблицы EHD_ACS_OBJECTS";
+                    if(SC_data_miner.Search_path[n] == null || Objects.equals(SC_data_miner.Search_path[n], "") || Objects.equals(SC_data_miner.Search_path[n], " ")){
+                        ehd_acs_script[n] = "--Warning: Не указаны данные для таблицы EHD_ACS_OBJECTS\n\n";
                     } else {
                         ehd_acs_script[n] = "MERGE INTO EHD_ACS_OBJECTS O\n" +
                                 "   USING (SELECT \n" +
                                 "'"+ FName_def[n] +"' as NAME,\n" +
-                                "   '"+ techdb_code +"' as CODE,\n" +
+                                "   '"+ SC_data_miner.Form_formal_code[n] +"' as CODE,\n" +
                                 "  (select t.id from EHD_ACS_OBJECTS t where t.type_ref in ('forms','ko_ao','apl_ao','ko_av') and t.code='"+ SC_data_miner.Form_cd[n] +"') as PARENT_ID,\n" +
                                 "  '" + TR_def[n] + "' as TYPE_REF,\n" +
                                 "  '" + SR_def[n] + "' as SOURCE_REF,\n" +
@@ -3594,9 +3651,12 @@ public class ScriptEXP {
                                 "   WHEN NOT MATCHED THEN INSERT (O.NAME, O.CODE, O.PARENT_ID, O.TYPE_REF, O.SOURCE_REF, O.CREATE_DATE, O.UPDATE_DATE, O.SEARCH_PATH, O.FLAG_EXP)\n" +
                                 "   VALUES (S.NAME, S.CODE, S.PARENT_ID, S.TYPE_REF, S.SOURCE_REF, S.CREATE_DATE, S.UPDATE_DATE, S.SEARCH_PATH, S.FLAG_EXP);\n" + "commit;" ;
                     }
-                    if(SC_data_miner.p_parent_code_txtf[n] == null || SC_data_miner.p_parent_type_ref_txtf[n] == null || SC_data_miner.p_type_ref_txtf[n] == null ||
-                            SC_data_miner.p_source_ref_txtf[n] == null || SC_data_miner.Search_path[n] == null){
-                        ehd_acs_script2[n] = "--Не указаны данные для таблицы EHD_ACS_OBJECTS";
+                    if(SC_data_miner.p_parent_code_txtf[n] == null || Objects.equals(SC_data_miner.p_parent_code_txtf[n], "") || Objects.equals(SC_data_miner.p_parent_code_txtf[n], " ") ||
+                            SC_data_miner.p_parent_type_ref_txtf[n] == null || Objects.equals(SC_data_miner.p_parent_type_ref_txtf[n], "") || Objects.equals(SC_data_miner.p_parent_type_ref_txtf[n], " ") ||
+                            //SC_data_miner.p_type_ref_txtf[n] == null || Objects.equals(SC_data_miner.p_type_ref_txtf[n], "") || Objects.equals(SC_data_miner.p_type_ref_txtf[n], " ") ||
+                            //SC_data_miner.p_source_ref_txtf[n] == null || Objects.equals(SC_data_miner.p_source_ref_txtf[n], "") || Objects.equals(SC_data_miner.p_source_ref_txtf[n], " ") ||
+                            SC_data_miner.Search_path[n] == null || Objects.equals(SC_data_miner.Search_path[n], "") || Objects.equals(SC_data_miner.Search_path[n], " ")){
+                        ehd_acs_script2[n] = "--Warning: Не указаны данные для таблицы EHD_ACS_OBJECTS\n\n";
                     } else {
                         ehd_acs_script2[n] = "begin\n" +
                                 "utils.add_object_node\n" +
@@ -3612,39 +3672,46 @@ public class ScriptEXP {
                                 "/";
                     }
                     
-                    if (SC_data_miner.Form_cd[n] == null){
-                        SC_data_miner.Form_cd[n] = SC_data_miner.Form_cd[0];
-                    }
                     //textset = text.split("#");
                     text[0] = text[0] + "\n" +
                             "\n" +
                             "--" + FName_def[n] + "\n" +
                             "\n" +
-                            reg_report_form_script[n] +
-                            report_okud_code_script[n] +
-                            report_form_src_script[n] +
-                            report_rep_subj_type_script[n] +
+                            rep_form_script[n] + "\n\n" +
+                            rep_form_cognos_script[n] + "\n\n" +
+                            rep_form_oki_script[n] + "\n\n" +
+                            rep_form_dep_owner_script[n] + "\n\n" +
+                            rep_form_dep_user_script[n] + "\n\n" +
+                            reg_report_form_script[n] + "\n\n" +
+                            report_okud_code_script[n] + "\n\n" +
+                            report_form_src_script[n] + "\n\n" +
+                            report_rep_subj_type_script[n] + "\n\n" +
                     "commit;";
                     text[1] = text[1] + "\n" +
                             "--" + FName_def[n] + "\n" +
                             "\n" +
-                            reg_report_form_script[n] +
-                            report_okud_code_script[n] +
-                            report_form_src_script[n] +
-                            report_rep_subj_type_script[n] +
+                            rep_form_script[n] + "\n\n" +
+                            rep_form_cognos_script[n] + "\n\n" +
+                            rep_form_oki_script[n] + "\n\n" +
+                            rep_form_dep_owner_script[n] + "\n\n" +
+                            rep_form_dep_user_script[n] + "\n\n" +
+                            reg_report_form_script[n] + "\n\n" +
+                            report_okud_code_script[n] + "\n\n" +
+                            report_form_src_script[n] + "\n\n" +
+                            report_rep_subj_type_script[n] + "\n\n" +
                     "commit;";
                     if(type == 0){
                         text[3] = text[3] + "\n" +
                                 "\n" +
                                 "--" + FName_def[n] + "\n" +
                                 "\n" +
-                                ehd_acs_script[n];
+                                ehd_acs_script[n] + "\n\n";
                     } else if(type == 1){
                         text[3] = "--" + FName_def[n] +"\n" +
                                 "\n" +
                                 "--TechDB_EHD_ACS\n" +
                                 "\n" +
-                                ehd_acs_script2[n];
+                                ehd_acs_script2[n] + "\n\n";
                     }
                     
                 }
@@ -3710,7 +3777,7 @@ public class ScriptEXP {
             fos.flush();
             fos.close();
         }
-        if(chk ==1){
+        if(chk ==1 || chk==3){
             if(isFileExists(file3)){
                 for(int i = 1; i<=50;){
                     String filePath32 = path2 + "\\V001_" + format_2.format(dateNow) + "_202000_0002__DM_DM_NIKA_KO_DATA_sc__reg_meta_" + SC_data_miner.Form_cd[0] + "(" + i + ").sql";

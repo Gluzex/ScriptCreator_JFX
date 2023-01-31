@@ -3,6 +3,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.Objects;
 
 public class PreCreateScr {
     public int count;
@@ -147,7 +148,7 @@ public class PreCreateScr {
         for(int i=0;i<=count;){
             UFName[i] = Form_name_txtf[i].getText();
             SC_data_miner.Form_cd_name[i] = Form_cd_name_txtf[i].getText();
-            System.out.print("Form_cd_name_txtf[i].getText() = " + Form_cd_name_txtf[i].getText() + "\n");
+            //System.out.print("Form_cd_name_txtf[i].getText() = " + Form_cd_name_txtf[i].getText() + "\n");
             SC_data_miner.Form_cd[i] = Form_cd_txtf[i].getText();
             SC_data_miner.Form_name[i] = Form_name_txtf[i].getText();
             SC_data_miner.Form_okud[i] = Form_okud_txtf[i].getText();
@@ -209,11 +210,19 @@ public class PreCreateScr {
             SC_data_miner.Search_path[i] = Search_path_txtf[i].getText();
             SC_data_miner.Search_path_for_ehd_acs[i] = Search_path_txtf[i].getText();
 
-            if(SC_data_miner.p_parent_code_txtf[i] != null && SC_data_miner.p_type_ref_txtf[i] != null && SC_data_miner.p_source_ref_txtf[i] != null && SC_data_miner.p_parent_type_ref_txtf[i] != null){
-                type = 1;
-            } else{
+            //System.out.print("SC_data_miner.p_parent_code_txtf["+ i +"] = " + SC_data_miner.p_parent_code_txtf[i] + "\n");
+            //System.out.print("SC_data_miner.p_type_ref_txtf["+ i +"] = " + SC_data_miner.p_type_ref_txtf[i] + "\n");
+            //System.out.print("SC_data_miner.p_source_ref_txtf["+ i +"] = " + SC_data_miner.p_source_ref_txtf[i] + "\n");
+            //System.out.print("SC_data_miner.p_parent_type_ref_txtf["+ i +"] = " + SC_data_miner.p_parent_type_ref_txtf[i] + "\n");
+            if((SC_data_miner.p_parent_code_txtf[i] == null || Objects.equals(SC_data_miner.p_parent_code_txtf[i], "") || Objects.equals(SC_data_miner.p_parent_code_txtf[i], " ")) &&
+                    //(SC_data_miner.p_type_ref_txtf[i] == null || Objects.equals(SC_data_miner.p_type_ref_txtf[i], "") || Objects.equals(SC_data_miner.p_type_ref_txtf[i], " ")) &&
+                    //(SC_data_miner.p_source_ref_txtf[i] == null || Objects.equals(SC_data_miner.p_source_ref_txtf[i], "") || Objects.equals(SC_data_miner.p_source_ref_txtf[i], " ")) &&
+                    (SC_data_miner.p_parent_type_ref_txtf[i] == null || Objects.equals(SC_data_miner.p_parent_type_ref_txtf[i], "") || Objects.equals(SC_data_miner.p_parent_type_ref_txtf[i], " "))){
                 type = 0;
+            } else{
+                type = 1;
             }
+            //System.out.print("type["+ i +"] = " + type + "\n");
             i++;
         }
 
