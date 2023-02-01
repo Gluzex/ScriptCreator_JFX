@@ -254,7 +254,7 @@ public class OK_Action {
         this.count = count;
         sp = new TabPane();
         sp.setPrefSize(1680, 740);
-        /*tooltip1.setShowDuration(Duration.seconds(8.0));
+        tooltip1.setShowDuration(Duration.seconds(8.0));
         tooltip1_1.setShowDuration(Duration.seconds(8.0));
         tooltip2.setShowDuration(Duration.seconds(8.0));
         tooltip3.setShowDuration(Duration.seconds(8.0));
@@ -265,7 +265,7 @@ public class OK_Action {
         tooltip7_2.setShowDuration(Duration.seconds(8.0));
         tooltip8.setShowDuration(Duration.seconds(8.0));
         tooltip9.setShowDuration(Duration.seconds(8.0));
-        tooltip10.setShowDuration(Duration.seconds(8.0));*/
+        tooltip10.setShowDuration(Duration.seconds(8.0));
         for(int t = 0; t<=11; t++){
             PanelSet[t] = new VBox(5.0);
             PanelSet[t].setPadding(new Insets(10.0));
@@ -427,28 +427,28 @@ public class OK_Action {
             Form_formal_code_txtf[t].setTooltip(tooltip9);
             Desc_txtf[t] =  new TextField();
             period_cmbx[t] =  new ComboBox<String>();
-            period_cmbx[t].getItems().addAll("квартальная", "месячная", "суточная", "нерегулярная");
+            period_cmbx[t].getItems().addAll("годовая", "квартальная", "месячная", "суточная", "нерегулярная");
             period_cmbx[t].setTooltip(tooltip2);
             period2_cmbx[t] =  new ComboBox<String>();
-            period2_cmbx[t].getItems().addAll("квартальная", "месячная", "суточная", "нерегулярная");
+            period2_cmbx[t].getItems().addAll("годовая", "квартальная", "месячная", "суточная", "нерегулярная");
             period2_cmbx[t].setTooltip(tooltip2);
             period3_cmbx[t] =  new ComboBox<String>();
-            period3_cmbx[t].getItems().addAll("квартальная", "месячная", "суточная", "нерегулярная");
+            period3_cmbx[t].getItems().addAll("годовая", "квартальная", "месячная", "суточная", "нерегулярная");
             period3_cmbx[t].setTooltip(tooltip2);
             period4_cmbx[t] =  new ComboBox<String>();
-            period4_cmbx[t].getItems().addAll("квартальная", "месячная", "суточная", "нерегулярная");
+            period4_cmbx[t].getItems().addAll("годовая", "квартальная", "месячная", "суточная", "нерегулярная");
             period4_cmbx[t].setTooltip(tooltip2);
             period5_cmbx[t] =  new ComboBox<String>();
-            period5_cmbx[t].getItems().addAll("квартальная", "месячная", "суточная", "нерегулярная");
+            period5_cmbx[t].getItems().addAll("годовая", "квартальная", "месячная", "суточная", "нерегулярная");
             period5_cmbx[t].setTooltip(tooltip2);
             period6_cmbx[t] =  new ComboBox<String>();
-            period6_cmbx[t].getItems().addAll("квартальная", "месячная", "суточная", "нерегулярная");
+            period6_cmbx[t].getItems().addAll("годовая", "квартальная", "месячная", "суточная", "нерегулярная");
             period6_cmbx[t].setTooltip(tooltip2);
             period7_cmbx[t] =  new ComboBox<String>();
-            period7_cmbx[t].getItems().addAll("квартальная", "месячная", "суточная", "нерегулярная");
+            period7_cmbx[t].getItems().addAll("годовая", "квартальная", "месячная", "суточная", "нерегулярная");
             period7_cmbx[t].setTooltip(tooltip2);
             period8_cmbx[t] =  new ComboBox<String>();
-            period8_cmbx[t].getItems().addAll("квартальная", "месячная", "суточная", "нерегулярная");
+            period8_cmbx[t].getItems().addAll("годовая", "квартальная", "месячная", "суточная", "нерегулярная");
             period8_cmbx[t].setTooltip(tooltip2);
             rep_subj_type_cmbx[t] =  new ComboBox<String>();
             rep_subj_type_cmbx[t].getItems().addAll("КО", "ОПДС", "ОПС", "ТУ", "Холдинги", "БГ", "Филиалы КО", "СП БР");
@@ -742,7 +742,7 @@ public class OK_Action {
             form_cd_lbl[o].setText("Код доступа для отчета: ");
             p_type_ref_txtf[o].setText("cognos");
             p_source_ref_txtf[o].setText("cognos");
-            PanelSet[o].getChildren().addAll(radioBtn_set[o], radioBtn_set_2[o], exjp1_set[o], p_tbl_6[o], exjp13_set[o], exjp14_set[o], exjp15_set[o], exjp11_set[o], exjp22_set[o], exjp12_set[o],
+            PanelSet[o].getChildren().addAll(radioBtn_set[o], exjp1_set[o], radioBtn_set_2[o], p_tbl_6[o], exjp13_set[o], exjp14_set[o], exjp15_set[o], exjp11_set[o], exjp22_set[o], exjp12_set[o],
                     p_tbl_7[o], p_cmbx_okud[o], exjp3_V_set[o],
                     p_tbl_9[o], p_cmbx_subj[o], exjp17_V_set[o],
                     p_tbl_10[o], exjp0_set[o], exjp18_set[o], exjp19_set[o], exjp20_set[o], exjp21_set[o]);
@@ -780,7 +780,7 @@ public class OK_Action {
                 exjp10_set[t], p_tbl_10[t], exjp0_set[t], exjp18_set[t], exjp19_set[t], exjp20_set[t], exjp21_set[t]);
         PanelScroll[t] = new ScrollPane(PanelSet[t]);
 
-        PanelSet[t].getChildren().addAll(radioBtn_set[t], radioBtn_set_2[t], exjp1_set[t], p_tbl_6[t], exjp13_set[t], exjp14_set[t], exjp15_set[t], exjp11_set[t], exjp22_set[t], exjp12_set[t],
+        PanelSet[t].getChildren().addAll(radioBtn_set[t], exjp1_set[t], radioBtn_set_2[t], p_tbl_6[t], exjp13_set[t], exjp14_set[t], exjp15_set[t], exjp11_set[t], exjp22_set[t], exjp12_set[t],
                 p_tbl_7[t], p_cmbx_okud[t], exjp3_V_set[t],
                 p_tbl_9[t], p_cmbx_subj[t], exjp17_V_set[t],
                 p_tbl_10[t], exjp0_set[t], exjp18_set[t], exjp19_set[t], exjp20_set[t], exjp21_set[t]);
@@ -797,7 +797,7 @@ public class OK_Action {
         tbl10_lbl[t].setText("---Данные для таблицы EHD_ACS_OBJECTS--- обязательно к заполнению, если код доступа ранее не был зарегистрирован");
         p_type_ref_txtf[t].clear();//setText("");
         p_source_ref_txtf[t].clear();//setText("");
-        PanelSet[t].getChildren().removeAll(radioBtn_set[t], radioBtn_set_2[t], exjp1_set[t], p_tbl_6[t], exjp13_set[t], exjp14_set[t], exjp15_set[t], exjp11_set[t], exjp22_set[t], exjp12_set[t],
+        PanelSet[t].getChildren().removeAll(radioBtn_set[t], exjp1_set[t], radioBtn_set_2[t], p_tbl_6[t], exjp13_set[t], exjp14_set[t], exjp15_set[t], exjp11_set[t], exjp22_set[t], exjp12_set[t],
                 p_tbl_7[t], p_cmbx_okud[t], exjp3_V_set[t],
                 p_tbl_9[t], p_cmbx_subj[t], exjp17_V_set[t],
                 p_tbl_10[t], exjp0_set[t], exjp18_set[t], exjp19_set[t], exjp20_set[t], exjp21_set[t]);
