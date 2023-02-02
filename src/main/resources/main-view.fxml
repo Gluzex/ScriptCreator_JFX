@@ -43,6 +43,10 @@
                   <Integer fx:value="10" />
                   <Integer fx:value="11" />
                   <Integer fx:value="12" />
+                  <Integer fx:value="13" />
+                  <Integer fx:value="14" />
+                  <Integer fx:value="15" />
+                  <Integer fx:value="16" />
               </FXCollections>
           </items>
       </ComboBox>

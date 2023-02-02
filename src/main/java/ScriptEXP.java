@@ -7,10 +7,10 @@ import java.util.Objects;
 
 public class ScriptEXP {
     String[] text = new String[4];
-    String[] FName_def = new String[12];
-    String[] Pid_def = new String[12];
-    String[] TR_def = new String[12];
-    String[] SR_def = new String[12];
+    String[] FName_def = new String[16];
+    String[] Pid_def = new String[16];
+    String[] TR_def = new String[16];
+    String[] SR_def = new String[16];
     int count = 0;
     byte type = PreCreateScr.getType();
     public int vid;
@@ -29,7 +29,7 @@ public class ScriptEXP {
         String okud_rep_form = "";
         String techdb_code = "";
 
-        for(int u = 0; u<=11; u++){
+        for(int u = 0; u<=15; u++){
         if(chk==3){
                 if(PreCreateScr.UFName[u] == null || Objects.equals(PreCreateScr.UFName[u], "") || Objects.equals(PreCreateScr.UFName[u], " ")){
                     FName_def[u] = PreCreateScr.UFName[0];
@@ -2128,17 +2128,17 @@ public class ScriptEXP {
                     //System.out.print("SC_data_miner.Form_cd[0].startsWith(\"0409\") = " + SC_data_miner.Form_cd[0].startsWith("0409"));
                 }
 
-                String[] rep_form_script = new String[12];
-                String[] rep_form_cognos_script = new String[12];
-                String[] rep_form_oki_script = new String[12];
-                String[] rep_form_dep_owner_script = new String[12];
-                String[] rep_form_dep_user_script = new String[12];
-                String[] reg_report_form_script = new String[12];
-                String[] report_okud_code_script = new String[12];
-                String[] report_form_src_script = new String[12];
-                String[] report_rep_subj_type_script = new String[12];
-                String[] ehd_acs_script = new String[12];
-                String[] ehd_acs_script2 = new String[12];
+                String[] rep_form_script = new String[16];
+                String[] rep_form_cognos_script = new String[16];
+                String[] rep_form_oki_script = new String[16];
+                String[] rep_form_dep_owner_script = new String[16];
+                String[] rep_form_dep_user_script = new String[16];
+                String[] reg_report_form_script = new String[16];
+                String[] report_okud_code_script = new String[16];
+                String[] report_form_src_script = new String[16];
+                String[] report_rep_subj_type_script = new String[16];
+                String[] ehd_acs_script = new String[16];
+                String[] ehd_acs_script2 = new String[16];
 
                 if((SC_data_miner.Form_cd_name[0]== null) || Objects.equals(SC_data_miner.Form_cd_name[0], "") || Objects.equals(SC_data_miner.Form_cd_name[0], " ")){
                     rep_form_script[0] = "--Warning: Не указаны данные для таблицы REP_FORM\n\n";
