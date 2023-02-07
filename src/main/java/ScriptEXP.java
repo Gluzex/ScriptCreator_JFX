@@ -13,7 +13,7 @@ public class ScriptEXP {
     String[] SR_def = new String[16];
     int count = 0;
     byte type = PreCreateScr.getType();
-    public int vid;
+    public int[] vid = new int[16];
 
     public static boolean isFileExists(File file) {
         return file.exists() && !file.isDirectory();
@@ -1161,10 +1161,10 @@ public class ScriptEXP {
                 //System.out.print("Search_path[" + x + "] = " + Search_path[x] + "\n");
                 if(SC_data_miner.Search_path[x] != null){
                     if(SC_data_miner.Search_path[x].contains("Нерегламентированные отчеты")){
-                        vid=1;
+                        vid[x]=1;
                         SC_data_miner.Security_role_path[x] = "CAMID(\":\")/namespaceFolder[@name=''FPS_IAPPR'']/namespaceFolder[@name=''PPK_OAD'']/namespaceFolder[@name=''REP_NR_ROLES'']";
                     } else if(SC_data_miner.Search_path[x].contains("Регламентированные отчеты")){
-                        vid=2;
+                        vid[x]=2;
                         SC_data_miner.Security_role_path[x] = "CAMID(\":\")/namespaceFolder[@name=''FPS_IAPPR'']/namespaceFolder[@name=''PPK_OAD'']/namespaceFolder[@name=''REP_ROLES'']";
                     } else
                         SC_data_miner.Security_role_path[x] = "-";
@@ -1173,7 +1173,8 @@ public class ScriptEXP {
                 //System.out.print("Security_role_path[" + x + "] = " + Security_role_path[x] + "\n");
             }
             for(int h=0; h<=SC_data_miner.Form_cd.length-1; h++){
-                //System.out.print("h = " + h + "\n");
+                //System.out.print("SC_data_miner.Form_cd.length = " + SC_data_miner.Form_cd.length + "\n");
+                System.out.print("h = " + h + "\n");
                 if(SC_data_miner.Search_path[h] != null && !Objects.equals(SC_data_miner.Search_path[h], "") && !Objects.equals(SC_data_miner.Search_path[h], " ")){
                     if(!SC_data_miner.Search_path[h].contains("/content/")){
                         int coc = 0;
@@ -1200,6 +1201,7 @@ public class ScriptEXP {
                         SC_data_miner.Search_path[h] = "/content/folder[@name=''Приложение НИКА'']/folder[@name=''КО'']" + SC_data_miner.Search_path[h];
                     } else {
                         int coc = 0;
+                        System.out.print("coc = " + coc + "\n");
                         for(int ut = 0; ut<=SC_data_miner.Search_path[h].lastIndexOf("'");){
                             int u = SC_data_miner.Search_path[h].indexOf("'", ut);
                             if(u == -1){
@@ -1210,29 +1212,29 @@ public class ScriptEXP {
                                 ut++;
                             }
                         }
-                        //System.out.print("coc = " + coc + "\n");
+                        System.out.print("coc = " + coc + "\n");
                         String[] subs = SC_data_miner.Search_path[h].split("'");
                         SC_data_miner.Search_path[h] = subs[0];
                         for(int d =1; d<=coc; d++) {
-                            //System.out.print("subs[" + d + "] = " + subs[d] + "\n");
+                            System.out.print("subs[" + d + "] = " + subs[d] + "\n");
                             SC_data_miner.Search_path[h] = SC_data_miner.Search_path[h] + "''" + subs[d];
-                            //System.out.print("Search_path[" + h + "] = " + SC_data_miner.Search_path[h] + "\n");
+                            System.out.print("Search_path[" + h + "] = " + SC_data_miner.Search_path[h] + "\n");
                         }
                         int u = 0;
-                        //System.out.print("vid = " + vid + "\n");
-                        switch (vid){
+                        System.out.print("vid[" + h + "] = " + vid[h] + "\n");
+                        switch (vid[h]){
                             case 1:
                                 u = SC_data_miner.Search_path[h].indexOf("/folder[@name=''Нерегламентированные");
-                                //System.out.print("u = " + u + "\n");
+                                System.out.print("u = " + u + "\n");
                                 break;
                             case 2:
                                 u = SC_data_miner.Search_path[h].indexOf("/folder[@name=''Регламентированные");
-                                //System.out.print("u = " + u + "\n");
+                                System.out.print("u = " + u + "\n");
                                 break;
                         }
-                        //System.out.print("Search_path[" + h + "] = " + SC_data_miner.Search_path[h] + "\n");
+                        System.out.print("Search_path[" + h + "] = " + SC_data_miner.Search_path[h] + "\n");
                         SC_data_miner.Search_path_for_ehd_acs[h] = "/content/folder[@name=''Приложение НИКА'']/folder[@name=''КО'']" + SC_data_miner.Search_path[h].substring(u);
-                        //System.out.print("Search_path_for_ehd_acs[" + h + "] = " + SC_data_miner.Search_path_for_ehd_acs[h] + "\n");
+                        System.out.print("Search_path_for_ehd_acs[" + h + "] = " + SC_data_miner.Search_path_for_ehd_acs[h] + "\n");
                     }
                 }
                 //System.out.print("Search_path_for_ehd_acs[" + h + "] = " + Search_path_for_ehd_acs[h] + "\n");

@@ -68,7 +68,7 @@ public class PreCreateScr {
     public TextField[] p_type_ref_txtf;
     public TextField[] p_source_ref_txtf;
     public TextField[] Security_role_name_txtf;
-    public static String[] UFName = new String[12];
+    public static String[] UFName = new String[16];
     private static byte type = 0;
 
     public PreCreateScr(int count, String path_fld, Stage mnf, AnchorPane main_root, Button resetBtn, TextField[] form_name_txtf, TextField[] form_cd_txtf, TextField[] form_cd_name_txtf,
@@ -237,7 +237,7 @@ public class PreCreateScr {
         dialog.setHeaderText("SUCCESS!!!");
         DialogPane dialogPane = dialog.getDialogPane();
         //dialog.setGraphic(new ImageView(createImage(16, 16, Color.BLUE)));
-        dialog.setContentText("Скрипты успешно созданы и находятся по казанному Вами пути");
+        dialog.setContentText("Скрипты успешно созданы и находятся по указанному Вами пути");
         dialogPane.getButtonTypes().add(ButtonType.OK);
         dialog.show();
 

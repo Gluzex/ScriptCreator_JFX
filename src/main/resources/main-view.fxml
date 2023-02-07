@@ -18,7 +18,7 @@
             <items>
                 <FXCollections fx:factory="observableArrayList">
                     <String fx:value="Из файла" />
-                    <String fx:value="Ручной(В разработке)" />
+                    <String fx:value="Ручной" />
                 </FXCollections>
             </items>
         </ComboBox>

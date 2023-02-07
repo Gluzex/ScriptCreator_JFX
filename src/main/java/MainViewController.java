@@ -51,7 +51,7 @@ public class MainViewController {
         //txt_fld1.setText("action perfomed");
         if (Objects.equals(cmbx1.getValue(), "Из файла")){
             fromFile();
-        }else if(Objects.equals(cmbx1.getValue(), "Ручной(В разработке)")){
+        }else if(Objects.equals(cmbx1.getValue(), "Ручной")){
             fromManual();
         }
     }

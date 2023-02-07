@@ -254,7 +254,7 @@ public class OK_Action {
         this.count = count;
         sp = new TabPane();
         sp.setPrefSize(1680, 740);
-        tooltip1.setShowDuration(Duration.seconds(8.0));
+        /*tooltip1.setShowDuration(Duration.seconds(8.0));
         tooltip1_1.setShowDuration(Duration.seconds(8.0));
         tooltip2.setShowDuration(Duration.seconds(8.0));
         tooltip3.setShowDuration(Duration.seconds(8.0));
@@ -265,7 +265,7 @@ public class OK_Action {
         tooltip7_2.setShowDuration(Duration.seconds(8.0));
         tooltip8.setShowDuration(Duration.seconds(8.0));
         tooltip9.setShowDuration(Duration.seconds(8.0));
-        tooltip10.setShowDuration(Duration.seconds(8.0));
+        tooltip10.setShowDuration(Duration.seconds(8.0));*/
         for(int t = 0; t<=15; t++){
             PanelSet[t] = new VBox(5.0);
             PanelSet[t].setPadding(new Insets(10.0));
@@ -451,28 +451,28 @@ public class OK_Action {
             period8_cmbx[t].getItems().addAll("годовая", "квартальная", "месячная", "суточная", "нерегулярная");
             period8_cmbx[t].setTooltip(tooltip2);
             rep_subj_type_cmbx[t] =  new ComboBox<String>();
-            rep_subj_type_cmbx[t].getItems().addAll("КО", "ОПДС", "ОПС", "ТУ", "Холдинги", "БГ", "Филиалы КО", "СП БР");
+            rep_subj_type_cmbx[t].getItems().addAll("КО", "ОПДС", "ОПС", "ТУ", "Холдинги", "БГ", "Филиалы КО", "СП БР", "Свод по РФ", "ТОФК");
             rep_subj_type_cmbx[t].setTooltip(tooltip3);
             rep_subj_type2_cmbx[t] =  new ComboBox<String>();
-            rep_subj_type2_cmbx[t].getItems().addAll("КО", "ОПДС", "ОПС", "ТУ", "Холдинги", "БГ", "Филиалы КО", "СП БР");
+            rep_subj_type2_cmbx[t].getItems().addAll("КО", "ОПДС", "ОПС", "ТУ", "Холдинги", "БГ", "Филиалы КО", "СП БР", "Свод по РФ", "ТОФК");
             rep_subj_type2_cmbx[t].setTooltip(tooltip3);
             rep_subj_type3_cmbx[t] =  new ComboBox<String>();
-            rep_subj_type3_cmbx[t].getItems().addAll("КО", "ОПДС", "ОПС", "ТУ", "Холдинги", "БГ", "Филиалы КО", "СП БР");
+            rep_subj_type3_cmbx[t].getItems().addAll("КО", "ОПДС", "ОПС", "ТУ", "Холдинги", "БГ", "Филиалы КО", "СП БР", "Свод по РФ", "ТОФК");
             rep_subj_type3_cmbx[t].setTooltip(tooltip3);
             rep_subj_type4_cmbx[t] =  new ComboBox<String>();
-            rep_subj_type4_cmbx[t].getItems().addAll("КО", "ОПДС", "ОПС", "ТУ", "Холдинги", "БГ", "Филиалы КО", "СП БР");
+            rep_subj_type4_cmbx[t].getItems().addAll("КО", "ОПДС", "ОПС", "ТУ", "Холдинги", "БГ", "Филиалы КО", "СП БР", "Свод по РФ", "ТОФК");
             rep_subj_type4_cmbx[t].setTooltip(tooltip3);
             rep_subj_type5_cmbx[t] =  new ComboBox<String>();
-            rep_subj_type5_cmbx[t].getItems().addAll("КО", "ОПДС", "ОПС", "ТУ", "Холдинги", "БГ", "Филиалы КО", "СП БР");
+            rep_subj_type5_cmbx[t].getItems().addAll("КО", "ОПДС", "ОПС", "ТУ", "Холдинги", "БГ", "Филиалы КО", "СП БР", "Свод по РФ", "ТОФК");
             rep_subj_type5_cmbx[t].setTooltip(tooltip3);
             rep_subj_type6_cmbx[t] =  new ComboBox<String>();
-            rep_subj_type6_cmbx[t].getItems().addAll("КО", "ОПДС", "ОПС", "ТУ", "Холдинги", "БГ", "Филиалы КО", "СП БР");
+            rep_subj_type6_cmbx[t].getItems().addAll("КО", "ОПДС", "ОПС", "ТУ", "Холдинги", "БГ", "Филиалы КО", "СП БР", "Свод по РФ", "ТОФК");
             rep_subj_type6_cmbx[t].setTooltip(tooltip3);
             rep_subj_type7_cmbx[t] =  new ComboBox<String>();
-            rep_subj_type7_cmbx[t].getItems().addAll("КО", "ОПДС", "ОПС", "ТУ", "Холдинги", "БГ", "Филиалы КО", "СП БР");
+            rep_subj_type7_cmbx[t].getItems().addAll("КО", "ОПДС", "ОПС", "ТУ", "Холдинги", "БГ", "Филиалы КО", "СП БР", "Свод по РФ", "ТОФК");
             rep_subj_type7_cmbx[t].setTooltip(tooltip3);
             rep_subj_type8_cmbx[t] =  new ComboBox<String>();
-            rep_subj_type8_cmbx[t].getItems().addAll("КО", "ОПДС", "ОПС", "ТУ", "Холдинги", "БГ", "Филиалы КО", "СП БР");
+            rep_subj_type8_cmbx[t].getItems().addAll("КО", "ОПДС", "ОПС", "ТУ", "Холдинги", "БГ", "Филиалы КО", "СП БР", "Свод по РФ", "ТОФК");
             rep_subj_type8_cmbx[t].setTooltip(tooltip3);
             p_parent_code_txtf[t] =  new TextField();
             p_parent_type_ref_txtf[t] =  new TextField();
