@@ -109,7 +109,7 @@ public class ScriptEXP {
                 }
             }
         }
-        System.out.print("chk = " + chk + "\n");
+        //System.out.print("chk = " + chk + "\n");
         //Все листы есть и все заполнены
         if(chk == 1){
             if(count == 0){
@@ -1287,11 +1287,19 @@ public class ScriptEXP {
                 String ehd_acs_script2 = "";
 
                 //System.out.print("SC_data_miner.Form_cd[0] = " + SC_data_miner.Form_cd[0] + "\n");
-                if((SC_data_miner.Form_cd_name[0]== null) || Objects.equals(SC_data_miner.Form_cd_name[0], "") || Objects.equals(SC_data_miner.Form_cd_name[0], " ")){
+                if((SC_data_miner.Form_cd_name[0]== null) || Objects.equals(SC_data_miner.Form_cd_name[0], "") || Objects.equals(SC_data_miner.Form_cd_name[0], " ")||
+                    (SC_data_miner.Form_cd[0]== null) || Objects.equals(SC_data_miner.Form_cd[0], "") || Objects.equals(SC_data_miner.Form_cd[0], " ")){
                     if(rep_or_code[0] == 0){
                         rep_form_script = "--Для регистрации отчета нет необходимости заполнять данные для таблицы REP_FORM\n\n";
                     } else{
-                        rep_form_script = "--Warning: Не указаны данные для таблицы REP_FORM\n\n";
+                        rep_form_script = "--Warning: Не указаны данные для таблицы REP_FORM: ";
+                        if((SC_data_miner.Form_cd[0]== null) || Objects.equals(SC_data_miner.Form_cd[0], "") || Objects.equals(SC_data_miner.Form_cd[0], " ")){
+                            rep_form_script = rep_form_script + "Код доступа, ";
+                        }
+                        if((SC_data_miner.Form_cd_name[0]== null) || Objects.equals(SC_data_miner.Form_cd_name[0], "") || Objects.equals(SC_data_miner.Form_cd_name[0], " ")){
+                            rep_form_script = rep_form_script + "Наименование кода доступа.";
+                        }
+                        rep_form_script = rep_form_script + "\n\n";
                     }
                 } else {
                     rep_form_script = "INSERT INTO REP_FORM \n" +
@@ -1304,7 +1312,14 @@ public class ScriptEXP {
                     if(rep_or_code[0] == 0){
                         rep_form_oki_script = "--Для регистрации отчета нет необходимости заполнять данные для таблицы REP_FORM_OKI\n\n";
                     } else{
-                        rep_form_oki_script = "--Warning: Не указаны данные для таблицы REP_FORM_OKI\n\n";
+                        rep_form_oki_script = "--Warning: Не указаны данные для таблицы REP_FORM_OKI: ";
+                        if(Objects.equals(iod, "null as FLAG_IOD")){
+                            rep_form_oki_script = rep_form_oki_script + "Флаг ИОД, ";
+                        }
+                        if(Objects.equals(pdn, "null as FLAG_PDN")){
+                            rep_form_oki_script = rep_form_oki_script + "Флаг ПДН.";
+                        }
+                        rep_form_oki_script = rep_form_oki_script + "\n\n";
                     }
                 } else{
                     rep_form_oki_script = "INSERT INTO REP_FORM_OKI\n" +
@@ -1318,7 +1333,7 @@ public class ScriptEXP {
                     if(rep_or_code[0] == 0){
                         rep_form_cognos_script = "--Для регистрации отчета нет необходимости заполнять данные для таблицы REP_FORM_COGNOS\n\n";
                     } else{
-                        rep_form_cognos_script = "--Warning: Не указаны данные для таблицы REP_FORM_COGNOS\n\n";
+                        rep_form_cognos_script = "--Warning: Не указаны данные для таблицы REP_FORM_COGNOS: Код потока(Когнос)\n\n";
                     }
                 } else {
                     rep_form_cognos_script = "INSERT INTO REP_FORM_COGNOS\n" +
@@ -1332,7 +1347,7 @@ public class ScriptEXP {
                     if(rep_or_code[0] == 0){
                         rep_form_dep_owner_script = "--Для регистрации отчета нет необходимости заполнять данные для таблицы REP_FORM_DEP_OWNER\n\n";
                     } else{
-                        rep_form_dep_owner_script = "--Warning: Не указаны данные для таблицы REP_FORM_DEP_OWNER\n\n";
+                        rep_form_dep_owner_script = "--Warning: Не указаны данные для таблицы REP_FORM_DEP_OWNER: Сокращенное наименование департамента для REP_FORM_DEP_OWNER\n\n";
                     }
                 } else {
                     int c = OK_Action.getDep_count(0);
@@ -1485,7 +1500,7 @@ public class ScriptEXP {
                     if(rep_or_code[0] == 0){
                         rep_form_dep_user_script = "--Для регистрации отчета нет необходимости заполнять данные для таблицы REP_FORM_DEP_USER\n\n";
                     } else{
-                        rep_form_dep_user_script = "--Warning: Не указаны данные для таблицы REP_FORM_DEP_USER\n\n";
+                        rep_form_dep_user_script = "--Warning: Не указаны данные для таблицы REP_FORM_DEP_USER: Сокращенное наименование департамента для REP_FORM_DEP_USER\n\n";
                     }
                 } else {
                     int c = OK_Action.getDep_u_count(0);
@@ -1648,7 +1663,26 @@ public class ScriptEXP {
                     if(rep_or_code[0] == 1){
                         reg_report_form_script = "--Для регистрации кода доступа нет необходимости заполнять данные для таблицы REG_REPORT_FORM\n\n";
                     } else{
-                        reg_report_form_script = "--Warning: Не указаны данные для таблицы REG_REPORT_FORM\n\n";
+                        reg_report_form_script = "--Warning: Не указаны данные для таблицы REG_REPORT_FORM: ";
+                        if(SC_data_miner.System_id[0] == null || Objects.equals(SC_data_miner.System_id[0], "") || Objects.equals(SC_data_miner.System_id[0], " ")){
+                            reg_report_form_script = reg_report_form_script + "System_id, ";
+                        }
+                        if(SC_data_miner.Security_role_name[0] == null || Objects.equals(SC_data_miner.Security_role_name[0], "") || Objects.equals(SC_data_miner.Security_role_name[0], " ")){
+                            reg_report_form_script = reg_report_form_script + "Security_role_name, ";
+                        }
+                        if(SC_data_miner.Security_role_path[0] == null || Objects.equals(SC_data_miner.Security_role_path[0], "") || Objects.equals(SC_data_miner.Security_role_path[0], " ")){
+                            reg_report_form_script = reg_report_form_script + "Security_role_path, ";
+                        }
+                        if(SC_data_miner.Search_path[0] == null || Objects.equals(SC_data_miner.Search_path[0], "") || Objects.equals(SC_data_miner.Search_path[0], " ")){
+                            reg_report_form_script = reg_report_form_script + "Полный путь отчета/папки(Search_path), ";
+                        }
+                        if(SC_data_miner.Form_formal_code[0] == null || Objects.equals(SC_data_miner.Form_formal_code[0], "") || Objects.equals(SC_data_miner.Form_formal_code[0], " ")){
+                            reg_report_form_script = reg_report_form_script + "Уникальный код отчета, ";
+                        }
+                        if(SC_data_miner.Desc[0] == null || Objects.equals(SC_data_miner.Desc[0], "") || Objects.equals(SC_data_miner.Desc[0], " ")){
+                            reg_report_form_script = reg_report_form_script + "Описание.";
+                        }
+                        reg_report_form_script = reg_report_form_script + "\n\n";
                     }
                 } else {
                     reg_report_form_script = "MERGE INTO REG_REPORT_FORM R\n" +
@@ -1681,7 +1715,7 @@ public class ScriptEXP {
                     if(rep_or_code[0] == 1){
                         report_okud_code_script = "--Для регистрации кода доступа нет необходимости заполнять данные для таблицы REPORT_OKUD_CODE\n\n";
                     } else{
-                        report_okud_code_script = "--Warning: Не указаны данные для таблицы REPORT_OKUD_CODE\n\n";
+                        report_okud_code_script = "--Warning: Не указаны данные для таблицы REPORT_OKUD_CODE: ОКУД\n\n";
                     }
                 } else {
                     if(rep_or_code[0] == 1){
@@ -1858,7 +1892,14 @@ public class ScriptEXP {
                     if(rep_or_code[0] == 1){
                         report_form_src_script = "--Для регистрации кода доступа нет необходимости заполнять данные для таблицы REPORT_FORM_SRC\n\n";
                     } else{
-                        report_form_src_script = "--Warning: Не указаны данные для таблицы REPORT_FORM_SRC\n\n";
+                        report_form_src_script = "--Warning: Не указаны данные для таблицы REPORT_FORM_SRC: ";
+                        if(SC_data_miner.Form_cd[0] == null  || Objects.equals(SC_data_miner.Form_cd[0], "") || Objects.equals(SC_data_miner.Form_cd[0], " ")){
+                            report_form_src_script = report_form_src_script + "Код доступа, ";
+                        }
+                        if(SC_data_miner.Form_formal_code[0] == null  || Objects.equals(SC_data_miner.Form_formal_code[0], "") || Objects.equals(SC_data_miner.Form_formal_code[0], " ")){
+                            report_form_src_script = report_form_src_script + "Уникальный код отчета.";
+                        }
+                        report_form_src_script = report_form_src_script + "\n\n";
                     }
                 } else {
                     report_form_src_script = "INSERT INTO  REPORT_FORM_SRC \n" +
@@ -1871,7 +1912,7 @@ public class ScriptEXP {
                     if(rep_or_code[0] == 1){
                         report_rep_subj_type_script = "--Для регистрации кода доступа нет необходимости заполнять данные для таблицы REPORT_REP_SUBJ_TYPE\n\n";
                     } else{
-                        report_rep_subj_type_script = "--Warning: Не указаны данные для таблицы REPORT_REP_SUBJ_TYPE\n\n";
+                        report_rep_subj_type_script = "--Warning: Не указаны данные для таблицы REPORT_REP_SUBJ_TYPE: Разрез\n\n";
                     }
                 } else {
                     int c = OK_Action.getSubj_count(0);
@@ -2041,7 +2082,7 @@ public class ScriptEXP {
                 }
                 //System.out.print("SC_data_miner.Search_path[0] = " + SC_data_miner.Search_path[0] + "\n");
                 if(SC_data_miner.Search_path[0] == null || Objects.equals(SC_data_miner.Search_path[0], "") || Objects.equals(SC_data_miner.Search_path[0], " ")){
-                    ehd_acs_script = "--Warning: Не указаны данные для таблицы EHD_ACS_OBJECTS\n\n";
+                    ehd_acs_script = "--Warning: Не указаны данные для таблицы EHD_ACS_OBJECTS: Полный путь отчета/папки(Search_path)\n\n";
                 } else {
                     ehd_acs_script = "MERGE INTO EHD_ACS_OBJECTS O\n" +
                             "   USING (SELECT \n" +
@@ -2073,7 +2114,20 @@ public class ScriptEXP {
                         SC_data_miner.p_parent_type_ref_txtf[0] == null || Objects.equals(SC_data_miner.p_parent_type_ref_txtf[0], "") || Objects.equals(SC_data_miner.p_parent_type_ref_txtf[0], " ") ||
                         SC_data_miner.p_type_ref_txtf[0] == null || Objects.equals(SC_data_miner.p_type_ref_txtf[0], "") || Objects.equals(SC_data_miner.p_type_ref_txtf[0], " ") ||
                         SC_data_miner.p_source_ref_txtf[0] == null || Objects.equals(SC_data_miner.p_source_ref_txtf[0], "") || Objects.equals(SC_data_miner.p_source_ref_txtf[0], " ") ){
-                    ehd_acs_script2 = "--Warning: Не указаны данные для таблицы EHD_ACS_OBJECTS\n\n";
+                    ehd_acs_script2 = "--Warning: Не указаны данные для таблицы EHD_ACS_OBJECTS: ";
+                    if(SC_data_miner.p_parent_code_txtf[0] == null || Objects.equals(SC_data_miner.p_parent_code_txtf[0], "") || Objects.equals(SC_data_miner.p_parent_code_txtf[0], " ")){
+                        ehd_acs_script2 = ehd_acs_script2 + "p_parent_code, ";
+                    }
+                    if(SC_data_miner.p_parent_type_ref_txtf[0] == null || Objects.equals(SC_data_miner.p_parent_type_ref_txtf[0], "") || Objects.equals(SC_data_miner.p_parent_type_ref_txtf[0], " ")){
+                        ehd_acs_script2 = ehd_acs_script2 + "p_parent_type_ref, ";
+                    }
+                    if(SC_data_miner.p_type_ref_txtf[0] == null || Objects.equals(SC_data_miner.p_type_ref_txtf[0], "") || Objects.equals(SC_data_miner.p_type_ref_txtf[0], " ")){
+                        ehd_acs_script2 = ehd_acs_script2 + "p_type_ref, ";
+                    }
+                    if(SC_data_miner.p_source_ref_txtf[0] == null || Objects.equals(SC_data_miner.p_source_ref_txtf[0], "") || Objects.equals(SC_data_miner.p_source_ref_txtf[0], " ")){
+                        ehd_acs_script2 = ehd_acs_script2 + "p_source_ref. ";
+                    }
+                    ehd_acs_script2 = ehd_acs_script2 + "\n\n";
                 } else {
                     if(rep_or_code[0] == 1){
                         ehd_acs_script2 = "begin\n" +
@@ -2135,7 +2189,7 @@ public class ScriptEXP {
                         "--DM_NIKA_KO_DATA\n" +
                         "\n" +
                         rep_form_cognos_script + "\n\n" + "commit;";
-                System.out.print("type[0] = " + type[0] + "\n");
+               // System.out.print("type[0] = " + type[0] + "\n");
                 if(type[0] == 0){
                     text[3] = "--" + FName_def[0] +"\n" +
                             "\n" +
@@ -2164,7 +2218,7 @@ public class ScriptEXP {
                 } else{
                     reason = "'" + SC_data_miner.reason[0] + "' as REASON";
                 }
-                System.out.print("SC_data_miner.Form_okud[0] = " + SC_data_miner.Form_okud[0] + "\n");
+                //System.out.print("SC_data_miner.Form_okud[0] = " + SC_data_miner.Form_okud[0] + "\n");
                 if(SC_data_miner.Form_cd[0].startsWith("0409")){
                     okud_rep_form = "null as FORM_OKUD";
                     //System.out.print("\nokud_rep_form = " + okud_rep_form + "\n");
@@ -2208,11 +2262,19 @@ public class ScriptEXP {
                 String[] ehd_acs_script = new String[16];
                 String[] ehd_acs_script2 = new String[16];
 
-                if((SC_data_miner.Form_cd_name[0]== null) || Objects.equals(SC_data_miner.Form_cd_name[0], "") || Objects.equals(SC_data_miner.Form_cd_name[0], " ")){
+                if((SC_data_miner.Form_cd_name[0]== null) || Objects.equals(SC_data_miner.Form_cd_name[0], "") || Objects.equals(SC_data_miner.Form_cd_name[0], " ")||
+                        (SC_data_miner.Form_cd[0]== null) || Objects.equals(SC_data_miner.Form_cd[0], "") || Objects.equals(SC_data_miner.Form_cd[0], " ")){
                     if(rep_or_code[0] == 0){
                         rep_form_script[0] = "--Для регистрации отчета нет необходимости заполнять данные для таблицы REP_FORM\n\n";
-                    } else{
-                        rep_form_script[0] = "--Warning: Не указаны данные для таблицы REP_FORM\n\n";
+                    } else {
+                        rep_form_script[0] = "--Warning: Не указаны данные для таблицы REP_FORM: ";
+                        if ((SC_data_miner.Form_cd[0] == null) || Objects.equals(SC_data_miner.Form_cd[0], "") || Objects.equals(SC_data_miner.Form_cd[0], " ")) {
+                            rep_form_script[0] = rep_form_script[0] + "Код доступа, ";
+                        }
+                        if ((SC_data_miner.Form_cd_name[0] == null) || Objects.equals(SC_data_miner.Form_cd_name[0], "") || Objects.equals(SC_data_miner.Form_cd_name[0], " ")) {
+                            rep_form_script[0] = rep_form_script[0] + "Наименование кода доступа.";
+                        }
+                        rep_form_script[0] = rep_form_script[0] + "\n\n";
                     }
                 } else {
                     rep_form_script[0] = "INSERT INTO REP_FORM \n" +
@@ -2225,7 +2287,14 @@ public class ScriptEXP {
                     if(rep_or_code[0] == 0){
                         rep_form_oki_script[0] = "--Для регистрации отчета нет необходимости заполнять данные для таблицы REP_FORM_OKI\n\n";
                     } else{
-                        rep_form_oki_script[0] = "--Warning: Не указаны данные для таблицы REP_FORM_OKI\n\n";
+                        rep_form_oki_script[0] = "--Warning: Не указаны данные для таблицы REP_FORM_OKI: ";
+                        if(Objects.equals(iod, "null as FLAG_IOD")){
+                            rep_form_oki_script[0] = rep_form_oki_script[0] + "Флаг ИОД, ";
+                        }
+                        if(Objects.equals(pdn, "null as FLAG_PDN")){
+                            rep_form_oki_script[0] = rep_form_oki_script[0] + "Флаг ПДН.";
+                        }
+                        rep_form_oki_script[0] = rep_form_oki_script[0] + "\n\n";
                     }
                 } else{
                     rep_form_oki_script[0] = "INSERT INTO REP_FORM_OKI\n" +
@@ -2238,7 +2307,7 @@ public class ScriptEXP {
                     if(rep_or_code[0] == 0){
                         rep_form_cognos_script[0] = "--Для регистрации отчета нет необходимости заполнять данные для таблицы REP_FORM_COGNOS\n\n";
                     } else{
-                        rep_form_cognos_script[0] = "--Warning: Не указаны данные для таблицы REP_FORM_COGNOS\n\n";
+                        rep_form_cognos_script[0] = "--Warning: Не указаны данные для таблицы REP_FORM_COGNOS: Код потока\n\n";
                     }
                 } else {
                     rep_form_cognos_script[0] = "INSERT INTO REP_FORM_COGNOS\n" +
@@ -2251,7 +2320,7 @@ public class ScriptEXP {
                     if(rep_or_code[0] == 0){
                         rep_form_dep_owner_script[0] = "--Для регистрации отчета нет необходимости заполнять данные для таблицы REP_FORM_DEP_OWNER\n\n";
                     } else{
-                        rep_form_dep_owner_script[0] = "--Warning: Не указаны данные для таблицы REP_FORM_DEP_OWNER\n\n";
+                        rep_form_dep_owner_script[0] = "--Warning: Не указаны данные для таблицы REP_FORM_DEP_OWNER: Сокращенное наименование департамента для REP_FORM_DEP_OWNER\n\n";
                     }
                 } else {
                     int c = OK_Action.getDep_count(0);
@@ -2403,7 +2472,7 @@ public class ScriptEXP {
                     if(rep_or_code[0] == 0){
                         rep_form_dep_user_script[0] = "--Для регистрации отчета нет необходимости заполнять данные для таблицы REP_FORM_DEP_USER\n\n";
                     } else{
-                        rep_form_dep_user_script[0] = "--Warning: Не указаны данные для таблицы REP_FORM_DEP_USER\n\n";
+                        rep_form_dep_user_script[0] = "--Warning: Не указаны данные для таблицы REP_FORM_DEP_USER: Сокращенное наименование департамента для REP_FORM_DEP_USER\n\n";
                     }
                 } else {
                     int c = OK_Action.getDep_u_count(0);
@@ -2560,7 +2629,26 @@ public class ScriptEXP {
                     if(rep_or_code[0] == 1){
                         reg_report_form_script[0] = "--Для регистрации кода доступа нет необходимости заполнять данные для таблицы REG_REPORT_FORM\n\n";
                     } else{
-                        reg_report_form_script[0] = "--Warning: Не указаны данные для таблицы REG_REPORT_FORM\n\n";
+                        reg_report_form_script[0] = "--Warning: Не указаны данные для таблицы REG_REPORT_FORM: ";
+                        if(SC_data_miner.System_id[0] == null || Objects.equals(SC_data_miner.System_id[0], "") || Objects.equals(SC_data_miner.System_id[0], " ")){
+                            reg_report_form_script[0] = reg_report_form_script[0] + "System_id, ";
+                        }
+                        if(SC_data_miner.Security_role_name[0] == null || Objects.equals(SC_data_miner.Security_role_name[0], "") || Objects.equals(SC_data_miner.Security_role_name[0], " ")){
+                            reg_report_form_script[0] = reg_report_form_script[0] + "Security_role_name, ";
+                        }
+                        if(SC_data_miner.Security_role_path[0] == null || Objects.equals(SC_data_miner.Security_role_path[0], "") || Objects.equals(SC_data_miner.Security_role_path[0], " ")){
+                            reg_report_form_script[0] = reg_report_form_script[0] + "Security_role_path, ";
+                        }
+                        if(SC_data_miner.Search_path[0] == null || Objects.equals(SC_data_miner.Search_path[0], "") || Objects.equals(SC_data_miner.Search_path[0], " ")){
+                            reg_report_form_script[0] = reg_report_form_script[0] + "Полный путь отчета/папки(Search_path), ";
+                        }
+                        if(SC_data_miner.Form_formal_code[0] == null || Objects.equals(SC_data_miner.Form_formal_code[0], "") || Objects.equals(SC_data_miner.Form_formal_code[0], " ")){
+                            reg_report_form_script[0] = reg_report_form_script[0] + "Уникальный код отчета, ";
+                        }
+                        if(SC_data_miner.Desc[0] == null || Objects.equals(SC_data_miner.Desc[0], "") || Objects.equals(SC_data_miner.Desc[0], " ")){
+                            reg_report_form_script[0] = reg_report_form_script[0] + "Описание.";
+                        }
+                        reg_report_form_script[0] = reg_report_form_script[0] + "\n\n";
                     }
                 } else {
                     reg_report_form_script[0] = "MERGE INTO REG_REPORT_FORM R\n" +
@@ -2592,7 +2680,7 @@ public class ScriptEXP {
                     if(rep_or_code[0] == 1){
                         report_okud_code_script[0] = "--Для регистрации кода доступа нет необходимости заполнять данные для таблицы REPORT_OKUD_CODE\n\n";
                     } else{
-                        report_okud_code_script[0] = "--Warning: Не указаны данные для таблицы REPORT_OKUD_CODE\n\n";
+                        report_okud_code_script[0] = "--Warning: Не указаны данные для таблицы REPORT_OKUD_CODE: ОКУД\n\n";
                     }
                 } else {
                     if(rep_or_code[0] == 1){
@@ -2768,7 +2856,14 @@ public class ScriptEXP {
                     if(rep_or_code[0] == 1){
                         report_form_src_script[0] = "--Для регистрации кода доступа нет необходимости заполнять данные для таблицы REPORT_FORM_SRC\n\n";
                     } else{
-                        report_form_src_script[0] = "--Warning: Не указаны данные для таблицы REPORT_FORM_SRC\n\n";
+                        report_form_src_script[0] = "--Warning: Не указаны данные для таблицы REPORT_FORM_SRC: ";
+                        if(SC_data_miner.Form_cd[0] == null  || Objects.equals(SC_data_miner.Form_cd[0], "") || Objects.equals(SC_data_miner.Form_cd[0], " ")){
+                            report_form_src_script[0] = report_form_src_script[0] + "Код доступа, ";
+                        }
+                        if(SC_data_miner.Form_formal_code[0] == null  || Objects.equals(SC_data_miner.Form_formal_code[0], "") || Objects.equals(SC_data_miner.Form_formal_code[0], " ")){
+                            report_form_src_script[0] = report_form_src_script[0] + "Уникальный код отчета.";
+                        }
+                        report_form_src_script[0] = report_form_src_script[0] + "\n\n";
                     }
                 } else {
                     report_form_src_script[0] = "INSERT INTO  REPORT_FORM_SRC \n" +
@@ -2780,7 +2875,7 @@ public class ScriptEXP {
                     if(rep_or_code[0] == 1){
                         report_rep_subj_type_script[0] = "--Для регистрации кода доступа нет необходимости заполнять данные для таблицы REPORT_REP_SUBJ_TYPE\n\n";
                     } else{
-                        report_rep_subj_type_script[0] = "--Warning: Не указаны данные для таблицы REPORT_REP_SUBJ_TYPE\n\n";
+                        report_rep_subj_type_script[0] = "--Warning: Не указаны данные для таблицы REPORT_REP_SUBJ_TYPE: Разрез\n\n";
                     }
                 } else {
                     int c = OK_Action.getSubj_count(0);
@@ -2949,7 +3044,7 @@ public class ScriptEXP {
                     }
                 }
                 if(SC_data_miner.Search_path[0] == null || Objects.equals(SC_data_miner.Search_path[0], "") || Objects.equals(SC_data_miner.Search_path[0], " ")){
-                    ehd_acs_script[0] = "--Warning: Не указаны данные для таблицы EHD_ACS_OBJECTS\n\n";
+                    ehd_acs_script[0] = "--Warning: Не указаны данные для таблицы EHD_ACS_OBJECTS: Полный путь отчета/папки(Search_path)\n\n";
                 } else {
                     ehd_acs_script[0] = "MERGE INTO EHD_ACS_OBJECTS O\n" +
                             "   USING (SELECT \n" +
@@ -2977,8 +3072,22 @@ public class ScriptEXP {
                         SC_data_miner.p_type_ref_txtf[0] == null || Objects.equals(SC_data_miner.p_type_ref_txtf[0], "") || Objects.equals(SC_data_miner.p_type_ref_txtf[0], " ") ||
                         SC_data_miner.p_source_ref_txtf[0] == null || Objects.equals(SC_data_miner.p_source_ref_txtf[0], "") || Objects.equals(SC_data_miner.p_source_ref_txtf[0], " ") //||
                         /*SC_data_miner.Search_path[0] == null || Objects.equals(SC_data_miner.Search_path[0], "") || Objects.equals(SC_data_miner.Search_path[0], " ")*/){
-                    ehd_acs_script2[0] = "--Warning: Не указаны данные для таблицы EHD_ACS_OBJECTS\n\n";
+                    ehd_acs_script2[0] = "--Warning: Не указаны данные для таблицы EHD_ACS_OBJECTS: ";
+                    if(SC_data_miner.p_parent_code_txtf[0] == null || Objects.equals(SC_data_miner.p_parent_code_txtf[0], "") || Objects.equals(SC_data_miner.p_parent_code_txtf[0], " ")){
+                        ehd_acs_script2[0] = ehd_acs_script2[0] + "p_parent_code, ";
+                    }
+                    if(SC_data_miner.p_parent_type_ref_txtf[0] == null || Objects.equals(SC_data_miner.p_parent_type_ref_txtf[0], "") || Objects.equals(SC_data_miner.p_parent_type_ref_txtf[0], " ")){
+                        ehd_acs_script2[0] = ehd_acs_script2[0] + "p_parent_type_ref, ";
+                    }
+                    if(SC_data_miner.p_type_ref_txtf[0] == null || Objects.equals(SC_data_miner.p_type_ref_txtf[0], "") || Objects.equals(SC_data_miner.p_type_ref_txtf[0], " ")){
+                        ehd_acs_script2[0] = ehd_acs_script2[0] + "p_type_ref, ";
+                    }
+                    if(SC_data_miner.p_source_ref_txtf[0] == null || Objects.equals(SC_data_miner.p_source_ref_txtf[0], "") || Objects.equals(SC_data_miner.p_source_ref_txtf[0], " ")){
+                        ehd_acs_script2[0] = ehd_acs_script2[0] + "p_source_ref. ";
+                    }
+                    ehd_acs_script2[0] = ehd_acs_script2[0] + "\n\n";
                 } else {
+                    //System.out.print("\n" + "rep_or_code[0] = " + rep_or_code[0]);
                     if(rep_or_code[0] == 1){
                         ehd_acs_script2[0] = "begin\n" +
                                 "utils.add_object_node\n" +
@@ -2991,6 +3100,7 @@ public class ScriptEXP {
                                 ");\n" +
                                 "                    end;\n" +
                                 "/";
+                        //System.out.print("\n" + "ehd_acs_script2[0] = " + ehd_acs_script2[0]);
                     } else{
                         ehd_acs_script2[0] = "begin\n" +
                                 "utils.add_object_node\n" +
@@ -3004,9 +3114,11 @@ public class ScriptEXP {
                                 ");\n" +
                                 "                    end;\n" +
                                 "/";
+                        //System.out.print("\n" + "ehd_acs_script2[0] = " + ehd_acs_script2[0]);
                     }
                 }
-
+                //System.out.print("\n" + "ehd_acs_script[0] = " + ehd_acs_script[0]);
+                //System.out.print("\n" + "ehd_acs_script2[0] = " + ehd_acs_script2[0]);
                 text[0] =  "--" + FName_def[0] +"\n" +
                         "\n" +
                         "--OAD_SECURITY\n" +
@@ -3040,6 +3152,7 @@ public class ScriptEXP {
                         "\n" +
                         rep_form_cognos_script[0] + "\n\n" + "commit;";
 
+                //System.out.print("\n" + "type[0] = " + type[0]);
                 if(type[0] == 0){
                     text[3] = "--" + FName_def[0] +"\n" +
                             "\n" +
@@ -3053,7 +3166,6 @@ public class ScriptEXP {
                 }
                 
                 for(int n = 1; n<=count; n++){
-
                     if(SC_data_miner.Flag_IOD[n] == null || Objects.equals(SC_data_miner.Flag_IOD[n], "") || Objects.equals(SC_data_miner.Flag_IOD[n], " ")){
                         iod = "null as FLAG_IOD";
                     } else {
@@ -3070,9 +3182,11 @@ public class ScriptEXP {
                         reason = "'" + SC_data_miner.reason[n] + "' as REASON";
                     }
                     if (SC_data_miner.Form_cd[n] == null){
-                        SC_data_miner.Form_cd[n] = SC_data_miner.Form_cd[0];
+                        if(rep_or_code[0] == 1){
+                            SC_data_miner.Form_cd[n] = SC_data_miner.Form_cd[0];
+                        }
                     }
-                    System.out.print("SC_data_miner.Form_okud[" + n + "] = " + SC_data_miner.Form_okud[n] + "\n");
+                    //System.out.print("SC_data_miner.Form_okud[" + n + "] = " + SC_data_miner.Form_okud[n] + "\n");
                     if(SC_data_miner.Form_cd[n].startsWith("0409")){
                         okud_rep_form = "null as FORM_OKUD";
                         //System.out.print("\nokud_rep_form = " + okud_rep_form + "\n");
@@ -3103,11 +3217,19 @@ public class ScriptEXP {
                         }
                     }
 
-                    if((SC_data_miner.Form_cd_name[n]== null) || Objects.equals(SC_data_miner.Form_cd_name[n], "") || Objects.equals(SC_data_miner.Form_cd_name[n], " ")){
+                    if((SC_data_miner.Form_cd_name[n]== null) || Objects.equals(SC_data_miner.Form_cd_name[n], "") || Objects.equals(SC_data_miner.Form_cd_name[n], " ")||
+                            (SC_data_miner.Form_cd[n]== null) || Objects.equals(SC_data_miner.Form_cd[n], "") || Objects.equals(SC_data_miner.Form_cd[n], " ")){
                         if(rep_or_code[n] == 0){
                             rep_form_script[n] = "--Для регистрации отчета нет необходимости заполнять данные для таблицы REP_FORM\n\n";
                         } else{
-                            rep_form_script[n] = "--Warning: Не указаны данные для таблицы REP_FORM\n\n";
+                            rep_form_script[n] = "--Warning: Не указаны данные для таблицы REP_FORM: ";
+                            if ((SC_data_miner.Form_cd[n] == null) || Objects.equals(SC_data_miner.Form_cd[n], "") || Objects.equals(SC_data_miner.Form_cd[n], " ")) {
+                                rep_form_script[n] = rep_form_script[n] + "Код доступа, ";
+                            }
+                            if ((SC_data_miner.Form_cd_name[n] == null) || Objects.equals(SC_data_miner.Form_cd_name[n], "") || Objects.equals(SC_data_miner.Form_cd_name[n], " ")) {
+                                rep_form_script[n] = rep_form_script[n] + "Наименование кода доступа.";
+                            }
+                            rep_form_script[n] = rep_form_script[n] + "\n\n";
                         }
                     } else {
                         rep_form_script[n] = "INSERT INTO REP_FORM \n" +
@@ -3120,7 +3242,14 @@ public class ScriptEXP {
                         if(rep_or_code[n] == 0){
                             rep_form_oki_script[n] = "--Для регистрации отчета нет необходимости заполнять данные для таблицы REP_FORM_OKI\n\n";
                         } else{
-                            rep_form_oki_script[n] = "--Warning: Не указаны данные для таблицы REP_FORM_OKI\n\n";
+                            rep_form_oki_script[n] = "--Warning: Не указаны данные для таблицы REP_FORM_OKI: ";
+                            if(Objects.equals(iod, "null as FLAG_IOD")){
+                                rep_form_oki_script[n] = rep_form_oki_script[n] + "Флаг ИОД, ";
+                            }
+                            if(Objects.equals(pdn, "null as FLAG_PDN")){
+                                rep_form_oki_script[n] = rep_form_oki_script[n] + "Флаг ПДН.";
+                            }
+                            rep_form_oki_script[n] = rep_form_oki_script[n] + "\n\n";
                         }
                     } else{
                         rep_form_oki_script[n] = "INSERT INTO REP_FORM_OKI\n" +
@@ -3133,7 +3262,7 @@ public class ScriptEXP {
                         if(rep_or_code[n] == 0){
                             rep_form_cognos_script[n] = "--Для регистрации отчета нет необходимости заполнять данные для таблицы REP_FORM_COGNOS\n\n";
                         } else{
-                            rep_form_cognos_script[n] = "--Warning: Не указаны данные для таблицы REP_FORM_COGNOS\n\n";
+                            rep_form_cognos_script[n] = "--Warning: Не указаны данные для таблицы REP_FORM_COGNOS: Код потока(Когнос)\n\n";
                         }
                     } else {
                         rep_form_cognos_script[n] = "INSERT INTO REP_FORM_COGNOS\n" +
@@ -3146,7 +3275,7 @@ public class ScriptEXP {
                         if(rep_or_code[n] == 0){
                             rep_form_dep_owner_script[n] = "--Для регистрации отчета нет необходимости заполнять данные для таблицы REP_FORM_DEP_OWNER\n\n";
                         } else{
-                            rep_form_dep_owner_script[n] = "--Warning: Не указаны данные для таблицы REP_FORM_DEP_OWNER\n\n";
+                            rep_form_dep_owner_script[n] = "--Warning: Не указаны данные для таблицы REP_FORM_DEP_OWNER: Сокращенное наименование департамента для REP_FORM_DEP_OWNER\n\n";
                         }
                     } else {
                         int c = OK_Action.getDep_count(0);
@@ -3298,7 +3427,7 @@ public class ScriptEXP {
                         if(rep_or_code[n] == 0){
                             rep_form_dep_user_script[n] = "--Для регистрации отчета нет необходимости заполнять данные для таблицы REP_FORM_DEP_USER\n\n";
                         } else{
-                            rep_form_dep_user_script[n] = "--Warning: Не указаны данные для таблицы REP_FORM_DEP_USER\n\n";
+                            rep_form_dep_user_script[n] = "--Warning: Не указаны данные для таблицы REP_FORM_DEP_USER: Сокращенное наименование департамента для REP_FORM_DEP_USER\n\n";
                         }
                     } else {
                         int c = OK_Action.getDep_u_count(0);
@@ -3455,7 +3584,26 @@ public class ScriptEXP {
                         if(rep_or_code[n] == 1){
                             reg_report_form_script[n] = "--Для регистрации кода доступа нет необходимости заполнять данные для таблицы REPORT_REP_SUBJ_TYPE\n\n";
                         } else{
-                            reg_report_form_script[n] = "--Warning: Не указаны данные для таблицы REG_REPORT_FORM\n\n";
+                            reg_report_form_script[n] = "--Warning: Не указаны данные для таблицы REG_REPORT_FORM: ";
+                            if(SC_data_miner.System_id[n] == null || Objects.equals(SC_data_miner.System_id[n], "") || Objects.equals(SC_data_miner.System_id[n], " ")){
+                                reg_report_form_script[n] = reg_report_form_script[n] + "System_id, ";
+                            }
+                            if(SC_data_miner.Security_role_name[n] == null || Objects.equals(SC_data_miner.Security_role_name[n], "") || Objects.equals(SC_data_miner.Security_role_name[n], " ")){
+                                reg_report_form_script[n] = reg_report_form_script[n] + "Security_role_name, ";
+                            }
+                            if(SC_data_miner.Security_role_path[n] == null || Objects.equals(SC_data_miner.Security_role_path[n], "") || Objects.equals(SC_data_miner.Security_role_path[n], " ")){
+                                reg_report_form_script[n] = reg_report_form_script[n] + "Security_role_path, ";
+                            }
+                            if(SC_data_miner.Search_path[n] == null || Objects.equals(SC_data_miner.Search_path[n], "") || Objects.equals(SC_data_miner.Search_path[n], " ")){
+                                reg_report_form_script[n] = reg_report_form_script[n] + "Полный путь отчета/папки(Search_path), ";
+                            }
+                            if(SC_data_miner.Form_formal_code[n] == null || Objects.equals(SC_data_miner.Form_formal_code[n], "") || Objects.equals(SC_data_miner.Form_formal_code[n], " ")){
+                                reg_report_form_script[n] = reg_report_form_script[n] + "Уникальный код отчета, ";
+                            }
+                            if(SC_data_miner.Desc[n] == null || Objects.equals(SC_data_miner.Desc[n], "") || Objects.equals(SC_data_miner.Desc[n], " ")){
+                                reg_report_form_script[n] = reg_report_form_script[n] + "Описание.";
+                            }
+                            reg_report_form_script[n] = reg_report_form_script[n] + "\n\n";
                         }
                     } else {
                         reg_report_form_script[n] = "MERGE INTO REG_REPORT_FORM R\n" +
@@ -3487,7 +3635,7 @@ public class ScriptEXP {
                         if(rep_or_code[n] == 1){
                             report_okud_code_script[n] = "--Для регистрации кода доступа нет необходимости заполнять данные для таблицы REPORT_OKUD_CODE\n\n";
                         } else{
-                            report_okud_code_script[n] = "--Warning: Не указаны данные для таблицы REPORT_OKUD_CODE\n\n";
+                            report_okud_code_script[n] = "--Warning: Не указаны данные для таблицы REPORT_OKUD_CODE: ОКУД\n\n";
                         }
                     } else {
                         if(rep_or_code[n] == 1){
@@ -3665,7 +3813,14 @@ public class ScriptEXP {
                         if(rep_or_code[n] == 1){
                             report_form_src_script[n] = "--Для регистрации кода доступа нет необходимости заполнять данные для таблицы REPORT_FORM_SRC\n\n";
                         } else{
-                            report_form_src_script[n] = "--Warning: Не указаны данные для таблицы REPORT_FORM_SRC\n\n";
+                            report_form_src_script[n] = "--Warning: Не указаны данные для таблицы REPORT_FORM_SRC: ";
+                            if(SC_data_miner.Form_cd[n] == null  || Objects.equals(SC_data_miner.Form_cd[n], "") || Objects.equals(SC_data_miner.Form_cd[n], " ")){
+                                report_form_src_script[n] = report_form_src_script[n] + "Код доступа, ";
+                            }
+                            if(SC_data_miner.Form_formal_code[n] == null  || Objects.equals(SC_data_miner.Form_formal_code[n], "") || Objects.equals(SC_data_miner.Form_formal_code[n], " ")){
+                                report_form_src_script[n] = report_form_src_script[n] + "Уникальный код отчета.";
+                            }
+                            report_form_src_script[n] = report_form_src_script[n] + "\n\n";
                         }
                     } else {
                         report_form_src_script[n] = "INSERT INTO  REPORT_FORM_SRC \n" +
@@ -3677,7 +3832,7 @@ public class ScriptEXP {
                         if(rep_or_code[n] == 1){
                             report_rep_subj_type_script[n] = "--Для регистрации кода доступа нет необходимости заполнять данные для таблицы REPORT_REP_SUBJ_TYPE\n\n";
                         } else{
-                            report_rep_subj_type_script[n] = "--Warning: Не указаны данные для таблицы REPORT_REP_SUBJ_TYPE\n\n";
+                            report_rep_subj_type_script[n] = "--Warning: Не указаны данные для таблицы REPORT_REP_SUBJ_TYPE: Разрез\n\n";
                         }
                     } else {
                         //System.out.print("n =" + n + "\n");
@@ -3848,7 +4003,7 @@ public class ScriptEXP {
                         }
                     }
                     if(SC_data_miner.Search_path[n] == null || Objects.equals(SC_data_miner.Search_path[n], "") || Objects.equals(SC_data_miner.Search_path[n], " ")){
-                        ehd_acs_script[n] = "--Warning: Не указаны данные для таблицы EHD_ACS_OBJECTS\n\n";
+                        ehd_acs_script[n] = "--Warning: Не указаны данные для таблицы EHD_ACS_OBJECTS: Полный путь отчета/папки(Search_path)\n\n";
                     } else {
                         ehd_acs_script[n] = "MERGE INTO EHD_ACS_OBJECTS O\n" +
                                 "   USING (SELECT \n" +
@@ -3876,8 +4031,22 @@ public class ScriptEXP {
                             //SC_data_miner.p_type_ref_txtf[n] == null || Objects.equals(SC_data_miner.p_type_ref_txtf[n], "") || Objects.equals(SC_data_miner.p_type_ref_txtf[n], " ") ||
                             //SC_data_miner.p_source_ref_txtf[n] == null || Objects.equals(SC_data_miner.p_source_ref_txtf[n], "") || Objects.equals(SC_data_miner.p_source_ref_txtf[n], " ") ||
                             /*SC_data_miner.Search_path[n] == null || Objects.equals(SC_data_miner.Search_path[n], "") || Objects.equals(SC_data_miner.Search_path[n], " ")*/){
-                        ehd_acs_script2[n] = "--Warning: Не указаны данные для таблицы EHD_ACS_OBJECTS\n\n";
+                        ehd_acs_script2[n] = "--Warning: Не указаны данные для таблицы EHD_ACS_OBJECTS: ";
+                        if(SC_data_miner.p_parent_code_txtf[n] == null || Objects.equals(SC_data_miner.p_parent_code_txtf[n], "") || Objects.equals(SC_data_miner.p_parent_code_txtf[n], " ")){
+                            ehd_acs_script2[n] = ehd_acs_script2[n] + "p_parent_code, ";
+                        }
+                        if(SC_data_miner.p_parent_type_ref_txtf[n] == null || Objects.equals(SC_data_miner.p_parent_type_ref_txtf[n], "") || Objects.equals(SC_data_miner.p_parent_type_ref_txtf[n], " ")){
+                            ehd_acs_script2[n] = ehd_acs_script2[n] + "p_parent_type_ref, ";
+                        }
+                        if(SC_data_miner.p_type_ref_txtf[n] == null || Objects.equals(SC_data_miner.p_type_ref_txtf[n], "") || Objects.equals(SC_data_miner.p_type_ref_txtf[n], " ")){
+                            ehd_acs_script2[n] = ehd_acs_script2[n] + "p_type_ref, ";
+                        }
+                        if(SC_data_miner.p_source_ref_txtf[n] == null || Objects.equals(SC_data_miner.p_source_ref_txtf[n], "") || Objects.equals(SC_data_miner.p_source_ref_txtf[n], " ")){
+                            ehd_acs_script2[n] = ehd_acs_script2[n] + "p_source_ref. ";
+                        }
+                        ehd_acs_script2[n] = ehd_acs_script2[n] + "\n\n";
                     } else {
+                        //System.out.print("\n" + "n - rep_or_code[" + n + "] = " + rep_or_code[n]);
                         if(rep_or_code[n] == 1){
                             ehd_acs_script2[n] = "begin\n" +
                                     "utils.add_object_node\n" +
@@ -3890,6 +4059,7 @@ public class ScriptEXP {
                                     ");\n" +
                                     "                    end;\n" +
                                     "/";
+                            //System.out.print("\n" + "ehd_acs_script2[" + n + "] = " + ehd_acs_script2[n]);
                         } else{
                             ehd_acs_script2[n] = "begin\n" +
                                     "utils.add_object_node\n" +
@@ -3903,9 +4073,11 @@ public class ScriptEXP {
                                     ");\n" +
                                     "                    end;\n" +
                                     "/";
+                            //System.out.print("\n" + "ehd_acs_script2[" + n + "] = " + ehd_acs_script2[n]);
                         }
-
                     }
+                    //System.out.print("\n" + "ehd_acs_script[" + n + "] = " + ehd_acs_script[n]);
+                    //System.out.print("\n" + "ehd_acs_script2[" + n + "] = " + ehd_acs_script2[n]);
                     
                     //textset = text.split("#");
                     text[0] = text[0] + "\n" +
@@ -3950,7 +4122,9 @@ public class ScriptEXP {
                                 "\n" +
                                 ehd_acs_script[n] + "\n\n";
                     } else if(type[n] == 1){
-                        text[3] = "--" + FName_def[n] +"\n" +
+                        text[3] = text[3] + "\n" +
+                                "\n" +
+                                "--" + FName_def[n] +"\n" +
                                 "\n" +
                                 "--TechDB_EHD_ACS\n" +
                                 "\n" +

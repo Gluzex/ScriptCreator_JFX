@@ -151,9 +151,9 @@ public class PreCreateScr {
             //System.out.print("Form_cd_name_txtf[i].getText() = " + Form_cd_name_txtf[i].getText() + "\n");
             SC_data_miner.Form_cd[i] = Form_cd_txtf[i].getText();
             SC_data_miner.Form_name[i] = Form_name_txtf[i].getText();
-            System.out.print("Form_okud_txtf[" + i + "].getText() = " + Form_okud_txtf[i].getText()+ "\n");
+            //System.out.print("Form_okud_txtf[" + i + "].getText() = " + Form_okud_txtf[i].getText()+ "\n");
             SC_data_miner.Form_okud[i] = Form_okud_txtf[i].getText();
-            System.out.print("SC_data_miner.Form_okud[" + i + "].getText() = " + SC_data_miner.Form_okud[i]+ "\n");
+            //System.out.print("SC_data_miner.Form_okud[" + i + "].getText() = " + SC_data_miner.Form_okud[i]+ "\n");
             SC_data_miner.Form_okud2[i] = Form_okud2_txtf[i].getText();
             SC_data_miner.Form_okud3[i] = Form_okud3_txtf[i].getText();
             SC_data_miner.Form_okud4[i] = Form_okud4_txtf[i].getText();
