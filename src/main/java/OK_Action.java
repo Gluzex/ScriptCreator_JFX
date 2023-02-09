@@ -73,6 +73,7 @@ public class OK_Action {
     private static int[] dep_u_count = new int[16];
     private static int[] okud_count = new int[16];
     private static int[] subj_count = new int[16];
+    private static byte[] rep_or_code = new byte[16];
     private ScrollPane[] PanelScroll = new ScrollPane[16];
     private VBox[] PanelSet = new VBox[16];
     private VBox PanelNull = new VBox();
@@ -154,6 +155,7 @@ public class OK_Action {
     private HBox[] p_cmbx_dep_2 = new HBox[16];
     private HBox[] p_cmbx_okud = new HBox[16];
     private HBox[] p_cmbx_subj = new HBox[16];
+    private HBox[] p_okud_repform_lbl = new HBox[16];
 
     private Label[] form_name_lbl = new Label[16];
     private Label[] form_cd_lbl = new Label[16];
@@ -248,13 +250,14 @@ public class OK_Action {
     private ComboBox<Integer>[] Cmbx_dep_2 = new ComboBox[16];
     private ComboBox<Integer>[] Cmbx_okud = new ComboBox[16];
     private ComboBox<Integer>[] Cmbx_subj = new ComboBox[16];
+    private Label[] okud_repform_lbl = new Label[16];
 
     public OK_Action(int count, AnchorPane root, Stage primaryStage, Button createBtn){
         this.mnf = primaryStage;
         this.count = count;
         sp = new TabPane();
         sp.setPrefSize(1680, 740);
-        /*tooltip1.setShowDuration(Duration.seconds(8.0));
+        tooltip1.setShowDuration(Duration.seconds(8.0));
         tooltip1_1.setShowDuration(Duration.seconds(8.0));
         tooltip2.setShowDuration(Duration.seconds(8.0));
         tooltip3.setShowDuration(Duration.seconds(8.0));
@@ -265,7 +268,7 @@ public class OK_Action {
         tooltip7_2.setShowDuration(Duration.seconds(8.0));
         tooltip8.setShowDuration(Duration.seconds(8.0));
         tooltip9.setShowDuration(Duration.seconds(8.0));
-        tooltip10.setShowDuration(Duration.seconds(8.0));*/
+        tooltip10.setShowDuration(Duration.seconds(8.0));
         for(int t = 0; t<=15; t++){
             PanelSet[t] = new VBox(5.0);
             PanelSet[t].setPadding(new Insets(10.0));
@@ -357,6 +360,7 @@ public class OK_Action {
             p_cmbx_dep_2[t] = new HBox(15.0);
             p_cmbx_okud[t] = new HBox(15.0);
             p_cmbx_subj[t] = new HBox(15.0);
+            p_okud_repform_lbl[t] = new HBox(15.0);
             Form_name_txtf[t] = new TextField();
             Form_cd_txtf[t] =  new TextField();
             Form_cd_txtf[t].setTooltip(tooltip4);
@@ -562,6 +566,7 @@ public class OK_Action {
             cmbx_dep_2_lbl[t] = new Label("Кол-во департаментов-пользователей для кода доступа");
             cmbx_okud_lbl[t] = new Label("Кол-во ОКУД для данного отчета");
             cmbx_subj_lbl[t] = new Label("Кол-во разрезов для данного отчета");
+            okud_repform_lbl[t] = new Label("Для регламентированных кодов доступа заполнение ОКУД обязательно!");
 
             caseCode[t] = new RadioButton("Код доступа");
             //caseCode[t].setOnAction(this::onChoose1);
@@ -658,6 +663,8 @@ public class OK_Action {
                     Subj_count(fT);
                 }
             });
+
+            rep_or_code[t] = 0;
         }
         for(int o = 0; o <= count-1;){
             //System.out.print("o = " + o );
@@ -738,6 +745,7 @@ public class OK_Action {
             exjp7_V_set[o].getChildren().addAll(exjp7_set[o]);
             exjp9_V_set[o].getChildren().addAll(exjp9_set[o]);
             exjp17_V_set[o].getChildren().addAll(exjp17_set[o]);
+            p_okud_repform_lbl[o].getChildren().addAll(okud_repform_lbl[o]);
 
             form_cd_lbl[o].setText("Код доступа для отчета: ");
             p_type_ref_txtf[o].setText("cognos");
@@ -766,6 +774,7 @@ public class OK_Action {
     }
 
     public void Case_report(int t){
+        rep_or_code[t] = 0;
         Cmbx_okud[t].setValue(1);
         Cmbx_subj[t].setValue(1);
         PanelScroll[t] = new ScrollPane(PanelNull);
@@ -774,7 +783,7 @@ public class OK_Action {
         tbl10_lbl[t].setText("---Данные для таблицы EHD_ACS_OBJECTS---");
         p_type_ref_txtf[t].setText("cognos");
         p_source_ref_txtf[t].setText("cognos");
-        PanelSet[t].getChildren().removeAll(radioBtn_set[t], p_tbl_1[t], exjp1_set[t], exjp2_set[t], p_tbl_2[t], exjp4_set[t], p_tbl_3[t], exjp5_set[t], exjp6_set[t], p_tbl_4[t], p_cmbx_dep_1[t],
+        PanelSet[t].getChildren().removeAll(radioBtn_set[t], p_tbl_1[t], exjp1_set[t], exjp2_set[t], exjp3_set[t], p_okud_repform_lbl[t], p_tbl_2[t], exjp4_set[t], p_tbl_3[t], exjp5_set[t], exjp6_set[t], p_tbl_4[t], p_cmbx_dep_1[t],
                 exjp7_V_set[t],
                 p_cmbx_dep_2[t], exjp9_V_set[t],
                 exjp10_set[t], p_tbl_10[t], exjp0_set[t], exjp18_set[t], exjp19_set[t], exjp20_set[t], exjp21_set[t]);
@@ -789,6 +798,7 @@ public class OK_Action {
         
     }
     public void Case_code(int t){
+        rep_or_code[t] = 1;
         Cmbx_dep_1[t].setValue(1);
         Cmbx_dep_2[t].setValue(1);
         PanelScroll[t] = new ScrollPane(PanelNull);
@@ -802,7 +812,7 @@ public class OK_Action {
                 p_tbl_9[t], p_cmbx_subj[t], exjp17_V_set[t],
                 p_tbl_10[t], exjp0_set[t], exjp18_set[t], exjp19_set[t], exjp20_set[t], exjp21_set[t]);
 
-        PanelSet[t].getChildren().addAll(radioBtn_set[t], p_tbl_1[t], exjp1_set[t], exjp2_set[t], p_tbl_2[t], exjp4_set[t], p_tbl_3[t], exjp5_set[t], exjp6_set[t], p_tbl_4[t], p_cmbx_dep_1[t], exjp7_V_set[t],
+        PanelSet[t].getChildren().addAll(radioBtn_set[t], p_tbl_1[t], exjp1_set[t], exjp2_set[t], exjp3_set[t], p_okud_repform_lbl[t],  p_tbl_2[t], exjp4_set[t], p_tbl_3[t], exjp5_set[t], exjp6_set[t], p_tbl_4[t], p_cmbx_dep_1[t], exjp7_V_set[t],
                 p_cmbx_dep_2[t], exjp9_V_set[t], exjp10_set[t], p_tbl_10[t], exjp0_set[t], exjp18_set[t], exjp19_set[t], exjp20_set[t], exjp21_set[t]);
         PanelScroll[t] = new ScrollPane(PanelSet[t]);
         tabs[t].setContent(PanelScroll[t]);
@@ -1133,6 +1143,9 @@ public class OK_Action {
     }
     public static int getSubj_count(int y){
         return OK_Action.subj_count[y];
+    }
+    public static byte[] getRep_or_code(){
+        return rep_or_code;
     }
 }
 

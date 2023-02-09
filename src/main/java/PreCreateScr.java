@@ -69,7 +69,7 @@ public class PreCreateScr {
     public TextField[] p_source_ref_txtf;
     public TextField[] Security_role_name_txtf;
     public static String[] UFName = new String[16];
-    private static byte type = 0;
+    private static byte[] type = new byte[16];
 
     public PreCreateScr(int count, String path_fld, Stage mnf, AnchorPane main_root, Button resetBtn, TextField[] form_name_txtf, TextField[] form_cd_txtf, TextField[] form_cd_name_txtf,
                         TextField[] form_okud_txtf, TextField[] form_okud2_txtf, TextField[] form_okud3_txtf, TextField[] form_okud4_txtf, TextField[] form_okud5_txtf, TextField[] form_okud6_txtf, TextField[] form_okud7_txtf, TextField[] form_okud8_txtf,
@@ -151,7 +151,9 @@ public class PreCreateScr {
             //System.out.print("Form_cd_name_txtf[i].getText() = " + Form_cd_name_txtf[i].getText() + "\n");
             SC_data_miner.Form_cd[i] = Form_cd_txtf[i].getText();
             SC_data_miner.Form_name[i] = Form_name_txtf[i].getText();
+            System.out.print("Form_okud_txtf[" + i + "].getText() = " + Form_okud_txtf[i].getText()+ "\n");
             SC_data_miner.Form_okud[i] = Form_okud_txtf[i].getText();
+            System.out.print("SC_data_miner.Form_okud[" + i + "].getText() = " + SC_data_miner.Form_okud[i]+ "\n");
             SC_data_miner.Form_okud2[i] = Form_okud2_txtf[i].getText();
             SC_data_miner.Form_okud3[i] = Form_okud3_txtf[i].getText();
             SC_data_miner.Form_okud4[i] = Form_okud4_txtf[i].getText();
@@ -218,9 +220,9 @@ public class PreCreateScr {
                     //(SC_data_miner.p_type_ref_txtf[i] == null || Objects.equals(SC_data_miner.p_type_ref_txtf[i], "") || Objects.equals(SC_data_miner.p_type_ref_txtf[i], " ")) &&
                     //(SC_data_miner.p_source_ref_txtf[i] == null || Objects.equals(SC_data_miner.p_source_ref_txtf[i], "") || Objects.equals(SC_data_miner.p_source_ref_txtf[i], " ")) &&
                     (SC_data_miner.p_parent_type_ref_txtf[i] == null || Objects.equals(SC_data_miner.p_parent_type_ref_txtf[i], "") || Objects.equals(SC_data_miner.p_parent_type_ref_txtf[i], " "))){
-                type = 0;
+                type[i] = 0;
             } else{
-                type = 1;
+                type[i] = 1;
             }
             //System.out.print("type["+ i +"] = " + type + "\n");
             i++;
@@ -244,7 +246,7 @@ public class PreCreateScr {
         resetBtn.setDisable(false);
         resetBtn.setVisible(true);
     }
-    public static byte getType(){
+    public static byte[] getType(){
         return PreCreateScr.type;
     }
 }
