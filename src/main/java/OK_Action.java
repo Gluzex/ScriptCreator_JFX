@@ -783,6 +783,7 @@ public class OK_Action {
         tbl10_lbl[t].setText("---Данные для таблицы EHD_ACS_OBJECTS---");
         p_type_ref_txtf[t].setText("cognos");
         p_source_ref_txtf[t].setText("cognos");
+
         PanelSet[t].getChildren().removeAll(radioBtn_set[t], p_tbl_1[t], exjp1_set[t], exjp2_set[t], exjp3_set[t], p_okud_repform_lbl[t], p_tbl_2[t], exjp4_set[t], p_tbl_3[t], exjp5_set[t], exjp6_set[t], p_tbl_4[t], p_cmbx_dep_1[t],
                 exjp7_V_set[t],
                 p_cmbx_dep_2[t], exjp9_V_set[t],
