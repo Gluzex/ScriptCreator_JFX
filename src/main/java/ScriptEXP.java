@@ -143,29 +143,65 @@ public class ScriptEXP {
                         "\n" +
                         "--OAD_SECURITY\n" +
                         "\n" +
-                        "INSERT INTO REP_FORM \n" +
-                        "SELECT '"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, '"+ SC_data_miner.Form_name[0] +"' as FORM_NAME, " + okud_rep_form + " FROM dual\n" +
-                        "minus select * from REP_FORM;" +
+                        "MERGE INTO REP_FORM R\n" +
+                        "   USING (SELECT \n" +
+                        "'" + SC_data_miner.Form_cd[0] + "' as FORM_CD, \n'" +
+                        "'" + SC_data_miner.Form_name[0] + "' as FORM_NAME, \n" +
+                        "'" + okud_rep_form + "' as FORM_OKUD\n" +
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.FORM_NAME = S.FORM_NAME,\n" +
+                        "                                R.FORM_OKUD = S.FORM_OKUD\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.FORM_NAME, R.FORM_OKUD)\n" +
+                        "   VALUES (S.FORM_CD, S.FORM_NAME, S.FORM_OKUD);" +
                         "\n" +
                         "\n" +
-                        "INSERT INTO REP_FORM_COGNOS\n" +
-                        "SELECT '"+ SC_data_miner.Form_cd_cog[0] +"' as FORM_CD, '"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD FROM dual\n" +
-                        "minus select * from REP_FORM_COGNOS;" +
+                        "MERGE INTO REP_FORM_COGNOS R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd_cog[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
+                        "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                         "\n" +
                         "\n" +
-                        "INSERT INTO REP_FORM_OKI\n" +
-                        "SELECT '"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, " + iod + ",  " + pdn + " FROM  dual\n" +
-                        "minus select * from REP_FORM_OKI;" +
+                        "MERGE INTO REP_FORM_OKI R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        iod + ",  " +
+						pdn +
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.FLAG_IOD = S.FLAG_IOD,\n" +
+						"                                R.FLAG_PDN = S.FLAG_PDN,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.FLAG_IOD, R.FLAG_PDN)\n" +
+                        "   VALUES (S.FORM_CD, S.FLAG_IOD, S.FLAG_PDN);" +
                         "\n" +
                         "\n" +
-                        "INSERT INTO REP_FORM_DEP_OWNER\n" +
-                        "SELECT '"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, '"+ SC_data_miner.Dep_name[0] +"' as DEP_NAME, '"+ SC_data_miner.reason[0] +"'as REASON FROM dual\n" +
-                        "minus select * from REP_FORM_DEP_OWNER;" +
+                        "MERGE INTO REP_FORM_DEP_OWNER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_name[0] +"' as DEP_NAME, \n" + 
+						"'"+ SC_data_miner.reason[0] +"'as REASON \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);" +
                         "\n" +
                         "\n" +
-                        "INSERT INTO REP_FORM_DEP_USER\n" +
-                        "SELECT '"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, '"+ SC_data_miner.Dep_u_name[0] +"' as DEP_NAME, '"+ SC_data_miner.reason[0] +"'as REASON FROM dual\n" +
-                        "minus select * from REP_FORM_DEP_USER;" +
+                        "MERGE INTO REP_FORM_DEP_USER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_u_name[0] +"' as DEP_NAME, \n" + 
+						"'"+ SC_data_miner.reason[0] +"'as REASON \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);" +	
                         "\n" +
                         "\n" +
                         "MERGE INTO REG_REPORT_FORM R\n" +
@@ -192,44 +228,100 @@ public class ScriptEXP {
                         "   VALUES (S.SYSTEM_ID, S.SECURITY_ROLE_NAME, S.SECURITY_ROLE_PATH, S.SEARCH_PATH, S.FORM_CODE, S.FORM_FORMAL_CODE, S.DESCRIPTION, S.FLAG_IOD, S.FLAG_PDN);\n" +
                         "\n" +
                         "\n" +
-                        "INSERT INTO REPORT_OKUD_CODE \n" +
-                        "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, '"+ SC_data_miner.period[0] + "' as PERIOD, null as FORM_CD FROM dual\n" +
-                        "minus select * from REPORT_OKUD_CODE;\n" +
+                        "MERGE INTO REPORT_OKUD_CODE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, \n" + 
+						"'"+ SC_data_miner.period[0] +"'as PERIOD \n" + 
+						"null as FORM_CD \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
+                        "                                R.FORM_CD = S.FORM_CD\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.OKUD_CODE, R.PERIOD, R.FORM_CD)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.OKUD_CODE, S.PERIOD, S.FORM_CD);" +
                         "\n" +
-                        "INSERT INTO  REPORT_FORM_SRC \n" +
-                        "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Reg_form_code[0] +"' as REG_FORM_CODE FROM dual\n" +
-                        "minus select * from REPORT_FORM_SRC;\n" +
+                        "MERGE INTO REPORT_FORM_SRC R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Reg_form_code[0] +"' as REG_FORM_CODE, \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REG_FORM_CODE = S.REG_FORM_CODE\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REG_FORM_CODE)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.REG_FORM_CODE);" +
                         "\n" +
-                        "INSERT INTO  REPORT_REP_SUBJ_TYPE \n" +
-                        "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE FROM dual\n" +
-                        "minus select * from REPORT_REP_SUBJ_TYPE;" +
+                        "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE, \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.REP_SUBJ_TYPE);" +
                         "\n" + "commit;";
                 text[1] = "--" + FName_def[0] +"\n" +
                         "\n" +
                         "--DM_NIKA_KO\n" +
-                        "INSERT INTO REP_FORM \n" +
-                        "SELECT '"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, '"+ SC_data_miner.Form_name[0] +"' as FORM_NAME, " + okud_rep_form + " FROM dual\n" +
-                        "minus select * from REP_FORM;" +
+                        "MERGE INTO REP_FORM R\n" +
+                        "   USING (SELECT \n" +
+                        "'" + SC_data_miner.Form_cd[0] + "' as FORM_CD, \n'" +
+                        "'" + SC_data_miner.Form_name[0] + "' as FORM_NAME, \n" +
+                        "'" + okud_rep_form + "' as FORM_OKUD\n" +
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.FORM_NAME = S.FORM_NAME,\n" +
+                        "                                R.FORM_OKUD = S.FORM_OKUD\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.FORM_NAME, R.FORM_OKUD)\n" +
+                        "   VALUES (S.FORM_CD, S.FORM_NAME, S.FORM_OKUD);" + 
                         "\n" +
                         "\n" +
-                        "INSERT INTO REP_FORM_COGNOS\n" +
-                        "SELECT '"+ SC_data_miner.Form_cd_cog[0] +"' as FORM_CD, '"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD FROM dual\n" +
-                        "minus select * from REP_FORM_COGNOS;" +
+                        "MERGE INTO REP_FORM_COGNOS R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd_cog[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
+                        "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                         "\n" +
                         "\n" +
-                        "INSERT INTO REP_FORM_OKI\n" +
-                        "SELECT '"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, " + iod + ",  " + pdn + " FROM  dual\n" +
-                        "minus select * from REP_FORM_OKI;" +
+                        "MERGE INTO REP_FORM_OKI R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        iod + ",  " +
+						pdn +
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.FLAG_IOD = S.FLAG_IOD,\n" +
+						"                                R.FLAG_PDN = S.FLAG_PDN,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.FLAG_IOD, R.FLAG_PDN)\n" +
+                        "   VALUES (S.FORM_CD, S.FLAG_IOD, S.FLAG_PDN);" +
                         "\n" +
                         "\n" +
-                        "INSERT INTO REP_FORM_DEP_OWNER\n" +
-                        "SELECT '"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, '"+ SC_data_miner.Dep_name[0] +"' as DEP_NAME, '"+ SC_data_miner.reason[0] +"'as REASON FROM dual\n" +
-                        "minus select * from REP_FORM_DEP_OWNER;" +
+                        "MERGE INTO REP_FORM_DEP_OWNER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_name[0] +"' as DEP_NAME, \n" + 
+						"'"+ SC_data_miner.reason[0] +"'as REASON \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);" +
                         "\n" +
                         "\n" +
-                        "INSERT INTO REP_FORM_DEP_USER\n" +
-                        "SELECT '"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, '"+ SC_data_miner.Dep_u_name[0] +"' as DEP_NAME, '"+ SC_data_miner.reason[0] +"'as REASON FROM dual\n" +
-                        "minus select * from REP_FORM_DEP_USER;" +
+                        "MERGE INTO REP_FORM_DEP_USER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_u_name[0] +"' as DEP_NAME, \n" + 
+						"'"+ SC_data_miner.reason[0] +"'as REASON \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);" +	
                         "\n" +
                         "\n" +
                         "MERGE INTO REG_REPORT_FORM R\n" +
@@ -256,17 +348,37 @@ public class ScriptEXP {
                         "   VALUES (S.SYSTEM_ID, S.SECURITY_ROLE_NAME, S.SECURITY_ROLE_PATH, S.SEARCH_PATH, S.FORM_CODE, S.FORM_FORMAL_CODE, S.DESCRIPTION, S.FLAG_IOD, S.FLAG_PDN);\n" +
                         "\n" +
                         "\n" +
-                        "INSERT INTO REPORT_OKUD_CODE \n" +
-                        "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, '"+ SC_data_miner.period[0] + "' as PERIOD, null as FORM_CD FROM dual\n" +
-                        "minus select * from REPORT_OKUD_CODE;\n" +
+                        "MERGE INTO REPORT_OKUD_CODE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, \n" + 
+						"'"+ SC_data_miner.period[0] +"'as PERIOD \n" + 
+						"null as FORM_CD \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
+                        "                                R.FORM_CD = S.FORM_CD\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.OKUD_CODE, R.PERIOD, R.FORM_CD)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.OKUD_CODE, S.PERIOD, S.FORM_CD);" +
                         "\n" +
-                        "INSERT INTO  REPORT_FORM_SRC \n" +
-                        "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Reg_form_code[0] +"' as REG_FORM_CODE FROM dual\n" +
-                        "minus select * from REPORT_FORM_SRC;\n" +
+                        "MERGE INTO REPORT_FORM_SRC R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Reg_form_code[0] +"' as REG_FORM_CODE, \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REG_FORM_CODE = S.REG_FORM_CODE\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REG_FORM_CODE)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.REG_FORM_CODE);" +
                         "\n" +
-                        "INSERT INTO  REPORT_REP_SUBJ_TYPE \n" +
-                        "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE FROM dual\n" +
-                        "minus select * from REPORT_REP_SUBJ_TYPE;" +
+                        "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE, \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.REP_SUBJ_TYPE);" +
                         "\n" + "commit;";
 
                 text[2] = "--" + FName_def[0] +"\n" +
@@ -274,9 +386,15 @@ public class ScriptEXP {
                         "--DM_NIKA_KO_DATA\n" +
                         "\n" +
                         "\n" +
-                        "INSERT INTO REP_FORM_COGNOS\n" +
-                        "SELECT '"+ SC_data_miner.Form_cd_cog[0] +"' as FORM_CD, '"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD FROM dual\n" +
-                        "minus select * from REP_FORM_COGNOS;" +
+                        "MERGE INTO REP_FORM_COGNOS R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd_cog[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
+                        "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                         "\n" + "commit;";
                 text[3] = "--" + FName_def[0] +"\n" +
                         "\n" +
@@ -328,29 +446,65 @@ public class ScriptEXP {
                         "\n" +
                         "--OAD_SECURITY\n" +
                         "\n" +
-                        "INSERT INTO REP_FORM \n" +
-                        "SELECT '"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, '"+ SC_data_miner.Form_name[0] +"' as FORM_NAME, " + okud_rep_form + " FROM dual\n" +
-                        "minus select * from REP_FORM;" +
+                        "MERGE INTO REP_FORM R\n" +
+                        "   USING (SELECT \n" +
+                        "'" + SC_data_miner.Form_cd[0] + "' as FORM_CD, \n'" +
+                        "'" + SC_data_miner.Form_name[0] + "' as FORM_NAME, \n" +
+                        "'" + okud_rep_form + "' as FORM_OKUD\n" +
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.FORM_NAME = S.FORM_NAME,\n" +
+                        "                                R.FORM_OKUD = S.FORM_OKUD\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.FORM_NAME, R.FORM_OKUD)\n" +
+                        "   VALUES (S.FORM_CD, S.FORM_NAME, S.FORM_OKUD);" + 
                         "\n" +
                         "\n" +
-                        "INSERT INTO REP_FORM_COGNOS\n" +
-                        "SELECT '"+ SC_data_miner.Form_cd_cog[0] +"' as FORM_CD, '"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD FROM dual\n" +
-                        "minus select * from REP_FORM_COGNOS;" +
+                        "MERGE INTO REP_FORM_COGNOS R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd_cog[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
+                        "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                         "\n" +
                         "\n" +
-                        "INSERT INTO REP_FORM_OKI\n" +
-                        "SELECT '"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, " + iod + ",  " + pdn + " FROM  dual\n" +
-                        "minus select * from REP_FORM_OKI;" +
+                        "MERGE INTO REP_FORM_OKI R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        iod + ",  " +
+						pdn +
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.FLAG_IOD = S.FLAG_IOD,\n" +
+						"                                R.FLAG_PDN = S.FLAG_PDN,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.FLAG_IOD, R.FLAG_PDN)\n" +
+                        "   VALUES (S.FORM_CD, S.FLAG_IOD, S.FLAG_PDN);" +
                         "\n" +
                         "\n" +
-                        "INSERT INTO REP_FORM_DEP_OWNER\n" +
-                        "SELECT '"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, '"+ SC_data_miner.Dep_name[0] +"' as DEP_NAME, '"+ SC_data_miner.reason[0] +"'as REASON FROM dual\n" +
-                        "minus select * from REP_FORM_DEP_OWNER;" +
+                        "MERGE INTO REP_FORM_DEP_OWNER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_name[0] +"' as DEP_NAME, \n" + 
+						"'"+ SC_data_miner.reason[0] +"'as REASON \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);" +
                         "\n" +
                         "\n" +
-                        "INSERT INTO REP_FORM_DEP_USER\n" +
-                        "SELECT '"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, '"+ SC_data_miner.Dep_u_name[0] +"' as DEP_NAME, '"+ SC_data_miner.reason[0] +"'as REASON FROM dual\n" +
-                        "minus select * from REP_FORM_DEP_USER;" +
+                        "MERGE INTO REP_FORM_DEP_USER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_u_name[0] +"' as DEP_NAME, \n" + 
+						"'"+ SC_data_miner.reason[0] +"'as REASON \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);" +	
                         "\n" +
                         "\n" +
                         "--№\n" +
@@ -378,18 +532,38 @@ public class ScriptEXP {
                         "   VALUES (S.SYSTEM_ID, S.SECURITY_ROLE_NAME, S.SECURITY_ROLE_PATH, S.SEARCH_PATH, S.FORM_CODE, S.FORM_FORMAL_CODE, S.DESCRIPTION, S.FLAG_IOD, S.FLAG_PDN);\n" +
                         "\n" +
                         "\n" +
-                        "INSERT INTO REPORT_OKUD_CODE \n" +
-                        "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, '"+ SC_data_miner.period[0] + "' as PERIOD, null as FORM_CD FROM dual\n" +
-                        "minus select * from REPORT_OKUD_CODE;\n" +
+                        "MERGE INTO REPORT_OKUD_CODE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, \n" + 
+						"'"+ SC_data_miner.period[0] +"'as PERIOD \n" + 
+						"null as FORM_CD \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
+                        "                                R.FORM_CD = S.FORM_CD\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.OKUD_CODE, R.PERIOD, R.FORM_CD)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.OKUD_CODE, S.PERIOD, S.FORM_CD);" +
                         "--&" +
                         "\n" +
-                        "INSERT INTO  REPORT_FORM_SRC \n" +
-                        "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Reg_form_code[0] +"' as REG_FORM_CODE FROM dual\n" +
-                        "minus select * from REPORT_FORM_SRC;\n" +
+                        "MERGE INTO REPORT_FORM_SRC R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Reg_form_code[0] +"' as REG_FORM_CODE, \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REG_FORM_CODE = S.REG_FORM_CODE\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REG_FORM_CODE)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.REG_FORM_CODE);" +
                         "\n" +
-                        "INSERT INTO  REPORT_REP_SUBJ_TYPE \n" +
-                        "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE FROM dual\n" +
-                        "minus select * from REPORT_REP_SUBJ_TYPE;" +
+                        "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE, \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.REP_SUBJ_TYPE);" +
                         "\n" +
                         "\n" + "commit;";
                 text[1] = "--" + FName_def[0] + "\n" +
@@ -398,29 +572,65 @@ public class ScriptEXP {
                         "\n" +
                         "--" + FName_def[0] + "\n" +
                         "\n" +
-                        "INSERT INTO REP_FORM \n" +
-                        "SELECT '"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, '"+ SC_data_miner.Form_name[0] +"' as FORM_NAME, " + okud_rep_form + " FROM dual\n" +
-                        "minus select * from REP_FORM;" +
+                        "MERGE INTO REP_FORM R\n" +
+                        "   USING (SELECT \n" +
+                        "'" + SC_data_miner.Form_cd[0] + "' as FORM_CD, \n'" +
+                        "'" + SC_data_miner.Form_name[0] + "' as FORM_NAME, \n" +
+                        "'" + okud_rep_form + "' as FORM_OKUD\n" +
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.FORM_NAME = S.FORM_NAME,\n" +
+                        "                                R.FORM_OKUD = S.FORM_OKUD\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.FORM_NAME, R.FORM_OKUD)\n" +
+                        "   VALUES (S.FORM_CD, S.FORM_NAME, S.FORM_OKUD);" + 
                         "\n" +
                         "\n" +
-                        "INSERT INTO REP_FORM_COGNOS\n" +
-                        "SELECT '"+ SC_data_miner.Form_cd_cog[0] +"' as FORM_CD, '"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD FROM dual\n" +
-                        "minus select * from REP_FORM_COGNOS;" +
+                        "MERGE INTO REP_FORM_COGNOS R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd_cog[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
+                        "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                         "\n" +
                         "\n" +
-                        "INSERT INTO REP_FORM_OKI\n" +
-                        "SELECT '"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, " + iod + ",  " + pdn + " FROM  dual\n" +
-                        "minus select * from REP_FORM_OKI;" +
+                        "MERGE INTO REP_FORM_OKI R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        iod + ",  " +
+						pdn +
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.FLAG_IOD = S.FLAG_IOD,\n" +
+						"                                R.FLAG_PDN = S.FLAG_PDN,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.FLAG_IOD, R.FLAG_PDN)\n" +
+                        "   VALUES (S.FORM_CD, S.FLAG_IOD, S.FLAG_PDN);" +
                         "\n" +
                         "\n" +
-                        "INSERT INTO REP_FORM_DEP_OWNER\n" +
-                        "SELECT '"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, '"+ SC_data_miner.Dep_name[0] +"' as DEP_NAME, '"+ SC_data_miner.reason[0] +"'as REASON FROM dual\n" +
-                        "minus select * from REP_FORM_DEP_OWNER;" +
+                        "MERGE INTO REP_FORM_DEP_OWNER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_name[0] +"' as DEP_NAME, \n" + 
+						"'"+ SC_data_miner.reason[0] +"'as REASON \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);" +
                         "\n" +
                         "\n" +
-                        "INSERT INTO REP_FORM_DEP_USER\n" +
-                        "SELECT '"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, '"+ SC_data_miner.Dep_u_name[0] +"' as DEP_NAME, '"+ SC_data_miner.reason[0] +"'as REASON FROM dual\n" +
-                        "minus select * from REP_FORM_DEP_USER;" +
+                        "MERGE INTO REP_FORM_DEP_USER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_u_name[0] +"' as DEP_NAME, \n" + 
+						"'"+ SC_data_miner.reason[0] +"'as REASON \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);" +	
                         "\n" +
                         "\n" +
                         "--№\n" +
@@ -448,28 +658,54 @@ public class ScriptEXP {
                         "   VALUES (S.SYSTEM_ID, S.SECURITY_ROLE_NAME, S.SECURITY_ROLE_PATH, S.SEARCH_PATH, S.FORM_CODE, S.FORM_FORMAL_CODE, S.DESCRIPTION, S.FLAG_IOD, S.FLAG_PDN);\n" +
                         "\n" +
                         "\n" +
-                        "INSERT INTO REPORT_OKUD_CODE \n" +
-                        "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, '"+ SC_data_miner.period[0] + "' as PERIOD, null as FORM_CD FROM dual\n" +
-                        "minus select * from REPORT_OKUD_CODE;\n" +
+                        "MERGE INTO REPORT_OKUD_CODE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, \n" + 
+						"'"+ SC_data_miner.period[0] +"'as PERIOD \n" + 
+						"null as FORM_CD \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
+                        "                                R.FORM_CD = S.FORM_CD\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.OKUD_CODE, R.PERIOD, R.FORM_CD)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.OKUD_CODE, S.PERIOD, S.FORM_CD);" +
                         "\n" +
                         "--&" +
                         "\n" +
-                        "INSERT INTO  REPORT_FORM_SRC \n" +
-                        "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Reg_form_code[0] +"' as REG_FORM_CODE FROM dual\n" +
-                        "minus select * from REPORT_FORM_SRC;\n" +
+                        "MERGE INTO REPORT_FORM_SRC R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Reg_form_code[0] +"' as REG_FORM_CODE, \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REG_FORM_CODE = S.REG_FORM_CODE\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REG_FORM_CODE)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.REG_FORM_CODE);" +
                         "\n" +
-                        "INSERT INTO  REPORT_REP_SUBJ_TYPE \n" +
-                        "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE FROM dual\n" +
-                        "minus select * from REPORT_REP_SUBJ_TYPE;" +
+                        "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE, \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.REP_SUBJ_TYPE);" +
                         "\n" + "commit;";
                 text[2] = "--" + FName_def[0] + "\n" +
                         "\n" +
                         "--DM_NIKA_KO_DATA\n" +
                         "\n" +
                         "\n" +
-                        "INSERT INTO REP_FORM_COGNOS\n" +
-                        "SELECT '"+ SC_data_miner.Form_cd_cog[0] +"' as FORM_CD, '"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD FROM dual\n" +
-                        "minus select * from REP_FORM_COGNOS;" +
+                        "MERGE INTO REP_FORM_COGNOS R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd_cog[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
+                        "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                         "\n" + "commit;";
                 text[3] = "--" + FName_def[0] + "\n" +
                         "\n" +"--TechDB_EHD_ACS\n" +
@@ -752,17 +988,37 @@ public class ScriptEXP {
                         "   VALUES (S.SYSTEM_ID, S.SECURITY_ROLE_NAME, S.SECURITY_ROLE_PATH, S.SEARCH_PATH, S.FORM_CODE, S.FORM_FORMAL_CODE, S.DESCRIPTION, S.FLAG_IOD, S.FLAG_PDN);\n" +
                         "\n" +
                         "\n" +
-                        "INSERT INTO REPORT_OKUD_CODE \n" +
-                        "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, '"+ SC_data_miner.period[0] + "' as PERIOD, null as FORM_CD FROM dual\n" +
-                        "minus select * from REPORT_OKUD_CODE;\n" +
+                        "MERGE INTO REPORT_OKUD_CODE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, \n" + 
+						"'"+ SC_data_miner.period[0] +"'as PERIOD \n" + 
+						"null as FORM_CD \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
+                        "                                R.FORM_CD = S.FORM_CD\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.OKUD_CODE, R.PERIOD, R.FORM_CD)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.OKUD_CODE, S.PERIOD, S.FORM_CD);" +
                         "\n" +
-                        "INSERT INTO  REPORT_FORM_SRC \n" +
-                        "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Reg_form_code[0] +"' as REG_FORM_CODE FROM dual\n" +
-                        "minus select * from REPORT_FORM_SRC;\n" +
+                        "MERGE INTO REPORT_FORM_SRC R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Reg_form_code[0] +"' as REG_FORM_CODE, \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REG_FORM_CODE = S.REG_FORM_CODE\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REG_FORM_CODE)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.REG_FORM_CODE);" +
                         "\n" +
-                        "INSERT INTO  REPORT_REP_SUBJ_TYPE \n" +
-                        "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE FROM dual\n" +
-                        "minus select * from REPORT_REP_SUBJ_TYPE;" +
+                        "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE, \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.REP_SUBJ_TYPE);" +
                         "\n" + "commit;";
                 text[1] = "--" + FName_def[0] +"\n" +
                         "\n" +
@@ -792,17 +1048,37 @@ public class ScriptEXP {
                         "   VALUES (S.SYSTEM_ID, S.SECURITY_ROLE_NAME, S.SECURITY_ROLE_PATH, S.SEARCH_PATH, S.FORM_CODE, S.FORM_FORMAL_CODE, S.DESCRIPTION, S.FLAG_IOD, S.FLAG_PDN);\n" +
                         "\n" +
                         "\n" +
-                        "INSERT INTO REPORT_OKUD_CODE \n" +
-                        "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, '"+ SC_data_miner.period[0] + "' as PERIOD, null as FORM_CD FROM dual\n" +
-                        "minus select * from REPORT_OKUD_CODE;\n" +
+                        "MERGE INTO REPORT_OKUD_CODE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, \n" + 
+						"'"+ SC_data_miner.period[0] +"'as PERIOD \n" + 
+						"null as FORM_CD \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
+                        "                                R.FORM_CD = S.FORM_CD\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.OKUD_CODE, R.PERIOD, R.FORM_CD)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.OKUD_CODE, S.PERIOD, S.FORM_CD);" +
                         "\n" +
-                        "INSERT INTO  REPORT_FORM_SRC \n" +
-                        "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Reg_form_code[0] +"' as REG_FORM_CODE FROM dual\n" +
-                        "minus select * from REPORT_FORM_SRC;\n" +
+                        "MERGE INTO REPORT_FORM_SRC R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Reg_form_code[0] +"' as REG_FORM_CODE, \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REG_FORM_CODE = S.REG_FORM_CODE\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REG_FORM_CODE)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.REG_FORM_CODE);" +
                         "\n" +
-                        "INSERT INTO  REPORT_REP_SUBJ_TYPE \n" +
-                        "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE FROM dual\n" +
-                        "minus select * from REPORT_REP_SUBJ_TYPE;" +
+                        "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE, \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.REP_SUBJ_TYPE);" +
                         "\n" + "commit;";
                 /*text[2] = "--" + FName_def[0] +"\n" +
                         "\n" +
@@ -878,18 +1154,38 @@ public class ScriptEXP {
                         "   VALUES (S.SYSTEM_ID, S.SECURITY_ROLE_NAME, S.SECURITY_ROLE_PATH, S.SEARCH_PATH, S.FORM_CODE, S.FORM_FORMAL_CODE, S.DESCRIPTION, S.FLAG_IOD, S.FLAG_PDN);\n" +
                         "\n" +
                         "\n" +
-                        "INSERT INTO REPORT_OKUD_CODE \n" +
-                        "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, '"+ SC_data_miner.period[0] + "' as PERIOD, null as FORM_CD FROM dual\n" +
-                        "minus select * from REPORT_OKUD_CODE;\n" +
+                        "MERGE INTO REPORT_OKUD_CODE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, \n" + 
+						"'"+ SC_data_miner.period[0] +"'as PERIOD \n" + 
+						"null as FORM_CD \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
+                        "                                R.FORM_CD = S.FORM_CD\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.OKUD_CODE, R.PERIOD, R.FORM_CD)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.OKUD_CODE, S.PERIOD, S.FORM_CD);" +
                         "--&" +
                         "\n" +
-                        "INSERT INTO  REPORT_FORM_SRC \n" +
-                        "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Reg_form_code[0] +"' as REG_FORM_CODE FROM dual\n" +
-                        "minus select * from REPORT_FORM_SRC;\n" +
+                        "MERGE INTO REPORT_FORM_SRC R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Reg_form_code[0] +"' as REG_FORM_CODE, \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REG_FORM_CODE = S.REG_FORM_CODE\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REG_FORM_CODE)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.REG_FORM_CODE);" +
                         "\n" +
-                        "INSERT INTO  REPORT_REP_SUBJ_TYPE \n" +
-                        "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE FROM dual\n" +
-                        "minus select * from REPORT_REP_SUBJ_TYPE;" +
+                        "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE, \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.REP_SUBJ_TYPE);" +
                         "\n" + "commit;";
                 text[1] = "--" + FName_def[0] +"\n" +
                         "\n" +
@@ -919,18 +1215,38 @@ public class ScriptEXP {
                         "   VALUES (S.SYSTEM_ID, S.SECURITY_ROLE_NAME, S.SECURITY_ROLE_PATH, S.SEARCH_PATH, S.FORM_CODE, S.FORM_FORMAL_CODE, S.DESCRIPTION, S.FLAG_IOD, S.FLAG_PDN);\n" +
                         "\n" +
                         "\n" +
-                        "INSERT INTO REPORT_OKUD_CODE \n" +
-                        "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, '"+ SC_data_miner.period[0] + "' as PERIOD, null as FORM_CD FROM dual\n" +
-                        "minus select * from REPORT_OKUD_CODE;\n" +
+                        "MERGE INTO REPORT_OKUD_CODE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, \n" + 
+						"'"+ SC_data_miner.period[0] +"'as PERIOD \n" + 
+						"null as FORM_CD \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
+                        "                                R.FORM_CD = S.FORM_CD\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.OKUD_CODE, R.PERIOD, R.FORM_CD)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.OKUD_CODE, S.PERIOD, S.FORM_CD);" +
                         "--&" +
                         "\n" +
-                        "INSERT INTO  REPORT_FORM_SRC \n" +
-                        "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Reg_form_code[0] +"' as REG_FORM_CODE FROM dual\n" +
-                        "minus select * from REPORT_FORM_SRC;\n" +
+                        "MERGE INTO REPORT_FORM_SRC R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Reg_form_code[0] +"' as REG_FORM_CODE, \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REG_FORM_CODE = S.REG_FORM_CODE\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REG_FORM_CODE)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.REG_FORM_CODE);" +
                         "\n" +
-                        "INSERT INTO  REPORT_REP_SUBJ_TYPE \n" +
-                        "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE FROM dual\n" +
-                        "minus select * from REPORT_REP_SUBJ_TYPE;" +
+                        "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE, \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.REP_SUBJ_TYPE);" +
                         "\n" + "commit;";
                 /*text[2] = "--" + FName_def[0] +"\n" +
                         "\n" +
@@ -1285,18 +1601,34 @@ public class ScriptEXP {
                 if((SC_data_miner.Form_cd_name[0]== null) || Objects.equals(SC_data_miner.Form_cd_name[0], "") || Objects.equals(SC_data_miner.Form_cd_name[0], " ")){
                     rep_form_script = "--Warning: Не указаны данные для таблицы REP_FORM\n\n";
                 } else {
-                    rep_form_script = "INSERT INTO REP_FORM \n" +
-                            "SELECT '"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, '"+ SC_data_miner.Form_cd_name[0] +"' as FORM_NAME, " + okud_rep_form + " FROM dual\n" +
-                            "minus select * from REP_FORM;" +
+                    rep_form_script = "MERGE INTO REP_FORM R\n" +
+                        "   USING (SELECT \n" +
+                        "'" + SC_data_miner.Form_cd[0] + "' as FORM_CD, \n'" +
+                        "'" + SC_data_miner.Form_name[0] + "' as FORM_NAME, \n" +
+                        "'" + okud_rep_form + "' as FORM_OKUD\n" +
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.FORM_NAME = S.FORM_NAME,\n" +
+                        "                                R.FORM_OKUD = S.FORM_OKUD\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.FORM_NAME, R.FORM_OKUD)\n" +
+                        "   VALUES (S.FORM_CD, S.FORM_NAME, S.FORM_OKUD);" + 
                             "\n" +
                             "\n" ;
                 }
                 if(Objects.equals(iod, "null as FLAG_IOD") || Objects.equals(pdn, "null as FLAG_PDN")){
                     rep_form_oki_script = "--Warning: Не указаны данные для таблицы REP_FORM_OKI\n\n";
                 } else{
-                    rep_form_oki_script = "INSERT INTO REP_FORM_OKI\n" +
-                            "SELECT '"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, " + iod + ",  " + pdn + " FROM  dual\n" +
-                            "minus select * from REP_FORM_OKI;" +
+                    rep_form_oki_script = "MERGE INTO REP_FORM_OKI R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        iod + ",  " +
+						pdn +
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.FLAG_IOD = S.FLAG_IOD,\n" +
+						"                                R.FLAG_PDN = S.FLAG_PDN,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.FLAG_IOD, R.FLAG_PDN)\n" +
+                        "   VALUES (S.FORM_CD, S.FLAG_IOD, S.FLAG_PDN);" +
                             "\n" +
                             "\n" ;
                 }
@@ -1304,9 +1636,15 @@ public class ScriptEXP {
                 if(SC_data_miner.Form_cd_cog[0] == null || Objects.equals(SC_data_miner.Form_cd_cog[0], "") || Objects.equals(SC_data_miner.Form_cd_cog[0], " ")){
                     rep_form_cognos_script = "--Warning: Не указаны данные для таблицы REP_FORM_COGNOS\n\n";
                 } else {
-                    rep_form_cognos_script = "INSERT INTO REP_FORM_COGNOS\n" +
-                            "SELECT '"+ SC_data_miner.Form_cd_cog[0] +"' as FORM_CD, '"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD FROM dual\n" +
-                            "minus select * from REP_FORM_COGNOS;" +
+                    rep_form_cognos_script = "MERGE INTO REP_FORM_COGNOS R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd_cog[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
+                        "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                             "\n" +
                             "\n";
                 }
@@ -1317,142 +1655,394 @@ public class ScriptEXP {
                     int c = OK_Action.getDep_count(0);
                     switch (c){
                         case 1:
-                            rep_form_dep_owner_script = "INSERT INTO REP_FORM_DEP_OWNER\n" +
-                                    "SELECT '"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, '"+ SC_data_miner.Dep_name[0] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                    "minus select * from REP_FORM_DEP_OWNER;" +
+                            rep_form_dep_owner_script = "MERGE INTO REP_FORM_DEP_OWNER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_name[0] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);" +
                                     "\n" +
                                     "\n";
                             break;
                         case 2:
-                            rep_form_dep_owner_script = "INSERT INTO REP_FORM_DEP_OWNER\n" +
-                                    "SELECT '"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, '"+ SC_data_miner.Dep_name[0] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                    "minus select * from REP_FORM_DEP_OWNER;\n\n" +
-                                    "INSERT INTO REP_FORM_DEP_OWNER\n" +
-                                    "SELECT '"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, '"+ SC_data_miner.Dep_name2[0] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                    "minus select * from REP_FORM_DEP_OWNER;" +
+                            rep_form_dep_owner_script = "MERGE INTO REP_FORM_DEP_OWNER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_name[0] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
+                                    "MERGE INTO REP_FORM_DEP_OWNER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_name2[0] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);" +
                                     "\n" +
                                     "\n";
                             break;
                         case 3:
-                            rep_form_dep_owner_script = "INSERT INTO REP_FORM_DEP_OWNER\n" +
-                                    "SELECT '"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, '"+ SC_data_miner.Dep_name[0] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                    "minus select * from REP_FORM_DEP_OWNER;\n\n" +
-                                    "INSERT INTO REP_FORM_DEP_OWNER\n" +
-                                    "SELECT '"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, '"+ SC_data_miner.Dep_name2[0] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                    "minus select * from REP_FORM_DEP_OWNER;\n\n" +
-                                    "INSERT INTO REP_FORM_DEP_OWNER\n" +
-                                    "SELECT '"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, '"+ SC_data_miner.Dep_name3[0] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                    "minus select * from REP_FORM_DEP_OWNER;" +
+                            rep_form_dep_owner_script = "MERGE INTO REP_FORM_DEP_OWNER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_name[0] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
+                                    "MERGE INTO REP_FORM_DEP_OWNER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_name2[0] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
+                                    "MERGE INTO REP_FORM_DEP_OWNER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_name3[0] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);" +
                                     "\n" +
                                     "\n";
                             break;
                         case 4:
-                            rep_form_dep_owner_script = "INSERT INTO REP_FORM_DEP_OWNER\n" +
-                                    "SELECT '"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, '"+ SC_data_miner.Dep_name[0] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                    "minus select * from REP_FORM_DEP_OWNER;\n\n" +
-                                    "INSERT INTO REP_FORM_DEP_OWNER\n" +
-                                    "SELECT '"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, '"+ SC_data_miner.Dep_name2[0] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                    "minus select * from REP_FORM_DEP_OWNER;\n\n" +
-                                    "INSERT INTO REP_FORM_DEP_OWNER\n" +
-                                    "SELECT '"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, '"+ SC_data_miner.Dep_name3[0] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                    "minus select * from REP_FORM_DEP_OWNER;\n\n" +
-                                    "INSERT INTO REP_FORM_DEP_OWNER\n" +
-                                    "SELECT '"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, '"+ SC_data_miner.Dep_name4[0] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                    "minus select * from REP_FORM_DEP_OWNER;" +
+                            rep_form_dep_owner_script = "MERGE INTO REP_FORM_DEP_OWNER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_name[0] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
+                                    "MERGE INTO REP_FORM_DEP_OWNER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_name2[0] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
+                                    "MERGE INTO REP_FORM_DEP_OWNER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_name3[0] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
+                                    "MERGE INTO REP_FORM_DEP_OWNER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_name4[0] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);" +
                                     "\n" +
                                     "\n";
                             break;
                         case 5:
-                            rep_form_dep_owner_script = "INSERT INTO REP_FORM_DEP_OWNER\n" +
-                                    "SELECT '"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, '"+ SC_data_miner.Dep_name[0] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                    "minus select * from REP_FORM_DEP_OWNER;\n\n" +
-                                    "INSERT INTO REP_FORM_DEP_OWNER\n" +
-                                    "SELECT '"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, '"+ SC_data_miner.Dep_name2[0] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                    "minus select * from REP_FORM_DEP_OWNER;\n\n" +
-                                    "INSERT INTO REP_FORM_DEP_OWNER\n" +
-                                    "SELECT '"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, '"+ SC_data_miner.Dep_name3[0] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                    "minus select * from REP_FORM_DEP_OWNER;\n\n" +
-                                    "INSERT INTO REP_FORM_DEP_OWNER\n" +
-                                    "SELECT '"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, '"+ SC_data_miner.Dep_name4[0] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                    "minus select * from REP_FORM_DEP_OWNER;\n\n" +
-                                    "INSERT INTO REP_FORM_DEP_OWNER\n" +
-                                    "SELECT '"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, '"+ SC_data_miner.Dep_name5[0] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                    "minus select * from REP_FORM_DEP_OWNER;" +
+                            rep_form_dep_owner_script = "MERGE INTO REP_FORM_DEP_OWNER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_name[0] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
+                                    "MERGE INTO REP_FORM_DEP_OWNER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_name2[0] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);" +
+                                    "MERGE INTO REP_FORM_DEP_OWNER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_name3[0] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
+                                    "MERGE INTO REP_FORM_DEP_OWNER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_name4[0] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
+                                    "MERGE INTO REP_FORM_DEP_OWNER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_name5[0] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);" +
                                     "\n" +
                                     "\n";
                             break;
                         case 6:
-                            rep_form_dep_owner_script = "INSERT INTO REP_FORM_DEP_OWNER\n" +
-                                    "SELECT '"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, '"+ SC_data_miner.Dep_name[0] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                    "minus select * from REP_FORM_DEP_OWNER;\n\n" +
-                                    "INSERT INTO REP_FORM_DEP_OWNER\n" +
-                                    "SELECT '"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, '"+ SC_data_miner.Dep_name2[0] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                    "minus select * from REP_FORM_DEP_OWNER;\n\n" +
-                                    "INSERT INTO REP_FORM_DEP_OWNER\n" +
-                                    "SELECT '"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, '"+ SC_data_miner.Dep_name3[0] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                    "minus select * from REP_FORM_DEP_OWNER;\n\n" +
-                                    "INSERT INTO REP_FORM_DEP_OWNER\n" +
-                                    "SELECT '"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, '"+ SC_data_miner.Dep_name4[0] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                    "minus select * from REP_FORM_DEP_OWNER;\n\n" +
-                                    "INSERT INTO REP_FORM_DEP_OWNER\n" +
-                                    "SELECT '"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, '"+ SC_data_miner.Dep_name5[0] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                    "minus select * from REP_FORM_DEP_OWNER;\n\n" +
-                                    "INSERT INTO REP_FORM_DEP_OWNER\n" +
-                                    "SELECT '"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, '"+ SC_data_miner.Dep_name6[0] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                    "minus select * from REP_FORM_DEP_OWNER;" +
+                            rep_form_dep_owner_script = "MERGE INTO REP_FORM_DEP_OWNER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_name[0] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
+                                    "MERGE INTO REP_FORM_DEP_OWNER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_name2[0] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);" +
+                                    "MERGE INTO REP_FORM_DEP_OWNER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_name3[0] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
+                                    "MERGE INTO REP_FORM_DEP_OWNER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_name4[0] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
+                                    "MERGE INTO REP_FORM_DEP_OWNER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_name5[0] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
+                                    "MERGE INTO REP_FORM_DEP_OWNER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_name6[0] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);" +
                                     "\n" +
                                     "\n";
                             break;
                         case 7:
-                            rep_form_dep_owner_script = "INSERT INTO REP_FORM_DEP_OWNER\n" +
-                                    "SELECT '"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, '"+ SC_data_miner.Dep_name[0] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                    "minus select * from REP_FORM_DEP_OWNER;\n\n" +
-                                    "INSERT INTO REP_FORM_DEP_OWNER\n" +
-                                    "SELECT '"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, '"+ SC_data_miner.Dep_name2[0] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                    "minus select * from REP_FORM_DEP_OWNER;\n\n" +
-                                    "INSERT INTO REP_FORM_DEP_OWNER\n" +
-                                    "SELECT '"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, '"+ SC_data_miner.Dep_name3[0] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                    "minus select * from REP_FORM_DEP_OWNER;\n\n" +
-                                    "INSERT INTO REP_FORM_DEP_OWNER\n" +
-                                    "SELECT '"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, '"+ SC_data_miner.Dep_name4[0] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                    "minus select * from REP_FORM_DEP_OWNER;\n\n" +
-                                    "INSERT INTO REP_FORM_DEP_OWNER\n" +
-                                    "SELECT '"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, '"+ SC_data_miner.Dep_name5[0] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                    "minus select * from REP_FORM_DEP_OWNER;\n\n" +
-                                    "INSERT INTO REP_FORM_DEP_OWNER\n" +
-                                    "SELECT '"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, '"+ SC_data_miner.Dep_name6[0] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                    "minus select * from REP_FORM_DEP_OWNER;\n\n" +
-                                    "INSERT INTO REP_FORM_DEP_OWNER\n" +
-                                    "SELECT '"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, '"+ SC_data_miner.Dep_name7[0] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                    "minus select * from REP_FORM_DEP_OWNER;" +
+                            rep_form_dep_owner_script = "MERGE INTO REP_FORM_DEP_OWNER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_name[0] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
+                                    "MERGE INTO REP_FORM_DEP_OWNER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_name2[0] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);" +
+                                    "MERGE INTO REP_FORM_DEP_OWNER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_name3[0] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
+                                    "MERGE INTO REP_FORM_DEP_OWNER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_name4[0] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
+                                    "MERGE INTO REP_FORM_DEP_OWNER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_name5[0] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
+                                    "MERGE INTO REP_FORM_DEP_OWNER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_name6[0] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
+                                    "MERGE INTO REP_FORM_DEP_OWNER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_name7[0] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);" +
                                     "\n" +
                                     "\n";
                             break;
                         case 8:
-                            rep_form_dep_owner_script = "INSERT INTO REP_FORM_DEP_OWNER\n" +
-                                    "SELECT '"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, '"+ SC_data_miner.Dep_name[0] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                    "minus select * from REP_FORM_DEP_OWNER;\n\n" +
-                                    "INSERT INTO REP_FORM_DEP_OWNER\n" +
-                                    "SELECT '"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, '"+ SC_data_miner.Dep_name2[0] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                    "minus select * from REP_FORM_DEP_OWNER;\n\n" +
-                                    "INSERT INTO REP_FORM_DEP_OWNER\n" +
-                                    "SELECT '"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, '"+ SC_data_miner.Dep_name3[0] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                    "minus select * from REP_FORM_DEP_OWNER;\n\n" +
-                                    "INSERT INTO REP_FORM_DEP_OWNER\n" +
-                                    "SELECT '"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, '"+ SC_data_miner.Dep_name4[0] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                    "minus select * from REP_FORM_DEP_OWNER;\n\n" +
-                                    "INSERT INTO REP_FORM_DEP_OWNER\n" +
-                                    "SELECT '"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, '"+ SC_data_miner.Dep_name5[0] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                    "minus select * from REP_FORM_DEP_OWNER;\n\n" +
-                                    "INSERT INTO REP_FORM_DEP_OWNER\n" +
-                                    "SELECT '"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, '"+ SC_data_miner.Dep_name6[0] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                    "minus select * from REP_FORM_DEP_OWNER;\n\n" +
-                                    "INSERT INTO REP_FORM_DEP_OWNER\n" +
-                                    "SELECT '"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, '"+ SC_data_miner.Dep_name7[0] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                    "minus select * from REP_FORM_DEP_OWNER;\n\n" +
-                                    "INSERT INTO REP_FORM_DEP_OWNER\n" +
-                                    "SELECT '"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, '"+ SC_data_miner.Dep_name8[0] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                    "minus select * from REP_FORM_DEP_OWNER;\n\n" +
+                            rep_form_dep_owner_script = "MERGE INTO REP_FORM_DEP_OWNER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_name[0] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
+                                    "MERGE INTO REP_FORM_DEP_OWNER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_name2[0] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);" +
+                                    "MERGE INTO REP_FORM_DEP_OWNER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_name3[0] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
+                                    "MERGE INTO REP_FORM_DEP_OWNER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_name4[0] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
+                                    "MERGE INTO REP_FORM_DEP_OWNER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_name5[0] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
+                                    "MERGE INTO REP_FORM_DEP_OWNER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_name6[0] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
+                                    "MERGE INTO REP_FORM_DEP_OWNER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_name7[0] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
+                                    "MERGE INTO REP_FORM_DEP_OWNER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_name8[0] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "\n" +
                                     "\n";
                             break;
@@ -1466,111 +2056,300 @@ public class ScriptEXP {
                     int c = OK_Action.getDep_u_count(0);
                     switch (c){
                         case 1:
-                            rep_form_dep_user_script = "INSERT INTO REP_FORM_DEP_USER\n" +
-                                    "SELECT '"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, '"+ SC_data_miner.Dep_u_name[0] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                    "minus select * from REP_FORM_DEP_USER;" +
+                            rep_form_dep_user_script = "MERGE INTO REP_FORM_DEP_USER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_u_name[0] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "\n" +
                                     "\n";
                             break;
                         case 2:
-                            rep_form_dep_user_script = "INSERT INTO REP_FORM_DEP_USER\n" +
-                                    "SELECT '"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, '"+ SC_data_miner.Dep_u_name[0] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                    "minus select * from REP_FORM_DEP_USER;\n\n" +
-                                    "INSERT INTO REP_FORM_DEP_USER\n" +
-                                    "SELECT '"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, '"+ SC_data_miner.Dep_u_name2[0] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                    "minus select * from REP_FORM_DEP_USER;" +
+                            rep_form_dep_user_script = "MERGE INTO REP_FORM_DEP_USER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_u_name[0] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
+                                    "MERGE INTO REP_FORM_DEP_USER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_u_name2[0] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "\n" +
                                     "\n";
                             break;
                         case 3:
-                            rep_form_dep_user_script = "INSERT INTO REP_FORM_DEP_USER\n" +
-                                    "SELECT '"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, '"+ SC_data_miner.Dep_u_name[0] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                    "minus select * from REP_FORM_DEP_USER;\n\n" +
-                                    "INSERT INTO REP_FORM_DEP_USER\n" +
-                                    "SELECT '"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, '"+ SC_data_miner.Dep_u_name2[0] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                    "minus select * from REP_FORM_DEP_USER;\n\n" +
-                                    "INSERT INTO REP_FORM_DEP_USER\n" +
-                                    "SELECT '"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, '"+ SC_data_miner.Dep_u_name3[0] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                    "minus select * from REP_FORM_DEP_USER;" +
+                            rep_form_dep_user_script = "MERGE INTO REP_FORM_DEP_USER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_u_name[0] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
+                                    "MERGE INTO REP_FORM_DEP_USER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_u_name2[0] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
+                                   "MERGE INTO REP_FORM_DEP_USER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_u_name3[0] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "\n" +
                                     "\n";
                             break;
                         case 4:
-                            rep_form_dep_user_script = "INSERT INTO REP_FORM_DEP_USER\n" +
-                                    "SELECT '"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, '"+ SC_data_miner.Dep_u_name[0] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                    "minus select * from REP_FORM_DEP_USER;\n\n" +
-                                    "INSERT INTO REP_FORM_DEP_USER\n" +
-                                    "SELECT '"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, '"+ SC_data_miner.Dep_u_name2[0] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                    "minus select * from REP_FORM_DEP_USER;\n\n" +
-                                    "INSERT INTO REP_FORM_DEP_USER\n" +
-                                    "SELECT '"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, '"+ SC_data_miner.Dep_u_name3[0] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                    "minus select * from REP_FORM_DEP_USER;\n\n" +
-                                    "INSERT INTO REP_FORM_DEP_USER\n" +
-                                    "SELECT '"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, '"+ SC_data_miner.Dep_u_name4[0] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                    "minus select * from REP_FORM_DEP_USER;" +
+                            rep_form_dep_user_script = "MERGE INTO REP_FORM_DEP_USER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_u_name[0] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
+                                    "MERGE INTO REP_FORM_DEP_USER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_u_name2[0] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
+                                    "MERGE INTO REP_FORM_DEP_USER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_u_name3[0] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
+                                    "MERGE INTO REP_FORM_DEP_USER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_u_name4[0] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "\n" +
                                     "\n";
                             break;
                         case 5:
-                            rep_form_dep_user_script = "INSERT INTO REP_FORM_DEP_USER\n" +
-                                    "SELECT '"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, '"+ SC_data_miner.Dep_u_name[0] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                    "minus select * from REP_FORM_DEP_USER;\n\n" +
-                                    "INSERT INTO REP_FORM_DEP_USER\n" +
-                                    "SELECT '"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, '"+ SC_data_miner.Dep_u_name2[0] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                    "minus select * from REP_FORM_DEP_USER;\n\n" +
-                                    "INSERT INTO REP_FORM_DEP_USER\n" +
-                                    "SELECT '"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, '"+ SC_data_miner.Dep_u_name3[0] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                    "minus select * from REP_FORM_DEP_USER;\n\n" +
-                                    "INSERT INTO REP_FORM_DEP_USER\n" +
-                                    "SELECT '"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, '"+ SC_data_miner.Dep_u_name4[0] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                    "minus select * from REP_FORM_DEP_USER;\n\n" +
-                                    "INSERT INTO REP_FORM_DEP_USER\n" +
-                                    "SELECT '"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, '"+ SC_data_miner.Dep_u_name5[0] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                    "minus select * from REP_FORM_DEP_USER;" +
+                            rep_form_dep_user_script = "MERGE INTO REP_FORM_DEP_USER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_u_name[0] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
+                                    "MERGE INTO REP_FORM_DEP_USER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_u_name2[0] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
+                                    "MERGE INTO REP_FORM_DEP_USER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_u_name3[0] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
+                                    "MERGE INTO REP_FORM_DEP_USER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_u_name4[0] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
+                                    "MERGE INTO REP_FORM_DEP_USER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_u_name5[0] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "\n" +
                                     "\n";
                             break;
                         case 6:
-                            rep_form_dep_user_script = "INSERT INTO REP_FORM_DEP_USER\n" +
-                                    "SELECT '"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, '"+ SC_data_miner.Dep_u_name[0] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                    "minus select * from REP_FORM_DEP_USER;\n\n" +
-                                    "INSERT INTO REP_FORM_DEP_USER\n" +
-                                    "SELECT '"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, '"+ SC_data_miner.Dep_u_name2[0] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                    "minus select * from REP_FORM_DEP_USER;\n\n" +
-                                    "INSERT INTO REP_FORM_DEP_USER\n" +
-                                    "SELECT '"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, '"+ SC_data_miner.Dep_u_name3[0] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                    "minus select * from REP_FORM_DEP_USER;\n\n" +
-                                    "INSERT INTO REP_FORM_DEP_USER\n" +
-                                    "SELECT '"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, '"+ SC_data_miner.Dep_u_name4[0] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                    "minus select * from REP_FORM_DEP_USER;\n\n" +
-                                    "INSERT INTO REP_FORM_DEP_USER\n" +
-                                    "SELECT '"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, '"+ SC_data_miner.Dep_u_name5[0] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                    "minus select * from REP_FORM_DEP_USER;\n\n" +
-                                    "INSERT INTO REP_FORM_DEP_USER\n" +
-                                    "SELECT '"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, '"+ SC_data_miner.Dep_u_name6[0] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                    "minus select * from REP_FORM_DEP_USER;" +
+                            rep_form_dep_user_script = "MERGE INTO REP_FORM_DEP_USER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_u_name[0] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
+                                    "MERGE INTO REP_FORM_DEP_USER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_u_name2[0] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
+                                    "MERGE INTO REP_FORM_DEP_USER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_u_name3[0] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
+                                    "MERGE INTO REP_FORM_DEP_USER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_u_name4[0] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
+                                    "MERGE INTO REP_FORM_DEP_USER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_u_name5[0] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
+                                    "MERGE INTO REP_FORM_DEP_USER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_u_name6[0] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "\n" +
                                     "\n";
                             break;
                         case 7:
-                            rep_form_dep_user_script = "INSERT INTO REP_FORM_DEP_USER\n" +
-                                    "SELECT '"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, '"+ SC_data_miner.Dep_u_name[0] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                    "minus select * from REP_FORM_DEP_USER;\n\n" +
-                                    "INSERT INTO REP_FORM_DEP_USER\n" +
-                                    "SELECT '"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, '"+ SC_data_miner.Dep_u_name2[0] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                    "minus select * from REP_FORM_DEP_USER;\n\n" +
-                                    "INSERT INTO REP_FORM_DEP_USER\n" +
-                                    "SELECT '"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, '"+ SC_data_miner.Dep_u_name3[0] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                    "minus select * from REP_FORM_DEP_USER;\n\n" +
-                                    "INSERT INTO REP_FORM_DEP_USER\n" +
-                                    "SELECT '"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, '"+ SC_data_miner.Dep_u_name4[0] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                    "minus select * from REP_FORM_DEP_USER;\n\n" +
-                                    "INSERT INTO REP_FORM_DEP_USER\n" +
-                                    "SELECT '"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, '"+ SC_data_miner.Dep_u_name5[0] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                    "minus select * from REP_FORM_DEP_USER;\n\n" +
-                                    "INSERT INTO REP_FORM_DEP_USER\n" +
-                                    "SELECT '"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, '"+ SC_data_miner.Dep_u_name6[0] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                    "minus select * from REP_FORM_DEP_USER;\n\n" +
+                            rep_form_dep_user_script = "MERGE INTO REP_FORM_DEP_USER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_u_name[0] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
+                                    "MERGE INTO REP_FORM_DEP_USER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_u_name2[0] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
+                                    "MERGE INTO REP_FORM_DEP_USER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_u_name3[0] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
+                                    "MERGE INTO REP_FORM_DEP_USER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_u_name4[0] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
+                                    "MERGE INTO REP_FORM_DEP_USER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_u_name5[0] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
+                                    "MERGE INTO REP_FORM_DEP_USER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_u_name6[0] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "INSERT INTO REP_FORM_DEP_USER\n" +
                                     "SELECT '"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, '"+ SC_data_miner.Dep_u_name7[0] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
                                     "minus select * from REP_FORM_DEP_USER;" +
@@ -1578,30 +2357,86 @@ public class ScriptEXP {
                                     "\n";
                             break;
                         case 8:
-                            rep_form_dep_user_script = "INSERT INTO REP_FORM_DEP_USER\n" +
-                                    "SELECT '"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, '"+ SC_data_miner.Dep_u_name[0] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                    "minus select * from REP_FORM_DEP_USER;\n\n" +
-                                    "INSERT INTO REP_FORM_DEP_USER\n" +
-                                    "SELECT '"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, '"+ SC_data_miner.Dep_u_name2[0] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                    "minus select * from REP_FORM_DEP_USER;\n\n" +
-                                    "INSERT INTO REP_FORM_DEP_USER\n" +
-                                    "SELECT '"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, '"+ SC_data_miner.Dep_u_name3[0] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                    "minus select * from REP_FORM_DEP_USER;\n\n" +
-                                    "INSERT INTO REP_FORM_DEP_USER\n" +
-                                    "SELECT '"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, '"+ SC_data_miner.Dep_u_name4[0] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                    "minus select * from REP_FORM_DEP_USER;\n\n" +
-                                    "INSERT INTO REP_FORM_DEP_USER\n" +
-                                    "SELECT '"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, '"+ SC_data_miner.Dep_u_name5[0] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                    "minus select * from REP_FORM_DEP_USER;\n\n" +
-                                    "INSERT INTO REP_FORM_DEP_USER\n" +
-                                    "SELECT '"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, '"+ SC_data_miner.Dep_u_name6[0] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                    "minus select * from REP_FORM_DEP_USER;\n\n" +
-                                    "INSERT INTO REP_FORM_DEP_USER\n" +
-                                    "SELECT '"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, '"+ SC_data_miner.Dep_u_name7[0] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                    "minus select * from REP_FORM_DEP_USER;\n\n" +
-                                    "INSERT INTO REP_FORM_DEP_USER\n" +
-                                    "SELECT '"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, '"+ SC_data_miner.Dep_u_name8[0] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                    "minus select * from REP_FORM_DEP_USER;\n\n" +
+                            rep_form_dep_user_script = "MERGE INTO REP_FORM_DEP_USER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_u_name[0] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
+                                    "MERGE INTO REP_FORM_DEP_USER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_u_name2[0] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
+                                    "MERGE INTO REP_FORM_DEP_USER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_u_name3[0] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
+                                    "MERGE INTO REP_FORM_DEP_USER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_u_name4[0] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
+                                    "MERGE INTO REP_FORM_DEP_USER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_u_name5[0] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
+                                    "MERGE INTO REP_FORM_DEP_USER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_u_name6[0] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
+                                    "MERGE INTO REP_FORM_DEP_USER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_u_name7[0] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
+                                    "MERGE INTO REP_FORM_DEP_USER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_u_name8[0] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "\n" +
                                     "\n";
                             break;
@@ -1654,163 +2489,487 @@ public class ScriptEXP {
                     int c = OK_Action.getOkud_count(0);
                     switch(c){
                         case 1:
-                            report_okud_code_script = "INSERT INTO REPORT_OKUD_CODE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, '"+ SC_data_miner.period[0] + "' as PERIOD, null as FORM_CD FROM dual\n" +
-                                    "minus select * from REPORT_OKUD_CODE;\n" +
+                            report_okud_code_script = "MERGE INTO REPORT_OKUD_CODE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, \n" + 
+						"'"+ SC_data_miner.period[0] +"'as PERIOD \n" + 
+						"null as FORM_CD \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
+                        "                                R.FORM_CD = S.FORM_CD\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.OKUD_CODE, R.PERIOD, R.FORM_CD)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.OKUD_CODE, S.PERIOD, S.FORM_CD);\n\n" +
                                     "\n";
                             break;
                         case 2:
-                            report_okud_code_script = "INSERT INTO REPORT_OKUD_CODE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, '"+ SC_data_miner.period[0] + "' as PERIOD, null as FORM_CD FROM dual\n" +
-                                    "minus select * from REPORT_OKUD_CODE;\n" +
+                            report_okud_code_script = "MERGE INTO REPORT_OKUD_CODE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, \n" + 
+						"'"+ SC_data_miner.period[0] +"'as PERIOD \n" + 
+						"null as FORM_CD \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
+                        "                                R.FORM_CD = S.FORM_CD\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.OKUD_CODE, R.PERIOD, R.FORM_CD)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.OKUD_CODE, S.PERIOD, S.FORM_CD);\n\n" +
                                     "\n" +
-                                    "INSERT INTO REPORT_OKUD_CODE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud2[0] +"' as OKUD_CODE, '"+ SC_data_miner.period2[0] + "' as PERIOD, null as FORM_CD FROM dual\n" +
-                                    "minus select * from REPORT_OKUD_CODE;\n" +
+                                    "MERGE INTO REPORT_OKUD_CODE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_okud2[0] +"' as OKUD_CODE, \n" + 
+						"'"+ SC_data_miner.period2[0] +"'as PERIOD \n" + 
+						"null as FORM_CD \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
+                        "                                R.FORM_CD = S.FORM_CD\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.OKUD_CODE, R.PERIOD, R.FORM_CD)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.OKUD_CODE, S.PERIOD, S.FORM_CD);\n\n" +
                                     "\n" ;
                             break;
                         case 3:
-                            report_okud_code_script = "INSERT INTO REPORT_OKUD_CODE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, '"+ SC_data_miner.period[0] + "' as PERIOD, null as FORM_CD FROM dual\n" +
-                                    "minus select * from REPORT_OKUD_CODE;\n" +
+                            report_okud_code_script = "MERGE INTO REPORT_OKUD_CODE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, \n" + 
+						"'"+ SC_data_miner.period[0] +"'as PERIOD \n" + 
+						"null as FORM_CD \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
+                        "                                R.FORM_CD = S.FORM_CD\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.OKUD_CODE, R.PERIOD, R.FORM_CD)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.OKUD_CODE, S.PERIOD, S.FORM_CD);\n\n" +
                                     "\n" +
-                                    "INSERT INTO REPORT_OKUD_CODE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud2[0] +"' as OKUD_CODE, '"+ SC_data_miner.period2[0] + "' as PERIOD, null as FORM_CD FROM dual\n" +
-                                    "minus select * from REPORT_OKUD_CODE;\n" +
+                                    "MERGE INTO REPORT_OKUD_CODE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_okud2[0] +"' as OKUD_CODE, \n" + 
+						"'"+ SC_data_miner.period2[0] +"'as PERIOD \n" + 
+						"null as FORM_CD \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
+                        "                                R.FORM_CD = S.FORM_CD\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.OKUD_CODE, R.PERIOD, R.FORM_CD)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.OKUD_CODE, S.PERIOD, S.FORM_CD);\n\n" +
                                     "\n" +
-                                    "INSERT INTO REPORT_OKUD_CODE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud3[0] +"' as OKUD_CODE, '"+ SC_data_miner.period3[0] + "' as PERIOD, null as FORM_CD FROM dual\n" +
-                                    "minus select * from REPORT_OKUD_CODE;\n" +
+                                    "MERGE INTO REPORT_OKUD_CODE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_okud3[0] +"' as OKUD_CODE, \n" + 
+						"'"+ SC_data_miner.period3[0] +"'as PERIOD \n" + 
+						"null as FORM_CD \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
+                        "                                R.FORM_CD = S.FORM_CD\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.OKUD_CODE, R.PERIOD, R.FORM_CD)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.OKUD_CODE, S.PERIOD, S.FORM_CD);\n\n" +
                                     "\n";
                             break;
                         case 4:
-                            report_okud_code_script = "INSERT INTO REPORT_OKUD_CODE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, '"+ SC_data_miner.period[0] + "' as PERIOD, null as FORM_CD FROM dual\n" +
-                                    "minus select * from REPORT_OKUD_CODE;\n" +
+                            report_okud_code_script = "MERGE INTO REPORT_OKUD_CODE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, \n" + 
+						"'"+ SC_data_miner.period[0] +"'as PERIOD \n" + 
+						"null as FORM_CD \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
+                        "                                R.FORM_CD = S.FORM_CD\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.OKUD_CODE, R.PERIOD, R.FORM_CD)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.OKUD_CODE, S.PERIOD, S.FORM_CD);\n\n" +
                                     "\n" +
-                                    "INSERT INTO REPORT_OKUD_CODE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud2[0] +"' as OKUD_CODE, '"+ SC_data_miner.period2[0] + "' as PERIOD, null as FORM_CD FROM dual\n" +
-                                    "minus select * from REPORT_OKUD_CODE;\n" +
+                                    "MERGE INTO REPORT_OKUD_CODE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_okud2[0] +"' as OKUD_CODE, \n" + 
+						"'"+ SC_data_miner.period2[0] +"'as PERIOD \n" + 
+						"null as FORM_CD \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
+                        "                                R.FORM_CD = S.FORM_CD\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.OKUD_CODE, R.PERIOD, R.FORM_CD)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.OKUD_CODE, S.PERIOD, S.FORM_CD);\n\n" +
                                     "\n" +
-                                    "INSERT INTO REPORT_OKUD_CODE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud3[0] +"' as OKUD_CODE, '"+ SC_data_miner.period3[0] + "' as PERIOD, null as FORM_CD FROM dual\n" +
-                                    "minus select * from REPORT_OKUD_CODE;\n" +
+                                    "MERGE INTO REPORT_OKUD_CODE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_okud3[0] +"' as OKUD_CODE, \n" + 
+						"'"+ SC_data_miner.period3[0] +"'as PERIOD \n" + 
+						"null as FORM_CD \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
+                        "                                R.FORM_CD = S.FORM_CD\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.OKUD_CODE, R.PERIOD, R.FORM_CD)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.OKUD_CODE, S.PERIOD, S.FORM_CD);\n\n" +
                                     "\n" +
-                                    "INSERT INTO REPORT_OKUD_CODE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud4[0] +"' as OKUD_CODE, '"+ SC_data_miner.period4[0] + "' as PERIOD, null as FORM_CD FROM dual\n" +
-                                    "minus select * from REPORT_OKUD_CODE;\n" +
+                                    "MERGE INTO REPORT_OKUD_CODE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_okud4[0] +"' as OKUD_CODE, \n" + 
+						"'"+ SC_data_miner.period4[0] +"'as PERIOD \n" + 
+						"null as FORM_CD \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
+                        "                                R.FORM_CD = S.FORM_CD\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.OKUD_CODE, R.PERIOD, R.FORM_CD)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.OKUD_CODE, S.PERIOD, S.FORM_CD);\n\n" +
                                     "\n";
                             break;
                         case 5:
-                            report_okud_code_script = "INSERT INTO REPORT_OKUD_CODE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, '"+ SC_data_miner.period[0] + "' as PERIOD, null as FORM_CD FROM dual\n" +
-                                    "minus select * from REPORT_OKUD_CODE;\n" +
+                            report_okud_code_script = "MERGE INTO REPORT_OKUD_CODE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, \n" + 
+						"'"+ SC_data_miner.period[0] +"'as PERIOD \n" + 
+						"null as FORM_CD \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
+                        "                                R.FORM_CD = S.FORM_CD\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.OKUD_CODE, R.PERIOD, R.FORM_CD)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.OKUD_CODE, S.PERIOD, S.FORM_CD);\n\n" +
                                     "\n" +
-                                    "INSERT INTO REPORT_OKUD_CODE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud2[0] +"' as OKUD_CODE, '"+ SC_data_miner.period2[0] + "' as PERIOD, null as FORM_CD FROM dual\n" +
-                                    "minus select * from REPORT_OKUD_CODE;\n" +
+                                    "MERGE INTO REPORT_OKUD_CODE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_okud2[0] +"' as OKUD_CODE, \n" + 
+						"'"+ SC_data_miner.period2[0] +"'as PERIOD \n" + 
+						"null as FORM_CD \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
+                        "                                R.FORM_CD = S.FORM_CD\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.OKUD_CODE, R.PERIOD, R.FORM_CD)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.OKUD_CODE, S.PERIOD, S.FORM_CD);\n\n" +
                                     "\n" +
-                                    "INSERT INTO REPORT_OKUD_CODE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud3[0] +"' as OKUD_CODE, '"+ SC_data_miner.period3[0] + "' as PERIOD, null as FORM_CD FROM dual\n" +
-                                    "minus select * from REPORT_OKUD_CODE;\n" +
+                                    "MERGE INTO REPORT_OKUD_CODE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_okud3[0] +"' as OKUD_CODE, \n" + 
+						"'"+ SC_data_miner.period3[0] +"'as PERIOD \n" + 
+						"null as FORM_CD \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
+                        "                                R.FORM_CD = S.FORM_CD\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.OKUD_CODE, R.PERIOD, R.FORM_CD)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.OKUD_CODE, S.PERIOD, S.FORM_CD);\n\n" +
                                     "\n" +
-                                    "INSERT INTO REPORT_OKUD_CODE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud4[0] +"' as OKUD_CODE, '"+ SC_data_miner.period4[0] + "' as PERIOD, null as FORM_CD FROM dual\n" +
-                                    "minus select * from REPORT_OKUD_CODE;\n" +
+                                    "MERGE INTO REPORT_OKUD_CODE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_okud4[0] +"' as OKUD_CODE, \n" + 
+						"'"+ SC_data_miner.period4[0] +"'as PERIOD \n" + 
+						"null as FORM_CD \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
+                        "                                R.FORM_CD = S.FORM_CD\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.OKUD_CODE, R.PERIOD, R.FORM_CD)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.OKUD_CODE, S.PERIOD, S.FORM_CD);\n\n" +
                                     "\n" +
-                                    "INSERT INTO REPORT_OKUD_CODE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud5[0] +"' as OKUD_CODE, '"+ SC_data_miner.period5[0] + "' as PERIOD, null as FORM_CD FROM dual\n" +
-                                    "minus select * from REPORT_OKUD_CODE;\n" +
+                                    "MERGE INTO REPORT_OKUD_CODE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_okud5[0] +"' as OKUD_CODE, \n" + 
+						"'"+ SC_data_miner.period5[0] +"'as PERIOD \n" + 
+						"null as FORM_CD \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
+                        "                                R.FORM_CD = S.FORM_CD\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.OKUD_CODE, R.PERIOD, R.FORM_CD)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.OKUD_CODE, S.PERIOD, S.FORM_CD);\n\n" +
                                     "\n";
                             break;
                         case 6:
-                            report_okud_code_script = "INSERT INTO REPORT_OKUD_CODE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, '"+ SC_data_miner.period[0] + "' as PERIOD, null as FORM_CD FROM dual\n" +
-                                    "minus select * from REPORT_OKUD_CODE;\n" +
+                            report_okud_code_script = "MERGE INTO REPORT_OKUD_CODE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, \n" + 
+						"'"+ SC_data_miner.period[0] +"'as PERIOD \n" + 
+						"null as FORM_CD \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
+                        "                                R.FORM_CD = S.FORM_CD\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.OKUD_CODE, R.PERIOD, R.FORM_CD)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.OKUD_CODE, S.PERIOD, S.FORM_CD);\n\n" +
                                     "\n" +
-                                    "INSERT INTO REPORT_OKUD_CODE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud2[0] +"' as OKUD_CODE, '"+ SC_data_miner.period2[0] + "' as PERIOD, null as FORM_CD FROM dual\n" +
-                                    "minus select * from REPORT_OKUD_CODE;\n" +
+                                    "MERGE INTO REPORT_OKUD_CODE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_okud2[0] +"' as OKUD_CODE, \n" + 
+						"'"+ SC_data_miner.period2[0] +"'as PERIOD \n" + 
+						"null as FORM_CD \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
+                        "                                R.FORM_CD = S.FORM_CD\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.OKUD_CODE, R.PERIOD, R.FORM_CD)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.OKUD_CODE, S.PERIOD, S.FORM_CD);\n\n" +
                                     "\n" +
-                                    "INSERT INTO REPORT_OKUD_CODE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud3[0] +"' as OKUD_CODE, '"+ SC_data_miner.period3[0] + "' as PERIOD, null as FORM_CD FROM dual\n" +
-                                    "minus select * from REPORT_OKUD_CODE;\n" +
+                                    "MERGE INTO REPORT_OKUD_CODE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_okud3[0] +"' as OKUD_CODE, \n" + 
+						"'"+ SC_data_miner.period3[0] +"'as PERIOD \n" + 
+						"null as FORM_CD \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
+                        "                                R.FORM_CD = S.FORM_CD\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.OKUD_CODE, R.PERIOD, R.FORM_CD)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.OKUD_CODE, S.PERIOD, S.FORM_CD);\n\n" +
                                     "\n" +
-                                    "INSERT INTO REPORT_OKUD_CODE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud4[0] +"' as OKUD_CODE, '"+ SC_data_miner.period4[0] + "' as PERIOD, null as FORM_CD FROM dual\n" +
-                                    "minus select * from REPORT_OKUD_CODE;\n" +
+                                    "MERGE INTO REPORT_OKUD_CODE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_okud4[0] +"' as OKUD_CODE, \n" + 
+						"'"+ SC_data_miner.period4[0] +"'as PERIOD \n" + 
+						"null as FORM_CD \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
+                        "                                R.FORM_CD = S.FORM_CD\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.OKUD_CODE, R.PERIOD, R.FORM_CD)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.OKUD_CODE, S.PERIOD, S.FORM_CD);\n\n" +
                                     "\n" +
-                                    "INSERT INTO REPORT_OKUD_CODE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud5[0] +"' as OKUD_CODE, '"+ SC_data_miner.period5[0] + "' as PERIOD, null as FORM_CD FROM dual\n" +
-                                    "minus select * from REPORT_OKUD_CODE;\n" +
+                                    "MERGE INTO REPORT_OKUD_CODE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_okud5[0] +"' as OKUD_CODE, \n" + 
+						"'"+ SC_data_miner.period5[0] +"'as PERIOD \n" + 
+						"null as FORM_CD \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
+                        "                                R.FORM_CD = S.FORM_CD\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.OKUD_CODE, R.PERIOD, R.FORM_CD)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.OKUD_CODE, S.PERIOD, S.FORM_CD);\n\n" +
                                     "\n" +
-                                    "INSERT INTO REPORT_OKUD_CODE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud6[0] +"' as OKUD_CODE, '"+ SC_data_miner.period6[0] + "' as PERIOD, null as FORM_CD FROM dual\n" +
-                                    "minus select * from REPORT_OKUD_CODE;\n" +
+                                    "MERGE INTO REPORT_OKUD_CODE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_okud6[0] +"' as OKUD_CODE, \n" + 
+						"'"+ SC_data_miner.period6[0] +"'as PERIOD \n" + 
+						"null as FORM_CD \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
+                        "                                R.FORM_CD = S.FORM_CD\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.OKUD_CODE, R.PERIOD, R.FORM_CD)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.OKUD_CODE, S.PERIOD, S.FORM_CD);\n\n" +
                                     "\n";
                             break;
                         case 7:
-                            report_okud_code_script = "INSERT INTO REPORT_OKUD_CODE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, '"+ SC_data_miner.period[0] + "' as PERIOD, null as FORM_CD FROM dual\n" +
-                                    "minus select * from REPORT_OKUD_CODE;\n" +
+                            report_okud_code_script = "MERGE INTO REPORT_OKUD_CODE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, \n" + 
+						"'"+ SC_data_miner.period[0] +"'as PERIOD \n" + 
+						"null as FORM_CD \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
+                        "                                R.FORM_CD = S.FORM_CD\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.OKUD_CODE, R.PERIOD, R.FORM_CD)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.OKUD_CODE, S.PERIOD, S.FORM_CD);\n\n" +
                                     "\n" +
-                                    "INSERT INTO REPORT_OKUD_CODE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud2[0] +"' as OKUD_CODE, '"+ SC_data_miner.period2[0] + "' as PERIOD, null as FORM_CD FROM dual\n" +
-                                    "minus select * from REPORT_OKUD_CODE;\n" +
+                                    "MERGE INTO REPORT_OKUD_CODE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_okud2[0] +"' as OKUD_CODE, \n" + 
+						"'"+ SC_data_miner.period2[0] +"'as PERIOD \n" + 
+						"null as FORM_CD \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
+                        "                                R.FORM_CD = S.FORM_CD\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.OKUD_CODE, R.PERIOD, R.FORM_CD)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.OKUD_CODE, S.PERIOD, S.FORM_CD);\n\n" +
                                     "\n" +
-                                    "INSERT INTO REPORT_OKUD_CODE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud3[0] +"' as OKUD_CODE, '"+ SC_data_miner.period3[0] + "' as PERIOD, null as FORM_CD FROM dual\n" +
-                                    "minus select * from REPORT_OKUD_CODE;\n" +
+                                    "MERGE INTO REPORT_OKUD_CODE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_okud3[0] +"' as OKUD_CODE, \n" + 
+						"'"+ SC_data_miner.period3[0] +"'as PERIOD \n" + 
+						"null as FORM_CD \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
+                        "                                R.FORM_CD = S.FORM_CD\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.OKUD_CODE, R.PERIOD, R.FORM_CD)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.OKUD_CODE, S.PERIOD, S.FORM_CD);\n\n" +
                                     "\n" +
-                                    "INSERT INTO REPORT_OKUD_CODE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud4[0] +"' as OKUD_CODE, '"+ SC_data_miner.period4[0] + "' as PERIOD, null as FORM_CD FROM dual\n" +
-                                    "minus select * from REPORT_OKUD_CODE;\n" +
+                                    "MERGE INTO REPORT_OKUD_CODE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_okud4[0] +"' as OKUD_CODE, \n" + 
+						"'"+ SC_data_miner.period4[0] +"'as PERIOD \n" + 
+						"null as FORM_CD \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
+                        "                                R.FORM_CD = S.FORM_CD\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.OKUD_CODE, R.PERIOD, R.FORM_CD)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.OKUD_CODE, S.PERIOD, S.FORM_CD);\n\n" +
                                     "\n" +
-                                    "INSERT INTO REPORT_OKUD_CODE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud5[0] +"' as OKUD_CODE, '"+ SC_data_miner.period5[0] + "' as PERIOD, null as FORM_CD FROM dual\n" +
-                                    "minus select * from REPORT_OKUD_CODE;\n" +
+                                    "MERGE INTO REPORT_OKUD_CODE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_okud5[0] +"' as OKUD_CODE, \n" + 
+						"'"+ SC_data_miner.period5[0] +"'as PERIOD \n" + 
+						"null as FORM_CD \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
+                        "                                R.FORM_CD = S.FORM_CD\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.OKUD_CODE, R.PERIOD, R.FORM_CD)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.OKUD_CODE, S.PERIOD, S.FORM_CD);\n\n" +
                                     "\n" +
-                                    "INSERT INTO REPORT_OKUD_CODE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud6[0] +"' as OKUD_CODE, '"+ SC_data_miner.period6[0] + "' as PERIOD, null as FORM_CD FROM dual\n" +
-                                    "minus select * from REPORT_OKUD_CODE;\n" +
+                                    "MERGE INTO REPORT_OKUD_CODE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_okud6[0] +"' as OKUD_CODE, \n" + 
+						"'"+ SC_data_miner.period6[0] +"'as PERIOD \n" + 
+						"null as FORM_CD \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
+                        "                                R.FORM_CD = S.FORM_CD\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.OKUD_CODE, R.PERIOD, R.FORM_CD)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.OKUD_CODE, S.PERIOD, S.FORM_CD);\n\n" +
                                     "\n" +
-                                    "INSERT INTO REPORT_OKUD_CODE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud7[0] +"' as OKUD_CODE, '"+ SC_data_miner.period7[0] + "' as PERIOD, null as FORM_CD FROM dual\n" +
-                                    "minus select * from REPORT_OKUD_CODE;\n" +
+                                    "MERGE INTO REPORT_OKUD_CODE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_okud7[0] +"' as OKUD_CODE, \n" + 
+						"'"+ SC_data_miner.period7[0] +"'as PERIOD \n" + 
+						"null as FORM_CD \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
+                        "                                R.FORM_CD = S.FORM_CD\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.OKUD_CODE, R.PERIOD, R.FORM_CD)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.OKUD_CODE, S.PERIOD, S.FORM_CD);\n\n" +
                                     "\n";
                             break;
                         case 8:
-                            report_okud_code_script = "INSERT INTO REPORT_OKUD_CODE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, '"+ SC_data_miner.period[0] + "' as PERIOD, null as FORM_CD FROM dual\n" +
-                                    "minus select * from REPORT_OKUD_CODE;\n" +
+                            report_okud_code_script = "MERGE INTO REPORT_OKUD_CODE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, \n" + 
+						"'"+ SC_data_miner.period[0] +"'as PERIOD \n" + 
+						"null as FORM_CD \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
+                        "                                R.FORM_CD = S.FORM_CD\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.OKUD_CODE, R.PERIOD, R.FORM_CD)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.OKUD_CODE, S.PERIOD, S.FORM_CD);\n\n" +
                                     "\n" +
-                                    "INSERT INTO REPORT_OKUD_CODE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud2[0] +"' as OKUD_CODE, '"+ SC_data_miner.period2[0] + "' as PERIOD, null as FORM_CD FROM dual\n" +
-                                    "minus select * from REPORT_OKUD_CODE;\n" +
+                                    "MERGE INTO REPORT_OKUD_CODE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_okud2[0] +"' as OKUD_CODE, \n" + 
+						"'"+ SC_data_miner.period2[0] +"'as PERIOD \n" + 
+						"null as FORM_CD \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
+                        "                                R.FORM_CD = S.FORM_CD\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.OKUD_CODE, R.PERIOD, R.FORM_CD)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.OKUD_CODE, S.PERIOD, S.FORM_CD);\n\n" +
                                     "\n" +
-                                    "INSERT INTO REPORT_OKUD_CODE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud3[0] +"' as OKUD_CODE, '"+ SC_data_miner.period3[0] + "' as PERIOD, null as FORM_CD FROM dual\n" +
-                                    "minus select * from REPORT_OKUD_CODE;\n" +
+                                    "MERGE INTO REPORT_OKUD_CODE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_okud3[0] +"' as OKUD_CODE, \n" + 
+						"'"+ SC_data_miner.period3[0] +"'as PERIOD \n" + 
+						"null as FORM_CD \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
+                        "                                R.FORM_CD = S.FORM_CD\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.OKUD_CODE, R.PERIOD, R.FORM_CD)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.OKUD_CODE, S.PERIOD, S.FORM_CD);\n\n" +
                                     "\n" +
-                                    "INSERT INTO REPORT_OKUD_CODE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud4[0] +"' as OKUD_CODE, '"+ SC_data_miner.period4[0] + "' as PERIOD, null as FORM_CD FROM dual\n" +
-                                    "minus select * from REPORT_OKUD_CODE;\n" +
+                                    "MERGE INTO REPORT_OKUD_CODE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_okud4[0] +"' as OKUD_CODE, \n" + 
+						"'"+ SC_data_miner.period4[0] +"'as PERIOD \n" + 
+						"null as FORM_CD \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
+                        "                                R.FORM_CD = S.FORM_CD\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.OKUD_CODE, R.PERIOD, R.FORM_CD)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.OKUD_CODE, S.PERIOD, S.FORM_CD);\n\n" +
                                     "\n" +
-                                    "INSERT INTO REPORT_OKUD_CODE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud5[0] +"' as OKUD_CODE, '"+ SC_data_miner.period5[0] + "' as PERIOD, null as FORM_CD FROM dual\n" +
-                                    "minus select * from REPORT_OKUD_CODE;\n" +
+                                    "MERGE INTO REPORT_OKUD_CODE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_okud5[0] +"' as OKUD_CODE, \n" + 
+						"'"+ SC_data_miner.period5[0] +"'as PERIOD \n" + 
+						"null as FORM_CD \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
+                        "                                R.FORM_CD = S.FORM_CD\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.OKUD_CODE, R.PERIOD, R.FORM_CD)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.OKUD_CODE, S.PERIOD, S.FORM_CD);\n\n" +
                                     "\n" +
-                                    "INSERT INTO REPORT_OKUD_CODE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud6[0] +"' as OKUD_CODE, '"+ SC_data_miner.period6[0] + "' as PERIOD, null as FORM_CD FROM dual\n" +
-                                    "minus select * from REPORT_OKUD_CODE;\n" +
+                                    "MERGE INTO REPORT_OKUD_CODE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_okud6[0] +"' as OKUD_CODE, \n" + 
+						"'"+ SC_data_miner.period6[0] +"'as PERIOD \n" + 
+						"null as FORM_CD \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
+                        "                                R.FORM_CD = S.FORM_CD\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.OKUD_CODE, R.PERIOD, R.FORM_CD)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.OKUD_CODE, S.PERIOD, S.FORM_CD);\n\n" +
                                     "\n" +
-                                    "INSERT INTO REPORT_OKUD_CODE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud7[0] +"' as OKUD_CODE, '"+ SC_data_miner.period7[0] + "' as PERIOD, null as FORM_CD FROM dual\n" +
-                                    "minus select * from REPORT_OKUD_CODE;\n" +
+                                    "MERGE INTO REPORT_OKUD_CODE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_okud7[0] +"' as OKUD_CODE, \n" + 
+						"'"+ SC_data_miner.period7[0] +"'as PERIOD \n" + 
+						"null as FORM_CD \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
+                        "                                R.FORM_CD = S.FORM_CD\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.OKUD_CODE, R.PERIOD, R.FORM_CD)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.OKUD_CODE, S.PERIOD, S.FORM_CD);\n\n" +
                                     "\n" +
-                                    "INSERT INTO REPORT_OKUD_CODE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud8[0] +"' as OKUD_CODE, '"+ SC_data_miner.period8[0] + "' as PERIOD, null as FORM_CD FROM dual\n" +
-                                    "minus select * from REPORT_OKUD_CODE;\n" +
+                                    "MERGE INTO REPORT_OKUD_CODE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_okud8[0] +"' as OKUD_CODE, \n" + 
+						"'"+ SC_data_miner.period8[0] +"'as PERIOD \n" + 
+						"null as FORM_CD \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
+                        "                                R.FORM_CD = S.FORM_CD\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.OKUD_CODE, R.PERIOD, R.FORM_CD)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.OKUD_CODE, S.PERIOD, S.FORM_CD);\n\n" +
                                     "\n";
                             break;
                     }
@@ -1820,9 +2979,15 @@ public class ScriptEXP {
                         SC_data_miner.Form_formal_code[0] == null  || Objects.equals(SC_data_miner.Form_formal_code[0], "") || Objects.equals(SC_data_miner.Form_formal_code[0], " ")){
                     report_form_src_script = "--Warning: Не указаны данные для таблицы REPORT_FORM_SRC\n\n";
                 } else {
-                    report_form_src_script = "INSERT INTO  REPORT_FORM_SRC \n" +
-                            "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_cd[0] +"' as REG_FORM_CODE FROM dual\n" +
-                            "minus select * from REPORT_FORM_SRC;\n" +
+                    report_form_src_script = "MERGE INTO REPORT_FORM_SRC R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Reg_form_code[0] +"' as REG_FORM_CODE, \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REG_FORM_CODE = S.REG_FORM_CODE\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REG_FORM_CODE)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.REG_FORM_CODE);" +
                             "\n" ;
                 }
                 //System.out.print("SC_data_miner.rep_subj_type[0] = " + SC_data_miner.rep_subj_type[0] + "\n");
@@ -1832,163 +2997,343 @@ public class ScriptEXP {
                     int c = OK_Action.getSubj_count(0);
                     switch(c){
                         case 1:
-                            report_rep_subj_type_script = "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE FROM dual\n" +
-                                    "minus select * from REPORT_REP_SUBJ_TYPE;\n" +
+                            report_rep_subj_type_script = "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE, \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.REP_SUBJ_TYPE);" +
                                     "\n";
                             break;
                         case 2:
-                            report_rep_subj_type_script = "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE FROM dual\n" +
-                                    "minus select * from REPORT_REP_SUBJ_TYPE;\n" +
+                            report_rep_subj_type_script = "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE, \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.REP_SUBJ_TYPE);" +
                                     "\n" +
-                                    "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type2[0] +"' as REP_SUBJ_TYPE FROM dual\n" +
-                                    "minus select * from REPORT_REP_SUBJ_TYPE;\n" +
+                                    "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.rep_subj_type2[0] +"' as REP_SUBJ_TYPE, \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.REP_SUBJ_TYPE);" +
                                     "\n" ;
                             break;
                         case 3:
-                            report_rep_subj_type_script = "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE FROM dual\n" +
-                                    "minus select * from REPORT_REP_SUBJ_TYPE;\n" +
+                            report_rep_subj_type_script = "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE, \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.REP_SUBJ_TYPE);" +
                                     "\n" +
-                                    "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type2[0] +"' as REP_SUBJ_TYPE FROM dual\n" +
-                                    "minus select * from REPORT_REP_SUBJ_TYPE;\n" +
+                                    "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.rep_subj_type2[0] +"' as REP_SUBJ_TYPE, \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.REP_SUBJ_TYPE);" +
                                     "\n" +
-                                    "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type3[0] +"' as REP_SUBJ_TYPE FROM dual\n" +
-                                    "minus select * from REPORT_REP_SUBJ_TYPE;\n" +
+                                    "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.rep_subj_type3[0] +"' as REP_SUBJ_TYPE, \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.REP_SUBJ_TYPE);" +
                                     "\n" ;
                             break;
                         case 4:
-                            report_rep_subj_type_script = "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE FROM dual\n" +
-                                    "minus select * from REPORT_REP_SUBJ_TYPE;\n" +
+                            report_rep_subj_type_script = "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE, \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.REP_SUBJ_TYPE);" +
                                     "\n" +
-                                    "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type2[0] +"' as REP_SUBJ_TYPE FROM dual\n" +
-                                    "minus select * from REPORT_REP_SUBJ_TYPE;\n" +
+                                    "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.rep_subj_type2[0] +"' as REP_SUBJ_TYPE, \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.REP_SUBJ_TYPE);" +
                                     "\n" +
-                                    "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type3[0] +"' as REP_SUBJ_TYPE FROM dual\n" +
-                                    "minus select * from REPORT_REP_SUBJ_TYPE;\n" +
+                                    "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.rep_subj_type3[0] +"' as REP_SUBJ_TYPE, \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.REP_SUBJ_TYPE);" +
                                     "\n" +
-                                    "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type4[0] +"' as REP_SUBJ_TYPE FROM dual\n" +
-                                    "minus select * from REPORT_REP_SUBJ_TYPE;\n" +
+                                    "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.rep_subj_type4[0] +"' as REP_SUBJ_TYPE, \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.REP_SUBJ_TYPE);" +
                                     "\n" ;
                             break;
                         case 5:
-                            report_rep_subj_type_script = "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE FROM dual\n" +
-                                    "minus select * from REPORT_REP_SUBJ_TYPE;\n" +
+                            report_rep_subj_type_script = "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE, \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.REP_SUBJ_TYPE);" +
                                     "\n" +
-                                    "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type2[0] +"' as REP_SUBJ_TYPE FROM dual\n" +
-                                    "minus select * from REPORT_REP_SUBJ_TYPE;\n" +
+                                    "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.rep_subj_type2[0] +"' as REP_SUBJ_TYPE, \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.REP_SUBJ_TYPE);" +
                                     "\n" +
-                                    "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type3[0] +"' as REP_SUBJ_TYPE FROM dual\n" +
-                                    "minus select * from REPORT_REP_SUBJ_TYPE;\n" +
+                                    "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.rep_subj_type3[0] +"' as REP_SUBJ_TYPE, \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.REP_SUBJ_TYPE);" +
                                     "\n" +
-                                    "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type4[0] +"' as REP_SUBJ_TYPE FROM dual\n" +
-                                    "minus select * from REPORT_REP_SUBJ_TYPE;\n" +
+                                    "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.rep_subj_type4[0] +"' as REP_SUBJ_TYPE, \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.REP_SUBJ_TYPE);" +
                                     "\n" +
-                                    "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type5[0] +"' as REP_SUBJ_TYPE FROM dual\n" +
-                                    "minus select * from REPORT_REP_SUBJ_TYPE;\n" +
+                                    "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.rep_subj_type5[0] +"' as REP_SUBJ_TYPE, \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.REP_SUBJ_TYPE);" +
                                     "\n" ;
                             break;
                         case 6:
-                            report_rep_subj_type_script = "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE FROM dual\n" +
-                                    "minus select * from REPORT_REP_SUBJ_TYPE;\n" +
+                            report_rep_subj_type_script = "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE, \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.REP_SUBJ_TYPE);" +
                                     "\n" +
-                                    "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type2[0] +"' as REP_SUBJ_TYPE FROM dual\n" +
-                                    "minus select * from REPORT_REP_SUBJ_TYPE;\n" +
+                                    "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.rep_subj_type2[0] +"' as REP_SUBJ_TYPE, \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.REP_SUBJ_TYPE);" +
                                     "\n" +
-                                    "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type3[0] +"' as REP_SUBJ_TYPE FROM dual\n" +
-                                    "minus select * from REPORT_REP_SUBJ_TYPE;\n" +
+                                    "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.rep_subj_type3[0] +"' as REP_SUBJ_TYPE, \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.REP_SUBJ_TYPE);" +
                                     "\n" +
-                                    "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type4[0] +"' as REP_SUBJ_TYPE FROM dual\n" +
-                                    "minus select * from REPORT_REP_SUBJ_TYPE;\n" +
+                                    "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.rep_subj_type4[0] +"' as REP_SUBJ_TYPE, \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.REP_SUBJ_TYPE);" +
                                     "\n" +
-                                    "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type5[0] +"' as REP_SUBJ_TYPE FROM dual\n" +
-                                    "minus select * from REPORT_REP_SUBJ_TYPE;\n" +
+                                    "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.rep_subj_type5[0] +"' as REP_SUBJ_TYPE, \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.REP_SUBJ_TYPE);" +
                                     "\n" +
-                                    "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type6[0] +"' as REP_SUBJ_TYPE FROM dual\n" +
-                                    "minus select * from REPORT_REP_SUBJ_TYPE;\n" +
+                                    "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.rep_subj_type6[0] +"' as REP_SUBJ_TYPE, \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.REP_SUBJ_TYPE);" +
                                     "\n" ;
                             break;
                         case 7:
-                            report_rep_subj_type_script = "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE FROM dual\n" +
-                                    "minus select * from REPORT_REP_SUBJ_TYPE;\n" +
+                            report_rep_subj_type_script = "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE, \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.REP_SUBJ_TYPE);" +
                                     "\n" +
-                                    "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type2[0] +"' as REP_SUBJ_TYPE FROM dual\n" +
-                                    "minus select * from REPORT_REP_SUBJ_TYPE;\n" +
+                                    "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.rep_subj_type2[0] +"' as REP_SUBJ_TYPE, \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.REP_SUBJ_TYPE);" +
                                     "\n" +
-                                    "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type3[0] +"' as REP_SUBJ_TYPE FROM dual\n" +
-                                    "minus select * from REPORT_REP_SUBJ_TYPE;\n" +
+                                    "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.rep_subj_type3[0] +"' as REP_SUBJ_TYPE, \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.REP_SUBJ_TYPE);" +
                                     "\n" +
-                                    "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type4[0] +"' as REP_SUBJ_TYPE FROM dual\n" +
-                                    "minus select * from REPORT_REP_SUBJ_TYPE;\n" +
+                                    "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.rep_subj_type4[0] +"' as REP_SUBJ_TYPE, \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.REP_SUBJ_TYPE);" +
                                     "\n" +
-                                    "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type5[0] +"' as REP_SUBJ_TYPE FROM dual\n" +
-                                    "minus select * from REPORT_REP_SUBJ_TYPE;\n" +
+                                    "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.rep_subj_type5[0] +"' as REP_SUBJ_TYPE, \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.REP_SUBJ_TYPE);" +
                                     "\n" +
-                                    "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type6[0] +"' as REP_SUBJ_TYPE FROM dual\n" +
-                                    "minus select * from REPORT_REP_SUBJ_TYPE;\n" +
+                                    "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.rep_subj_type6[0] +"' as REP_SUBJ_TYPE, \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.REP_SUBJ_TYPE);" +
                                     "\n" +
-                                    "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type7[0] +"' as REP_SUBJ_TYPE FROM dual\n" +
-                                    "minus select * from REPORT_REP_SUBJ_TYPE;\n" +
+                                    "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.rep_subj_type7[0] +"' as REP_SUBJ_TYPE, \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.REP_SUBJ_TYPE);" +
                                     "\n";
                             break;
                         case 8:
-                            report_rep_subj_type_script = "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE FROM dual\n" +
-                                    "minus select * from REPORT_REP_SUBJ_TYPE;\n" +
+                            report_rep_subj_type_script = "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE, \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.REP_SUBJ_TYPE);" +
                                     "\n" +
-                                    "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type2[0] +"' as REP_SUBJ_TYPE FROM dual\n" +
-                                    "minus select * from REPORT_REP_SUBJ_TYPE;\n" +
+                                    "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.rep_subj_type2[0] +"' as REP_SUBJ_TYPE, \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.REP_SUBJ_TYPE);" +
                                     "\n" +
-                                    "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type3[0] +"' as REP_SUBJ_TYPE FROM dual\n" +
-                                    "minus select * from REPORT_REP_SUBJ_TYPE;\n" +
+                                    "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.rep_subj_type3[0] +"' as REP_SUBJ_TYPE, \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.REP_SUBJ_TYPE);" +
                                     "\n" +
-                                    "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type4[0] +"' as REP_SUBJ_TYPE FROM dual\n" +
-                                    "minus select * from REPORT_REP_SUBJ_TYPE;\n" +
+                                    "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.rep_subj_type4[0] +"' as REP_SUBJ_TYPE, \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.REP_SUBJ_TYPE);" +
                                     "\n" +
-                                    "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type5[0] +"' as REP_SUBJ_TYPE FROM dual\n" +
-                                    "minus select * from REPORT_REP_SUBJ_TYPE;\n" +
+                                    "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.rep_subj_type5[0] +"' as REP_SUBJ_TYPE, \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.REP_SUBJ_TYPE);" +
                                     "\n" +
-                                    "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type6[0] +"' as REP_SUBJ_TYPE FROM dual\n" +
-                                    "minus select * from REPORT_REP_SUBJ_TYPE;\n" +
+                                    "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.rep_subj_type6[0] +"' as REP_SUBJ_TYPE, \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.REP_SUBJ_TYPE);" +
                                     "\n" +
-                                    "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type7[0] +"' as REP_SUBJ_TYPE FROM dual\n" +
-                                    "minus select * from REPORT_REP_SUBJ_TYPE;\n" +
+                                    "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.rep_subj_type7[0] +"' as REP_SUBJ_TYPE, \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.REP_SUBJ_TYPE);" +
                                     "\n" +
-                                    "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type8[0] +"' as REP_SUBJ_TYPE FROM dual\n" +
-                                    "minus select * from REPORT_REP_SUBJ_TYPE;\n" +
+                                    "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.rep_subj_type8[0] +"' as REP_SUBJ_TYPE, \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.REP_SUBJ_TYPE);" +
                                     "\n" ;
                             break;
 
@@ -2145,27 +3490,49 @@ public class ScriptEXP {
                 if((SC_data_miner.Form_cd_name[0]== null) || Objects.equals(SC_data_miner.Form_cd_name[0], "") || Objects.equals(SC_data_miner.Form_cd_name[0], " ")){
                     rep_form_script[0] = "--Warning: Не указаны данные для таблицы REP_FORM\n\n";
                 } else {
-                    rep_form_script[0] = "INSERT INTO REP_FORM \n" +
-                            "SELECT '"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, '"+ SC_data_miner.Form_cd_name[0] +"' as FORM_NAME, " + okud_rep_form + " FROM dual\n" +
-                            "minus select * from REP_FORM;" +
+                    rep_form_script[0] = "MERGE INTO REP_FORM R\n" +
+                        "   USING (SELECT \n" +
+                        "'" + SC_data_miner.Form_cd[0] + "' as FORM_CD, \n'" +
+                        "'" + SC_data_miner.Form_name[0] + "' as FORM_NAME, \n" +
+                        "'" + okud_rep_form + "' as FORM_OKUD\n" +
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.FORM_NAME = S.FORM_NAME,\n" +
+                        "                                R.FORM_OKUD = S.FORM_OKUD\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.FORM_NAME, R.FORM_OKUD)\n" +
+                        "   VALUES (S.FORM_CD, S.FORM_NAME, S.FORM_OKUD);" + 
                             "\n" +
                             "\n" ;
                 }
                 if(Objects.equals(iod, "null as FLAG_IOD") || Objects.equals(pdn, "null as FLAG_PDN")){
                     rep_form_oki_script[0] = "--Warning: Не указаны данные для таблицы REP_FORM_OKI\n\n";
                 } else{
-                    rep_form_oki_script[0] = "INSERT INTO REP_FORM_OKI\n" +
-                            "SELECT '"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, " + iod + ",  " + pdn + " FROM  dual\n" +
-                            "minus select * from REP_FORM_OKI;" +
+                    rep_form_oki_script[0] = "MERGE INTO REP_FORM_OKI R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        iod + ",  " +
+						pdn +
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.FLAG_IOD = S.FLAG_IOD,\n" +
+						"                                R.FLAG_PDN = S.FLAG_PDN,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.FLAG_IOD, R.FLAG_PDN)\n" +
+                        "   VALUES (S.FORM_CD, S.FLAG_IOD, S.FLAG_PDN);" +
                             "\n" +
                             "\n" ;
                 }
                 if(SC_data_miner.Form_cd_cog[0] == null || Objects.equals(SC_data_miner.Form_cd_cog[0], "") || Objects.equals(SC_data_miner.Form_cd_cog[0], " ")){
                     rep_form_cognos_script[0] = "--Warning: Не указаны данные для таблицы REP_FORM_COGNOS\n\n";
                 } else {
-                    rep_form_cognos_script[0] = "INSERT INTO REP_FORM_COGNOS\n" +
-                            "SELECT '"+ SC_data_miner.Form_cd_cog[0] +"' as FORM_CD, '"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD FROM dual\n" +
-                            "minus select * from REP_FORM_COGNOS;" +
+                    rep_form_cognos_script[0] = "MERGE INTO REP_FORM_COGNOS R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd_cog[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
+                        "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                             "\n" +
                             "\n";
                 }
@@ -2175,142 +3542,394 @@ public class ScriptEXP {
                     int c = OK_Action.getDep_count(0);
                     switch (c){
                         case 1:
-                            rep_form_dep_owner_script[0] = "INSERT INTO REP_FORM_DEP_OWNER\n" +
-                                    "SELECT '"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, '"+ SC_data_miner.Dep_name[0] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                    "minus select * from REP_FORM_DEP_OWNER;" +
+                            rep_form_dep_owner_script[0] = "MERGE INTO REP_FORM_DEP_OWNER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_name[0] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);" +
                                     "\n" +
                                     "\n";
                             break;
                         case 2:
-                            rep_form_dep_owner_script[0] = "INSERT INTO REP_FORM_DEP_OWNER\n" +
-                                    "SELECT '"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, '"+ SC_data_miner.Dep_name[0] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                    "minus select * from REP_FORM_DEP_OWNER;\n\n" +
-                                    "INSERT INTO REP_FORM_DEP_OWNER\n" +
-                                    "SELECT '"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, '"+ SC_data_miner.Dep_name2[0] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                    "minus select * from REP_FORM_DEP_OWNER;" +
+                            rep_form_dep_owner_script[0] = "MERGE INTO REP_FORM_DEP_OWNER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_name[0] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
+                                    "MERGE INTO REP_FORM_DEP_OWNER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_name2[0] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);" +
                                     "\n" +
                                     "\n";
                             break;
                         case 3:
-                            rep_form_dep_owner_script[0] = "INSERT INTO REP_FORM_DEP_OWNER\n" +
-                                    "SELECT '"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, '"+ SC_data_miner.Dep_name[0] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                    "minus select * from REP_FORM_DEP_OWNER;\n\n" +
-                                    "INSERT INTO REP_FORM_DEP_OWNER\n" +
-                                    "SELECT '"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, '"+ SC_data_miner.Dep_name2[0] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                    "minus select * from REP_FORM_DEP_OWNER;\n\n" +
-                                    "INSERT INTO REP_FORM_DEP_OWNER\n" +
-                                    "SELECT '"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, '"+ SC_data_miner.Dep_name3[0] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                    "minus select * from REP_FORM_DEP_OWNER;" +
+                            rep_form_dep_owner_script[0] = "MERGE INTO REP_FORM_DEP_OWNER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_name[0] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
+                                    "MERGE INTO REP_FORM_DEP_OWNER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_name2[0] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
+                                    "MERGE INTO REP_FORM_DEP_OWNER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_name3[0] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);" +
                                     "\n" +
                                     "\n";
                             break;
                         case 4:
-                            rep_form_dep_owner_script[0] = "INSERT INTO REP_FORM_DEP_OWNER\n" +
-                                    "SELECT '"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, '"+ SC_data_miner.Dep_name[0] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                    "minus select * from REP_FORM_DEP_OWNER;\n\n" +
-                                    "INSERT INTO REP_FORM_DEP_OWNER\n" +
-                                    "SELECT '"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, '"+ SC_data_miner.Dep_name2[0] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                    "minus select * from REP_FORM_DEP_OWNER;\n\n" +
-                                    "INSERT INTO REP_FORM_DEP_OWNER\n" +
-                                    "SELECT '"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, '"+ SC_data_miner.Dep_name3[0] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                    "minus select * from REP_FORM_DEP_OWNER;\n\n" +
-                                    "INSERT INTO REP_FORM_DEP_OWNER\n" +
-                                    "SELECT '"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, '"+ SC_data_miner.Dep_name4[0] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                    "minus select * from REP_FORM_DEP_OWNER;" +
+                            rep_form_dep_owner_script[0] = "MERGE INTO REP_FORM_DEP_OWNER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_name[0] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
+                                    "MERGE INTO REP_FORM_DEP_OWNER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_name2[0] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
+                                    "MERGE INTO REP_FORM_DEP_OWNER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_name3[0] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
+                                    "MERGE INTO REP_FORM_DEP_OWNER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_name4[0] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);" +
                                     "\n" +
                                     "\n";
                             break;
                         case 5:
-                            rep_form_dep_owner_script[0] = "INSERT INTO REP_FORM_DEP_OWNER\n" +
-                                    "SELECT '"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, '"+ SC_data_miner.Dep_name[0] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                    "minus select * from REP_FORM_DEP_OWNER;\n\n" +
-                                    "INSERT INTO REP_FORM_DEP_OWNER\n" +
-                                    "SELECT '"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, '"+ SC_data_miner.Dep_name2[0] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                    "minus select * from REP_FORM_DEP_OWNER;\n\n" +
-                                    "INSERT INTO REP_FORM_DEP_OWNER\n" +
-                                    "SELECT '"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, '"+ SC_data_miner.Dep_name3[0] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                    "minus select * from REP_FORM_DEP_OWNER;\n\n" +
-                                    "INSERT INTO REP_FORM_DEP_OWNER\n" +
-                                    "SELECT '"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, '"+ SC_data_miner.Dep_name4[0] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                    "minus select * from REP_FORM_DEP_OWNER;\n\n" +
-                                    "INSERT INTO REP_FORM_DEP_OWNER\n" +
-                                    "SELECT '"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, '"+ SC_data_miner.Dep_name5[0] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                    "minus select * from REP_FORM_DEP_OWNER;" +
+                            rep_form_dep_owner_script[0] = "MERGE INTO REP_FORM_DEP_OWNER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_name[0] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
+                                    "MERGE INTO REP_FORM_DEP_OWNER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_name2[0] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);" +
+                                    "MERGE INTO REP_FORM_DEP_OWNER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_name3[0] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
+                                    "MERGE INTO REP_FORM_DEP_OWNER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_name4[0] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
+                                    "MERGE INTO REP_FORM_DEP_OWNER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_name5[0] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);" +
                                     "\n" +
                                     "\n";
                             break;
                         case 6:
-                            rep_form_dep_owner_script[0] = "INSERT INTO REP_FORM_DEP_OWNER\n" +
-                                    "SELECT '"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, '"+ SC_data_miner.Dep_name[0] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                    "minus select * from REP_FORM_DEP_OWNER;\n\n" +
-                                    "INSERT INTO REP_FORM_DEP_OWNER\n" +
-                                    "SELECT '"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, '"+ SC_data_miner.Dep_name2[0] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                    "minus select * from REP_FORM_DEP_OWNER;\n\n" +
-                                    "INSERT INTO REP_FORM_DEP_OWNER\n" +
-                                    "SELECT '"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, '"+ SC_data_miner.Dep_name3[0] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                    "minus select * from REP_FORM_DEP_OWNER;\n\n" +
-                                    "INSERT INTO REP_FORM_DEP_OWNER\n" +
-                                    "SELECT '"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, '"+ SC_data_miner.Dep_name4[0] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                    "minus select * from REP_FORM_DEP_OWNER;\n\n" +
-                                    "INSERT INTO REP_FORM_DEP_OWNER\n" +
-                                    "SELECT '"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, '"+ SC_data_miner.Dep_name5[0] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                    "minus select * from REP_FORM_DEP_OWNER;\n\n" +
-                                    "INSERT INTO REP_FORM_DEP_OWNER\n" +
-                                    "SELECT '"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, '"+ SC_data_miner.Dep_name6[0] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                    "minus select * from REP_FORM_DEP_OWNER;" +
+                            rep_form_dep_owner_script[0] = "MERGE INTO REP_FORM_DEP_OWNER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_name[0] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
+                                    "MERGE INTO REP_FORM_DEP_OWNER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_name2[0] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);" +
+                                    "MERGE INTO REP_FORM_DEP_OWNER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_name3[0] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
+                                    "MERGE INTO REP_FORM_DEP_OWNER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_name4[0] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
+                                    "MERGE INTO REP_FORM_DEP_OWNER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_name5[0] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
+                                    "MERGE INTO REP_FORM_DEP_OWNER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_name6[0] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);" +
                                     "\n" +
                                     "\n";
                             break;
                         case 7:
-                            rep_form_dep_owner_script[0] = "INSERT INTO REP_FORM_DEP_OWNER\n" +
-                                    "SELECT '"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, '"+ SC_data_miner.Dep_name[0] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                    "minus select * from REP_FORM_DEP_OWNER;\n\n" +
-                                    "INSERT INTO REP_FORM_DEP_OWNER\n" +
-                                    "SELECT '"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, '"+ SC_data_miner.Dep_name2[0] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                    "minus select * from REP_FORM_DEP_OWNER;\n\n" +
-                                    "INSERT INTO REP_FORM_DEP_OWNER\n" +
-                                    "SELECT '"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, '"+ SC_data_miner.Dep_name3[0] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                    "minus select * from REP_FORM_DEP_OWNER;\n\n" +
-                                    "INSERT INTO REP_FORM_DEP_OWNER\n" +
-                                    "SELECT '"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, '"+ SC_data_miner.Dep_name4[0] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                    "minus select * from REP_FORM_DEP_OWNER;\n\n" +
-                                    "INSERT INTO REP_FORM_DEP_OWNER\n" +
-                                    "SELECT '"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, '"+ SC_data_miner.Dep_name5[0] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                    "minus select * from REP_FORM_DEP_OWNER;\n\n" +
-                                    "INSERT INTO REP_FORM_DEP_OWNER\n" +
-                                    "SELECT '"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, '"+ SC_data_miner.Dep_name6[0] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                    "minus select * from REP_FORM_DEP_OWNER;\n\n" +
-                                    "INSERT INTO REP_FORM_DEP_OWNER\n" +
-                                    "SELECT '"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, '"+ SC_data_miner.Dep_name7[0] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                    "minus select * from REP_FORM_DEP_OWNER;" +
+                            rep_form_dep_owner_script[0] = "MERGE INTO REP_FORM_DEP_OWNER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_name[0] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
+                                    "MERGE INTO REP_FORM_DEP_OWNER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_name2[0] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);" +
+                                    "MERGE INTO REP_FORM_DEP_OWNER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_name3[0] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
+                                    "MERGE INTO REP_FORM_DEP_OWNER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_name4[0] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
+                                    "MERGE INTO REP_FORM_DEP_OWNER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_name5[0] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
+                                    "MERGE INTO REP_FORM_DEP_OWNER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_name6[0] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
+                                    "MERGE INTO REP_FORM_DEP_OWNER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_name7[0] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);" +
                                     "\n" +
                                     "\n";
                             break;
                         case 8:
-                            rep_form_dep_owner_script[0] = "INSERT INTO REP_FORM_DEP_OWNER\n" +
-                                    "SELECT '"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, '"+ SC_data_miner.Dep_name[0] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                    "minus select * from REP_FORM_DEP_OWNER;\n\n" +
-                                    "INSERT INTO REP_FORM_DEP_OWNER\n" +
-                                    "SELECT '"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, '"+ SC_data_miner.Dep_name2[0] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                    "minus select * from REP_FORM_DEP_OWNER;\n\n" +
-                                    "INSERT INTO REP_FORM_DEP_OWNER\n" +
-                                    "SELECT '"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, '"+ SC_data_miner.Dep_name3[0] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                    "minus select * from REP_FORM_DEP_OWNER;\n\n" +
-                                    "INSERT INTO REP_FORM_DEP_OWNER\n" +
-                                    "SELECT '"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, '"+ SC_data_miner.Dep_name4[0] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                    "minus select * from REP_FORM_DEP_OWNER;\n\n" +
-                                    "INSERT INTO REP_FORM_DEP_OWNER\n" +
-                                    "SELECT '"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, '"+ SC_data_miner.Dep_name5[0] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                    "minus select * from REP_FORM_DEP_OWNER;\n\n" +
-                                    "INSERT INTO REP_FORM_DEP_OWNER\n" +
-                                    "SELECT '"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, '"+ SC_data_miner.Dep_name6[0] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                    "minus select * from REP_FORM_DEP_OWNER;\n\n" +
-                                    "INSERT INTO REP_FORM_DEP_OWNER\n" +
-                                    "SELECT '"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, '"+ SC_data_miner.Dep_name7[0] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                    "minus select * from REP_FORM_DEP_OWNER;\n\n" +
-                                    "INSERT INTO REP_FORM_DEP_OWNER\n" +
-                                    "SELECT '"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, '"+ SC_data_miner.Dep_name8[0] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                    "minus select * from REP_FORM_DEP_OWNER;\n\n" +
+                            rep_form_dep_owner_script[0] = "MERGE INTO REP_FORM_DEP_OWNER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_name[0] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
+                                    "MERGE INTO REP_FORM_DEP_OWNER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_name2[0] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);" +
+                                    "MERGE INTO REP_FORM_DEP_OWNER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_name3[0] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
+                                    "MERGE INTO REP_FORM_DEP_OWNER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_name4[0] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
+                                    "MERGE INTO REP_FORM_DEP_OWNER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_name5[0] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
+                                    "MERGE INTO REP_FORM_DEP_OWNER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_name6[0] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
+                                    "MERGE INTO REP_FORM_DEP_OWNER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_name7[0] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
+                                    "MERGE INTO REP_FORM_DEP_OWNER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_name8[0] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "\n" +
                                     "\n";
                             break;
@@ -2323,111 +3942,300 @@ public class ScriptEXP {
                     int c = OK_Action.getDep_u_count(0);
                     switch (c){
                         case 1:
-                            rep_form_dep_user_script[0] = "INSERT INTO REP_FORM_DEP_USER\n" +
-                                    "SELECT '"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, '"+ SC_data_miner.Dep_u_name[0] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                    "minus select * from REP_FORM_DEP_USER;" +
+                            rep_form_dep_user_script[0] = "MERGE INTO REP_FORM_DEP_USER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_u_name[0] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "\n" +
                                     "\n";
                             break;
                         case 2:
-                            rep_form_dep_user_script[0] = "INSERT INTO REP_FORM_DEP_USER\n" +
-                                    "SELECT '"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, '"+ SC_data_miner.Dep_u_name[0] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                    "minus select * from REP_FORM_DEP_USER;\n\n" +
-                                    "INSERT INTO REP_FORM_DEP_USER\n" +
-                                    "SELECT '"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, '"+ SC_data_miner.Dep_u_name2[0] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                    "minus select * from REP_FORM_DEP_USER;" +
+                            rep_form_dep_user_script[0] = "MERGE INTO REP_FORM_DEP_USER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_u_name[0] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
+                                    "MERGE INTO REP_FORM_DEP_USER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_u_name2[0] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "\n" +
                                     "\n";
                             break;
                         case 3:
-                            rep_form_dep_user_script[0] = "INSERT INTO REP_FORM_DEP_USER\n" +
-                                    "SELECT '"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, '"+ SC_data_miner.Dep_u_name[0] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                    "minus select * from REP_FORM_DEP_USER;\n\n" +
-                                    "INSERT INTO REP_FORM_DEP_USER\n" +
-                                    "SELECT '"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, '"+ SC_data_miner.Dep_u_name2[0] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                    "minus select * from REP_FORM_DEP_USER;\n\n" +
-                                    "INSERT INTO REP_FORM_DEP_USER\n" +
-                                    "SELECT '"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, '"+ SC_data_miner.Dep_u_name3[0] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                    "minus select * from REP_FORM_DEP_USER;" +
+                            rep_form_dep_user_script[0] = "MERGE INTO REP_FORM_DEP_USER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_u_name[0] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
+                                    "MERGE INTO REP_FORM_DEP_USER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_u_name2[0] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
+                                   "MERGE INTO REP_FORM_DEP_USER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_u_name3[0] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "\n" +
                                     "\n";
                             break;
                         case 4:
-                            rep_form_dep_user_script[0] = "INSERT INTO REP_FORM_DEP_USER\n" +
-                                    "SELECT '"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, '"+ SC_data_miner.Dep_u_name[0] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                    "minus select * from REP_FORM_DEP_USER;\n\n" +
-                                    "INSERT INTO REP_FORM_DEP_USER\n" +
-                                    "SELECT '"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, '"+ SC_data_miner.Dep_u_name2[0] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                    "minus select * from REP_FORM_DEP_USER;\n\n" +
-                                    "INSERT INTO REP_FORM_DEP_USER\n" +
-                                    "SELECT '"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, '"+ SC_data_miner.Dep_u_name3[0] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                    "minus select * from REP_FORM_DEP_USER;\n\n" +
-                                    "INSERT INTO REP_FORM_DEP_USER\n" +
-                                    "SELECT '"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, '"+ SC_data_miner.Dep_u_name4[0] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                    "minus select * from REP_FORM_DEP_USER;" +
+                            rep_form_dep_user_script[0] = "MERGE INTO REP_FORM_DEP_USER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_u_name[0] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
+                                    "MERGE INTO REP_FORM_DEP_USER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_u_name2[0] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
+                                    "MERGE INTO REP_FORM_DEP_USER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_u_name3[0] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
+                                    "MERGE INTO REP_FORM_DEP_USER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_u_name4[0] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "\n" +
                                     "\n";
                             break;
                         case 5:
-                            rep_form_dep_user_script[0] = "INSERT INTO REP_FORM_DEP_USER\n" +
-                                    "SELECT '"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, '"+ SC_data_miner.Dep_u_name[0] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                    "minus select * from REP_FORM_DEP_USER;\n\n" +
-                                    "INSERT INTO REP_FORM_DEP_USER\n" +
-                                    "SELECT '"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, '"+ SC_data_miner.Dep_u_name2[0] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                    "minus select * from REP_FORM_DEP_USER;\n\n" +
-                                    "INSERT INTO REP_FORM_DEP_USER\n" +
-                                    "SELECT '"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, '"+ SC_data_miner.Dep_u_name3[0] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                    "minus select * from REP_FORM_DEP_USER;\n\n" +
-                                    "INSERT INTO REP_FORM_DEP_USER\n" +
-                                    "SELECT '"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, '"+ SC_data_miner.Dep_u_name4[0] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                    "minus select * from REP_FORM_DEP_USER;\n\n" +
-                                    "INSERT INTO REP_FORM_DEP_USER\n" +
-                                    "SELECT '"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, '"+ SC_data_miner.Dep_u_name5[0] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                    "minus select * from REP_FORM_DEP_USER;" +
+                            rep_form_dep_user_script[0] = "MERGE INTO REP_FORM_DEP_USER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_u_name[0] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
+                                    "MERGE INTO REP_FORM_DEP_USER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_u_name2[0] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
+                                    "MERGE INTO REP_FORM_DEP_USER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_u_name3[0] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
+                                    "MERGE INTO REP_FORM_DEP_USER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_u_name4[0] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
+                                    "MERGE INTO REP_FORM_DEP_USER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_u_name5[0] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "\n" +
                                     "\n";
                             break;
                         case 6:
-                            rep_form_dep_user_script[0] = "INSERT INTO REP_FORM_DEP_USER\n" +
-                                    "SELECT '"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, '"+ SC_data_miner.Dep_u_name[0] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                    "minus select * from REP_FORM_DEP_USER;\n\n" +
-                                    "INSERT INTO REP_FORM_DEP_USER\n" +
-                                    "SELECT '"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, '"+ SC_data_miner.Dep_u_name2[0] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                    "minus select * from REP_FORM_DEP_USER;\n\n" +
-                                    "INSERT INTO REP_FORM_DEP_USER\n" +
-                                    "SELECT '"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, '"+ SC_data_miner.Dep_u_name3[0] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                    "minus select * from REP_FORM_DEP_USER;\n\n" +
-                                    "INSERT INTO REP_FORM_DEP_USER\n" +
-                                    "SELECT '"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, '"+ SC_data_miner.Dep_u_name4[0] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                    "minus select * from REP_FORM_DEP_USER;\n\n" +
-                                    "INSERT INTO REP_FORM_DEP_USER\n" +
-                                    "SELECT '"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, '"+ SC_data_miner.Dep_u_name5[0] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                    "minus select * from REP_FORM_DEP_USER;\n\n" +
-                                    "INSERT INTO REP_FORM_DEP_USER\n" +
-                                    "SELECT '"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, '"+ SC_data_miner.Dep_u_name6[0] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                    "minus select * from REP_FORM_DEP_USER;" +
+                            rep_form_dep_user_script[0] = "MERGE INTO REP_FORM_DEP_USER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_u_name[0] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
+                                    "MERGE INTO REP_FORM_DEP_USER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_u_name2[0] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
+                                    "MERGE INTO REP_FORM_DEP_USER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_u_name3[0] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
+                                    "MERGE INTO REP_FORM_DEP_USER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_u_name4[0] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
+                                    "MERGE INTO REP_FORM_DEP_USER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_u_name5[0] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
+                                    "MERGE INTO REP_FORM_DEP_USER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_u_name6[0] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "\n" +
                                     "\n";
                             break;
                         case 7:
-                            rep_form_dep_user_script[0] = "INSERT INTO REP_FORM_DEP_USER\n" +
-                                    "SELECT '"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, '"+ SC_data_miner.Dep_u_name[0] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                    "minus select * from REP_FORM_DEP_USER;\n\n" +
-                                    "INSERT INTO REP_FORM_DEP_USER\n" +
-                                    "SELECT '"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, '"+ SC_data_miner.Dep_u_name2[0] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                    "minus select * from REP_FORM_DEP_USER;\n\n" +
-                                    "INSERT INTO REP_FORM_DEP_USER\n" +
-                                    "SELECT '"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, '"+ SC_data_miner.Dep_u_name3[0] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                    "minus select * from REP_FORM_DEP_USER;\n\n" +
-                                    "INSERT INTO REP_FORM_DEP_USER\n" +
-                                    "SELECT '"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, '"+ SC_data_miner.Dep_u_name4[0] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                    "minus select * from REP_FORM_DEP_USER;\n\n" +
-                                    "INSERT INTO REP_FORM_DEP_USER\n" +
-                                    "SELECT '"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, '"+ SC_data_miner.Dep_u_name5[0] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                    "minus select * from REP_FORM_DEP_USER;\n\n" +
-                                    "INSERT INTO REP_FORM_DEP_USER\n" +
-                                    "SELECT '"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, '"+ SC_data_miner.Dep_u_name6[0] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                    "minus select * from REP_FORM_DEP_USER;\n\n" +
+                            rep_form_dep_user_script[0] = "MERGE INTO REP_FORM_DEP_USER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_u_name[0] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
+                                    "MERGE INTO REP_FORM_DEP_USER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_u_name2[0] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
+                                    "MERGE INTO REP_FORM_DEP_USER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_u_name3[0] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
+                                    "MERGE INTO REP_FORM_DEP_USER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_u_name4[0] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
+                                    "MERGE INTO REP_FORM_DEP_USER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_u_name5[0] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
+                                    "MERGE INTO REP_FORM_DEP_USER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_u_name6[0] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "INSERT INTO REP_FORM_DEP_USER\n" +
                                     "SELECT '"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, '"+ SC_data_miner.Dep_u_name7[0] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
                                     "minus select * from REP_FORM_DEP_USER;" +
@@ -2435,30 +4243,86 @@ public class ScriptEXP {
                                     "\n";
                             break;
                         case 8:
-                            rep_form_dep_user_script[0] = "INSERT INTO REP_FORM_DEP_USER\n" +
-                                    "SELECT '"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, '"+ SC_data_miner.Dep_u_name[0] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                    "minus select * from REP_FORM_DEP_USER;\n\n" +
-                                    "INSERT INTO REP_FORM_DEP_USER\n" +
-                                    "SELECT '"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, '"+ SC_data_miner.Dep_u_name2[0] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                    "minus select * from REP_FORM_DEP_USER;\n\n" +
-                                    "INSERT INTO REP_FORM_DEP_USER\n" +
-                                    "SELECT '"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, '"+ SC_data_miner.Dep_u_name3[0] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                    "minus select * from REP_FORM_DEP_USER;\n\n" +
-                                    "INSERT INTO REP_FORM_DEP_USER\n" +
-                                    "SELECT '"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, '"+ SC_data_miner.Dep_u_name4[0] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                    "minus select * from REP_FORM_DEP_USER;\n\n" +
-                                    "INSERT INTO REP_FORM_DEP_USER\n" +
-                                    "SELECT '"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, '"+ SC_data_miner.Dep_u_name5[0] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                    "minus select * from REP_FORM_DEP_USER;\n\n" +
-                                    "INSERT INTO REP_FORM_DEP_USER\n" +
-                                    "SELECT '"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, '"+ SC_data_miner.Dep_u_name6[0] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                    "minus select * from REP_FORM_DEP_USER;\n\n" +
-                                    "INSERT INTO REP_FORM_DEP_USER\n" +
-                                    "SELECT '"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, '"+ SC_data_miner.Dep_u_name7[0] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                    "minus select * from REP_FORM_DEP_USER;\n\n" +
-                                    "INSERT INTO REP_FORM_DEP_USER\n" +
-                                    "SELECT '"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, '"+ SC_data_miner.Dep_u_name8[0] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                    "minus select * from REP_FORM_DEP_USER;\n\n" +
+                            rep_form_dep_user_script[0] = "MERGE INTO REP_FORM_DEP_USER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_u_name[0] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
+                                    "MERGE INTO REP_FORM_DEP_USER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_u_name2[0] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
+                                    "MERGE INTO REP_FORM_DEP_USER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_u_name3[0] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
+                                    "MERGE INTO REP_FORM_DEP_USER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_u_name4[0] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
+                                    "MERGE INTO REP_FORM_DEP_USER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_u_name5[0] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
+                                    "MERGE INTO REP_FORM_DEP_USER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_u_name6[0] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
+                                    "MERGE INTO REP_FORM_DEP_USER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_u_name7[0] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
+                                    "MERGE INTO REP_FORM_DEP_USER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_u_name8[0] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "\n" +
                                     "\n";
                             break;
@@ -2504,163 +4368,487 @@ public class ScriptEXP {
                     int c = OK_Action.getOkud_count(0);
                     switch(c){
                         case 1:
-                            report_okud_code_script[0] = "INSERT INTO REPORT_OKUD_CODE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, '"+ SC_data_miner.period[0] + "' as PERIOD, null as FORM_CD FROM dual\n" +
-                                    "minus select * from REPORT_OKUD_CODE;\n" +
+                            report_okud_code_script[0] = "MERGE INTO REPORT_OKUD_CODE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, \n" + 
+						"'"+ SC_data_miner.period[0] +"'as PERIOD \n" + 
+						"null as FORM_CD \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
+                        "                                R.FORM_CD = S.FORM_CD\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.OKUD_CODE, R.PERIOD, R.FORM_CD)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.OKUD_CODE, S.PERIOD, S.FORM_CD);\n\n" +
                                     "\n";
                             break;
                         case 2:
-                            report_okud_code_script[0] = "INSERT INTO REPORT_OKUD_CODE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, '"+ SC_data_miner.period[0] + "' as PERIOD, null as FORM_CD FROM dual\n" +
-                                    "minus select * from REPORT_OKUD_CODE;\n" +
+                            report_okud_code_script[0] = "MERGE INTO REPORT_OKUD_CODE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, \n" + 
+						"'"+ SC_data_miner.period[0] +"'as PERIOD \n" + 
+						"null as FORM_CD \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
+                        "                                R.FORM_CD = S.FORM_CD\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.OKUD_CODE, R.PERIOD, R.FORM_CD)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.OKUD_CODE, S.PERIOD, S.FORM_CD);\n\n" +
                                     "\n" +
-                                    "INSERT INTO REPORT_OKUD_CODE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud2[0] +"' as OKUD_CODE, '"+ SC_data_miner.period2[0] + "' as PERIOD, null as FORM_CD FROM dual\n" +
-                                    "minus select * from REPORT_OKUD_CODE;\n" +
+                                    "MERGE INTO REPORT_OKUD_CODE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_okud2[0] +"' as OKUD_CODE, \n" + 
+						"'"+ SC_data_miner.period2[0] +"'as PERIOD \n" + 
+						"null as FORM_CD \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
+                        "                                R.FORM_CD = S.FORM_CD\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.OKUD_CODE, R.PERIOD, R.FORM_CD)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.OKUD_CODE, S.PERIOD, S.FORM_CD);\n\n" +
                                     "\n" ;
                             break;
                         case 3:
-                            report_okud_code_script[0] = "INSERT INTO REPORT_OKUD_CODE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, '"+ SC_data_miner.period[0] + "' as PERIOD, null as FORM_CD FROM dual\n" +
-                                    "minus select * from REPORT_OKUD_CODE;\n" +
+                            report_okud_code_script[0] = "MERGE INTO REPORT_OKUD_CODE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, \n" + 
+						"'"+ SC_data_miner.period[0] +"'as PERIOD \n" + 
+						"null as FORM_CD \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
+                        "                                R.FORM_CD = S.FORM_CD\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.OKUD_CODE, R.PERIOD, R.FORM_CD)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.OKUD_CODE, S.PERIOD, S.FORM_CD);\n\n" +
                                     "\n" +
-                                    "INSERT INTO REPORT_OKUD_CODE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud2[0] +"' as OKUD_CODE, '"+ SC_data_miner.period2[0] + "' as PERIOD, null as FORM_CD FROM dual\n" +
-                                    "minus select * from REPORT_OKUD_CODE;\n" +
+                                    "MERGE INTO REPORT_OKUD_CODE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_okud2[0] +"' as OKUD_CODE, \n" + 
+						"'"+ SC_data_miner.period2[0] +"'as PERIOD \n" + 
+						"null as FORM_CD \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
+                        "                                R.FORM_CD = S.FORM_CD\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.OKUD_CODE, R.PERIOD, R.FORM_CD)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.OKUD_CODE, S.PERIOD, S.FORM_CD);\n\n" +
                                     "\n" +
-                                    "INSERT INTO REPORT_OKUD_CODE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud3[0] +"' as OKUD_CODE, '"+ SC_data_miner.period3[0] + "' as PERIOD, null as FORM_CD FROM dual\n" +
-                                    "minus select * from REPORT_OKUD_CODE;\n" +
+                                    "MERGE INTO REPORT_OKUD_CODE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_okud3[0] +"' as OKUD_CODE, \n" + 
+						"'"+ SC_data_miner.period3[0] +"'as PERIOD \n" + 
+						"null as FORM_CD \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
+                        "                                R.FORM_CD = S.FORM_CD\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.OKUD_CODE, R.PERIOD, R.FORM_CD)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.OKUD_CODE, S.PERIOD, S.FORM_CD);\n\n" +
                                     "\n";
                             break;
                         case 4:
-                            report_okud_code_script[0] = "INSERT INTO REPORT_OKUD_CODE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, '"+ SC_data_miner.period[0] + "' as PERIOD, null as FORM_CD FROM dual\n" +
-                                    "minus select * from REPORT_OKUD_CODE;\n" +
+                            report_okud_code_script[0] = "MERGE INTO REPORT_OKUD_CODE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, \n" + 
+						"'"+ SC_data_miner.period[0] +"'as PERIOD \n" + 
+						"null as FORM_CD \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
+                        "                                R.FORM_CD = S.FORM_CD\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.OKUD_CODE, R.PERIOD, R.FORM_CD)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.OKUD_CODE, S.PERIOD, S.FORM_CD);\n\n" +
                                     "\n" +
-                                    "INSERT INTO REPORT_OKUD_CODE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud2[0] +"' as OKUD_CODE, '"+ SC_data_miner.period2[0] + "' as PERIOD, null as FORM_CD FROM dual\n" +
-                                    "minus select * from REPORT_OKUD_CODE;\n" +
+                                    "MERGE INTO REPORT_OKUD_CODE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_okud2[0] +"' as OKUD_CODE, \n" + 
+						"'"+ SC_data_miner.period2[0] +"'as PERIOD \n" + 
+						"null as FORM_CD \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
+                        "                                R.FORM_CD = S.FORM_CD\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.OKUD_CODE, R.PERIOD, R.FORM_CD)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.OKUD_CODE, S.PERIOD, S.FORM_CD);\n\n" +
                                     "\n" +
-                                    "INSERT INTO REPORT_OKUD_CODE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud3[0] +"' as OKUD_CODE, '"+ SC_data_miner.period3[0] + "' as PERIOD, null as FORM_CD FROM dual\n" +
-                                    "minus select * from REPORT_OKUD_CODE;\n" +
+                                    "MERGE INTO REPORT_OKUD_CODE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_okud3[0] +"' as OKUD_CODE, \n" + 
+						"'"+ SC_data_miner.period3[0] +"'as PERIOD \n" + 
+						"null as FORM_CD \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
+                        "                                R.FORM_CD = S.FORM_CD\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.OKUD_CODE, R.PERIOD, R.FORM_CD)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.OKUD_CODE, S.PERIOD, S.FORM_CD);\n\n" +
                                     "\n" +
-                                    "INSERT INTO REPORT_OKUD_CODE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud4[0] +"' as OKUD_CODE, '"+ SC_data_miner.period4[0] + "' as PERIOD, null as FORM_CD FROM dual\n" +
-                                    "minus select * from REPORT_OKUD_CODE;\n" +
+                                    "MERGE INTO REPORT_OKUD_CODE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_okud4[0] +"' as OKUD_CODE, \n" + 
+						"'"+ SC_data_miner.period4[0] +"'as PERIOD \n" + 
+						"null as FORM_CD \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
+                        "                                R.FORM_CD = S.FORM_CD\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.OKUD_CODE, R.PERIOD, R.FORM_CD)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.OKUD_CODE, S.PERIOD, S.FORM_CD);\n\n" +
                                     "\n";
                             break;
                         case 5:
-                            report_okud_code_script[0] = "INSERT INTO REPORT_OKUD_CODE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, '"+ SC_data_miner.period[0] + "' as PERIOD, null as FORM_CD FROM dual\n" +
-                                    "minus select * from REPORT_OKUD_CODE;\n" +
+                            report_okud_code_script[0] = "MERGE INTO REPORT_OKUD_CODE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, \n" + 
+						"'"+ SC_data_miner.period[0] +"'as PERIOD \n" + 
+						"null as FORM_CD \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
+                        "                                R.FORM_CD = S.FORM_CD\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.OKUD_CODE, R.PERIOD, R.FORM_CD)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.OKUD_CODE, S.PERIOD, S.FORM_CD);\n\n" +
                                     "\n" +
-                                    "INSERT INTO REPORT_OKUD_CODE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud2[0] +"' as OKUD_CODE, '"+ SC_data_miner.period2[0] + "' as PERIOD, null as FORM_CD FROM dual\n" +
-                                    "minus select * from REPORT_OKUD_CODE;\n" +
+                                    "MERGE INTO REPORT_OKUD_CODE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_okud2[0] +"' as OKUD_CODE, \n" + 
+						"'"+ SC_data_miner.period2[0] +"'as PERIOD \n" + 
+						"null as FORM_CD \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
+                        "                                R.FORM_CD = S.FORM_CD\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.OKUD_CODE, R.PERIOD, R.FORM_CD)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.OKUD_CODE, S.PERIOD, S.FORM_CD);\n\n" +
                                     "\n" +
-                                    "INSERT INTO REPORT_OKUD_CODE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud3[0] +"' as OKUD_CODE, '"+ SC_data_miner.period3[0] + "' as PERIOD, null as FORM_CD FROM dual\n" +
-                                    "minus select * from REPORT_OKUD_CODE;\n" +
+                                    "MERGE INTO REPORT_OKUD_CODE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_okud3[0] +"' as OKUD_CODE, \n" + 
+						"'"+ SC_data_miner.period3[0] +"'as PERIOD \n" + 
+						"null as FORM_CD \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
+                        "                                R.FORM_CD = S.FORM_CD\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.OKUD_CODE, R.PERIOD, R.FORM_CD)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.OKUD_CODE, S.PERIOD, S.FORM_CD);\n\n" +
                                     "\n" +
-                                    "INSERT INTO REPORT_OKUD_CODE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud4[0] +"' as OKUD_CODE, '"+ SC_data_miner.period4[0] + "' as PERIOD, null as FORM_CD FROM dual\n" +
-                                    "minus select * from REPORT_OKUD_CODE;\n" +
+                                    "MERGE INTO REPORT_OKUD_CODE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_okud4[0] +"' as OKUD_CODE, \n" + 
+						"'"+ SC_data_miner.period4[0] +"'as PERIOD \n" + 
+						"null as FORM_CD \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
+                        "                                R.FORM_CD = S.FORM_CD\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.OKUD_CODE, R.PERIOD, R.FORM_CD)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.OKUD_CODE, S.PERIOD, S.FORM_CD);\n\n" +
                                     "\n" +
-                                    "INSERT INTO REPORT_OKUD_CODE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud5[0] +"' as OKUD_CODE, '"+ SC_data_miner.period5[0] + "' as PERIOD, null as FORM_CD FROM dual\n" +
-                                    "minus select * from REPORT_OKUD_CODE;\n" +
+                                    "MERGE INTO REPORT_OKUD_CODE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_okud5[0] +"' as OKUD_CODE, \n" + 
+						"'"+ SC_data_miner.period5[0] +"'as PERIOD \n" + 
+						"null as FORM_CD \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
+                        "                                R.FORM_CD = S.FORM_CD\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.OKUD_CODE, R.PERIOD, R.FORM_CD)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.OKUD_CODE, S.PERIOD, S.FORM_CD);\n\n" +
                                     "\n";
                             break;
                         case 6:
-                            report_okud_code_script[0] = "INSERT INTO REPORT_OKUD_CODE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, '"+ SC_data_miner.period[0] + "' as PERIOD, null as FORM_CD FROM dual\n" +
-                                    "minus select * from REPORT_OKUD_CODE;\n" +
+                            report_okud_code_script[0] = "MERGE INTO REPORT_OKUD_CODE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, \n" + 
+						"'"+ SC_data_miner.period[0] +"'as PERIOD \n" + 
+						"null as FORM_CD \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
+                        "                                R.FORM_CD = S.FORM_CD\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.OKUD_CODE, R.PERIOD, R.FORM_CD)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.OKUD_CODE, S.PERIOD, S.FORM_CD);\n\n" +
                                     "\n" +
-                                    "INSERT INTO REPORT_OKUD_CODE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud2[0] +"' as OKUD_CODE, '"+ SC_data_miner.period2[0] + "' as PERIOD, null as FORM_CD FROM dual\n" +
-                                    "minus select * from REPORT_OKUD_CODE;\n" +
+                                    "MERGE INTO REPORT_OKUD_CODE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_okud2[0] +"' as OKUD_CODE, \n" + 
+						"'"+ SC_data_miner.period2[0] +"'as PERIOD \n" + 
+						"null as FORM_CD \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
+                        "                                R.FORM_CD = S.FORM_CD\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.OKUD_CODE, R.PERIOD, R.FORM_CD)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.OKUD_CODE, S.PERIOD, S.FORM_CD);\n\n" +
                                     "\n" +
-                                    "INSERT INTO REPORT_OKUD_CODE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud3[0] +"' as OKUD_CODE, '"+ SC_data_miner.period3[0] + "' as PERIOD, null as FORM_CD FROM dual\n" +
-                                    "minus select * from REPORT_OKUD_CODE;\n" +
+                                    "MERGE INTO REPORT_OKUD_CODE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_okud3[0] +"' as OKUD_CODE, \n" + 
+						"'"+ SC_data_miner.period3[0] +"'as PERIOD \n" + 
+						"null as FORM_CD \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
+                        "                                R.FORM_CD = S.FORM_CD\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.OKUD_CODE, R.PERIOD, R.FORM_CD)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.OKUD_CODE, S.PERIOD, S.FORM_CD);\n\n" +
                                     "\n" +
-                                    "INSERT INTO REPORT_OKUD_CODE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud4[0] +"' as OKUD_CODE, '"+ SC_data_miner.period4[0] + "' as PERIOD, null as FORM_CD FROM dual\n" +
-                                    "minus select * from REPORT_OKUD_CODE;\n" +
+                                    "MERGE INTO REPORT_OKUD_CODE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_okud4[0] +"' as OKUD_CODE, \n" + 
+						"'"+ SC_data_miner.period4[0] +"'as PERIOD \n" + 
+						"null as FORM_CD \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
+                        "                                R.FORM_CD = S.FORM_CD\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.OKUD_CODE, R.PERIOD, R.FORM_CD)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.OKUD_CODE, S.PERIOD, S.FORM_CD);\n\n" +
                                     "\n" +
-                                    "INSERT INTO REPORT_OKUD_CODE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud5[0] +"' as OKUD_CODE, '"+ SC_data_miner.period5[0] + "' as PERIOD, null as FORM_CD FROM dual\n" +
-                                    "minus select * from REPORT_OKUD_CODE;\n" +
+                                    "MERGE INTO REPORT_OKUD_CODE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_okud5[0] +"' as OKUD_CODE, \n" + 
+						"'"+ SC_data_miner.period5[0] +"'as PERIOD \n" + 
+						"null as FORM_CD \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
+                        "                                R.FORM_CD = S.FORM_CD\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.OKUD_CODE, R.PERIOD, R.FORM_CD)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.OKUD_CODE, S.PERIOD, S.FORM_CD);\n\n" +
                                     "\n" +
-                                    "INSERT INTO REPORT_OKUD_CODE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud6[0] +"' as OKUD_CODE, '"+ SC_data_miner.period6[0] + "' as PERIOD, null as FORM_CD FROM dual\n" +
-                                    "minus select * from REPORT_OKUD_CODE;\n" +
+                                    "MERGE INTO REPORT_OKUD_CODE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_okud6[0] +"' as OKUD_CODE, \n" + 
+						"'"+ SC_data_miner.period6[0] +"'as PERIOD \n" + 
+						"null as FORM_CD \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
+                        "                                R.FORM_CD = S.FORM_CD\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.OKUD_CODE, R.PERIOD, R.FORM_CD)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.OKUD_CODE, S.PERIOD, S.FORM_CD);\n\n" +
                                     "\n";
                             break;
                         case 7:
-                            report_okud_code_script[0] = "INSERT INTO REPORT_OKUD_CODE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, '"+ SC_data_miner.period[0] + "' as PERIOD, null as FORM_CD FROM dual\n" +
-                                    "minus select * from REPORT_OKUD_CODE;\n" +
+                            report_okud_code_script[0] = "MERGE INTO REPORT_OKUD_CODE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, \n" + 
+						"'"+ SC_data_miner.period[0] +"'as PERIOD \n" + 
+						"null as FORM_CD \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
+                        "                                R.FORM_CD = S.FORM_CD\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.OKUD_CODE, R.PERIOD, R.FORM_CD)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.OKUD_CODE, S.PERIOD, S.FORM_CD);\n\n" +
                                     "\n" +
-                                    "INSERT INTO REPORT_OKUD_CODE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud2[0] +"' as OKUD_CODE, '"+ SC_data_miner.period2[0] + "' as PERIOD, null as FORM_CD FROM dual\n" +
-                                    "minus select * from REPORT_OKUD_CODE;\n" +
+                                    "MERGE INTO REPORT_OKUD_CODE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_okud2[0] +"' as OKUD_CODE, \n" + 
+						"'"+ SC_data_miner.period2[0] +"'as PERIOD \n" + 
+						"null as FORM_CD \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
+                        "                                R.FORM_CD = S.FORM_CD\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.OKUD_CODE, R.PERIOD, R.FORM_CD)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.OKUD_CODE, S.PERIOD, S.FORM_CD);\n\n" +
                                     "\n" +
-                                    "INSERT INTO REPORT_OKUD_CODE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud3[0] +"' as OKUD_CODE, '"+ SC_data_miner.period3[0] + "' as PERIOD, null as FORM_CD FROM dual\n" +
-                                    "minus select * from REPORT_OKUD_CODE;\n" +
+                                    "MERGE INTO REPORT_OKUD_CODE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_okud3[0] +"' as OKUD_CODE, \n" + 
+						"'"+ SC_data_miner.period3[0] +"'as PERIOD \n" + 
+						"null as FORM_CD \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
+                        "                                R.FORM_CD = S.FORM_CD\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.OKUD_CODE, R.PERIOD, R.FORM_CD)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.OKUD_CODE, S.PERIOD, S.FORM_CD);\n\n" +
                                     "\n" +
-                                    "INSERT INTO REPORT_OKUD_CODE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud4[0] +"' as OKUD_CODE, '"+ SC_data_miner.period4[0] + "' as PERIOD, null as FORM_CD FROM dual\n" +
-                                    "minus select * from REPORT_OKUD_CODE;\n" +
+                                    "MERGE INTO REPORT_OKUD_CODE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_okud4[0] +"' as OKUD_CODE, \n" + 
+						"'"+ SC_data_miner.period4[0] +"'as PERIOD \n" + 
+						"null as FORM_CD \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
+                        "                                R.FORM_CD = S.FORM_CD\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.OKUD_CODE, R.PERIOD, R.FORM_CD)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.OKUD_CODE, S.PERIOD, S.FORM_CD);\n\n" +
                                     "\n" +
-                                    "INSERT INTO REPORT_OKUD_CODE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud5[0] +"' as OKUD_CODE, '"+ SC_data_miner.period5[0] + "' as PERIOD, null as FORM_CD FROM dual\n" +
-                                    "minus select * from REPORT_OKUD_CODE;\n" +
+                                    "MERGE INTO REPORT_OKUD_CODE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_okud5[0] +"' as OKUD_CODE, \n" + 
+						"'"+ SC_data_miner.period5[0] +"'as PERIOD \n" + 
+						"null as FORM_CD \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
+                        "                                R.FORM_CD = S.FORM_CD\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.OKUD_CODE, R.PERIOD, R.FORM_CD)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.OKUD_CODE, S.PERIOD, S.FORM_CD);\n\n" +
                                     "\n" +
-                                    "INSERT INTO REPORT_OKUD_CODE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud6[0] +"' as OKUD_CODE, '"+ SC_data_miner.period6[0] + "' as PERIOD, null as FORM_CD FROM dual\n" +
-                                    "minus select * from REPORT_OKUD_CODE;\n" +
+                                    "MERGE INTO REPORT_OKUD_CODE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_okud6[0] +"' as OKUD_CODE, \n" + 
+						"'"+ SC_data_miner.period6[0] +"'as PERIOD \n" + 
+						"null as FORM_CD \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
+                        "                                R.FORM_CD = S.FORM_CD\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.OKUD_CODE, R.PERIOD, R.FORM_CD)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.OKUD_CODE, S.PERIOD, S.FORM_CD);\n\n" +
                                     "\n" +
-                                    "INSERT INTO REPORT_OKUD_CODE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud7[0] +"' as OKUD_CODE, '"+ SC_data_miner.period7[0] + "' as PERIOD, null as FORM_CD FROM dual\n" +
-                                    "minus select * from REPORT_OKUD_CODE;\n" +
+                                    "MERGE INTO REPORT_OKUD_CODE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_okud7[0] +"' as OKUD_CODE, \n" + 
+						"'"+ SC_data_miner.period7[0] +"'as PERIOD \n" + 
+						"null as FORM_CD \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
+                        "                                R.FORM_CD = S.FORM_CD\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.OKUD_CODE, R.PERIOD, R.FORM_CD)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.OKUD_CODE, S.PERIOD, S.FORM_CD);\n\n" +
                                     "\n";
                             break;
                         case 8:
-                            report_okud_code_script[0] = "INSERT INTO REPORT_OKUD_CODE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, '"+ SC_data_miner.period[0] + "' as PERIOD, null as FORM_CD FROM dual\n" +
-                                    "minus select * from REPORT_OKUD_CODE;\n" +
+                            report_okud_code_script[0] = "MERGE INTO REPORT_OKUD_CODE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, \n" + 
+						"'"+ SC_data_miner.period[0] +"'as PERIOD \n" + 
+						"null as FORM_CD \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
+                        "                                R.FORM_CD = S.FORM_CD\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.OKUD_CODE, R.PERIOD, R.FORM_CD)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.OKUD_CODE, S.PERIOD, S.FORM_CD);\n\n" +
                                     "\n" +
-                                    "INSERT INTO REPORT_OKUD_CODE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud2[0] +"' as OKUD_CODE, '"+ SC_data_miner.period2[0] + "' as PERIOD, null as FORM_CD FROM dual\n" +
-                                    "minus select * from REPORT_OKUD_CODE;\n" +
+                                    "MERGE INTO REPORT_OKUD_CODE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_okud2[0] +"' as OKUD_CODE, \n" + 
+						"'"+ SC_data_miner.period2[0] +"'as PERIOD \n" + 
+						"null as FORM_CD \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
+                        "                                R.FORM_CD = S.FORM_CD\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.OKUD_CODE, R.PERIOD, R.FORM_CD)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.OKUD_CODE, S.PERIOD, S.FORM_CD);\n\n" +
                                     "\n" +
-                                    "INSERT INTO REPORT_OKUD_CODE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud3[0] +"' as OKUD_CODE, '"+ SC_data_miner.period3[0] + "' as PERIOD, null as FORM_CD FROM dual\n" +
-                                    "minus select * from REPORT_OKUD_CODE;\n" +
+                                    "MERGE INTO REPORT_OKUD_CODE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_okud3[0] +"' as OKUD_CODE, \n" + 
+						"'"+ SC_data_miner.period3[0] +"'as PERIOD \n" + 
+						"null as FORM_CD \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
+                        "                                R.FORM_CD = S.FORM_CD\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.OKUD_CODE, R.PERIOD, R.FORM_CD)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.OKUD_CODE, S.PERIOD, S.FORM_CD);\n\n" +
                                     "\n" +
-                                    "INSERT INTO REPORT_OKUD_CODE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud4[0] +"' as OKUD_CODE, '"+ SC_data_miner.period4[0] + "' as PERIOD, null as FORM_CD FROM dual\n" +
-                                    "minus select * from REPORT_OKUD_CODE;\n" +
+                                    "MERGE INTO REPORT_OKUD_CODE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_okud4[0] +"' as OKUD_CODE, \n" + 
+						"'"+ SC_data_miner.period4[0] +"'as PERIOD \n" + 
+						"null as FORM_CD \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
+                        "                                R.FORM_CD = S.FORM_CD\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.OKUD_CODE, R.PERIOD, R.FORM_CD)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.OKUD_CODE, S.PERIOD, S.FORM_CD);\n\n" +
                                     "\n" +
-                                    "INSERT INTO REPORT_OKUD_CODE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud5[0] +"' as OKUD_CODE, '"+ SC_data_miner.period5[0] + "' as PERIOD, null as FORM_CD FROM dual\n" +
-                                    "minus select * from REPORT_OKUD_CODE;\n" +
+                                    "MERGE INTO REPORT_OKUD_CODE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_okud5[0] +"' as OKUD_CODE, \n" + 
+						"'"+ SC_data_miner.period5[0] +"'as PERIOD \n" + 
+						"null as FORM_CD \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
+                        "                                R.FORM_CD = S.FORM_CD\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.OKUD_CODE, R.PERIOD, R.FORM_CD)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.OKUD_CODE, S.PERIOD, S.FORM_CD);\n\n" +
                                     "\n" +
-                                    "INSERT INTO REPORT_OKUD_CODE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud6[0] +"' as OKUD_CODE, '"+ SC_data_miner.period6[0] + "' as PERIOD, null as FORM_CD FROM dual\n" +
-                                    "minus select * from REPORT_OKUD_CODE;\n" +
+                                    "MERGE INTO REPORT_OKUD_CODE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_okud6[0] +"' as OKUD_CODE, \n" + 
+						"'"+ SC_data_miner.period6[0] +"'as PERIOD \n" + 
+						"null as FORM_CD \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
+                        "                                R.FORM_CD = S.FORM_CD\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.OKUD_CODE, R.PERIOD, R.FORM_CD)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.OKUD_CODE, S.PERIOD, S.FORM_CD);\n\n" +
                                     "\n" +
-                                    "INSERT INTO REPORT_OKUD_CODE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud7[0] +"' as OKUD_CODE, '"+ SC_data_miner.period7[0] + "' as PERIOD, null as FORM_CD FROM dual\n" +
-                                    "minus select * from REPORT_OKUD_CODE;\n" +
+                                    "MERGE INTO REPORT_OKUD_CODE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_okud7[0] +"' as OKUD_CODE, \n" + 
+						"'"+ SC_data_miner.period7[0] +"'as PERIOD \n" + 
+						"null as FORM_CD \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
+                        "                                R.FORM_CD = S.FORM_CD\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.OKUD_CODE, R.PERIOD, R.FORM_CD)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.OKUD_CODE, S.PERIOD, S.FORM_CD);\n\n" +
                                     "\n" +
-                                    "INSERT INTO REPORT_OKUD_CODE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud8[0] +"' as OKUD_CODE, '"+ SC_data_miner.period8[0] + "' as PERIOD, null as FORM_CD FROM dual\n" +
-                                    "minus select * from REPORT_OKUD_CODE;\n" +
+                                    "MERGE INTO REPORT_OKUD_CODE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_okud8[0] +"' as OKUD_CODE, \n" + 
+						"'"+ SC_data_miner.period8[0] +"'as PERIOD \n" + 
+						"null as FORM_CD \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
+                        "                                R.FORM_CD = S.FORM_CD\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.OKUD_CODE, R.PERIOD, R.FORM_CD)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.OKUD_CODE, S.PERIOD, S.FORM_CD);\n\n" +
                                     "\n";
                             break;
                     }
@@ -2669,9 +4857,15 @@ public class ScriptEXP {
                         SC_data_miner.Form_formal_code[0] == null  || Objects.equals(SC_data_miner.Form_formal_code[0], "") || Objects.equals(SC_data_miner.Form_formal_code[0], " ")){
                     report_form_src_script[0] = "--Warning: Не указаны данные для таблицы REPORT_FORM_SRC\n\n";
                 } else {
-                    report_form_src_script[0] = "INSERT INTO  REPORT_FORM_SRC \n" +
-                            "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_cd[0] +"' as REG_FORM_CODE FROM dual\n" +
-                            "minus select * from REPORT_FORM_SRC;\n" +
+                    report_form_src_script[0] = "MERGE INTO REPORT_FORM_SRC R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Reg_form_code[0] +"' as REG_FORM_CODE, \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REG_FORM_CODE = S.REG_FORM_CODE\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REG_FORM_CODE)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.REG_FORM_CODE);" +
                             "\n" ;
                 }
                 if(SC_data_miner.rep_subj_type[0] == null || Objects.equals(SC_data_miner.rep_subj_type[0], "") || Objects.equals(SC_data_miner.rep_subj_type[0], " ")){
@@ -2680,163 +4874,343 @@ public class ScriptEXP {
                     int c = OK_Action.getSubj_count(0);
                     switch(c){
                         case 1:
-                            report_rep_subj_type_script[0] = "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE FROM dual\n" +
-                                    "minus select * from REPORT_REP_SUBJ_TYPE;\n" +
+                            report_rep_subj_type_script[0] = "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE, \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.REP_SUBJ_TYPE);" +
                                     "\n";
                             break;
                         case 2:
-                            report_rep_subj_type_script[0] = "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE FROM dual\n" +
-                                    "minus select * from REPORT_REP_SUBJ_TYPE;\n" +
+                            report_rep_subj_type_script[0] = "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE, \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.REP_SUBJ_TYPE);" +
                                     "\n" +
-                                    "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type2[0] +"' as REP_SUBJ_TYPE FROM dual\n" +
-                                    "minus select * from REPORT_REP_SUBJ_TYPE;\n" +
+                                    "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.rep_subj_type2[0] +"' as REP_SUBJ_TYPE, \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.REP_SUBJ_TYPE);" +
                                     "\n" ;
                             break;
                         case 3:
-                            report_rep_subj_type_script[0] = "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE FROM dual\n" +
-                                    "minus select * from REPORT_REP_SUBJ_TYPE;\n" +
+                            report_rep_subj_type_script[0] = "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE, \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.REP_SUBJ_TYPE);" +
                                     "\n" +
-                                    "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type2[0] +"' as REP_SUBJ_TYPE FROM dual\n" +
-                                    "minus select * from REPORT_REP_SUBJ_TYPE;\n" +
+                                    "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.rep_subj_type2[0] +"' as REP_SUBJ_TYPE, \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.REP_SUBJ_TYPE);" +
                                     "\n" +
-                                    "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type3[0] +"' as REP_SUBJ_TYPE FROM dual\n" +
-                                    "minus select * from REPORT_REP_SUBJ_TYPE;\n" +
+                                    "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.rep_subj_type3[0] +"' as REP_SUBJ_TYPE, \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.REP_SUBJ_TYPE);" +
                                     "\n" ;
                             break;
                         case 4:
-                            report_rep_subj_type_script[0] = "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE FROM dual\n" +
-                                    "minus select * from REPORT_REP_SUBJ_TYPE;\n" +
+                            report_rep_subj_type_script[0] = "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE, \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.REP_SUBJ_TYPE);" +
                                     "\n" +
-                                    "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type2[0] +"' as REP_SUBJ_TYPE FROM dual\n" +
-                                    "minus select * from REPORT_REP_SUBJ_TYPE;\n" +
+                                    "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.rep_subj_type2[0] +"' as REP_SUBJ_TYPE, \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.REP_SUBJ_TYPE);" +
                                     "\n" +
-                                    "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type3[0] +"' as REP_SUBJ_TYPE FROM dual\n" +
-                                    "minus select * from REPORT_REP_SUBJ_TYPE;\n" +
+                                    "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.rep_subj_type3[0] +"' as REP_SUBJ_TYPE, \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.REP_SUBJ_TYPE);" +
                                     "\n" +
-                                    "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type4[0] +"' as REP_SUBJ_TYPE FROM dual\n" +
-                                    "minus select * from REPORT_REP_SUBJ_TYPE;\n" +
+                                    "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.rep_subj_type4[0] +"' as REP_SUBJ_TYPE, \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.REP_SUBJ_TYPE);" +
                                     "\n" ;
                             break;
                         case 5:
-                            report_rep_subj_type_script[0] = "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE FROM dual\n" +
-                                    "minus select * from REPORT_REP_SUBJ_TYPE;\n" +
+                            report_rep_subj_type_script[0] = "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE, \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.REP_SUBJ_TYPE);" +
                                     "\n" +
-                                    "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type2[0] +"' as REP_SUBJ_TYPE FROM dual\n" +
-                                    "minus select * from REPORT_REP_SUBJ_TYPE;\n" +
+                                    "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.rep_subj_type2[0] +"' as REP_SUBJ_TYPE, \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.REP_SUBJ_TYPE);" +
                                     "\n" +
-                                    "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type3[0] +"' as REP_SUBJ_TYPE FROM dual\n" +
-                                    "minus select * from REPORT_REP_SUBJ_TYPE;\n" +
+                                    "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.rep_subj_type3[0] +"' as REP_SUBJ_TYPE, \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.REP_SUBJ_TYPE);" +
                                     "\n" +
-                                    "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type4[0] +"' as REP_SUBJ_TYPE FROM dual\n" +
-                                    "minus select * from REPORT_REP_SUBJ_TYPE;\n" +
+                                    "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.rep_subj_type4[0] +"' as REP_SUBJ_TYPE, \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.REP_SUBJ_TYPE);" +
                                     "\n" +
-                                    "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type5[0] +"' as REP_SUBJ_TYPE FROM dual\n" +
-                                    "minus select * from REPORT_REP_SUBJ_TYPE;\n" +
+                                    "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.rep_subj_type5[0] +"' as REP_SUBJ_TYPE, \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.REP_SUBJ_TYPE);" +
                                     "\n" ;
                             break;
                         case 6:
-                            report_rep_subj_type_script[0] = "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE FROM dual\n" +
-                                    "minus select * from REPORT_REP_SUBJ_TYPE;\n" +
+                            report_rep_subj_type_script[0] = "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE, \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.REP_SUBJ_TYPE);" +
                                     "\n" +
-                                    "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type2[0] +"' as REP_SUBJ_TYPE FROM dual\n" +
-                                    "minus select * from REPORT_REP_SUBJ_TYPE;\n" +
+                                    "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.rep_subj_type2[0] +"' as REP_SUBJ_TYPE, \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.REP_SUBJ_TYPE);" +
                                     "\n" +
-                                    "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type3[0] +"' as REP_SUBJ_TYPE FROM dual\n" +
-                                    "minus select * from REPORT_REP_SUBJ_TYPE;\n" +
+                                    "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.rep_subj_type3[0] +"' as REP_SUBJ_TYPE, \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.REP_SUBJ_TYPE);" +
                                     "\n" +
-                                    "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type4[0] +"' as REP_SUBJ_TYPE FROM dual\n" +
-                                    "minus select * from REPORT_REP_SUBJ_TYPE;\n" +
+                                    "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.rep_subj_type4[0] +"' as REP_SUBJ_TYPE, \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.REP_SUBJ_TYPE);" +
                                     "\n" +
-                                    "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type5[0] +"' as REP_SUBJ_TYPE FROM dual\n" +
-                                    "minus select * from REPORT_REP_SUBJ_TYPE;\n" +
+                                    "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.rep_subj_type5[0] +"' as REP_SUBJ_TYPE, \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.REP_SUBJ_TYPE);" +
                                     "\n" +
-                                    "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type6[0] +"' as REP_SUBJ_TYPE FROM dual\n" +
-                                    "minus select * from REPORT_REP_SUBJ_TYPE;\n" +
+                                    "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.rep_subj_type6[0] +"' as REP_SUBJ_TYPE, \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.REP_SUBJ_TYPE);" +
                                     "\n" ;
                             break;
                         case 7:
-                            report_rep_subj_type_script[0] = "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE FROM dual\n" +
-                                    "minus select * from REPORT_REP_SUBJ_TYPE;\n" +
+                            report_rep_subj_type_script[0] = "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE, \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.REP_SUBJ_TYPE);" +
                                     "\n" +
-                                    "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type2[0] +"' as REP_SUBJ_TYPE FROM dual\n" +
-                                    "minus select * from REPORT_REP_SUBJ_TYPE;\n" +
+                                    "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.rep_subj_type2[0] +"' as REP_SUBJ_TYPE, \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.REP_SUBJ_TYPE);" +
                                     "\n" +
-                                    "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type3[0] +"' as REP_SUBJ_TYPE FROM dual\n" +
-                                    "minus select * from REPORT_REP_SUBJ_TYPE;\n" +
+                                    "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.rep_subj_type3[0] +"' as REP_SUBJ_TYPE, \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.REP_SUBJ_TYPE);" +
                                     "\n" +
-                                    "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type4[0] +"' as REP_SUBJ_TYPE FROM dual\n" +
-                                    "minus select * from REPORT_REP_SUBJ_TYPE;\n" +
+                                    "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.rep_subj_type4[0] +"' as REP_SUBJ_TYPE, \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.REP_SUBJ_TYPE);" +
                                     "\n" +
-                                    "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type5[0] +"' as REP_SUBJ_TYPE FROM dual\n" +
-                                    "minus select * from REPORT_REP_SUBJ_TYPE;\n" +
+                                    "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.rep_subj_type5[0] +"' as REP_SUBJ_TYPE, \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.REP_SUBJ_TYPE);" +
                                     "\n" +
-                                    "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type6[0] +"' as REP_SUBJ_TYPE FROM dual\n" +
-                                    "minus select * from REPORT_REP_SUBJ_TYPE;\n" +
+                                    "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.rep_subj_type6[0] +"' as REP_SUBJ_TYPE, \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.REP_SUBJ_TYPE);" +
                                     "\n" +
-                                    "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type7[0] +"' as REP_SUBJ_TYPE FROM dual\n" +
-                                    "minus select * from REPORT_REP_SUBJ_TYPE;\n" +
+                                    "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.rep_subj_type7[0] +"' as REP_SUBJ_TYPE, \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.REP_SUBJ_TYPE);" +
                                     "\n";
                             break;
                         case 8:
-                            report_rep_subj_type_script[0] = "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE FROM dual\n" +
-                                    "minus select * from REPORT_REP_SUBJ_TYPE;\n" +
+                            report_rep_subj_type_script[0] = "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE, \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.REP_SUBJ_TYPE);" +
                                     "\n" +
-                                    "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type2[0] +"' as REP_SUBJ_TYPE FROM dual\n" +
-                                    "minus select * from REPORT_REP_SUBJ_TYPE;\n" +
+                                    "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.rep_subj_type2[0] +"' as REP_SUBJ_TYPE, \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.REP_SUBJ_TYPE);" +
                                     "\n" +
-                                    "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type3[0] +"' as REP_SUBJ_TYPE FROM dual\n" +
-                                    "minus select * from REPORT_REP_SUBJ_TYPE;\n" +
+                                    "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.rep_subj_type3[0] +"' as REP_SUBJ_TYPE, \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.REP_SUBJ_TYPE);" +
                                     "\n" +
-                                    "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type4[0] +"' as REP_SUBJ_TYPE FROM dual\n" +
-                                    "minus select * from REPORT_REP_SUBJ_TYPE;\n" +
+                                    "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.rep_subj_type4[0] +"' as REP_SUBJ_TYPE, \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.REP_SUBJ_TYPE);" +
                                     "\n" +
-                                    "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type5[0] +"' as REP_SUBJ_TYPE FROM dual\n" +
-                                    "minus select * from REPORT_REP_SUBJ_TYPE;\n" +
+                                    "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.rep_subj_type5[0] +"' as REP_SUBJ_TYPE, \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.REP_SUBJ_TYPE);" +
                                     "\n" +
-                                    "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type6[0] +"' as REP_SUBJ_TYPE FROM dual\n" +
-                                    "minus select * from REPORT_REP_SUBJ_TYPE;\n" +
+                                    "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.rep_subj_type6[0] +"' as REP_SUBJ_TYPE, \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.REP_SUBJ_TYPE);" +
                                     "\n" +
-                                    "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type7[0] +"' as REP_SUBJ_TYPE FROM dual\n" +
-                                    "minus select * from REPORT_REP_SUBJ_TYPE;\n" +
+                                    "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.rep_subj_type7[0] +"' as REP_SUBJ_TYPE, \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.REP_SUBJ_TYPE);" +
                                     "\n" +
-                                    "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
-                                    "SELECT '"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type8[0] +"' as REP_SUBJ_TYPE FROM dual\n" +
-                                    "minus select * from REPORT_REP_SUBJ_TYPE;\n" +
+                                    "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.rep_subj_type8[0] +"' as REP_SUBJ_TYPE, \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.REP_SUBJ_TYPE);" +
                                     "\n" ;
                             break;
 
@@ -2957,27 +5331,49 @@ public class ScriptEXP {
                     if((SC_data_miner.Form_cd_name[n]== null) || Objects.equals(SC_data_miner.Form_cd_name[n], "") || Objects.equals(SC_data_miner.Form_cd_name[n], " ")){
                         rep_form_script[n] = "--Warning: Не указаны данные для таблицы REP_FORM\n\n";
                     } else {
-                        rep_form_script[n] = "INSERT INTO REP_FORM \n" +
-                                "SELECT '"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, '"+ SC_data_miner.Form_cd_name[n] +"' as FORM_NAME, " + okud_rep_form + " FROM dual\n" +
-                                "minus select * from REP_FORM;" +
+                        rep_form_script[n] = "MERGE INTO REP_FORM R\n" +
+                        "   USING (SELECT \n" +
+                        "'" + SC_data_miner.Form_cd[n] + "' as FORM_CD, \n'" +
+                        "'" + SC_data_miner.Form_name[n] + "' as FORM_NAME, \n" +
+                        "'" + okud_rep_form + "' as FORM_OKUD\n" +
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.FORM_NAME = S.FORM_NAME,\n" +
+                        "                                R.FORM_OKUD = S.FORM_OKUD\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.FORM_NAME, R.FORM_OKUD)\n" +
+                        "   VALUES (S.FORM_CD, S.FORM_NAME, S.FORM_OKUD);" +
                                 "\n" +
                                 "\n" ;
                     }
                     if(Objects.equals(iod, "null as FLAG_IOD") || Objects.equals(pdn, "null as FLAG_PDN")){
                         rep_form_oki_script[n] = "--Warning: Не указаны данные для таблицы REP_FORM_OKI\n\n";
                     } else{
-                        rep_form_oki_script[n] = "INSERT INTO REP_FORM_OKI\n" +
-                                "SELECT '"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, " + iod + ",  " + pdn + " FROM  dual\n" +
-                                "minus select * from REP_FORM_OKI;" +
+                        rep_form_oki_script[n] = "MERGE INTO REP_FORM_OKI R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
+                        iod + ",  " +
+						pdn +
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.FLAG_IOD = S.FLAG_IOD,\n" +
+						"                                R.FLAG_PDN = S.FLAG_PDN,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.FLAG_IOD, R.FLAG_PDN)\n" +
+                        "   VALUES (S.FORM_CD, S.FLAG_IOD, S.FLAG_PDN);" +
                                 "\n" +
                                 "\n" ;
                     }
                     if(SC_data_miner.Form_cd_cog[n] == null || Objects.equals(SC_data_miner.Form_cd_cog[n], "") || Objects.equals(SC_data_miner.Form_cd_cog[n], " ")){
                         rep_form_cognos_script[n] = "--Warning: Не указаны данные для таблицы REP_FORM_COGNOS\n\n";
                     } else {
-                        rep_form_cognos_script[n] = "INSERT INTO REP_FORM_COGNOS\n" +
-                                "SELECT '"+ SC_data_miner.Form_cd_cog[n] +"' as FORM_CD, '"+ SC_data_miner.Form_cd[n] + "' as REP_FORM_CD FROM dual\n" +
-                                "minus select * from REP_FORM_COGNOS;" +
+                        rep_form_cognos_script[n] = "MERGE INTO REP_FORM_COGNOS R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd_cog[n] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[n] + "' as REP_FORM_CD \n" +
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
+                        "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                 "\n" +
                                 "\n";
                     }
@@ -2987,142 +5383,394 @@ public class ScriptEXP {
                         int c = OK_Action.getDep_count(0);
                         switch (c){
                             case 1:
-                                rep_form_dep_owner_script[n] = "INSERT INTO REP_FORM_DEP_OWNER\n" +
-                                        "SELECT '"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, '"+ SC_data_miner.Dep_name[n] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                        "minus select * from REP_FORM_DEP_OWNER;" +
+                                rep_form_dep_owner_script[n] = "MERGE INTO REP_FORM_DEP_OWNER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_name[n] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);" +
                                         "\n" +
                                         "\n";
                                 break;
                             case 2:
-                                rep_form_dep_owner_script[n] = "INSERT INTO REP_FORM_DEP_OWNER\n" +
-                                        "SELECT '"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, '"+ SC_data_miner.Dep_name[n] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                        "minus select * from REP_FORM_DEP_OWNER;\n\n" +
-                                        "INSERT INTO REP_FORM_DEP_OWNER\n" +
-                                        "SELECT '"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, '"+ SC_data_miner.Dep_name2[n] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                        "minus select * from REP_FORM_DEP_OWNER;" +
+                                rep_form_dep_owner_script[n] = "MERGE INTO REP_FORM_DEP_OWNER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_name[n] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
+                                        "MERGE INTO REP_FORM_DEP_OWNER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_name2[n] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                         "\n" +
                                         "\n";
                                 break;
                             case 3:
-                                rep_form_dep_owner_script[n] = "INSERT INTO REP_FORM_DEP_OWNER\n" +
-                                        "SELECT '"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, '"+ SC_data_miner.Dep_name[n] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                        "minus select * from REP_FORM_DEP_OWNER;\n\n" +
-                                        "INSERT INTO REP_FORM_DEP_OWNER\n" +
-                                        "SELECT '"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, '"+ SC_data_miner.Dep_name2[n] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                        "minus select * from REP_FORM_DEP_OWNER;\n\n" +
-                                        "INSERT INTO REP_FORM_DEP_OWNER\n" +
-                                        "SELECT '"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, '"+ SC_data_miner.Dep_name3[n] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                        "minus select * from REP_FORM_DEP_OWNER;" +
+                                rep_form_dep_owner_script[n] = "MERGE INTO REP_FORM_DEP_OWNER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_name[n] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
+                                        "MERGE INTO REP_FORM_DEP_OWNER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_name2[n] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
+                                        "MERGE INTO REP_FORM_DEP_OWNER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_name3[n] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                         "\n" +
                                         "\n";
                                 break;
                             case 4:
-                                rep_form_dep_owner_script[n] = "INSERT INTO REP_FORM_DEP_OWNER\n" +
-                                        "SELECT '"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, '"+ SC_data_miner.Dep_name[n] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                        "minus select * from REP_FORM_DEP_OWNER;\n\n" +
-                                        "INSERT INTO REP_FORM_DEP_OWNER\n" +
-                                        "SELECT '"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, '"+ SC_data_miner.Dep_name2[n] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                        "minus select * from REP_FORM_DEP_OWNER;\n\n" +
-                                        "INSERT INTO REP_FORM_DEP_OWNER\n" +
-                                        "SELECT '"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, '"+ SC_data_miner.Dep_name3[n] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                        "minus select * from REP_FORM_DEP_OWNER;\n\n" +
-                                        "INSERT INTO REP_FORM_DEP_OWNER\n" +
-                                        "SELECT '"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, '"+ SC_data_miner.Dep_name4[n] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                        "minus select * from REP_FORM_DEP_OWNER;" +
+                                rep_form_dep_owner_script[n] = "MERGE INTO REP_FORM_DEP_OWNER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_name[n] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
+                                        "MERGE INTO REP_FORM_DEP_OWNER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_name2[n] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
+                                        "MERGE INTO REP_FORM_DEP_OWNER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_name3[n] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
+                                        "MERGE INTO REP_FORM_DEP_OWNER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_name4[n] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                         "\n" +
                                         "\n";
                                 break;
                             case 5:
-                                rep_form_dep_owner_script[n] = "INSERT INTO REP_FORM_DEP_OWNER\n" +
-                                        "SELECT '"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, '"+ SC_data_miner.Dep_name[n] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                        "minus select * from REP_FORM_DEP_OWNER;\n\n" +
-                                        "INSERT INTO REP_FORM_DEP_OWNER\n" +
-                                        "SELECT '"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, '"+ SC_data_miner.Dep_name2[n] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                        "minus select * from REP_FORM_DEP_OWNER;\n\n" +
-                                        "INSERT INTO REP_FORM_DEP_OWNER\n" +
-                                        "SELECT '"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, '"+ SC_data_miner.Dep_name3[n] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                        "minus select * from REP_FORM_DEP_OWNER;\n\n" +
-                                        "INSERT INTO REP_FORM_DEP_OWNER\n" +
-                                        "SELECT '"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, '"+ SC_data_miner.Dep_name4[n] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                        "minus select * from REP_FORM_DEP_OWNER;\n\n" +
-                                        "INSERT INTO REP_FORM_DEP_OWNER\n" +
-                                        "SELECT '"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, '"+ SC_data_miner.Dep_name5[n] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                        "minus select * from REP_FORM_DEP_OWNER;" +
+                                rep_form_dep_owner_script[n] = "MERGE INTO REP_FORM_DEP_OWNER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_name[n] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
+                                        "MERGE INTO REP_FORM_DEP_OWNER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_name2[n] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
+                                        "MERGE INTO REP_FORM_DEP_OWNER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_name3[n] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
+                                        "MERGE INTO REP_FORM_DEP_OWNER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_name4[n] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
+                                        "MERGE INTO REP_FORM_DEP_OWNER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_name5[n] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                         "\n" +
                                         "\n";
                                 break;
                             case 6:
-                                rep_form_dep_owner_script[n] = "INSERT INTO REP_FORM_DEP_OWNER\n" +
-                                        "SELECT '"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, '"+ SC_data_miner.Dep_name[n] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                        "minus select * from REP_FORM_DEP_OWNER;\n\n" +
-                                        "INSERT INTO REP_FORM_DEP_OWNER\n" +
-                                        "SELECT '"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, '"+ SC_data_miner.Dep_name2[n] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                        "minus select * from REP_FORM_DEP_OWNER;\n\n" +
-                                        "INSERT INTO REP_FORM_DEP_OWNER\n" +
-                                        "SELECT '"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, '"+ SC_data_miner.Dep_name3[n] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                        "minus select * from REP_FORM_DEP_OWNER;\n\n" +
-                                        "INSERT INTO REP_FORM_DEP_OWNER\n" +
-                                        "SELECT '"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, '"+ SC_data_miner.Dep_name4[n] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                        "minus select * from REP_FORM_DEP_OWNER;\n\n" +
-                                        "INSERT INTO REP_FORM_DEP_OWNER\n" +
-                                        "SELECT '"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, '"+ SC_data_miner.Dep_name5[n] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                        "minus select * from REP_FORM_DEP_OWNER;\n\n" +
-                                        "INSERT INTO REP_FORM_DEP_OWNER\n" +
-                                        "SELECT '"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, '"+ SC_data_miner.Dep_name6[n] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                        "minus select * from REP_FORM_DEP_OWNER;" +
+                                rep_form_dep_owner_script[n] = "MERGE INTO REP_FORM_DEP_OWNER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_name[n] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
+                                        "MERGE INTO REP_FORM_DEP_OWNER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_name2[n] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
+                                        "MERGE INTO REP_FORM_DEP_OWNER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_name3[n] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
+                                        "MERGE INTO REP_FORM_DEP_OWNER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_name4[n] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
+                                        "MERGE INTO REP_FORM_DEP_OWNER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_name5[n] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
+                                        "MERGE INTO REP_FORM_DEP_OWNER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_name6[n] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                         "\n" +
                                         "\n";
                                 break;
                             case 7:
-                                rep_form_dep_owner_script[n] = "INSERT INTO REP_FORM_DEP_OWNER\n" +
-                                        "SELECT '"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, '"+ SC_data_miner.Dep_name[n] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                        "minus select * from REP_FORM_DEP_OWNER;\n\n" +
-                                        "INSERT INTO REP_FORM_DEP_OWNER\n" +
-                                        "SELECT '"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, '"+ SC_data_miner.Dep_name2[n] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                        "minus select * from REP_FORM_DEP_OWNER;\n\n" +
-                                        "INSERT INTO REP_FORM_DEP_OWNER\n" +
-                                        "SELECT '"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, '"+ SC_data_miner.Dep_name3[n] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                        "minus select * from REP_FORM_DEP_OWNER;\n\n" +
-                                        "INSERT INTO REP_FORM_DEP_OWNER\n" +
-                                        "SELECT '"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, '"+ SC_data_miner.Dep_name4[n] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                        "minus select * from REP_FORM_DEP_OWNER;\n\n" +
-                                        "INSERT INTO REP_FORM_DEP_OWNER\n" +
-                                        "SELECT '"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, '"+ SC_data_miner.Dep_name5[n] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                        "minus select * from REP_FORM_DEP_OWNER;\n\n" +
-                                        "INSERT INTO REP_FORM_DEP_OWNER\n" +
-                                        "SELECT '"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, '"+ SC_data_miner.Dep_name6[n] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                        "minus select * from REP_FORM_DEP_OWNER;\n\n" +
-                                        "INSERT INTO REP_FORM_DEP_OWNER\n" +
-                                        "SELECT '"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, '"+ SC_data_miner.Dep_name7[n] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                        "minus select * from REP_FORM_DEP_OWNER;" +
+                                rep_form_dep_owner_script[n] = "MERGE INTO REP_FORM_DEP_OWNER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_name[n] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
+                                        "MERGE INTO REP_FORM_DEP_OWNER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_name2[n] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
+                                        "MERGE INTO REP_FORM_DEP_OWNER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_name3[n] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
+                                        "MERGE INTO REP_FORM_DEP_OWNER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_name4[n] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
+                                        "MERGE INTO REP_FORM_DEP_OWNER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_name5[n] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
+                                        "MERGE INTO REP_FORM_DEP_OWNER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_name6[n] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
+                                        "MERGE INTO REP_FORM_DEP_OWNER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_name7[n] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                         "\n" +
                                         "\n";
                                 break;
                             case 8:
-                                rep_form_dep_owner_script[n] = "INSERT INTO REP_FORM_DEP_OWNER\n" +
-                                        "SELECT '"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, '"+ SC_data_miner.Dep_name[n] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                        "minus select * from REP_FORM_DEP_OWNER;\n\n" +
-                                        "INSERT INTO REP_FORM_DEP_OWNER\n" +
-                                        "SELECT '"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, '"+ SC_data_miner.Dep_name2[n] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                        "minus select * from REP_FORM_DEP_OWNER;\n\n" +
-                                        "INSERT INTO REP_FORM_DEP_OWNER\n" +
-                                        "SELECT '"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, '"+ SC_data_miner.Dep_name3[n] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                        "minus select * from REP_FORM_DEP_OWNER;\n\n" +
-                                        "INSERT INTO REP_FORM_DEP_OWNER\n" +
-                                        "SELECT '"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, '"+ SC_data_miner.Dep_name4[n] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                        "minus select * from REP_FORM_DEP_OWNER;\n\n" +
-                                        "INSERT INTO REP_FORM_DEP_OWNER\n" +
-                                        "SELECT '"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, '"+ SC_data_miner.Dep_name5[n] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                        "minus select * from REP_FORM_DEP_OWNER;\n\n" +
-                                        "INSERT INTO REP_FORM_DEP_OWNER\n" +
-                                        "SELECT '"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, '"+ SC_data_miner.Dep_name6[n] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                        "minus select * from REP_FORM_DEP_OWNER;\n\n" +
-                                        "INSERT INTO REP_FORM_DEP_OWNER\n" +
-                                        "SELECT '"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, '"+ SC_data_miner.Dep_name7[n] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                        "minus select * from REP_FORM_DEP_OWNER;\n\n" +
-                                        "INSERT INTO REP_FORM_DEP_OWNER\n" +
-                                        "SELECT '"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, '"+ SC_data_miner.Dep_name8[n] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                        "minus select * from REP_FORM_DEP_OWNER;\n\n" +
+                                rep_form_dep_owner_script[n] = "MERGE INTO REP_FORM_DEP_OWNER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_name[n] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
+                                        "MERGE INTO REP_FORM_DEP_OWNER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_name2[n] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
+                                        "MERGE INTO REP_FORM_DEP_OWNER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_name3[n] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
+                                        "MERGE INTO REP_FORM_DEP_OWNER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_name4[n] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
+                                        "MERGE INTO REP_FORM_DEP_OWNER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_name5[n] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
+                                        "MERGE INTO REP_FORM_DEP_OWNER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_name6[n] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
+                                        "MERGE INTO REP_FORM_DEP_OWNER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_name7[n] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
+                                        "MERGE INTO REP_FORM_DEP_OWNER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_name8[n] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                         "\n" +
                                         "\n";
                                 break;
@@ -3135,142 +5783,394 @@ public class ScriptEXP {
                         int c = OK_Action.getDep_u_count(0);
                         switch (c){
                             case 1:
-                                rep_form_dep_user_script[n] = "INSERT INTO REP_FORM_DEP_USER\n" +
-                                        "SELECT '"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, '"+ SC_data_miner.Dep_u_name[n] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                        "minus select * from REP_FORM_DEP_USER;" +
+                                rep_form_dep_user_script[n] = "MERGE INTO REP_FORM_DEP_USER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_u_name[n] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                         "\n" +
                                         "\n";
                                 break;
                             case 2:
-                                rep_form_dep_user_script[n] = "INSERT INTO REP_FORM_DEP_USER\n" +
-                                        "SELECT '"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, '"+ SC_data_miner.Dep_u_name[n] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                        "minus select * from REP_FORM_DEP_USER;\n\n" +
-                                        "INSERT INTO REP_FORM_DEP_USER\n" +
-                                        "SELECT '"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, '"+ SC_data_miner.Dep_u_name2[n] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                        "minus select * from REP_FORM_DEP_USER;" +
+                                rep_form_dep_user_script[n] = "MERGE INTO REP_FORM_DEP_USER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_u_name[n] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
+                                        "MERGE INTO REP_FORM_DEP_USER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_u_name2[n] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                         "\n" +
                                         "\n";
                                 break;
                             case 3:
-                                rep_form_dep_user_script[n] = "INSERT INTO REP_FORM_DEP_USER\n" +
-                                        "SELECT '"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, '"+ SC_data_miner.Dep_u_name[n] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                        "minus select * from REP_FORM_DEP_USER;\n\n" +
-                                        "INSERT INTO REP_FORM_DEP_USER\n" +
-                                        "SELECT '"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, '"+ SC_data_miner.Dep_u_name2[n] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                        "minus select * from REP_FORM_DEP_USER;\n\n" +
-                                        "INSERT INTO REP_FORM_DEP_USER\n" +
-                                        "SELECT '"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, '"+ SC_data_miner.Dep_u_name3[n] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                        "minus select * from REP_FORM_DEP_USER;" +
+                                rep_form_dep_user_script[n] = "MERGE INTO REP_FORM_DEP_USER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_u_name[n] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
+                                        "MERGE INTO REP_FORM_DEP_USER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_u_name2[n] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
+                                        "MERGE INTO REP_FORM_DEP_USER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_u_name3[n] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                         "\n" +
                                         "\n";
                                 break;
                             case 4:
-                                rep_form_dep_user_script[n] = "INSERT INTO REP_FORM_DEP_USER\n" +
-                                        "SELECT '"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, '"+ SC_data_miner.Dep_u_name[n] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                        "minus select * from REP_FORM_DEP_USER;\n\n" +
-                                        "INSERT INTO REP_FORM_DEP_USER\n" +
-                                        "SELECT '"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, '"+ SC_data_miner.Dep_u_name2[n] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                        "minus select * from REP_FORM_DEP_USER;\n\n" +
-                                        "INSERT INTO REP_FORM_DEP_USER\n" +
-                                        "SELECT '"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, '"+ SC_data_miner.Dep_u_name3[n] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                        "minus select * from REP_FORM_DEP_USER;\n\n" +
-                                        "INSERT INTO REP_FORM_DEP_USER\n" +
-                                        "SELECT '"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, '"+ SC_data_miner.Dep_u_name4[n] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                        "minus select * from REP_FORM_DEP_USER;" +
+                                rep_form_dep_user_script[n] = "MERGE INTO REP_FORM_DEP_USER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_u_name[n] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
+                                        "MERGE INTO REP_FORM_DEP_USER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_u_name2[n] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
+                                        "MERGE INTO REP_FORM_DEP_USER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_u_name3[n] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
+                                        "MERGE INTO REP_FORM_DEP_USER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_u_name4[n] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                         "\n" +
                                         "\n";
                                 break;
                             case 5:
-                                rep_form_dep_user_script[n] = "INSERT INTO REP_FORM_DEP_USER\n" +
-                                        "SELECT '"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, '"+ SC_data_miner.Dep_u_name[n] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                        "minus select * from REP_FORM_DEP_USER;\n\n" +
-                                        "INSERT INTO REP_FORM_DEP_USER\n" +
-                                        "SELECT '"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, '"+ SC_data_miner.Dep_u_name2[n] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                        "minus select * from REP_FORM_DEP_USER;\n\n" +
-                                        "INSERT INTO REP_FORM_DEP_USER\n" +
-                                        "SELECT '"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, '"+ SC_data_miner.Dep_u_name3[n] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                        "minus select * from REP_FORM_DEP_USER;\n\n" +
-                                        "INSERT INTO REP_FORM_DEP_USER\n" +
-                                        "SELECT '"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, '"+ SC_data_miner.Dep_u_name4[n] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                        "minus select * from REP_FORM_DEP_USER;\n\n" +
-                                        "INSERT INTO REP_FORM_DEP_USER\n" +
-                                        "SELECT '"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, '"+ SC_data_miner.Dep_u_name5[n] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                        "minus select * from REP_FORM_DEP_USER;" +
+                                rep_form_dep_user_script[n] = "MERGE INTO REP_FORM_DEP_USER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_u_name[n] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
+                                        "MERGE INTO REP_FORM_DEP_USER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_u_name2[n] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
+                                        "MERGE INTO REP_FORM_DEP_USER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_u_name3[n] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
+                                        "MERGE INTO REP_FORM_DEP_USER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_u_name4[n] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
+                                        "MERGE INTO REP_FORM_DEP_USER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_u_name5[n] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                         "\n" +
                                         "\n";
                                 break;
                             case 6:
-                                rep_form_dep_user_script[n] = "INSERT INTO REP_FORM_DEP_USER\n" +
-                                        "SELECT '"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, '"+ SC_data_miner.Dep_u_name[n] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                        "minus select * from REP_FORM_DEP_USER;\n\n" +
-                                        "INSERT INTO REP_FORM_DEP_USER\n" +
-                                        "SELECT '"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, '"+ SC_data_miner.Dep_u_name2[n] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                        "minus select * from REP_FORM_DEP_USER;\n\n" +
-                                        "INSERT INTO REP_FORM_DEP_USER\n" +
-                                        "SELECT '"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, '"+ SC_data_miner.Dep_u_name3[n] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                        "minus select * from REP_FORM_DEP_USER;\n\n" +
-                                        "INSERT INTO REP_FORM_DEP_USER\n" +
-                                        "SELECT '"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, '"+ SC_data_miner.Dep_u_name4[n] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                        "minus select * from REP_FORM_DEP_USER;\n\n" +
-                                        "INSERT INTO REP_FORM_DEP_USER\n" +
-                                        "SELECT '"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, '"+ SC_data_miner.Dep_u_name5[n] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                        "minus select * from REP_FORM_DEP_USER;\n\n" +
-                                        "INSERT INTO REP_FORM_DEP_USER\n" +
-                                        "SELECT '"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, '"+ SC_data_miner.Dep_u_name6[n] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                        "minus select * from REP_FORM_DEP_USER;" +
+                                rep_form_dep_user_script[n] = "MERGE INTO REP_FORM_DEP_USER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_u_name[n] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
+                                        "MERGE INTO REP_FORM_DEP_USER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_u_name2[n] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
+                                        "MERGE INTO REP_FORM_DEP_USER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_u_name3[n] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
+                                        "MERGE INTO REP_FORM_DEP_USER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_u_name4[n] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
+                                        "MERGE INTO REP_FORM_DEP_USER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_u_name5[n] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
+                                        "MERGE INTO REP_FORM_DEP_USER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_u_name6[n] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                         "\n" +
                                         "\n";
                                 break;
                             case 7:
-                                rep_form_dep_user_script[n] = "INSERT INTO REP_FORM_DEP_USER\n" +
-                                        "SELECT '"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, '"+ SC_data_miner.Dep_u_name[n] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                        "minus select * from REP_FORM_DEP_USER;\n\n" +
-                                        "INSERT INTO REP_FORM_DEP_USER\n" +
-                                        "SELECT '"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, '"+ SC_data_miner.Dep_u_name2[n] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                        "minus select * from REP_FORM_DEP_USER;\n\n" +
-                                        "INSERT INTO REP_FORM_DEP_USER\n" +
-                                        "SELECT '"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, '"+ SC_data_miner.Dep_u_name3[n] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                        "minus select * from REP_FORM_DEP_USER;\n\n" +
-                                        "INSERT INTO REP_FORM_DEP_USER\n" +
-                                        "SELECT '"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, '"+ SC_data_miner.Dep_u_name4[n] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                        "minus select * from REP_FORM_DEP_USER;\n\n" +
-                                        "INSERT INTO REP_FORM_DEP_USER\n" +
-                                        "SELECT '"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, '"+ SC_data_miner.Dep_u_name5[n] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                        "minus select * from REP_FORM_DEP_USER;\n\n" +
-                                        "INSERT INTO REP_FORM_DEP_USER\n" +
-                                        "SELECT '"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, '"+ SC_data_miner.Dep_u_name6[n] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                        "minus select * from REP_FORM_DEP_USER;\n\n" +
-                                        "INSERT INTO REP_FORM_DEP_USER\n" +
-                                        "SELECT '"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, '"+ SC_data_miner.Dep_u_name7[n] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                        "minus select * from REP_FORM_DEP_USER;" +
+                                rep_form_dep_user_script[n] = "MERGE INTO REP_FORM_DEP_USER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_u_name[n] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
+                                        "MERGE INTO REP_FORM_DEP_USER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_u_name2[n] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
+                                        "MERGE INTO REP_FORM_DEP_USER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_u_name3[n] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
+                                        "MERGE INTO REP_FORM_DEP_USER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_u_name4[n] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
+                                        "MERGE INTO REP_FORM_DEP_USER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_u_name5[n] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
+                                        "MERGE INTO REP_FORM_DEP_USER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_u_name6[n] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
+                                        "MERGE INTO REP_FORM_DEP_USER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_u_name7[n] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                         "\n" +
                                         "\n";
                                 break;
                             case 8:
-                                rep_form_dep_user_script[n] = "INSERT INTO REP_FORM_DEP_USER\n" +
-                                        "SELECT '"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, '"+ SC_data_miner.Dep_u_name[n] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                        "minus select * from REP_FORM_DEP_USER;\n\n" +
-                                        "INSERT INTO REP_FORM_DEP_USER\n" +
-                                        "SELECT '"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, '"+ SC_data_miner.Dep_u_name2[n] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                        "minus select * from REP_FORM_DEP_USER;\n\n" +
-                                        "INSERT INTO REP_FORM_DEP_USER\n" +
-                                        "SELECT '"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, '"+ SC_data_miner.Dep_u_name3[n] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                        "minus select * from REP_FORM_DEP_USER;\n\n" +
-                                        "INSERT INTO REP_FORM_DEP_USER\n" +
-                                        "SELECT '"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, '"+ SC_data_miner.Dep_u_name4[n] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                        "minus select * from REP_FORM_DEP_USER;\n\n" +
-                                        "INSERT INTO REP_FORM_DEP_USER\n" +
-                                        "SELECT '"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, '"+ SC_data_miner.Dep_u_name5[n] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                        "minus select * from REP_FORM_DEP_USER;\n\n" +
-                                        "INSERT INTO REP_FORM_DEP_USER\n" +
-                                        "SELECT '"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, '"+ SC_data_miner.Dep_u_name6[n] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                        "minus select * from REP_FORM_DEP_USER;\n\n" +
-                                        "INSERT INTO REP_FORM_DEP_USER\n" +
-                                        "SELECT '"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, '"+ SC_data_miner.Dep_u_name7[n] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                        "minus select * from REP_FORM_DEP_USER;\n\n" +
-                                        "INSERT INTO REP_FORM_DEP_USER\n" +
-                                        "SELECT '"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, '"+ SC_data_miner.Dep_u_name8[n] +"' as DEP_NAME, "+ reason + " FROM dual\n" +
-                                        "minus select * from REP_FORM_DEP_USER;\n\n" +
+                                rep_form_dep_user_script[n] = "MERGE INTO REP_FORM_DEP_USER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_u_name[n] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
+                                        "MERGE INTO REP_FORM_DEP_USER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_u_name2[n] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
+                                        "MERGE INTO REP_FORM_DEP_USER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_u_name3[n] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
+                                        "MERGE INTO REP_FORM_DEP_USER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_u_name4[n] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
+                                        "MERGE INTO REP_FORM_DEP_USER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_u_name5[n] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
+                                        "MERGE INTO REP_FORM_DEP_USER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_u_name6[n] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
+                                        "MERGE INTO REP_FORM_DEP_USER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_u_name7[n] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
+                                        "MERGE INTO REP_FORM_DEP_USER R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Dep_u_name8[n] +"' as DEP_NAME, \n" + 
+						reason + " \n" + 
+                        " FROM dual) S\n" +
+                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                         "\n" +
                                         "\n";
                                 break;
@@ -3318,163 +6218,487 @@ public class ScriptEXP {
                         //System.out.print("c =" + c + "\n");
                         switch(c){
                             case 1:
-                                report_okud_code_script[n] = "INSERT INTO REPORT_OKUD_CODE \n" +
-                                        "SELECT '"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud[n] +"' as OKUD_CODE, '"+ SC_data_miner.period[n] + "' as PERIOD, null as FORM_CD FROM dual\n" +
-                                        "minus select * from REPORT_OKUD_CODE;\n" +
+                                report_okud_code_script[n] = "MERGE INTO REPORT_OKUD_CODE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_okud[n] +"' as OKUD_CODE, \n" + 
+						"'"+ SC_data_miner.period[n] +"'as PERIOD \n" + 
+						"null as FORM_CD \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
+                        "                                R.FORM_CD = S.FORM_CD\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.OKUD_CODE, R.PERIOD, R.FORM_CD)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.OKUD_CODE, S.PERIOD, S.FORM_CD);\n\n" +
                                         "\n";
                                 break;
                             case 2:
-                                report_okud_code_script[n] = "INSERT INTO REPORT_OKUD_CODE \n" +
-                                        "SELECT '"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud[n] +"' as OKUD_CODE, '"+ SC_data_miner.period[n] + "' as PERIOD, null as FORM_CD FROM dual\n" +
-                                        "minus select * from REPORT_OKUD_CODE;\n" +
+                                report_okud_code_script[n] = "MERGE INTO REPORT_OKUD_CODE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_okud[n] +"' as OKUD_CODE, \n" + 
+						"'"+ SC_data_miner.period[n] +"'as PERIOD \n" + 
+						"null as FORM_CD \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
+                        "                                R.FORM_CD = S.FORM_CD\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.OKUD_CODE, R.PERIOD, R.FORM_CD)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.OKUD_CODE, S.PERIOD, S.FORM_CD);\n\n" +
                                         "\n" +
-                                        "INSERT INTO REPORT_OKUD_CODE \n" +
-                                        "SELECT '"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud2[n] +"' as OKUD_CODE, '"+ SC_data_miner.period2[n] + "' as PERIOD, null as FORM_CD FROM dual\n" +
-                                        "minus select * from REPORT_OKUD_CODE;\n" +
+                                        "MERGE INTO REPORT_OKUD_CODE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_okud2[n] +"' as OKUD_CODE, \n" + 
+						"'"+ SC_data_miner.period2[n] +"'as PERIOD \n" + 
+						"null as FORM_CD \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
+                        "                                R.FORM_CD = S.FORM_CD\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.OKUD_CODE, R.PERIOD, R.FORM_CD)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.OKUD_CODE, S.PERIOD, S.FORM_CD);\n\n" +
                                         "\n" ;
                                 break;
                             case 3:
-                                report_okud_code_script[n] = "INSERT INTO REPORT_OKUD_CODE \n" +
-                                        "SELECT '"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud[n] +"' as OKUD_CODE, '"+ SC_data_miner.period[n] + "' as PERIOD, null as FORM_CD FROM dual\n" +
-                                        "minus select * from REPORT_OKUD_CODE;\n" +
+                                report_okud_code_script[n] = "MERGE INTO REPORT_OKUD_CODE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_okud[n] +"' as OKUD_CODE, \n" + 
+						"'"+ SC_data_miner.period[n] +"'as PERIOD \n" + 
+						"null as FORM_CD \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
+                        "                                R.FORM_CD = S.FORM_CD\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.OKUD_CODE, R.PERIOD, R.FORM_CD)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.OKUD_CODE, S.PERIOD, S.FORM_CD);\n\n" +
                                         "\n" +
-                                        "INSERT INTO REPORT_OKUD_CODE \n" +
-                                        "SELECT '"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud2[n] +"' as OKUD_CODE, '"+ SC_data_miner.period2[n] + "' as PERIOD, null as FORM_CD FROM dual\n" +
-                                        "minus select * from REPORT_OKUD_CODE;\n" +
+                                        "MERGE INTO REPORT_OKUD_CODE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_okud2[n] +"' as OKUD_CODE, \n" + 
+						"'"+ SC_data_miner.period2[n] +"'as PERIOD \n" + 
+						"null as FORM_CD \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
+                        "                                R.FORM_CD = S.FORM_CD\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.OKUD_CODE, R.PERIOD, R.FORM_CD)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.OKUD_CODE, S.PERIOD, S.FORM_CD);\n\n" +
                                         "\n" +
-                                        "INSERT INTO REPORT_OKUD_CODE \n" +
-                                        "SELECT '"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud3[n] +"' as OKUD_CODE, '"+ SC_data_miner.period3[n] + "' as PERIOD, null as FORM_CD FROM dual\n" +
-                                        "minus select * from REPORT_OKUD_CODE;\n" +
+                                        "MERGE INTO REPORT_OKUD_CODE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_okud3[n] +"' as OKUD_CODE, \n" + 
+						"'"+ SC_data_miner.period3[n] +"'as PERIOD \n" + 
+						"null as FORM_CD \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
+                        "                                R.FORM_CD = S.FORM_CD\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.OKUD_CODE, R.PERIOD, R.FORM_CD)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.OKUD_CODE, S.PERIOD, S.FORM_CD);\n\n" +
                                         "\n";
                                 break;
                             case 4:
-                                report_okud_code_script[n] = "INSERT INTO REPORT_OKUD_CODE \n" +
-                                        "SELECT '"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud[n] +"' as OKUD_CODE, '"+ SC_data_miner.period[n] + "' as PERIOD, null as FORM_CD FROM dual\n" +
-                                        "minus select * from REPORT_OKUD_CODE;\n" +
+                                report_okud_code_script[n] = "MERGE INTO REPORT_OKUD_CODE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_okud[n] +"' as OKUD_CODE, \n" + 
+						"'"+ SC_data_miner.period[n] +"'as PERIOD \n" + 
+						"null as FORM_CD \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
+                        "                                R.FORM_CD = S.FORM_CD\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.OKUD_CODE, R.PERIOD, R.FORM_CD)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.OKUD_CODE, S.PERIOD, S.FORM_CD);\n\n" +
                                         "\n" +
-                                        "INSERT INTO REPORT_OKUD_CODE \n" +
-                                        "SELECT '"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud2[n] +"' as OKUD_CODE, '"+ SC_data_miner.period2[n] + "' as PERIOD, null as FORM_CD FROM dual\n" +
-                                        "minus select * from REPORT_OKUD_CODE;\n" +
+                                        "MERGE INTO REPORT_OKUD_CODE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_okud2[n] +"' as OKUD_CODE, \n" + 
+						"'"+ SC_data_miner.period2[n] +"'as PERIOD \n" + 
+						"null as FORM_CD \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
+                        "                                R.FORM_CD = S.FORM_CD\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.OKUD_CODE, R.PERIOD, R.FORM_CD)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.OKUD_CODE, S.PERIOD, S.FORM_CD);\n\n" +
                                         "\n" +
-                                        "INSERT INTO REPORT_OKUD_CODE \n" +
-                                        "SELECT '"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud3[n] +"' as OKUD_CODE, '"+ SC_data_miner.period3[n] + "' as PERIOD, null as FORM_CD FROM dual\n" +
-                                        "minus select * from REPORT_OKUD_CODE;\n" +
+                                        "MERGE INTO REPORT_OKUD_CODE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_okud3[n] +"' as OKUD_CODE, \n" + 
+						"'"+ SC_data_miner.period3[n] +"'as PERIOD \n" + 
+						"null as FORM_CD \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
+                        "                                R.FORM_CD = S.FORM_CD\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.OKUD_CODE, R.PERIOD, R.FORM_CD)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.OKUD_CODE, S.PERIOD, S.FORM_CD);\n\n" +
                                         "\n" +
-                                        "INSERT INTO REPORT_OKUD_CODE \n" +
-                                        "SELECT '"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud4[n] +"' as OKUD_CODE, '"+ SC_data_miner.period4[n] + "' as PERIOD, null as FORM_CD FROM dual\n" +
-                                        "minus select * from REPORT_OKUD_CODE;\n" +
+                                        "MERGE INTO REPORT_OKUD_CODE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_okud4[n] +"' as OKUD_CODE, \n" + 
+						"'"+ SC_data_miner.period4[n] +"'as PERIOD \n" + 
+						"null as FORM_CD \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
+                        "                                R.FORM_CD = S.FORM_CD\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.OKUD_CODE, R.PERIOD, R.FORM_CD)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.OKUD_CODE, S.PERIOD, S.FORM_CD);\n\n" +
                                         "\n";
                                 break;
                             case 5:
-                                report_okud_code_script[n] = "INSERT INTO REPORT_OKUD_CODE \n" +
-                                        "SELECT '"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud[n] +"' as OKUD_CODE, '"+ SC_data_miner.period[n] + "' as PERIOD, null as FORM_CD FROM dual\n" +
-                                        "minus select * from REPORT_OKUD_CODE;\n" +
+                                report_okud_code_script[n] = "MERGE INTO REPORT_OKUD_CODE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_okud[n] +"' as OKUD_CODE, \n" + 
+						"'"+ SC_data_miner.period[n] +"'as PERIOD \n" + 
+						"null as FORM_CD \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
+                        "                                R.FORM_CD = S.FORM_CD\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.OKUD_CODE, R.PERIOD, R.FORM_CD)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.OKUD_CODE, S.PERIOD, S.FORM_CD);\n\n" +
                                         "\n" +
-                                        "INSERT INTO REPORT_OKUD_CODE \n" +
-                                        "SELECT '"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud2[n] +"' as OKUD_CODE, '"+ SC_data_miner.period2[n] + "' as PERIOD, null as FORM_CD FROM dual\n" +
-                                        "minus select * from REPORT_OKUD_CODE;\n" +
+                                        "MERGE INTO REPORT_OKUD_CODE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_okud2[n] +"' as OKUD_CODE, \n" + 
+						"'"+ SC_data_miner.period2[n] +"'as PERIOD \n" + 
+						"null as FORM_CD \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
+                        "                                R.FORM_CD = S.FORM_CD\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.OKUD_CODE, R.PERIOD, R.FORM_CD)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.OKUD_CODE, S.PERIOD, S.FORM_CD);\n\n" +
                                         "\n" +
-                                        "INSERT INTO REPORT_OKUD_CODE \n" +
-                                        "SELECT '"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud3[n] +"' as OKUD_CODE, '"+ SC_data_miner.period3[n] + "' as PERIOD, null as FORM_CD FROM dual\n" +
-                                        "minus select * from REPORT_OKUD_CODE;\n" +
+                                        "MERGE INTO REPORT_OKUD_CODE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_okud3[n] +"' as OKUD_CODE, \n" + 
+						"'"+ SC_data_miner.period3[n] +"'as PERIOD \n" + 
+						"null as FORM_CD \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
+                        "                                R.FORM_CD = S.FORM_CD\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.OKUD_CODE, R.PERIOD, R.FORM_CD)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.OKUD_CODE, S.PERIOD, S.FORM_CD);\n\n" +
                                         "\n" +
-                                        "INSERT INTO REPORT_OKUD_CODE \n" +
-                                        "SELECT '"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud4[n] +"' as OKUD_CODE, '"+ SC_data_miner.period4[n] + "' as PERIOD, null as FORM_CD FROM dual\n" +
-                                        "minus select * from REPORT_OKUD_CODE;\n" +
+                                        "MERGE INTO REPORT_OKUD_CODE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_okud4[n] +"' as OKUD_CODE, \n" + 
+						"'"+ SC_data_miner.period4[n] +"'as PERIOD \n" + 
+						"null as FORM_CD \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
+                        "                                R.FORM_CD = S.FORM_CD\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.OKUD_CODE, R.PERIOD, R.FORM_CD)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.OKUD_CODE, S.PERIOD, S.FORM_CD);\n\n" +
                                         "\n" +
-                                        "INSERT INTO REPORT_OKUD_CODE \n" +
-                                        "SELECT '"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud5[n] +"' as OKUD_CODE, '"+ SC_data_miner.period5[n] + "' as PERIOD, null as FORM_CD FROM dual\n" +
-                                        "minus select * from REPORT_OKUD_CODE;\n" +
+                                        "MERGE INTO REPORT_OKUD_CODE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_okud5[n] +"' as OKUD_CODE, \n" + 
+						"'"+ SC_data_miner.period5[n] +"'as PERIOD \n" + 
+						"null as FORM_CD \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
+                        "                                R.FORM_CD = S.FORM_CD\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.OKUD_CODE, R.PERIOD, R.FORM_CD)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.OKUD_CODE, S.PERIOD, S.FORM_CD);\n\n" +
                                         "\n";
                                 break;
                             case 6:
-                                report_okud_code_script[n] = "INSERT INTO REPORT_OKUD_CODE \n" +
-                                        "SELECT '"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud[n] +"' as OKUD_CODE, '"+ SC_data_miner.period[n] + "' as PERIOD, null as FORM_CD FROM dual\n" +
-                                        "minus select * from REPORT_OKUD_CODE;\n" +
+                                report_okud_code_script[n] = "MERGE INTO REPORT_OKUD_CODE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_okud[n] +"' as OKUD_CODE, \n" + 
+						"'"+ SC_data_miner.period[n] +"'as PERIOD \n" + 
+						"null as FORM_CD \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
+                        "                                R.FORM_CD = S.FORM_CD\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.OKUD_CODE, R.PERIOD, R.FORM_CD)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.OKUD_CODE, S.PERIOD, S.FORM_CD);\n\n" +
                                         "\n" +
-                                        "INSERT INTO REPORT_OKUD_CODE \n" +
-                                        "SELECT '"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud2[n] +"' as OKUD_CODE, '"+ SC_data_miner.period2[n] + "' as PERIOD, null as FORM_CD FROM dual\n" +
-                                        "minus select * from REPORT_OKUD_CODE;\n" +
+                                        "MERGE INTO REPORT_OKUD_CODE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_okud2[n] +"' as OKUD_CODE, \n" + 
+						"'"+ SC_data_miner.period2[n] +"'as PERIOD \n" + 
+						"null as FORM_CD \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
+                        "                                R.FORM_CD = S.FORM_CD\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.OKUD_CODE, R.PERIOD, R.FORM_CD)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.OKUD_CODE, S.PERIOD, S.FORM_CD);\n\n" +
                                         "\n" +
-                                        "INSERT INTO REPORT_OKUD_CODE \n" +
-                                        "SELECT '"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud3[n] +"' as OKUD_CODE, '"+ SC_data_miner.period3[n] + "' as PERIOD, null as FORM_CD FROM dual\n" +
-                                        "minus select * from REPORT_OKUD_CODE;\n" +
+                                        "MERGE INTO REPORT_OKUD_CODE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_okud3[n] +"' as OKUD_CODE, \n" + 
+						"'"+ SC_data_miner.period3[n] +"'as PERIOD \n" + 
+						"null as FORM_CD \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
+                        "                                R.FORM_CD = S.FORM_CD\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.OKUD_CODE, R.PERIOD, R.FORM_CD)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.OKUD_CODE, S.PERIOD, S.FORM_CD);\n\n" +
                                         "\n" +
-                                        "INSERT INTO REPORT_OKUD_CODE \n" +
-                                        "SELECT '"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud4[n] +"' as OKUD_CODE, '"+ SC_data_miner.period4[n] + "' as PERIOD, null as FORM_CD FROM dual\n" +
-                                        "minus select * from REPORT_OKUD_CODE;\n" +
+                                        "MERGE INTO REPORT_OKUD_CODE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_okud4[n] +"' as OKUD_CODE, \n" + 
+						"'"+ SC_data_miner.period4[n] +"'as PERIOD \n" + 
+						"null as FORM_CD \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
+                        "                                R.FORM_CD = S.FORM_CD\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.OKUD_CODE, R.PERIOD, R.FORM_CD)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.OKUD_CODE, S.PERIOD, S.FORM_CD);\n\n" +
                                         "\n" +
-                                        "INSERT INTO REPORT_OKUD_CODE \n" +
-                                        "SELECT '"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud5[n] +"' as OKUD_CODE, '"+ SC_data_miner.period5[n] + "' as PERIOD, null as FORM_CD FROM dual\n" +
-                                        "minus select * from REPORT_OKUD_CODE;\n" +
+                                        "MERGE INTO REPORT_OKUD_CODE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_okud5[n] +"' as OKUD_CODE, \n" + 
+						"'"+ SC_data_miner.period5[n] +"'as PERIOD \n" + 
+						"null as FORM_CD \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
+                        "                                R.FORM_CD = S.FORM_CD\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.OKUD_CODE, R.PERIOD, R.FORM_CD)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.OKUD_CODE, S.PERIOD, S.FORM_CD);\n\n" +
                                         "\n" +
-                                        "INSERT INTO REPORT_OKUD_CODE \n" +
-                                        "SELECT '"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud6[n] +"' as OKUD_CODE, '"+ SC_data_miner.period6[n] + "' as PERIOD, null as FORM_CD FROM dual\n" +
-                                        "minus select * from REPORT_OKUD_CODE;\n" +
+                                        "MERGE INTO REPORT_OKUD_CODE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_okud6[n] +"' as OKUD_CODE, \n" + 
+						"'"+ SC_data_miner.period6[n] +"'as PERIOD \n" + 
+						"null as FORM_CD \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
+                        "                                R.FORM_CD = S.FORM_CD\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.OKUD_CODE, R.PERIOD, R.FORM_CD)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.OKUD_CODE, S.PERIOD, S.FORM_CD);\n\n" +
                                         "\n";
                                 break;
                             case 7:
-                                report_okud_code_script[n] = "INSERT INTO REPORT_OKUD_CODE \n" +
-                                        "SELECT '"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud[n] +"' as OKUD_CODE, '"+ SC_data_miner.period[n] + "' as PERIOD, null as FORM_CD FROM dual\n" +
-                                        "minus select * from REPORT_OKUD_CODE;\n" +
+                                report_okud_code_script[n] = "MERGE INTO REPORT_OKUD_CODE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_okud[n] +"' as OKUD_CODE, \n" + 
+						"'"+ SC_data_miner.period[n] +"'as PERIOD \n" + 
+						"null as FORM_CD \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
+                        "                                R.FORM_CD = S.FORM_CD\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.OKUD_CODE, R.PERIOD, R.FORM_CD)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.OKUD_CODE, S.PERIOD, S.FORM_CD);\n\n" +
                                         "\n" +
-                                        "INSERT INTO REPORT_OKUD_CODE \n" +
-                                        "SELECT '"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud2[n] +"' as OKUD_CODE, '"+ SC_data_miner.period2[n] + "' as PERIOD, null as FORM_CD FROM dual\n" +
-                                        "minus select * from REPORT_OKUD_CODE;\n" +
+                                        "MERGE INTO REPORT_OKUD_CODE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_okud2[n] +"' as OKUD_CODE, \n" + 
+						"'"+ SC_data_miner.period2[n] +"'as PERIOD \n" + 
+						"null as FORM_CD \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
+                        "                                R.FORM_CD = S.FORM_CD\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.OKUD_CODE, R.PERIOD, R.FORM_CD)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.OKUD_CODE, S.PERIOD, S.FORM_CD);\n\n" +
                                         "\n" +
-                                        "INSERT INTO REPORT_OKUD_CODE \n" +
-                                        "SELECT '"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud3[n] +"' as OKUD_CODE, '"+ SC_data_miner.period3[n] + "' as PERIOD, null as FORM_CD FROM dual\n" +
-                                        "minus select * from REPORT_OKUD_CODE;\n" +
+                                        "MERGE INTO REPORT_OKUD_CODE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_okud3[n] +"' as OKUD_CODE, \n" + 
+						"'"+ SC_data_miner.period3[n] +"'as PERIOD \n" + 
+						"null as FORM_CD \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
+                        "                                R.FORM_CD = S.FORM_CD\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.OKUD_CODE, R.PERIOD, R.FORM_CD)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.OKUD_CODE, S.PERIOD, S.FORM_CD);\n\n" +
                                         "\n" +
-                                        "INSERT INTO REPORT_OKUD_CODE \n" +
-                                        "SELECT '"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud4[n] +"' as OKUD_CODE, '"+ SC_data_miner.period4[n] + "' as PERIOD, null as FORM_CD FROM dual\n" +
-                                        "minus select * from REPORT_OKUD_CODE;\n" +
+                                        "MERGE INTO REPORT_OKUD_CODE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_okud4[n] +"' as OKUD_CODE, \n" + 
+						"'"+ SC_data_miner.period4[n] +"'as PERIOD \n" + 
+						"null as FORM_CD \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
+                        "                                R.FORM_CD = S.FORM_CD\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.OKUD_CODE, R.PERIOD, R.FORM_CD)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.OKUD_CODE, S.PERIOD, S.FORM_CD);\n\n" +
                                         "\n" +
-                                        "INSERT INTO REPORT_OKUD_CODE \n" +
-                                        "SELECT '"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud5[n] +"' as OKUD_CODE, '"+ SC_data_miner.period5[n] + "' as PERIOD, null as FORM_CD FROM dual\n" +
-                                        "minus select * from REPORT_OKUD_CODE;\n" +
+                                        "MERGE INTO REPORT_OKUD_CODE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_okud5[n] +"' as OKUD_CODE, \n" + 
+						"'"+ SC_data_miner.period5[n] +"'as PERIOD \n" + 
+						"null as FORM_CD \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
+                        "                                R.FORM_CD = S.FORM_CD\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.OKUD_CODE, R.PERIOD, R.FORM_CD)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.OKUD_CODE, S.PERIOD, S.FORM_CD);\n\n" +
                                         "\n" +
-                                        "INSERT INTO REPORT_OKUD_CODE \n" +
-                                        "SELECT '"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud6[n] +"' as OKUD_CODE, '"+ SC_data_miner.period6[n] + "' as PERIOD, null as FORM_CD FROM dual\n" +
-                                        "minus select * from REPORT_OKUD_CODE;\n" +
+                                        "MERGE INTO REPORT_OKUD_CODE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_okud6[n] +"' as OKUD_CODE, \n" + 
+						"'"+ SC_data_miner.period6[n] +"'as PERIOD \n" + 
+						"null as FORM_CD \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
+                        "                                R.FORM_CD = S.FORM_CD\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.OKUD_CODE, R.PERIOD, R.FORM_CD)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.OKUD_CODE, S.PERIOD, S.FORM_CD);\n\n" +
                                         "\n" +
-                                        "INSERT INTO REPORT_OKUD_CODE \n" +
-                                        "SELECT '"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud7[n] +"' as OKUD_CODE, '"+ SC_data_miner.period7[n] + "' as PERIOD, null as FORM_CD FROM dual\n" +
-                                        "minus select * from REPORT_OKUD_CODE;\n" +
+                                        "MERGE INTO REPORT_OKUD_CODE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_okud7[n] +"' as OKUD_CODE, \n" + 
+						"'"+ SC_data_miner.period7[n] +"'as PERIOD \n" + 
+						"null as FORM_CD \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
+                        "                                R.FORM_CD = S.FORM_CD\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.OKUD_CODE, R.PERIOD, R.FORM_CD)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.OKUD_CODE, S.PERIOD, S.FORM_CD);\n\n" +
                                         "\n";
                                 break;
                             case 8:
-                                report_okud_code_script[n] = "INSERT INTO REPORT_OKUD_CODE \n" +
-                                        "SELECT '"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud[n] +"' as OKUD_CODE, '"+ SC_data_miner.period[n] + "' as PERIOD, null as FORM_CD FROM dual\n" +
-                                        "minus select * from REPORT_OKUD_CODE;\n" +
+                                report_okud_code_script[n] = "MERGE INTO REPORT_OKUD_CODE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_okud[n] +"' as OKUD_CODE, \n" + 
+						"'"+ SC_data_miner.period[n] +"'as PERIOD \n" + 
+						"null as FORM_CD \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
+                        "                                R.FORM_CD = S.FORM_CD\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.OKUD_CODE, R.PERIOD, R.FORM_CD)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.OKUD_CODE, S.PERIOD, S.FORM_CD);\n\n" +
                                         "\n" +
-                                        "INSERT INTO REPORT_OKUD_CODE \n" +
-                                        "SELECT '"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud2[n] +"' as OKUD_CODE, '"+ SC_data_miner.period2[n] + "' as PERIOD, null as FORM_CD FROM dual\n" +
-                                        "minus select * from REPORT_OKUD_CODE;\n" +
+                                        "MERGE INTO REPORT_OKUD_CODE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_okud2[n] +"' as OKUD_CODE, \n" + 
+						"'"+ SC_data_miner.period2[n] +"'as PERIOD \n" + 
+						"null as FORM_CD \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
+                        "                                R.FORM_CD = S.FORM_CD\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.OKUD_CODE, R.PERIOD, R.FORM_CD)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.OKUD_CODE, S.PERIOD, S.FORM_CD);\n\n" +
                                         "\n" +
-                                        "INSERT INTO REPORT_OKUD_CODE \n" +
-                                        "SELECT '"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud3[n] +"' as OKUD_CODE, '"+ SC_data_miner.period3[n] + "' as PERIOD, null as FORM_CD FROM dual\n" +
-                                        "minus select * from REPORT_OKUD_CODE;\n" +
+                                        "MERGE INTO REPORT_OKUD_CODE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_okud3[n] +"' as OKUD_CODE, \n" + 
+						"'"+ SC_data_miner.period3[n] +"'as PERIOD \n" + 
+						"null as FORM_CD \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
+                        "                                R.FORM_CD = S.FORM_CD\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.OKUD_CODE, R.PERIOD, R.FORM_CD)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.OKUD_CODE, S.PERIOD, S.FORM_CD);\n\n" +
                                         "\n" +
-                                        "INSERT INTO REPORT_OKUD_CODE \n" +
-                                        "SELECT '"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud4[n] +"' as OKUD_CODE, '"+ SC_data_miner.period4[n] + "' as PERIOD, null as FORM_CD FROM dual\n" +
-                                        "minus select * from REPORT_OKUD_CODE;\n" +
+                                        "MERGE INTO REPORT_OKUD_CODE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_okud4[n] +"' as OKUD_CODE, \n" + 
+						"'"+ SC_data_miner.period4[n] +"'as PERIOD \n" + 
+						"null as FORM_CD \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
+                        "                                R.FORM_CD = S.FORM_CD\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.OKUD_CODE, R.PERIOD, R.FORM_CD)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.OKUD_CODE, S.PERIOD, S.FORM_CD);\n\n" +
                                         "\n" +
-                                        "INSERT INTO REPORT_OKUD_CODE \n" +
-                                        "SELECT '"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud5[n] +"' as OKUD_CODE, '"+ SC_data_miner.period5[n] + "' as PERIOD, null as FORM_CD FROM dual\n" +
-                                        "minus select * from REPORT_OKUD_CODE;\n" +
+                                        "MERGE INTO REPORT_OKUD_CODE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_okud5[n] +"' as OKUD_CODE, \n" + 
+						"'"+ SC_data_miner.period5[n] +"'as PERIOD \n" + 
+						"null as FORM_CD \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
+                        "                                R.FORM_CD = S.FORM_CD\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.OKUD_CODE, R.PERIOD, R.FORM_CD)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.OKUD_CODE, S.PERIOD, S.FORM_CD);\n\n" +
                                         "\n" +
-                                        "INSERT INTO REPORT_OKUD_CODE \n" +
-                                        "SELECT '"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud6[n] +"' as OKUD_CODE, '"+ SC_data_miner.period6[n] + "' as PERIOD, null as FORM_CD FROM dual\n" +
-                                        "minus select * from REPORT_OKUD_CODE;\n" +
+                                        "MERGE INTO REPORT_OKUD_CODE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_okud6[n] +"' as OKUD_CODE, \n" + 
+						"'"+ SC_data_miner.period6[n] +"'as PERIOD \n" + 
+						"null as FORM_CD \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
+                        "                                R.FORM_CD = S.FORM_CD\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.OKUD_CODE, R.PERIOD, R.FORM_CD)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.OKUD_CODE, S.PERIOD, S.FORM_CD);\n\n" +
                                         "\n" +
-                                        "INSERT INTO REPORT_OKUD_CODE \n" +
-                                        "SELECT '"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud7[n] +"' as OKUD_CODE, '"+ SC_data_miner.period7[n] + "' as PERIOD, null as FORM_CD FROM dual\n" +
-                                        "minus select * from REPORT_OKUD_CODE;\n" +
+                                        "MERGE INTO REPORT_OKUD_CODE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_okud7[n] +"' as OKUD_CODE, \n" + 
+						"'"+ SC_data_miner.period7[n] +"'as PERIOD \n" + 
+						"null as FORM_CD \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
+                        "                                R.FORM_CD = S.FORM_CD\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.OKUD_CODE, R.PERIOD, R.FORM_CD)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.OKUD_CODE, S.PERIOD, S.FORM_CD);\n\n" +
                                         "\n" +
-                                        "INSERT INTO REPORT_OKUD_CODE \n" +
-                                        "SELECT '"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_okud8[n] +"' as OKUD_CODE, '"+ SC_data_miner.period8[n] + "' as PERIOD, null as FORM_CD FROM dual\n" +
-                                        "minus select * from REPORT_OKUD_CODE;\n" +
+                                        "MERGE INTO REPORT_OKUD_CODE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_okud8[n] +"' as OKUD_CODE, \n" + 
+						"'"+ SC_data_miner.period8[n] +"'as PERIOD \n" + 
+						"null as FORM_CD \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
+                        "                                R.FORM_CD = S.FORM_CD\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.OKUD_CODE, R.PERIOD, R.FORM_CD)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.OKUD_CODE, S.PERIOD, S.FORM_CD);\n\n" +
                                         "\n";
                                 break;
                         }
@@ -3483,9 +6707,15 @@ public class ScriptEXP {
                             SC_data_miner.Form_formal_code[n] == null  || Objects.equals(SC_data_miner.Form_formal_code[n], "") || Objects.equals(SC_data_miner.Form_formal_code[n], " ")){
                         report_form_src_script[n] = "--Warning: Не указаны данные для таблицы REPORT_FORM_SRC\n\n";
                     } else {
-                        report_form_src_script[n] = "INSERT INTO  REPORT_FORM_SRC \n" +
-                                "SELECT '"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.Form_cd[n] +"' as REG_FORM_CODE FROM dual\n" +
-                                "minus select * from REPORT_FORM_SRC;\n" +
+                        report_form_src_script[n] = "MERGE INTO REPORT_FORM_SRC R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Reg_form_code[n] +"' as REG_FORM_CODE, \n" +
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REG_FORM_CODE = S.REG_FORM_CODE\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REG_FORM_CODE)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.REG_FORM_CODE);" +
                                 "\n" ;
                     }
                     if(SC_data_miner.rep_subj_type[n] == null || Objects.equals(SC_data_miner.rep_subj_type[n], "") || Objects.equals(SC_data_miner.rep_subj_type[n], " ")){
@@ -3496,163 +6726,343 @@ public class ScriptEXP {
                         //System.out.print("c =" + c + "\n");
                         switch(c){
                             case 1:
-                                report_rep_subj_type_script[n] = "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
-                                        "SELECT '"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type[n] +"' as REP_SUBJ_TYPE FROM dual\n" +
-                                        "minus select * from REPORT_REP_SUBJ_TYPE;" +
+                                report_rep_subj_type_script[n] = "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.rep_subj_type[n] +"' as REP_SUBJ_TYPE, \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.REP_SUBJ_TYPE);" +
                                         "\n\n";
                                 break;
                             case 2:
-                                report_rep_subj_type_script[n] = "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
-                                        "SELECT '"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type[n] +"' as REP_SUBJ_TYPE FROM dual\n" +
-                                        "minus select * from REPORT_REP_SUBJ_TYPE;" +
+                                report_rep_subj_type_script[n] = "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.rep_subj_type[n] +"' as REP_SUBJ_TYPE, \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.REP_SUBJ_TYPE);" +
                                         "\n\n" +
-                                        "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
-                                        "SELECT '"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type2[n] +"' as REP_SUBJ_TYPE FROM dual\n" +
-                                        "minus select * from REPORT_REP_SUBJ_TYPE;" +
+                                        "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.rep_subj_type2[n] +"' as REP_SUBJ_TYPE, \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.REP_SUBJ_TYPE);" +
                                         "\n\n" ;
                                 break;
                             case 3:
-                                report_rep_subj_type_script[n] = "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
-                                        "SELECT '"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type[n] +"' as REP_SUBJ_TYPE FROM dual\n" +
-                                        "minus select * from REPORT_REP_SUBJ_TYPE;" +
+                                report_rep_subj_type_script[n] = "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.rep_subj_type[n] +"' as REP_SUBJ_TYPE, \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.REP_SUBJ_TYPE);" +
                                         "\n\n" +
-                                        "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
-                                        "SELECT '"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type2[n] +"' as REP_SUBJ_TYPE FROM dual\n" +
-                                        "minus select * from REPORT_REP_SUBJ_TYPE;" +
+                                        "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.rep_subj_type2[n] +"' as REP_SUBJ_TYPE, \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.REP_SUBJ_TYPE);" +
                                         "\n\n" +
-                                        "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
-                                        "SELECT '"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type3[n] +"' as REP_SUBJ_TYPE FROM dual\n" +
-                                        "minus select * from REPORT_REP_SUBJ_TYPE;" +
+                                        "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.rep_subj_type3[n] +"' as REP_SUBJ_TYPE, \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.REP_SUBJ_TYPE);" +
                                         "\n\n" ;
                                 break;
                             case 4:
-                                report_rep_subj_type_script[n] = "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
-                                        "SELECT '"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type[n] +"' as REP_SUBJ_TYPE FROM dual\n" +
-                                        "minus select * from REPORT_REP_SUBJ_TYPE;" +
+                                report_rep_subj_type_script[n] = "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.rep_subj_type[n] +"' as REP_SUBJ_TYPE, \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.REP_SUBJ_TYPE);" +
                                         "\n\n" +
-                                        "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
-                                        "SELECT '"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type2[n] +"' as REP_SUBJ_TYPE FROM dual\n" +
-                                        "minus select * from REPORT_REP_SUBJ_TYPE;" +
+                                        "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.rep_subj_type2[n] +"' as REP_SUBJ_TYPE, \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.REP_SUBJ_TYPE);" +
                                         "\n\n" +
-                                        "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
-                                        "SELECT '"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type3[n] +"' as REP_SUBJ_TYPE FROM dual\n" +
-                                        "minus select * from REPORT_REP_SUBJ_TYPE;" +
+                                        "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.rep_subj_type3[n] +"' as REP_SUBJ_TYPE, \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.REP_SUBJ_TYPE);" +
                                         "\n\n" +
-                                        "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
-                                        "SELECT '"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type4[n] +"' as REP_SUBJ_TYPE FROM dual\n" +
-                                        "minus select * from REPORT_REP_SUBJ_TYPE;" +
+                                        "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.rep_subj_type4[n] +"' as REP_SUBJ_TYPE, \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.REP_SUBJ_TYPE);" +
                                         "\n\n" ;
                                 break;
                             case 5:
-                                report_rep_subj_type_script[n] = "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
-                                        "SELECT '"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type[n] +"' as REP_SUBJ_TYPE FROM dual\n" +
-                                        "minus select * from REPORT_REP_SUBJ_TYPE;" +
+                                report_rep_subj_type_script[n] = "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.rep_subj_type[n] +"' as REP_SUBJ_TYPE, \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.REP_SUBJ_TYPE);" +
                                         "\n\n" +
-                                        "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
-                                        "SELECT '"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type2[n] +"' as REP_SUBJ_TYPE FROM dual\n" +
-                                        "minus select * from REPORT_REP_SUBJ_TYPE;" +
+                                        "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.rep_subj_type2[n] +"' as REP_SUBJ_TYPE, \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.REP_SUBJ_TYPE);" +
                                         "\n\n" +
-                                        "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
-                                        "SELECT '"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type3[n] +"' as REP_SUBJ_TYPE FROM dual\n" +
-                                        "minus select * from REPORT_REP_SUBJ_TYPE;" +
+                                        "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.rep_subj_type3[n] +"' as REP_SUBJ_TYPE, \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.REP_SUBJ_TYPE);" +
                                         "\n\n" +
-                                        "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
-                                        "SELECT '"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type4[n] +"' as REP_SUBJ_TYPE FROM dual\n" +
-                                        "minus select * from REPORT_REP_SUBJ_TYPE;" +
+                                        "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.rep_subj_type4[n] +"' as REP_SUBJ_TYPE, \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.REP_SUBJ_TYPE);" +
                                         "\n\n" +
-                                        "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
-                                        "SELECT '"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type5[n] +"' as REP_SUBJ_TYPE FROM dual\n" +
-                                        "minus select * from REPORT_REP_SUBJ_TYPE;" +
+                                        "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.rep_subj_type5[n] +"' as REP_SUBJ_TYPE, \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.REP_SUBJ_TYPE);" +
                                         "\n\n" ;
                                 break;
                             case 6:
-                                report_rep_subj_type_script[n] = "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
-                                        "SELECT '"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type[n] +"' as REP_SUBJ_TYPE FROM dual\n" +
-                                        "minus select * from REPORT_REP_SUBJ_TYPE;" +
+                                report_rep_subj_type_script[n] = "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.rep_subj_type[n] +"' as REP_SUBJ_TYPE, \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.REP_SUBJ_TYPE);" +
                                         "\n\n" +
-                                        "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
-                                        "SELECT '"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type2[n] +"' as REP_SUBJ_TYPE FROM dual\n" +
-                                        "minus select * from REPORT_REP_SUBJ_TYPE;" +
+                                        "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.rep_subj_type2[n] +"' as REP_SUBJ_TYPE, \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.REP_SUBJ_TYPE);" +
                                         "\n\n" +
-                                        "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
-                                        "SELECT '"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type3[n] +"' as REP_SUBJ_TYPE FROM dual\n" +
-                                        "minus select * from REPORT_REP_SUBJ_TYPE;" +
+                                        "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.rep_subj_type3[n] +"' as REP_SUBJ_TYPE, \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.REP_SUBJ_TYPE);" +
                                         "\n\n" +
-                                        "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
-                                        "SELECT '"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type4[n] +"' as REP_SUBJ_TYPE FROM dual\n" +
-                                        "minus select * from REPORT_REP_SUBJ_TYPE;" +
+                                        "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.rep_subj_type4[n] +"' as REP_SUBJ_TYPE, \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.REP_SUBJ_TYPE);" +
                                         "\n\n" +
-                                        "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
-                                        "SELECT '"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type5[n] +"' as REP_SUBJ_TYPE FROM dual\n" +
-                                        "minus select * from REPORT_REP_SUBJ_TYPE;" +
+                                        "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.rep_subj_type5[n] +"' as REP_SUBJ_TYPE, \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.REP_SUBJ_TYPE);" +
                                         "\n\n" +
-                                        "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
-                                        "SELECT '"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type6[n] +"' as REP_SUBJ_TYPE FROM dual\n" +
-                                        "minus select * from REPORT_REP_SUBJ_TYPE;" +
+                                        "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.rep_subj_type6[n] +"' as REP_SUBJ_TYPE, \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.REP_SUBJ_TYPE);" +
                                         "\n\n" ;
                                 break;
                             case 7:
-                                report_rep_subj_type_script[n] = "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
-                                        "SELECT '"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type[n] +"' as REP_SUBJ_TYPE FROM dual\n" +
-                                        "minus select * from REPORT_REP_SUBJ_TYPE;" +
+                                report_rep_subj_type_script[n] = "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.rep_subj_type[n] +"' as REP_SUBJ_TYPE, \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.REP_SUBJ_TYPE);" +
                                         "\n\n" +
-                                        "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
-                                        "SELECT '"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type2[n] +"' as REP_SUBJ_TYPE FROM dual\n" +
-                                        "minus select * from REPORT_REP_SUBJ_TYPE;" +
+                                        "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.rep_subj_type2[n] +"' as REP_SUBJ_TYPE, \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.REP_SUBJ_TYPE);" +
                                         "\n\n" +
-                                        "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
-                                        "SELECT '"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type3[n] +"' as REP_SUBJ_TYPE FROM dual\n" +
-                                        "minus select * from REPORT_REP_SUBJ_TYPE;" +
+                                        "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.rep_subj_type3[n] +"' as REP_SUBJ_TYPE, \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.REP_SUBJ_TYPE);" +
                                         "\n\n" +
-                                        "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
-                                        "SELECT '"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type4[n] +"' as REP_SUBJ_TYPE FROM dual\n" +
-                                        "minus select * from REPORT_REP_SUBJ_TYPE;" +
+                                        "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.rep_subj_type4[n] +"' as REP_SUBJ_TYPE, \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.REP_SUBJ_TYPE);" +
                                         "\n\n" +
-                                        "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
-                                        "SELECT '"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type5[n] +"' as REP_SUBJ_TYPE FROM dual\n" +
-                                        "minus select * from REPORT_REP_SUBJ_TYPE;" +
+                                        "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.rep_subj_type5[n] +"' as REP_SUBJ_TYPE, \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.REP_SUBJ_TYPE);" +
                                         "\n\n" +
-                                        "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
-                                        "SELECT '"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type6[n] +"' as REP_SUBJ_TYPE FROM dual\n" +
-                                        "minus select * from REPORT_REP_SUBJ_TYPE;" +
+                                        "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.rep_subj_type6[n] +"' as REP_SUBJ_TYPE, \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.REP_SUBJ_TYPE);" +
                                         "\n\n" +
-                                        "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
-                                        "SELECT '"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type7[n] +"' as REP_SUBJ_TYPE FROM dual\n" +
-                                        "minus select * from REPORT_REP_SUBJ_TYPE;" +
+                                        "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.rep_subj_type7[n] +"' as REP_SUBJ_TYPE, \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.REP_SUBJ_TYPE);" +
                                         "\n\n";
                                 break;
                             case 8:
-                                report_rep_subj_type_script[n] = "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
-                                        "SELECT '"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type[n] +"' as REP_SUBJ_TYPE FROM dual\n" +
-                                        "minus select * from REPORT_REP_SUBJ_TYPE;" +
+                                report_rep_subj_type_script[n] = "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.rep_subj_type[n] +"' as REP_SUBJ_TYPE, \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.REP_SUBJ_TYPE);" +
                                         "\n\n" +
-                                        "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
-                                        "SELECT '"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type2[n] +"' as REP_SUBJ_TYPE FROM dual\n" +
-                                        "minus select * from REPORT_REP_SUBJ_TYPE;" +
+                                        "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.rep_subj_type2[n] +"' as REP_SUBJ_TYPE, \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.REP_SUBJ_TYPE);" +
                                         "\n\n" +
-                                        "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
-                                        "SELECT '"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type3[n] +"' as REP_SUBJ_TYPE FROM dual\n" +
-                                        "minus select * from REPORT_REP_SUBJ_TYPE;" +
+                                        "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.rep_subj_type3[n] +"' as REP_SUBJ_TYPE, \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.REP_SUBJ_TYPE);" +
                                         "\n\n" +
-                                        "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
-                                        "SELECT '"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type4[n] +"' as REP_SUBJ_TYPE FROM dual\n" +
-                                        "minus select * from REPORT_REP_SUBJ_TYPE;" +
+                                        "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.rep_subj_type4[n] +"' as REP_SUBJ_TYPE, \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.REP_SUBJ_TYPE);" +
                                         "\n\n" +
-                                        "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
-                                        "SELECT '"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type5[n] +"' as REP_SUBJ_TYPE FROM dual\n" +
-                                        "minus select * from REPORT_REP_SUBJ_TYPE;" +
+                                        "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.rep_subj_type5[n] +"' as REP_SUBJ_TYPE, \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.REP_SUBJ_TYPE);" +
                                         "\n\n" +
-                                        "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
-                                        "SELECT '"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type6[n] +"' as REP_SUBJ_TYPE FROM dual\n" +
-                                        "minus select * from REPORT_REP_SUBJ_TYPE;" +
+                                        "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.rep_subj_type6[n] +"' as REP_SUBJ_TYPE, \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.REP_SUBJ_TYPE);" +
                                         "\n\n" +
-                                        "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
-                                        "SELECT '"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type7[n] +"' as REP_SUBJ_TYPE FROM dual\n" +
-                                        "minus select * from REPORT_REP_SUBJ_TYPE;" +
+                                        "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.rep_subj_type7[n] +"' as REP_SUBJ_TYPE, \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.REP_SUBJ_TYPE);" +
                                         "\n\n" +
-                                        "INSERT INTO REPORT_REP_SUBJ_TYPE \n" +
-                                        "SELECT '"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, '"+ SC_data_miner.rep_subj_type8[n] +"' as REP_SUBJ_TYPE FROM dual\n" +
-                                        "minus select * from REPORT_REP_SUBJ_TYPE;" +
+                                        "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.rep_subj_type8[n] +"' as REP_SUBJ_TYPE, \n" + 
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.REP_SUBJ_TYPE);" +
                                         "\n\n" ;
                                 break;
 

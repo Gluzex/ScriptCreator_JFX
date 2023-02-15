@@ -26,9 +26,9 @@ public class CreateSc {
     public TextField[] txtf_NAME_set;
     public TextField[] txtf_TF_set;
     public TextField[] txtf_SR_set;
-    public static String[] UFName = new String[12];
-    public static String[] TR = new String[12];
-    public static String[] SR = new String[12];
+    public static String[] UFName = new String[16];
+    public static String[] TR = new String[16];
+    public static String[] SR = new String[16];
     public int p;
     public CreateSc(String path_u2, Stage mnf, AnchorPane root, TextField txtf_sys_id, TextField txtf_sec_r_n, TextField txtf_sec_r_p, TextField txtf_searchPath, TextField txtf_searchPath2, TextField txtf_name, TextField txtf_tf, TextField txtf_sr, Button resetBtn) {
         this.path_u2 = path_u2;

@@ -248,6 +248,7 @@ public class OK_Action {
     private ComboBox<Integer>[] Cmbx_dep_2 = new ComboBox[16];
     private ComboBox<Integer>[] Cmbx_okud = new ComboBox[16];
     private ComboBox<Integer>[] Cmbx_subj = new ComboBox[16];
+    private byte[] code_or_rep = new byte[16];
 
     public OK_Action(int count, AnchorPane root, Stage primaryStage, Button createBtn){
         this.mnf = primaryStage;
@@ -267,6 +268,7 @@ public class OK_Action {
         tooltip9.setShowDuration(Duration.seconds(8.0));
         tooltip10.setShowDuration(Duration.seconds(8.0));*/
         for(int t = 0; t<=15; t++){
+            code_or_rep[t] = 0;
             PanelSet[t] = new VBox(5.0);
             PanelSet[t].setPadding(new Insets(10.0));
             exjp0_set[t] = new HBox(15.0);
@@ -745,7 +747,7 @@ public class OK_Action {
             PanelSet[o].getChildren().addAll(radioBtn_set[o], exjp1_set[o], radioBtn_set_2[o], p_tbl_6[o], exjp13_set[o], exjp14_set[o], exjp15_set[o], exjp11_set[o], exjp22_set[o], exjp12_set[o],
                     p_tbl_7[o], p_cmbx_okud[o], exjp3_V_set[o],
                     p_tbl_9[o], p_cmbx_subj[o], exjp17_V_set[o],
-                    p_tbl_10[o], exjp0_set[o], exjp18_set[o], exjp19_set[o], exjp20_set[o], exjp21_set[o]);
+                    p_tbl_10[o], exjp0_set[o]/*, exjp18_set[o], exjp19_set[o], exjp20_set[o], exjp21_set[o]*/);
             PanelScroll[o] = new ScrollPane(PanelSet[o]);
             tabs[o].setText("Форма " + (o+1));
             tabs[o].setContent(PanelScroll[o]);
@@ -766,6 +768,7 @@ public class OK_Action {
     }
 
     public void Case_report(int t){
+        code_or_rep[t] = 0;
         Cmbx_okud[t].setValue(1);
         Cmbx_subj[t].setValue(1);
         PanelScroll[t] = new ScrollPane(PanelNull);
@@ -777,18 +780,19 @@ public class OK_Action {
         PanelSet[t].getChildren().removeAll(radioBtn_set[t], p_tbl_1[t], exjp1_set[t], exjp2_set[t], p_tbl_2[t], exjp4_set[t], p_tbl_3[t], exjp5_set[t], exjp6_set[t], p_tbl_4[t], p_cmbx_dep_1[t],
                 exjp7_V_set[t],
                 p_cmbx_dep_2[t], exjp9_V_set[t],
-                exjp10_set[t], p_tbl_10[t], exjp0_set[t], exjp18_set[t], exjp19_set[t], exjp20_set[t], exjp21_set[t]);
+                exjp10_set[t], p_tbl_10[t], exjp0_set[t]/*, exjp18_set[t], exjp19_set[t], exjp20_set[t], exjp21_set[t]*/);
         PanelScroll[t] = new ScrollPane(PanelSet[t]);
 
         PanelSet[t].getChildren().addAll(radioBtn_set[t], exjp1_set[t], radioBtn_set_2[t], p_tbl_6[t], exjp13_set[t], exjp14_set[t], exjp15_set[t], exjp11_set[t], exjp22_set[t], exjp12_set[t],
                 p_tbl_7[t], p_cmbx_okud[t], exjp3_V_set[t],
                 p_tbl_9[t], p_cmbx_subj[t], exjp17_V_set[t],
-                p_tbl_10[t], exjp0_set[t], exjp18_set[t], exjp19_set[t], exjp20_set[t], exjp21_set[t]);
+                p_tbl_10[t], exjp0_set[t]/*, exjp18_set[t], exjp19_set[t], exjp20_set[t], exjp21_set[t]*/);
         tabs[t].setContent(PanelScroll[t]);
         //sp.getTabs().add(new Tab("Форма " + (o+1), PanelSet[t]));
         
     }
     public void Case_code(int t){
+        code_or_rep[t] = 1;
         Cmbx_dep_1[t].setValue(1);
         Cmbx_dep_2[t].setValue(1);
         PanelScroll[t] = new ScrollPane(PanelNull);
@@ -800,10 +804,10 @@ public class OK_Action {
         PanelSet[t].getChildren().removeAll(radioBtn_set[t], exjp1_set[t], radioBtn_set_2[t], p_tbl_6[t], exjp13_set[t], exjp14_set[t], exjp15_set[t], exjp11_set[t], exjp22_set[t], exjp12_set[t],
                 p_tbl_7[t], p_cmbx_okud[t], exjp3_V_set[t],
                 p_tbl_9[t], p_cmbx_subj[t], exjp17_V_set[t],
-                p_tbl_10[t], exjp0_set[t], exjp18_set[t], exjp19_set[t], exjp20_set[t], exjp21_set[t]);
+                p_tbl_10[t], exjp0_set[t]/*, exjp18_set[t], exjp19_set[t], exjp20_set[t], exjp21_set[t]*/);
 
         PanelSet[t].getChildren().addAll(radioBtn_set[t], p_tbl_1[t], exjp1_set[t], exjp2_set[t], p_tbl_2[t], exjp4_set[t], p_tbl_3[t], exjp5_set[t], exjp6_set[t], p_tbl_4[t], p_cmbx_dep_1[t], exjp7_V_set[t],
-                p_cmbx_dep_2[t], exjp9_V_set[t], exjp10_set[t], p_tbl_10[t], exjp0_set[t], exjp18_set[t], exjp19_set[t], exjp20_set[t], exjp21_set[t]);
+                p_cmbx_dep_2[t], exjp9_V_set[t], exjp10_set[t], p_tbl_10[t], exjp0_set[t]/*, exjp18_set[t], exjp19_set[t], exjp20_set[t], exjp21_set[t]*/);
         PanelScroll[t] = new ScrollPane(PanelSet[t]);
         tabs[t].setContent(PanelScroll[t]);
     }
@@ -813,11 +817,29 @@ public class OK_Action {
             Security_role_name_txtf[t].setText("OAD_" + Form_cd_txtf[t].getText());
             Security_role_path_txtf[t].setText("CAMID(\":\")/namespaceFolder[@name=''FPS_IAPPR'']/namespaceFolder[@name=''PPK_OAD'']/namespaceFolder[@name=''REP_ROLES'']");
             Search_path_txtf[t].setText("/content/folder[@name='Приложение НИКА']/folder[@name='КО']/folder[@name='Регламентированные отчеты']/...");
+            p_parent_code_txtf[t].setText("OAD_FORMS");
+            p_parent_type_ref_txtf[t].setText("forms");
+            if(code_or_rep[t] == 1){
+                p_type_ref_txtf[t].setText("forms");
+                p_source_ref_txtf[t].setText("system");
+            } else{
+                p_type_ref_txtf[t].setText("cognos");
+                p_source_ref_txtf[t].setText("cognos");
+            }
         } else{
             System_id_txtf[t].setText("OAD");
             Security_role_name_txtf[t].setText("OAD_" + Form_cd_txtf[t].getText());
             Security_role_path_txtf[t].setText("CAMID(\":\")/namespaceFolder[@name=''FPS_IAPPR'']/namespaceFolder[@name=''PPK_OAD'']/namespaceFolder[@name=''REP_NR_ROLES'']");
             Search_path_txtf[t].setText("/content/folder[@name='Приложение НИКА']/folder[@name='КО']/folder[@name='Нерегламентированные отчеты']/...");
+            p_parent_code_txtf[t].setText("OAD_AO");
+            p_parent_type_ref_txtf[t].setText("ko_ao");
+            if(code_or_rep[t] == 1){
+                p_type_ref_txtf[t].setText("ko_ao");
+                p_source_ref_txtf[t].setText("system");
+            } else{
+                p_type_ref_txtf[t].setText("cognos");
+                p_source_ref_txtf[t].setText("cognos");
+            }
         }
 
     }
