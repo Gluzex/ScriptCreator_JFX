@@ -9,7 +9,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="266.0" prefWidth="692.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MainViewController">
+<AnchorPane prefHeight="266.0" prefWidth="692.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MainViewController">
     <children>
         <Label layoutX="14.0" layoutY="14.0" prefHeight="20.0" prefWidth="73.0" text="Имя формы:" />
         <TextField fx:id="txt_fld1" layoutX="87.0" layoutY="12.0" promptText="Например, 106" />
@@ -28,7 +28,7 @@
       <Button fx:id="ChckBtn1" disable="true" layoutX="25.0" layoutY="95.0" mnemonicParsing="false" onAction="#CheckClicked" text="Проверить файл" visible="false" />
       <Button fx:id="ScrBtn3" disable="true" layoutX="144.0" layoutY="95.0" mnemonicParsing="false" onAction="#CreateClicked" prefHeight="25.0" prefWidth="114.0" text="Создать скрипты" visible="false" />
       <Button fx:id="resetBtn" disable="true" layoutX="268.0" layoutY="95.0" mnemonicParsing="false" onAction="#ResetClicked" prefHeight="25.0" prefWidth="81.0" text="Сброс" visible="false" />
-      <ComboBox fx:id="countCmbx" disable="true" layoutX="428.0" layoutY="66.0" prefHeight="25.0" prefWidth="40.0" promptText="0" visible="false">
+      <ComboBox fx:id="countCmbx" disable="true" layoutX="428.0" layoutY="66.0" prefHeight="25.0" prefWidth="58.0" promptText="0" visible="false">
           <items>
               <FXCollections fx:factory="observableArrayList">
                   <Integer fx:value="1" />

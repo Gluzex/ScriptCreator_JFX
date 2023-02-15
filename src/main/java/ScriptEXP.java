@@ -12,8 +12,9 @@ public class ScriptEXP {
     String[] TR_def = new String[16];
     String[] SR_def = new String[16];
     int count = 0;
-    byte type = PreCreateScr.getType();
+    byte[] type = PreCreateScr.getType();
     public int[] vid = new int[16];
+    byte[] rep_or_code = OK_Action.getRep_or_code();
 
     public static boolean isFileExists(File file) {
         return file.exists() && !file.isDirectory();
@@ -108,7 +109,7 @@ public class ScriptEXP {
                 }
             }
         }
-        System.out.print("chk = " + chk + "\n");
+        //System.out.print("chk = " + chk + "\n");
         //Все листы есть и все заполнены
         if(chk == 1){
             if(count == 0){
@@ -183,8 +184,8 @@ public class ScriptEXP {
                         "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_name[0] +"' as DEP_NAME, \n" + 
-						"'"+ SC_data_miner.reason[0] +"'as REASON \n" + 
+                        "'"+ SC_data_miner.Dep_name[0] +"' as DEP_NAME, \n" +
+						"'"+ SC_data_miner.reason[0] +"'as REASON \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -195,13 +196,13 @@ public class ScriptEXP {
                         "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_u_name[0] +"' as DEP_NAME, \n" + 
-						"'"+ SC_data_miner.reason[0] +"'as REASON \n" + 
+                        "'"+ SC_data_miner.Dep_u_name[0] +"' as DEP_NAME, \n" +
+						"'"+ SC_data_miner.reason[0] +"'as REASON \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
-                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);" +	
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);" +
                         "\n" +
                         "\n" +
                         "MERGE INTO REG_REPORT_FORM R\n" +
@@ -231,9 +232,9 @@ public class ScriptEXP {
                         "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, \n" + 
-						"'"+ SC_data_miner.period[0] +"'as PERIOD \n" + 
-						"null as FORM_CD \n" + 
+                        "'"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, \n" +
+						"'"+ SC_data_miner.period[0] +"'as PERIOD \n" +
+						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
@@ -244,7 +245,7 @@ public class ScriptEXP {
                         "MERGE INTO REPORT_FORM_SRC R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.Reg_form_code[0] +"' as REG_FORM_CODE, \n" + 
+                        "'"+ SC_data_miner.Reg_form_code[0] +"' as REG_FORM_CODE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REG_FORM_CODE = S.REG_FORM_CODE\n" +
@@ -254,7 +255,7 @@ public class ScriptEXP {
                         "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE, \n" + 
+                        "'"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -273,7 +274,7 @@ public class ScriptEXP {
                         "   WHEN MATCHED THEN UPDATE SET R.FORM_NAME = S.FORM_NAME,\n" +
                         "                                R.FORM_OKUD = S.FORM_OKUD\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.FORM_NAME, R.FORM_OKUD)\n" +
-                        "   VALUES (S.FORM_CD, S.FORM_NAME, S.FORM_OKUD);" + 
+                        "   VALUES (S.FORM_CD, S.FORM_NAME, S.FORM_OKUD);" +
                         "\n" +
                         "\n" +
                         "MERGE INTO REP_FORM_COGNOS R\n" +
@@ -303,8 +304,8 @@ public class ScriptEXP {
                         "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_name[0] +"' as DEP_NAME, \n" + 
-						"'"+ SC_data_miner.reason[0] +"'as REASON \n" + 
+                        "'"+ SC_data_miner.Dep_name[0] +"' as DEP_NAME, \n" +
+						"'"+ SC_data_miner.reason[0] +"'as REASON \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -315,13 +316,13 @@ public class ScriptEXP {
                         "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_u_name[0] +"' as DEP_NAME, \n" + 
-						"'"+ SC_data_miner.reason[0] +"'as REASON \n" + 
+                        "'"+ SC_data_miner.Dep_u_name[0] +"' as DEP_NAME, \n" +
+						"'"+ SC_data_miner.reason[0] +"'as REASON \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
-                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);" +	
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);" +
                         "\n" +
                         "\n" +
                         "MERGE INTO REG_REPORT_FORM R\n" +
@@ -351,9 +352,9 @@ public class ScriptEXP {
                         "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, \n" + 
-						"'"+ SC_data_miner.period[0] +"'as PERIOD \n" + 
-						"null as FORM_CD \n" + 
+                        "'"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, \n" +
+						"'"+ SC_data_miner.period[0] +"'as PERIOD \n" +
+						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
@@ -364,7 +365,7 @@ public class ScriptEXP {
                         "MERGE INTO REPORT_FORM_SRC R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.Reg_form_code[0] +"' as REG_FORM_CODE, \n" + 
+                        "'"+ SC_data_miner.Reg_form_code[0] +"' as REG_FORM_CODE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REG_FORM_CODE = S.REG_FORM_CODE\n" +
@@ -374,7 +375,7 @@ public class ScriptEXP {
                         "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE, \n" + 
+                        "'"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -456,7 +457,7 @@ public class ScriptEXP {
                         "   WHEN MATCHED THEN UPDATE SET R.FORM_NAME = S.FORM_NAME,\n" +
                         "                                R.FORM_OKUD = S.FORM_OKUD\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.FORM_NAME, R.FORM_OKUD)\n" +
-                        "   VALUES (S.FORM_CD, S.FORM_NAME, S.FORM_OKUD);" + 
+                        "   VALUES (S.FORM_CD, S.FORM_NAME, S.FORM_OKUD);" +
                         "\n" +
                         "\n" +
                         "MERGE INTO REP_FORM_COGNOS R\n" +
@@ -486,8 +487,8 @@ public class ScriptEXP {
                         "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_name[0] +"' as DEP_NAME, \n" + 
-						"'"+ SC_data_miner.reason[0] +"'as REASON \n" + 
+                        "'"+ SC_data_miner.Dep_name[0] +"' as DEP_NAME, \n" +
+						"'"+ SC_data_miner.reason[0] +"'as REASON \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -498,13 +499,13 @@ public class ScriptEXP {
                         "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_u_name[0] +"' as DEP_NAME, \n" + 
-						"'"+ SC_data_miner.reason[0] +"'as REASON \n" + 
+                        "'"+ SC_data_miner.Dep_u_name[0] +"' as DEP_NAME, \n" +
+						"'"+ SC_data_miner.reason[0] +"'as REASON \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
-                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);" +	
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);" +
                         "\n" +
                         "\n" +
                         "--№\n" +
@@ -535,9 +536,9 @@ public class ScriptEXP {
                         "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, \n" + 
-						"'"+ SC_data_miner.period[0] +"'as PERIOD \n" + 
-						"null as FORM_CD \n" + 
+                        "'"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, \n" +
+						"'"+ SC_data_miner.period[0] +"'as PERIOD \n" +
+						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
@@ -549,7 +550,7 @@ public class ScriptEXP {
                         "MERGE INTO REPORT_FORM_SRC R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.Reg_form_code[0] +"' as REG_FORM_CODE, \n" + 
+                        "'"+ SC_data_miner.Reg_form_code[0] +"' as REG_FORM_CODE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REG_FORM_CODE = S.REG_FORM_CODE\n" +
@@ -559,7 +560,7 @@ public class ScriptEXP {
                         "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE, \n" + 
+                        "'"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -582,7 +583,7 @@ public class ScriptEXP {
                         "   WHEN MATCHED THEN UPDATE SET R.FORM_NAME = S.FORM_NAME,\n" +
                         "                                R.FORM_OKUD = S.FORM_OKUD\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.FORM_NAME, R.FORM_OKUD)\n" +
-                        "   VALUES (S.FORM_CD, S.FORM_NAME, S.FORM_OKUD);" + 
+                        "   VALUES (S.FORM_CD, S.FORM_NAME, S.FORM_OKUD);" +
                         "\n" +
                         "\n" +
                         "MERGE INTO REP_FORM_COGNOS R\n" +
@@ -612,8 +613,8 @@ public class ScriptEXP {
                         "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_name[0] +"' as DEP_NAME, \n" + 
-						"'"+ SC_data_miner.reason[0] +"'as REASON \n" + 
+                        "'"+ SC_data_miner.Dep_name[0] +"' as DEP_NAME, \n" +
+						"'"+ SC_data_miner.reason[0] +"'as REASON \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -624,13 +625,13 @@ public class ScriptEXP {
                         "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_u_name[0] +"' as DEP_NAME, \n" + 
-						"'"+ SC_data_miner.reason[0] +"'as REASON \n" + 
+                        "'"+ SC_data_miner.Dep_u_name[0] +"' as DEP_NAME, \n" +
+						"'"+ SC_data_miner.reason[0] +"'as REASON \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
-                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);" +	
+                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);" +
                         "\n" +
                         "\n" +
                         "--№\n" +
@@ -661,9 +662,9 @@ public class ScriptEXP {
                         "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, \n" + 
-						"'"+ SC_data_miner.period[0] +"'as PERIOD \n" + 
-						"null as FORM_CD \n" + 
+                        "'"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, \n" +
+						"'"+ SC_data_miner.period[0] +"'as PERIOD \n" +
+						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
@@ -676,7 +677,7 @@ public class ScriptEXP {
                         "MERGE INTO REPORT_FORM_SRC R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.Reg_form_code[0] +"' as REG_FORM_CODE, \n" + 
+                        "'"+ SC_data_miner.Reg_form_code[0] +"' as REG_FORM_CODE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REG_FORM_CODE = S.REG_FORM_CODE\n" +
@@ -686,7 +687,7 @@ public class ScriptEXP {
                         "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE, \n" + 
+                        "'"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -991,9 +992,9 @@ public class ScriptEXP {
                         "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, \n" + 
-						"'"+ SC_data_miner.period[0] +"'as PERIOD \n" + 
-						"null as FORM_CD \n" + 
+                        "'"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, \n" +
+						"'"+ SC_data_miner.period[0] +"'as PERIOD \n" +
+						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
@@ -1004,7 +1005,7 @@ public class ScriptEXP {
                         "MERGE INTO REPORT_FORM_SRC R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.Reg_form_code[0] +"' as REG_FORM_CODE, \n" + 
+                        "'"+ SC_data_miner.Reg_form_code[0] +"' as REG_FORM_CODE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REG_FORM_CODE = S.REG_FORM_CODE\n" +
@@ -1014,7 +1015,7 @@ public class ScriptEXP {
                         "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE, \n" + 
+                        "'"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -1051,9 +1052,9 @@ public class ScriptEXP {
                         "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, \n" + 
-						"'"+ SC_data_miner.period[0] +"'as PERIOD \n" + 
-						"null as FORM_CD \n" + 
+                        "'"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, \n" +
+						"'"+ SC_data_miner.period[0] +"'as PERIOD \n" +
+						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
@@ -1064,7 +1065,7 @@ public class ScriptEXP {
                         "MERGE INTO REPORT_FORM_SRC R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.Reg_form_code[0] +"' as REG_FORM_CODE, \n" + 
+                        "'"+ SC_data_miner.Reg_form_code[0] +"' as REG_FORM_CODE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REG_FORM_CODE = S.REG_FORM_CODE\n" +
@@ -1074,7 +1075,7 @@ public class ScriptEXP {
                         "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE, \n" + 
+                        "'"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -1157,9 +1158,9 @@ public class ScriptEXP {
                         "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, \n" + 
-						"'"+ SC_data_miner.period[0] +"'as PERIOD \n" + 
-						"null as FORM_CD \n" + 
+                        "'"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, \n" +
+						"'"+ SC_data_miner.period[0] +"'as PERIOD \n" +
+						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
@@ -1171,7 +1172,7 @@ public class ScriptEXP {
                         "MERGE INTO REPORT_FORM_SRC R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.Reg_form_code[0] +"' as REG_FORM_CODE, \n" + 
+                        "'"+ SC_data_miner.Reg_form_code[0] +"' as REG_FORM_CODE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REG_FORM_CODE = S.REG_FORM_CODE\n" +
@@ -1181,7 +1182,7 @@ public class ScriptEXP {
                         "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE, \n" + 
+                        "'"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -1218,9 +1219,9 @@ public class ScriptEXP {
                         "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, \n" + 
-						"'"+ SC_data_miner.period[0] +"'as PERIOD \n" + 
-						"null as FORM_CD \n" + 
+                        "'"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, \n" +
+						"'"+ SC_data_miner.period[0] +"'as PERIOD \n" +
+						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
@@ -1232,7 +1233,7 @@ public class ScriptEXP {
                         "MERGE INTO REPORT_FORM_SRC R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.Reg_form_code[0] +"' as REG_FORM_CODE, \n" + 
+                        "'"+ SC_data_miner.Reg_form_code[0] +"' as REG_FORM_CODE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REG_FORM_CODE = S.REG_FORM_CODE\n" +
@@ -1242,7 +1243,7 @@ public class ScriptEXP {
                         "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE, \n" + 
+                        "'"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -1490,7 +1491,7 @@ public class ScriptEXP {
             }
             for(int h=0; h<=SC_data_miner.Form_cd.length-1; h++){
                 //System.out.print("SC_data_miner.Form_cd.length = " + SC_data_miner.Form_cd.length + "\n");
-                System.out.print("h = " + h + "\n");
+                //System.out.print("h = " + h + "\n");
                 if(SC_data_miner.Search_path[h] != null && !Objects.equals(SC_data_miner.Search_path[h], "") && !Objects.equals(SC_data_miner.Search_path[h], " ")){
                     if(!SC_data_miner.Search_path[h].contains("/content/")){
                         int coc = 0;
@@ -1517,7 +1518,7 @@ public class ScriptEXP {
                         SC_data_miner.Search_path[h] = "/content/folder[@name=''Приложение НИКА'']/folder[@name=''КО'']" + SC_data_miner.Search_path[h];
                     } else {
                         int coc = 0;
-                        System.out.print("coc = " + coc + "\n");
+                        //System.out.print("coc = " + coc + "\n");
                         for(int ut = 0; ut<=SC_data_miner.Search_path[h].lastIndexOf("'");){
                             int u = SC_data_miner.Search_path[h].indexOf("'", ut);
                             if(u == -1){
@@ -1528,29 +1529,29 @@ public class ScriptEXP {
                                 ut++;
                             }
                         }
-                        System.out.print("coc = " + coc + "\n");
+                        //System.out.print("coc = " + coc + "\n");
                         String[] subs = SC_data_miner.Search_path[h].split("'");
                         SC_data_miner.Search_path[h] = subs[0];
                         for(int d =1; d<=coc; d++) {
-                            System.out.print("subs[" + d + "] = " + subs[d] + "\n");
+                            //System.out.print("subs[" + d + "] = " + subs[d] + "\n");
                             SC_data_miner.Search_path[h] = SC_data_miner.Search_path[h] + "''" + subs[d];
-                            System.out.print("Search_path[" + h + "] = " + SC_data_miner.Search_path[h] + "\n");
+                            //System.out.print("Search_path[" + h + "] = " + SC_data_miner.Search_path[h] + "\n");
                         }
                         int u = 0;
-                        System.out.print("vid[" + h + "] = " + vid[h] + "\n");
+                        //System.out.print("vid[" + h + "] = " + vid[h] + "\n");
                         switch (vid[h]){
                             case 1:
                                 u = SC_data_miner.Search_path[h].indexOf("/folder[@name=''Нерегламентированные");
-                                System.out.print("u = " + u + "\n");
+                                //System.out.print("u = " + u + "\n");
                                 break;
                             case 2:
                                 u = SC_data_miner.Search_path[h].indexOf("/folder[@name=''Регламентированные");
-                                System.out.print("u = " + u + "\n");
+                                //System.out.print("u = " + u + "\n");
                                 break;
                         }
-                        System.out.print("Search_path[" + h + "] = " + SC_data_miner.Search_path[h] + "\n");
+                        //System.out.print("Search_path[" + h + "] = " + SC_data_miner.Search_path[h] + "\n");
                         SC_data_miner.Search_path_for_ehd_acs[h] = "/content/folder[@name=''Приложение НИКА'']/folder[@name=''КО'']" + SC_data_miner.Search_path[h].substring(u);
-                        System.out.print("Search_path_for_ehd_acs[" + h + "] = " + SC_data_miner.Search_path_for_ehd_acs[h] + "\n");
+                        //System.out.print("Search_path_for_ehd_acs[" + h + "] = " + SC_data_miner.Search_path_for_ehd_acs[h] + "\n");
                     }
                 }
                 //System.out.print("Search_path_for_ehd_acs[" + h + "] = " + Search_path_for_ehd_acs[h] + "\n");
@@ -1580,9 +1581,13 @@ public class ScriptEXP {
                     //System.out.print("\nokud_rep_form = " + okud_rep_form + "\n");
                     //System.out.print("SC_data_miner.Form_cd[0].startsWith(\"0409\") = " + SC_data_miner.Form_cd[0].startsWith("0409"));
                 } else {
-                    okud_rep_form = "'"+ SC_data_miner.Form_okud[0] + "' as FORM_OKUD";
-                    //System.out.print("\nokud_rep_form = " + okud_rep_form + "\n");
-                    //System.out.print("SC_data_miner.Form_cd[0].startsWith(\"0409\") = " + SC_data_miner.Form_cd[0].startsWith("0409"));
+                    if(SC_data_miner.Form_okud[0] == null || Objects.equals(SC_data_miner.Form_okud[0], "") || Objects.equals(SC_data_miner.Form_okud[0], " ")){
+                        okud_rep_form = "null as FORM_OKUD";
+                    } else{
+                        okud_rep_form = "'"+ SC_data_miner.Form_okud[0] + "' as FORM_OKUD";
+                        //System.out.print("\nokud_rep_form = " + okud_rep_form + "\n");
+                        //System.out.print("SC_data_miner.Form_cd[0].startsWith(\"0409\") = " + SC_data_miner.Form_cd[0].startsWith("0409"));
+                    }
                 }
 
                 String rep_form_script = "";
@@ -1598,8 +1603,20 @@ public class ScriptEXP {
                 String ehd_acs_script2 = "";
 
                 //System.out.print("SC_data_miner.Form_cd[0] = " + SC_data_miner.Form_cd[0] + "\n");
-                if((SC_data_miner.Form_cd_name[0]== null) || Objects.equals(SC_data_miner.Form_cd_name[0], "") || Objects.equals(SC_data_miner.Form_cd_name[0], " ")){
-                    rep_form_script = "--Warning: Не указаны данные для таблицы REP_FORM\n\n";
+                if((SC_data_miner.Form_cd_name[0]== null) || Objects.equals(SC_data_miner.Form_cd_name[0], "") || Objects.equals(SC_data_miner.Form_cd_name[0], " ")||
+                    (SC_data_miner.Form_cd[0]== null) || Objects.equals(SC_data_miner.Form_cd[0], "") || Objects.equals(SC_data_miner.Form_cd[0], " ")){
+                    if(rep_or_code[0] == 0){
+                        rep_form_script = "--Для регистрации отчета нет необходимости заполнять данные для таблицы REP_FORM\n\n";
+                    } else{
+                        rep_form_script = "--Warning: Не указаны данные для таблицы REP_FORM: ";
+                        if((SC_data_miner.Form_cd[0]== null) || Objects.equals(SC_data_miner.Form_cd[0], "") || Objects.equals(SC_data_miner.Form_cd[0], " ")){
+                            rep_form_script = rep_form_script + "Код доступа, ";
+                        }
+                        if((SC_data_miner.Form_cd_name[0]== null) || Objects.equals(SC_data_miner.Form_cd_name[0], "") || Objects.equals(SC_data_miner.Form_cd_name[0], " ")){
+                            rep_form_script = rep_form_script + "Наименование кода доступа.";
+                        }
+                        rep_form_script = rep_form_script + "\n\n";
+                    }
                 } else {
                     rep_form_script = "MERGE INTO REP_FORM R\n" +
                         "   USING (SELECT \n" +
@@ -1611,12 +1628,23 @@ public class ScriptEXP {
                         "   WHEN MATCHED THEN UPDATE SET R.FORM_NAME = S.FORM_NAME,\n" +
                         "                                R.FORM_OKUD = S.FORM_OKUD\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.FORM_NAME, R.FORM_OKUD)\n" +
-                        "   VALUES (S.FORM_CD, S.FORM_NAME, S.FORM_OKUD);" + 
+                        "   VALUES (S.FORM_CD, S.FORM_NAME, S.FORM_OKUD);" +
                             "\n" +
                             "\n" ;
                 }
                 if(Objects.equals(iod, "null as FLAG_IOD") || Objects.equals(pdn, "null as FLAG_PDN")){
-                    rep_form_oki_script = "--Warning: Не указаны данные для таблицы REP_FORM_OKI\n\n";
+                    if(rep_or_code[0] == 0){
+                        rep_form_oki_script = "--Для регистрации отчета нет необходимости заполнять данные для таблицы REP_FORM_OKI\n\n";
+                    } else{
+                        rep_form_oki_script = "--Warning: Не указаны данные для таблицы REP_FORM_OKI: ";
+                        if(Objects.equals(iod, "null as FLAG_IOD")){
+                            rep_form_oki_script = rep_form_oki_script + "Флаг ИОД, ";
+                        }
+                        if(Objects.equals(pdn, "null as FLAG_PDN")){
+                            rep_form_oki_script = rep_form_oki_script + "Флаг ПДН.";
+                        }
+                        rep_form_oki_script = rep_form_oki_script + "\n\n";
+                    }
                 } else{
                     rep_form_oki_script = "MERGE INTO REP_FORM_OKI R\n" +
                         "   USING (SELECT \n" +
@@ -1634,7 +1662,11 @@ public class ScriptEXP {
                 }
                 //System.out.print("SC_data_miner.Form_cd_cog[0] = " + SC_data_miner.Form_cd_cog[0] + "\n");
                 if(SC_data_miner.Form_cd_cog[0] == null || Objects.equals(SC_data_miner.Form_cd_cog[0], "") || Objects.equals(SC_data_miner.Form_cd_cog[0], " ")){
-                    rep_form_cognos_script = "--Warning: Не указаны данные для таблицы REP_FORM_COGNOS\n\n";
+                    if(rep_or_code[0] == 0){
+                        rep_form_cognos_script = "--Для регистрации отчета нет необходимости заполнять данные для таблицы REP_FORM_COGNOS\n\n";
+                    } else{
+                        rep_form_cognos_script = "--Warning: Не указаны данные для таблицы REP_FORM_COGNOS: Код потока(Когнос)\n\n";
+                    }
                 } else {
                     rep_form_cognos_script = "MERGE INTO REP_FORM_COGNOS R\n" +
                         "   USING (SELECT \n" +
@@ -1650,7 +1682,11 @@ public class ScriptEXP {
                 }
                 //System.out.print("SC_data_miner.Dep_name[0] = " + SC_data_miner.Dep_name[0] + "\n");
                 if(SC_data_miner.Dep_name[0] == null || Objects.equals(SC_data_miner.Dep_name[0], "") || Objects.equals(SC_data_miner.Dep_name[0], " ")){
-                    rep_form_dep_owner_script = "--Warning: Не указаны данные для таблицы REP_FORM_DEP_OWNER\n\n";
+                    if(rep_or_code[0] == 0){
+                        rep_form_dep_owner_script = "--Для регистрации отчета нет необходимости заполнять данные для таблицы REP_FORM_DEP_OWNER\n\n";
+                    } else{
+                        rep_form_dep_owner_script = "--Warning: Не указаны данные для таблицы REP_FORM_DEP_OWNER: Сокращенное наименование департамента для REP_FORM_DEP_OWNER\n\n";
+                    }
                 } else {
                     int c = OK_Action.getDep_count(0);
                     switch (c){
@@ -1658,8 +1694,8 @@ public class ScriptEXP {
                             rep_form_dep_owner_script = "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_name[0] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_name[0] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -1672,8 +1708,8 @@ public class ScriptEXP {
                             rep_form_dep_owner_script = "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_name[0] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_name[0] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -1682,8 +1718,8 @@ public class ScriptEXP {
                                     "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_name2[0] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_name2[0] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -1696,8 +1732,8 @@ public class ScriptEXP {
                             rep_form_dep_owner_script = "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_name[0] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_name[0] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -1706,8 +1742,8 @@ public class ScriptEXP {
                                     "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_name2[0] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_name2[0] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -1716,8 +1752,8 @@ public class ScriptEXP {
                                     "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_name3[0] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_name3[0] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -1730,8 +1766,8 @@ public class ScriptEXP {
                             rep_form_dep_owner_script = "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_name[0] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_name[0] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -1740,8 +1776,8 @@ public class ScriptEXP {
                                     "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_name2[0] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_name2[0] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -1750,8 +1786,8 @@ public class ScriptEXP {
                                     "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_name3[0] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_name3[0] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -1760,8 +1796,8 @@ public class ScriptEXP {
                                     "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_name4[0] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_name4[0] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -1774,8 +1810,8 @@ public class ScriptEXP {
                             rep_form_dep_owner_script = "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_name[0] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_name[0] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -1784,8 +1820,8 @@ public class ScriptEXP {
                                     "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_name2[0] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_name2[0] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -1794,8 +1830,8 @@ public class ScriptEXP {
                                     "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_name3[0] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_name3[0] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -1804,8 +1840,8 @@ public class ScriptEXP {
                                     "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_name4[0] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_name4[0] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -1814,8 +1850,8 @@ public class ScriptEXP {
                                     "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_name5[0] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_name5[0] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -1828,8 +1864,8 @@ public class ScriptEXP {
                             rep_form_dep_owner_script = "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_name[0] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_name[0] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -1838,8 +1874,8 @@ public class ScriptEXP {
                                     "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_name2[0] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_name2[0] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -1848,8 +1884,8 @@ public class ScriptEXP {
                                     "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_name3[0] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_name3[0] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -1858,8 +1894,8 @@ public class ScriptEXP {
                                     "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_name4[0] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_name4[0] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -1868,8 +1904,8 @@ public class ScriptEXP {
                                     "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_name5[0] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_name5[0] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -1878,8 +1914,8 @@ public class ScriptEXP {
                                     "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_name6[0] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_name6[0] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -1892,8 +1928,8 @@ public class ScriptEXP {
                             rep_form_dep_owner_script = "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_name[0] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_name[0] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -1902,8 +1938,8 @@ public class ScriptEXP {
                                     "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_name2[0] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_name2[0] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -1912,8 +1948,8 @@ public class ScriptEXP {
                                     "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_name3[0] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_name3[0] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -1922,8 +1958,8 @@ public class ScriptEXP {
                                     "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_name4[0] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_name4[0] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -1932,8 +1968,8 @@ public class ScriptEXP {
                                     "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_name5[0] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_name5[0] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -1942,8 +1978,8 @@ public class ScriptEXP {
                                     "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_name6[0] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_name6[0] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -1952,8 +1988,8 @@ public class ScriptEXP {
                                     "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_name7[0] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_name7[0] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -1966,8 +2002,8 @@ public class ScriptEXP {
                             rep_form_dep_owner_script = "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_name[0] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_name[0] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -1976,8 +2012,8 @@ public class ScriptEXP {
                                     "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_name2[0] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_name2[0] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -1986,8 +2022,8 @@ public class ScriptEXP {
                                     "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_name3[0] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_name3[0] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -1996,8 +2032,8 @@ public class ScriptEXP {
                                     "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_name4[0] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_name4[0] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -2006,8 +2042,8 @@ public class ScriptEXP {
                                     "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_name5[0] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_name5[0] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -2016,8 +2052,8 @@ public class ScriptEXP {
                                     "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_name6[0] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_name6[0] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -2026,8 +2062,8 @@ public class ScriptEXP {
                                     "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_name7[0] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_name7[0] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -2036,8 +2072,8 @@ public class ScriptEXP {
                                     "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_name8[0] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_name8[0] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -2051,7 +2087,11 @@ public class ScriptEXP {
                 }
                 //System.out.print("SC_data_miner.Dep_u_name[0] = " + SC_data_miner.Dep_u_name[0] + "\n");
                 if(SC_data_miner.Dep_u_name[0] == null || Objects.equals(SC_data_miner.Dep_u_name[0], "") || Objects.equals(SC_data_miner.Dep_u_name[0], " ")){
-                    rep_form_dep_user_script = "--Warning: Не указаны данные для таблицы REP_FORM_DEP_USER\n\n";
+                    if(rep_or_code[0] == 0){
+                        rep_form_dep_user_script = "--Для регистрации отчета нет необходимости заполнять данные для таблицы REP_FORM_DEP_USER\n\n";
+                    } else{
+                        rep_form_dep_user_script = "--Warning: Не указаны данные для таблицы REP_FORM_DEP_USER: Сокращенное наименование департамента для REP_FORM_DEP_USER\n\n";
+                    }
                 } else {
                     int c = OK_Action.getDep_u_count(0);
                     switch (c){
@@ -2059,8 +2099,8 @@ public class ScriptEXP {
                             rep_form_dep_user_script = "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_u_name[0] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_u_name[0] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -2073,8 +2113,8 @@ public class ScriptEXP {
                             rep_form_dep_user_script = "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_u_name[0] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_u_name[0] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -2083,8 +2123,8 @@ public class ScriptEXP {
                                     "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_u_name2[0] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_u_name2[0] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -2097,8 +2137,8 @@ public class ScriptEXP {
                             rep_form_dep_user_script = "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_u_name[0] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_u_name[0] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -2107,8 +2147,8 @@ public class ScriptEXP {
                                     "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_u_name2[0] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_u_name2[0] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -2117,8 +2157,8 @@ public class ScriptEXP {
                                    "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_u_name3[0] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_u_name3[0] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -2131,8 +2171,8 @@ public class ScriptEXP {
                             rep_form_dep_user_script = "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_u_name[0] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_u_name[0] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -2141,8 +2181,8 @@ public class ScriptEXP {
                                     "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_u_name2[0] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_u_name2[0] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -2151,8 +2191,8 @@ public class ScriptEXP {
                                     "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_u_name3[0] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_u_name3[0] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -2161,8 +2201,8 @@ public class ScriptEXP {
                                     "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_u_name4[0] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_u_name4[0] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -2175,8 +2215,8 @@ public class ScriptEXP {
                             rep_form_dep_user_script = "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_u_name[0] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_u_name[0] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -2185,8 +2225,8 @@ public class ScriptEXP {
                                     "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_u_name2[0] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_u_name2[0] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -2195,8 +2235,8 @@ public class ScriptEXP {
                                     "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_u_name3[0] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_u_name3[0] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -2205,8 +2245,8 @@ public class ScriptEXP {
                                     "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_u_name4[0] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_u_name4[0] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -2215,8 +2255,8 @@ public class ScriptEXP {
                                     "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_u_name5[0] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_u_name5[0] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -2229,8 +2269,8 @@ public class ScriptEXP {
                             rep_form_dep_user_script = "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_u_name[0] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_u_name[0] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -2239,8 +2279,8 @@ public class ScriptEXP {
                                     "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_u_name2[0] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_u_name2[0] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -2249,8 +2289,8 @@ public class ScriptEXP {
                                     "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_u_name3[0] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_u_name3[0] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -2259,8 +2299,8 @@ public class ScriptEXP {
                                     "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_u_name4[0] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_u_name4[0] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -2269,8 +2309,8 @@ public class ScriptEXP {
                                     "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_u_name5[0] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_u_name5[0] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -2279,8 +2319,8 @@ public class ScriptEXP {
                                     "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_u_name6[0] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_u_name6[0] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -2293,8 +2333,8 @@ public class ScriptEXP {
                             rep_form_dep_user_script = "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_u_name[0] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_u_name[0] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -2303,8 +2343,8 @@ public class ScriptEXP {
                                     "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_u_name2[0] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_u_name2[0] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -2313,8 +2353,8 @@ public class ScriptEXP {
                                     "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_u_name3[0] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_u_name3[0] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -2323,8 +2363,8 @@ public class ScriptEXP {
                                     "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_u_name4[0] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_u_name4[0] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -2333,8 +2373,8 @@ public class ScriptEXP {
                                     "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_u_name5[0] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_u_name5[0] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -2343,8 +2383,8 @@ public class ScriptEXP {
                                     "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_u_name6[0] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_u_name6[0] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -2360,8 +2400,8 @@ public class ScriptEXP {
                             rep_form_dep_user_script = "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_u_name[0] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_u_name[0] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -2370,8 +2410,8 @@ public class ScriptEXP {
                                     "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_u_name2[0] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_u_name2[0] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -2380,8 +2420,8 @@ public class ScriptEXP {
                                     "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_u_name3[0] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_u_name3[0] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -2390,8 +2430,8 @@ public class ScriptEXP {
                                     "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_u_name4[0] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_u_name4[0] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -2400,8 +2440,8 @@ public class ScriptEXP {
                                     "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_u_name5[0] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_u_name5[0] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -2410,8 +2450,8 @@ public class ScriptEXP {
                                     "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_u_name6[0] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_u_name6[0] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -2420,8 +2460,8 @@ public class ScriptEXP {
                                     "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_u_name7[0] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_u_name7[0] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -2430,8 +2470,8 @@ public class ScriptEXP {
                                     "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_u_name8[0] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_u_name8[0] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -2455,7 +2495,30 @@ public class ScriptEXP {
                         SC_data_miner.Search_path[0] == null || Objects.equals(SC_data_miner.Search_path[0], "") || Objects.equals(SC_data_miner.Search_path[0], " ") ||
                         SC_data_miner.Form_formal_code[0] == null || Objects.equals(SC_data_miner.Form_formal_code[0], "") || Objects.equals(SC_data_miner.Form_formal_code[0], " ") ||
                         SC_data_miner.Desc[0] == null || Objects.equals(SC_data_miner.Desc[0], "") || Objects.equals(SC_data_miner.Desc[0], " ")){
-                    reg_report_form_script = "--Warning: Не указаны данные для таблицы REG_REPORT_FORM\n\n";
+                    if(rep_or_code[0] == 1){
+                        reg_report_form_script = "--Для регистрации кода доступа нет необходимости заполнять данные для таблицы REG_REPORT_FORM\n\n";
+                    } else{
+                        reg_report_form_script = "--Warning: Не указаны данные для таблицы REG_REPORT_FORM: ";
+                        if(SC_data_miner.System_id[0] == null || Objects.equals(SC_data_miner.System_id[0], "") || Objects.equals(SC_data_miner.System_id[0], " ")){
+                            reg_report_form_script = reg_report_form_script + "System_id, ";
+                        }
+                        if(SC_data_miner.Security_role_name[0] == null || Objects.equals(SC_data_miner.Security_role_name[0], "") || Objects.equals(SC_data_miner.Security_role_name[0], " ")){
+                            reg_report_form_script = reg_report_form_script + "Security_role_name, ";
+                        }
+                        if(SC_data_miner.Security_role_path[0] == null || Objects.equals(SC_data_miner.Security_role_path[0], "") || Objects.equals(SC_data_miner.Security_role_path[0], " ")){
+                            reg_report_form_script = reg_report_form_script + "Security_role_path, ";
+                        }
+                        if(SC_data_miner.Search_path[0] == null || Objects.equals(SC_data_miner.Search_path[0], "") || Objects.equals(SC_data_miner.Search_path[0], " ")){
+                            reg_report_form_script = reg_report_form_script + "Полный путь отчета/папки(Search_path), ";
+                        }
+                        if(SC_data_miner.Form_formal_code[0] == null || Objects.equals(SC_data_miner.Form_formal_code[0], "") || Objects.equals(SC_data_miner.Form_formal_code[0], " ")){
+                            reg_report_form_script = reg_report_form_script + "Уникальный код отчета, ";
+                        }
+                        if(SC_data_miner.Desc[0] == null || Objects.equals(SC_data_miner.Desc[0], "") || Objects.equals(SC_data_miner.Desc[0], " ")){
+                            reg_report_form_script = reg_report_form_script + "Описание.";
+                        }
+                        reg_report_form_script = reg_report_form_script + "\n\n";
+                    }
                 } else {
                     reg_report_form_script = "MERGE INTO REG_REPORT_FORM R\n" +
                             "   USING (SELECT \n" +
@@ -2484,60 +2547,39 @@ public class ScriptEXP {
                 }
                 //System.out.print("SC_data_miner.Form_okud[0] = " + SC_data_miner.Form_okud[0] + "\n");
                 if(SC_data_miner.Form_okud[0] == null  || Objects.equals(SC_data_miner.Form_okud[0], "") || Objects.equals(SC_data_miner.Form_okud[0], " ")){
-                    report_okud_code_script = "--Warning: Не указаны данные для таблицы REPORT_OKUD_CODE\n\n";
+                    if(rep_or_code[0] == 1){
+                        report_okud_code_script = "--Для регистрации кода доступа нет необходимости заполнять данные для таблицы REPORT_OKUD_CODE\n\n";
+                    } else{
+                        report_okud_code_script = "--Warning: Не указаны данные для таблицы REPORT_OKUD_CODE: ОКУД\n\n";
+                    }
                 } else {
-                    int c = OK_Action.getOkud_count(0);
-                    switch(c){
-                        case 1:
-                            report_okud_code_script = "MERGE INTO REPORT_OKUD_CODE R\n" +
+                    if(rep_or_code[0] == 1){
+                        report_okud_code_script = "--Для регистрации кода доступа нет необходимости заполнять данные для таблицы REPORT_OKUD_CODE\n\n";
+                    } else{
+                        int c = OK_Action.getOkud_count(0);
+                        switch(c){
+                            case 1:
+                                report_okud_code_script = "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, \n" + 
-						"'"+ SC_data_miner.period[0] +"'as PERIOD \n" + 
-						"null as FORM_CD \n" + 
+                        "'"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, \n" +
+						"'"+ SC_data_miner.period[0] +"'as PERIOD \n" +
+						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
                         "                                R.FORM_CD = S.FORM_CD\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.OKUD_CODE, R.PERIOD, R.FORM_CD)\n" +
                         "   VALUES (S.FORM_FORMAL_CODE, S.OKUD_CODE, S.PERIOD, S.FORM_CD);\n\n" +
-                                    "\n";
-                            break;
-                        case 2:
-                            report_okud_code_script = "MERGE INTO REPORT_OKUD_CODE R\n" +
+                                        "\n";
+                                break;
+                            case 2:
+                                report_okud_code_script = "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, \n" + 
-						"'"+ SC_data_miner.period[0] +"'as PERIOD \n" + 
-						"null as FORM_CD \n" + 
-                        "FROM dual) S\n" +
-                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
-                        "                                R.FORM_CD = S.FORM_CD\n" +
-                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.OKUD_CODE, R.PERIOD, R.FORM_CD)\n" +
-                        "   VALUES (S.FORM_FORMAL_CODE, S.OKUD_CODE, S.PERIOD, S.FORM_CD);\n\n" +
-                                    "\n" +
-                                    "MERGE INTO REPORT_OKUD_CODE R\n" +
-                        "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.Form_okud2[0] +"' as OKUD_CODE, \n" + 
-						"'"+ SC_data_miner.period2[0] +"'as PERIOD \n" + 
-						"null as FORM_CD \n" + 
-                        "FROM dual) S\n" +
-                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
-                        "                                R.FORM_CD = S.FORM_CD\n" +
-                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.OKUD_CODE, R.PERIOD, R.FORM_CD)\n" +
-                        "   VALUES (S.FORM_FORMAL_CODE, S.OKUD_CODE, S.PERIOD, S.FORM_CD);\n\n" +
-                                    "\n" ;
-                            break;
-                        case 3:
-                            report_okud_code_script = "MERGE INTO REPORT_OKUD_CODE R\n" +
-                        "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, \n" + 
-						"'"+ SC_data_miner.period[0] +"'as PERIOD \n" + 
-						"null as FORM_CD \n" + 
+                        "'"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, \n" +
+						"'"+ SC_data_miner.period[0] +"'as PERIOD \n" +
+						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
@@ -2548,9 +2590,24 @@ public class ScriptEXP {
                                     "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.Form_okud2[0] +"' as OKUD_CODE, \n" + 
-						"'"+ SC_data_miner.period2[0] +"'as PERIOD \n" + 
-						"null as FORM_CD \n" + 
+                        "'"+ SC_data_miner.Form_okud2[0] +"' as OKUD_CODE, \n" +
+						"'"+ SC_data_miner.period2[0] +"'as PERIOD \n" +
+						"null as FORM_CD \n" +
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
+                        "                                R.FORM_CD = S.FORM_CD\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.OKUD_CODE, R.PERIOD, R.FORM_CD)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.OKUD_CODE, S.PERIOD, S.FORM_CD);\n\n" +
+                                        "\n" ;
+                                break;
+                            case 3:
+                                report_okud_code_script = "MERGE INTO REPORT_OKUD_CODE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, \n" +
+						"'"+ SC_data_miner.period[0] +"'as PERIOD \n" +
+						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
@@ -2561,24 +2618,9 @@ public class ScriptEXP {
                                     "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.Form_okud3[0] +"' as OKUD_CODE, \n" + 
-						"'"+ SC_data_miner.period3[0] +"'as PERIOD \n" + 
-						"null as FORM_CD \n" + 
-                        "FROM dual) S\n" +
-                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
-                        "                                R.FORM_CD = S.FORM_CD\n" +
-                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.OKUD_CODE, R.PERIOD, R.FORM_CD)\n" +
-                        "   VALUES (S.FORM_FORMAL_CODE, S.OKUD_CODE, S.PERIOD, S.FORM_CD);\n\n" +
-                                    "\n";
-                            break;
-                        case 4:
-                            report_okud_code_script = "MERGE INTO REPORT_OKUD_CODE R\n" +
-                        "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, \n" + 
-						"'"+ SC_data_miner.period[0] +"'as PERIOD \n" + 
-						"null as FORM_CD \n" + 
+                        "'"+ SC_data_miner.Form_okud2[0] +"' as OKUD_CODE, \n" +
+						"'"+ SC_data_miner.period2[0] +"'as PERIOD \n" +
+						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
@@ -2589,9 +2631,24 @@ public class ScriptEXP {
                                     "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.Form_okud2[0] +"' as OKUD_CODE, \n" + 
-						"'"+ SC_data_miner.period2[0] +"'as PERIOD \n" + 
-						"null as FORM_CD \n" + 
+                        "'"+ SC_data_miner.Form_okud3[0] +"' as OKUD_CODE, \n" +
+						"'"+ SC_data_miner.period3[0] +"'as PERIOD \n" +
+						"null as FORM_CD \n" +
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
+                        "                                R.FORM_CD = S.FORM_CD\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.OKUD_CODE, R.PERIOD, R.FORM_CD)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.OKUD_CODE, S.PERIOD, S.FORM_CD);\n\n" +
+                                        "\n";
+                                break;
+                            case 4:
+                                report_okud_code_script = "MERGE INTO REPORT_OKUD_CODE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, \n" +
+						"'"+ SC_data_miner.period[0] +"'as PERIOD \n" +
+						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
@@ -2602,9 +2659,9 @@ public class ScriptEXP {
                                     "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.Form_okud3[0] +"' as OKUD_CODE, \n" + 
-						"'"+ SC_data_miner.period3[0] +"'as PERIOD \n" + 
-						"null as FORM_CD \n" + 
+                        "'"+ SC_data_miner.Form_okud2[0] +"' as OKUD_CODE, \n" +
+						"'"+ SC_data_miner.period2[0] +"'as PERIOD \n" +
+						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
@@ -2615,24 +2672,9 @@ public class ScriptEXP {
                                     "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.Form_okud4[0] +"' as OKUD_CODE, \n" + 
-						"'"+ SC_data_miner.period4[0] +"'as PERIOD \n" + 
-						"null as FORM_CD \n" + 
-                        "FROM dual) S\n" +
-                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
-                        "                                R.FORM_CD = S.FORM_CD\n" +
-                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.OKUD_CODE, R.PERIOD, R.FORM_CD)\n" +
-                        "   VALUES (S.FORM_FORMAL_CODE, S.OKUD_CODE, S.PERIOD, S.FORM_CD);\n\n" +
-                                    "\n";
-                            break;
-                        case 5:
-                            report_okud_code_script = "MERGE INTO REPORT_OKUD_CODE R\n" +
-                        "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, \n" + 
-						"'"+ SC_data_miner.period[0] +"'as PERIOD \n" + 
-						"null as FORM_CD \n" + 
+                        "'"+ SC_data_miner.Form_okud3[0] +"' as OKUD_CODE, \n" +
+						"'"+ SC_data_miner.period3[0] +"'as PERIOD \n" +
+						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
@@ -2643,9 +2685,24 @@ public class ScriptEXP {
                                     "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.Form_okud2[0] +"' as OKUD_CODE, \n" + 
-						"'"+ SC_data_miner.period2[0] +"'as PERIOD \n" + 
-						"null as FORM_CD \n" + 
+                        "'"+ SC_data_miner.Form_okud4[0] +"' as OKUD_CODE, \n" +
+						"'"+ SC_data_miner.period4[0] +"'as PERIOD \n" +
+						"null as FORM_CD \n" +
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
+                        "                                R.FORM_CD = S.FORM_CD\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.OKUD_CODE, R.PERIOD, R.FORM_CD)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.OKUD_CODE, S.PERIOD, S.FORM_CD);\n\n" +
+                                        "\n";
+                                break;
+                            case 5:
+                                report_okud_code_script = "MERGE INTO REPORT_OKUD_CODE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, \n" +
+						"'"+ SC_data_miner.period[0] +"'as PERIOD \n" +
+						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
@@ -2656,9 +2713,9 @@ public class ScriptEXP {
                                     "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.Form_okud3[0] +"' as OKUD_CODE, \n" + 
-						"'"+ SC_data_miner.period3[0] +"'as PERIOD \n" + 
-						"null as FORM_CD \n" + 
+                        "'"+ SC_data_miner.Form_okud2[0] +"' as OKUD_CODE, \n" +
+						"'"+ SC_data_miner.period2[0] +"'as PERIOD \n" +
+						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
@@ -2669,9 +2726,9 @@ public class ScriptEXP {
                                     "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.Form_okud4[0] +"' as OKUD_CODE, \n" + 
-						"'"+ SC_data_miner.period4[0] +"'as PERIOD \n" + 
-						"null as FORM_CD \n" + 
+                        "'"+ SC_data_miner.Form_okud3[0] +"' as OKUD_CODE, \n" +
+						"'"+ SC_data_miner.period3[0] +"'as PERIOD \n" +
+						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
@@ -2682,24 +2739,9 @@ public class ScriptEXP {
                                     "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.Form_okud5[0] +"' as OKUD_CODE, \n" + 
-						"'"+ SC_data_miner.period5[0] +"'as PERIOD \n" + 
-						"null as FORM_CD \n" + 
-                        "FROM dual) S\n" +
-                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
-                        "                                R.FORM_CD = S.FORM_CD\n" +
-                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.OKUD_CODE, R.PERIOD, R.FORM_CD)\n" +
-                        "   VALUES (S.FORM_FORMAL_CODE, S.OKUD_CODE, S.PERIOD, S.FORM_CD);\n\n" +
-                                    "\n";
-                            break;
-                        case 6:
-                            report_okud_code_script = "MERGE INTO REPORT_OKUD_CODE R\n" +
-                        "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, \n" + 
-						"'"+ SC_data_miner.period[0] +"'as PERIOD \n" + 
-						"null as FORM_CD \n" + 
+                        "'"+ SC_data_miner.Form_okud4[0] +"' as OKUD_CODE, \n" +
+						"'"+ SC_data_miner.period4[0] +"'as PERIOD \n" +
+						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
@@ -2710,9 +2752,24 @@ public class ScriptEXP {
                                     "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.Form_okud2[0] +"' as OKUD_CODE, \n" + 
-						"'"+ SC_data_miner.period2[0] +"'as PERIOD \n" + 
-						"null as FORM_CD \n" + 
+                        "'"+ SC_data_miner.Form_okud5[0] +"' as OKUD_CODE, \n" +
+						"'"+ SC_data_miner.period5[0] +"'as PERIOD \n" +
+						"null as FORM_CD \n" +
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
+                        "                                R.FORM_CD = S.FORM_CD\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.OKUD_CODE, R.PERIOD, R.FORM_CD)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.OKUD_CODE, S.PERIOD, S.FORM_CD);\n\n" +
+                                        "\n";
+                                break;
+                            case 6:
+                                report_okud_code_script = "MERGE INTO REPORT_OKUD_CODE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, \n" +
+						"'"+ SC_data_miner.period[0] +"'as PERIOD \n" +
+						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
@@ -2723,9 +2780,9 @@ public class ScriptEXP {
                                     "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.Form_okud3[0] +"' as OKUD_CODE, \n" + 
-						"'"+ SC_data_miner.period3[0] +"'as PERIOD \n" + 
-						"null as FORM_CD \n" + 
+                        "'"+ SC_data_miner.Form_okud2[0] +"' as OKUD_CODE, \n" +
+						"'"+ SC_data_miner.period2[0] +"'as PERIOD \n" +
+						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
@@ -2736,9 +2793,9 @@ public class ScriptEXP {
                                     "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.Form_okud4[0] +"' as OKUD_CODE, \n" + 
-						"'"+ SC_data_miner.period4[0] +"'as PERIOD \n" + 
-						"null as FORM_CD \n" + 
+                        "'"+ SC_data_miner.Form_okud3[0] +"' as OKUD_CODE, \n" +
+						"'"+ SC_data_miner.period3[0] +"'as PERIOD \n" +
+						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
@@ -2749,9 +2806,9 @@ public class ScriptEXP {
                                     "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.Form_okud5[0] +"' as OKUD_CODE, \n" + 
-						"'"+ SC_data_miner.period5[0] +"'as PERIOD \n" + 
-						"null as FORM_CD \n" + 
+                        "'"+ SC_data_miner.Form_okud4[0] +"' as OKUD_CODE, \n" +
+						"'"+ SC_data_miner.period4[0] +"'as PERIOD \n" +
+						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
@@ -2762,24 +2819,9 @@ public class ScriptEXP {
                                     "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.Form_okud6[0] +"' as OKUD_CODE, \n" + 
-						"'"+ SC_data_miner.period6[0] +"'as PERIOD \n" + 
-						"null as FORM_CD \n" + 
-                        "FROM dual) S\n" +
-                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
-                        "                                R.FORM_CD = S.FORM_CD\n" +
-                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.OKUD_CODE, R.PERIOD, R.FORM_CD)\n" +
-                        "   VALUES (S.FORM_FORMAL_CODE, S.OKUD_CODE, S.PERIOD, S.FORM_CD);\n\n" +
-                                    "\n";
-                            break;
-                        case 7:
-                            report_okud_code_script = "MERGE INTO REPORT_OKUD_CODE R\n" +
-                        "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, \n" + 
-						"'"+ SC_data_miner.period[0] +"'as PERIOD \n" + 
-						"null as FORM_CD \n" + 
+                        "'"+ SC_data_miner.Form_okud5[0] +"' as OKUD_CODE, \n" +
+						"'"+ SC_data_miner.period5[0] +"'as PERIOD \n" +
+						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
@@ -2790,9 +2832,24 @@ public class ScriptEXP {
                                     "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.Form_okud2[0] +"' as OKUD_CODE, \n" + 
-						"'"+ SC_data_miner.period2[0] +"'as PERIOD \n" + 
-						"null as FORM_CD \n" + 
+                        "'"+ SC_data_miner.Form_okud6[0] +"' as OKUD_CODE, \n" +
+						"'"+ SC_data_miner.period6[0] +"'as PERIOD \n" +
+						"null as FORM_CD \n" +
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
+                        "                                R.FORM_CD = S.FORM_CD\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.OKUD_CODE, R.PERIOD, R.FORM_CD)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.OKUD_CODE, S.PERIOD, S.FORM_CD);\n\n" +
+                                        "\n";
+                                break;
+                            case 7:
+                                report_okud_code_script = "MERGE INTO REPORT_OKUD_CODE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, \n" +
+						"'"+ SC_data_miner.period[0] +"'as PERIOD \n" +
+						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
@@ -2803,9 +2860,9 @@ public class ScriptEXP {
                                     "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.Form_okud3[0] +"' as OKUD_CODE, \n" + 
-						"'"+ SC_data_miner.period3[0] +"'as PERIOD \n" + 
-						"null as FORM_CD \n" + 
+                        "'"+ SC_data_miner.Form_okud2[0] +"' as OKUD_CODE, \n" +
+						"'"+ SC_data_miner.period2[0] +"'as PERIOD \n" +
+						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
@@ -2816,9 +2873,9 @@ public class ScriptEXP {
                                     "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.Form_okud4[0] +"' as OKUD_CODE, \n" + 
-						"'"+ SC_data_miner.period4[0] +"'as PERIOD \n" + 
-						"null as FORM_CD \n" + 
+                        "'"+ SC_data_miner.Form_okud3[0] +"' as OKUD_CODE, \n" +
+						"'"+ SC_data_miner.period3[0] +"'as PERIOD \n" +
+						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
@@ -2829,9 +2886,9 @@ public class ScriptEXP {
                                     "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.Form_okud5[0] +"' as OKUD_CODE, \n" + 
-						"'"+ SC_data_miner.period5[0] +"'as PERIOD \n" + 
-						"null as FORM_CD \n" + 
+                        "'"+ SC_data_miner.Form_okud4[0] +"' as OKUD_CODE, \n" +
+						"'"+ SC_data_miner.period4[0] +"'as PERIOD \n" +
+						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
@@ -2842,9 +2899,9 @@ public class ScriptEXP {
                                     "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.Form_okud6[0] +"' as OKUD_CODE, \n" + 
-						"'"+ SC_data_miner.period6[0] +"'as PERIOD \n" + 
-						"null as FORM_CD \n" + 
+                        "'"+ SC_data_miner.Form_okud5[0] +"' as OKUD_CODE, \n" +
+						"'"+ SC_data_miner.period5[0] +"'as PERIOD \n" +
+						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
@@ -2855,24 +2912,9 @@ public class ScriptEXP {
                                     "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.Form_okud7[0] +"' as OKUD_CODE, \n" + 
-						"'"+ SC_data_miner.period7[0] +"'as PERIOD \n" + 
-						"null as FORM_CD \n" + 
-                        "FROM dual) S\n" +
-                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
-                        "                                R.FORM_CD = S.FORM_CD\n" +
-                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.OKUD_CODE, R.PERIOD, R.FORM_CD)\n" +
-                        "   VALUES (S.FORM_FORMAL_CODE, S.OKUD_CODE, S.PERIOD, S.FORM_CD);\n\n" +
-                                    "\n";
-                            break;
-                        case 8:
-                            report_okud_code_script = "MERGE INTO REPORT_OKUD_CODE R\n" +
-                        "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, \n" + 
-						"'"+ SC_data_miner.period[0] +"'as PERIOD \n" + 
-						"null as FORM_CD \n" + 
+                        "'"+ SC_data_miner.Form_okud6[0] +"' as OKUD_CODE, \n" +
+						"'"+ SC_data_miner.period6[0] +"'as PERIOD \n" +
+						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
@@ -2883,9 +2925,24 @@ public class ScriptEXP {
                                     "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.Form_okud2[0] +"' as OKUD_CODE, \n" + 
-						"'"+ SC_data_miner.period2[0] +"'as PERIOD \n" + 
-						"null as FORM_CD \n" + 
+                        "'"+ SC_data_miner.Form_okud7[0] +"' as OKUD_CODE, \n" +
+						"'"+ SC_data_miner.period7[0] +"'as PERIOD \n" +
+						"null as FORM_CD \n" +
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
+                        "                                R.FORM_CD = S.FORM_CD\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.OKUD_CODE, R.PERIOD, R.FORM_CD)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.OKUD_CODE, S.PERIOD, S.FORM_CD);\n\n" +
+                                        "\n";
+                                break;
+                            case 8:
+                                report_okud_code_script = "MERGE INTO REPORT_OKUD_CODE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, \n" +
+						"'"+ SC_data_miner.period[0] +"'as PERIOD \n" +
+						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
@@ -2896,9 +2953,9 @@ public class ScriptEXP {
                                     "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.Form_okud3[0] +"' as OKUD_CODE, \n" + 
-						"'"+ SC_data_miner.period3[0] +"'as PERIOD \n" + 
-						"null as FORM_CD \n" + 
+                        "'"+ SC_data_miner.Form_okud2[0] +"' as OKUD_CODE, \n" +
+						"'"+ SC_data_miner.period2[0] +"'as PERIOD \n" +
+						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
@@ -2909,9 +2966,9 @@ public class ScriptEXP {
                                     "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.Form_okud4[0] +"' as OKUD_CODE, \n" + 
-						"'"+ SC_data_miner.period4[0] +"'as PERIOD \n" + 
-						"null as FORM_CD \n" + 
+                        "'"+ SC_data_miner.Form_okud3[0] +"' as OKUD_CODE, \n" +
+						"'"+ SC_data_miner.period3[0] +"'as PERIOD \n" +
+						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
@@ -2922,9 +2979,9 @@ public class ScriptEXP {
                                     "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.Form_okud5[0] +"' as OKUD_CODE, \n" + 
-						"'"+ SC_data_miner.period5[0] +"'as PERIOD \n" + 
-						"null as FORM_CD \n" + 
+                        "'"+ SC_data_miner.Form_okud4[0] +"' as OKUD_CODE, \n" +
+						"'"+ SC_data_miner.period4[0] +"'as PERIOD \n" +
+						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
@@ -2935,9 +2992,9 @@ public class ScriptEXP {
                                     "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.Form_okud6[0] +"' as OKUD_CODE, \n" + 
-						"'"+ SC_data_miner.period6[0] +"'as PERIOD \n" + 
-						"null as FORM_CD \n" + 
+                        "'"+ SC_data_miner.Form_okud5[0] +"' as OKUD_CODE, \n" +
+						"'"+ SC_data_miner.period5[0] +"'as PERIOD \n" +
+						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
@@ -2948,9 +3005,9 @@ public class ScriptEXP {
                                     "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.Form_okud7[0] +"' as OKUD_CODE, \n" + 
-						"'"+ SC_data_miner.period7[0] +"'as PERIOD \n" + 
-						"null as FORM_CD \n" + 
+                        "'"+ SC_data_miner.Form_okud6[0] +"' as OKUD_CODE, \n" +
+						"'"+ SC_data_miner.period6[0] +"'as PERIOD \n" +
+						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
@@ -2961,28 +3018,53 @@ public class ScriptEXP {
                                     "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.Form_okud8[0] +"' as OKUD_CODE, \n" + 
-						"'"+ SC_data_miner.period8[0] +"'as PERIOD \n" + 
-						"null as FORM_CD \n" + 
+                        "'"+ SC_data_miner.Form_okud7[0] +"' as OKUD_CODE, \n" +
+						"'"+ SC_data_miner.period7[0] +"'as PERIOD \n" +
+						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
                         "                                R.FORM_CD = S.FORM_CD\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.OKUD_CODE, R.PERIOD, R.FORM_CD)\n" +
                         "   VALUES (S.FORM_FORMAL_CODE, S.OKUD_CODE, S.PERIOD, S.FORM_CD);\n\n" +
-                                    "\n";
-                            break;
+                                    "\n" +
+                                    "MERGE INTO REPORT_OKUD_CODE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_okud8[0] +"' as OKUD_CODE, \n" +
+						"'"+ SC_data_miner.period8[0] +"'as PERIOD \n" +
+						"null as FORM_CD \n" +
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
+                        "                                R.FORM_CD = S.FORM_CD\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.OKUD_CODE, R.PERIOD, R.FORM_CD)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.OKUD_CODE, S.PERIOD, S.FORM_CD);\n\n" +
+                                        "\n";
+                                break;
+                        }
                     }
                 }
                 //System.out.print("SC_data_miner.Form_formal_code[0] = " + SC_data_miner.Form_formal_code[0] + "\n");
                 if(SC_data_miner.Form_cd[0] == null  || Objects.equals(SC_data_miner.Form_cd[0], "") || Objects.equals(SC_data_miner.Form_cd[0], " ") ||
                         SC_data_miner.Form_formal_code[0] == null  || Objects.equals(SC_data_miner.Form_formal_code[0], "") || Objects.equals(SC_data_miner.Form_formal_code[0], " ")){
-                    report_form_src_script = "--Warning: Не указаны данные для таблицы REPORT_FORM_SRC\n\n";
+                    if(rep_or_code[0] == 1){
+                        report_form_src_script = "--Для регистрации кода доступа нет необходимости заполнять данные для таблицы REPORT_FORM_SRC\n\n";
+                    } else{
+                        report_form_src_script = "--Warning: Не указаны данные для таблицы REPORT_FORM_SRC: ";
+                        if(SC_data_miner.Form_cd[0] == null  || Objects.equals(SC_data_miner.Form_cd[0], "") || Objects.equals(SC_data_miner.Form_cd[0], " ")){
+                            report_form_src_script = report_form_src_script + "Код доступа, ";
+                        }
+                        if(SC_data_miner.Form_formal_code[0] == null  || Objects.equals(SC_data_miner.Form_formal_code[0], "") || Objects.equals(SC_data_miner.Form_formal_code[0], " ")){
+                            report_form_src_script = report_form_src_script + "Уникальный код отчета.";
+                        }
+                        report_form_src_script = report_form_src_script + "\n\n";
+                    }
                 } else {
                     report_form_src_script = "MERGE INTO REPORT_FORM_SRC R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.Reg_form_code[0] +"' as REG_FORM_CODE, \n" + 
+                        "'"+ SC_data_miner.Reg_form_code[0] +"' as REG_FORM_CODE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REG_FORM_CODE = S.REG_FORM_CODE\n" +
@@ -2992,7 +3074,11 @@ public class ScriptEXP {
                 }
                 //System.out.print("SC_data_miner.rep_subj_type[0] = " + SC_data_miner.rep_subj_type[0] + "\n");
                 if(SC_data_miner.rep_subj_type[0] == null || Objects.equals(SC_data_miner.rep_subj_type[0], "") || Objects.equals(SC_data_miner.rep_subj_type[0], " ")){
-                    report_rep_subj_type_script = "--Warning: Не указаны данные для таблицы REPORT_REP_SUBJ_TYPE\n\n";
+                    if(rep_or_code[0] == 1){
+                        report_rep_subj_type_script = "--Для регистрации кода доступа нет необходимости заполнять данные для таблицы REPORT_REP_SUBJ_TYPE\n\n";
+                    } else{
+                        report_rep_subj_type_script = "--Warning: Не указаны данные для таблицы REPORT_REP_SUBJ_TYPE: Разрез\n\n";
+                    }
                 } else {
                     int c = OK_Action.getSubj_count(0);
                     switch(c){
@@ -3000,7 +3086,7 @@ public class ScriptEXP {
                             report_rep_subj_type_script = "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE, \n" + 
+                        "'"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -3011,7 +3097,7 @@ public class ScriptEXP {
                             report_rep_subj_type_script = "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE, \n" + 
+                        "'"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -3020,7 +3106,7 @@ public class ScriptEXP {
                                     "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.rep_subj_type2[0] +"' as REP_SUBJ_TYPE, \n" + 
+                        "'"+ SC_data_miner.rep_subj_type2[0] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -3031,7 +3117,7 @@ public class ScriptEXP {
                             report_rep_subj_type_script = "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE, \n" + 
+                        "'"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -3040,7 +3126,7 @@ public class ScriptEXP {
                                     "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.rep_subj_type2[0] +"' as REP_SUBJ_TYPE, \n" + 
+                        "'"+ SC_data_miner.rep_subj_type2[0] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -3049,7 +3135,7 @@ public class ScriptEXP {
                                     "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.rep_subj_type3[0] +"' as REP_SUBJ_TYPE, \n" + 
+                        "'"+ SC_data_miner.rep_subj_type3[0] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -3060,7 +3146,7 @@ public class ScriptEXP {
                             report_rep_subj_type_script = "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE, \n" + 
+                        "'"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -3069,7 +3155,7 @@ public class ScriptEXP {
                                     "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.rep_subj_type2[0] +"' as REP_SUBJ_TYPE, \n" + 
+                        "'"+ SC_data_miner.rep_subj_type2[0] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -3078,7 +3164,7 @@ public class ScriptEXP {
                                     "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.rep_subj_type3[0] +"' as REP_SUBJ_TYPE, \n" + 
+                        "'"+ SC_data_miner.rep_subj_type3[0] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -3087,7 +3173,7 @@ public class ScriptEXP {
                                     "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.rep_subj_type4[0] +"' as REP_SUBJ_TYPE, \n" + 
+                        "'"+ SC_data_miner.rep_subj_type4[0] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -3098,7 +3184,7 @@ public class ScriptEXP {
                             report_rep_subj_type_script = "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE, \n" + 
+                        "'"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -3107,7 +3193,7 @@ public class ScriptEXP {
                                     "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.rep_subj_type2[0] +"' as REP_SUBJ_TYPE, \n" + 
+                        "'"+ SC_data_miner.rep_subj_type2[0] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -3116,7 +3202,7 @@ public class ScriptEXP {
                                     "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.rep_subj_type3[0] +"' as REP_SUBJ_TYPE, \n" + 
+                        "'"+ SC_data_miner.rep_subj_type3[0] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -3125,7 +3211,7 @@ public class ScriptEXP {
                                     "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.rep_subj_type4[0] +"' as REP_SUBJ_TYPE, \n" + 
+                        "'"+ SC_data_miner.rep_subj_type4[0] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -3134,7 +3220,7 @@ public class ScriptEXP {
                                     "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.rep_subj_type5[0] +"' as REP_SUBJ_TYPE, \n" + 
+                        "'"+ SC_data_miner.rep_subj_type5[0] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -3145,7 +3231,7 @@ public class ScriptEXP {
                             report_rep_subj_type_script = "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE, \n" + 
+                        "'"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -3154,7 +3240,7 @@ public class ScriptEXP {
                                     "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.rep_subj_type2[0] +"' as REP_SUBJ_TYPE, \n" + 
+                        "'"+ SC_data_miner.rep_subj_type2[0] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -3163,7 +3249,7 @@ public class ScriptEXP {
                                     "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.rep_subj_type3[0] +"' as REP_SUBJ_TYPE, \n" + 
+                        "'"+ SC_data_miner.rep_subj_type3[0] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -3172,7 +3258,7 @@ public class ScriptEXP {
                                     "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.rep_subj_type4[0] +"' as REP_SUBJ_TYPE, \n" + 
+                        "'"+ SC_data_miner.rep_subj_type4[0] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -3181,7 +3267,7 @@ public class ScriptEXP {
                                     "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.rep_subj_type5[0] +"' as REP_SUBJ_TYPE, \n" + 
+                        "'"+ SC_data_miner.rep_subj_type5[0] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -3190,7 +3276,7 @@ public class ScriptEXP {
                                     "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.rep_subj_type6[0] +"' as REP_SUBJ_TYPE, \n" + 
+                        "'"+ SC_data_miner.rep_subj_type6[0] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -3201,7 +3287,7 @@ public class ScriptEXP {
                             report_rep_subj_type_script = "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE, \n" + 
+                        "'"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -3210,7 +3296,7 @@ public class ScriptEXP {
                                     "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.rep_subj_type2[0] +"' as REP_SUBJ_TYPE, \n" + 
+                        "'"+ SC_data_miner.rep_subj_type2[0] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -3219,7 +3305,7 @@ public class ScriptEXP {
                                     "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.rep_subj_type3[0] +"' as REP_SUBJ_TYPE, \n" + 
+                        "'"+ SC_data_miner.rep_subj_type3[0] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -3228,7 +3314,7 @@ public class ScriptEXP {
                                     "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.rep_subj_type4[0] +"' as REP_SUBJ_TYPE, \n" + 
+                        "'"+ SC_data_miner.rep_subj_type4[0] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -3237,7 +3323,7 @@ public class ScriptEXP {
                                     "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.rep_subj_type5[0] +"' as REP_SUBJ_TYPE, \n" + 
+                        "'"+ SC_data_miner.rep_subj_type5[0] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -3246,7 +3332,7 @@ public class ScriptEXP {
                                     "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.rep_subj_type6[0] +"' as REP_SUBJ_TYPE, \n" + 
+                        "'"+ SC_data_miner.rep_subj_type6[0] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -3255,7 +3341,7 @@ public class ScriptEXP {
                                     "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.rep_subj_type7[0] +"' as REP_SUBJ_TYPE, \n" + 
+                        "'"+ SC_data_miner.rep_subj_type7[0] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -3266,7 +3352,7 @@ public class ScriptEXP {
                             report_rep_subj_type_script = "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE, \n" + 
+                        "'"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -3275,7 +3361,7 @@ public class ScriptEXP {
                                     "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.rep_subj_type2[0] +"' as REP_SUBJ_TYPE, \n" + 
+                        "'"+ SC_data_miner.rep_subj_type2[0] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -3284,7 +3370,7 @@ public class ScriptEXP {
                                     "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.rep_subj_type3[0] +"' as REP_SUBJ_TYPE, \n" + 
+                        "'"+ SC_data_miner.rep_subj_type3[0] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -3293,7 +3379,7 @@ public class ScriptEXP {
                                     "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.rep_subj_type4[0] +"' as REP_SUBJ_TYPE, \n" + 
+                        "'"+ SC_data_miner.rep_subj_type4[0] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -3302,7 +3388,7 @@ public class ScriptEXP {
                                     "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.rep_subj_type5[0] +"' as REP_SUBJ_TYPE, \n" + 
+                        "'"+ SC_data_miner.rep_subj_type5[0] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -3311,7 +3397,7 @@ public class ScriptEXP {
                                     "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.rep_subj_type6[0] +"' as REP_SUBJ_TYPE, \n" + 
+                        "'"+ SC_data_miner.rep_subj_type6[0] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -3320,7 +3406,7 @@ public class ScriptEXP {
                                     "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.rep_subj_type7[0] +"' as REP_SUBJ_TYPE, \n" + 
+                        "'"+ SC_data_miner.rep_subj_type7[0] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -3329,7 +3415,7 @@ public class ScriptEXP {
                                     "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.rep_subj_type8[0] +"' as REP_SUBJ_TYPE, \n" + 
+                        "'"+ SC_data_miner.rep_subj_type8[0] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -3341,7 +3427,7 @@ public class ScriptEXP {
                 }
                 //System.out.print("SC_data_miner.Search_path[0] = " + SC_data_miner.Search_path[0] + "\n");
                 if(SC_data_miner.Search_path[0] == null || Objects.equals(SC_data_miner.Search_path[0], "") || Objects.equals(SC_data_miner.Search_path[0], " ")){
-                    ehd_acs_script = "--Warning: Не указаны данные для таблицы EHD_ACS_OBJECTS\n\n";
+                    ehd_acs_script = "--Warning: Не указаны данные для таблицы EHD_ACS_OBJECTS: Полный путь отчета/папки(Search_path)\n\n";
                 } else {
                     ehd_acs_script = "MERGE INTO EHD_ACS_OBJECTS O\n" +
                             "   USING (SELECT \n" +
@@ -3373,9 +3459,22 @@ public class ScriptEXP {
                         SC_data_miner.p_parent_type_ref_txtf[0] == null || Objects.equals(SC_data_miner.p_parent_type_ref_txtf[0], "") || Objects.equals(SC_data_miner.p_parent_type_ref_txtf[0], " ") ||
                         SC_data_miner.p_type_ref_txtf[0] == null || Objects.equals(SC_data_miner.p_type_ref_txtf[0], "") || Objects.equals(SC_data_miner.p_type_ref_txtf[0], " ") ||
                         SC_data_miner.p_source_ref_txtf[0] == null || Objects.equals(SC_data_miner.p_source_ref_txtf[0], "") || Objects.equals(SC_data_miner.p_source_ref_txtf[0], " ") ){
-                    ehd_acs_script2 = "--Warning: Не указаны данные для таблицы EHD_ACS_OBJECTS\n\n";
+                    ehd_acs_script2 = "--Warning: Не указаны данные для таблицы EHD_ACS_OBJECTS: ";
+                    if(SC_data_miner.p_parent_code_txtf[0] == null || Objects.equals(SC_data_miner.p_parent_code_txtf[0], "") || Objects.equals(SC_data_miner.p_parent_code_txtf[0], " ")){
+                        ehd_acs_script2 = ehd_acs_script2 + "p_parent_code, ";
+                    }
+                    if(SC_data_miner.p_parent_type_ref_txtf[0] == null || Objects.equals(SC_data_miner.p_parent_type_ref_txtf[0], "") || Objects.equals(SC_data_miner.p_parent_type_ref_txtf[0], " ")){
+                        ehd_acs_script2 = ehd_acs_script2 + "p_parent_type_ref, ";
+                    }
+                    if(SC_data_miner.p_type_ref_txtf[0] == null || Objects.equals(SC_data_miner.p_type_ref_txtf[0], "") || Objects.equals(SC_data_miner.p_type_ref_txtf[0], " ")){
+                        ehd_acs_script2 = ehd_acs_script2 + "p_type_ref, ";
+                    }
+                    if(SC_data_miner.p_source_ref_txtf[0] == null || Objects.equals(SC_data_miner.p_source_ref_txtf[0], "") || Objects.equals(SC_data_miner.p_source_ref_txtf[0], " ")){
+                        ehd_acs_script2 = ehd_acs_script2 + "p_source_ref. ";
+                    }
+                    ehd_acs_script2 = ehd_acs_script2 + "\n\n";
                 } else {
-                    if((SC_data_miner.Search_path[0] == null || Objects.equals(SC_data_miner.Search_path[0], "") || Objects.equals(SC_data_miner.Search_path[0], " ")) && (!Objects.equals(SC_data_miner.p_type_ref_txtf[0], "cognos") && !Objects.equals(SC_data_miner.p_source_ref_txtf[0], "cognos"))){
+                    if(rep_or_code[0] == 1){
                         ehd_acs_script2 = "begin\n" +
                                 "utils.add_object_node\n" +
                                 "                            (p_name => '" + SC_data_miner.Form_name[0] + "'\n" +
@@ -3387,7 +3486,7 @@ public class ScriptEXP {
                                 ");\n" +
                                 "                    end;\n" +
                                 "/";
-                    } else {
+                    } else{
                         ehd_acs_script2 = "begin\n" +
                                 "utils.add_object_node\n" +
                                 "                            (p_name => '" + SC_data_miner.Form_name[0] + "'\n" +
@@ -3401,7 +3500,6 @@ public class ScriptEXP {
                                 "                    end;\n" +
                                 "/";
                     }
-
                 }
 
                 text[0] =  "--" + FName_def[0] +"\n" +
@@ -3436,13 +3534,13 @@ public class ScriptEXP {
                         "--DM_NIKA_KO_DATA\n" +
                         "\n" +
                         rep_form_cognos_script + "\n\n" + "commit;";
-                System.out.print("type = " + type + "\n");
-                if(type == 0){
+               // System.out.print("type[0] = " + type[0] + "\n");
+                if(type[0] == 0){
                     text[3] = "--" + FName_def[0] +"\n" +
                             "\n" +
                             "--TechDB_EHD_ACS\n" +
                             "\n" + ehd_acs_script + "\n\n" + "commit;" ;
-                } else if(type == 1){
+                } else if(type[0] == 1){
                     text[3] = "--" + FName_def[0] +"\n" +
                             "\n" +
                             "--TechDB_EHD_ACS\n" +
@@ -3465,16 +3563,38 @@ public class ScriptEXP {
                 } else{
                     reason = "'" + SC_data_miner.reason[0] + "' as REASON";
                 }
+                //System.out.print("SC_data_miner.Form_okud[0] = " + SC_data_miner.Form_okud[0] + "\n");
                 if(SC_data_miner.Form_cd[0].startsWith("0409")){
                     okud_rep_form = "null as FORM_OKUD";
                     //System.out.print("\nokud_rep_form = " + okud_rep_form + "\n");
-                    //System.out.print("SC_data_miner.Form_cd[0].startsWith(\"0409\") = " + SC_data_miner.Form_cd[0].startsWith("0409"));
+                    //System.out.print("SC_data_miner.Form_cd[0].startsWith(\"0409\") = " + SC_data_miner.Form_cd[0].startsWith("0409") + "\n");
                 } else {
-                    okud_rep_form = "'"+ SC_data_miner.Form_okud[0] + "' as FORM_OKUD";
-                    //System.out.print("\nokud_rep_form = " + okud_rep_form + "\n");
-                    //System.out.print("SC_data_miner.Form_cd[0].startsWith(\"0409\") = " + SC_data_miner.Form_cd[0].startsWith("0409"));
-                }
+                    if(SC_data_miner.Form_okud[0] == null || Objects.equals(SC_data_miner.Form_okud[0], "") || Objects.equals(SC_data_miner.Form_okud[0], " ")){
+                        for(int y = 1; y<=count;){
+                            if (SC_data_miner.Form_okud[y] == null || Objects.equals(SC_data_miner.Form_okud[y], "") || Objects.equals(SC_data_miner.Form_okud[y], " ")){
+                                y++;
+                            } else{
+                                if(type[y] == 0){
+                                    okud_rep_form = "'"+ SC_data_miner.Form_okud[y] + "' as FORM_OKUD";
+                                    break;
+                                } else{
+                                    y++;
+                                }
 
+                            }
+                        }
+                        if(okud_rep_form == null || Objects.equals(okud_rep_form, "") || Objects.equals(okud_rep_form, " ")){
+                            okud_rep_form = "null as FORM_OKUD";
+                        }
+                        //System.out.print("\nokud_rep_form = " + okud_rep_form + "\n");
+                        //System.out.print("SC_data_miner.Form_cd[0].startsWith(\"0409\") = " + SC_data_miner.Form_cd[0].startsWith("0409") + "\n");
+                    } else{
+                             okud_rep_form = "'"+ SC_data_miner.Form_okud[0] + "' as FORM_OKUD";
+                            //System.out.print("\nokud_rep_form = " + okud_rep_form + "\n");
+                            //System.out.print("SC_data_miner.Form_cd[0].startsWith(\"0409\") = " + SC_data_miner.Form_cd[0].startsWith("0409"));
+
+                    }
+                }
                 String[] rep_form_script = new String[16];
                 String[] rep_form_cognos_script = new String[16];
                 String[] rep_form_oki_script = new String[16];
@@ -3487,8 +3607,20 @@ public class ScriptEXP {
                 String[] ehd_acs_script = new String[16];
                 String[] ehd_acs_script2 = new String[16];
 
-                if((SC_data_miner.Form_cd_name[0]== null) || Objects.equals(SC_data_miner.Form_cd_name[0], "") || Objects.equals(SC_data_miner.Form_cd_name[0], " ")){
-                    rep_form_script[0] = "--Warning: Не указаны данные для таблицы REP_FORM\n\n";
+                if((SC_data_miner.Form_cd_name[0]== null) || Objects.equals(SC_data_miner.Form_cd_name[0], "") || Objects.equals(SC_data_miner.Form_cd_name[0], " ")||
+                        (SC_data_miner.Form_cd[0]== null) || Objects.equals(SC_data_miner.Form_cd[0], "") || Objects.equals(SC_data_miner.Form_cd[0], " ")){
+                    if(rep_or_code[0] == 0){
+                        rep_form_script[0] = "--Для регистрации отчета нет необходимости заполнять данные для таблицы REP_FORM\n\n";
+                    } else {
+                        rep_form_script[0] = "--Warning: Не указаны данные для таблицы REP_FORM: ";
+                        if ((SC_data_miner.Form_cd[0] == null) || Objects.equals(SC_data_miner.Form_cd[0], "") || Objects.equals(SC_data_miner.Form_cd[0], " ")) {
+                            rep_form_script[0] = rep_form_script[0] + "Код доступа, ";
+                        }
+                        if ((SC_data_miner.Form_cd_name[0] == null) || Objects.equals(SC_data_miner.Form_cd_name[0], "") || Objects.equals(SC_data_miner.Form_cd_name[0], " ")) {
+                            rep_form_script[0] = rep_form_script[0] + "Наименование кода доступа.";
+                        }
+                        rep_form_script[0] = rep_form_script[0] + "\n\n";
+                    }
                 } else {
                     rep_form_script[0] = "MERGE INTO REP_FORM R\n" +
                         "   USING (SELECT \n" +
@@ -3500,12 +3632,23 @@ public class ScriptEXP {
                         "   WHEN MATCHED THEN UPDATE SET R.FORM_NAME = S.FORM_NAME,\n" +
                         "                                R.FORM_OKUD = S.FORM_OKUD\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.FORM_NAME, R.FORM_OKUD)\n" +
-                        "   VALUES (S.FORM_CD, S.FORM_NAME, S.FORM_OKUD);" + 
+                        "   VALUES (S.FORM_CD, S.FORM_NAME, S.FORM_OKUD);" +
                             "\n" +
                             "\n" ;
                 }
                 if(Objects.equals(iod, "null as FLAG_IOD") || Objects.equals(pdn, "null as FLAG_PDN")){
-                    rep_form_oki_script[0] = "--Warning: Не указаны данные для таблицы REP_FORM_OKI\n\n";
+                    if(rep_or_code[0] == 0){
+                        rep_form_oki_script[0] = "--Для регистрации отчета нет необходимости заполнять данные для таблицы REP_FORM_OKI\n\n";
+                    } else{
+                        rep_form_oki_script[0] = "--Warning: Не указаны данные для таблицы REP_FORM_OKI: ";
+                        if(Objects.equals(iod, "null as FLAG_IOD")){
+                            rep_form_oki_script[0] = rep_form_oki_script[0] + "Флаг ИОД, ";
+                        }
+                        if(Objects.equals(pdn, "null as FLAG_PDN")){
+                            rep_form_oki_script[0] = rep_form_oki_script[0] + "Флаг ПДН.";
+                        }
+                        rep_form_oki_script[0] = rep_form_oki_script[0] + "\n\n";
+                    }
                 } else{
                     rep_form_oki_script[0] = "MERGE INTO REP_FORM_OKI R\n" +
                         "   USING (SELECT \n" +
@@ -3522,7 +3665,11 @@ public class ScriptEXP {
                             "\n" ;
                 }
                 if(SC_data_miner.Form_cd_cog[0] == null || Objects.equals(SC_data_miner.Form_cd_cog[0], "") || Objects.equals(SC_data_miner.Form_cd_cog[0], " ")){
-                    rep_form_cognos_script[0] = "--Warning: Не указаны данные для таблицы REP_FORM_COGNOS\n\n";
+                    if(rep_or_code[0] == 0){
+                        rep_form_cognos_script[0] = "--Для регистрации отчета нет необходимости заполнять данные для таблицы REP_FORM_COGNOS\n\n";
+                    } else{
+                        rep_form_cognos_script[0] = "--Warning: Не указаны данные для таблицы REP_FORM_COGNOS: Код потока\n\n";
+                    }
                 } else {
                     rep_form_cognos_script[0] = "MERGE INTO REP_FORM_COGNOS R\n" +
                         "   USING (SELECT \n" +
@@ -3537,7 +3684,11 @@ public class ScriptEXP {
                             "\n";
                 }
                 if(SC_data_miner.Dep_name[0] == null || Objects.equals(SC_data_miner.Dep_name[0], "") || Objects.equals(SC_data_miner.Dep_name[0], " ")){
-                    rep_form_dep_owner_script[0] = "--Warning: Не указаны данные для таблицы REP_FORM_DEP_OWNER\n\n";
+                    if(rep_or_code[0] == 0){
+                        rep_form_dep_owner_script[0] = "--Для регистрации отчета нет необходимости заполнять данные для таблицы REP_FORM_DEP_OWNER\n\n";
+                    } else{
+                        rep_form_dep_owner_script[0] = "--Warning: Не указаны данные для таблицы REP_FORM_DEP_OWNER: Сокращенное наименование департамента для REP_FORM_DEP_OWNER\n\n";
+                    }
                 } else {
                     int c = OK_Action.getDep_count(0);
                     switch (c){
@@ -3545,8 +3696,8 @@ public class ScriptEXP {
                             rep_form_dep_owner_script[0] = "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_name[0] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_name[0] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -3559,8 +3710,8 @@ public class ScriptEXP {
                             rep_form_dep_owner_script[0] = "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_name[0] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_name[0] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -3569,8 +3720,8 @@ public class ScriptEXP {
                                     "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_name2[0] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_name2[0] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -3583,8 +3734,8 @@ public class ScriptEXP {
                             rep_form_dep_owner_script[0] = "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_name[0] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_name[0] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -3593,8 +3744,8 @@ public class ScriptEXP {
                                     "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_name2[0] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_name2[0] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -3603,8 +3754,8 @@ public class ScriptEXP {
                                     "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_name3[0] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_name3[0] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -3617,8 +3768,8 @@ public class ScriptEXP {
                             rep_form_dep_owner_script[0] = "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_name[0] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_name[0] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -3627,8 +3778,8 @@ public class ScriptEXP {
                                     "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_name2[0] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_name2[0] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -3637,8 +3788,8 @@ public class ScriptEXP {
                                     "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_name3[0] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_name3[0] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -3647,8 +3798,8 @@ public class ScriptEXP {
                                     "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_name4[0] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_name4[0] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -3661,8 +3812,8 @@ public class ScriptEXP {
                             rep_form_dep_owner_script[0] = "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_name[0] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_name[0] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -3671,8 +3822,8 @@ public class ScriptEXP {
                                     "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_name2[0] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_name2[0] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -3681,8 +3832,8 @@ public class ScriptEXP {
                                     "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_name3[0] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_name3[0] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -3691,8 +3842,8 @@ public class ScriptEXP {
                                     "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_name4[0] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_name4[0] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -3701,8 +3852,8 @@ public class ScriptEXP {
                                     "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_name5[0] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_name5[0] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -3715,8 +3866,8 @@ public class ScriptEXP {
                             rep_form_dep_owner_script[0] = "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_name[0] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_name[0] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -3725,8 +3876,8 @@ public class ScriptEXP {
                                     "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_name2[0] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_name2[0] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -3735,8 +3886,8 @@ public class ScriptEXP {
                                     "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_name3[0] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_name3[0] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -3745,8 +3896,8 @@ public class ScriptEXP {
                                     "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_name4[0] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_name4[0] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -3755,8 +3906,8 @@ public class ScriptEXP {
                                     "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_name5[0] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_name5[0] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -3765,8 +3916,8 @@ public class ScriptEXP {
                                     "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_name6[0] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_name6[0] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -3779,8 +3930,8 @@ public class ScriptEXP {
                             rep_form_dep_owner_script[0] = "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_name[0] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_name[0] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -3789,8 +3940,8 @@ public class ScriptEXP {
                                     "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_name2[0] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_name2[0] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -3799,8 +3950,8 @@ public class ScriptEXP {
                                     "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_name3[0] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_name3[0] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -3809,8 +3960,8 @@ public class ScriptEXP {
                                     "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_name4[0] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_name4[0] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -3819,8 +3970,8 @@ public class ScriptEXP {
                                     "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_name5[0] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_name5[0] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -3829,8 +3980,8 @@ public class ScriptEXP {
                                     "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_name6[0] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_name6[0] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -3839,8 +3990,8 @@ public class ScriptEXP {
                                     "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_name7[0] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_name7[0] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -3853,8 +4004,8 @@ public class ScriptEXP {
                             rep_form_dep_owner_script[0] = "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_name[0] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_name[0] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -3863,8 +4014,8 @@ public class ScriptEXP {
                                     "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_name2[0] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_name2[0] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -3873,8 +4024,8 @@ public class ScriptEXP {
                                     "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_name3[0] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_name3[0] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -3883,8 +4034,8 @@ public class ScriptEXP {
                                     "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_name4[0] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_name4[0] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -3893,8 +4044,8 @@ public class ScriptEXP {
                                     "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_name5[0] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_name5[0] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -3903,8 +4054,8 @@ public class ScriptEXP {
                                     "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_name6[0] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_name6[0] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -3913,8 +4064,8 @@ public class ScriptEXP {
                                     "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_name7[0] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_name7[0] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -3923,8 +4074,8 @@ public class ScriptEXP {
                                     "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_name8[0] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_name8[0] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -3937,7 +4088,11 @@ public class ScriptEXP {
                     }
                 }
                 if(SC_data_miner.Dep_u_name[0] == null || Objects.equals(SC_data_miner.Dep_u_name[0], "") || Objects.equals(SC_data_miner.Dep_u_name[0], " ")){
-                    rep_form_dep_user_script[0] = "--Warning: Не указаны данные для таблицы REP_FORM_DEP_USER\n\n";
+                    if(rep_or_code[0] == 0){
+                        rep_form_dep_user_script[0] = "--Для регистрации отчета нет необходимости заполнять данные для таблицы REP_FORM_DEP_USER\n\n";
+                    } else{
+                        rep_form_dep_user_script[0] = "--Warning: Не указаны данные для таблицы REP_FORM_DEP_USER: Сокращенное наименование департамента для REP_FORM_DEP_USER\n\n";
+                    }
                 } else {
                     int c = OK_Action.getDep_u_count(0);
                     switch (c){
@@ -3945,8 +4100,8 @@ public class ScriptEXP {
                             rep_form_dep_user_script[0] = "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_u_name[0] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_u_name[0] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -3959,8 +4114,8 @@ public class ScriptEXP {
                             rep_form_dep_user_script[0] = "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_u_name[0] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_u_name[0] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -3969,8 +4124,8 @@ public class ScriptEXP {
                                     "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_u_name2[0] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_u_name2[0] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -3983,8 +4138,8 @@ public class ScriptEXP {
                             rep_form_dep_user_script[0] = "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_u_name[0] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_u_name[0] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -3993,8 +4148,8 @@ public class ScriptEXP {
                                     "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_u_name2[0] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_u_name2[0] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -4003,8 +4158,8 @@ public class ScriptEXP {
                                    "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_u_name3[0] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_u_name3[0] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -4017,8 +4172,8 @@ public class ScriptEXP {
                             rep_form_dep_user_script[0] = "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_u_name[0] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_u_name[0] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -4027,8 +4182,8 @@ public class ScriptEXP {
                                     "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_u_name2[0] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_u_name2[0] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -4037,8 +4192,8 @@ public class ScriptEXP {
                                     "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_u_name3[0] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_u_name3[0] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -4047,8 +4202,8 @@ public class ScriptEXP {
                                     "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_u_name4[0] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_u_name4[0] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -4061,8 +4216,8 @@ public class ScriptEXP {
                             rep_form_dep_user_script[0] = "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_u_name[0] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_u_name[0] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -4071,8 +4226,8 @@ public class ScriptEXP {
                                     "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_u_name2[0] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_u_name2[0] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -4081,8 +4236,8 @@ public class ScriptEXP {
                                     "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_u_name3[0] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_u_name3[0] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -4091,8 +4246,8 @@ public class ScriptEXP {
                                     "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_u_name4[0] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_u_name4[0] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -4101,8 +4256,8 @@ public class ScriptEXP {
                                     "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_u_name5[0] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_u_name5[0] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -4115,8 +4270,8 @@ public class ScriptEXP {
                             rep_form_dep_user_script[0] = "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_u_name[0] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_u_name[0] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -4125,8 +4280,8 @@ public class ScriptEXP {
                                     "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_u_name2[0] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_u_name2[0] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -4135,8 +4290,8 @@ public class ScriptEXP {
                                     "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_u_name3[0] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_u_name3[0] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -4145,8 +4300,8 @@ public class ScriptEXP {
                                     "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_u_name4[0] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_u_name4[0] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -4155,8 +4310,8 @@ public class ScriptEXP {
                                     "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_u_name5[0] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_u_name5[0] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -4165,8 +4320,8 @@ public class ScriptEXP {
                                     "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_u_name6[0] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_u_name6[0] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -4179,8 +4334,8 @@ public class ScriptEXP {
                             rep_form_dep_user_script[0] = "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_u_name[0] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_u_name[0] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -4189,8 +4344,8 @@ public class ScriptEXP {
                                     "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_u_name2[0] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_u_name2[0] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -4199,8 +4354,8 @@ public class ScriptEXP {
                                     "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_u_name3[0] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_u_name3[0] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -4209,8 +4364,8 @@ public class ScriptEXP {
                                     "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_u_name4[0] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_u_name4[0] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -4219,8 +4374,8 @@ public class ScriptEXP {
                                     "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_u_name5[0] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_u_name5[0] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -4229,8 +4384,8 @@ public class ScriptEXP {
                                     "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_u_name6[0] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_u_name6[0] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -4246,8 +4401,8 @@ public class ScriptEXP {
                             rep_form_dep_user_script[0] = "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_u_name[0] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_u_name[0] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -4256,8 +4411,8 @@ public class ScriptEXP {
                                     "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_u_name2[0] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_u_name2[0] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -4266,8 +4421,8 @@ public class ScriptEXP {
                                     "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_u_name3[0] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_u_name3[0] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -4276,8 +4431,8 @@ public class ScriptEXP {
                                     "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_u_name4[0] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_u_name4[0] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -4286,8 +4441,8 @@ public class ScriptEXP {
                                     "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_u_name5[0] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_u_name5[0] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -4296,8 +4451,8 @@ public class ScriptEXP {
                                     "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_u_name6[0] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_u_name6[0] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -4306,8 +4461,8 @@ public class ScriptEXP {
                                     "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_u_name7[0] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_u_name7[0] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -4316,8 +4471,8 @@ public class ScriptEXP {
                                     "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_u_name8[0] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_u_name8[0] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -4335,7 +4490,30 @@ public class ScriptEXP {
                         SC_data_miner.Search_path[0] == null || Objects.equals(SC_data_miner.Search_path[0], "") || Objects.equals(SC_data_miner.Search_path[0], " ") ||
                         SC_data_miner.Form_formal_code[0] == null || Objects.equals(SC_data_miner.Form_formal_code[0], "") || Objects.equals(SC_data_miner.Form_formal_code[0], " ") ||
                         SC_data_miner.Desc[0] == null || Objects.equals(SC_data_miner.Desc[0], "") || Objects.equals(SC_data_miner.Desc[0], " ")){
-                    reg_report_form_script[0] = "--Warning: Не указаны данные для таблицы REG_REPORT_FORM\n\n";
+                    if(rep_or_code[0] == 1){
+                        reg_report_form_script[0] = "--Для регистрации кода доступа нет необходимости заполнять данные для таблицы REG_REPORT_FORM\n\n";
+                    } else{
+                        reg_report_form_script[0] = "--Warning: Не указаны данные для таблицы REG_REPORT_FORM: ";
+                        if(SC_data_miner.System_id[0] == null || Objects.equals(SC_data_miner.System_id[0], "") || Objects.equals(SC_data_miner.System_id[0], " ")){
+                            reg_report_form_script[0] = reg_report_form_script[0] + "System_id, ";
+                        }
+                        if(SC_data_miner.Security_role_name[0] == null || Objects.equals(SC_data_miner.Security_role_name[0], "") || Objects.equals(SC_data_miner.Security_role_name[0], " ")){
+                            reg_report_form_script[0] = reg_report_form_script[0] + "Security_role_name, ";
+                        }
+                        if(SC_data_miner.Security_role_path[0] == null || Objects.equals(SC_data_miner.Security_role_path[0], "") || Objects.equals(SC_data_miner.Security_role_path[0], " ")){
+                            reg_report_form_script[0] = reg_report_form_script[0] + "Security_role_path, ";
+                        }
+                        if(SC_data_miner.Search_path[0] == null || Objects.equals(SC_data_miner.Search_path[0], "") || Objects.equals(SC_data_miner.Search_path[0], " ")){
+                            reg_report_form_script[0] = reg_report_form_script[0] + "Полный путь отчета/папки(Search_path), ";
+                        }
+                        if(SC_data_miner.Form_formal_code[0] == null || Objects.equals(SC_data_miner.Form_formal_code[0], "") || Objects.equals(SC_data_miner.Form_formal_code[0], " ")){
+                            reg_report_form_script[0] = reg_report_form_script[0] + "Уникальный код отчета, ";
+                        }
+                        if(SC_data_miner.Desc[0] == null || Objects.equals(SC_data_miner.Desc[0], "") || Objects.equals(SC_data_miner.Desc[0], " ")){
+                            reg_report_form_script[0] = reg_report_form_script[0] + "Описание.";
+                        }
+                        reg_report_form_script[0] = reg_report_form_script[0] + "\n\n";
+                    }
                 } else {
                     reg_report_form_script[0] = "MERGE INTO REG_REPORT_FORM R\n" +
                             "   USING (SELECT \n" +
@@ -4363,60 +4541,39 @@ public class ScriptEXP {
                             "\n";
                 }
                 if(SC_data_miner.Form_okud[0] == null  || Objects.equals(SC_data_miner.Form_okud[0], "") || Objects.equals(SC_data_miner.Form_okud[0], " ")){
-                    report_okud_code_script[0] = "--Warning: Не указаны данные для таблицы REPORT_OKUD_CODE\n\n";
+                    if(rep_or_code[0] == 1){
+                        report_okud_code_script[0] = "--Для регистрации кода доступа нет необходимости заполнять данные для таблицы REPORT_OKUD_CODE\n\n";
+                    } else{
+                        report_okud_code_script[0] = "--Warning: Не указаны данные для таблицы REPORT_OKUD_CODE: ОКУД\n\n";
+                    }
                 } else {
-                    int c = OK_Action.getOkud_count(0);
-                    switch(c){
-                        case 1:
-                            report_okud_code_script[0] = "MERGE INTO REPORT_OKUD_CODE R\n" +
+                    if(rep_or_code[0] == 1){
+                        report_okud_code_script[0] = "--Для регистрации кода доступа нет необходимости заполнять данные для таблицы REPORT_OKUD_CODE\n\n";
+                    } else{
+                        int c = OK_Action.getOkud_count(0);
+                        switch(c){
+                            case 1:
+                                report_okud_code_script[0] = "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, \n" + 
-						"'"+ SC_data_miner.period[0] +"'as PERIOD \n" + 
-						"null as FORM_CD \n" + 
+                        "'"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, \n" +
+						"'"+ SC_data_miner.period[0] +"'as PERIOD \n" +
+						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
                         "                                R.FORM_CD = S.FORM_CD\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.OKUD_CODE, R.PERIOD, R.FORM_CD)\n" +
                         "   VALUES (S.FORM_FORMAL_CODE, S.OKUD_CODE, S.PERIOD, S.FORM_CD);\n\n" +
-                                    "\n";
-                            break;
-                        case 2:
-                            report_okud_code_script[0] = "MERGE INTO REPORT_OKUD_CODE R\n" +
+                                        "\n";
+                                break;
+                            case 2:
+                                report_okud_code_script[0] = "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, \n" + 
-						"'"+ SC_data_miner.period[0] +"'as PERIOD \n" + 
-						"null as FORM_CD \n" + 
-                        "FROM dual) S\n" +
-                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
-                        "                                R.FORM_CD = S.FORM_CD\n" +
-                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.OKUD_CODE, R.PERIOD, R.FORM_CD)\n" +
-                        "   VALUES (S.FORM_FORMAL_CODE, S.OKUD_CODE, S.PERIOD, S.FORM_CD);\n\n" +
-                                    "\n" +
-                                    "MERGE INTO REPORT_OKUD_CODE R\n" +
-                        "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.Form_okud2[0] +"' as OKUD_CODE, \n" + 
-						"'"+ SC_data_miner.period2[0] +"'as PERIOD \n" + 
-						"null as FORM_CD \n" + 
-                        "FROM dual) S\n" +
-                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
-                        "                                R.FORM_CD = S.FORM_CD\n" +
-                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.OKUD_CODE, R.PERIOD, R.FORM_CD)\n" +
-                        "   VALUES (S.FORM_FORMAL_CODE, S.OKUD_CODE, S.PERIOD, S.FORM_CD);\n\n" +
-                                    "\n" ;
-                            break;
-                        case 3:
-                            report_okud_code_script[0] = "MERGE INTO REPORT_OKUD_CODE R\n" +
-                        "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, \n" + 
-						"'"+ SC_data_miner.period[0] +"'as PERIOD \n" + 
-						"null as FORM_CD \n" + 
+                        "'"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, \n" +
+						"'"+ SC_data_miner.period[0] +"'as PERIOD \n" +
+						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
@@ -4427,9 +4584,24 @@ public class ScriptEXP {
                                     "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.Form_okud2[0] +"' as OKUD_CODE, \n" + 
-						"'"+ SC_data_miner.period2[0] +"'as PERIOD \n" + 
-						"null as FORM_CD \n" + 
+                        "'"+ SC_data_miner.Form_okud2[0] +"' as OKUD_CODE, \n" +
+						"'"+ SC_data_miner.period2[0] +"'as PERIOD \n" +
+						"null as FORM_CD \n" +
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
+                        "                                R.FORM_CD = S.FORM_CD\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.OKUD_CODE, R.PERIOD, R.FORM_CD)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.OKUD_CODE, S.PERIOD, S.FORM_CD);\n\n" +
+                                        "\n" ;
+                                break;
+                            case 3:
+                                report_okud_code_script[0] = "MERGE INTO REPORT_OKUD_CODE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, \n" +
+						"'"+ SC_data_miner.period[0] +"'as PERIOD \n" +
+						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
@@ -4440,24 +4612,9 @@ public class ScriptEXP {
                                     "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.Form_okud3[0] +"' as OKUD_CODE, \n" + 
-						"'"+ SC_data_miner.period3[0] +"'as PERIOD \n" + 
-						"null as FORM_CD \n" + 
-                        "FROM dual) S\n" +
-                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
-                        "                                R.FORM_CD = S.FORM_CD\n" +
-                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.OKUD_CODE, R.PERIOD, R.FORM_CD)\n" +
-                        "   VALUES (S.FORM_FORMAL_CODE, S.OKUD_CODE, S.PERIOD, S.FORM_CD);\n\n" +
-                                    "\n";
-                            break;
-                        case 4:
-                            report_okud_code_script[0] = "MERGE INTO REPORT_OKUD_CODE R\n" +
-                        "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, \n" + 
-						"'"+ SC_data_miner.period[0] +"'as PERIOD \n" + 
-						"null as FORM_CD \n" + 
+                        "'"+ SC_data_miner.Form_okud2[0] +"' as OKUD_CODE, \n" +
+						"'"+ SC_data_miner.period2[0] +"'as PERIOD \n" +
+						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
@@ -4468,9 +4625,24 @@ public class ScriptEXP {
                                     "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.Form_okud2[0] +"' as OKUD_CODE, \n" + 
-						"'"+ SC_data_miner.period2[0] +"'as PERIOD \n" + 
-						"null as FORM_CD \n" + 
+                        "'"+ SC_data_miner.Form_okud3[0] +"' as OKUD_CODE, \n" +
+						"'"+ SC_data_miner.period3[0] +"'as PERIOD \n" +
+						"null as FORM_CD \n" +
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
+                        "                                R.FORM_CD = S.FORM_CD\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.OKUD_CODE, R.PERIOD, R.FORM_CD)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.OKUD_CODE, S.PERIOD, S.FORM_CD);\n\n" +
+                                        "\n";
+                                break;
+                            case 4:
+                                report_okud_code_script[0] = "MERGE INTO REPORT_OKUD_CODE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, \n" +
+						"'"+ SC_data_miner.period[0] +"'as PERIOD \n" +
+						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
@@ -4481,9 +4653,9 @@ public class ScriptEXP {
                                     "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.Form_okud3[0] +"' as OKUD_CODE, \n" + 
-						"'"+ SC_data_miner.period3[0] +"'as PERIOD \n" + 
-						"null as FORM_CD \n" + 
+                        "'"+ SC_data_miner.Form_okud2[0] +"' as OKUD_CODE, \n" +
+						"'"+ SC_data_miner.period2[0] +"'as PERIOD \n" +
+						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
@@ -4494,24 +4666,9 @@ public class ScriptEXP {
                                     "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.Form_okud4[0] +"' as OKUD_CODE, \n" + 
-						"'"+ SC_data_miner.period4[0] +"'as PERIOD \n" + 
-						"null as FORM_CD \n" + 
-                        "FROM dual) S\n" +
-                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
-                        "                                R.FORM_CD = S.FORM_CD\n" +
-                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.OKUD_CODE, R.PERIOD, R.FORM_CD)\n" +
-                        "   VALUES (S.FORM_FORMAL_CODE, S.OKUD_CODE, S.PERIOD, S.FORM_CD);\n\n" +
-                                    "\n";
-                            break;
-                        case 5:
-                            report_okud_code_script[0] = "MERGE INTO REPORT_OKUD_CODE R\n" +
-                        "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, \n" + 
-						"'"+ SC_data_miner.period[0] +"'as PERIOD \n" + 
-						"null as FORM_CD \n" + 
+                        "'"+ SC_data_miner.Form_okud3[0] +"' as OKUD_CODE, \n" +
+						"'"+ SC_data_miner.period3[0] +"'as PERIOD \n" +
+						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
@@ -4522,9 +4679,24 @@ public class ScriptEXP {
                                     "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.Form_okud2[0] +"' as OKUD_CODE, \n" + 
-						"'"+ SC_data_miner.period2[0] +"'as PERIOD \n" + 
-						"null as FORM_CD \n" + 
+                        "'"+ SC_data_miner.Form_okud4[0] +"' as OKUD_CODE, \n" +
+						"'"+ SC_data_miner.period4[0] +"'as PERIOD \n" +
+						"null as FORM_CD \n" +
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
+                        "                                R.FORM_CD = S.FORM_CD\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.OKUD_CODE, R.PERIOD, R.FORM_CD)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.OKUD_CODE, S.PERIOD, S.FORM_CD);\n\n" +
+                                        "\n";
+                                break;
+                            case 5:
+                                report_okud_code_script[0] = "MERGE INTO REPORT_OKUD_CODE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, \n" +
+						"'"+ SC_data_miner.period[0] +"'as PERIOD \n" +
+						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
@@ -4535,9 +4707,9 @@ public class ScriptEXP {
                                     "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.Form_okud3[0] +"' as OKUD_CODE, \n" + 
-						"'"+ SC_data_miner.period3[0] +"'as PERIOD \n" + 
-						"null as FORM_CD \n" + 
+                        "'"+ SC_data_miner.Form_okud2[0] +"' as OKUD_CODE, \n" +
+						"'"+ SC_data_miner.period2[0] +"'as PERIOD \n" +
+						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
@@ -4548,9 +4720,9 @@ public class ScriptEXP {
                                     "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.Form_okud4[0] +"' as OKUD_CODE, \n" + 
-						"'"+ SC_data_miner.period4[0] +"'as PERIOD \n" + 
-						"null as FORM_CD \n" + 
+                        "'"+ SC_data_miner.Form_okud3[0] +"' as OKUD_CODE, \n" +
+						"'"+ SC_data_miner.period3[0] +"'as PERIOD \n" +
+						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
@@ -4561,24 +4733,9 @@ public class ScriptEXP {
                                     "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.Form_okud5[0] +"' as OKUD_CODE, \n" + 
-						"'"+ SC_data_miner.period5[0] +"'as PERIOD \n" + 
-						"null as FORM_CD \n" + 
-                        "FROM dual) S\n" +
-                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
-                        "                                R.FORM_CD = S.FORM_CD\n" +
-                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.OKUD_CODE, R.PERIOD, R.FORM_CD)\n" +
-                        "   VALUES (S.FORM_FORMAL_CODE, S.OKUD_CODE, S.PERIOD, S.FORM_CD);\n\n" +
-                                    "\n";
-                            break;
-                        case 6:
-                            report_okud_code_script[0] = "MERGE INTO REPORT_OKUD_CODE R\n" +
-                        "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, \n" + 
-						"'"+ SC_data_miner.period[0] +"'as PERIOD \n" + 
-						"null as FORM_CD \n" + 
+                        "'"+ SC_data_miner.Form_okud4[0] +"' as OKUD_CODE, \n" +
+						"'"+ SC_data_miner.period4[0] +"'as PERIOD \n" +
+						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
@@ -4589,9 +4746,24 @@ public class ScriptEXP {
                                     "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.Form_okud2[0] +"' as OKUD_CODE, \n" + 
-						"'"+ SC_data_miner.period2[0] +"'as PERIOD \n" + 
-						"null as FORM_CD \n" + 
+                        "'"+ SC_data_miner.Form_okud5[0] +"' as OKUD_CODE, \n" +
+						"'"+ SC_data_miner.period5[0] +"'as PERIOD \n" +
+						"null as FORM_CD \n" +
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
+                        "                                R.FORM_CD = S.FORM_CD\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.OKUD_CODE, R.PERIOD, R.FORM_CD)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.OKUD_CODE, S.PERIOD, S.FORM_CD);\n\n" +
+                                        "\n";
+                                break;
+                            case 6:
+                                report_okud_code_script[0] = "MERGE INTO REPORT_OKUD_CODE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, \n" +
+						"'"+ SC_data_miner.period[0] +"'as PERIOD \n" +
+						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
@@ -4602,9 +4774,9 @@ public class ScriptEXP {
                                     "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.Form_okud3[0] +"' as OKUD_CODE, \n" + 
-						"'"+ SC_data_miner.period3[0] +"'as PERIOD \n" + 
-						"null as FORM_CD \n" + 
+                        "'"+ SC_data_miner.Form_okud2[0] +"' as OKUD_CODE, \n" +
+						"'"+ SC_data_miner.period2[0] +"'as PERIOD \n" +
+						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
@@ -4615,9 +4787,9 @@ public class ScriptEXP {
                                     "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.Form_okud4[0] +"' as OKUD_CODE, \n" + 
-						"'"+ SC_data_miner.period4[0] +"'as PERIOD \n" + 
-						"null as FORM_CD \n" + 
+                        "'"+ SC_data_miner.Form_okud3[0] +"' as OKUD_CODE, \n" +
+						"'"+ SC_data_miner.period3[0] +"'as PERIOD \n" +
+						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
@@ -4628,9 +4800,9 @@ public class ScriptEXP {
                                     "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.Form_okud5[0] +"' as OKUD_CODE, \n" + 
-						"'"+ SC_data_miner.period5[0] +"'as PERIOD \n" + 
-						"null as FORM_CD \n" + 
+                        "'"+ SC_data_miner.Form_okud4[0] +"' as OKUD_CODE, \n" +
+						"'"+ SC_data_miner.period4[0] +"'as PERIOD \n" +
+						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
@@ -4641,24 +4813,9 @@ public class ScriptEXP {
                                     "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.Form_okud6[0] +"' as OKUD_CODE, \n" + 
-						"'"+ SC_data_miner.period6[0] +"'as PERIOD \n" + 
-						"null as FORM_CD \n" + 
-                        "FROM dual) S\n" +
-                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
-                        "                                R.FORM_CD = S.FORM_CD\n" +
-                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.OKUD_CODE, R.PERIOD, R.FORM_CD)\n" +
-                        "   VALUES (S.FORM_FORMAL_CODE, S.OKUD_CODE, S.PERIOD, S.FORM_CD);\n\n" +
-                                    "\n";
-                            break;
-                        case 7:
-                            report_okud_code_script[0] = "MERGE INTO REPORT_OKUD_CODE R\n" +
-                        "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, \n" + 
-						"'"+ SC_data_miner.period[0] +"'as PERIOD \n" + 
-						"null as FORM_CD \n" + 
+                        "'"+ SC_data_miner.Form_okud5[0] +"' as OKUD_CODE, \n" +
+						"'"+ SC_data_miner.period5[0] +"'as PERIOD \n" +
+						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
@@ -4669,9 +4826,24 @@ public class ScriptEXP {
                                     "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.Form_okud2[0] +"' as OKUD_CODE, \n" + 
-						"'"+ SC_data_miner.period2[0] +"'as PERIOD \n" + 
-						"null as FORM_CD \n" + 
+                        "'"+ SC_data_miner.Form_okud6[0] +"' as OKUD_CODE, \n" +
+						"'"+ SC_data_miner.period6[0] +"'as PERIOD \n" +
+						"null as FORM_CD \n" +
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
+                        "                                R.FORM_CD = S.FORM_CD\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.OKUD_CODE, R.PERIOD, R.FORM_CD)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.OKUD_CODE, S.PERIOD, S.FORM_CD);\n\n" +
+                                        "\n";
+                                break;
+                            case 7:
+                                report_okud_code_script[0] = "MERGE INTO REPORT_OKUD_CODE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, \n" +
+						"'"+ SC_data_miner.period[0] +"'as PERIOD \n" +
+						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
@@ -4682,9 +4854,9 @@ public class ScriptEXP {
                                     "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.Form_okud3[0] +"' as OKUD_CODE, \n" + 
-						"'"+ SC_data_miner.period3[0] +"'as PERIOD \n" + 
-						"null as FORM_CD \n" + 
+                        "'"+ SC_data_miner.Form_okud2[0] +"' as OKUD_CODE, \n" +
+						"'"+ SC_data_miner.period2[0] +"'as PERIOD \n" +
+						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
@@ -4695,9 +4867,9 @@ public class ScriptEXP {
                                     "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.Form_okud4[0] +"' as OKUD_CODE, \n" + 
-						"'"+ SC_data_miner.period4[0] +"'as PERIOD \n" + 
-						"null as FORM_CD \n" + 
+                        "'"+ SC_data_miner.Form_okud3[0] +"' as OKUD_CODE, \n" +
+						"'"+ SC_data_miner.period3[0] +"'as PERIOD \n" +
+						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
@@ -4708,9 +4880,9 @@ public class ScriptEXP {
                                     "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.Form_okud5[0] +"' as OKUD_CODE, \n" + 
-						"'"+ SC_data_miner.period5[0] +"'as PERIOD \n" + 
-						"null as FORM_CD \n" + 
+                        "'"+ SC_data_miner.Form_okud4[0] +"' as OKUD_CODE, \n" +
+						"'"+ SC_data_miner.period4[0] +"'as PERIOD \n" +
+						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
@@ -4721,9 +4893,9 @@ public class ScriptEXP {
                                     "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.Form_okud6[0] +"' as OKUD_CODE, \n" + 
-						"'"+ SC_data_miner.period6[0] +"'as PERIOD \n" + 
-						"null as FORM_CD \n" + 
+                        "'"+ SC_data_miner.Form_okud5[0] +"' as OKUD_CODE, \n" +
+						"'"+ SC_data_miner.period5[0] +"'as PERIOD \n" +
+						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
@@ -4734,24 +4906,9 @@ public class ScriptEXP {
                                     "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.Form_okud7[0] +"' as OKUD_CODE, \n" + 
-						"'"+ SC_data_miner.period7[0] +"'as PERIOD \n" + 
-						"null as FORM_CD \n" + 
-                        "FROM dual) S\n" +
-                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
-                        "                                R.FORM_CD = S.FORM_CD\n" +
-                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.OKUD_CODE, R.PERIOD, R.FORM_CD)\n" +
-                        "   VALUES (S.FORM_FORMAL_CODE, S.OKUD_CODE, S.PERIOD, S.FORM_CD);\n\n" +
-                                    "\n";
-                            break;
-                        case 8:
-                            report_okud_code_script[0] = "MERGE INTO REPORT_OKUD_CODE R\n" +
-                        "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, \n" + 
-						"'"+ SC_data_miner.period[0] +"'as PERIOD \n" + 
-						"null as FORM_CD \n" + 
+                        "'"+ SC_data_miner.Form_okud6[0] +"' as OKUD_CODE, \n" +
+						"'"+ SC_data_miner.period6[0] +"'as PERIOD \n" +
+						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
@@ -4762,9 +4919,24 @@ public class ScriptEXP {
                                     "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.Form_okud2[0] +"' as OKUD_CODE, \n" + 
-						"'"+ SC_data_miner.period2[0] +"'as PERIOD \n" + 
-						"null as FORM_CD \n" + 
+                        "'"+ SC_data_miner.Form_okud7[0] +"' as OKUD_CODE, \n" +
+						"'"+ SC_data_miner.period7[0] +"'as PERIOD \n" +
+						"null as FORM_CD \n" +
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
+                        "                                R.FORM_CD = S.FORM_CD\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.OKUD_CODE, R.PERIOD, R.FORM_CD)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.OKUD_CODE, S.PERIOD, S.FORM_CD);\n\n" +
+                                        "\n";
+                                break;
+                            case 8:
+                                report_okud_code_script[0] = "MERGE INTO REPORT_OKUD_CODE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, \n" +
+						"'"+ SC_data_miner.period[0] +"'as PERIOD \n" +
+						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
@@ -4775,9 +4947,9 @@ public class ScriptEXP {
                                     "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.Form_okud3[0] +"' as OKUD_CODE, \n" + 
-						"'"+ SC_data_miner.period3[0] +"'as PERIOD \n" + 
-						"null as FORM_CD \n" + 
+                        "'"+ SC_data_miner.Form_okud2[0] +"' as OKUD_CODE, \n" +
+						"'"+ SC_data_miner.period2[0] +"'as PERIOD \n" +
+						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
@@ -4788,9 +4960,9 @@ public class ScriptEXP {
                                     "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.Form_okud4[0] +"' as OKUD_CODE, \n" + 
-						"'"+ SC_data_miner.period4[0] +"'as PERIOD \n" + 
-						"null as FORM_CD \n" + 
+                        "'"+ SC_data_miner.Form_okud3[0] +"' as OKUD_CODE, \n" +
+						"'"+ SC_data_miner.period3[0] +"'as PERIOD \n" +
+						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
@@ -4801,9 +4973,9 @@ public class ScriptEXP {
                                     "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.Form_okud5[0] +"' as OKUD_CODE, \n" + 
-						"'"+ SC_data_miner.period5[0] +"'as PERIOD \n" + 
-						"null as FORM_CD \n" + 
+                        "'"+ SC_data_miner.Form_okud4[0] +"' as OKUD_CODE, \n" +
+						"'"+ SC_data_miner.period4[0] +"'as PERIOD \n" +
+						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
@@ -4814,9 +4986,9 @@ public class ScriptEXP {
                                     "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.Form_okud6[0] +"' as OKUD_CODE, \n" + 
-						"'"+ SC_data_miner.period6[0] +"'as PERIOD \n" + 
-						"null as FORM_CD \n" + 
+                        "'"+ SC_data_miner.Form_okud5[0] +"' as OKUD_CODE, \n" +
+						"'"+ SC_data_miner.period5[0] +"'as PERIOD \n" +
+						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
@@ -4827,9 +4999,9 @@ public class ScriptEXP {
                                     "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.Form_okud7[0] +"' as OKUD_CODE, \n" + 
-						"'"+ SC_data_miner.period7[0] +"'as PERIOD \n" + 
-						"null as FORM_CD \n" + 
+                        "'"+ SC_data_miner.Form_okud6[0] +"' as OKUD_CODE, \n" +
+						"'"+ SC_data_miner.period6[0] +"'as PERIOD \n" +
+						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
@@ -4840,27 +5012,52 @@ public class ScriptEXP {
                                     "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.Form_okud8[0] +"' as OKUD_CODE, \n" + 
-						"'"+ SC_data_miner.period8[0] +"'as PERIOD \n" + 
-						"null as FORM_CD \n" + 
+                        "'"+ SC_data_miner.Form_okud7[0] +"' as OKUD_CODE, \n" +
+						"'"+ SC_data_miner.period7[0] +"'as PERIOD \n" +
+						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
                         "                                R.FORM_CD = S.FORM_CD\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.OKUD_CODE, R.PERIOD, R.FORM_CD)\n" +
                         "   VALUES (S.FORM_FORMAL_CODE, S.OKUD_CODE, S.PERIOD, S.FORM_CD);\n\n" +
-                                    "\n";
-                            break;
+                                    "\n" +
+                                    "MERGE INTO REPORT_OKUD_CODE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_okud8[0] +"' as OKUD_CODE, \n" +
+						"'"+ SC_data_miner.period8[0] +"'as PERIOD \n" +
+						"null as FORM_CD \n" +
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
+                        "                                R.FORM_CD = S.FORM_CD\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.OKUD_CODE, R.PERIOD, R.FORM_CD)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.OKUD_CODE, S.PERIOD, S.FORM_CD);\n\n" +
+                                        "\n";
+                                break;
+                        }
                     }
                 }
                 if(SC_data_miner.Form_cd[0] == null  || Objects.equals(SC_data_miner.Form_cd[0], "") || Objects.equals(SC_data_miner.Form_cd[0], " ") ||
                         SC_data_miner.Form_formal_code[0] == null  || Objects.equals(SC_data_miner.Form_formal_code[0], "") || Objects.equals(SC_data_miner.Form_formal_code[0], " ")){
-                    report_form_src_script[0] = "--Warning: Не указаны данные для таблицы REPORT_FORM_SRC\n\n";
+                    if(rep_or_code[0] == 1){
+                        report_form_src_script[0] = "--Для регистрации кода доступа нет необходимости заполнять данные для таблицы REPORT_FORM_SRC\n\n";
+                    } else{
+                        report_form_src_script[0] = "--Warning: Не указаны данные для таблицы REPORT_FORM_SRC: ";
+                        if(SC_data_miner.Form_cd[0] == null  || Objects.equals(SC_data_miner.Form_cd[0], "") || Objects.equals(SC_data_miner.Form_cd[0], " ")){
+                            report_form_src_script[0] = report_form_src_script[0] + "Код доступа, ";
+                        }
+                        if(SC_data_miner.Form_formal_code[0] == null  || Objects.equals(SC_data_miner.Form_formal_code[0], "") || Objects.equals(SC_data_miner.Form_formal_code[0], " ")){
+                            report_form_src_script[0] = report_form_src_script[0] + "Уникальный код отчета.";
+                        }
+                        report_form_src_script[0] = report_form_src_script[0] + "\n\n";
+                    }
                 } else {
                     report_form_src_script[0] = "MERGE INTO REPORT_FORM_SRC R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.Reg_form_code[0] +"' as REG_FORM_CODE, \n" + 
+                        "'"+ SC_data_miner.Reg_form_code[0] +"' as REG_FORM_CODE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REG_FORM_CODE = S.REG_FORM_CODE\n" +
@@ -4869,7 +5066,11 @@ public class ScriptEXP {
                             "\n" ;
                 }
                 if(SC_data_miner.rep_subj_type[0] == null || Objects.equals(SC_data_miner.rep_subj_type[0], "") || Objects.equals(SC_data_miner.rep_subj_type[0], " ")){
-                    report_rep_subj_type_script[0] = "--Warning: Не указаны данные для таблицы REPORT_REP_SUBJ_TYPE\n\n";
+                    if(rep_or_code[0] == 1){
+                        report_rep_subj_type_script[0] = "--Для регистрации кода доступа нет необходимости заполнять данные для таблицы REPORT_REP_SUBJ_TYPE\n\n";
+                    } else{
+                        report_rep_subj_type_script[0] = "--Warning: Не указаны данные для таблицы REPORT_REP_SUBJ_TYPE: Разрез\n\n";
+                    }
                 } else {
                     int c = OK_Action.getSubj_count(0);
                     switch(c){
@@ -4877,7 +5078,7 @@ public class ScriptEXP {
                             report_rep_subj_type_script[0] = "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE, \n" + 
+                        "'"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -4888,7 +5089,7 @@ public class ScriptEXP {
                             report_rep_subj_type_script[0] = "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE, \n" + 
+                        "'"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -4897,7 +5098,7 @@ public class ScriptEXP {
                                     "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.rep_subj_type2[0] +"' as REP_SUBJ_TYPE, \n" + 
+                        "'"+ SC_data_miner.rep_subj_type2[0] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -4908,7 +5109,7 @@ public class ScriptEXP {
                             report_rep_subj_type_script[0] = "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE, \n" + 
+                        "'"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -4917,7 +5118,7 @@ public class ScriptEXP {
                                     "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.rep_subj_type2[0] +"' as REP_SUBJ_TYPE, \n" + 
+                        "'"+ SC_data_miner.rep_subj_type2[0] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -4926,7 +5127,7 @@ public class ScriptEXP {
                                     "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.rep_subj_type3[0] +"' as REP_SUBJ_TYPE, \n" + 
+                        "'"+ SC_data_miner.rep_subj_type3[0] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -4937,7 +5138,7 @@ public class ScriptEXP {
                             report_rep_subj_type_script[0] = "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE, \n" + 
+                        "'"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -4946,7 +5147,7 @@ public class ScriptEXP {
                                     "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.rep_subj_type2[0] +"' as REP_SUBJ_TYPE, \n" + 
+                        "'"+ SC_data_miner.rep_subj_type2[0] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -4955,7 +5156,7 @@ public class ScriptEXP {
                                     "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.rep_subj_type3[0] +"' as REP_SUBJ_TYPE, \n" + 
+                        "'"+ SC_data_miner.rep_subj_type3[0] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -4964,7 +5165,7 @@ public class ScriptEXP {
                                     "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.rep_subj_type4[0] +"' as REP_SUBJ_TYPE, \n" + 
+                        "'"+ SC_data_miner.rep_subj_type4[0] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -4975,7 +5176,7 @@ public class ScriptEXP {
                             report_rep_subj_type_script[0] = "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE, \n" + 
+                        "'"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -4984,7 +5185,7 @@ public class ScriptEXP {
                                     "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.rep_subj_type2[0] +"' as REP_SUBJ_TYPE, \n" + 
+                        "'"+ SC_data_miner.rep_subj_type2[0] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -4993,7 +5194,7 @@ public class ScriptEXP {
                                     "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.rep_subj_type3[0] +"' as REP_SUBJ_TYPE, \n" + 
+                        "'"+ SC_data_miner.rep_subj_type3[0] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -5002,7 +5203,7 @@ public class ScriptEXP {
                                     "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.rep_subj_type4[0] +"' as REP_SUBJ_TYPE, \n" + 
+                        "'"+ SC_data_miner.rep_subj_type4[0] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -5011,7 +5212,7 @@ public class ScriptEXP {
                                     "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.rep_subj_type5[0] +"' as REP_SUBJ_TYPE, \n" + 
+                        "'"+ SC_data_miner.rep_subj_type5[0] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -5022,7 +5223,7 @@ public class ScriptEXP {
                             report_rep_subj_type_script[0] = "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE, \n" + 
+                        "'"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -5031,7 +5232,7 @@ public class ScriptEXP {
                                     "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.rep_subj_type2[0] +"' as REP_SUBJ_TYPE, \n" + 
+                        "'"+ SC_data_miner.rep_subj_type2[0] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -5040,7 +5241,7 @@ public class ScriptEXP {
                                     "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.rep_subj_type3[0] +"' as REP_SUBJ_TYPE, \n" + 
+                        "'"+ SC_data_miner.rep_subj_type3[0] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -5049,7 +5250,7 @@ public class ScriptEXP {
                                     "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.rep_subj_type4[0] +"' as REP_SUBJ_TYPE, \n" + 
+                        "'"+ SC_data_miner.rep_subj_type4[0] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -5058,7 +5259,7 @@ public class ScriptEXP {
                                     "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.rep_subj_type5[0] +"' as REP_SUBJ_TYPE, \n" + 
+                        "'"+ SC_data_miner.rep_subj_type5[0] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -5067,7 +5268,7 @@ public class ScriptEXP {
                                     "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.rep_subj_type6[0] +"' as REP_SUBJ_TYPE, \n" + 
+                        "'"+ SC_data_miner.rep_subj_type6[0] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -5078,7 +5279,7 @@ public class ScriptEXP {
                             report_rep_subj_type_script[0] = "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE, \n" + 
+                        "'"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -5087,7 +5288,7 @@ public class ScriptEXP {
                                     "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.rep_subj_type2[0] +"' as REP_SUBJ_TYPE, \n" + 
+                        "'"+ SC_data_miner.rep_subj_type2[0] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -5096,7 +5297,7 @@ public class ScriptEXP {
                                     "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.rep_subj_type3[0] +"' as REP_SUBJ_TYPE, \n" + 
+                        "'"+ SC_data_miner.rep_subj_type3[0] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -5105,7 +5306,7 @@ public class ScriptEXP {
                                     "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.rep_subj_type4[0] +"' as REP_SUBJ_TYPE, \n" + 
+                        "'"+ SC_data_miner.rep_subj_type4[0] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -5114,7 +5315,7 @@ public class ScriptEXP {
                                     "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.rep_subj_type5[0] +"' as REP_SUBJ_TYPE, \n" + 
+                        "'"+ SC_data_miner.rep_subj_type5[0] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -5123,7 +5324,7 @@ public class ScriptEXP {
                                     "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.rep_subj_type6[0] +"' as REP_SUBJ_TYPE, \n" + 
+                        "'"+ SC_data_miner.rep_subj_type6[0] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -5132,7 +5333,7 @@ public class ScriptEXP {
                                     "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.rep_subj_type7[0] +"' as REP_SUBJ_TYPE, \n" + 
+                        "'"+ SC_data_miner.rep_subj_type7[0] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -5143,7 +5344,7 @@ public class ScriptEXP {
                             report_rep_subj_type_script[0] = "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE, \n" + 
+                        "'"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -5152,7 +5353,7 @@ public class ScriptEXP {
                                     "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.rep_subj_type2[0] +"' as REP_SUBJ_TYPE, \n" + 
+                        "'"+ SC_data_miner.rep_subj_type2[0] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -5161,7 +5362,7 @@ public class ScriptEXP {
                                     "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.rep_subj_type3[0] +"' as REP_SUBJ_TYPE, \n" + 
+                        "'"+ SC_data_miner.rep_subj_type3[0] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -5170,7 +5371,7 @@ public class ScriptEXP {
                                     "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.rep_subj_type4[0] +"' as REP_SUBJ_TYPE, \n" + 
+                        "'"+ SC_data_miner.rep_subj_type4[0] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -5179,7 +5380,7 @@ public class ScriptEXP {
                                     "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.rep_subj_type5[0] +"' as REP_SUBJ_TYPE, \n" + 
+                        "'"+ SC_data_miner.rep_subj_type5[0] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -5188,7 +5389,7 @@ public class ScriptEXP {
                                     "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.rep_subj_type6[0] +"' as REP_SUBJ_TYPE, \n" + 
+                        "'"+ SC_data_miner.rep_subj_type6[0] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -5197,7 +5398,7 @@ public class ScriptEXP {
                                     "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.rep_subj_type7[0] +"' as REP_SUBJ_TYPE, \n" + 
+                        "'"+ SC_data_miner.rep_subj_type7[0] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -5206,7 +5407,7 @@ public class ScriptEXP {
                                     "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.rep_subj_type8[0] +"' as REP_SUBJ_TYPE, \n" + 
+                        "'"+ SC_data_miner.rep_subj_type8[0] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -5217,7 +5418,7 @@ public class ScriptEXP {
                     }
                 }
                 if(SC_data_miner.Search_path[0] == null || Objects.equals(SC_data_miner.Search_path[0], "") || Objects.equals(SC_data_miner.Search_path[0], " ")){
-                    ehd_acs_script[0] = "--Warning: Не указаны данные для таблицы EHD_ACS_OBJECTS\n\n";
+                    ehd_acs_script[0] = "--Warning: Не указаны данные для таблицы EHD_ACS_OBJECTS: Полный путь отчета/папки(Search_path)\n\n";
                 } else {
                     ehd_acs_script[0] = "MERGE INTO EHD_ACS_OBJECTS O\n" +
                             "   USING (SELECT \n" +
@@ -5243,24 +5444,55 @@ public class ScriptEXP {
                 if(SC_data_miner.p_parent_code_txtf[0] == null || Objects.equals(SC_data_miner.p_parent_code_txtf[0], "") || Objects.equals(SC_data_miner.p_parent_code_txtf[0], " ") ||
                         SC_data_miner.p_parent_type_ref_txtf[0] == null || Objects.equals(SC_data_miner.p_parent_type_ref_txtf[0], "") || Objects.equals(SC_data_miner.p_parent_type_ref_txtf[0], " ") ||
                         SC_data_miner.p_type_ref_txtf[0] == null || Objects.equals(SC_data_miner.p_type_ref_txtf[0], "") || Objects.equals(SC_data_miner.p_type_ref_txtf[0], " ") ||
-                        SC_data_miner.p_source_ref_txtf[0] == null || Objects.equals(SC_data_miner.p_source_ref_txtf[0], "") || Objects.equals(SC_data_miner.p_source_ref_txtf[0], " ") ||
-                        SC_data_miner.Search_path[0] == null || Objects.equals(SC_data_miner.Search_path[0], "") || Objects.equals(SC_data_miner.Search_path[0], " ")){
-                    ehd_acs_script2[0] = "--Warning: Не указаны данные для таблицы EHD_ACS_OBJECTS\n\n";
+                        SC_data_miner.p_source_ref_txtf[0] == null || Objects.equals(SC_data_miner.p_source_ref_txtf[0], "") || Objects.equals(SC_data_miner.p_source_ref_txtf[0], " ") //||
+                        /*SC_data_miner.Search_path[0] == null || Objects.equals(SC_data_miner.Search_path[0], "") || Objects.equals(SC_data_miner.Search_path[0], " ")*/){
+                    ehd_acs_script2[0] = "--Warning: Не указаны данные для таблицы EHD_ACS_OBJECTS: ";
+                    if(SC_data_miner.p_parent_code_txtf[0] == null || Objects.equals(SC_data_miner.p_parent_code_txtf[0], "") || Objects.equals(SC_data_miner.p_parent_code_txtf[0], " ")){
+                        ehd_acs_script2[0] = ehd_acs_script2[0] + "p_parent_code, ";
+                    }
+                    if(SC_data_miner.p_parent_type_ref_txtf[0] == null || Objects.equals(SC_data_miner.p_parent_type_ref_txtf[0], "") || Objects.equals(SC_data_miner.p_parent_type_ref_txtf[0], " ")){
+                        ehd_acs_script2[0] = ehd_acs_script2[0] + "p_parent_type_ref, ";
+                    }
+                    if(SC_data_miner.p_type_ref_txtf[0] == null || Objects.equals(SC_data_miner.p_type_ref_txtf[0], "") || Objects.equals(SC_data_miner.p_type_ref_txtf[0], " ")){
+                        ehd_acs_script2[0] = ehd_acs_script2[0] + "p_type_ref, ";
+                    }
+                    if(SC_data_miner.p_source_ref_txtf[0] == null || Objects.equals(SC_data_miner.p_source_ref_txtf[0], "") || Objects.equals(SC_data_miner.p_source_ref_txtf[0], " ")){
+                        ehd_acs_script2[0] = ehd_acs_script2[0] + "p_source_ref. ";
+                    }
+                    ehd_acs_script2[0] = ehd_acs_script2[0] + "\n\n";
                 } else {
-                    ehd_acs_script2[0] = "begin\n" +
-                            "utils.add_object_node\n" +
-                            "                            (p_name => '" + SC_data_miner.Form_name[0] + "'\n" +
-                            "                            ,p_code => '" + SC_data_miner.Form_cd[0] + "'\n" +
-                            "                            ,p_parent_code => '" + SC_data_miner.p_parent_code_txtf[0] + "' --родительский элемент (код доступа)\n" +
-                            "                            ,p_parent_type_ref =>'" + SC_data_miner.p_parent_type_ref_txtf[0] + "'\n" +
-                            "                            ,p_type_ref => '" + SC_data_miner.p_type_ref_txtf[0] + "'\n" +
-                            "                            ,p_source_ref => '" + SC_data_miner.p_source_ref_txtf[0] + "'\n" +
-                            "                            ,p_search_path => '" + SC_data_miner.Search_path[0] + "\n" +
-                            ");\n" +
-                            "                    end;\n" +
-                            "/";
+                    //System.out.print("\n" + "rep_or_code[0] = " + rep_or_code[0]);
+                    if(rep_or_code[0] == 1){
+                        ehd_acs_script2[0] = "begin\n" +
+                                "utils.add_object_node\n" +
+                                "                            (p_name => '" + SC_data_miner.Form_name[0] + "'\n" +
+                                "                            ,p_code => '" + SC_data_miner.Form_cd[0] + "'\n" +
+                                "                            ,p_parent_code => '" + SC_data_miner.p_parent_code_txtf[0] + "' --родительский элемент (код доступа)\n" +
+                                "                            ,p_parent_type_ref =>'" + SC_data_miner.p_parent_type_ref_txtf[0] + "'\n" +
+                                "                            ,p_type_ref => '" + SC_data_miner.p_type_ref_txtf[0] + "'\n" +
+                                "                            ,p_source_ref => '" + SC_data_miner.p_source_ref_txtf[0] + "'\n" +
+                                ");\n" +
+                                "                    end;\n" +
+                                "/";
+                        //System.out.print("\n" + "ehd_acs_script2[0] = " + ehd_acs_script2[0]);
+                    } else{
+                        ehd_acs_script2[0] = "begin\n" +
+                                "utils.add_object_node\n" +
+                                "                            (p_name => '" + SC_data_miner.Form_name[0] + "'\n" +
+                                "                            ,p_code => '" + SC_data_miner.Form_cd[0] + "'\n" +
+                                "                            ,p_parent_code => '" + SC_data_miner.p_parent_code_txtf[0] + "' --родительский элемент (код доступа)\n" +
+                                "                            ,p_parent_type_ref =>'" + SC_data_miner.p_parent_type_ref_txtf[0] + "'\n" +
+                                "                            ,p_type_ref => '" + SC_data_miner.p_type_ref_txtf[0] + "'\n" +
+                                "                            ,p_source_ref => '" + SC_data_miner.p_source_ref_txtf[0] + "'\n" +
+                                "                            ,p_search_path => '" + SC_data_miner.Search_path[0] + "\n" +
+                                ");\n" +
+                                "                    end;\n" +
+                                "/";
+                        //System.out.print("\n" + "ehd_acs_script2[0] = " + ehd_acs_script2[0]);
+                    }
                 }
-
+                //System.out.print("\n" + "ehd_acs_script[0] = " + ehd_acs_script[0]);
+                //System.out.print("\n" + "ehd_acs_script2[0] = " + ehd_acs_script2[0]);
                 text[0] =  "--" + FName_def[0] +"\n" +
                         "\n" +
                         "--OAD_SECURITY\n" +
@@ -5294,12 +5526,13 @@ public class ScriptEXP {
                         "\n" +
                         rep_form_cognos_script[0] + "\n\n" + "commit;";
 
-                if(type == 0){
+                //System.out.print("\n" + "type[0] = " + type[0]);
+                if(type[0] == 0){
                     text[3] = "--" + FName_def[0] +"\n" +
                             "\n" +
                             "--TechDB_EHD_ACS\n" +
                             "\n" + ehd_acs_script[0] ;
-                } else if(type == 1){
+                } else if(type[0] == 1){
                     text[3] = "--" + FName_def[0] +"\n" +
                             "\n" +
                             "--TechDB_EHD_ACS\n" +
@@ -5307,7 +5540,6 @@ public class ScriptEXP {
                 }
                 
                 for(int n = 1; n<=count; n++){
-
                     if(SC_data_miner.Flag_IOD[n] == null || Objects.equals(SC_data_miner.Flag_IOD[n], "") || Objects.equals(SC_data_miner.Flag_IOD[n], " ")){
                         iod = "null as FLAG_IOD";
                     } else {
@@ -5323,13 +5555,56 @@ public class ScriptEXP {
                     } else{
                         reason = "'" + SC_data_miner.reason[n] + "' as REASON";
                     }
-
                     if (SC_data_miner.Form_cd[n] == null){
-                        SC_data_miner.Form_cd[n] = SC_data_miner.Form_cd[0];
+                        if(rep_or_code[0] == 1){
+                            SC_data_miner.Form_cd[n] = SC_data_miner.Form_cd[0];
+                        }
+                    }
+                    //System.out.print("SC_data_miner.Form_okud[" + n + "] = " + SC_data_miner.Form_okud[n] + "\n");
+                    if(SC_data_miner.Form_cd[n].startsWith("0409")){
+                        okud_rep_form = "null as FORM_OKUD";
+                        //System.out.print("\nokud_rep_form = " + okud_rep_form + "\n");
+                        //System.out.print("SC_data_miner.Form_cd[" + n + "].startsWith(\"0409\") = " + SC_data_miner.Form_cd[n].startsWith("0409") + "\n");
+                    } else {
+                        if(SC_data_miner.Form_okud[n] == null || Objects.equals(SC_data_miner.Form_okud[n], "") || Objects.equals(SC_data_miner.Form_okud[n], " ")){
+                            for(int y = n; y<=count;){
+                                if (SC_data_miner.Form_okud[y] == null || Objects.equals(SC_data_miner.Form_okud[y], "") || Objects.equals(SC_data_miner.Form_okud[y], " ")){
+                                    y++;
+                                } else{
+                                    if(type[y] == 0){
+                                        okud_rep_form = "'"+ SC_data_miner.Form_okud[y] + "' as FORM_OKUD";
+                                        break;
+                                    } else{
+                                        y++;
+                                    }
+                                }
+                            }
+                            if(okud_rep_form == null || Objects.equals(okud_rep_form, "") || Objects.equals(okud_rep_form, " ")){
+                                okud_rep_form = "null as FORM_OKUD";
+                            }
+                            //System.out.print("\nokud_rep_form = " + okud_rep_form + "\n");
+                            //System.out.print("SC_data_miner.Form_cd[0].startsWith(\"0409\") = " + SC_data_miner.Form_cd[n].startsWith("0409"));
+                        } else{
+                            okud_rep_form = "'"+ SC_data_miner.Form_okud[n] + "' as FORM_OKUD";
+                            //System.out.print("\nokud_rep_form = " + okud_rep_form + "\n");
+                            //System.out.print("SC_data_miner.Form_cd[" + n + "].startsWith(\"0409\") = " + SC_data_miner.Form_cd[n].startsWith("0409"));
+                        }
                     }
 
-                    if((SC_data_miner.Form_cd_name[n]== null) || Objects.equals(SC_data_miner.Form_cd_name[n], "") || Objects.equals(SC_data_miner.Form_cd_name[n], " ")){
-                        rep_form_script[n] = "--Warning: Не указаны данные для таблицы REP_FORM\n\n";
+                    if((SC_data_miner.Form_cd_name[n]== null) || Objects.equals(SC_data_miner.Form_cd_name[n], "") || Objects.equals(SC_data_miner.Form_cd_name[n], " ")||
+                            (SC_data_miner.Form_cd[n]== null) || Objects.equals(SC_data_miner.Form_cd[n], "") || Objects.equals(SC_data_miner.Form_cd[n], " ")){
+                        if(rep_or_code[n] == 0){
+                            rep_form_script[n] = "--Для регистрации отчета нет необходимости заполнять данные для таблицы REP_FORM\n\n";
+                        } else{
+                            rep_form_script[n] = "--Warning: Не указаны данные для таблицы REP_FORM: ";
+                            if ((SC_data_miner.Form_cd[n] == null) || Objects.equals(SC_data_miner.Form_cd[n], "") || Objects.equals(SC_data_miner.Form_cd[n], " ")) {
+                                rep_form_script[n] = rep_form_script[n] + "Код доступа, ";
+                            }
+                            if ((SC_data_miner.Form_cd_name[n] == null) || Objects.equals(SC_data_miner.Form_cd_name[n], "") || Objects.equals(SC_data_miner.Form_cd_name[n], " ")) {
+                                rep_form_script[n] = rep_form_script[n] + "Наименование кода доступа.";
+                            }
+                            rep_form_script[n] = rep_form_script[n] + "\n\n";
+                        }
                     } else {
                         rep_form_script[n] = "MERGE INTO REP_FORM R\n" +
                         "   USING (SELECT \n" +
@@ -5346,7 +5621,18 @@ public class ScriptEXP {
                                 "\n" ;
                     }
                     if(Objects.equals(iod, "null as FLAG_IOD") || Objects.equals(pdn, "null as FLAG_PDN")){
-                        rep_form_oki_script[n] = "--Warning: Не указаны данные для таблицы REP_FORM_OKI\n\n";
+                        if(rep_or_code[n] == 0){
+                            rep_form_oki_script[n] = "--Для регистрации отчета нет необходимости заполнять данные для таблицы REP_FORM_OKI\n\n";
+                        } else{
+                            rep_form_oki_script[n] = "--Warning: Не указаны данные для таблицы REP_FORM_OKI: ";
+                            if(Objects.equals(iod, "null as FLAG_IOD")){
+                                rep_form_oki_script[n] = rep_form_oki_script[n] + "Флаг ИОД, ";
+                            }
+                            if(Objects.equals(pdn, "null as FLAG_PDN")){
+                                rep_form_oki_script[n] = rep_form_oki_script[n] + "Флаг ПДН.";
+                            }
+                            rep_form_oki_script[n] = rep_form_oki_script[n] + "\n\n";
+                        }
                     } else{
                         rep_form_oki_script[n] = "MERGE INTO REP_FORM_OKI R\n" +
                         "   USING (SELECT \n" +
@@ -5363,7 +5649,11 @@ public class ScriptEXP {
                                 "\n" ;
                     }
                     if(SC_data_miner.Form_cd_cog[n] == null || Objects.equals(SC_data_miner.Form_cd_cog[n], "") || Objects.equals(SC_data_miner.Form_cd_cog[n], " ")){
-                        rep_form_cognos_script[n] = "--Warning: Не указаны данные для таблицы REP_FORM_COGNOS\n\n";
+                        if(rep_or_code[n] == 0){
+                            rep_form_cognos_script[n] = "--Для регистрации отчета нет необходимости заполнять данные для таблицы REP_FORM_COGNOS\n\n";
+                        } else{
+                            rep_form_cognos_script[n] = "--Warning: Не указаны данные для таблицы REP_FORM_COGNOS: Код потока(Когнос)\n\n";
+                        }
                     } else {
                         rep_form_cognos_script[n] = "MERGE INTO REP_FORM_COGNOS R\n" +
                         "   USING (SELECT \n" +
@@ -5378,7 +5668,11 @@ public class ScriptEXP {
                                 "\n";
                     }
                     if(SC_data_miner.Dep_name[n] == null || Objects.equals(SC_data_miner.Dep_name[n], "") || Objects.equals(SC_data_miner.Dep_name[n], " ")){
-                        rep_form_dep_owner_script[n] = "--Warning: Не указаны данные для таблицы REP_FORM_DEP_OWNER\n\n";
+                        if(rep_or_code[n] == 0){
+                            rep_form_dep_owner_script[n] = "--Для регистрации отчета нет необходимости заполнять данные для таблицы REP_FORM_DEP_OWNER\n\n";
+                        } else{
+                            rep_form_dep_owner_script[n] = "--Warning: Не указаны данные для таблицы REP_FORM_DEP_OWNER: Сокращенное наименование департамента для REP_FORM_DEP_OWNER\n\n";
+                        }
                     } else {
                         int c = OK_Action.getDep_count(0);
                         switch (c){
@@ -5386,8 +5680,8 @@ public class ScriptEXP {
                                 rep_form_dep_owner_script[n] = "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_name[n] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_name[n] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -5400,8 +5694,8 @@ public class ScriptEXP {
                                 rep_form_dep_owner_script[n] = "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_name[n] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_name[n] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -5410,8 +5704,8 @@ public class ScriptEXP {
                                         "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_name2[n] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_name2[n] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -5424,8 +5718,8 @@ public class ScriptEXP {
                                 rep_form_dep_owner_script[n] = "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_name[n] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_name[n] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -5434,8 +5728,8 @@ public class ScriptEXP {
                                         "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_name2[n] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_name2[n] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -5444,8 +5738,8 @@ public class ScriptEXP {
                                         "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_name3[n] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_name3[n] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -5458,8 +5752,8 @@ public class ScriptEXP {
                                 rep_form_dep_owner_script[n] = "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_name[n] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_name[n] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -5468,8 +5762,8 @@ public class ScriptEXP {
                                         "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_name2[n] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_name2[n] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -5478,8 +5772,8 @@ public class ScriptEXP {
                                         "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_name3[n] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_name3[n] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -5488,8 +5782,8 @@ public class ScriptEXP {
                                         "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_name4[n] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_name4[n] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -5502,8 +5796,8 @@ public class ScriptEXP {
                                 rep_form_dep_owner_script[n] = "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_name[n] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_name[n] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -5512,8 +5806,8 @@ public class ScriptEXP {
                                         "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_name2[n] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_name2[n] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -5522,8 +5816,8 @@ public class ScriptEXP {
                                         "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_name3[n] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_name3[n] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -5532,8 +5826,8 @@ public class ScriptEXP {
                                         "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_name4[n] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_name4[n] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -5542,8 +5836,8 @@ public class ScriptEXP {
                                         "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_name5[n] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_name5[n] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -5556,8 +5850,8 @@ public class ScriptEXP {
                                 rep_form_dep_owner_script[n] = "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_name[n] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_name[n] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -5566,8 +5860,8 @@ public class ScriptEXP {
                                         "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_name2[n] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_name2[n] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -5576,8 +5870,8 @@ public class ScriptEXP {
                                         "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_name3[n] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_name3[n] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -5586,8 +5880,8 @@ public class ScriptEXP {
                                         "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_name4[n] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_name4[n] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -5596,8 +5890,8 @@ public class ScriptEXP {
                                         "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_name5[n] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_name5[n] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -5606,8 +5900,8 @@ public class ScriptEXP {
                                         "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_name6[n] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_name6[n] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -5620,8 +5914,8 @@ public class ScriptEXP {
                                 rep_form_dep_owner_script[n] = "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_name[n] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_name[n] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -5630,8 +5924,8 @@ public class ScriptEXP {
                                         "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_name2[n] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_name2[n] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -5640,8 +5934,8 @@ public class ScriptEXP {
                                         "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_name3[n] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_name3[n] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -5650,8 +5944,8 @@ public class ScriptEXP {
                                         "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_name4[n] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_name4[n] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -5660,8 +5954,8 @@ public class ScriptEXP {
                                         "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_name5[n] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_name5[n] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -5670,8 +5964,8 @@ public class ScriptEXP {
                                         "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_name6[n] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_name6[n] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -5680,8 +5974,8 @@ public class ScriptEXP {
                                         "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_name7[n] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_name7[n] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -5694,8 +5988,8 @@ public class ScriptEXP {
                                 rep_form_dep_owner_script[n] = "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_name[n] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_name[n] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -5704,8 +5998,8 @@ public class ScriptEXP {
                                         "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_name2[n] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_name2[n] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -5714,8 +6008,8 @@ public class ScriptEXP {
                                         "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_name3[n] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_name3[n] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -5724,8 +6018,8 @@ public class ScriptEXP {
                                         "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_name4[n] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_name4[n] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -5734,8 +6028,8 @@ public class ScriptEXP {
                                         "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_name5[n] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_name5[n] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -5744,8 +6038,8 @@ public class ScriptEXP {
                                         "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_name6[n] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_name6[n] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -5754,8 +6048,8 @@ public class ScriptEXP {
                                         "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_name7[n] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_name7[n] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -5764,8 +6058,8 @@ public class ScriptEXP {
                                         "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_name8[n] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_name8[n] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -5778,7 +6072,11 @@ public class ScriptEXP {
                         }
                     }
                     if(SC_data_miner.Dep_u_name[n] == null || Objects.equals(SC_data_miner.Dep_u_name[n], "") || Objects.equals(SC_data_miner.Dep_u_name[n], " ")){
-                        rep_form_dep_user_script[n] = "--Warning: Не указаны данные для таблицы REP_FORM_DEP_USER\n\n";
+                        if(rep_or_code[n] == 0){
+                            rep_form_dep_user_script[n] = "--Для регистрации отчета нет необходимости заполнять данные для таблицы REP_FORM_DEP_USER\n\n";
+                        } else{
+                            rep_form_dep_user_script[n] = "--Warning: Не указаны данные для таблицы REP_FORM_DEP_USER: Сокращенное наименование департамента для REP_FORM_DEP_USER\n\n";
+                        }
                     } else {
                         int c = OK_Action.getDep_u_count(0);
                         switch (c){
@@ -5786,8 +6084,8 @@ public class ScriptEXP {
                                 rep_form_dep_user_script[n] = "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_u_name[n] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_u_name[n] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -5800,8 +6098,8 @@ public class ScriptEXP {
                                 rep_form_dep_user_script[n] = "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_u_name[n] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_u_name[n] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -5810,8 +6108,8 @@ public class ScriptEXP {
                                         "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_u_name2[n] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_u_name2[n] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -5824,8 +6122,8 @@ public class ScriptEXP {
                                 rep_form_dep_user_script[n] = "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_u_name[n] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_u_name[n] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -5834,8 +6132,8 @@ public class ScriptEXP {
                                         "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_u_name2[n] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_u_name2[n] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -5844,8 +6142,8 @@ public class ScriptEXP {
                                         "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_u_name3[n] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_u_name3[n] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -5858,8 +6156,8 @@ public class ScriptEXP {
                                 rep_form_dep_user_script[n] = "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_u_name[n] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_u_name[n] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -5868,8 +6166,8 @@ public class ScriptEXP {
                                         "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_u_name2[n] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_u_name2[n] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -5878,8 +6176,8 @@ public class ScriptEXP {
                                         "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_u_name3[n] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_u_name3[n] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -5888,8 +6186,8 @@ public class ScriptEXP {
                                         "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_u_name4[n] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_u_name4[n] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -5902,8 +6200,8 @@ public class ScriptEXP {
                                 rep_form_dep_user_script[n] = "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_u_name[n] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_u_name[n] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -5912,8 +6210,8 @@ public class ScriptEXP {
                                         "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_u_name2[n] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_u_name2[n] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -5922,8 +6220,8 @@ public class ScriptEXP {
                                         "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_u_name3[n] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_u_name3[n] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -5932,8 +6230,8 @@ public class ScriptEXP {
                                         "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_u_name4[n] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_u_name4[n] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -5942,8 +6240,8 @@ public class ScriptEXP {
                                         "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_u_name5[n] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_u_name5[n] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -5956,8 +6254,8 @@ public class ScriptEXP {
                                 rep_form_dep_user_script[n] = "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_u_name[n] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_u_name[n] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -5966,8 +6264,8 @@ public class ScriptEXP {
                                         "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_u_name2[n] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_u_name2[n] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -5976,8 +6274,8 @@ public class ScriptEXP {
                                         "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_u_name3[n] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_u_name3[n] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -5986,8 +6284,8 @@ public class ScriptEXP {
                                         "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_u_name4[n] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_u_name4[n] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -5996,8 +6294,8 @@ public class ScriptEXP {
                                         "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_u_name5[n] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_u_name5[n] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -6006,8 +6304,8 @@ public class ScriptEXP {
                                         "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_u_name6[n] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_u_name6[n] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -6020,8 +6318,8 @@ public class ScriptEXP {
                                 rep_form_dep_user_script[n] = "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_u_name[n] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_u_name[n] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -6030,8 +6328,8 @@ public class ScriptEXP {
                                         "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_u_name2[n] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_u_name2[n] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -6040,8 +6338,8 @@ public class ScriptEXP {
                                         "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_u_name3[n] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_u_name3[n] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -6050,8 +6348,8 @@ public class ScriptEXP {
                                         "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_u_name4[n] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_u_name4[n] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -6060,8 +6358,8 @@ public class ScriptEXP {
                                         "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_u_name5[n] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_u_name5[n] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -6070,8 +6368,8 @@ public class ScriptEXP {
                                         "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_u_name6[n] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_u_name6[n] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -6080,8 +6378,8 @@ public class ScriptEXP {
                                         "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_u_name7[n] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_u_name7[n] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -6094,8 +6392,8 @@ public class ScriptEXP {
                                 rep_form_dep_user_script[n] = "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_u_name[n] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_u_name[n] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -6104,8 +6402,8 @@ public class ScriptEXP {
                                         "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_u_name2[n] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_u_name2[n] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -6114,8 +6412,8 @@ public class ScriptEXP {
                                         "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_u_name3[n] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_u_name3[n] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -6124,8 +6422,8 @@ public class ScriptEXP {
                                         "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_u_name4[n] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_u_name4[n] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -6134,8 +6432,8 @@ public class ScriptEXP {
                                         "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_u_name5[n] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_u_name5[n] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -6144,8 +6442,8 @@ public class ScriptEXP {
                                         "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_u_name6[n] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_u_name6[n] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -6154,8 +6452,8 @@ public class ScriptEXP {
                                         "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_u_name7[n] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_u_name7[n] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -6164,8 +6462,8 @@ public class ScriptEXP {
                                         "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
-                        "'"+ SC_data_miner.Dep_u_name8[n] +"' as DEP_NAME, \n" + 
-						reason + " \n" + 
+                        "'"+ SC_data_miner.Dep_u_name8[n] +"' as DEP_NAME, \n" +
+						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
@@ -6183,7 +6481,30 @@ public class ScriptEXP {
                             SC_data_miner.Search_path[n] == null || Objects.equals(SC_data_miner.Search_path[n], "") || Objects.equals(SC_data_miner.Search_path[n], " ") ||
                             SC_data_miner.Form_formal_code[n] == null || Objects.equals(SC_data_miner.Form_formal_code[n], "") || Objects.equals(SC_data_miner.Form_formal_code[n], " ") ||
                             SC_data_miner.Desc[n] == null || Objects.equals(SC_data_miner.Desc[n], "") || Objects.equals(SC_data_miner.Desc[n], " ")){
-                        reg_report_form_script[n] = "--Warning: Не указаны данные для таблицы REG_REPORT_FORM\n\n";
+                        if(rep_or_code[n] == 1){
+                            reg_report_form_script[n] = "--Для регистрации кода доступа нет необходимости заполнять данные для таблицы REPORT_REP_SUBJ_TYPE\n\n";
+                        } else{
+                            reg_report_form_script[n] = "--Warning: Не указаны данные для таблицы REG_REPORT_FORM: ";
+                            if(SC_data_miner.System_id[n] == null || Objects.equals(SC_data_miner.System_id[n], "") || Objects.equals(SC_data_miner.System_id[n], " ")){
+                                reg_report_form_script[n] = reg_report_form_script[n] + "System_id, ";
+                            }
+                            if(SC_data_miner.Security_role_name[n] == null || Objects.equals(SC_data_miner.Security_role_name[n], "") || Objects.equals(SC_data_miner.Security_role_name[n], " ")){
+                                reg_report_form_script[n] = reg_report_form_script[n] + "Security_role_name, ";
+                            }
+                            if(SC_data_miner.Security_role_path[n] == null || Objects.equals(SC_data_miner.Security_role_path[n], "") || Objects.equals(SC_data_miner.Security_role_path[n], " ")){
+                                reg_report_form_script[n] = reg_report_form_script[n] + "Security_role_path, ";
+                            }
+                            if(SC_data_miner.Search_path[n] == null || Objects.equals(SC_data_miner.Search_path[n], "") || Objects.equals(SC_data_miner.Search_path[n], " ")){
+                                reg_report_form_script[n] = reg_report_form_script[n] + "Полный путь отчета/папки(Search_path), ";
+                            }
+                            if(SC_data_miner.Form_formal_code[n] == null || Objects.equals(SC_data_miner.Form_formal_code[n], "") || Objects.equals(SC_data_miner.Form_formal_code[n], " ")){
+                                reg_report_form_script[n] = reg_report_form_script[n] + "Уникальный код отчета, ";
+                            }
+                            if(SC_data_miner.Desc[n] == null || Objects.equals(SC_data_miner.Desc[n], "") || Objects.equals(SC_data_miner.Desc[n], " ")){
+                                reg_report_form_script[n] = reg_report_form_script[n] + "Описание.";
+                            }
+                            reg_report_form_script[n] = reg_report_form_script[n] + "\n\n";
+                        }
                     } else {
                         reg_report_form_script[n] = "MERGE INTO REG_REPORT_FORM R\n" +
                                 "   USING (SELECT \n" +
@@ -6211,62 +6532,41 @@ public class ScriptEXP {
                                 "\n";
                     }
                     if(SC_data_miner.Form_okud[n] == null  || Objects.equals(SC_data_miner.Form_okud[n], "") || Objects.equals(SC_data_miner.Form_okud[n], " ")){
-                        report_okud_code_script[n] = "--Warning: Не указаны данные для таблицы REPORT_OKUD_CODE\n\n";
+                        if(rep_or_code[n] == 1){
+                            report_okud_code_script[n] = "--Для регистрации кода доступа нет необходимости заполнять данные для таблицы REPORT_OKUD_CODE\n\n";
+                        } else{
+                            report_okud_code_script[n] = "--Warning: Не указаны данные для таблицы REPORT_OKUD_CODE: ОКУД\n\n";
+                        }
                     } else {
-                        //System.out.print("n =" + n + "\n");
-                        int c = OK_Action.getOkud_count(n);
-                        //System.out.print("c =" + c + "\n");
-                        switch(c){
-                            case 1:
-                                report_okud_code_script[n] = "MERGE INTO REPORT_OKUD_CODE R\n" +
+                        if(rep_or_code[n] == 1){
+                            report_okud_code_script[n] = "--Для регистрации кода доступа нет необходимости заполнять данные для таблицы REPORT_OKUD_CODE\n\n";
+                        } else{
+                            //System.out.print("n =" + n + "\n");
+                            int c = OK_Action.getOkud_count(n);
+                            //System.out.print("c =" + c + "\n");
+                            switch(c){
+                                case 1:
+                                    report_okud_code_script[n] = "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.Form_okud[n] +"' as OKUD_CODE, \n" + 
-						"'"+ SC_data_miner.period[n] +"'as PERIOD \n" + 
-						"null as FORM_CD \n" + 
+                        "'"+ SC_data_miner.Form_okud[n] +"' as OKUD_CODE, \n" +
+						"'"+ SC_data_miner.period[n] +"'as PERIOD \n" +
+						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
                         "                                R.FORM_CD = S.FORM_CD\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.OKUD_CODE, R.PERIOD, R.FORM_CD)\n" +
                         "   VALUES (S.FORM_FORMAL_CODE, S.OKUD_CODE, S.PERIOD, S.FORM_CD);\n\n" +
-                                        "\n";
-                                break;
-                            case 2:
-                                report_okud_code_script[n] = "MERGE INTO REPORT_OKUD_CODE R\n" +
+                                            "\n";
+                                    break;
+                                case 2:
+                                    report_okud_code_script[n] = "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.Form_okud[n] +"' as OKUD_CODE, \n" + 
-						"'"+ SC_data_miner.period[n] +"'as PERIOD \n" + 
-						"null as FORM_CD \n" + 
-                        "FROM dual) S\n" +
-                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
-                        "                                R.FORM_CD = S.FORM_CD\n" +
-                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.OKUD_CODE, R.PERIOD, R.FORM_CD)\n" +
-                        "   VALUES (S.FORM_FORMAL_CODE, S.OKUD_CODE, S.PERIOD, S.FORM_CD);\n\n" +
-                                        "\n" +
-                                        "MERGE INTO REPORT_OKUD_CODE R\n" +
-                        "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.Form_okud2[n] +"' as OKUD_CODE, \n" + 
-						"'"+ SC_data_miner.period2[n] +"'as PERIOD \n" + 
-						"null as FORM_CD \n" + 
-                        "FROM dual) S\n" +
-                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
-                        "                                R.FORM_CD = S.FORM_CD\n" +
-                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.OKUD_CODE, R.PERIOD, R.FORM_CD)\n" +
-                        "   VALUES (S.FORM_FORMAL_CODE, S.OKUD_CODE, S.PERIOD, S.FORM_CD);\n\n" +
-                                        "\n" ;
-                                break;
-                            case 3:
-                                report_okud_code_script[n] = "MERGE INTO REPORT_OKUD_CODE R\n" +
-                        "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.Form_okud[n] +"' as OKUD_CODE, \n" + 
-						"'"+ SC_data_miner.period[n] +"'as PERIOD \n" + 
-						"null as FORM_CD \n" + 
+                        "'"+ SC_data_miner.Form_okud[n] +"' as OKUD_CODE, \n" +
+						"'"+ SC_data_miner.period[n] +"'as PERIOD \n" +
+						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
@@ -6277,9 +6577,24 @@ public class ScriptEXP {
                                         "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.Form_okud2[n] +"' as OKUD_CODE, \n" + 
-						"'"+ SC_data_miner.period2[n] +"'as PERIOD \n" + 
-						"null as FORM_CD \n" + 
+                        "'"+ SC_data_miner.Form_okud2[n] +"' as OKUD_CODE, \n" +
+						"'"+ SC_data_miner.period2[n] +"'as PERIOD \n" +
+						"null as FORM_CD \n" +
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
+                        "                                R.FORM_CD = S.FORM_CD\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.OKUD_CODE, R.PERIOD, R.FORM_CD)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.OKUD_CODE, S.PERIOD, S.FORM_CD);\n\n" +
+                                            "\n" ;
+                                    break;
+                                case 3:
+                                    report_okud_code_script[n] = "MERGE INTO REPORT_OKUD_CODE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_okud[n] +"' as OKUD_CODE, \n" +
+						"'"+ SC_data_miner.period[n] +"'as PERIOD \n" +
+						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
@@ -6290,24 +6605,9 @@ public class ScriptEXP {
                                         "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.Form_okud3[n] +"' as OKUD_CODE, \n" + 
-						"'"+ SC_data_miner.period3[n] +"'as PERIOD \n" + 
-						"null as FORM_CD \n" + 
-                        "FROM dual) S\n" +
-                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
-                        "                                R.FORM_CD = S.FORM_CD\n" +
-                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.OKUD_CODE, R.PERIOD, R.FORM_CD)\n" +
-                        "   VALUES (S.FORM_FORMAL_CODE, S.OKUD_CODE, S.PERIOD, S.FORM_CD);\n\n" +
-                                        "\n";
-                                break;
-                            case 4:
-                                report_okud_code_script[n] = "MERGE INTO REPORT_OKUD_CODE R\n" +
-                        "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.Form_okud[n] +"' as OKUD_CODE, \n" + 
-						"'"+ SC_data_miner.period[n] +"'as PERIOD \n" + 
-						"null as FORM_CD \n" + 
+                        "'"+ SC_data_miner.Form_okud2[n] +"' as OKUD_CODE, \n" +
+						"'"+ SC_data_miner.period2[n] +"'as PERIOD \n" +
+						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
@@ -6318,9 +6618,24 @@ public class ScriptEXP {
                                         "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.Form_okud2[n] +"' as OKUD_CODE, \n" + 
-						"'"+ SC_data_miner.period2[n] +"'as PERIOD \n" + 
-						"null as FORM_CD \n" + 
+                        "'"+ SC_data_miner.Form_okud3[n] +"' as OKUD_CODE, \n" +
+						"'"+ SC_data_miner.period3[n] +"'as PERIOD \n" +
+						"null as FORM_CD \n" +
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
+                        "                                R.FORM_CD = S.FORM_CD\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.OKUD_CODE, R.PERIOD, R.FORM_CD)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.OKUD_CODE, S.PERIOD, S.FORM_CD);\n\n" +
+                                            "\n";
+                                    break;
+                                case 4:
+                                    report_okud_code_script[n] = "MERGE INTO REPORT_OKUD_CODE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_okud[n] +"' as OKUD_CODE, \n" +
+						"'"+ SC_data_miner.period[n] +"'as PERIOD \n" +
+						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
@@ -6331,9 +6646,9 @@ public class ScriptEXP {
                                         "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.Form_okud3[n] +"' as OKUD_CODE, \n" + 
-						"'"+ SC_data_miner.period3[n] +"'as PERIOD \n" + 
-						"null as FORM_CD \n" + 
+                        "'"+ SC_data_miner.Form_okud2[n] +"' as OKUD_CODE, \n" +
+						"'"+ SC_data_miner.period2[n] +"'as PERIOD \n" +
+						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
@@ -6344,24 +6659,9 @@ public class ScriptEXP {
                                         "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.Form_okud4[n] +"' as OKUD_CODE, \n" + 
-						"'"+ SC_data_miner.period4[n] +"'as PERIOD \n" + 
-						"null as FORM_CD \n" + 
-                        "FROM dual) S\n" +
-                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
-                        "                                R.FORM_CD = S.FORM_CD\n" +
-                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.OKUD_CODE, R.PERIOD, R.FORM_CD)\n" +
-                        "   VALUES (S.FORM_FORMAL_CODE, S.OKUD_CODE, S.PERIOD, S.FORM_CD);\n\n" +
-                                        "\n";
-                                break;
-                            case 5:
-                                report_okud_code_script[n] = "MERGE INTO REPORT_OKUD_CODE R\n" +
-                        "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.Form_okud[n] +"' as OKUD_CODE, \n" + 
-						"'"+ SC_data_miner.period[n] +"'as PERIOD \n" + 
-						"null as FORM_CD \n" + 
+                        "'"+ SC_data_miner.Form_okud3[n] +"' as OKUD_CODE, \n" +
+						"'"+ SC_data_miner.period3[n] +"'as PERIOD \n" +
+						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
@@ -6372,9 +6672,24 @@ public class ScriptEXP {
                                         "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.Form_okud2[n] +"' as OKUD_CODE, \n" + 
-						"'"+ SC_data_miner.period2[n] +"'as PERIOD \n" + 
-						"null as FORM_CD \n" + 
+                        "'"+ SC_data_miner.Form_okud4[n] +"' as OKUD_CODE, \n" +
+						"'"+ SC_data_miner.period4[n] +"'as PERIOD \n" +
+						"null as FORM_CD \n" +
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
+                        "                                R.FORM_CD = S.FORM_CD\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.OKUD_CODE, R.PERIOD, R.FORM_CD)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.OKUD_CODE, S.PERIOD, S.FORM_CD);\n\n" +
+                                            "\n";
+                                    break;
+                                case 5:
+                                    report_okud_code_script[n] = "MERGE INTO REPORT_OKUD_CODE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_okud[n] +"' as OKUD_CODE, \n" +
+						"'"+ SC_data_miner.period[n] +"'as PERIOD \n" +
+						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
@@ -6385,9 +6700,9 @@ public class ScriptEXP {
                                         "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.Form_okud3[n] +"' as OKUD_CODE, \n" + 
-						"'"+ SC_data_miner.period3[n] +"'as PERIOD \n" + 
-						"null as FORM_CD \n" + 
+                        "'"+ SC_data_miner.Form_okud2[n] +"' as OKUD_CODE, \n" +
+						"'"+ SC_data_miner.period2[n] +"'as PERIOD \n" +
+						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
@@ -6398,9 +6713,9 @@ public class ScriptEXP {
                                         "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.Form_okud4[n] +"' as OKUD_CODE, \n" + 
-						"'"+ SC_data_miner.period4[n] +"'as PERIOD \n" + 
-						"null as FORM_CD \n" + 
+                        "'"+ SC_data_miner.Form_okud3[n] +"' as OKUD_CODE, \n" +
+						"'"+ SC_data_miner.period3[n] +"'as PERIOD \n" +
+						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
@@ -6411,24 +6726,9 @@ public class ScriptEXP {
                                         "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.Form_okud5[n] +"' as OKUD_CODE, \n" + 
-						"'"+ SC_data_miner.period5[n] +"'as PERIOD \n" + 
-						"null as FORM_CD \n" + 
-                        "FROM dual) S\n" +
-                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
-                        "                                R.FORM_CD = S.FORM_CD\n" +
-                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.OKUD_CODE, R.PERIOD, R.FORM_CD)\n" +
-                        "   VALUES (S.FORM_FORMAL_CODE, S.OKUD_CODE, S.PERIOD, S.FORM_CD);\n\n" +
-                                        "\n";
-                                break;
-                            case 6:
-                                report_okud_code_script[n] = "MERGE INTO REPORT_OKUD_CODE R\n" +
-                        "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.Form_okud[n] +"' as OKUD_CODE, \n" + 
-						"'"+ SC_data_miner.period[n] +"'as PERIOD \n" + 
-						"null as FORM_CD \n" + 
+                        "'"+ SC_data_miner.Form_okud4[n] +"' as OKUD_CODE, \n" +
+						"'"+ SC_data_miner.period4[n] +"'as PERIOD \n" +
+						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
@@ -6439,9 +6739,24 @@ public class ScriptEXP {
                                         "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.Form_okud2[n] +"' as OKUD_CODE, \n" + 
-						"'"+ SC_data_miner.period2[n] +"'as PERIOD \n" + 
-						"null as FORM_CD \n" + 
+                        "'"+ SC_data_miner.Form_okud5[n] +"' as OKUD_CODE, \n" +
+						"'"+ SC_data_miner.period5[n] +"'as PERIOD \n" +
+						"null as FORM_CD \n" +
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
+                        "                                R.FORM_CD = S.FORM_CD\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.OKUD_CODE, R.PERIOD, R.FORM_CD)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.OKUD_CODE, S.PERIOD, S.FORM_CD);\n\n" +
+                                            "\n";
+                                    break;
+                                case 6:
+                                    report_okud_code_script[n] = "MERGE INTO REPORT_OKUD_CODE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_okud[n] +"' as OKUD_CODE, \n" +
+						"'"+ SC_data_miner.period[n] +"'as PERIOD \n" +
+						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
@@ -6452,9 +6767,9 @@ public class ScriptEXP {
                                         "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.Form_okud3[n] +"' as OKUD_CODE, \n" + 
-						"'"+ SC_data_miner.period3[n] +"'as PERIOD \n" + 
-						"null as FORM_CD \n" + 
+                        "'"+ SC_data_miner.Form_okud2[n] +"' as OKUD_CODE, \n" +
+						"'"+ SC_data_miner.period2[n] +"'as PERIOD \n" +
+						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
@@ -6465,9 +6780,9 @@ public class ScriptEXP {
                                         "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.Form_okud4[n] +"' as OKUD_CODE, \n" + 
-						"'"+ SC_data_miner.period4[n] +"'as PERIOD \n" + 
-						"null as FORM_CD \n" + 
+                        "'"+ SC_data_miner.Form_okud3[n] +"' as OKUD_CODE, \n" +
+						"'"+ SC_data_miner.period3[n] +"'as PERIOD \n" +
+						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
@@ -6478,9 +6793,9 @@ public class ScriptEXP {
                                         "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.Form_okud5[n] +"' as OKUD_CODE, \n" + 
-						"'"+ SC_data_miner.period5[n] +"'as PERIOD \n" + 
-						"null as FORM_CD \n" + 
+                        "'"+ SC_data_miner.Form_okud4[n] +"' as OKUD_CODE, \n" +
+						"'"+ SC_data_miner.period4[n] +"'as PERIOD \n" +
+						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
@@ -6491,24 +6806,9 @@ public class ScriptEXP {
                                         "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.Form_okud6[n] +"' as OKUD_CODE, \n" + 
-						"'"+ SC_data_miner.period6[n] +"'as PERIOD \n" + 
-						"null as FORM_CD \n" + 
-                        "FROM dual) S\n" +
-                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
-                        "                                R.FORM_CD = S.FORM_CD\n" +
-                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.OKUD_CODE, R.PERIOD, R.FORM_CD)\n" +
-                        "   VALUES (S.FORM_FORMAL_CODE, S.OKUD_CODE, S.PERIOD, S.FORM_CD);\n\n" +
-                                        "\n";
-                                break;
-                            case 7:
-                                report_okud_code_script[n] = "MERGE INTO REPORT_OKUD_CODE R\n" +
-                        "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.Form_okud[n] +"' as OKUD_CODE, \n" + 
-						"'"+ SC_data_miner.period[n] +"'as PERIOD \n" + 
-						"null as FORM_CD \n" + 
+                        "'"+ SC_data_miner.Form_okud5[n] +"' as OKUD_CODE, \n" +
+						"'"+ SC_data_miner.period5[n] +"'as PERIOD \n" +
+						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
@@ -6519,9 +6819,24 @@ public class ScriptEXP {
                                         "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.Form_okud2[n] +"' as OKUD_CODE, \n" + 
-						"'"+ SC_data_miner.period2[n] +"'as PERIOD \n" + 
-						"null as FORM_CD \n" + 
+                        "'"+ SC_data_miner.Form_okud6[n] +"' as OKUD_CODE, \n" +
+						"'"+ SC_data_miner.period6[n] +"'as PERIOD \n" +
+						"null as FORM_CD \n" +
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
+                        "                                R.FORM_CD = S.FORM_CD\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.OKUD_CODE, R.PERIOD, R.FORM_CD)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.OKUD_CODE, S.PERIOD, S.FORM_CD);\n\n" +
+                                            "\n";
+                                    break;
+                                case 7:
+                                    report_okud_code_script[n] = "MERGE INTO REPORT_OKUD_CODE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_okud[n] +"' as OKUD_CODE, \n" +
+						"'"+ SC_data_miner.period[n] +"'as PERIOD \n" +
+						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
@@ -6532,9 +6847,9 @@ public class ScriptEXP {
                                         "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.Form_okud3[n] +"' as OKUD_CODE, \n" + 
-						"'"+ SC_data_miner.period3[n] +"'as PERIOD \n" + 
-						"null as FORM_CD \n" + 
+                        "'"+ SC_data_miner.Form_okud2[n] +"' as OKUD_CODE, \n" +
+						"'"+ SC_data_miner.period2[n] +"'as PERIOD \n" +
+						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
@@ -6545,9 +6860,9 @@ public class ScriptEXP {
                                         "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.Form_okud4[n] +"' as OKUD_CODE, \n" + 
-						"'"+ SC_data_miner.period4[n] +"'as PERIOD \n" + 
-						"null as FORM_CD \n" + 
+                        "'"+ SC_data_miner.Form_okud3[n] +"' as OKUD_CODE, \n" +
+						"'"+ SC_data_miner.period3[n] +"'as PERIOD \n" +
+						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
@@ -6558,9 +6873,9 @@ public class ScriptEXP {
                                         "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.Form_okud5[n] +"' as OKUD_CODE, \n" + 
-						"'"+ SC_data_miner.period5[n] +"'as PERIOD \n" + 
-						"null as FORM_CD \n" + 
+                        "'"+ SC_data_miner.Form_okud4[n] +"' as OKUD_CODE, \n" +
+						"'"+ SC_data_miner.period4[n] +"'as PERIOD \n" +
+						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
@@ -6571,9 +6886,9 @@ public class ScriptEXP {
                                         "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.Form_okud6[n] +"' as OKUD_CODE, \n" + 
-						"'"+ SC_data_miner.period6[n] +"'as PERIOD \n" + 
-						"null as FORM_CD \n" + 
+                        "'"+ SC_data_miner.Form_okud5[n] +"' as OKUD_CODE, \n" +
+						"'"+ SC_data_miner.period5[n] +"'as PERIOD \n" +
+						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
@@ -6584,24 +6899,9 @@ public class ScriptEXP {
                                         "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.Form_okud7[n] +"' as OKUD_CODE, \n" + 
-						"'"+ SC_data_miner.period7[n] +"'as PERIOD \n" + 
-						"null as FORM_CD \n" + 
-                        "FROM dual) S\n" +
-                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
-                        "                                R.FORM_CD = S.FORM_CD\n" +
-                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.OKUD_CODE, R.PERIOD, R.FORM_CD)\n" +
-                        "   VALUES (S.FORM_FORMAL_CODE, S.OKUD_CODE, S.PERIOD, S.FORM_CD);\n\n" +
-                                        "\n";
-                                break;
-                            case 8:
-                                report_okud_code_script[n] = "MERGE INTO REPORT_OKUD_CODE R\n" +
-                        "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.Form_okud[n] +"' as OKUD_CODE, \n" + 
-						"'"+ SC_data_miner.period[n] +"'as PERIOD \n" + 
-						"null as FORM_CD \n" + 
+                        "'"+ SC_data_miner.Form_okud6[n] +"' as OKUD_CODE, \n" +
+						"'"+ SC_data_miner.period6[n] +"'as PERIOD \n" +
+						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
@@ -6612,9 +6912,24 @@ public class ScriptEXP {
                                         "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.Form_okud2[n] +"' as OKUD_CODE, \n" + 
-						"'"+ SC_data_miner.period2[n] +"'as PERIOD \n" + 
-						"null as FORM_CD \n" + 
+                        "'"+ SC_data_miner.Form_okud7[n] +"' as OKUD_CODE, \n" +
+						"'"+ SC_data_miner.period7[n] +"'as PERIOD \n" +
+						"null as FORM_CD \n" +
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
+                        "                                R.FORM_CD = S.FORM_CD\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.OKUD_CODE, R.PERIOD, R.FORM_CD)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.OKUD_CODE, S.PERIOD, S.FORM_CD);\n\n" +
+                                            "\n";
+                                    break;
+                                case 8:
+                                    report_okud_code_script[n] = "MERGE INTO REPORT_OKUD_CODE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_okud[n] +"' as OKUD_CODE, \n" +
+						"'"+ SC_data_miner.period[n] +"'as PERIOD \n" +
+						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
@@ -6625,9 +6940,9 @@ public class ScriptEXP {
                                         "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.Form_okud3[n] +"' as OKUD_CODE, \n" + 
-						"'"+ SC_data_miner.period3[n] +"'as PERIOD \n" + 
-						"null as FORM_CD \n" + 
+                        "'"+ SC_data_miner.Form_okud2[n] +"' as OKUD_CODE, \n" +
+						"'"+ SC_data_miner.period2[n] +"'as PERIOD \n" +
+						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
@@ -6638,9 +6953,9 @@ public class ScriptEXP {
                                         "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.Form_okud4[n] +"' as OKUD_CODE, \n" + 
-						"'"+ SC_data_miner.period4[n] +"'as PERIOD \n" + 
-						"null as FORM_CD \n" + 
+                        "'"+ SC_data_miner.Form_okud3[n] +"' as OKUD_CODE, \n" +
+						"'"+ SC_data_miner.period3[n] +"'as PERIOD \n" +
+						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
@@ -6651,9 +6966,9 @@ public class ScriptEXP {
                                         "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.Form_okud5[n] +"' as OKUD_CODE, \n" + 
-						"'"+ SC_data_miner.period5[n] +"'as PERIOD \n" + 
-						"null as FORM_CD \n" + 
+                        "'"+ SC_data_miner.Form_okud4[n] +"' as OKUD_CODE, \n" +
+						"'"+ SC_data_miner.period4[n] +"'as PERIOD \n" +
+						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
@@ -6664,9 +6979,9 @@ public class ScriptEXP {
                                         "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.Form_okud6[n] +"' as OKUD_CODE, \n" + 
-						"'"+ SC_data_miner.period6[n] +"'as PERIOD \n" + 
-						"null as FORM_CD \n" + 
+                        "'"+ SC_data_miner.Form_okud5[n] +"' as OKUD_CODE, \n" +
+						"'"+ SC_data_miner.period5[n] +"'as PERIOD \n" +
+						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
@@ -6677,9 +6992,9 @@ public class ScriptEXP {
                                         "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.Form_okud7[n] +"' as OKUD_CODE, \n" + 
-						"'"+ SC_data_miner.period7[n] +"'as PERIOD \n" + 
-						"null as FORM_CD \n" + 
+                        "'"+ SC_data_miner.Form_okud6[n] +"' as OKUD_CODE, \n" +
+						"'"+ SC_data_miner.period6[n] +"'as PERIOD \n" +
+						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
@@ -6690,22 +7005,47 @@ public class ScriptEXP {
                                         "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.Form_okud8[n] +"' as OKUD_CODE, \n" + 
-						"'"+ SC_data_miner.period8[n] +"'as PERIOD \n" + 
-						"null as FORM_CD \n" + 
+                        "'"+ SC_data_miner.Form_okud7[n] +"' as OKUD_CODE, \n" +
+						"'"+ SC_data_miner.period7[n] +"'as PERIOD \n" +
+						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
                         "                                R.FORM_CD = S.FORM_CD\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.OKUD_CODE, R.PERIOD, R.FORM_CD)\n" +
                         "   VALUES (S.FORM_FORMAL_CODE, S.OKUD_CODE, S.PERIOD, S.FORM_CD);\n\n" +
-                                        "\n";
-                                break;
+                                        "\n" +
+                                        "MERGE INTO REPORT_OKUD_CODE R\n" +
+                        "   USING (SELECT \n" +
+                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_okud8[n] +"' as OKUD_CODE, \n" +
+						"'"+ SC_data_miner.period8[n] +"'as PERIOD \n" +
+						"null as FORM_CD \n" +
+                        "FROM dual) S\n" +
+                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
+                        "                                R.FORM_CD = S.FORM_CD\n" +
+                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.OKUD_CODE, R.PERIOD, R.FORM_CD)\n" +
+                        "   VALUES (S.FORM_FORMAL_CODE, S.OKUD_CODE, S.PERIOD, S.FORM_CD);\n\n" +
+                                            "\n";
+                                    break;
+                            }
                         }
                     }
                     if(SC_data_miner.Form_cd[n] == null  || Objects.equals(SC_data_miner.Form_cd[n], "") || Objects.equals(SC_data_miner.Form_cd[n], " ") ||
                             SC_data_miner.Form_formal_code[n] == null  || Objects.equals(SC_data_miner.Form_formal_code[n], "") || Objects.equals(SC_data_miner.Form_formal_code[n], " ")){
-                        report_form_src_script[n] = "--Warning: Не указаны данные для таблицы REPORT_FORM_SRC\n\n";
+                        if(rep_or_code[n] == 1){
+                            report_form_src_script[n] = "--Для регистрации кода доступа нет необходимости заполнять данные для таблицы REPORT_FORM_SRC\n\n";
+                        } else{
+                            report_form_src_script[n] = "--Warning: Не указаны данные для таблицы REPORT_FORM_SRC: ";
+                            if(SC_data_miner.Form_cd[n] == null  || Objects.equals(SC_data_miner.Form_cd[n], "") || Objects.equals(SC_data_miner.Form_cd[n], " ")){
+                                report_form_src_script[n] = report_form_src_script[n] + "Код доступа, ";
+                            }
+                            if(SC_data_miner.Form_formal_code[n] == null  || Objects.equals(SC_data_miner.Form_formal_code[n], "") || Objects.equals(SC_data_miner.Form_formal_code[n], " ")){
+                                report_form_src_script[n] = report_form_src_script[n] + "Уникальный код отчета.";
+                            }
+                            report_form_src_script[n] = report_form_src_script[n] + "\n\n";
+                        }
                     } else {
                         report_form_src_script[n] = "MERGE INTO REPORT_FORM_SRC R\n" +
                         "   USING (SELECT \n" +
@@ -6719,7 +7059,11 @@ public class ScriptEXP {
                                 "\n" ;
                     }
                     if(SC_data_miner.rep_subj_type[n] == null || Objects.equals(SC_data_miner.rep_subj_type[n], "") || Objects.equals(SC_data_miner.rep_subj_type[n], " ")){
-                        report_rep_subj_type_script[n] = "--Warning: Не указаны данные для таблицы REPORT_REP_SUBJ_TYPE\n\n";
+                        if(rep_or_code[n] == 1){
+                            report_rep_subj_type_script[n] = "--Для регистрации кода доступа нет необходимости заполнять данные для таблицы REPORT_REP_SUBJ_TYPE\n\n";
+                        } else{
+                            report_rep_subj_type_script[n] = "--Warning: Не указаны данные для таблицы REPORT_REP_SUBJ_TYPE: Разрез\n\n";
+                        }
                     } else {
                         //System.out.print("n =" + n + "\n");
                         int c = OK_Action.getSubj_count(n);
@@ -6729,7 +7073,7 @@ public class ScriptEXP {
                                 report_rep_subj_type_script[n] = "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.rep_subj_type[n] +"' as REP_SUBJ_TYPE, \n" + 
+                        "'"+ SC_data_miner.rep_subj_type[n] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -6740,7 +7084,7 @@ public class ScriptEXP {
                                 report_rep_subj_type_script[n] = "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.rep_subj_type[n] +"' as REP_SUBJ_TYPE, \n" + 
+                        "'"+ SC_data_miner.rep_subj_type[n] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -6749,7 +7093,7 @@ public class ScriptEXP {
                                         "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.rep_subj_type2[n] +"' as REP_SUBJ_TYPE, \n" + 
+                        "'"+ SC_data_miner.rep_subj_type2[n] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -6760,7 +7104,7 @@ public class ScriptEXP {
                                 report_rep_subj_type_script[n] = "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.rep_subj_type[n] +"' as REP_SUBJ_TYPE, \n" + 
+                        "'"+ SC_data_miner.rep_subj_type[n] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -6769,7 +7113,7 @@ public class ScriptEXP {
                                         "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.rep_subj_type2[n] +"' as REP_SUBJ_TYPE, \n" + 
+                        "'"+ SC_data_miner.rep_subj_type2[n] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -6778,7 +7122,7 @@ public class ScriptEXP {
                                         "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.rep_subj_type3[n] +"' as REP_SUBJ_TYPE, \n" + 
+                        "'"+ SC_data_miner.rep_subj_type3[n] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -6789,7 +7133,7 @@ public class ScriptEXP {
                                 report_rep_subj_type_script[n] = "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.rep_subj_type[n] +"' as REP_SUBJ_TYPE, \n" + 
+                        "'"+ SC_data_miner.rep_subj_type[n] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -6798,7 +7142,7 @@ public class ScriptEXP {
                                         "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.rep_subj_type2[n] +"' as REP_SUBJ_TYPE, \n" + 
+                        "'"+ SC_data_miner.rep_subj_type2[n] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -6807,7 +7151,7 @@ public class ScriptEXP {
                                         "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.rep_subj_type3[n] +"' as REP_SUBJ_TYPE, \n" + 
+                        "'"+ SC_data_miner.rep_subj_type3[n] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -6816,7 +7160,7 @@ public class ScriptEXP {
                                         "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.rep_subj_type4[n] +"' as REP_SUBJ_TYPE, \n" + 
+                        "'"+ SC_data_miner.rep_subj_type4[n] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -6827,7 +7171,7 @@ public class ScriptEXP {
                                 report_rep_subj_type_script[n] = "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.rep_subj_type[n] +"' as REP_SUBJ_TYPE, \n" + 
+                        "'"+ SC_data_miner.rep_subj_type[n] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -6836,7 +7180,7 @@ public class ScriptEXP {
                                         "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.rep_subj_type2[n] +"' as REP_SUBJ_TYPE, \n" + 
+                        "'"+ SC_data_miner.rep_subj_type2[n] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -6845,7 +7189,7 @@ public class ScriptEXP {
                                         "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.rep_subj_type3[n] +"' as REP_SUBJ_TYPE, \n" + 
+                        "'"+ SC_data_miner.rep_subj_type3[n] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -6854,7 +7198,7 @@ public class ScriptEXP {
                                         "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.rep_subj_type4[n] +"' as REP_SUBJ_TYPE, \n" + 
+                        "'"+ SC_data_miner.rep_subj_type4[n] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -6863,7 +7207,7 @@ public class ScriptEXP {
                                         "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.rep_subj_type5[n] +"' as REP_SUBJ_TYPE, \n" + 
+                        "'"+ SC_data_miner.rep_subj_type5[n] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -6874,7 +7218,7 @@ public class ScriptEXP {
                                 report_rep_subj_type_script[n] = "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.rep_subj_type[n] +"' as REP_SUBJ_TYPE, \n" + 
+                        "'"+ SC_data_miner.rep_subj_type[n] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -6883,7 +7227,7 @@ public class ScriptEXP {
                                         "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.rep_subj_type2[n] +"' as REP_SUBJ_TYPE, \n" + 
+                        "'"+ SC_data_miner.rep_subj_type2[n] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -6892,7 +7236,7 @@ public class ScriptEXP {
                                         "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.rep_subj_type3[n] +"' as REP_SUBJ_TYPE, \n" + 
+                        "'"+ SC_data_miner.rep_subj_type3[n] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -6901,7 +7245,7 @@ public class ScriptEXP {
                                         "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.rep_subj_type4[n] +"' as REP_SUBJ_TYPE, \n" + 
+                        "'"+ SC_data_miner.rep_subj_type4[n] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -6910,7 +7254,7 @@ public class ScriptEXP {
                                         "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.rep_subj_type5[n] +"' as REP_SUBJ_TYPE, \n" + 
+                        "'"+ SC_data_miner.rep_subj_type5[n] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -6919,7 +7263,7 @@ public class ScriptEXP {
                                         "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.rep_subj_type6[n] +"' as REP_SUBJ_TYPE, \n" + 
+                        "'"+ SC_data_miner.rep_subj_type6[n] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -6930,7 +7274,7 @@ public class ScriptEXP {
                                 report_rep_subj_type_script[n] = "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.rep_subj_type[n] +"' as REP_SUBJ_TYPE, \n" + 
+                        "'"+ SC_data_miner.rep_subj_type[n] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -6939,7 +7283,7 @@ public class ScriptEXP {
                                         "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.rep_subj_type2[n] +"' as REP_SUBJ_TYPE, \n" + 
+                        "'"+ SC_data_miner.rep_subj_type2[n] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -6948,7 +7292,7 @@ public class ScriptEXP {
                                         "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.rep_subj_type3[n] +"' as REP_SUBJ_TYPE, \n" + 
+                        "'"+ SC_data_miner.rep_subj_type3[n] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -6957,7 +7301,7 @@ public class ScriptEXP {
                                         "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.rep_subj_type4[n] +"' as REP_SUBJ_TYPE, \n" + 
+                        "'"+ SC_data_miner.rep_subj_type4[n] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -6966,7 +7310,7 @@ public class ScriptEXP {
                                         "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.rep_subj_type5[n] +"' as REP_SUBJ_TYPE, \n" + 
+                        "'"+ SC_data_miner.rep_subj_type5[n] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -6975,7 +7319,7 @@ public class ScriptEXP {
                                         "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.rep_subj_type6[n] +"' as REP_SUBJ_TYPE, \n" + 
+                        "'"+ SC_data_miner.rep_subj_type6[n] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -6984,7 +7328,7 @@ public class ScriptEXP {
                                         "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.rep_subj_type7[n] +"' as REP_SUBJ_TYPE, \n" + 
+                        "'"+ SC_data_miner.rep_subj_type7[n] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -6995,7 +7339,7 @@ public class ScriptEXP {
                                 report_rep_subj_type_script[n] = "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.rep_subj_type[n] +"' as REP_SUBJ_TYPE, \n" + 
+                        "'"+ SC_data_miner.rep_subj_type[n] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -7004,7 +7348,7 @@ public class ScriptEXP {
                                         "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.rep_subj_type2[n] +"' as REP_SUBJ_TYPE, \n" + 
+                        "'"+ SC_data_miner.rep_subj_type2[n] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -7013,7 +7357,7 @@ public class ScriptEXP {
                                         "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.rep_subj_type3[n] +"' as REP_SUBJ_TYPE, \n" + 
+                        "'"+ SC_data_miner.rep_subj_type3[n] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -7022,7 +7366,7 @@ public class ScriptEXP {
                                         "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.rep_subj_type4[n] +"' as REP_SUBJ_TYPE, \n" + 
+                        "'"+ SC_data_miner.rep_subj_type4[n] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -7031,7 +7375,7 @@ public class ScriptEXP {
                                         "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.rep_subj_type5[n] +"' as REP_SUBJ_TYPE, \n" + 
+                        "'"+ SC_data_miner.rep_subj_type5[n] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -7040,7 +7384,7 @@ public class ScriptEXP {
                                         "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.rep_subj_type6[n] +"' as REP_SUBJ_TYPE, \n" + 
+                        "'"+ SC_data_miner.rep_subj_type6[n] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -7049,7 +7393,7 @@ public class ScriptEXP {
                                         "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.rep_subj_type7[n] +"' as REP_SUBJ_TYPE, \n" + 
+                        "'"+ SC_data_miner.rep_subj_type7[n] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -7058,7 +7402,7 @@ public class ScriptEXP {
                                         "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
-                        "'"+ SC_data_miner.rep_subj_type8[n] +"' as REP_SUBJ_TYPE, \n" + 
+                        "'"+ SC_data_miner.rep_subj_type8[n] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -7069,7 +7413,7 @@ public class ScriptEXP {
                         }
                     }
                     if(SC_data_miner.Search_path[n] == null || Objects.equals(SC_data_miner.Search_path[n], "") || Objects.equals(SC_data_miner.Search_path[n], " ")){
-                        ehd_acs_script[n] = "--Warning: Не указаны данные для таблицы EHD_ACS_OBJECTS\n\n";
+                        ehd_acs_script[n] = "--Warning: Не указаны данные для таблицы EHD_ACS_OBJECTS: Полный путь отчета/папки(Search_path)\n\n";
                     } else {
                         ehd_acs_script[n] = "MERGE INTO EHD_ACS_OBJECTS O\n" +
                                 "   USING (SELECT \n" +
@@ -7093,26 +7437,58 @@ public class ScriptEXP {
                                 "   VALUES (S.NAME, S.CODE, S.PARENT_ID, S.TYPE_REF, S.SOURCE_REF, S.CREATE_DATE, S.UPDATE_DATE, S.SEARCH_PATH, S.FLAG_EXP);\n" + "commit;" ;
                     }
                     if(SC_data_miner.p_parent_code_txtf[n] == null || Objects.equals(SC_data_miner.p_parent_code_txtf[n], "") || Objects.equals(SC_data_miner.p_parent_code_txtf[n], " ") ||
-                            SC_data_miner.p_parent_type_ref_txtf[n] == null || Objects.equals(SC_data_miner.p_parent_type_ref_txtf[n], "") || Objects.equals(SC_data_miner.p_parent_type_ref_txtf[n], " ") ||
+                            SC_data_miner.p_parent_type_ref_txtf[n] == null || Objects.equals(SC_data_miner.p_parent_type_ref_txtf[n], "") || Objects.equals(SC_data_miner.p_parent_type_ref_txtf[n], " ") //||
                             //SC_data_miner.p_type_ref_txtf[n] == null || Objects.equals(SC_data_miner.p_type_ref_txtf[n], "") || Objects.equals(SC_data_miner.p_type_ref_txtf[n], " ") ||
                             //SC_data_miner.p_source_ref_txtf[n] == null || Objects.equals(SC_data_miner.p_source_ref_txtf[n], "") || Objects.equals(SC_data_miner.p_source_ref_txtf[n], " ") ||
-                            SC_data_miner.Search_path[n] == null || Objects.equals(SC_data_miner.Search_path[n], "") || Objects.equals(SC_data_miner.Search_path[n], " ")){
-                        ehd_acs_script2[n] = "--Warning: Не указаны данные для таблицы EHD_ACS_OBJECTS\n\n";
+                            /*SC_data_miner.Search_path[n] == null || Objects.equals(SC_data_miner.Search_path[n], "") || Objects.equals(SC_data_miner.Search_path[n], " ")*/){
+                        ehd_acs_script2[n] = "--Warning: Не указаны данные для таблицы EHD_ACS_OBJECTS: ";
+                        if(SC_data_miner.p_parent_code_txtf[n] == null || Objects.equals(SC_data_miner.p_parent_code_txtf[n], "") || Objects.equals(SC_data_miner.p_parent_code_txtf[n], " ")){
+                            ehd_acs_script2[n] = ehd_acs_script2[n] + "p_parent_code, ";
+                        }
+                        if(SC_data_miner.p_parent_type_ref_txtf[n] == null || Objects.equals(SC_data_miner.p_parent_type_ref_txtf[n], "") || Objects.equals(SC_data_miner.p_parent_type_ref_txtf[n], " ")){
+                            ehd_acs_script2[n] = ehd_acs_script2[n] + "p_parent_type_ref, ";
+                        }
+                        if(SC_data_miner.p_type_ref_txtf[n] == null || Objects.equals(SC_data_miner.p_type_ref_txtf[n], "") || Objects.equals(SC_data_miner.p_type_ref_txtf[n], " ")){
+                            ehd_acs_script2[n] = ehd_acs_script2[n] + "p_type_ref, ";
+                        }
+                        if(SC_data_miner.p_source_ref_txtf[n] == null || Objects.equals(SC_data_miner.p_source_ref_txtf[n], "") || Objects.equals(SC_data_miner.p_source_ref_txtf[n], " ")){
+                            ehd_acs_script2[n] = ehd_acs_script2[n] + "p_source_ref. ";
+                        }
+                        ehd_acs_script2[n] = ehd_acs_script2[n] + "\n\n";
                     } else {
-                        ehd_acs_script2[n] = "begin\n" +
-                                "utils.add_object_node\n" +
-                                "                            (p_name => '" + SC_data_miner.Form_name[n] + "'\n" +
-                                "                            ,p_code => '" + SC_data_miner.Form_cd[n] + "'\n" +
-                                "                            ,p_parent_code => '" + SC_data_miner.p_parent_code_txtf[n] + "' --родительский элемент (код доступа)\n" +
-                                "                            ,p_parent_type_ref =>'" + SC_data_miner.p_parent_type_ref_txtf[n] + "'\n" +
-                                "                            ,p_type_ref => '" + SC_data_miner.p_type_ref_txtf[n] + "'\n" +
-                                "                            ,p_source_ref => '" + SC_data_miner.p_source_ref_txtf[n] + "'\n" +
-                                "                            ,p_search_path => '" + SC_data_miner.Search_path[n] + "\n" +
-                                ");\n" +
-                                "                    end;\n" +
-                                "/";
+                        //System.out.print("\n" + "n - rep_or_code[" + n + "] = " + rep_or_code[n]);
+                        if(rep_or_code[n] == 1){
+                            ehd_acs_script2[n] = "begin\n" +
+                                    "utils.add_object_node\n" +
+                                    "                            (p_name => '" + SC_data_miner.Form_name[n] + "'\n" +
+                                    "                            ,p_code => '" + SC_data_miner.Form_cd[n] + "'\n" +
+                                    "                            ,p_parent_code => '" + SC_data_miner.p_parent_code_txtf[n] + "' --родительский элемент (код доступа)\n" +
+                                    "                            ,p_parent_type_ref =>'" + SC_data_miner.p_parent_type_ref_txtf[n] + "'\n" +
+                                    "                            ,p_type_ref => '" + SC_data_miner.p_type_ref_txtf[n] + "'\n" +
+                                    "                            ,p_source_ref => '" + SC_data_miner.p_source_ref_txtf[n] + "'\n" +
+                                    ");\n" +
+                                    "                    end;\n" +
+                                    "/";
+                            //System.out.print("\n" + "ehd_acs_script2[" + n + "] = " + ehd_acs_script2[n]);
+                        } else{
+                            ehd_acs_script2[n] = "begin\n" +
+                                    "utils.add_object_node\n" +
+                                    "                            (p_name => '" + SC_data_miner.Form_name[n] + "'\n" +
+                                    "                            ,p_code => '" + SC_data_miner.Form_cd[n] + "'\n" +
+                                    "                            ,p_parent_code => '" + SC_data_miner.p_parent_code_txtf[n] + "' --родительский элемент (код доступа)\n" +
+                                    "                            ,p_parent_type_ref =>'" + SC_data_miner.p_parent_type_ref_txtf[n] + "'\n" +
+                                    "                            ,p_type_ref => '" + SC_data_miner.p_type_ref_txtf[n] + "'\n" +
+                                    "                            ,p_source_ref => '" + SC_data_miner.p_source_ref_txtf[n] + "'\n" +
+                                    "                            ,p_search_path => '" + SC_data_miner.Search_path[n] + "\n" +
+                                    ");\n" +
+                                    "                    end;\n" +
+                                    "/";
+                            //System.out.print("\n" + "ehd_acs_script2[" + n + "] = " + ehd_acs_script2[n]);
+                        }
                     }
-                    
+                    //System.out.print("\n" + "ehd_acs_script[" + n + "] = " + ehd_acs_script[n]);
+                    //System.out.print("\n" + "ehd_acs_script2[" + n + "] = " + ehd_acs_script2[n]);
+
                     //textset = text.split("#");
                     text[0] = text[0] + "\n" +
                             "\n" +
@@ -7141,14 +7517,24 @@ public class ScriptEXP {
                             report_form_src_script[n] + "\n\n" +
                             report_rep_subj_type_script[n] + "\n\n" +
                     "commit;";
-                    if(type == 0){
+
+                    text[2] = text[2] + "\n" +
+                            "--" + FName_def[0] +"\n" +
+                            "\n" +
+                            "--DM_NIKA_KO_DATA\n" +
+                            "\n" +
+                            rep_form_cognos_script[n] + "\n\n" + "commit;";
+
+                    if(type[n] == 0){
                         text[3] = text[3] + "\n" +
                                 "\n" +
                                 "--" + FName_def[n] + "\n" +
                                 "\n" +
                                 ehd_acs_script[n] + "\n\n";
-                    } else if(type == 1){
-                        text[3] = "--" + FName_def[n] +"\n" +
+                    } else if(type[n] == 1){
+                        text[3] = text[3] + "\n" +
+                                "\n" +
+                                "--" + FName_def[n] +"\n" +
                                 "\n" +
                                 "--TechDB_EHD_ACS\n" +
                                 "\n" +
