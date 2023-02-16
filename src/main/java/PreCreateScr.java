@@ -217,6 +217,10 @@ public class PreCreateScr {
                 SC_data_miner.p_parent_type_ref_txtf[i] =  p_parent_type_ref_txtf[i].getText();
                 SC_data_miner.p_type_ref_txtf[i] =  p_type_ref_txtf[i].getText();
                 SC_data_miner.p_source_ref_txtf[i] = p_source_ref_txtf[i].getText();
+                System.out.print("2 p_parent_code_txtf[" + i + "].getText() = " + p_parent_code_txtf[i].getText() + "\n");
+                System.out.print("2 p_parent_type_ref_txtf[" + i + "].getText() = " + p_parent_type_ref_txtf[i].getText() + "\n");
+                System.out.print("SC_data_miner.p_parent_code_txtf[" + i + "] = " + SC_data_miner.p_parent_code_txtf[i] + "\n");
+                System.out.print("SC_data_miner.p_parent_type_ref_txtf[" + i + "] = " + SC_data_miner.p_parent_type_ref_txtf[i] + "\n");
             }
             //System.out.print("Form_cd_name_txtf[i].getText() = " + Form_cd_name_txtf[i].getText() + "\n");
             //System.out.print("Form_okud_txtf[" + i + "].getText() = " + Form_okud_txtf[i].getText()+ "\n");
@@ -235,7 +239,7 @@ public class PreCreateScr {
             } else{
                 type[i] = 1;
             }
-            //System.out.print("type["+ i +"] = " + type + "\n");
+            System.out.print("type["+ i +"] = " + type[i] + "\n");
             i++;
         }
 

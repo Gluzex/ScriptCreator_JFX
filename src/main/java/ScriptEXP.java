@@ -146,9 +146,9 @@ public class ScriptEXP {
                         "\n" +
                         "MERGE INTO REP_FORM R\n" +
                         "   USING (SELECT \n" +
-                        "'" + SC_data_miner.Form_cd[0] + "' as FORM_CD, \n'" +
+                        "'" + SC_data_miner.Form_cd[0] + "' as FORM_CD, \n" +
                         "'" + SC_data_miner.Form_name[0] + "' as FORM_NAME, \n" +
-                        "'" + okud_rep_form + "' as FORM_OKUD\n" +
+                         okud_rep_form + "\n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.FORM_NAME = S.FORM_NAME,\n" +
@@ -159,7 +159,7 @@ public class ScriptEXP {
                         "\n" +
                         "MERGE INTO REP_FORM_COGNOS R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd_cog[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd_cog[0] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD)\n" +
@@ -170,7 +170,7 @@ public class ScriptEXP {
                         "\n" +
                         "MERGE INTO REP_FORM_OKI R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n" +
                         iod + ",  " +
 						pdn +
                         " FROM dual) S\n" +
@@ -183,7 +183,7 @@ public class ScriptEXP {
                         "\n" +
                         "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_name[0] +"' as DEP_NAME, \n" +
 						"'"+ SC_data_miner.reason[0] +"'as REASON \n" +
                         "FROM dual) S\n" +
@@ -195,7 +195,7 @@ public class ScriptEXP {
                         "\n" +
                         "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_u_name[0] +"' as DEP_NAME, \n" +
 						"'"+ SC_data_miner.reason[0] +"'as REASON \n" +
                         "FROM dual) S\n" +
@@ -231,7 +231,7 @@ public class ScriptEXP {
                         "\n" +
                         "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, \n" +
 						"'"+ SC_data_miner.period[0] +"'as PERIOD \n" +
 						"null as FORM_CD \n" +
@@ -244,7 +244,7 @@ public class ScriptEXP {
                         "\n" +
                         "MERGE INTO REPORT_FORM_SRC R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Reg_form_code[0] +"' as REG_FORM_CODE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE)\n" +
@@ -254,7 +254,7 @@ public class ScriptEXP {
                         "\n" +
                         "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
@@ -266,9 +266,9 @@ public class ScriptEXP {
                         "--DM_NIKA_KO\n" +
                         "MERGE INTO REP_FORM R\n" +
                         "   USING (SELECT \n" +
-                        "'" + SC_data_miner.Form_cd[0] + "' as FORM_CD, \n'" +
+                        "'" + SC_data_miner.Form_cd[0] + "' as FORM_CD, \n" +
                         "'" + SC_data_miner.Form_name[0] + "' as FORM_NAME, \n" +
-                        "'" + okud_rep_form + "' as FORM_OKUD\n" +
+                         okud_rep_form + "\n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.FORM_NAME = S.FORM_NAME,\n" +
@@ -279,7 +279,7 @@ public class ScriptEXP {
                         "\n" +
                         "MERGE INTO REP_FORM_COGNOS R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd_cog[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd_cog[0] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD)\n" +
@@ -290,7 +290,7 @@ public class ScriptEXP {
                         "\n" +
                         "MERGE INTO REP_FORM_OKI R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n" +
                         iod + ",  " +
 						pdn +
                         " FROM dual) S\n" +
@@ -303,7 +303,7 @@ public class ScriptEXP {
                         "\n" +
                         "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_name[0] +"' as DEP_NAME, \n" +
 						"'"+ SC_data_miner.reason[0] +"'as REASON \n" +
                         "FROM dual) S\n" +
@@ -315,7 +315,7 @@ public class ScriptEXP {
                         "\n" +
                         "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_u_name[0] +"' as DEP_NAME, \n" +
 						"'"+ SC_data_miner.reason[0] +"'as REASON \n" +
                         "FROM dual) S\n" +
@@ -351,7 +351,7 @@ public class ScriptEXP {
                         "\n" +
                         "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, \n" +
 						"'"+ SC_data_miner.period[0] +"'as PERIOD \n" +
 						"null as FORM_CD \n" +
@@ -364,7 +364,7 @@ public class ScriptEXP {
                         "\n" +
                         "MERGE INTO REPORT_FORM_SRC R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Reg_form_code[0] +"' as REG_FORM_CODE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE)\n" +
@@ -374,7 +374,7 @@ public class ScriptEXP {
                         "\n" +
                         "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
@@ -389,7 +389,7 @@ public class ScriptEXP {
                         "\n" +
                         "MERGE INTO REP_FORM_COGNOS R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd_cog[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd_cog[0] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD)\n" +
@@ -449,9 +449,9 @@ public class ScriptEXP {
                         "\n" +
                         "MERGE INTO REP_FORM R\n" +
                         "   USING (SELECT \n" +
-                        "'" + SC_data_miner.Form_cd[0] + "' as FORM_CD, \n'" +
+                        "'" + SC_data_miner.Form_cd[0] + "' as FORM_CD, \n" +
                         "'" + SC_data_miner.Form_name[0] + "' as FORM_NAME, \n" +
-                        "'" + okud_rep_form + "' as FORM_OKUD\n" +
+                         okud_rep_form + "\n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.FORM_NAME = S.FORM_NAME,\n" +
@@ -462,7 +462,7 @@ public class ScriptEXP {
                         "\n" +
                         "MERGE INTO REP_FORM_COGNOS R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd_cog[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd_cog[0] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD)\n" +
@@ -473,7 +473,7 @@ public class ScriptEXP {
                         "\n" +
                         "MERGE INTO REP_FORM_OKI R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n" +
                         iod + ",  " +
 						pdn +
                         " FROM dual) S\n" +
@@ -486,7 +486,7 @@ public class ScriptEXP {
                         "\n" +
                         "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_name[0] +"' as DEP_NAME, \n" +
 						"'"+ SC_data_miner.reason[0] +"'as REASON \n" +
                         "FROM dual) S\n" +
@@ -498,7 +498,7 @@ public class ScriptEXP {
                         "\n" +
                         "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_u_name[0] +"' as DEP_NAME, \n" +
 						"'"+ SC_data_miner.reason[0] +"'as REASON \n" +
                         "FROM dual) S\n" +
@@ -535,7 +535,7 @@ public class ScriptEXP {
                         "\n" +
                         "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, \n" +
 						"'"+ SC_data_miner.period[0] +"'as PERIOD \n" +
 						"null as FORM_CD \n" +
@@ -549,7 +549,7 @@ public class ScriptEXP {
                         "\n" +
                         "MERGE INTO REPORT_FORM_SRC R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Reg_form_code[0] +"' as REG_FORM_CODE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE)\n" +
@@ -559,7 +559,7 @@ public class ScriptEXP {
                         "\n" +
                         "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
@@ -575,9 +575,9 @@ public class ScriptEXP {
                         "\n" +
                         "MERGE INTO REP_FORM R\n" +
                         "   USING (SELECT \n" +
-                        "'" + SC_data_miner.Form_cd[0] + "' as FORM_CD, \n'" +
+                        "'" + SC_data_miner.Form_cd[0] + "' as FORM_CD, \n" +
                         "'" + SC_data_miner.Form_name[0] + "' as FORM_NAME, \n" +
-                        "'" + okud_rep_form + "' as FORM_OKUD\n" +
+                         okud_rep_form + "\n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.FORM_NAME = S.FORM_NAME,\n" +
@@ -588,7 +588,7 @@ public class ScriptEXP {
                         "\n" +
                         "MERGE INTO REP_FORM_COGNOS R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd_cog[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd_cog[0] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD)\n" +
@@ -599,7 +599,7 @@ public class ScriptEXP {
                         "\n" +
                         "MERGE INTO REP_FORM_OKI R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n" +
                         iod + ",  " +
 						pdn +
                         " FROM dual) S\n" +
@@ -612,7 +612,7 @@ public class ScriptEXP {
                         "\n" +
                         "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_name[0] +"' as DEP_NAME, \n" +
 						"'"+ SC_data_miner.reason[0] +"'as REASON \n" +
                         "FROM dual) S\n" +
@@ -624,7 +624,7 @@ public class ScriptEXP {
                         "\n" +
                         "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_u_name[0] +"' as DEP_NAME, \n" +
 						"'"+ SC_data_miner.reason[0] +"'as REASON \n" +
                         "FROM dual) S\n" +
@@ -661,7 +661,7 @@ public class ScriptEXP {
                         "\n" +
                         "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, \n" +
 						"'"+ SC_data_miner.period[0] +"'as PERIOD \n" +
 						"null as FORM_CD \n" +
@@ -676,7 +676,7 @@ public class ScriptEXP {
                         "\n" +
                         "MERGE INTO REPORT_FORM_SRC R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Reg_form_code[0] +"' as REG_FORM_CODE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE)\n" +
@@ -686,7 +686,7 @@ public class ScriptEXP {
                         "\n" +
                         "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
@@ -700,7 +700,7 @@ public class ScriptEXP {
                         "\n" +
                         "MERGE INTO REP_FORM_COGNOS R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd_cog[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd_cog[0] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD)\n" +
@@ -991,7 +991,7 @@ public class ScriptEXP {
                         "\n" +
                         "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, \n" +
 						"'"+ SC_data_miner.period[0] +"'as PERIOD \n" +
 						"null as FORM_CD \n" +
@@ -1004,7 +1004,7 @@ public class ScriptEXP {
                         "\n" +
                         "MERGE INTO REPORT_FORM_SRC R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Reg_form_code[0] +"' as REG_FORM_CODE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE)\n" +
@@ -1014,7 +1014,7 @@ public class ScriptEXP {
                         "\n" +
                         "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
@@ -1051,7 +1051,7 @@ public class ScriptEXP {
                         "\n" +
                         "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, \n" +
 						"'"+ SC_data_miner.period[0] +"'as PERIOD \n" +
 						"null as FORM_CD \n" +
@@ -1064,7 +1064,7 @@ public class ScriptEXP {
                         "\n" +
                         "MERGE INTO REPORT_FORM_SRC R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Reg_form_code[0] +"' as REG_FORM_CODE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE)\n" +
@@ -1074,7 +1074,7 @@ public class ScriptEXP {
                         "\n" +
                         "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
@@ -1157,7 +1157,7 @@ public class ScriptEXP {
                         "\n" +
                         "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, \n" +
 						"'"+ SC_data_miner.period[0] +"'as PERIOD \n" +
 						"null as FORM_CD \n" +
@@ -1171,7 +1171,7 @@ public class ScriptEXP {
                         "\n" +
                         "MERGE INTO REPORT_FORM_SRC R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Reg_form_code[0] +"' as REG_FORM_CODE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE)\n" +
@@ -1181,7 +1181,7 @@ public class ScriptEXP {
                         "\n" +
                         "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
@@ -1218,7 +1218,7 @@ public class ScriptEXP {
                         "\n" +
                         "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, \n" +
 						"'"+ SC_data_miner.period[0] +"'as PERIOD \n" +
 						"null as FORM_CD \n" +
@@ -1232,7 +1232,7 @@ public class ScriptEXP {
                         "\n" +
                         "MERGE INTO REPORT_FORM_SRC R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Reg_form_code[0] +"' as REG_FORM_CODE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE)\n" +
@@ -1242,7 +1242,7 @@ public class ScriptEXP {
                         "\n" +
                         "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
@@ -1575,7 +1575,6 @@ public class ScriptEXP {
                 }
                 int l = SC_data_miner.Form_cd[0].length();
                 //System.out.print("\nl = " + l + "\n");
-
                 if(SC_data_miner.Form_cd[0].startsWith("0409")){
                     okud_rep_form = "null as FORM_OKUD";
                     //System.out.print("\nokud_rep_form = " + okud_rep_form + "\n");
@@ -1589,7 +1588,10 @@ public class ScriptEXP {
                         //System.out.print("SC_data_miner.Form_cd[0].startsWith(\"0409\") = " + SC_data_miner.Form_cd[0].startsWith("0409"));
                     }
                 }
-
+                if(SC_data_miner.Reg_form_code[0] == null || Objects.equals(SC_data_miner.Reg_form_code[0], "") || Objects.equals(SC_data_miner.Reg_form_code[0], " ")){
+                    SC_data_miner.Reg_form_code[0] = SC_data_miner.Form_cd[0];
+                }
+                
                 String rep_form_script = "";
                 String rep_form_cognos_script = "";
                 String rep_form_oki_script = "";
@@ -1620,9 +1622,9 @@ public class ScriptEXP {
                 } else {
                     rep_form_script = "MERGE INTO REP_FORM R\n" +
                         "   USING (SELECT \n" +
-                        "'" + SC_data_miner.Form_cd[0] + "' as FORM_CD, \n'" +
+                        "'" + SC_data_miner.Form_cd[0] + "' as FORM_CD,\n" +
                         "'" + SC_data_miner.Form_name[0] + "' as FORM_NAME, \n" +
-                        "'" + okud_rep_form + "' as FORM_OKUD\n" +
+                         okud_rep_form + "\n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.FORM_NAME = S.FORM_NAME,\n" +
@@ -1648,7 +1650,7 @@ public class ScriptEXP {
                 } else{
                     rep_form_oki_script = "MERGE INTO REP_FORM_OKI R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n" +
                         iod + ",  " +
 						pdn +
                         " FROM dual) S\n" +
@@ -1670,7 +1672,7 @@ public class ScriptEXP {
                 } else {
                     rep_form_cognos_script = "MERGE INTO REP_FORM_COGNOS R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd_cog[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd_cog[0] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD)\n" +
@@ -1693,7 +1695,7 @@ public class ScriptEXP {
                         case 1:
                             rep_form_dep_owner_script = "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_name[0] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -1707,7 +1709,7 @@ public class ScriptEXP {
                         case 2:
                             rep_form_dep_owner_script = "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_name[0] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -1717,7 +1719,7 @@ public class ScriptEXP {
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_name2[0] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -1731,7 +1733,7 @@ public class ScriptEXP {
                         case 3:
                             rep_form_dep_owner_script = "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_name[0] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -1741,7 +1743,7 @@ public class ScriptEXP {
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_name2[0] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -1751,7 +1753,7 @@ public class ScriptEXP {
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_name3[0] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -1765,7 +1767,7 @@ public class ScriptEXP {
                         case 4:
                             rep_form_dep_owner_script = "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_name[0] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -1775,7 +1777,7 @@ public class ScriptEXP {
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_name2[0] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -1785,7 +1787,7 @@ public class ScriptEXP {
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_name3[0] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -1795,7 +1797,7 @@ public class ScriptEXP {
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_name4[0] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -1809,7 +1811,7 @@ public class ScriptEXP {
                         case 5:
                             rep_form_dep_owner_script = "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_name[0] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -1819,7 +1821,7 @@ public class ScriptEXP {
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_name2[0] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -1829,7 +1831,7 @@ public class ScriptEXP {
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);" +
                                     "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_name3[0] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -1839,7 +1841,7 @@ public class ScriptEXP {
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_name4[0] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -1849,7 +1851,7 @@ public class ScriptEXP {
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_name5[0] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -1863,7 +1865,7 @@ public class ScriptEXP {
                         case 6:
                             rep_form_dep_owner_script = "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_name[0] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -1873,7 +1875,7 @@ public class ScriptEXP {
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_name2[0] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -1883,7 +1885,7 @@ public class ScriptEXP {
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);" +
                                     "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_name3[0] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -1893,7 +1895,7 @@ public class ScriptEXP {
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_name4[0] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -1903,7 +1905,7 @@ public class ScriptEXP {
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_name5[0] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -1913,7 +1915,7 @@ public class ScriptEXP {
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_name6[0] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -1927,7 +1929,7 @@ public class ScriptEXP {
                         case 7:
                             rep_form_dep_owner_script = "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_name[0] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -1937,7 +1939,7 @@ public class ScriptEXP {
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_name2[0] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -1947,7 +1949,7 @@ public class ScriptEXP {
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);" +
                                     "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_name3[0] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -1957,7 +1959,7 @@ public class ScriptEXP {
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_name4[0] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -1967,7 +1969,7 @@ public class ScriptEXP {
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_name5[0] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -1977,7 +1979,7 @@ public class ScriptEXP {
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_name6[0] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -1987,7 +1989,7 @@ public class ScriptEXP {
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_name7[0] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -2001,7 +2003,7 @@ public class ScriptEXP {
                         case 8:
                             rep_form_dep_owner_script = "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_name[0] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -2011,7 +2013,7 @@ public class ScriptEXP {
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_name2[0] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -2021,7 +2023,7 @@ public class ScriptEXP {
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);" +
                                     "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_name3[0] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -2031,7 +2033,7 @@ public class ScriptEXP {
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_name4[0] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -2041,7 +2043,7 @@ public class ScriptEXP {
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_name5[0] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -2051,7 +2053,7 @@ public class ScriptEXP {
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_name6[0] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -2061,7 +2063,7 @@ public class ScriptEXP {
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_name7[0] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -2071,7 +2073,7 @@ public class ScriptEXP {
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_name8[0] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -2098,7 +2100,7 @@ public class ScriptEXP {
                         case 1:
                             rep_form_dep_user_script = "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_u_name[0] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -2112,7 +2114,7 @@ public class ScriptEXP {
                         case 2:
                             rep_form_dep_user_script = "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_u_name[0] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -2122,7 +2124,7 @@ public class ScriptEXP {
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_u_name2[0] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -2136,7 +2138,7 @@ public class ScriptEXP {
                         case 3:
                             rep_form_dep_user_script = "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_u_name[0] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -2146,7 +2148,7 @@ public class ScriptEXP {
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_u_name2[0] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -2156,7 +2158,7 @@ public class ScriptEXP {
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                    "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_u_name3[0] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -2170,7 +2172,7 @@ public class ScriptEXP {
                         case 4:
                             rep_form_dep_user_script = "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_u_name[0] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -2180,7 +2182,7 @@ public class ScriptEXP {
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_u_name2[0] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -2190,7 +2192,7 @@ public class ScriptEXP {
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_u_name3[0] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -2200,7 +2202,7 @@ public class ScriptEXP {
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_u_name4[0] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -2214,7 +2216,7 @@ public class ScriptEXP {
                         case 5:
                             rep_form_dep_user_script = "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_u_name[0] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -2224,7 +2226,7 @@ public class ScriptEXP {
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_u_name2[0] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -2234,7 +2236,7 @@ public class ScriptEXP {
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_u_name3[0] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -2244,7 +2246,7 @@ public class ScriptEXP {
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_u_name4[0] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -2254,7 +2256,7 @@ public class ScriptEXP {
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_u_name5[0] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -2268,7 +2270,7 @@ public class ScriptEXP {
                         case 6:
                             rep_form_dep_user_script = "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_u_name[0] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -2278,7 +2280,7 @@ public class ScriptEXP {
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_u_name2[0] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -2288,7 +2290,7 @@ public class ScriptEXP {
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_u_name3[0] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -2298,7 +2300,7 @@ public class ScriptEXP {
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_u_name4[0] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -2308,7 +2310,7 @@ public class ScriptEXP {
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_u_name5[0] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -2318,7 +2320,7 @@ public class ScriptEXP {
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_u_name6[0] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -2332,7 +2334,7 @@ public class ScriptEXP {
                         case 7:
                             rep_form_dep_user_script = "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_u_name[0] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -2342,7 +2344,7 @@ public class ScriptEXP {
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_u_name2[0] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -2352,7 +2354,7 @@ public class ScriptEXP {
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_u_name3[0] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -2362,7 +2364,7 @@ public class ScriptEXP {
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_u_name4[0] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -2372,7 +2374,7 @@ public class ScriptEXP {
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_u_name5[0] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -2382,7 +2384,7 @@ public class ScriptEXP {
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_u_name6[0] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -2399,7 +2401,7 @@ public class ScriptEXP {
                         case 8:
                             rep_form_dep_user_script = "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_u_name[0] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -2409,7 +2411,7 @@ public class ScriptEXP {
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_u_name2[0] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -2419,7 +2421,7 @@ public class ScriptEXP {
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_u_name3[0] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -2429,7 +2431,7 @@ public class ScriptEXP {
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_u_name4[0] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -2439,7 +2441,7 @@ public class ScriptEXP {
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_u_name5[0] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -2449,7 +2451,7 @@ public class ScriptEXP {
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_u_name6[0] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -2459,7 +2461,7 @@ public class ScriptEXP {
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_u_name7[0] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -2469,7 +2471,7 @@ public class ScriptEXP {
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_u_name8[0] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -2561,7 +2563,7 @@ public class ScriptEXP {
                             case 1:
                                 report_okud_code_script = "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, \n" +
 						"'"+ SC_data_miner.period[0] +"'as PERIOD \n" +
 						"null as FORM_CD \n" +
@@ -2576,7 +2578,7 @@ public class ScriptEXP {
                             case 2:
                                 report_okud_code_script = "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, \n" +
 						"'"+ SC_data_miner.period[0] +"'as PERIOD \n" +
 						"null as FORM_CD \n" +
@@ -2589,7 +2591,7 @@ public class ScriptEXP {
                                     "\n" +
                                     "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud2[0] +"' as OKUD_CODE, \n" +
 						"'"+ SC_data_miner.period2[0] +"'as PERIOD \n" +
 						"null as FORM_CD \n" +
@@ -2604,7 +2606,7 @@ public class ScriptEXP {
                             case 3:
                                 report_okud_code_script = "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, \n" +
 						"'"+ SC_data_miner.period[0] +"'as PERIOD \n" +
 						"null as FORM_CD \n" +
@@ -2617,7 +2619,7 @@ public class ScriptEXP {
                                     "\n" +
                                     "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud2[0] +"' as OKUD_CODE, \n" +
 						"'"+ SC_data_miner.period2[0] +"'as PERIOD \n" +
 						"null as FORM_CD \n" +
@@ -2630,7 +2632,7 @@ public class ScriptEXP {
                                     "\n" +
                                     "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud3[0] +"' as OKUD_CODE, \n" +
 						"'"+ SC_data_miner.period3[0] +"'as PERIOD \n" +
 						"null as FORM_CD \n" +
@@ -2645,7 +2647,7 @@ public class ScriptEXP {
                             case 4:
                                 report_okud_code_script = "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, \n" +
 						"'"+ SC_data_miner.period[0] +"'as PERIOD \n" +
 						"null as FORM_CD \n" +
@@ -2658,7 +2660,7 @@ public class ScriptEXP {
                                     "\n" +
                                     "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud2[0] +"' as OKUD_CODE, \n" +
 						"'"+ SC_data_miner.period2[0] +"'as PERIOD \n" +
 						"null as FORM_CD \n" +
@@ -2671,7 +2673,7 @@ public class ScriptEXP {
                                     "\n" +
                                     "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud3[0] +"' as OKUD_CODE, \n" +
 						"'"+ SC_data_miner.period3[0] +"'as PERIOD \n" +
 						"null as FORM_CD \n" +
@@ -2684,7 +2686,7 @@ public class ScriptEXP {
                                     "\n" +
                                     "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud4[0] +"' as OKUD_CODE, \n" +
 						"'"+ SC_data_miner.period4[0] +"'as PERIOD \n" +
 						"null as FORM_CD \n" +
@@ -2699,7 +2701,7 @@ public class ScriptEXP {
                             case 5:
                                 report_okud_code_script = "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, \n" +
 						"'"+ SC_data_miner.period[0] +"'as PERIOD \n" +
 						"null as FORM_CD \n" +
@@ -2712,7 +2714,7 @@ public class ScriptEXP {
                                     "\n" +
                                     "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud2[0] +"' as OKUD_CODE, \n" +
 						"'"+ SC_data_miner.period2[0] +"'as PERIOD \n" +
 						"null as FORM_CD \n" +
@@ -2725,7 +2727,7 @@ public class ScriptEXP {
                                     "\n" +
                                     "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud3[0] +"' as OKUD_CODE, \n" +
 						"'"+ SC_data_miner.period3[0] +"'as PERIOD \n" +
 						"null as FORM_CD \n" +
@@ -2738,7 +2740,7 @@ public class ScriptEXP {
                                     "\n" +
                                     "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud4[0] +"' as OKUD_CODE, \n" +
 						"'"+ SC_data_miner.period4[0] +"'as PERIOD \n" +
 						"null as FORM_CD \n" +
@@ -2751,7 +2753,7 @@ public class ScriptEXP {
                                     "\n" +
                                     "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud5[0] +"' as OKUD_CODE, \n" +
 						"'"+ SC_data_miner.period5[0] +"'as PERIOD \n" +
 						"null as FORM_CD \n" +
@@ -2766,7 +2768,7 @@ public class ScriptEXP {
                             case 6:
                                 report_okud_code_script = "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, \n" +
 						"'"+ SC_data_miner.period[0] +"'as PERIOD \n" +
 						"null as FORM_CD \n" +
@@ -2779,7 +2781,7 @@ public class ScriptEXP {
                                     "\n" +
                                     "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud2[0] +"' as OKUD_CODE, \n" +
 						"'"+ SC_data_miner.period2[0] +"'as PERIOD \n" +
 						"null as FORM_CD \n" +
@@ -2792,7 +2794,7 @@ public class ScriptEXP {
                                     "\n" +
                                     "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud3[0] +"' as OKUD_CODE, \n" +
 						"'"+ SC_data_miner.period3[0] +"'as PERIOD \n" +
 						"null as FORM_CD \n" +
@@ -2805,7 +2807,7 @@ public class ScriptEXP {
                                     "\n" +
                                     "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud4[0] +"' as OKUD_CODE, \n" +
 						"'"+ SC_data_miner.period4[0] +"'as PERIOD \n" +
 						"null as FORM_CD \n" +
@@ -2818,7 +2820,7 @@ public class ScriptEXP {
                                     "\n" +
                                     "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud5[0] +"' as OKUD_CODE, \n" +
 						"'"+ SC_data_miner.period5[0] +"'as PERIOD \n" +
 						"null as FORM_CD \n" +
@@ -2831,7 +2833,7 @@ public class ScriptEXP {
                                     "\n" +
                                     "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud6[0] +"' as OKUD_CODE, \n" +
 						"'"+ SC_data_miner.period6[0] +"'as PERIOD \n" +
 						"null as FORM_CD \n" +
@@ -2846,7 +2848,7 @@ public class ScriptEXP {
                             case 7:
                                 report_okud_code_script = "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, \n" +
 						"'"+ SC_data_miner.period[0] +"'as PERIOD \n" +
 						"null as FORM_CD \n" +
@@ -2859,7 +2861,7 @@ public class ScriptEXP {
                                     "\n" +
                                     "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud2[0] +"' as OKUD_CODE, \n" +
 						"'"+ SC_data_miner.period2[0] +"'as PERIOD \n" +
 						"null as FORM_CD \n" +
@@ -2872,7 +2874,7 @@ public class ScriptEXP {
                                     "\n" +
                                     "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud3[0] +"' as OKUD_CODE, \n" +
 						"'"+ SC_data_miner.period3[0] +"'as PERIOD \n" +
 						"null as FORM_CD \n" +
@@ -2885,7 +2887,7 @@ public class ScriptEXP {
                                     "\n" +
                                     "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud4[0] +"' as OKUD_CODE, \n" +
 						"'"+ SC_data_miner.period4[0] +"'as PERIOD \n" +
 						"null as FORM_CD \n" +
@@ -2898,7 +2900,7 @@ public class ScriptEXP {
                                     "\n" +
                                     "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud5[0] +"' as OKUD_CODE, \n" +
 						"'"+ SC_data_miner.period5[0] +"'as PERIOD \n" +
 						"null as FORM_CD \n" +
@@ -2911,7 +2913,7 @@ public class ScriptEXP {
                                     "\n" +
                                     "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud6[0] +"' as OKUD_CODE, \n" +
 						"'"+ SC_data_miner.period6[0] +"'as PERIOD \n" +
 						"null as FORM_CD \n" +
@@ -2924,7 +2926,7 @@ public class ScriptEXP {
                                     "\n" +
                                     "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud7[0] +"' as OKUD_CODE, \n" +
 						"'"+ SC_data_miner.period7[0] +"'as PERIOD \n" +
 						"null as FORM_CD \n" +
@@ -2939,7 +2941,7 @@ public class ScriptEXP {
                             case 8:
                                 report_okud_code_script = "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, \n" +
 						"'"+ SC_data_miner.period[0] +"'as PERIOD \n" +
 						"null as FORM_CD \n" +
@@ -2952,7 +2954,7 @@ public class ScriptEXP {
                                     "\n" +
                                     "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud2[0] +"' as OKUD_CODE, \n" +
 						"'"+ SC_data_miner.period2[0] +"'as PERIOD \n" +
 						"null as FORM_CD \n" +
@@ -2965,7 +2967,7 @@ public class ScriptEXP {
                                     "\n" +
                                     "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud3[0] +"' as OKUD_CODE, \n" +
 						"'"+ SC_data_miner.period3[0] +"'as PERIOD \n" +
 						"null as FORM_CD \n" +
@@ -2978,7 +2980,7 @@ public class ScriptEXP {
                                     "\n" +
                                     "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud4[0] +"' as OKUD_CODE, \n" +
 						"'"+ SC_data_miner.period4[0] +"'as PERIOD \n" +
 						"null as FORM_CD \n" +
@@ -2991,7 +2993,7 @@ public class ScriptEXP {
                                     "\n" +
                                     "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud5[0] +"' as OKUD_CODE, \n" +
 						"'"+ SC_data_miner.period5[0] +"'as PERIOD \n" +
 						"null as FORM_CD \n" +
@@ -3004,7 +3006,7 @@ public class ScriptEXP {
                                     "\n" +
                                     "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud6[0] +"' as OKUD_CODE, \n" +
 						"'"+ SC_data_miner.period6[0] +"'as PERIOD \n" +
 						"null as FORM_CD \n" +
@@ -3017,7 +3019,7 @@ public class ScriptEXP {
                                     "\n" +
                                     "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud7[0] +"' as OKUD_CODE, \n" +
 						"'"+ SC_data_miner.period7[0] +"'as PERIOD \n" +
 						"null as FORM_CD \n" +
@@ -3030,7 +3032,7 @@ public class ScriptEXP {
                                     "\n" +
                                     "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud8[0] +"' as OKUD_CODE, \n" +
 						"'"+ SC_data_miner.period8[0] +"'as PERIOD \n" +
 						"null as FORM_CD \n" +
@@ -3063,7 +3065,7 @@ public class ScriptEXP {
                 } else {
                     report_form_src_script = "MERGE INTO REPORT_FORM_SRC R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Reg_form_code[0] +"' as REG_FORM_CODE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE)\n" +
@@ -3085,7 +3087,7 @@ public class ScriptEXP {
                         case 1:
                             report_rep_subj_type_script = "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
@@ -3096,7 +3098,7 @@ public class ScriptEXP {
                         case 2:
                             report_rep_subj_type_script = "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
@@ -3105,7 +3107,7 @@ public class ScriptEXP {
                                     "\n" +
                                     "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.rep_subj_type2[0] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
@@ -3116,7 +3118,7 @@ public class ScriptEXP {
                         case 3:
                             report_rep_subj_type_script = "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
@@ -3125,7 +3127,7 @@ public class ScriptEXP {
                                     "\n" +
                                     "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.rep_subj_type2[0] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
@@ -3134,7 +3136,7 @@ public class ScriptEXP {
                                     "\n" +
                                     "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.rep_subj_type3[0] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
@@ -3145,7 +3147,7 @@ public class ScriptEXP {
                         case 4:
                             report_rep_subj_type_script = "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
@@ -3154,7 +3156,7 @@ public class ScriptEXP {
                                     "\n" +
                                     "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.rep_subj_type2[0] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
@@ -3163,7 +3165,7 @@ public class ScriptEXP {
                                     "\n" +
                                     "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.rep_subj_type3[0] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
@@ -3172,7 +3174,7 @@ public class ScriptEXP {
                                     "\n" +
                                     "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.rep_subj_type4[0] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
@@ -3183,7 +3185,7 @@ public class ScriptEXP {
                         case 5:
                             report_rep_subj_type_script = "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
@@ -3192,7 +3194,7 @@ public class ScriptEXP {
                                     "\n" +
                                     "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.rep_subj_type2[0] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
@@ -3201,7 +3203,7 @@ public class ScriptEXP {
                                     "\n" +
                                     "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.rep_subj_type3[0] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
@@ -3210,7 +3212,7 @@ public class ScriptEXP {
                                     "\n" +
                                     "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.rep_subj_type4[0] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
@@ -3219,7 +3221,7 @@ public class ScriptEXP {
                                     "\n" +
                                     "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.rep_subj_type5[0] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
@@ -3230,7 +3232,7 @@ public class ScriptEXP {
                         case 6:
                             report_rep_subj_type_script = "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
@@ -3239,7 +3241,7 @@ public class ScriptEXP {
                                     "\n" +
                                     "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.rep_subj_type2[0] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
@@ -3248,7 +3250,7 @@ public class ScriptEXP {
                                     "\n" +
                                     "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.rep_subj_type3[0] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
@@ -3257,7 +3259,7 @@ public class ScriptEXP {
                                     "\n" +
                                     "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.rep_subj_type4[0] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
@@ -3266,7 +3268,7 @@ public class ScriptEXP {
                                     "\n" +
                                     "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.rep_subj_type5[0] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
@@ -3275,7 +3277,7 @@ public class ScriptEXP {
                                     "\n" +
                                     "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.rep_subj_type6[0] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
@@ -3286,7 +3288,7 @@ public class ScriptEXP {
                         case 7:
                             report_rep_subj_type_script = "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
@@ -3295,7 +3297,7 @@ public class ScriptEXP {
                                     "\n" +
                                     "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.rep_subj_type2[0] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
@@ -3304,7 +3306,7 @@ public class ScriptEXP {
                                     "\n" +
                                     "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.rep_subj_type3[0] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
@@ -3313,7 +3315,7 @@ public class ScriptEXP {
                                     "\n" +
                                     "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.rep_subj_type4[0] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
@@ -3322,7 +3324,7 @@ public class ScriptEXP {
                                     "\n" +
                                     "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.rep_subj_type5[0] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
@@ -3331,7 +3333,7 @@ public class ScriptEXP {
                                     "\n" +
                                     "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.rep_subj_type6[0] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
@@ -3340,7 +3342,7 @@ public class ScriptEXP {
                                     "\n" +
                                     "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.rep_subj_type7[0] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
@@ -3351,7 +3353,7 @@ public class ScriptEXP {
                         case 8:
                             report_rep_subj_type_script = "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
@@ -3360,7 +3362,7 @@ public class ScriptEXP {
                                     "\n" +
                                     "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.rep_subj_type2[0] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
@@ -3369,7 +3371,7 @@ public class ScriptEXP {
                                     "\n" +
                                     "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.rep_subj_type3[0] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
@@ -3378,7 +3380,7 @@ public class ScriptEXP {
                                     "\n" +
                                     "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.rep_subj_type4[0] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
@@ -3387,7 +3389,7 @@ public class ScriptEXP {
                                     "\n" +
                                     "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.rep_subj_type5[0] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
@@ -3396,7 +3398,7 @@ public class ScriptEXP {
                                     "\n" +
                                     "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.rep_subj_type6[0] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
@@ -3405,7 +3407,7 @@ public class ScriptEXP {
                                     "\n" +
                                     "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.rep_subj_type7[0] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
@@ -3414,7 +3416,7 @@ public class ScriptEXP {
                                     "\n" +
                                     "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.rep_subj_type8[0] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
@@ -3595,6 +3597,9 @@ public class ScriptEXP {
 
                     }
                 }
+                if(SC_data_miner.Reg_form_code[0] == null || Objects.equals(SC_data_miner.Reg_form_code[0], "") || Objects.equals(SC_data_miner.Reg_form_code[0], " ")){
+                    SC_data_miner.Reg_form_code[0] = SC_data_miner.Form_cd[0];
+                }
                 String[] rep_form_script = new String[16];
                 String[] rep_form_cognos_script = new String[16];
                 String[] rep_form_oki_script = new String[16];
@@ -3624,9 +3629,9 @@ public class ScriptEXP {
                 } else {
                     rep_form_script[0] = "MERGE INTO REP_FORM R\n" +
                         "   USING (SELECT \n" +
-                        "'" + SC_data_miner.Form_cd[0] + "' as FORM_CD, \n'" +
+                        "'" + SC_data_miner.Form_cd[0] + "' as FORM_CD, \n" +
                         "'" + SC_data_miner.Form_name[0] + "' as FORM_NAME, \n" +
-                        "'" + okud_rep_form + "' as FORM_OKUD\n" +
+                          okud_rep_form + "\n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.FORM_NAME = S.FORM_NAME,\n" +
@@ -3652,7 +3657,7 @@ public class ScriptEXP {
                 } else{
                     rep_form_oki_script[0] = "MERGE INTO REP_FORM_OKI R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n" +
                         iod + ",  " +
 						pdn +
                         " FROM dual) S\n" +
@@ -3673,7 +3678,7 @@ public class ScriptEXP {
                 } else {
                     rep_form_cognos_script[0] = "MERGE INTO REP_FORM_COGNOS R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd_cog[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd_cog[0] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD)\n" +
@@ -3695,7 +3700,7 @@ public class ScriptEXP {
                         case 1:
                             rep_form_dep_owner_script[0] = "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_name[0] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -3709,7 +3714,7 @@ public class ScriptEXP {
                         case 2:
                             rep_form_dep_owner_script[0] = "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_name[0] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -3719,7 +3724,7 @@ public class ScriptEXP {
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_name2[0] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -3733,7 +3738,7 @@ public class ScriptEXP {
                         case 3:
                             rep_form_dep_owner_script[0] = "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_name[0] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -3743,7 +3748,7 @@ public class ScriptEXP {
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_name2[0] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -3753,7 +3758,7 @@ public class ScriptEXP {
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_name3[0] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -3767,7 +3772,7 @@ public class ScriptEXP {
                         case 4:
                             rep_form_dep_owner_script[0] = "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_name[0] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -3777,7 +3782,7 @@ public class ScriptEXP {
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_name2[0] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -3787,7 +3792,7 @@ public class ScriptEXP {
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_name3[0] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -3797,7 +3802,7 @@ public class ScriptEXP {
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_name4[0] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -3811,7 +3816,7 @@ public class ScriptEXP {
                         case 5:
                             rep_form_dep_owner_script[0] = "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_name[0] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -3821,7 +3826,7 @@ public class ScriptEXP {
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_name2[0] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -3831,7 +3836,7 @@ public class ScriptEXP {
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);" +
                                     "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_name3[0] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -3841,7 +3846,7 @@ public class ScriptEXP {
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_name4[0] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -3851,7 +3856,7 @@ public class ScriptEXP {
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_name5[0] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -3865,7 +3870,7 @@ public class ScriptEXP {
                         case 6:
                             rep_form_dep_owner_script[0] = "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_name[0] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -3875,7 +3880,7 @@ public class ScriptEXP {
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_name2[0] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -3885,7 +3890,7 @@ public class ScriptEXP {
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);" +
                                     "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_name3[0] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -3895,7 +3900,7 @@ public class ScriptEXP {
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_name4[0] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -3905,7 +3910,7 @@ public class ScriptEXP {
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_name5[0] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -3915,7 +3920,7 @@ public class ScriptEXP {
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_name6[0] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -3929,7 +3934,7 @@ public class ScriptEXP {
                         case 7:
                             rep_form_dep_owner_script[0] = "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_name[0] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -3939,7 +3944,7 @@ public class ScriptEXP {
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_name2[0] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -3949,7 +3954,7 @@ public class ScriptEXP {
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);" +
                                     "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_name3[0] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -3959,7 +3964,7 @@ public class ScriptEXP {
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_name4[0] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -3969,7 +3974,7 @@ public class ScriptEXP {
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_name5[0] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -3979,7 +3984,7 @@ public class ScriptEXP {
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_name6[0] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -3989,7 +3994,7 @@ public class ScriptEXP {
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_name7[0] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -4003,7 +4008,7 @@ public class ScriptEXP {
                         case 8:
                             rep_form_dep_owner_script[0] = "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_name[0] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -4013,7 +4018,7 @@ public class ScriptEXP {
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_name2[0] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -4023,7 +4028,7 @@ public class ScriptEXP {
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);" +
                                     "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_name3[0] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -4033,7 +4038,7 @@ public class ScriptEXP {
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_name4[0] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -4043,7 +4048,7 @@ public class ScriptEXP {
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_name5[0] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -4053,7 +4058,7 @@ public class ScriptEXP {
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_name6[0] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -4063,7 +4068,7 @@ public class ScriptEXP {
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_name7[0] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -4073,7 +4078,7 @@ public class ScriptEXP {
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_name8[0] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -4099,7 +4104,7 @@ public class ScriptEXP {
                         case 1:
                             rep_form_dep_user_script[0] = "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_u_name[0] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -4113,7 +4118,7 @@ public class ScriptEXP {
                         case 2:
                             rep_form_dep_user_script[0] = "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_u_name[0] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -4123,7 +4128,7 @@ public class ScriptEXP {
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_u_name2[0] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -4137,7 +4142,7 @@ public class ScriptEXP {
                         case 3:
                             rep_form_dep_user_script[0] = "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_u_name[0] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -4147,7 +4152,7 @@ public class ScriptEXP {
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_u_name2[0] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -4157,7 +4162,7 @@ public class ScriptEXP {
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                    "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_u_name3[0] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -4171,7 +4176,7 @@ public class ScriptEXP {
                         case 4:
                             rep_form_dep_user_script[0] = "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_u_name[0] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -4181,7 +4186,7 @@ public class ScriptEXP {
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_u_name2[0] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -4191,7 +4196,7 @@ public class ScriptEXP {
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_u_name3[0] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -4201,7 +4206,7 @@ public class ScriptEXP {
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_u_name4[0] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -4215,7 +4220,7 @@ public class ScriptEXP {
                         case 5:
                             rep_form_dep_user_script[0] = "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_u_name[0] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -4225,7 +4230,7 @@ public class ScriptEXP {
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_u_name2[0] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -4235,7 +4240,7 @@ public class ScriptEXP {
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_u_name3[0] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -4245,7 +4250,7 @@ public class ScriptEXP {
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_u_name4[0] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -4255,7 +4260,7 @@ public class ScriptEXP {
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_u_name5[0] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -4269,7 +4274,7 @@ public class ScriptEXP {
                         case 6:
                             rep_form_dep_user_script[0] = "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_u_name[0] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -4279,7 +4284,7 @@ public class ScriptEXP {
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_u_name2[0] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -4289,7 +4294,7 @@ public class ScriptEXP {
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_u_name3[0] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -4299,7 +4304,7 @@ public class ScriptEXP {
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_u_name4[0] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -4309,7 +4314,7 @@ public class ScriptEXP {
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_u_name5[0] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -4319,7 +4324,7 @@ public class ScriptEXP {
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_u_name6[0] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -4333,7 +4338,7 @@ public class ScriptEXP {
                         case 7:
                             rep_form_dep_user_script[0] = "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_u_name[0] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -4343,7 +4348,7 @@ public class ScriptEXP {
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_u_name2[0] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -4353,7 +4358,7 @@ public class ScriptEXP {
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_u_name3[0] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -4363,7 +4368,7 @@ public class ScriptEXP {
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_u_name4[0] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -4373,7 +4378,7 @@ public class ScriptEXP {
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_u_name5[0] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -4383,7 +4388,7 @@ public class ScriptEXP {
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_u_name6[0] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -4400,7 +4405,7 @@ public class ScriptEXP {
                         case 8:
                             rep_form_dep_user_script[0] = "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_u_name[0] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -4410,7 +4415,7 @@ public class ScriptEXP {
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_u_name2[0] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -4420,7 +4425,7 @@ public class ScriptEXP {
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_u_name3[0] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -4430,7 +4435,7 @@ public class ScriptEXP {
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_u_name4[0] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -4440,7 +4445,7 @@ public class ScriptEXP {
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_u_name5[0] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -4450,7 +4455,7 @@ public class ScriptEXP {
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_u_name6[0] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -4460,7 +4465,7 @@ public class ScriptEXP {
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_u_name7[0] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -4470,7 +4475,7 @@ public class ScriptEXP {
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_u_name8[0] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -4555,7 +4560,7 @@ public class ScriptEXP {
                             case 1:
                                 report_okud_code_script[0] = "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, \n" +
 						"'"+ SC_data_miner.period[0] +"'as PERIOD \n" +
 						"null as FORM_CD \n" +
@@ -4570,7 +4575,7 @@ public class ScriptEXP {
                             case 2:
                                 report_okud_code_script[0] = "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, \n" +
 						"'"+ SC_data_miner.period[0] +"'as PERIOD \n" +
 						"null as FORM_CD \n" +
@@ -4583,7 +4588,7 @@ public class ScriptEXP {
                                     "\n" +
                                     "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud2[0] +"' as OKUD_CODE, \n" +
 						"'"+ SC_data_miner.period2[0] +"'as PERIOD \n" +
 						"null as FORM_CD \n" +
@@ -4598,7 +4603,7 @@ public class ScriptEXP {
                             case 3:
                                 report_okud_code_script[0] = "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, \n" +
 						"'"+ SC_data_miner.period[0] +"'as PERIOD \n" +
 						"null as FORM_CD \n" +
@@ -4611,7 +4616,7 @@ public class ScriptEXP {
                                     "\n" +
                                     "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud2[0] +"' as OKUD_CODE, \n" +
 						"'"+ SC_data_miner.period2[0] +"'as PERIOD \n" +
 						"null as FORM_CD \n" +
@@ -4624,7 +4629,7 @@ public class ScriptEXP {
                                     "\n" +
                                     "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud3[0] +"' as OKUD_CODE, \n" +
 						"'"+ SC_data_miner.period3[0] +"'as PERIOD \n" +
 						"null as FORM_CD \n" +
@@ -4639,7 +4644,7 @@ public class ScriptEXP {
                             case 4:
                                 report_okud_code_script[0] = "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, \n" +
 						"'"+ SC_data_miner.period[0] +"'as PERIOD \n" +
 						"null as FORM_CD \n" +
@@ -4652,7 +4657,7 @@ public class ScriptEXP {
                                     "\n" +
                                     "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud2[0] +"' as OKUD_CODE, \n" +
 						"'"+ SC_data_miner.period2[0] +"'as PERIOD \n" +
 						"null as FORM_CD \n" +
@@ -4665,7 +4670,7 @@ public class ScriptEXP {
                                     "\n" +
                                     "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud3[0] +"' as OKUD_CODE, \n" +
 						"'"+ SC_data_miner.period3[0] +"'as PERIOD \n" +
 						"null as FORM_CD \n" +
@@ -4678,7 +4683,7 @@ public class ScriptEXP {
                                     "\n" +
                                     "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud4[0] +"' as OKUD_CODE, \n" +
 						"'"+ SC_data_miner.period4[0] +"'as PERIOD \n" +
 						"null as FORM_CD \n" +
@@ -4693,7 +4698,7 @@ public class ScriptEXP {
                             case 5:
                                 report_okud_code_script[0] = "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, \n" +
 						"'"+ SC_data_miner.period[0] +"'as PERIOD \n" +
 						"null as FORM_CD \n" +
@@ -4706,7 +4711,7 @@ public class ScriptEXP {
                                     "\n" +
                                     "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud2[0] +"' as OKUD_CODE, \n" +
 						"'"+ SC_data_miner.period2[0] +"'as PERIOD \n" +
 						"null as FORM_CD \n" +
@@ -4719,7 +4724,7 @@ public class ScriptEXP {
                                     "\n" +
                                     "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud3[0] +"' as OKUD_CODE, \n" +
 						"'"+ SC_data_miner.period3[0] +"'as PERIOD \n" +
 						"null as FORM_CD \n" +
@@ -4732,7 +4737,7 @@ public class ScriptEXP {
                                     "\n" +
                                     "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud4[0] +"' as OKUD_CODE, \n" +
 						"'"+ SC_data_miner.period4[0] +"'as PERIOD \n" +
 						"null as FORM_CD \n" +
@@ -4745,7 +4750,7 @@ public class ScriptEXP {
                                     "\n" +
                                     "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud5[0] +"' as OKUD_CODE, \n" +
 						"'"+ SC_data_miner.period5[0] +"'as PERIOD \n" +
 						"null as FORM_CD \n" +
@@ -4760,7 +4765,7 @@ public class ScriptEXP {
                             case 6:
                                 report_okud_code_script[0] = "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, \n" +
 						"'"+ SC_data_miner.period[0] +"'as PERIOD \n" +
 						"null as FORM_CD \n" +
@@ -4773,7 +4778,7 @@ public class ScriptEXP {
                                     "\n" +
                                     "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud2[0] +"' as OKUD_CODE, \n" +
 						"'"+ SC_data_miner.period2[0] +"'as PERIOD \n" +
 						"null as FORM_CD \n" +
@@ -4786,7 +4791,7 @@ public class ScriptEXP {
                                     "\n" +
                                     "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud3[0] +"' as OKUD_CODE, \n" +
 						"'"+ SC_data_miner.period3[0] +"'as PERIOD \n" +
 						"null as FORM_CD \n" +
@@ -4799,7 +4804,7 @@ public class ScriptEXP {
                                     "\n" +
                                     "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud4[0] +"' as OKUD_CODE, \n" +
 						"'"+ SC_data_miner.period4[0] +"'as PERIOD \n" +
 						"null as FORM_CD \n" +
@@ -4812,7 +4817,7 @@ public class ScriptEXP {
                                     "\n" +
                                     "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud5[0] +"' as OKUD_CODE, \n" +
 						"'"+ SC_data_miner.period5[0] +"'as PERIOD \n" +
 						"null as FORM_CD \n" +
@@ -4825,7 +4830,7 @@ public class ScriptEXP {
                                     "\n" +
                                     "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud6[0] +"' as OKUD_CODE, \n" +
 						"'"+ SC_data_miner.period6[0] +"'as PERIOD \n" +
 						"null as FORM_CD \n" +
@@ -4840,7 +4845,7 @@ public class ScriptEXP {
                             case 7:
                                 report_okud_code_script[0] = "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, \n" +
 						"'"+ SC_data_miner.period[0] +"'as PERIOD \n" +
 						"null as FORM_CD \n" +
@@ -4853,7 +4858,7 @@ public class ScriptEXP {
                                     "\n" +
                                     "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud2[0] +"' as OKUD_CODE, \n" +
 						"'"+ SC_data_miner.period2[0] +"'as PERIOD \n" +
 						"null as FORM_CD \n" +
@@ -4866,7 +4871,7 @@ public class ScriptEXP {
                                     "\n" +
                                     "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud3[0] +"' as OKUD_CODE, \n" +
 						"'"+ SC_data_miner.period3[0] +"'as PERIOD \n" +
 						"null as FORM_CD \n" +
@@ -4879,7 +4884,7 @@ public class ScriptEXP {
                                     "\n" +
                                     "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud4[0] +"' as OKUD_CODE, \n" +
 						"'"+ SC_data_miner.period4[0] +"'as PERIOD \n" +
 						"null as FORM_CD \n" +
@@ -4892,7 +4897,7 @@ public class ScriptEXP {
                                     "\n" +
                                     "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud5[0] +"' as OKUD_CODE, \n" +
 						"'"+ SC_data_miner.period5[0] +"'as PERIOD \n" +
 						"null as FORM_CD \n" +
@@ -4905,7 +4910,7 @@ public class ScriptEXP {
                                     "\n" +
                                     "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud6[0] +"' as OKUD_CODE, \n" +
 						"'"+ SC_data_miner.period6[0] +"'as PERIOD \n" +
 						"null as FORM_CD \n" +
@@ -4918,7 +4923,7 @@ public class ScriptEXP {
                                     "\n" +
                                     "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud7[0] +"' as OKUD_CODE, \n" +
 						"'"+ SC_data_miner.period7[0] +"'as PERIOD \n" +
 						"null as FORM_CD \n" +
@@ -4933,7 +4938,7 @@ public class ScriptEXP {
                             case 8:
                                 report_okud_code_script[0] = "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, \n" +
 						"'"+ SC_data_miner.period[0] +"'as PERIOD \n" +
 						"null as FORM_CD \n" +
@@ -4946,7 +4951,7 @@ public class ScriptEXP {
                                     "\n" +
                                     "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud2[0] +"' as OKUD_CODE, \n" +
 						"'"+ SC_data_miner.period2[0] +"'as PERIOD \n" +
 						"null as FORM_CD \n" +
@@ -4959,7 +4964,7 @@ public class ScriptEXP {
                                     "\n" +
                                     "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud3[0] +"' as OKUD_CODE, \n" +
 						"'"+ SC_data_miner.period3[0] +"'as PERIOD \n" +
 						"null as FORM_CD \n" +
@@ -4972,7 +4977,7 @@ public class ScriptEXP {
                                     "\n" +
                                     "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud4[0] +"' as OKUD_CODE, \n" +
 						"'"+ SC_data_miner.period4[0] +"'as PERIOD \n" +
 						"null as FORM_CD \n" +
@@ -4985,7 +4990,7 @@ public class ScriptEXP {
                                     "\n" +
                                     "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud5[0] +"' as OKUD_CODE, \n" +
 						"'"+ SC_data_miner.period5[0] +"'as PERIOD \n" +
 						"null as FORM_CD \n" +
@@ -4998,7 +5003,7 @@ public class ScriptEXP {
                                     "\n" +
                                     "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud6[0] +"' as OKUD_CODE, \n" +
 						"'"+ SC_data_miner.period6[0] +"'as PERIOD \n" +
 						"null as FORM_CD \n" +
@@ -5011,7 +5016,7 @@ public class ScriptEXP {
                                     "\n" +
                                     "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud7[0] +"' as OKUD_CODE, \n" +
 						"'"+ SC_data_miner.period7[0] +"'as PERIOD \n" +
 						"null as FORM_CD \n" +
@@ -5024,7 +5029,7 @@ public class ScriptEXP {
                                     "\n" +
                                     "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud8[0] +"' as OKUD_CODE, \n" +
 						"'"+ SC_data_miner.period8[0] +"'as PERIOD \n" +
 						"null as FORM_CD \n" +
@@ -5056,7 +5061,7 @@ public class ScriptEXP {
                 } else {
                     report_form_src_script[0] = "MERGE INTO REPORT_FORM_SRC R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Reg_form_code[0] +"' as REG_FORM_CODE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE)\n" +
@@ -5077,7 +5082,7 @@ public class ScriptEXP {
                         case 1:
                             report_rep_subj_type_script[0] = "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
@@ -5088,7 +5093,7 @@ public class ScriptEXP {
                         case 2:
                             report_rep_subj_type_script[0] = "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
@@ -5097,7 +5102,7 @@ public class ScriptEXP {
                                     "\n" +
                                     "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.rep_subj_type2[0] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
@@ -5108,7 +5113,7 @@ public class ScriptEXP {
                         case 3:
                             report_rep_subj_type_script[0] = "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
@@ -5117,7 +5122,7 @@ public class ScriptEXP {
                                     "\n" +
                                     "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.rep_subj_type2[0] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
@@ -5126,7 +5131,7 @@ public class ScriptEXP {
                                     "\n" +
                                     "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.rep_subj_type3[0] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
@@ -5137,7 +5142,7 @@ public class ScriptEXP {
                         case 4:
                             report_rep_subj_type_script[0] = "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
@@ -5146,7 +5151,7 @@ public class ScriptEXP {
                                     "\n" +
                                     "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.rep_subj_type2[0] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
@@ -5155,7 +5160,7 @@ public class ScriptEXP {
                                     "\n" +
                                     "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.rep_subj_type3[0] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
@@ -5164,7 +5169,7 @@ public class ScriptEXP {
                                     "\n" +
                                     "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.rep_subj_type4[0] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
@@ -5175,7 +5180,7 @@ public class ScriptEXP {
                         case 5:
                             report_rep_subj_type_script[0] = "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
@@ -5184,7 +5189,7 @@ public class ScriptEXP {
                                     "\n" +
                                     "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.rep_subj_type2[0] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
@@ -5193,7 +5198,7 @@ public class ScriptEXP {
                                     "\n" +
                                     "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.rep_subj_type3[0] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
@@ -5202,7 +5207,7 @@ public class ScriptEXP {
                                     "\n" +
                                     "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.rep_subj_type4[0] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
@@ -5211,7 +5216,7 @@ public class ScriptEXP {
                                     "\n" +
                                     "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.rep_subj_type5[0] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
@@ -5222,7 +5227,7 @@ public class ScriptEXP {
                         case 6:
                             report_rep_subj_type_script[0] = "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
@@ -5231,7 +5236,7 @@ public class ScriptEXP {
                                     "\n" +
                                     "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.rep_subj_type2[0] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
@@ -5240,7 +5245,7 @@ public class ScriptEXP {
                                     "\n" +
                                     "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.rep_subj_type3[0] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
@@ -5249,7 +5254,7 @@ public class ScriptEXP {
                                     "\n" +
                                     "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.rep_subj_type4[0] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
@@ -5258,7 +5263,7 @@ public class ScriptEXP {
                                     "\n" +
                                     "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.rep_subj_type5[0] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
@@ -5267,7 +5272,7 @@ public class ScriptEXP {
                                     "\n" +
                                     "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.rep_subj_type6[0] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
@@ -5278,7 +5283,7 @@ public class ScriptEXP {
                         case 7:
                             report_rep_subj_type_script[0] = "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
@@ -5287,7 +5292,7 @@ public class ScriptEXP {
                                     "\n" +
                                     "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.rep_subj_type2[0] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
@@ -5296,7 +5301,7 @@ public class ScriptEXP {
                                     "\n" +
                                     "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.rep_subj_type3[0] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
@@ -5305,7 +5310,7 @@ public class ScriptEXP {
                                     "\n" +
                                     "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.rep_subj_type4[0] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
@@ -5314,7 +5319,7 @@ public class ScriptEXP {
                                     "\n" +
                                     "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.rep_subj_type5[0] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
@@ -5323,7 +5328,7 @@ public class ScriptEXP {
                                     "\n" +
                                     "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.rep_subj_type6[0] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
@@ -5332,7 +5337,7 @@ public class ScriptEXP {
                                     "\n" +
                                     "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.rep_subj_type7[0] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
@@ -5343,7 +5348,7 @@ public class ScriptEXP {
                         case 8:
                             report_rep_subj_type_script[0] = "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
@@ -5352,7 +5357,7 @@ public class ScriptEXP {
                                     "\n" +
                                     "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.rep_subj_type2[0] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
@@ -5361,7 +5366,7 @@ public class ScriptEXP {
                                     "\n" +
                                     "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.rep_subj_type3[0] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
@@ -5370,7 +5375,7 @@ public class ScriptEXP {
                                     "\n" +
                                     "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.rep_subj_type4[0] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
@@ -5379,7 +5384,7 @@ public class ScriptEXP {
                                     "\n" +
                                     "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.rep_subj_type5[0] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
@@ -5388,7 +5393,7 @@ public class ScriptEXP {
                                     "\n" +
                                     "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.rep_subj_type6[0] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
@@ -5397,7 +5402,7 @@ public class ScriptEXP {
                                     "\n" +
                                     "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.rep_subj_type7[0] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
@@ -5406,7 +5411,7 @@ public class ScriptEXP {
                                     "\n" +
                                     "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.rep_subj_type8[0] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
@@ -5526,7 +5531,7 @@ public class ScriptEXP {
                         "\n" +
                         rep_form_cognos_script[0] + "\n\n" + "commit;";
 
-                //System.out.print("\n" + "type[0] = " + type[0]);
+                System.out.print("\n" + "type[0] = " + type[0]);
                 if(type[0] == 0){
                     text[3] = "--" + FName_def[0] +"\n" +
                             "\n" +
@@ -5590,6 +5595,9 @@ public class ScriptEXP {
                             //System.out.print("SC_data_miner.Form_cd[" + n + "].startsWith(\"0409\") = " + SC_data_miner.Form_cd[n].startsWith("0409"));
                         }
                     }
+                    if(SC_data_miner.Reg_form_code[n] == null || Objects.equals(SC_data_miner.Reg_form_code[n], "") || Objects.equals(SC_data_miner.Reg_form_code[n], " ")){
+                        SC_data_miner.Reg_form_code[n] = SC_data_miner.Form_cd[n];
+                    }
 
                     if((SC_data_miner.Form_cd_name[n]== null) || Objects.equals(SC_data_miner.Form_cd_name[n], "") || Objects.equals(SC_data_miner.Form_cd_name[n], " ")||
                             (SC_data_miner.Form_cd[n]== null) || Objects.equals(SC_data_miner.Form_cd[n], "") || Objects.equals(SC_data_miner.Form_cd[n], " ")){
@@ -5608,9 +5616,9 @@ public class ScriptEXP {
                     } else {
                         rep_form_script[n] = "MERGE INTO REP_FORM R\n" +
                         "   USING (SELECT \n" +
-                        "'" + SC_data_miner.Form_cd[n] + "' as FORM_CD, \n'" +
+                        "'" + SC_data_miner.Form_cd[n] + "' as FORM_CD, \n" +
                         "'" + SC_data_miner.Form_name[n] + "' as FORM_NAME, \n" +
-                        "'" + okud_rep_form + "' as FORM_OKUD\n" +
+                         okud_rep_form + "\n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.FORM_NAME = S.FORM_NAME,\n" +
@@ -5636,7 +5644,7 @@ public class ScriptEXP {
                     } else{
                         rep_form_oki_script[n] = "MERGE INTO REP_FORM_OKI R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n" +
                         iod + ",  " +
 						pdn +
                         " FROM dual) S\n" +
@@ -5657,7 +5665,7 @@ public class ScriptEXP {
                     } else {
                         rep_form_cognos_script[n] = "MERGE INTO REP_FORM_COGNOS R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd_cog[n] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd_cog[n] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Form_cd[n] + "' as REP_FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD)\n" +
@@ -5679,7 +5687,7 @@ public class ScriptEXP {
                             case 1:
                                 rep_form_dep_owner_script[n] = "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_name[n] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -5693,7 +5701,7 @@ public class ScriptEXP {
                             case 2:
                                 rep_form_dep_owner_script[n] = "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_name[n] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -5703,7 +5711,7 @@ public class ScriptEXP {
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                         "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_name2[n] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -5717,7 +5725,7 @@ public class ScriptEXP {
                             case 3:
                                 rep_form_dep_owner_script[n] = "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_name[n] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -5727,7 +5735,7 @@ public class ScriptEXP {
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                         "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_name2[n] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -5737,7 +5745,7 @@ public class ScriptEXP {
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                         "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_name3[n] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -5751,7 +5759,7 @@ public class ScriptEXP {
                             case 4:
                                 rep_form_dep_owner_script[n] = "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_name[n] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -5761,7 +5769,7 @@ public class ScriptEXP {
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                         "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_name2[n] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -5771,7 +5779,7 @@ public class ScriptEXP {
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                         "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_name3[n] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -5781,7 +5789,7 @@ public class ScriptEXP {
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                         "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_name4[n] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -5795,7 +5803,7 @@ public class ScriptEXP {
                             case 5:
                                 rep_form_dep_owner_script[n] = "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_name[n] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -5805,7 +5813,7 @@ public class ScriptEXP {
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                         "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_name2[n] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -5815,7 +5823,7 @@ public class ScriptEXP {
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                         "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_name3[n] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -5825,7 +5833,7 @@ public class ScriptEXP {
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                         "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_name4[n] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -5835,7 +5843,7 @@ public class ScriptEXP {
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                         "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_name5[n] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -5849,7 +5857,7 @@ public class ScriptEXP {
                             case 6:
                                 rep_form_dep_owner_script[n] = "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_name[n] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -5859,7 +5867,7 @@ public class ScriptEXP {
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                         "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_name2[n] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -5869,7 +5877,7 @@ public class ScriptEXP {
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                         "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_name3[n] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -5879,7 +5887,7 @@ public class ScriptEXP {
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                         "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_name4[n] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -5889,7 +5897,7 @@ public class ScriptEXP {
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                         "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_name5[n] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -5899,7 +5907,7 @@ public class ScriptEXP {
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                         "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_name6[n] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -5913,7 +5921,7 @@ public class ScriptEXP {
                             case 7:
                                 rep_form_dep_owner_script[n] = "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_name[n] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -5923,7 +5931,7 @@ public class ScriptEXP {
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                         "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_name2[n] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -5933,7 +5941,7 @@ public class ScriptEXP {
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                         "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_name3[n] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -5943,7 +5951,7 @@ public class ScriptEXP {
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                         "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_name4[n] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -5953,7 +5961,7 @@ public class ScriptEXP {
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                         "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_name5[n] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -5963,7 +5971,7 @@ public class ScriptEXP {
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                         "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_name6[n] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -5973,7 +5981,7 @@ public class ScriptEXP {
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                         "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_name7[n] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -5987,7 +5995,7 @@ public class ScriptEXP {
                             case 8:
                                 rep_form_dep_owner_script[n] = "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_name[n] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -5997,7 +6005,7 @@ public class ScriptEXP {
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                         "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_name2[n] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -6007,7 +6015,7 @@ public class ScriptEXP {
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                         "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_name3[n] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -6017,7 +6025,7 @@ public class ScriptEXP {
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                         "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_name4[n] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -6027,7 +6035,7 @@ public class ScriptEXP {
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                         "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_name5[n] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -6037,7 +6045,7 @@ public class ScriptEXP {
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                         "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_name6[n] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -6047,7 +6055,7 @@ public class ScriptEXP {
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                         "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_name7[n] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -6057,7 +6065,7 @@ public class ScriptEXP {
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                         "MERGE INTO REP_FORM_DEP_OWNER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_name8[n] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -6083,7 +6091,7 @@ public class ScriptEXP {
                             case 1:
                                 rep_form_dep_user_script[n] = "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_u_name[n] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -6097,7 +6105,7 @@ public class ScriptEXP {
                             case 2:
                                 rep_form_dep_user_script[n] = "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_u_name[n] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -6107,7 +6115,7 @@ public class ScriptEXP {
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                         "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_u_name2[n] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -6121,7 +6129,7 @@ public class ScriptEXP {
                             case 3:
                                 rep_form_dep_user_script[n] = "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_u_name[n] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -6131,7 +6139,7 @@ public class ScriptEXP {
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                         "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_u_name2[n] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -6141,7 +6149,7 @@ public class ScriptEXP {
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                         "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_u_name3[n] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -6155,7 +6163,7 @@ public class ScriptEXP {
                             case 4:
                                 rep_form_dep_user_script[n] = "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_u_name[n] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -6165,7 +6173,7 @@ public class ScriptEXP {
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                         "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_u_name2[n] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -6175,7 +6183,7 @@ public class ScriptEXP {
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                         "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_u_name3[n] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -6185,7 +6193,7 @@ public class ScriptEXP {
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                         "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_u_name4[n] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -6199,7 +6207,7 @@ public class ScriptEXP {
                             case 5:
                                 rep_form_dep_user_script[n] = "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_u_name[n] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -6209,7 +6217,7 @@ public class ScriptEXP {
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                         "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_u_name2[n] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -6219,7 +6227,7 @@ public class ScriptEXP {
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                         "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_u_name3[n] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -6229,7 +6237,7 @@ public class ScriptEXP {
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                         "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_u_name4[n] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -6239,7 +6247,7 @@ public class ScriptEXP {
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                         "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_u_name5[n] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -6253,7 +6261,7 @@ public class ScriptEXP {
                             case 6:
                                 rep_form_dep_user_script[n] = "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_u_name[n] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -6263,7 +6271,7 @@ public class ScriptEXP {
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                         "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_u_name2[n] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -6273,7 +6281,7 @@ public class ScriptEXP {
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                         "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_u_name3[n] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -6283,7 +6291,7 @@ public class ScriptEXP {
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                         "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_u_name4[n] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -6293,7 +6301,7 @@ public class ScriptEXP {
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                         "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_u_name5[n] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -6303,7 +6311,7 @@ public class ScriptEXP {
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                         "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_u_name6[n] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -6317,7 +6325,7 @@ public class ScriptEXP {
                             case 7:
                                 rep_form_dep_user_script[n] = "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_u_name[n] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -6327,7 +6335,7 @@ public class ScriptEXP {
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                         "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_u_name2[n] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -6337,7 +6345,7 @@ public class ScriptEXP {
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                         "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_u_name3[n] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -6347,7 +6355,7 @@ public class ScriptEXP {
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                         "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_u_name4[n] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -6357,7 +6365,7 @@ public class ScriptEXP {
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                         "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_u_name5[n] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -6367,7 +6375,7 @@ public class ScriptEXP {
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                         "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_u_name6[n] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -6377,7 +6385,7 @@ public class ScriptEXP {
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                         "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_u_name7[n] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -6391,7 +6399,7 @@ public class ScriptEXP {
                             case 8:
                                 rep_form_dep_user_script[n] = "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_u_name[n] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -6401,7 +6409,7 @@ public class ScriptEXP {
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                         "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_u_name2[n] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -6411,7 +6419,7 @@ public class ScriptEXP {
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                         "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_u_name3[n] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -6421,7 +6429,7 @@ public class ScriptEXP {
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                         "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_u_name4[n] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -6431,7 +6439,7 @@ public class ScriptEXP {
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                         "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_u_name5[n] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -6441,7 +6449,7 @@ public class ScriptEXP {
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                         "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_u_name6[n] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -6451,7 +6459,7 @@ public class ScriptEXP {
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                         "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_u_name7[n] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -6461,7 +6469,7 @@ public class ScriptEXP {
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                         "MERGE INTO REP_FORM_DEP_USER R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n'" +
+                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n" +
                         "'"+ SC_data_miner.Dep_u_name8[n] +"' as DEP_NAME, \n" +
 						reason + " \n" +
                         " FROM dual) S\n" +
@@ -6548,7 +6556,7 @@ public class ScriptEXP {
                                 case 1:
                                     report_okud_code_script[n] = "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud[n] +"' as OKUD_CODE, \n" +
 						"'"+ SC_data_miner.period[n] +"'as PERIOD \n" +
 						"null as FORM_CD \n" +
@@ -6563,7 +6571,7 @@ public class ScriptEXP {
                                 case 2:
                                     report_okud_code_script[n] = "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud[n] +"' as OKUD_CODE, \n" +
 						"'"+ SC_data_miner.period[n] +"'as PERIOD \n" +
 						"null as FORM_CD \n" +
@@ -6576,7 +6584,7 @@ public class ScriptEXP {
                                         "\n" +
                                         "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud2[n] +"' as OKUD_CODE, \n" +
 						"'"+ SC_data_miner.period2[n] +"'as PERIOD \n" +
 						"null as FORM_CD \n" +
@@ -6591,7 +6599,7 @@ public class ScriptEXP {
                                 case 3:
                                     report_okud_code_script[n] = "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud[n] +"' as OKUD_CODE, \n" +
 						"'"+ SC_data_miner.period[n] +"'as PERIOD \n" +
 						"null as FORM_CD \n" +
@@ -6604,7 +6612,7 @@ public class ScriptEXP {
                                         "\n" +
                                         "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud2[n] +"' as OKUD_CODE, \n" +
 						"'"+ SC_data_miner.period2[n] +"'as PERIOD \n" +
 						"null as FORM_CD \n" +
@@ -6617,7 +6625,7 @@ public class ScriptEXP {
                                         "\n" +
                                         "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud3[n] +"' as OKUD_CODE, \n" +
 						"'"+ SC_data_miner.period3[n] +"'as PERIOD \n" +
 						"null as FORM_CD \n" +
@@ -6632,7 +6640,7 @@ public class ScriptEXP {
                                 case 4:
                                     report_okud_code_script[n] = "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud[n] +"' as OKUD_CODE, \n" +
 						"'"+ SC_data_miner.period[n] +"'as PERIOD \n" +
 						"null as FORM_CD \n" +
@@ -6645,7 +6653,7 @@ public class ScriptEXP {
                                         "\n" +
                                         "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud2[n] +"' as OKUD_CODE, \n" +
 						"'"+ SC_data_miner.period2[n] +"'as PERIOD \n" +
 						"null as FORM_CD \n" +
@@ -6658,7 +6666,7 @@ public class ScriptEXP {
                                         "\n" +
                                         "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud3[n] +"' as OKUD_CODE, \n" +
 						"'"+ SC_data_miner.period3[n] +"'as PERIOD \n" +
 						"null as FORM_CD \n" +
@@ -6671,7 +6679,7 @@ public class ScriptEXP {
                                         "\n" +
                                         "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud4[n] +"' as OKUD_CODE, \n" +
 						"'"+ SC_data_miner.period4[n] +"'as PERIOD \n" +
 						"null as FORM_CD \n" +
@@ -6686,7 +6694,7 @@ public class ScriptEXP {
                                 case 5:
                                     report_okud_code_script[n] = "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud[n] +"' as OKUD_CODE, \n" +
 						"'"+ SC_data_miner.period[n] +"'as PERIOD \n" +
 						"null as FORM_CD \n" +
@@ -6699,7 +6707,7 @@ public class ScriptEXP {
                                         "\n" +
                                         "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud2[n] +"' as OKUD_CODE, \n" +
 						"'"+ SC_data_miner.period2[n] +"'as PERIOD \n" +
 						"null as FORM_CD \n" +
@@ -6712,7 +6720,7 @@ public class ScriptEXP {
                                         "\n" +
                                         "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud3[n] +"' as OKUD_CODE, \n" +
 						"'"+ SC_data_miner.period3[n] +"'as PERIOD \n" +
 						"null as FORM_CD \n" +
@@ -6725,7 +6733,7 @@ public class ScriptEXP {
                                         "\n" +
                                         "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud4[n] +"' as OKUD_CODE, \n" +
 						"'"+ SC_data_miner.period4[n] +"'as PERIOD \n" +
 						"null as FORM_CD \n" +
@@ -6738,7 +6746,7 @@ public class ScriptEXP {
                                         "\n" +
                                         "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud5[n] +"' as OKUD_CODE, \n" +
 						"'"+ SC_data_miner.period5[n] +"'as PERIOD \n" +
 						"null as FORM_CD \n" +
@@ -6753,7 +6761,7 @@ public class ScriptEXP {
                                 case 6:
                                     report_okud_code_script[n] = "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud[n] +"' as OKUD_CODE, \n" +
 						"'"+ SC_data_miner.period[n] +"'as PERIOD \n" +
 						"null as FORM_CD \n" +
@@ -6766,7 +6774,7 @@ public class ScriptEXP {
                                         "\n" +
                                         "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud2[n] +"' as OKUD_CODE, \n" +
 						"'"+ SC_data_miner.period2[n] +"'as PERIOD \n" +
 						"null as FORM_CD \n" +
@@ -6779,7 +6787,7 @@ public class ScriptEXP {
                                         "\n" +
                                         "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud3[n] +"' as OKUD_CODE, \n" +
 						"'"+ SC_data_miner.period3[n] +"'as PERIOD \n" +
 						"null as FORM_CD \n" +
@@ -6792,7 +6800,7 @@ public class ScriptEXP {
                                         "\n" +
                                         "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud4[n] +"' as OKUD_CODE, \n" +
 						"'"+ SC_data_miner.period4[n] +"'as PERIOD \n" +
 						"null as FORM_CD \n" +
@@ -6805,7 +6813,7 @@ public class ScriptEXP {
                                         "\n" +
                                         "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud5[n] +"' as OKUD_CODE, \n" +
 						"'"+ SC_data_miner.period5[n] +"'as PERIOD \n" +
 						"null as FORM_CD \n" +
@@ -6818,7 +6826,7 @@ public class ScriptEXP {
                                         "\n" +
                                         "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud6[n] +"' as OKUD_CODE, \n" +
 						"'"+ SC_data_miner.period6[n] +"'as PERIOD \n" +
 						"null as FORM_CD \n" +
@@ -6833,7 +6841,7 @@ public class ScriptEXP {
                                 case 7:
                                     report_okud_code_script[n] = "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud[n] +"' as OKUD_CODE, \n" +
 						"'"+ SC_data_miner.period[n] +"'as PERIOD \n" +
 						"null as FORM_CD \n" +
@@ -6846,7 +6854,7 @@ public class ScriptEXP {
                                         "\n" +
                                         "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud2[n] +"' as OKUD_CODE, \n" +
 						"'"+ SC_data_miner.period2[n] +"'as PERIOD \n" +
 						"null as FORM_CD \n" +
@@ -6859,7 +6867,7 @@ public class ScriptEXP {
                                         "\n" +
                                         "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud3[n] +"' as OKUD_CODE, \n" +
 						"'"+ SC_data_miner.period3[n] +"'as PERIOD \n" +
 						"null as FORM_CD \n" +
@@ -6872,7 +6880,7 @@ public class ScriptEXP {
                                         "\n" +
                                         "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud4[n] +"' as OKUD_CODE, \n" +
 						"'"+ SC_data_miner.period4[n] +"'as PERIOD \n" +
 						"null as FORM_CD \n" +
@@ -6885,7 +6893,7 @@ public class ScriptEXP {
                                         "\n" +
                                         "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud5[n] +"' as OKUD_CODE, \n" +
 						"'"+ SC_data_miner.period5[n] +"'as PERIOD \n" +
 						"null as FORM_CD \n" +
@@ -6898,7 +6906,7 @@ public class ScriptEXP {
                                         "\n" +
                                         "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud6[n] +"' as OKUD_CODE, \n" +
 						"'"+ SC_data_miner.period6[n] +"'as PERIOD \n" +
 						"null as FORM_CD \n" +
@@ -6911,7 +6919,7 @@ public class ScriptEXP {
                                         "\n" +
                                         "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud7[n] +"' as OKUD_CODE, \n" +
 						"'"+ SC_data_miner.period7[n] +"'as PERIOD \n" +
 						"null as FORM_CD \n" +
@@ -6926,7 +6934,7 @@ public class ScriptEXP {
                                 case 8:
                                     report_okud_code_script[n] = "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud[n] +"' as OKUD_CODE, \n" +
 						"'"+ SC_data_miner.period[n] +"'as PERIOD \n" +
 						"null as FORM_CD \n" +
@@ -6939,7 +6947,7 @@ public class ScriptEXP {
                                         "\n" +
                                         "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud2[n] +"' as OKUD_CODE, \n" +
 						"'"+ SC_data_miner.period2[n] +"'as PERIOD \n" +
 						"null as FORM_CD \n" +
@@ -6952,7 +6960,7 @@ public class ScriptEXP {
                                         "\n" +
                                         "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud3[n] +"' as OKUD_CODE, \n" +
 						"'"+ SC_data_miner.period3[n] +"'as PERIOD \n" +
 						"null as FORM_CD \n" +
@@ -6965,7 +6973,7 @@ public class ScriptEXP {
                                         "\n" +
                                         "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud4[n] +"' as OKUD_CODE, \n" +
 						"'"+ SC_data_miner.period4[n] +"'as PERIOD \n" +
 						"null as FORM_CD \n" +
@@ -6978,7 +6986,7 @@ public class ScriptEXP {
                                         "\n" +
                                         "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud5[n] +"' as OKUD_CODE, \n" +
 						"'"+ SC_data_miner.period5[n] +"'as PERIOD \n" +
 						"null as FORM_CD \n" +
@@ -6991,7 +6999,7 @@ public class ScriptEXP {
                                         "\n" +
                                         "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud6[n] +"' as OKUD_CODE, \n" +
 						"'"+ SC_data_miner.period6[n] +"'as PERIOD \n" +
 						"null as FORM_CD \n" +
@@ -7004,7 +7012,7 @@ public class ScriptEXP {
                                         "\n" +
                                         "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud7[n] +"' as OKUD_CODE, \n" +
 						"'"+ SC_data_miner.period7[n] +"'as PERIOD \n" +
 						"null as FORM_CD \n" +
@@ -7017,7 +7025,7 @@ public class ScriptEXP {
                                         "\n" +
                                         "MERGE INTO REPORT_OKUD_CODE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud8[n] +"' as OKUD_CODE, \n" +
 						"'"+ SC_data_miner.period8[n] +"'as PERIOD \n" +
 						"null as FORM_CD \n" +
@@ -7049,7 +7057,7 @@ public class ScriptEXP {
                     } else {
                         report_form_src_script[n] = "MERGE INTO REPORT_FORM_SRC R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Reg_form_code[n] +"' as REG_FORM_CODE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE)\n" +
@@ -7072,7 +7080,7 @@ public class ScriptEXP {
                             case 1:
                                 report_rep_subj_type_script[n] = "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.rep_subj_type[n] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
@@ -7083,7 +7091,7 @@ public class ScriptEXP {
                             case 2:
                                 report_rep_subj_type_script[n] = "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.rep_subj_type[n] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
@@ -7092,7 +7100,7 @@ public class ScriptEXP {
                                         "\n\n" +
                                         "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.rep_subj_type2[n] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
@@ -7103,7 +7111,7 @@ public class ScriptEXP {
                             case 3:
                                 report_rep_subj_type_script[n] = "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.rep_subj_type[n] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
@@ -7112,7 +7120,7 @@ public class ScriptEXP {
                                         "\n\n" +
                                         "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.rep_subj_type2[n] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
@@ -7121,7 +7129,7 @@ public class ScriptEXP {
                                         "\n\n" +
                                         "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.rep_subj_type3[n] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
@@ -7132,7 +7140,7 @@ public class ScriptEXP {
                             case 4:
                                 report_rep_subj_type_script[n] = "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.rep_subj_type[n] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
@@ -7141,7 +7149,7 @@ public class ScriptEXP {
                                         "\n\n" +
                                         "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.rep_subj_type2[n] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
@@ -7150,7 +7158,7 @@ public class ScriptEXP {
                                         "\n\n" +
                                         "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.rep_subj_type3[n] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
@@ -7159,7 +7167,7 @@ public class ScriptEXP {
                                         "\n\n" +
                                         "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.rep_subj_type4[n] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
@@ -7170,7 +7178,7 @@ public class ScriptEXP {
                             case 5:
                                 report_rep_subj_type_script[n] = "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.rep_subj_type[n] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
@@ -7179,7 +7187,7 @@ public class ScriptEXP {
                                         "\n\n" +
                                         "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.rep_subj_type2[n] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
@@ -7188,7 +7196,7 @@ public class ScriptEXP {
                                         "\n\n" +
                                         "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.rep_subj_type3[n] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
@@ -7197,7 +7205,7 @@ public class ScriptEXP {
                                         "\n\n" +
                                         "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.rep_subj_type4[n] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
@@ -7206,7 +7214,7 @@ public class ScriptEXP {
                                         "\n\n" +
                                         "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.rep_subj_type5[n] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
@@ -7217,7 +7225,7 @@ public class ScriptEXP {
                             case 6:
                                 report_rep_subj_type_script[n] = "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.rep_subj_type[n] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
@@ -7226,7 +7234,7 @@ public class ScriptEXP {
                                         "\n\n" +
                                         "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.rep_subj_type2[n] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
@@ -7235,7 +7243,7 @@ public class ScriptEXP {
                                         "\n\n" +
                                         "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.rep_subj_type3[n] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
@@ -7244,7 +7252,7 @@ public class ScriptEXP {
                                         "\n\n" +
                                         "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.rep_subj_type4[n] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
@@ -7253,7 +7261,7 @@ public class ScriptEXP {
                                         "\n\n" +
                                         "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.rep_subj_type5[n] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
@@ -7262,7 +7270,7 @@ public class ScriptEXP {
                                         "\n\n" +
                                         "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.rep_subj_type6[n] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
@@ -7273,7 +7281,7 @@ public class ScriptEXP {
                             case 7:
                                 report_rep_subj_type_script[n] = "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.rep_subj_type[n] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
@@ -7282,7 +7290,7 @@ public class ScriptEXP {
                                         "\n\n" +
                                         "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.rep_subj_type2[n] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
@@ -7291,7 +7299,7 @@ public class ScriptEXP {
                                         "\n\n" +
                                         "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.rep_subj_type3[n] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
@@ -7300,7 +7308,7 @@ public class ScriptEXP {
                                         "\n\n" +
                                         "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.rep_subj_type4[n] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
@@ -7309,7 +7317,7 @@ public class ScriptEXP {
                                         "\n\n" +
                                         "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.rep_subj_type5[n] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
@@ -7318,7 +7326,7 @@ public class ScriptEXP {
                                         "\n\n" +
                                         "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.rep_subj_type6[n] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
@@ -7327,7 +7335,7 @@ public class ScriptEXP {
                                         "\n\n" +
                                         "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.rep_subj_type7[n] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
@@ -7338,7 +7346,7 @@ public class ScriptEXP {
                             case 8:
                                 report_rep_subj_type_script[n] = "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.rep_subj_type[n] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
@@ -7347,7 +7355,7 @@ public class ScriptEXP {
                                         "\n\n" +
                                         "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.rep_subj_type2[n] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
@@ -7356,7 +7364,7 @@ public class ScriptEXP {
                                         "\n\n" +
                                         "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.rep_subj_type3[n] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
@@ -7365,7 +7373,7 @@ public class ScriptEXP {
                                         "\n\n" +
                                         "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.rep_subj_type4[n] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
@@ -7374,7 +7382,7 @@ public class ScriptEXP {
                                         "\n\n" +
                                         "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.rep_subj_type5[n] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
@@ -7383,7 +7391,7 @@ public class ScriptEXP {
                                         "\n\n" +
                                         "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.rep_subj_type6[n] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
@@ -7392,7 +7400,7 @@ public class ScriptEXP {
                                         "\n\n" +
                                         "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.rep_subj_type7[n] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
@@ -7401,7 +7409,7 @@ public class ScriptEXP {
                                         "\n\n" +
                                         "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n'" +
+                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.rep_subj_type8[n] +"' as REP_SUBJ_TYPE, \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
@@ -7525,6 +7533,7 @@ public class ScriptEXP {
                             "\n" +
                             rep_form_cognos_script[n] + "\n\n" + "commit;";
 
+                    System.out.print("\n" + "type[" + n + "] = " + type[n]);
                     if(type[n] == 0){
                         text[3] = text[3] + "\n" +
                                 "\n" +
