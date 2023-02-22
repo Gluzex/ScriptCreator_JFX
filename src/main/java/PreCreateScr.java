@@ -23,6 +23,13 @@ public class PreCreateScr {
     public TextField[] Form_okud7_txtf;
     public TextField[] Form_okud8_txtf;
     public TextField[] Form_cd_cog_txtf;
+    public TextField[] Form_cd_cog2_txtf;
+    public TextField[] Form_cd_cog3_txtf;
+    public TextField[] Form_cd_cog4_txtf;
+    public TextField[] Form_cd_cog5_txtf;
+    public TextField[] Form_cd_cog6_txtf;
+    public TextField[] Form_cd_cog7_txtf;
+    public TextField[] Form_cd_cog8_txtf;
     public ComboBox<String>[] Flag_IOD_cmbx;
     public ComboBox<String>[] Flag_PDN_cmbx;
     public TextField[] Dep_name_txtf;
@@ -74,7 +81,8 @@ public class PreCreateScr {
 
     public PreCreateScr(int count, String path_fld, Stage mnf, AnchorPane main_root, Button resetBtn, TextField[] form_name_txtf, TextField[] form_cd_txtf, TextField[] form_cd_name_txtf,
                         TextField[] form_okud_txtf, TextField[] form_okud2_txtf, TextField[] form_okud3_txtf, TextField[] form_okud4_txtf, TextField[] form_okud5_txtf, TextField[] form_okud6_txtf, TextField[] form_okud7_txtf, TextField[] form_okud8_txtf,
-                        TextField[] form_cd_cog_txtf, ComboBox<String>[] flag_iod_cmbx, ComboBox<String>[] flag_pdn_cmbx, TextField[] dep_name_txtf,
+                        TextField[] form_cd_cog_txtf, TextField[] form_cd_cog2_txtf, TextField[] form_cd_cog3_txtf, TextField[] form_cd_cog4_txtf, TextField[] form_cd_cog5_txtf, TextField[] form_cd_cog6_txtf, TextField[] form_cd_cog7_txtf, TextField[] form_cd_cog8_txtf,
+                        ComboBox<String>[] flag_iod_cmbx, ComboBox<String>[] flag_pdn_cmbx, TextField[] dep_name_txtf,
                         TextField[] dep_name2_txtf, TextField[] dep_name3_txtf, TextField[] dep_name4_txtf, TextField[] dep_name5_txtf, TextField[] dep_name6_txtf, TextField[] dep_name7_txtf, TextField[] dep_name8_txtf,
                         TextField[] dep_u_name_txtf, TextField[] dep_u_name2_txtf, TextField[] dep_u_name3_txtf, TextField[] dep_u_name4_txtf, TextField[] dep_u_name5_txtf, TextField[] dep_u_name6_txtf, TextField[] dep_u_name7_txtf, TextField[] dep_u_name8_txtf,
                         TextField[] reason_txtf, TextField[] system_id_txtf, TextField[] security_role_path_txtf, TextField[] search_path_txtf, TextField[] form_formal_code_txtf, TextField[] desc_txtf,
@@ -98,6 +106,13 @@ public class PreCreateScr {
         this.Form_okud7_txtf = form_okud7_txtf;
         this.Form_okud8_txtf = form_okud8_txtf;
         this.Form_cd_cog_txtf = form_cd_cog_txtf;
+        this.Form_cd_cog2_txtf = form_cd_cog2_txtf;
+        this.Form_cd_cog3_txtf = form_cd_cog3_txtf;
+        this.Form_cd_cog4_txtf = form_cd_cog4_txtf;
+        this.Form_cd_cog5_txtf = form_cd_cog5_txtf;
+        this.Form_cd_cog6_txtf = form_cd_cog6_txtf;
+        this.Form_cd_cog7_txtf = form_cd_cog7_txtf;
+        this.Form_cd_cog8_txtf = form_cd_cog8_txtf;
         this.Flag_IOD_cmbx = flag_iod_cmbx;
         this.Flag_PDN_cmbx = flag_pdn_cmbx;
         this.Dep_name_txtf = dep_name_txtf;
@@ -194,6 +209,13 @@ public class PreCreateScr {
                 SC_data_miner.Form_okud[i] = Form_okud_txtf[i].getText();
                 SC_data_miner.okud_form_cd[i] = Form_okud_txtf[i].getText();
                 SC_data_miner.Form_cd_cog[i]  = Form_cd_cog_txtf[i].getText();
+                SC_data_miner.Form_cd_cog2[i]  = Form_cd_cog2_txtf[i].getText();
+                SC_data_miner.Form_cd_cog3[i]  = Form_cd_cog3_txtf[i].getText();
+                SC_data_miner.Form_cd_cog4[i]  = Form_cd_cog4_txtf[i].getText();
+                SC_data_miner.Form_cd_cog5[i]  = Form_cd_cog5_txtf[i].getText();
+                SC_data_miner.Form_cd_cog6[i]  = Form_cd_cog6_txtf[i].getText();
+                SC_data_miner.Form_cd_cog7[i]  = Form_cd_cog7_txtf[i].getText();
+                SC_data_miner.Form_cd_cog8[i]  = Form_cd_cog8_txtf[i].getText();
                 SC_data_miner.Flag_IOD[i] = Flag_IOD_cmbx[i].getValue();
                 SC_data_miner.Flag_PDN[i] = Flag_PDN_cmbx[i].getValue();
                 SC_data_miner.Dep_name[i] = Dep_name_txtf[i].getText();

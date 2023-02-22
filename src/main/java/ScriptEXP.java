@@ -1670,17 +1670,421 @@ public class ScriptEXP {
                         rep_form_cognos_script = "--Warning: Не указаны данные для таблицы REP_FORM_COGNOS: Код потока(Когнос)\n\n";
                     }
                 } else {
-                    rep_form_cognos_script = "MERGE INTO REP_FORM_COGNOS R\n" +
-                        "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd_cog[0] +"' as FORM_CD, \n" +
-                        "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
-                        "FROM dual) S\n" +
-                        "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
-                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
-                        "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
-                            "\n" +
-                            "\n";
+                    int c = OK_Action.getCog_count(0);
+                    switch (c){
+                        case 1:
+                            rep_form_cognos_script = "MERGE INTO REP_FORM_COGNOS R\n" +
+                                    "   USING (SELECT \n" +
+                                    "'"+ SC_data_miner.Form_cd_cog[0] +"' as FORM_CD, \n" +
+                                    "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
+                                    "FROM dual) S\n" +
+                                    "   ON (R.FORM_CD = S.FORM_CD)\n" +
+                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                    "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
+                                    "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
+                                    "\n" +
+                                    "\n";
+                            break;
+                        case 2:
+                            rep_form_cognos_script = "MERGE INTO REP_FORM_COGNOS R\n" +
+                                    "   USING (SELECT \n" +
+                                    "'"+ SC_data_miner.Form_cd_cog[0] +"' as FORM_CD, \n" +
+                                    "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
+                                    "FROM dual) S\n" +
+                                    "   ON (R.FORM_CD = S.FORM_CD)\n" +
+                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                    "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
+                                    "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
+                                    "\n" +
+                                    "\n" +
+                            "MERGE INTO REP_FORM_COGNOS R\n" +
+                                    "   USING (SELECT \n" +
+                                    "'"+ SC_data_miner.Form_cd_cog2[0] +"' as FORM_CD, \n" +
+                                    "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
+                                    "FROM dual) S\n" +
+                                    "   ON (R.FORM_CD = S.FORM_CD)\n" +
+                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                    "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
+                                    "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
+                                    "\n" +
+                                    "\n";
+                            break;
+                        case 3:
+                            rep_form_cognos_script = "MERGE INTO REP_FORM_COGNOS R\n" +
+                                    "   USING (SELECT \n" +
+                                    "'"+ SC_data_miner.Form_cd_cog[0] +"' as FORM_CD, \n" +
+                                    "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
+                                    "FROM dual) S\n" +
+                                    "   ON (R.FORM_CD = S.FORM_CD)\n" +
+                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                    "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
+                                    "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
+                                    "\n" +
+                                    "\n" +
+                                    "MERGE INTO REP_FORM_COGNOS R\n" +
+                                    "   USING (SELECT \n" +
+                                    "'"+ SC_data_miner.Form_cd_cog2[0] +"' as FORM_CD, \n" +
+                                    "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
+                                    "FROM dual) S\n" +
+                                    "   ON (R.FORM_CD = S.FORM_CD)\n" +
+                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                    "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
+                                    "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
+                                    "\n" +
+                                    "\n" +
+                                    "MERGE INTO REP_FORM_COGNOS R\n" +
+                                    "   USING (SELECT \n" +
+                                    "'"+ SC_data_miner.Form_cd_cog3[0] +"' as FORM_CD, \n" +
+                                    "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
+                                    "FROM dual) S\n" +
+                                    "   ON (R.FORM_CD = S.FORM_CD)\n" +
+                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                    "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
+                                    "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
+                                    "\n" +
+                                    "\n";
+                            break;
+                        case 4:
+                            rep_form_cognos_script = "MERGE INTO REP_FORM_COGNOS R\n" +
+                                    "   USING (SELECT \n" +
+                                    "'"+ SC_data_miner.Form_cd_cog[0] +"' as FORM_CD, \n" +
+                                    "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
+                                    "FROM dual) S\n" +
+                                    "   ON (R.FORM_CD = S.FORM_CD)\n" +
+                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                    "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
+                                    "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
+                                    "\n" +
+                                    "\n" +
+                                    "MERGE INTO REP_FORM_COGNOS R\n" +
+                                    "   USING (SELECT \n" +
+                                    "'"+ SC_data_miner.Form_cd_cog2[0] +"' as FORM_CD, \n" +
+                                    "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
+                                    "FROM dual) S\n" +
+                                    "   ON (R.FORM_CD = S.FORM_CD)\n" +
+                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                    "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
+                                    "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
+                                    "\n" +
+                                    "\n" +
+                                    "MERGE INTO REP_FORM_COGNOS R\n" +
+                                    "   USING (SELECT \n" +
+                                    "'"+ SC_data_miner.Form_cd_cog3[0] +"' as FORM_CD, \n" +
+                                    "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
+                                    "FROM dual) S\n" +
+                                    "   ON (R.FORM_CD = S.FORM_CD)\n" +
+                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                    "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
+                                    "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
+                                    "\n" +
+                                    "\n" +
+                                    "MERGE INTO REP_FORM_COGNOS R\n" +
+                                    "   USING (SELECT \n" +
+                                    "'"+ SC_data_miner.Form_cd_cog4[0] +"' as FORM_CD, \n" +
+                                    "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
+                                    "FROM dual) S\n" +
+                                    "   ON (R.FORM_CD = S.FORM_CD)\n" +
+                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                    "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
+                                    "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
+                                    "\n" +
+                                    "\n";
+                            break;
+                        case 5:
+                            rep_form_cognos_script = "MERGE INTO REP_FORM_COGNOS R\n" +
+                                    "   USING (SELECT \n" +
+                                    "'"+ SC_data_miner.Form_cd_cog[0] +"' as FORM_CD, \n" +
+                                    "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
+                                    "FROM dual) S\n" +
+                                    "   ON (R.FORM_CD = S.FORM_CD)\n" +
+                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                    "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
+                                    "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
+                                    "\n" +
+                                    "\n" +
+                                    "MERGE INTO REP_FORM_COGNOS R\n" +
+                                    "   USING (SELECT \n" +
+                                    "'"+ SC_data_miner.Form_cd_cog2[0] +"' as FORM_CD, \n" +
+                                    "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
+                                    "FROM dual) S\n" +
+                                    "   ON (R.FORM_CD = S.FORM_CD)\n" +
+                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                    "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
+                                    "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
+                                    "\n" +
+                                    "\n" +
+                                    "MERGE INTO REP_FORM_COGNOS R\n" +
+                                    "   USING (SELECT \n" +
+                                    "'"+ SC_data_miner.Form_cd_cog3[0] +"' as FORM_CD, \n" +
+                                    "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
+                                    "FROM dual) S\n" +
+                                    "   ON (R.FORM_CD = S.FORM_CD)\n" +
+                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                    "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
+                                    "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
+                                    "\n" +
+                                    "\n" +
+                                    "MERGE INTO REP_FORM_COGNOS R\n" +
+                                    "   USING (SELECT \n" +
+                                    "'"+ SC_data_miner.Form_cd_cog4[0] +"' as FORM_CD, \n" +
+                                    "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
+                                    "FROM dual) S\n" +
+                                    "   ON (R.FORM_CD = S.FORM_CD)\n" +
+                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                    "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
+                                    "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
+                                    "\n" +
+                                    "\n" +
+                                    "MERGE INTO REP_FORM_COGNOS R\n" +
+                                    "   USING (SELECT \n" +
+                                    "'"+ SC_data_miner.Form_cd_cog5[0] +"' as FORM_CD, \n" +
+                                    "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
+                                    "FROM dual) S\n" +
+                                    "   ON (R.FORM_CD = S.FORM_CD)\n" +
+                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                    "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
+                                    "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
+                                    "\n" +
+                                    "\n";
+                            break;
+                        case 6:
+                            rep_form_cognos_script = "MERGE INTO REP_FORM_COGNOS R\n" +
+                                    "   USING (SELECT \n" +
+                                    "'"+ SC_data_miner.Form_cd_cog[0] +"' as FORM_CD, \n" +
+                                    "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
+                                    "FROM dual) S\n" +
+                                    "   ON (R.FORM_CD = S.FORM_CD)\n" +
+                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                    "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
+                                    "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
+                                    "\n" +
+                                    "\n" +
+                                    "MERGE INTO REP_FORM_COGNOS R\n" +
+                                    "   USING (SELECT \n" +
+                                    "'"+ SC_data_miner.Form_cd_cog2[0] +"' as FORM_CD, \n" +
+                                    "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
+                                    "FROM dual) S\n" +
+                                    "   ON (R.FORM_CD = S.FORM_CD)\n" +
+                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                    "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
+                                    "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
+                                    "\n" +
+                                    "\n" +
+                                    "MERGE INTO REP_FORM_COGNOS R\n" +
+                                    "   USING (SELECT \n" +
+                                    "'"+ SC_data_miner.Form_cd_cog3[0] +"' as FORM_CD, \n" +
+                                    "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
+                                    "FROM dual) S\n" +
+                                    "   ON (R.FORM_CD = S.FORM_CD)\n" +
+                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                    "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
+                                    "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
+                                    "\n" +
+                                    "\n" +
+                                    "MERGE INTO REP_FORM_COGNOS R\n" +
+                                    "   USING (SELECT \n" +
+                                    "'"+ SC_data_miner.Form_cd_cog4[0] +"' as FORM_CD, \n" +
+                                    "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
+                                    "FROM dual) S\n" +
+                                    "   ON (R.FORM_CD = S.FORM_CD)\n" +
+                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                    "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
+                                    "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
+                                    "\n" +
+                                    "\n" +
+                                    "MERGE INTO REP_FORM_COGNOS R\n" +
+                                    "   USING (SELECT \n" +
+                                    "'"+ SC_data_miner.Form_cd_cog5[0] +"' as FORM_CD, \n" +
+                                    "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
+                                    "FROM dual) S\n" +
+                                    "   ON (R.FORM_CD = S.FORM_CD)\n" +
+                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                    "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
+                                    "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
+                                    "\n" +
+                                    "\n" +
+                                    "MERGE INTO REP_FORM_COGNOS R\n" +
+                                    "   USING (SELECT \n" +
+                                    "'"+ SC_data_miner.Form_cd_cog6[0] +"' as FORM_CD, \n" +
+                                    "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
+                                    "FROM dual) S\n" +
+                                    "   ON (R.FORM_CD = S.FORM_CD)\n" +
+                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                    "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
+                                    "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
+                                    "\n" +
+                                    "\n";
+                            break;
+                        case 7:
+                            rep_form_cognos_script = "MERGE INTO REP_FORM_COGNOS R\n" +
+                                    "   USING (SELECT \n" +
+                                    "'"+ SC_data_miner.Form_cd_cog[0] +"' as FORM_CD, \n" +
+                                    "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
+                                    "FROM dual) S\n" +
+                                    "   ON (R.FORM_CD = S.FORM_CD)\n" +
+                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                    "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
+                                    "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
+                                    "\n" +
+                                    "\n" +
+                                    "MERGE INTO REP_FORM_COGNOS R\n" +
+                                    "   USING (SELECT \n" +
+                                    "'"+ SC_data_miner.Form_cd_cog2[0] +"' as FORM_CD, \n" +
+                                    "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
+                                    "FROM dual) S\n" +
+                                    "   ON (R.FORM_CD = S.FORM_CD)\n" +
+                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                    "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
+                                    "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
+                                    "\n" +
+                                    "\n" +
+                                    "MERGE INTO REP_FORM_COGNOS R\n" +
+                                    "   USING (SELECT \n" +
+                                    "'"+ SC_data_miner.Form_cd_cog3[0] +"' as FORM_CD, \n" +
+                                    "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
+                                    "FROM dual) S\n" +
+                                    "   ON (R.FORM_CD = S.FORM_CD)\n" +
+                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                    "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
+                                    "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
+                                    "\n" +
+                                    "\n" +
+                                    "MERGE INTO REP_FORM_COGNOS R\n" +
+                                    "   USING (SELECT \n" +
+                                    "'"+ SC_data_miner.Form_cd_cog4[0] +"' as FORM_CD, \n" +
+                                    "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
+                                    "FROM dual) S\n" +
+                                    "   ON (R.FORM_CD = S.FORM_CD)\n" +
+                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                    "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
+                                    "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
+                                    "\n" +
+                                    "\n" +
+                                    "MERGE INTO REP_FORM_COGNOS R\n" +
+                                    "   USING (SELECT \n" +
+                                    "'"+ SC_data_miner.Form_cd_cog5[0] +"' as FORM_CD, \n" +
+                                    "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
+                                    "FROM dual) S\n" +
+                                    "   ON (R.FORM_CD = S.FORM_CD)\n" +
+                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                    "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
+                                    "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
+                                    "\n" +
+                                    "\n" +
+                                    "MERGE INTO REP_FORM_COGNOS R\n" +
+                                    "   USING (SELECT \n" +
+                                    "'"+ SC_data_miner.Form_cd_cog6[0] +"' as FORM_CD, \n" +
+                                    "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
+                                    "FROM dual) S\n" +
+                                    "   ON (R.FORM_CD = S.FORM_CD)\n" +
+                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                    "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
+                                    "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
+                                    "\n" +
+                                    "\n" +
+                                    "MERGE INTO REP_FORM_COGNOS R\n" +
+                                    "   USING (SELECT \n" +
+                                    "'"+ SC_data_miner.Form_cd_cog7[0] +"' as FORM_CD, \n" +
+                                    "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
+                                    "FROM dual) S\n" +
+                                    "   ON (R.FORM_CD = S.FORM_CD)\n" +
+                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                    "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
+                                    "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
+                                    "\n" +
+                                    "\n";
+                            break;
+                        case 8:
+                            rep_form_cognos_script = "MERGE INTO REP_FORM_COGNOS R\n" +
+                                    "   USING (SELECT \n" +
+                                    "'"+ SC_data_miner.Form_cd_cog[0] +"' as FORM_CD, \n" +
+                                    "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
+                                    "FROM dual) S\n" +
+                                    "   ON (R.FORM_CD = S.FORM_CD)\n" +
+                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                    "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
+                                    "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
+                                    "\n" +
+                                    "\n" +
+                                    "MERGE INTO REP_FORM_COGNOS R\n" +
+                                    "   USING (SELECT \n" +
+                                    "'"+ SC_data_miner.Form_cd_cog2[0] +"' as FORM_CD, \n" +
+                                    "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
+                                    "FROM dual) S\n" +
+                                    "   ON (R.FORM_CD = S.FORM_CD)\n" +
+                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                    "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
+                                    "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
+                                    "\n" +
+                                    "\n" +
+                                    "MERGE INTO REP_FORM_COGNOS R\n" +
+                                    "   USING (SELECT \n" +
+                                    "'"+ SC_data_miner.Form_cd_cog3[0] +"' as FORM_CD, \n" +
+                                    "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
+                                    "FROM dual) S\n" +
+                                    "   ON (R.FORM_CD = S.FORM_CD)\n" +
+                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                    "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
+                                    "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
+                                    "\n" +
+                                    "\n" +
+                                    "MERGE INTO REP_FORM_COGNOS R\n" +
+                                    "   USING (SELECT \n" +
+                                    "'"+ SC_data_miner.Form_cd_cog4[0] +"' as FORM_CD, \n" +
+                                    "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
+                                    "FROM dual) S\n" +
+                                    "   ON (R.FORM_CD = S.FORM_CD)\n" +
+                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                    "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
+                                    "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
+                                    "\n" +
+                                    "\n" +
+                                    "MERGE INTO REP_FORM_COGNOS R\n" +
+                                    "   USING (SELECT \n" +
+                                    "'"+ SC_data_miner.Form_cd_cog5[0] +"' as FORM_CD, \n" +
+                                    "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
+                                    "FROM dual) S\n" +
+                                    "   ON (R.FORM_CD = S.FORM_CD)\n" +
+                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                    "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
+                                    "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
+                                    "\n" +
+                                    "\n" +
+                                    "MERGE INTO REP_FORM_COGNOS R\n" +
+                                    "   USING (SELECT \n" +
+                                    "'"+ SC_data_miner.Form_cd_cog6[0] +"' as FORM_CD, \n" +
+                                    "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
+                                    "FROM dual) S\n" +
+                                    "   ON (R.FORM_CD = S.FORM_CD)\n" +
+                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                    "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
+                                    "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
+                                    "\n" +
+                                    "\n" +
+                                    "MERGE INTO REP_FORM_COGNOS R\n" +
+                                    "   USING (SELECT \n" +
+                                    "'"+ SC_data_miner.Form_cd_cog7[0] +"' as FORM_CD, \n" +
+                                    "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
+                                    "FROM dual) S\n" +
+                                    "   ON (R.FORM_CD = S.FORM_CD)\n" +
+                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                    "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
+                                    "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
+                                    "\n" +
+                                    "\n" +
+                                    "MERGE INTO REP_FORM_COGNOS R\n" +
+                                    "   USING (SELECT \n" +
+                                    "'"+ SC_data_miner.Form_cd_cog8[0] +"' as FORM_CD, \n" +
+                                    "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
+                                    "FROM dual) S\n" +
+                                    "   ON (R.FORM_CD = S.FORM_CD)\n" +
+                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                    "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
+                                    "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
+                                    "\n" +
+                                    "\n";
+                            break;
+                    }
                 }
                 //System.out.print("SC_data_miner.Dep_name[0] = " + SC_data_miner.Dep_name[0] + "\n");
                 if(SC_data_miner.Dep_name[0] == null || Objects.equals(SC_data_miner.Dep_name[0], "") || Objects.equals(SC_data_miner.Dep_name[0], " ")){
@@ -3676,17 +4080,421 @@ public class ScriptEXP {
                         rep_form_cognos_script[0] = "--Warning: Не указаны данные для таблицы REP_FORM_COGNOS: Код потока\n\n";
                     }
                 } else {
-                    rep_form_cognos_script[0] = "MERGE INTO REP_FORM_COGNOS R\n" +
-                        "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd_cog[0] +"' as FORM_CD, \n" +
-                        "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
-                        "FROM dual) S\n" +
-                        "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
-                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
-                        "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
-                            "\n" +
-                            "\n";
+                    int c = OK_Action.getCog_count(0);
+                    switch (c){
+                        case 1:
+                            rep_form_cognos_script[0] = "MERGE INTO REP_FORM_COGNOS R\n" +
+                                    "   USING (SELECT \n" +
+                                    "'"+ SC_data_miner.Form_cd_cog[0] +"' as FORM_CD, \n" +
+                                    "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
+                                    "FROM dual) S\n" +
+                                    "   ON (R.FORM_CD = S.FORM_CD)\n" +
+                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                    "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
+                                    "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
+                                    "\n" +
+                                    "\n";
+                            break;
+                        case 2:
+                            rep_form_cognos_script[0] = "MERGE INTO REP_FORM_COGNOS R\n" +
+                                    "   USING (SELECT \n" +
+                                    "'"+ SC_data_miner.Form_cd_cog[0] +"' as FORM_CD, \n" +
+                                    "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
+                                    "FROM dual) S\n" +
+                                    "   ON (R.FORM_CD = S.FORM_CD)\n" +
+                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                    "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
+                                    "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
+                                    "\n" +
+                                    "\n" +
+                                    "MERGE INTO REP_FORM_COGNOS R\n" +
+                                    "   USING (SELECT \n" +
+                                    "'"+ SC_data_miner.Form_cd_cog2[0] +"' as FORM_CD, \n" +
+                                    "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
+                                    "FROM dual) S\n" +
+                                    "   ON (R.FORM_CD = S.FORM_CD)\n" +
+                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                    "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
+                                    "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
+                                    "\n" +
+                                    "\n";
+                            break;
+                        case 3:
+                            rep_form_cognos_script[0] = "MERGE INTO REP_FORM_COGNOS R\n" +
+                                    "   USING (SELECT \n" +
+                                    "'"+ SC_data_miner.Form_cd_cog[0] +"' as FORM_CD, \n" +
+                                    "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
+                                    "FROM dual) S\n" +
+                                    "   ON (R.FORM_CD = S.FORM_CD)\n" +
+                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                    "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
+                                    "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
+                                    "\n" +
+                                    "\n" +
+                                    "MERGE INTO REP_FORM_COGNOS R\n" +
+                                    "   USING (SELECT \n" +
+                                    "'"+ SC_data_miner.Form_cd_cog2[0] +"' as FORM_CD, \n" +
+                                    "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
+                                    "FROM dual) S\n" +
+                                    "   ON (R.FORM_CD = S.FORM_CD)\n" +
+                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                    "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
+                                    "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
+                                    "\n" +
+                                    "\n" +
+                                    "MERGE INTO REP_FORM_COGNOS R\n" +
+                                    "   USING (SELECT \n" +
+                                    "'"+ SC_data_miner.Form_cd_cog3[0] +"' as FORM_CD, \n" +
+                                    "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
+                                    "FROM dual) S\n" +
+                                    "   ON (R.FORM_CD = S.FORM_CD)\n" +
+                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                    "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
+                                    "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
+                                    "\n" +
+                                    "\n";
+                            break;
+                        case 4:
+                            rep_form_cognos_script[0] = "MERGE INTO REP_FORM_COGNOS R\n" +
+                                    "   USING (SELECT \n" +
+                                    "'"+ SC_data_miner.Form_cd_cog[0] +"' as FORM_CD, \n" +
+                                    "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
+                                    "FROM dual) S\n" +
+                                    "   ON (R.FORM_CD = S.FORM_CD)\n" +
+                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                    "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
+                                    "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
+                                    "\n" +
+                                    "\n" +
+                                    "MERGE INTO REP_FORM_COGNOS R\n" +
+                                    "   USING (SELECT \n" +
+                                    "'"+ SC_data_miner.Form_cd_cog2[0] +"' as FORM_CD, \n" +
+                                    "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
+                                    "FROM dual) S\n" +
+                                    "   ON (R.FORM_CD = S.FORM_CD)\n" +
+                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                    "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
+                                    "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
+                                    "\n" +
+                                    "\n" +
+                                    "MERGE INTO REP_FORM_COGNOS R\n" +
+                                    "   USING (SELECT \n" +
+                                    "'"+ SC_data_miner.Form_cd_cog3[0] +"' as FORM_CD, \n" +
+                                    "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
+                                    "FROM dual) S\n" +
+                                    "   ON (R.FORM_CD = S.FORM_CD)\n" +
+                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                    "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
+                                    "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
+                                    "\n" +
+                                    "\n" +
+                                    "MERGE INTO REP_FORM_COGNOS R\n" +
+                                    "   USING (SELECT \n" +
+                                    "'"+ SC_data_miner.Form_cd_cog4[0] +"' as FORM_CD, \n" +
+                                    "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
+                                    "FROM dual) S\n" +
+                                    "   ON (R.FORM_CD = S.FORM_CD)\n" +
+                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                    "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
+                                    "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
+                                    "\n" +
+                                    "\n";
+                            break;
+                        case 5:
+                            rep_form_cognos_script[0] = "MERGE INTO REP_FORM_COGNOS R\n" +
+                                    "   USING (SELECT \n" +
+                                    "'"+ SC_data_miner.Form_cd_cog[0] +"' as FORM_CD, \n" +
+                                    "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
+                                    "FROM dual) S\n" +
+                                    "   ON (R.FORM_CD = S.FORM_CD)\n" +
+                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                    "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
+                                    "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
+                                    "\n" +
+                                    "\n" +
+                                    "MERGE INTO REP_FORM_COGNOS R\n" +
+                                    "   USING (SELECT \n" +
+                                    "'"+ SC_data_miner.Form_cd_cog2[0] +"' as FORM_CD, \n" +
+                                    "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
+                                    "FROM dual) S\n" +
+                                    "   ON (R.FORM_CD = S.FORM_CD)\n" +
+                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                    "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
+                                    "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
+                                    "\n" +
+                                    "\n" +
+                                    "MERGE INTO REP_FORM_COGNOS R\n" +
+                                    "   USING (SELECT \n" +
+                                    "'"+ SC_data_miner.Form_cd_cog3[0] +"' as FORM_CD, \n" +
+                                    "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
+                                    "FROM dual) S\n" +
+                                    "   ON (R.FORM_CD = S.FORM_CD)\n" +
+                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                    "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
+                                    "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
+                                    "\n" +
+                                    "\n" +
+                                    "MERGE INTO REP_FORM_COGNOS R\n" +
+                                    "   USING (SELECT \n" +
+                                    "'"+ SC_data_miner.Form_cd_cog4[0] +"' as FORM_CD, \n" +
+                                    "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
+                                    "FROM dual) S\n" +
+                                    "   ON (R.FORM_CD = S.FORM_CD)\n" +
+                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                    "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
+                                    "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
+                                    "\n" +
+                                    "\n" +
+                                    "MERGE INTO REP_FORM_COGNOS R\n" +
+                                    "   USING (SELECT \n" +
+                                    "'"+ SC_data_miner.Form_cd_cog5[0] +"' as FORM_CD, \n" +
+                                    "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
+                                    "FROM dual) S\n" +
+                                    "   ON (R.FORM_CD = S.FORM_CD)\n" +
+                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                    "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
+                                    "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
+                                    "\n" +
+                                    "\n";
+                            break;
+                        case 6:
+                            rep_form_cognos_script[0] = "MERGE INTO REP_FORM_COGNOS R\n" +
+                                    "   USING (SELECT \n" +
+                                    "'"+ SC_data_miner.Form_cd_cog[0] +"' as FORM_CD, \n" +
+                                    "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
+                                    "FROM dual) S\n" +
+                                    "   ON (R.FORM_CD = S.FORM_CD)\n" +
+                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                    "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
+                                    "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
+                                    "\n" +
+                                    "\n" +
+                                    "MERGE INTO REP_FORM_COGNOS R\n" +
+                                    "   USING (SELECT \n" +
+                                    "'"+ SC_data_miner.Form_cd_cog2[0] +"' as FORM_CD, \n" +
+                                    "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
+                                    "FROM dual) S\n" +
+                                    "   ON (R.FORM_CD = S.FORM_CD)\n" +
+                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                    "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
+                                    "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
+                                    "\n" +
+                                    "\n" +
+                                    "MERGE INTO REP_FORM_COGNOS R\n" +
+                                    "   USING (SELECT \n" +
+                                    "'"+ SC_data_miner.Form_cd_cog3[0] +"' as FORM_CD, \n" +
+                                    "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
+                                    "FROM dual) S\n" +
+                                    "   ON (R.FORM_CD = S.FORM_CD)\n" +
+                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                    "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
+                                    "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
+                                    "\n" +
+                                    "\n" +
+                                    "MERGE INTO REP_FORM_COGNOS R\n" +
+                                    "   USING (SELECT \n" +
+                                    "'"+ SC_data_miner.Form_cd_cog4[0] +"' as FORM_CD, \n" +
+                                    "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
+                                    "FROM dual) S\n" +
+                                    "   ON (R.FORM_CD = S.FORM_CD)\n" +
+                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                    "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
+                                    "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
+                                    "\n" +
+                                    "\n" +
+                                    "MERGE INTO REP_FORM_COGNOS R\n" +
+                                    "   USING (SELECT \n" +
+                                    "'"+ SC_data_miner.Form_cd_cog5[0] +"' as FORM_CD, \n" +
+                                    "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
+                                    "FROM dual) S\n" +
+                                    "   ON (R.FORM_CD = S.FORM_CD)\n" +
+                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                    "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
+                                    "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
+                                    "\n" +
+                                    "\n" +
+                                    "MERGE INTO REP_FORM_COGNOS R\n" +
+                                    "   USING (SELECT \n" +
+                                    "'"+ SC_data_miner.Form_cd_cog6[0] +"' as FORM_CD, \n" +
+                                    "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
+                                    "FROM dual) S\n" +
+                                    "   ON (R.FORM_CD = S.FORM_CD)\n" +
+                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                    "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
+                                    "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
+                                    "\n" +
+                                    "\n";
+                            break;
+                        case 7:
+                            rep_form_cognos_script[0] = "MERGE INTO REP_FORM_COGNOS R\n" +
+                                    "   USING (SELECT \n" +
+                                    "'"+ SC_data_miner.Form_cd_cog[0] +"' as FORM_CD, \n" +
+                                    "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
+                                    "FROM dual) S\n" +
+                                    "   ON (R.FORM_CD = S.FORM_CD)\n" +
+                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                    "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
+                                    "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
+                                    "\n" +
+                                    "\n" +
+                                    "MERGE INTO REP_FORM_COGNOS R\n" +
+                                    "   USING (SELECT \n" +
+                                    "'"+ SC_data_miner.Form_cd_cog2[0] +"' as FORM_CD, \n" +
+                                    "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
+                                    "FROM dual) S\n" +
+                                    "   ON (R.FORM_CD = S.FORM_CD)\n" +
+                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                    "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
+                                    "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
+                                    "\n" +
+                                    "\n" +
+                                    "MERGE INTO REP_FORM_COGNOS R\n" +
+                                    "   USING (SELECT \n" +
+                                    "'"+ SC_data_miner.Form_cd_cog3[0] +"' as FORM_CD, \n" +
+                                    "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
+                                    "FROM dual) S\n" +
+                                    "   ON (R.FORM_CD = S.FORM_CD)\n" +
+                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                    "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
+                                    "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
+                                    "\n" +
+                                    "\n" +
+                                    "MERGE INTO REP_FORM_COGNOS R\n" +
+                                    "   USING (SELECT \n" +
+                                    "'"+ SC_data_miner.Form_cd_cog4[0] +"' as FORM_CD, \n" +
+                                    "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
+                                    "FROM dual) S\n" +
+                                    "   ON (R.FORM_CD = S.FORM_CD)\n" +
+                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                    "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
+                                    "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
+                                    "\n" +
+                                    "\n" +
+                                    "MERGE INTO REP_FORM_COGNOS R\n" +
+                                    "   USING (SELECT \n" +
+                                    "'"+ SC_data_miner.Form_cd_cog5[0] +"' as FORM_CD, \n" +
+                                    "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
+                                    "FROM dual) S\n" +
+                                    "   ON (R.FORM_CD = S.FORM_CD)\n" +
+                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                    "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
+                                    "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
+                                    "\n" +
+                                    "\n" +
+                                    "MERGE INTO REP_FORM_COGNOS R\n" +
+                                    "   USING (SELECT \n" +
+                                    "'"+ SC_data_miner.Form_cd_cog6[0] +"' as FORM_CD, \n" +
+                                    "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
+                                    "FROM dual) S\n" +
+                                    "   ON (R.FORM_CD = S.FORM_CD)\n" +
+                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                    "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
+                                    "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
+                                    "\n" +
+                                    "\n" +
+                                    "MERGE INTO REP_FORM_COGNOS R\n" +
+                                    "   USING (SELECT \n" +
+                                    "'"+ SC_data_miner.Form_cd_cog7[0] +"' as FORM_CD, \n" +
+                                    "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
+                                    "FROM dual) S\n" +
+                                    "   ON (R.FORM_CD = S.FORM_CD)\n" +
+                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                    "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
+                                    "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
+                                    "\n" +
+                                    "\n";
+                            break;
+                        case 8:
+                            rep_form_cognos_script[0] = "MERGE INTO REP_FORM_COGNOS R\n" +
+                                    "   USING (SELECT \n" +
+                                    "'"+ SC_data_miner.Form_cd_cog[0] +"' as FORM_CD, \n" +
+                                    "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
+                                    "FROM dual) S\n" +
+                                    "   ON (R.FORM_CD = S.FORM_CD)\n" +
+                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                    "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
+                                    "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
+                                    "\n" +
+                                    "\n" +
+                                    "MERGE INTO REP_FORM_COGNOS R\n" +
+                                    "   USING (SELECT \n" +
+                                    "'"+ SC_data_miner.Form_cd_cog2[0] +"' as FORM_CD, \n" +
+                                    "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
+                                    "FROM dual) S\n" +
+                                    "   ON (R.FORM_CD = S.FORM_CD)\n" +
+                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                    "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
+                                    "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
+                                    "\n" +
+                                    "\n" +
+                                    "MERGE INTO REP_FORM_COGNOS R\n" +
+                                    "   USING (SELECT \n" +
+                                    "'"+ SC_data_miner.Form_cd_cog3[0] +"' as FORM_CD, \n" +
+                                    "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
+                                    "FROM dual) S\n" +
+                                    "   ON (R.FORM_CD = S.FORM_CD)\n" +
+                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                    "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
+                                    "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
+                                    "\n" +
+                                    "\n" +
+                                    "MERGE INTO REP_FORM_COGNOS R\n" +
+                                    "   USING (SELECT \n" +
+                                    "'"+ SC_data_miner.Form_cd_cog4[0] +"' as FORM_CD, \n" +
+                                    "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
+                                    "FROM dual) S\n" +
+                                    "   ON (R.FORM_CD = S.FORM_CD)\n" +
+                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                    "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
+                                    "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
+                                    "\n" +
+                                    "\n" +
+                                    "MERGE INTO REP_FORM_COGNOS R\n" +
+                                    "   USING (SELECT \n" +
+                                    "'"+ SC_data_miner.Form_cd_cog5[0] +"' as FORM_CD, \n" +
+                                    "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
+                                    "FROM dual) S\n" +
+                                    "   ON (R.FORM_CD = S.FORM_CD)\n" +
+                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                    "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
+                                    "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
+                                    "\n" +
+                                    "\n" +
+                                    "MERGE INTO REP_FORM_COGNOS R\n" +
+                                    "   USING (SELECT \n" +
+                                    "'"+ SC_data_miner.Form_cd_cog6[0] +"' as FORM_CD, \n" +
+                                    "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
+                                    "FROM dual) S\n" +
+                                    "   ON (R.FORM_CD = S.FORM_CD)\n" +
+                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                    "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
+                                    "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
+                                    "\n" +
+                                    "\n" +
+                                    "MERGE INTO REP_FORM_COGNOS R\n" +
+                                    "   USING (SELECT \n" +
+                                    "'"+ SC_data_miner.Form_cd_cog7[0] +"' as FORM_CD, \n" +
+                                    "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
+                                    "FROM dual) S\n" +
+                                    "   ON (R.FORM_CD = S.FORM_CD)\n" +
+                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                    "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
+                                    "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
+                                    "\n" +
+                                    "\n" +
+                                    "MERGE INTO REP_FORM_COGNOS R\n" +
+                                    "   USING (SELECT \n" +
+                                    "'"+ SC_data_miner.Form_cd_cog8[0] +"' as FORM_CD, \n" +
+                                    "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
+                                    "FROM dual) S\n" +
+                                    "   ON (R.FORM_CD = S.FORM_CD)\n" +
+                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                    "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
+                                    "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
+                                    "\n" +
+                                    "\n";
+                            break;
+                    }
                 }
                 if(SC_data_miner.Dep_name[0] == null || Objects.equals(SC_data_miner.Dep_name[0], "") || Objects.equals(SC_data_miner.Dep_name[0], " ")){
                     if(rep_or_code[0] == 0){
@@ -5663,17 +6471,421 @@ public class ScriptEXP {
                             rep_form_cognos_script[n] = "--Warning: Не указаны данные для таблицы REP_FORM_COGNOS: Код потока(Когнос)\n\n";
                         }
                     } else {
-                        rep_form_cognos_script[n] = "MERGE INTO REP_FORM_COGNOS R\n" +
-                        "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_cd_cog[n] +"' as FORM_CD, \n" +
-                        "'"+ SC_data_miner.Form_cd[n] + "' as REP_FORM_CD \n" +
-                        "FROM dual) S\n" +
-                        "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
-                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
-                        "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
-                                "\n" +
-                                "\n";
+                        int c = OK_Action.getCog_count(n);
+                        switch (c){
+                            case 1:
+                                rep_form_cognos_script[n] = "MERGE INTO REP_FORM_COGNOS R\n" +
+                                        "   USING (SELECT \n" +
+                                        "'"+ SC_data_miner.Form_cd_cog[n] +"' as FORM_CD, \n" +
+                                        "'"+ SC_data_miner.Form_cd[n] + "' as REP_FORM_CD \n" +
+                                        "FROM dual) S\n" +
+                                        "   ON (R.FORM_CD = S.FORM_CD)\n" +
+                                        "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
+                                        "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
+                                        "\n" +
+                                        "\n";
+                                break;
+                            case 2:
+                                rep_form_cognos_script[n] = "MERGE INTO REP_FORM_COGNOS R\n" +
+                                        "   USING (SELECT \n" +
+                                        "'"+ SC_data_miner.Form_cd_cog[n] +"' as FORM_CD, \n" +
+                                        "'"+ SC_data_miner.Form_cd[n] + "' as REP_FORM_CD \n" +
+                                        "FROM dual) S\n" +
+                                        "   ON (R.FORM_CD = S.FORM_CD)\n" +
+                                        "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
+                                        "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
+                                        "\n" +
+                                        "\n" +
+                                        "MERGE INTO REP_FORM_COGNOS R\n" +
+                                        "   USING (SELECT \n" +
+                                        "'"+ SC_data_miner.Form_cd_cog2[n] +"' as FORM_CD, \n" +
+                                        "'"+ SC_data_miner.Form_cd[n] + "' as REP_FORM_CD \n" +
+                                        "FROM dual) S\n" +
+                                        "   ON (R.FORM_CD = S.FORM_CD)\n" +
+                                        "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
+                                        "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
+                                        "\n" +
+                                        "\n";
+                                break;
+                            case 3:
+                                rep_form_cognos_script[n] = "MERGE INTO REP_FORM_COGNOS R\n" +
+                                        "   USING (SELECT \n" +
+                                        "'"+ SC_data_miner.Form_cd_cog[n] +"' as FORM_CD, \n" +
+                                        "'"+ SC_data_miner.Form_cd[n] + "' as REP_FORM_CD \n" +
+                                        "FROM dual) S\n" +
+                                        "   ON (R.FORM_CD = S.FORM_CD)\n" +
+                                        "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
+                                        "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
+                                        "\n" +
+                                        "\n" +
+                                        "MERGE INTO REP_FORM_COGNOS R\n" +
+                                        "   USING (SELECT \n" +
+                                        "'"+ SC_data_miner.Form_cd_cog2[n] +"' as FORM_CD, \n" +
+                                        "'"+ SC_data_miner.Form_cd[n] + "' as REP_FORM_CD \n" +
+                                        "FROM dual) S\n" +
+                                        "   ON (R.FORM_CD = S.FORM_CD)\n" +
+                                        "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
+                                        "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
+                                        "\n" +
+                                        "\n" +
+                                        "MERGE INTO REP_FORM_COGNOS R\n" +
+                                        "   USING (SELECT \n" +
+                                        "'"+ SC_data_miner.Form_cd_cog3[n] +"' as FORM_CD, \n" +
+                                        "'"+ SC_data_miner.Form_cd[n] + "' as REP_FORM_CD \n" +
+                                        "FROM dual) S\n" +
+                                        "   ON (R.FORM_CD = S.FORM_CD)\n" +
+                                        "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
+                                        "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
+                                        "\n" +
+                                        "\n";
+                                break;
+                            case 4:
+                                rep_form_cognos_script[n] = "MERGE INTO REP_FORM_COGNOS R\n" +
+                                        "   USING (SELECT \n" +
+                                        "'"+ SC_data_miner.Form_cd_cog[n] +"' as FORM_CD, \n" +
+                                        "'"+ SC_data_miner.Form_cd[n] + "' as REP_FORM_CD \n" +
+                                        "FROM dual) S\n" +
+                                        "   ON (R.FORM_CD = S.FORM_CD)\n" +
+                                        "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
+                                        "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
+                                        "\n" +
+                                        "\n" +
+                                        "MERGE INTO REP_FORM_COGNOS R\n" +
+                                        "   USING (SELECT \n" +
+                                        "'"+ SC_data_miner.Form_cd_cog2[n] +"' as FORM_CD, \n" +
+                                        "'"+ SC_data_miner.Form_cd[n] + "' as REP_FORM_CD \n" +
+                                        "FROM dual) S\n" +
+                                        "   ON (R.FORM_CD = S.FORM_CD)\n" +
+                                        "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
+                                        "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
+                                        "\n" +
+                                        "\n" +
+                                        "MERGE INTO REP_FORM_COGNOS R\n" +
+                                        "   USING (SELECT \n" +
+                                        "'"+ SC_data_miner.Form_cd_cog3[n] +"' as FORM_CD, \n" +
+                                        "'"+ SC_data_miner.Form_cd[n] + "' as REP_FORM_CD \n" +
+                                        "FROM dual) S\n" +
+                                        "   ON (R.FORM_CD = S.FORM_CD)\n" +
+                                        "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
+                                        "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
+                                        "\n" +
+                                        "\n" +
+                                        "MERGE INTO REP_FORM_COGNOS R\n" +
+                                        "   USING (SELECT \n" +
+                                        "'"+ SC_data_miner.Form_cd_cog4[n] +"' as FORM_CD, \n" +
+                                        "'"+ SC_data_miner.Form_cd[n] + "' as REP_FORM_CD \n" +
+                                        "FROM dual) S\n" +
+                                        "   ON (R.FORM_CD = S.FORM_CD)\n" +
+                                        "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
+                                        "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
+                                        "\n" +
+                                        "\n";
+                                break;
+                            case 5:
+                                rep_form_cognos_script[n] = "MERGE INTO REP_FORM_COGNOS R\n" +
+                                        "   USING (SELECT \n" +
+                                        "'"+ SC_data_miner.Form_cd_cog[n] +"' as FORM_CD, \n" +
+                                        "'"+ SC_data_miner.Form_cd[n] + "' as REP_FORM_CD \n" +
+                                        "FROM dual) S\n" +
+                                        "   ON (R.FORM_CD = S.FORM_CD)\n" +
+                                        "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
+                                        "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
+                                        "\n" +
+                                        "\n" +
+                                        "MERGE INTO REP_FORM_COGNOS R\n" +
+                                        "   USING (SELECT \n" +
+                                        "'"+ SC_data_miner.Form_cd_cog2[n] +"' as FORM_CD, \n" +
+                                        "'"+ SC_data_miner.Form_cd[n] + "' as REP_FORM_CD \n" +
+                                        "FROM dual) S\n" +
+                                        "   ON (R.FORM_CD = S.FORM_CD)\n" +
+                                        "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
+                                        "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
+                                        "\n" +
+                                        "\n" +
+                                        "MERGE INTO REP_FORM_COGNOS R\n" +
+                                        "   USING (SELECT \n" +
+                                        "'"+ SC_data_miner.Form_cd_cog3[n] +"' as FORM_CD, \n" +
+                                        "'"+ SC_data_miner.Form_cd[n] + "' as REP_FORM_CD \n" +
+                                        "FROM dual) S\n" +
+                                        "   ON (R.FORM_CD = S.FORM_CD)\n" +
+                                        "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
+                                        "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
+                                        "\n" +
+                                        "\n" +
+                                        "MERGE INTO REP_FORM_COGNOS R\n" +
+                                        "   USING (SELECT \n" +
+                                        "'"+ SC_data_miner.Form_cd_cog4[n] +"' as FORM_CD, \n" +
+                                        "'"+ SC_data_miner.Form_cd[n] + "' as REP_FORM_CD \n" +
+                                        "FROM dual) S\n" +
+                                        "   ON (R.FORM_CD = S.FORM_CD)\n" +
+                                        "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
+                                        "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
+                                        "\n" +
+                                        "\n" +
+                                        "MERGE INTO REP_FORM_COGNOS R\n" +
+                                        "   USING (SELECT \n" +
+                                        "'"+ SC_data_miner.Form_cd_cog5[n] +"' as FORM_CD, \n" +
+                                        "'"+ SC_data_miner.Form_cd[n] + "' as REP_FORM_CD \n" +
+                                        "FROM dual) S\n" +
+                                        "   ON (R.FORM_CD = S.FORM_CD)\n" +
+                                        "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
+                                        "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
+                                        "\n" +
+                                        "\n";
+                                break;
+                            case 6:
+                                rep_form_cognos_script[n] = "MERGE INTO REP_FORM_COGNOS R\n" +
+                                        "   USING (SELECT \n" +
+                                        "'"+ SC_data_miner.Form_cd_cog[n] +"' as FORM_CD, \n" +
+                                        "'"+ SC_data_miner.Form_cd[n] + "' as REP_FORM_CD \n" +
+                                        "FROM dual) S\n" +
+                                        "   ON (R.FORM_CD = S.FORM_CD)\n" +
+                                        "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
+                                        "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
+                                        "\n" +
+                                        "\n" +
+                                        "MERGE INTO REP_FORM_COGNOS R\n" +
+                                        "   USING (SELECT \n" +
+                                        "'"+ SC_data_miner.Form_cd_cog2[n] +"' as FORM_CD, \n" +
+                                        "'"+ SC_data_miner.Form_cd[n] + "' as REP_FORM_CD \n" +
+                                        "FROM dual) S\n" +
+                                        "   ON (R.FORM_CD = S.FORM_CD)\n" +
+                                        "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
+                                        "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
+                                        "\n" +
+                                        "\n" +
+                                        "MERGE INTO REP_FORM_COGNOS R\n" +
+                                        "   USING (SELECT \n" +
+                                        "'"+ SC_data_miner.Form_cd_cog3[n] +"' as FORM_CD, \n" +
+                                        "'"+ SC_data_miner.Form_cd[n] + "' as REP_FORM_CD \n" +
+                                        "FROM dual) S\n" +
+                                        "   ON (R.FORM_CD = S.FORM_CD)\n" +
+                                        "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
+                                        "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
+                                        "\n" +
+                                        "\n" +
+                                        "MERGE INTO REP_FORM_COGNOS R\n" +
+                                        "   USING (SELECT \n" +
+                                        "'"+ SC_data_miner.Form_cd_cog4[n] +"' as FORM_CD, \n" +
+                                        "'"+ SC_data_miner.Form_cd[n] + "' as REP_FORM_CD \n" +
+                                        "FROM dual) S\n" +
+                                        "   ON (R.FORM_CD = S.FORM_CD)\n" +
+                                        "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
+                                        "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
+                                        "\n" +
+                                        "\n" +
+                                        "MERGE INTO REP_FORM_COGNOS R\n" +
+                                        "   USING (SELECT \n" +
+                                        "'"+ SC_data_miner.Form_cd_cog5[n] +"' as FORM_CD, \n" +
+                                        "'"+ SC_data_miner.Form_cd[n] + "' as REP_FORM_CD \n" +
+                                        "FROM dual) S\n" +
+                                        "   ON (R.FORM_CD = S.FORM_CD)\n" +
+                                        "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
+                                        "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
+                                        "\n" +
+                                        "\n" +
+                                        "MERGE INTO REP_FORM_COGNOS R\n" +
+                                        "   USING (SELECT \n" +
+                                        "'"+ SC_data_miner.Form_cd_cog6[n] +"' as FORM_CD, \n" +
+                                        "'"+ SC_data_miner.Form_cd[n] + "' as REP_FORM_CD \n" +
+                                        "FROM dual) S\n" +
+                                        "   ON (R.FORM_CD = S.FORM_CD)\n" +
+                                        "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
+                                        "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
+                                        "\n" +
+                                        "\n";
+                                break;
+                            case 7:
+                                rep_form_cognos_script[n] = "MERGE INTO REP_FORM_COGNOS R\n" +
+                                        "   USING (SELECT \n" +
+                                        "'"+ SC_data_miner.Form_cd_cog[n] +"' as FORM_CD, \n" +
+                                        "'"+ SC_data_miner.Form_cd[n] + "' as REP_FORM_CD \n" +
+                                        "FROM dual) S\n" +
+                                        "   ON (R.FORM_CD = S.FORM_CD)\n" +
+                                        "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
+                                        "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
+                                        "\n" +
+                                        "\n" +
+                                        "MERGE INTO REP_FORM_COGNOS R\n" +
+                                        "   USING (SELECT \n" +
+                                        "'"+ SC_data_miner.Form_cd_cog2[n] +"' as FORM_CD, \n" +
+                                        "'"+ SC_data_miner.Form_cd[n] + "' as REP_FORM_CD \n" +
+                                        "FROM dual) S\n" +
+                                        "   ON (R.FORM_CD = S.FORM_CD)\n" +
+                                        "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
+                                        "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
+                                        "\n" +
+                                        "\n" +
+                                        "MERGE INTO REP_FORM_COGNOS R\n" +
+                                        "   USING (SELECT \n" +
+                                        "'"+ SC_data_miner.Form_cd_cog3[n] +"' as FORM_CD, \n" +
+                                        "'"+ SC_data_miner.Form_cd[n] + "' as REP_FORM_CD \n" +
+                                        "FROM dual) S\n" +
+                                        "   ON (R.FORM_CD = S.FORM_CD)\n" +
+                                        "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
+                                        "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
+                                        "\n" +
+                                        "\n" +
+                                        "MERGE INTO REP_FORM_COGNOS R\n" +
+                                        "   USING (SELECT \n" +
+                                        "'"+ SC_data_miner.Form_cd_cog4[n] +"' as FORM_CD, \n" +
+                                        "'"+ SC_data_miner.Form_cd[n] + "' as REP_FORM_CD \n" +
+                                        "FROM dual) S\n" +
+                                        "   ON (R.FORM_CD = S.FORM_CD)\n" +
+                                        "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
+                                        "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
+                                        "\n" +
+                                        "\n" +
+                                        "MERGE INTO REP_FORM_COGNOS R\n" +
+                                        "   USING (SELECT \n" +
+                                        "'"+ SC_data_miner.Form_cd_cog5[n] +"' as FORM_CD, \n" +
+                                        "'"+ SC_data_miner.Form_cd[n] + "' as REP_FORM_CD \n" +
+                                        "FROM dual) S\n" +
+                                        "   ON (R.FORM_CD = S.FORM_CD)\n" +
+                                        "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
+                                        "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
+                                        "\n" +
+                                        "\n" +
+                                        "MERGE INTO REP_FORM_COGNOS R\n" +
+                                        "   USING (SELECT \n" +
+                                        "'"+ SC_data_miner.Form_cd_cog6[n] +"' as FORM_CD, \n" +
+                                        "'"+ SC_data_miner.Form_cd[n] + "' as REP_FORM_CD \n" +
+                                        "FROM dual) S\n" +
+                                        "   ON (R.FORM_CD = S.FORM_CD)\n" +
+                                        "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
+                                        "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
+                                        "\n" +
+                                        "\n" +
+                                        "MERGE INTO REP_FORM_COGNOS R\n" +
+                                        "   USING (SELECT \n" +
+                                        "'"+ SC_data_miner.Form_cd_cog7[n] +"' as FORM_CD, \n" +
+                                        "'"+ SC_data_miner.Form_cd[n] + "' as REP_FORM_CD \n" +
+                                        "FROM dual) S\n" +
+                                        "   ON (R.FORM_CD = S.FORM_CD)\n" +
+                                        "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
+                                        "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
+                                        "\n" +
+                                        "\n";
+                                break;
+                            case 8:
+                                rep_form_cognos_script[n] = "MERGE INTO REP_FORM_COGNOS R\n" +
+                                        "   USING (SELECT \n" +
+                                        "'"+ SC_data_miner.Form_cd_cog[n] +"' as FORM_CD, \n" +
+                                        "'"+ SC_data_miner.Form_cd[n] + "' as REP_FORM_CD \n" +
+                                        "FROM dual) S\n" +
+                                        "   ON (R.FORM_CD = S.FORM_CD)\n" +
+                                        "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
+                                        "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
+                                        "\n" +
+                                        "\n" +
+                                        "MERGE INTO REP_FORM_COGNOS R\n" +
+                                        "   USING (SELECT \n" +
+                                        "'"+ SC_data_miner.Form_cd_cog2[n] +"' as FORM_CD, \n" +
+                                        "'"+ SC_data_miner.Form_cd[n] + "' as REP_FORM_CD \n" +
+                                        "FROM dual) S\n" +
+                                        "   ON (R.FORM_CD = S.FORM_CD)\n" +
+                                        "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
+                                        "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
+                                        "\n" +
+                                        "\n" +
+                                        "MERGE INTO REP_FORM_COGNOS R\n" +
+                                        "   USING (SELECT \n" +
+                                        "'"+ SC_data_miner.Form_cd_cog3[n] +"' as FORM_CD, \n" +
+                                        "'"+ SC_data_miner.Form_cd[n] + "' as REP_FORM_CD \n" +
+                                        "FROM dual) S\n" +
+                                        "   ON (R.FORM_CD = S.FORM_CD)\n" +
+                                        "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
+                                        "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
+                                        "\n" +
+                                        "\n" +
+                                        "MERGE INTO REP_FORM_COGNOS R\n" +
+                                        "   USING (SELECT \n" +
+                                        "'"+ SC_data_miner.Form_cd_cog4[n] +"' as FORM_CD, \n" +
+                                        "'"+ SC_data_miner.Form_cd[n] + "' as REP_FORM_CD \n" +
+                                        "FROM dual) S\n" +
+                                        "   ON (R.FORM_CD = S.FORM_CD)\n" +
+                                        "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
+                                        "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
+                                        "\n" +
+                                        "\n" +
+                                        "MERGE INTO REP_FORM_COGNOS R\n" +
+                                        "   USING (SELECT \n" +
+                                        "'"+ SC_data_miner.Form_cd_cog5[n] +"' as FORM_CD, \n" +
+                                        "'"+ SC_data_miner.Form_cd[n] + "' as REP_FORM_CD \n" +
+                                        "FROM dual) S\n" +
+                                        "   ON (R.FORM_CD = S.FORM_CD)\n" +
+                                        "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
+                                        "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
+                                        "\n" +
+                                        "\n" +
+                                        "MERGE INTO REP_FORM_COGNOS R\n" +
+                                        "   USING (SELECT \n" +
+                                        "'"+ SC_data_miner.Form_cd_cog6[n] +"' as FORM_CD, \n" +
+                                        "'"+ SC_data_miner.Form_cd[n] + "' as REP_FORM_CD \n" +
+                                        "FROM dual) S\n" +
+                                        "   ON (R.FORM_CD = S.FORM_CD)\n" +
+                                        "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
+                                        "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
+                                        "\n" +
+                                        "\n" +
+                                        "MERGE INTO REP_FORM_COGNOS R\n" +
+                                        "   USING (SELECT \n" +
+                                        "'"+ SC_data_miner.Form_cd_cog7[n] +"' as FORM_CD, \n" +
+                                        "'"+ SC_data_miner.Form_cd[n] + "' as REP_FORM_CD \n" +
+                                        "FROM dual) S\n" +
+                                        "   ON (R.FORM_CD = S.FORM_CD)\n" +
+                                        "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
+                                        "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
+                                        "\n" +
+                                        "\n" +
+                                        "MERGE INTO REP_FORM_COGNOS R\n" +
+                                        "   USING (SELECT \n" +
+                                        "'"+ SC_data_miner.Form_cd_cog8[n] +"' as FORM_CD, \n" +
+                                        "'"+ SC_data_miner.Form_cd[n] + "' as REP_FORM_CD \n" +
+                                        "FROM dual) S\n" +
+                                        "   ON (R.FORM_CD = S.FORM_CD)\n" +
+                                        "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
+                                        "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
+                                        "\n" +
+                                        "\n";
+                                break;
+                        }
                     }
                     if(SC_data_miner.Dep_name[n] == null || Objects.equals(SC_data_miner.Dep_name[n], "") || Objects.equals(SC_data_miner.Dep_name[n], " ")){
                         if(rep_or_code[n] == 0){
@@ -5682,7 +6894,7 @@ public class ScriptEXP {
                             rep_form_dep_owner_script[n] = "--Warning: Не указаны данные для таблицы REP_FORM_DEP_OWNER: Сокращенное наименование департамента для REP_FORM_DEP_OWNER\n\n";
                         }
                     } else {
-                        int c = OK_Action.getDep_count(0);
+                        int c = OK_Action.getDep_count(n);
                         switch (c){
                             case 1:
                                 rep_form_dep_owner_script[n] = "MERGE INTO REP_FORM_DEP_OWNER R\n" +
@@ -6086,7 +7298,7 @@ public class ScriptEXP {
                             rep_form_dep_user_script[n] = "--Warning: Не указаны данные для таблицы REP_FORM_DEP_USER: Сокращенное наименование департамента для REP_FORM_DEP_USER\n\n";
                         }
                     } else {
-                        int c = OK_Action.getDep_u_count(0);
+                        int c = OK_Action.getDep_u_count(n);
                         switch (c){
                             case 1:
                                 rep_form_dep_user_script[n] = "MERGE INTO REP_FORM_DEP_USER R\n" +
@@ -7554,7 +8766,7 @@ public class ScriptEXP {
             }
         }
 
-        String fileData1 = text[0];
+        //String fileData1 = text[0];
         String fileData2 = text[1];
         String fileData3 = text[2];
         String fileData4 = text[3];
@@ -7564,16 +8776,16 @@ public class ScriptEXP {
             //System.out.print("path2 = " + path2);
         }
         SimpleDateFormat format_2 = new SimpleDateFormat("yyyyMMdd");
-        String filePath1 = path2 + "\\V004_" + format_2.format(dateNow) + "_202001_01__reg_" + SC_data_miner.Form_cd[0] + "_OAD_SECURITY.sql";
+        //String filePath1 = path2 + "\\V004_" + format_2.format(dateNow) + "_202001_01__reg_" + SC_data_miner.Form_cd[0] + "_OAD_SECURITY.sql";
         String filePath2 = path2 + "\\V001_" + format_2.format(dateNow) + "_202001_0001__DM_DM_NIKA_KO_sc__reg_meta_" + SC_data_miner.Form_cd[0] + ".sql";
         String filePath3 = path2 + "\\V001_" + format_2.format(dateNow) + "_202001_0002__DM_DM_NIKA_KO_DATA_sc__reg_meta_" + SC_data_miner.Form_cd[0] + ".sql";
         String filePath4 = path2 + "\\V004_" + format_2.format(dateNow) + "_202001_01__reg_" + SC_data_miner.Form_cd[0] + "_TechDB_EHD_ACS.sql";
 
-        File file1 = new File(filePath1);
+        //File file1 = new File(filePath1);
         File file2 = new File(filePath2);
         File file3 = new File(filePath3);
         File file4 = new File(filePath4);
-        if(isFileExists(file1)){
+        /*if(isFileExists(file1)){
             for(int i = 1; i<=50;){
                 String filePath12 = path2 + "\\V004_" + format_2.format(dateNow) + "_202001_01__reg_" + SC_data_miner.Form_cd[0] + "_OAD_SECURITY(" + i + ").sql";
                 File file12 = new File(filePath12);
@@ -7592,7 +8804,7 @@ public class ScriptEXP {
             fos.write(fileData1.getBytes());
             fos.flush();
             fos.close();
-        }
+        }*/
         if(isFileExists(file2)){
             for(int i = 1; i<=50;){
                 String filePath22 = path2 + "\\V001_" + format_2.format(dateNow) + "_202001_0001__DM_DM_NIKA_KO_sc__reg_meta_" + SC_data_miner.Form_cd[0] + "(" + i + ").sql";

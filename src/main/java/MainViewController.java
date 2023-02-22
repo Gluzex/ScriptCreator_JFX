@@ -2,6 +2,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.io.File;
@@ -9,53 +10,63 @@ import java.io.IOException;
 import java.util.Objects;
 
 public class MainViewController {
+    private static Label lab1;
+    private static TextField txt_fld1;
+    private static ComboBox<String> cmbx1;
     @FXML
-    private Label lab1;
+    private static Stage primaryStage;
     @FXML
-    private TextField txt_fld1;
-    @FXML
-    private ComboBox<String> cmbx1;
-    @FXML
-    private Stage primaryStage;
-    @FXML
-    private AnchorPane root;
-    @FXML
-    private TextField txtf1;
-    @FXML
-    private Button Browse;
-    @FXML
-    private Button ChckBtn1;
-    @FXML
-    private Button resetBtn;
-    @FXML
-    private Button ScrBtn3;
-    @FXML
-    private ComboBox<Integer> countCmbx;
-    @FXML
-    private Label countLbl;
-    @FXML
-    private Label pathLbl;
-    @FXML
-    private TextField pathTxtf;
-    @FXML
-    private Button fldchs_btn;
-    @FXML
-    private Button OK_btn;
-    @FXML
-    private Button createBtn;
-    @FXML
-    private Button resetBtn2;
-    public void MainViewController(ActionEvent actionEvent) {
+    private static AnchorPane root;
+    private static TextField txtf1;
+    private static Button Browse;
+    private static Button ChckBtn1;
+    private static Button resetBtn;
+    private static Button ScrBtn3;
+    private static ComboBox<Integer> countCmbx;
+    private static Label countLbl;
+    private static Label pathLbl;
+    private static TextField pathTxtf;
+    private static Button fldchs_btn;
+    private static Button OK_btn;
+    private static Button createBtn;
+    private static Button resetBtn2;
+    private static VBox Vbox1;
+    private static VBox Vbox2;
+    private static VBox Vbox3;
+    public static void MainViewController(ActionEvent actionEvent) {
+        lab1 = SCJFXApp.getLab1();
+        txt_fld1 = SCJFXApp.getTxt_fld1();
+        cmbx1 = SCJFXApp.getCmbx1();
+        txtf1 = SCJFXApp.getTxtf1();
+        Browse = SCJFXApp.getBrowse();
+        ChckBtn1 = SCJFXApp.getChckBtn1();
+        resetBtn = SCJFXApp.getResetBtn();
+        ScrBtn3 = SCJFXApp.getScrBtn3();
+        countCmbx = SCJFXApp.getCountCmbx();
+        countLbl = SCJFXApp.getCountLbl();
+        pathLbl = SCJFXApp.getPathLbl();
+        pathTxtf = SCJFXApp.getPathTxtf();
+        fldchs_btn = SCJFXApp.getFldchs_btn();
+        OK_btn = SCJFXApp.getOK_btn();
+        createBtn = SCJFXApp.getCreateBtn();
+        resetBtn2 = SCJFXApp.getResetBtn2();
         primaryStage = SCJFXApp.getPrimaryStage();
         root = SCJFXApp.getRoot();
+        Vbox1 = SCJFXApp.getVbox1();
+        Vbox2 = SCJFXApp.getVbox2();
+        Vbox3 = SCJFXApp.getVbox3();
+
         //txt_fld1.setText("action perfomed");
         if (Objects.equals(cmbx1.getValue(), "Из файла")){
             fromFile();
+            Vbox1.getChildren().addAll(Vbox2);
+            root.getChildren().addAll(Vbox1);
         }else if(Objects.equals(cmbx1.getValue(), "Ручной")){
             fromManual();
+            Vbox1.getChildren().addAll(Vbox3);
         }
     }
-    public void fromFile(){
+    public static void fromFile(){
         cmbx1.setDisable(true);
         lab1.setVisible(true);
         txtf1.setVisible(true);
@@ -66,14 +77,14 @@ public class MainViewController {
         primaryStage.setWidth(1020);
         primaryStage.setHeight(300);
     }
-    public void BrowseClicked(){
+    public static void BrowseClicked(){
         new BrowseAction(txt_fld1, primaryStage, ChckBtn1, txtf1);
         txtf1.setDisable(true);
         resetBtn.setVisible(true);
         resetBtn.setDisable(false);
 
     }
-    public void CheckClicked(){
+    public static void CheckClicked(){
         Browse.setDisable(true);
         File file1 = BrowseAction.getFile();
         String fname1 = BrowseAction.getFName1();
@@ -82,7 +93,7 @@ public class MainViewController {
         ChckBtn1.setDisable(true);
         txt_fld1.setDisable(true);
     }
-    public void CreateClicked(){
+    public static void CreateClicked(){
         int count = CheckAction.getCount();
         String path_u1 = CheckAction.getPath_u1();
         Stage mnf = CheckAction.getMnf();
@@ -110,7 +121,7 @@ public class MainViewController {
             new CreateSc(path_u1, mnf, root, txtf_Sys_id_set, txtf_Sec_R_N_set, txtf_Sec_R_P_set, txtf_SearchPath_set, txtf_SearchPath2_set,  txtf_NAME_set, txtf_TF_set, txtf_SR_set, resetBtn);
         }
     }
-    public void ResetClicked(){
+    public static void ResetClicked(){
         TabPane sp = CheckAction.getSp();
         Stage mnf = primaryStage;
         root.getChildren().remove(sp);
@@ -132,7 +143,7 @@ public class MainViewController {
         primaryStage.setHeight(240);
         new ResetAction(mnf);
     }
-    public void fromManual(){
+    public static void fromManual(){
         cmbx1.setDisable(true);
         countLbl.setVisible(true);
         pathLbl.setVisible(true);
@@ -145,13 +156,13 @@ public class MainViewController {
         primaryStage.setWidth(1020);
         primaryStage.setHeight(300);
     }
-    public void BrowseFldClicked(){
+    public static void BrowseFldClicked(){
         new BrowseFldAction (pathTxtf, primaryStage, OK_btn);
         pathTxtf.setDisable(true);
         cmbx1.setDisable(true);
         txt_fld1.setDisable(true);
     }
-    public void OKClicked(){
+    public static void OKClicked(){
         int count = countCmbx.getValue();
         System.out.print("count = " + count + "\n");
         if(count !=0 || pathTxtf.getText() != null || !Objects.equals(pathTxtf.getText(), "")){
@@ -170,7 +181,7 @@ public class MainViewController {
             dialog.show();
         }
     }
-    public void CreateClicked2() throws IOException {
+    public static void CreateClicked2() throws IOException {
         int count = countCmbx.getValue();
         String path_fld = BrowseFldAction.getPath_fld();
         Stage mnf = primaryStage;
@@ -189,6 +200,13 @@ public class MainViewController {
         TextField[] Form_okud7_txtf =  OK_Action.getForm_okud7_txtf();
         TextField[] Form_okud8_txtf =  OK_Action.getForm_okud8_txtf();
         TextField[] Form_cd_cog_txtf =  OK_Action.getForm_cd_cog_txtf();
+        TextField[] Form_cd_cog2_txtf =  OK_Action.getForm_cd_cog2_txtf();
+        TextField[] Form_cd_cog3_txtf =  OK_Action.getForm_cd_cog3_txtf();
+        TextField[] Form_cd_cog4_txtf =  OK_Action.getForm_cd_cog4_txtf();
+        TextField[] Form_cd_cog5_txtf =  OK_Action.getForm_cd_cog5_txtf();
+        TextField[] Form_cd_cog6_txtf =  OK_Action.getForm_cd_cog6_txtf();
+        TextField[] Form_cd_cog7_txtf =  OK_Action.getForm_cd_cog7_txtf();
+        TextField[] Form_cd_cog8_txtf =  OK_Action.getForm_cd_cog8_txtf();
         ComboBox<String>[] Flag_IOD_cmbx =  OK_Action.getFlag_IOD_cmbx();
         ComboBox<String>[] Flag_PDN_cmbx =  OK_Action.getFlag_PDN_cmbx();
         TextField[] Dep_name_txtf =  OK_Action.getDep_name_txtf();
@@ -237,7 +255,8 @@ public class MainViewController {
 
         new PreCreateScr(count, path_fld, mnf, main_root, resetBtn, Form_name_txtf, Form_cd_txtf, Form_cd_name_txtf,
                 Form_okud_txtf, Form_okud2_txtf, Form_okud3_txtf, Form_okud4_txtf, Form_okud5_txtf, Form_okud6_txtf, Form_okud7_txtf, Form_okud8_txtf,
-                Form_cd_cog_txtf, Flag_IOD_cmbx, Flag_PDN_cmbx,
+                Form_cd_cog_txtf, Form_cd_cog2_txtf, Form_cd_cog3_txtf, Form_cd_cog4_txtf, Form_cd_cog5_txtf, Form_cd_cog6_txtf, Form_cd_cog7_txtf, Form_cd_cog8_txtf,
+                Flag_IOD_cmbx, Flag_PDN_cmbx,
                 Dep_name_txtf, Dep_name2_txtf, Dep_name3_txtf, Dep_name4_txtf, Dep_name5_txtf, Dep_name6_txtf, Dep_name7_txtf, Dep_name8_txtf,
                 Dep_u_name_txtf, Dep_u_name2_txtf, Dep_u_name3_txtf, Dep_u_name4_txtf, Dep_u_name5_txtf, Dep_u_name6_txtf, Dep_u_name7_txtf, Dep_u_name8_txtf,
                 reason_txtf, System_id_txtf, Security_role_path_txtf, Search_path_txtf, Form_formal_code_txtf, Desc_txtf,
@@ -246,7 +265,7 @@ public class MainViewController {
                 p_parent_code_txtf, p_parent_type_ref_txtf,
                 p_type_ref_txtf, p_source_ref_txtf, Security_role_name_txtf);
     }
-    public void ResetClicked2(){
+    public static void ResetClicked2(){
         TabPane sp = OK_Action.getSp();
         Stage mnf = primaryStage;
         root.getChildren().remove(sp);

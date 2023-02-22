@@ -69,7 +69,7 @@ public class CheckAction {
         System.out.print("count = " + count + "\n");
         VBox Panel_s = new VBox(15.0);
         Panel_s.setLayoutX(15);
-        Panel_s.setLayoutY(140);
+        Panel_s.setLayoutY(160);
         HBox exjp1 = new HBox(15.0);
         HBox exjp2 = new HBox(15.0);
         HBox exjp3 = new HBox(15.0);

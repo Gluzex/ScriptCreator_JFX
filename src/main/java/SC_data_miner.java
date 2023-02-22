@@ -19,6 +19,13 @@ public class SC_data_miner {
     public static String[] Form_okud8= new String[16];
     public static String[] okud_form_cd= new String[16];
     public static String[] Form_cd_cog= new String[16];
+    public static String[] Form_cd_cog2= new String[16];
+    public static String[] Form_cd_cog3= new String[16];
+    public static String[] Form_cd_cog4= new String[16];
+    public static String[] Form_cd_cog5= new String[16];
+    public static String[] Form_cd_cog6= new String[16];
+    public static String[] Form_cd_cog7= new String[16];
+    public static String[] Form_cd_cog8= new String[16];
     public static String[] Rep_form_cd= new String[16];
     public static String[] Flag_IOD= new String[16];
     public static String[] Flag_PDN= new String[16];

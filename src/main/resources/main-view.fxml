@@ -11,7 +11,7 @@
 
 <AnchorPane prefHeight="266.0" prefWidth="692.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MainViewController">
     <children>
-        <Label layoutX="14.0" layoutY="14.0" prefHeight="20.0" prefWidth="73.0" text="Имя формы:" />
+        <Label layoutX="14.0" layoutY="14.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="73.0" text="Имя формы:" />
         <TextField fx:id="txt_fld1" layoutX="87.0" layoutY="12.0" promptText="Например, 106" />
         <Label layoutX="254.0" layoutY="16.0" text="Режим:" />
         <ComboBox fx:id="cmbx1" layoutX="300.0" layoutY="12.0" onAction="#MainViewController" prefHeight="25.0" prefWidth="160.0" promptText="Выберите режим">
