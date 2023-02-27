@@ -3901,7 +3901,7 @@ public class ScriptEXP {
                                 "                            ,p_parent_type_ref =>'" + SC_data_miner.p_parent_type_ref_txtf[0] + "'\n" +
                                 "                            ,p_type_ref => '" + SC_data_miner.p_type_ref_txtf[0] + "'\n" +
                                 "                            ,p_source_ref => '" + SC_data_miner.p_source_ref_txtf[0] + "'\n" +
-                                "                            ,p_search_path => '" + SC_data_miner.Search_path[0] + "\n" +
+                                "                            ,p_search_path => '" + SC_data_miner.Search_path[0] + "'\n" +
                                 ");\n" +
                                 "                    end;\n" +
                                 "/";
@@ -6297,7 +6297,7 @@ public class ScriptEXP {
                                 "                            ,p_parent_type_ref =>'" + SC_data_miner.p_parent_type_ref_txtf[0] + "'\n" +
                                 "                            ,p_type_ref => '" + SC_data_miner.p_type_ref_txtf[0] + "'\n" +
                                 "                            ,p_source_ref => '" + SC_data_miner.p_source_ref_txtf[0] + "'\n" +
-                                "                            ,p_search_path => '" + SC_data_miner.Search_path[0] + "\n" +
+                                "                            ,p_search_path => '" + SC_data_miner.Search_path[0] + "'\n" +
                                 ");\n" +
                                 "                    end;\n" +
                                 "/";
@@ -8699,7 +8699,7 @@ public class ScriptEXP {
                                     "                            ,p_parent_type_ref =>'" + SC_data_miner.p_parent_type_ref_txtf[n] + "'\n" +
                                     "                            ,p_type_ref => '" + SC_data_miner.p_type_ref_txtf[n] + "'\n" +
                                     "                            ,p_source_ref => '" + SC_data_miner.p_source_ref_txtf[n] + "'\n" +
-                                    "                            ,p_search_path => '" + SC_data_miner.Search_path[n] + "\n" +
+                                    "                            ,p_search_path => '" + SC_data_miner.Search_path[n] + "'\n" +
                                     ");\n" +
                                     "                    end;\n" +
                                     "/";

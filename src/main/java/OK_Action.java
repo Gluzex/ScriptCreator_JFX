@@ -481,51 +481,67 @@ public class OK_Action {
             Desc_txtf[t] =  new TextField();
             period_cmbx[t] =  new ComboBox<String>();
             period_cmbx[t].getItems().addAll("годовая", "квартальная", "месячная", "суточная", "нерегулярная");
+            period_cmbx[t].setEditable(true);
             period_cmbx[t].setTooltip(tooltip2);
             period2_cmbx[t] =  new ComboBox<String>();
             period2_cmbx[t].getItems().addAll("годовая", "квартальная", "месячная", "суточная", "нерегулярная");
+            period2_cmbx[t].setEditable(true);
             period2_cmbx[t].setTooltip(tooltip2);
             period3_cmbx[t] =  new ComboBox<String>();
             period3_cmbx[t].getItems().addAll("годовая", "квартальная", "месячная", "суточная", "нерегулярная");
+            period3_cmbx[t].setEditable(true);
             period3_cmbx[t].setTooltip(tooltip2);
             period4_cmbx[t] =  new ComboBox<String>();
             period4_cmbx[t].getItems().addAll("годовая", "квартальная", "месячная", "суточная", "нерегулярная");
+            period4_cmbx[t].setEditable(true);
             period4_cmbx[t].setTooltip(tooltip2);
             period5_cmbx[t] =  new ComboBox<String>();
             period5_cmbx[t].getItems().addAll("годовая", "квартальная", "месячная", "суточная", "нерегулярная");
+            period5_cmbx[t].setEditable(true);
             period5_cmbx[t].setTooltip(tooltip2);
             period6_cmbx[t] =  new ComboBox<String>();
             period6_cmbx[t].getItems().addAll("годовая", "квартальная", "месячная", "суточная", "нерегулярная");
+            period6_cmbx[t].setEditable(true);
             period6_cmbx[t].setTooltip(tooltip2);
             period7_cmbx[t] =  new ComboBox<String>();
             period7_cmbx[t].getItems().addAll("годовая", "квартальная", "месячная", "суточная", "нерегулярная");
+            period7_cmbx[t].setEditable(true);
             period7_cmbx[t].setTooltip(tooltip2);
             period8_cmbx[t] =  new ComboBox<String>();
             period8_cmbx[t].getItems().addAll("годовая", "квартальная", "месячная", "суточная", "нерегулярная");
+            period8_cmbx[t].setEditable(true);
             period8_cmbx[t].setTooltip(tooltip2);
             rep_subj_type_cmbx[t] =  new ComboBox<String>();
             rep_subj_type_cmbx[t].getItems().addAll("КО", "ОПДС", "ОПС", "ТУ", "Холдинги", "БГ", "Филиалы КО", "СП БР", "Свод по РФ", "ТОФК");
+            rep_subj_type_cmbx[t].setEditable(true);
             rep_subj_type_cmbx[t].setTooltip(tooltip3);
             rep_subj_type2_cmbx[t] =  new ComboBox<String>();
             rep_subj_type2_cmbx[t].getItems().addAll("КО", "ОПДС", "ОПС", "ТУ", "Холдинги", "БГ", "Филиалы КО", "СП БР", "Свод по РФ", "ТОФК");
+            rep_subj_type2_cmbx[t].setEditable(true);
             rep_subj_type2_cmbx[t].setTooltip(tooltip3);
             rep_subj_type3_cmbx[t] =  new ComboBox<String>();
             rep_subj_type3_cmbx[t].getItems().addAll("КО", "ОПДС", "ОПС", "ТУ", "Холдинги", "БГ", "Филиалы КО", "СП БР", "Свод по РФ", "ТОФК");
+            rep_subj_type3_cmbx[t].setEditable(true);
             rep_subj_type3_cmbx[t].setTooltip(tooltip3);
             rep_subj_type4_cmbx[t] =  new ComboBox<String>();
             rep_subj_type4_cmbx[t].getItems().addAll("КО", "ОПДС", "ОПС", "ТУ", "Холдинги", "БГ", "Филиалы КО", "СП БР", "Свод по РФ", "ТОФК");
+            rep_subj_type4_cmbx[t].setEditable(true);
             rep_subj_type4_cmbx[t].setTooltip(tooltip3);
             rep_subj_type5_cmbx[t] =  new ComboBox<String>();
             rep_subj_type5_cmbx[t].getItems().addAll("КО", "ОПДС", "ОПС", "ТУ", "Холдинги", "БГ", "Филиалы КО", "СП БР", "Свод по РФ", "ТОФК");
+            rep_subj_type5_cmbx[t].setEditable(true);
             rep_subj_type5_cmbx[t].setTooltip(tooltip3);
             rep_subj_type6_cmbx[t] =  new ComboBox<String>();
             rep_subj_type6_cmbx[t].getItems().addAll("КО", "ОПДС", "ОПС", "ТУ", "Холдинги", "БГ", "Филиалы КО", "СП БР", "Свод по РФ", "ТОФК");
+            rep_subj_type6_cmbx[t].setEditable(true);
             rep_subj_type6_cmbx[t].setTooltip(tooltip3);
             rep_subj_type7_cmbx[t] =  new ComboBox<String>();
             rep_subj_type7_cmbx[t].getItems().addAll("КО", "ОПДС", "ОПС", "ТУ", "Холдинги", "БГ", "Филиалы КО", "СП БР", "Свод по РФ", "ТОФК");
+            rep_subj_type7_cmbx[t].setEditable(true);
             rep_subj_type7_cmbx[t].setTooltip(tooltip3);
             rep_subj_type8_cmbx[t] =  new ComboBox<String>();
             rep_subj_type8_cmbx[t].getItems().addAll("КО", "ОПДС", "ОПС", "ТУ", "Холдинги", "БГ", "Филиалы КО", "СП БР", "Свод по РФ", "ТОФК");
+            rep_subj_type8_cmbx[t].setEditable(true);
             rep_subj_type8_cmbx[t].setTooltip(tooltip3);
             p_parent_code_txtf[t] =  new TextField();
             p_parent_type_ref_txtf[t] =  new TextField();
@@ -828,9 +844,9 @@ public class OK_Action {
             form_cd_lbl[o].setText("Код доступа для отчета: ");
             p_type_ref_txtf[o].setText("cognos");
             p_source_ref_txtf[o].setText("cognos");
-            PanelSet[o].getChildren().addAll(radioBtn_set[o], exjp1_set[o], radioBtn_set_2[o], p_tbl_6[o], exjp13_set[o], exjp14_set[o], exjp15_set[o], exjp11_set[o], exjp22_set[o], exjp12_set[o],
+            PanelSet[o].getChildren().addAll(radioBtn_set[o], exjp1_set[o], radioBtn_set_2[o], p_tbl_6[o], exjp13_set[o], exjp14_set[o], exjp15_set[o], /*exjp11_set[o], exjp22_set[o], exjp12_set[o],*/
                     p_tbl_7[o], p_cmbx_okud[o], exjp3_V_set[o],
-                    p_tbl_9[o], p_cmbx_subj[o], exjp17_V_set[o],
+                    p_tbl_9[o], p_cmbx_subj[o], exjp17_V_set[o]/*,
                     p_tbl_10[o], exjp0_set[o]/*, exjp18_set[o], exjp19_set[o], exjp20_set[o], exjp21_set[o]*/);
             PanelScroll[o] = new ScrollPane(PanelSet[o]);
             tabs[o].setText("Форма " + (o+1));
@@ -842,7 +858,7 @@ public class OK_Action {
 
         root.getChildren().add(sp);
         sp.setLayoutX(15);
-        sp.setLayoutY(160);
+        sp.setLayoutY(210);
 
         mnf.setWidth(1720);
         mnf.setHeight(920);
@@ -863,17 +879,18 @@ public class OK_Action {
         p_type_ref_txtf[t].setText("cognos");
         p_source_ref_txtf[t].setText("cognos");
 
-        PanelSet[t].getChildren().removeAll(radioBtn_set[t], radioBtn_set_2[t], p_tbl_1[t], exjp1_set[t], exjp2_set[t], exjp3_set[t], p_okud_repform_lbl[t], p_tbl_2[t], 
+        PanelSet[t].getChildren().removeAll(radioBtn_set[t], radioBtn_set_2[t], p_tbl_1[t], exjp1_set[t], exjp2_set[t], exjp3_set[t], p_okud_repform_lbl[t], p_tbl_2[t],
                 p_cmbx_cog[t], exjp4_V_set[t],
                 p_tbl_3[t], exjp5_set[t], exjp6_set[t], p_tbl_4[t],
                 p_cmbx_dep_1[t], exjp7_V_set[t],
                 p_cmbx_dep_2[t], exjp9_V_set[t],
-                exjp10_set[t], p_tbl_10[t], exjp0_set[t]/*, exjp18_set[t], exjp19_set[t], exjp20_set[t], exjp21_set[t]*/);
+                exjp10_set[t]/*, p_tbl_10[t], exjp0_set[t]/*, exjp18_set[t], exjp19_set[t], exjp20_set[t], exjp21_set[t]*/);
         PanelScroll[t] = new ScrollPane(PanelSet[t]);
-
-        PanelSet[t].getChildren().addAll(radioBtn_set[t], exjp1_set[t], radioBtn_set_2[t], p_tbl_6[t], exjp13_set[t], exjp14_set[t], exjp15_set[t], exjp11_set[t], exjp22_set[t], exjp12_set[t],
+        exjp3_V_set[t].getChildren().removeAll(exjp3_set[t], exjp16_set[t]);
+        exjp3_V_set[t].getChildren().addAll(exjp3_set[t], exjp16_set[t]);
+        PanelSet[t].getChildren().addAll(radioBtn_set[t], exjp1_set[t], radioBtn_set_2[t], p_tbl_6[t], exjp13_set[t], exjp14_set[t], exjp15_set[t], /*exjp11_set[t], exjp22_set[t], exjp12_set[t],*/
                 p_tbl_7[t], p_cmbx_okud[t], exjp3_V_set[t],
-                p_tbl_9[t], p_cmbx_subj[t], exjp17_V_set[t],
+                p_tbl_9[t], p_cmbx_subj[t], exjp17_V_set[t]/*,
                 p_tbl_10[t], exjp0_set[t]/*, exjp18_set[t], exjp19_set[t], exjp20_set[t], exjp21_set[t]*/);
         tabs[t].setContent(PanelScroll[t]);
         //sp.getTabs().add(new Tab("Форма " + (o+1), PanelSet[t]));
@@ -889,15 +906,15 @@ public class OK_Action {
         tbl10_lbl[t].setText("---Данные для таблицы EHD_ACS_OBJECTS--- обязательно к заполнению, если код доступа ранее не был зарегистрирован");
         p_type_ref_txtf[t].clear();//setText("");
         p_source_ref_txtf[t].clear();//setText("");
-        PanelSet[t].getChildren().removeAll(radioBtn_set[t], exjp1_set[t], radioBtn_set_2[t], p_tbl_6[t], exjp13_set[t], exjp14_set[t], exjp15_set[t], exjp11_set[t], exjp22_set[t], exjp12_set[t],
+        PanelSet[t].getChildren().removeAll(radioBtn_set[t], exjp1_set[t], radioBtn_set_2[t], p_tbl_6[t], exjp13_set[t], exjp14_set[t], exjp15_set[t], /*exjp11_set[t], exjp22_set[t], exjp12_set[t],*/
                 p_tbl_7[t], p_cmbx_okud[t], exjp3_V_set[t],
-                p_tbl_9[t], p_cmbx_subj[t], exjp17_V_set[t],
+                p_tbl_9[t], p_cmbx_subj[t], exjp17_V_set[t]/*,
                 p_tbl_10[t], exjp0_set[t]/*, exjp18_set[t], exjp19_set[t], exjp20_set[t], exjp21_set[t]*/);
 
         PanelSet[t].getChildren().addAll(radioBtn_set[t], radioBtn_set_2[t], p_tbl_1[t], exjp1_set[t], exjp2_set[t], exjp3_set[t], p_okud_repform_lbl[t],  p_tbl_2[t],
                 p_cmbx_cog[t], exjp4_V_set[t],
                 p_tbl_3[t], exjp5_set[t], exjp6_set[t], p_tbl_4[t], p_cmbx_dep_1[t], exjp7_V_set[t],
-                p_cmbx_dep_2[t], exjp9_V_set[t], exjp10_set[t], p_tbl_10[t], exjp0_set[t]/*, exjp18_set[t], exjp19_set[t], exjp20_set[t], exjp21_set[t]*/);
+                p_cmbx_dep_2[t], exjp9_V_set[t], exjp10_set[t]/*, p_tbl_10[t], exjp0_set[t]/*, exjp18_set[t], exjp19_set[t], exjp20_set[t], exjp21_set[t]*/);
         PanelScroll[t] = new ScrollPane(PanelSet[t]);
         tabs[t].setContent(PanelScroll[t]);
     }
@@ -917,14 +934,14 @@ public class OK_Action {
                 PanelSet[t].getChildren().removeAll(radioBtn_set[t], radioBtn_set_2[t], p_tbl_1[t], exjp1_set[t], exjp2_set[t], exjp3_set[t], p_okud_repform_lbl[t],  p_tbl_2[t],
                         p_cmbx_cog[t], exjp4_V_set[t],
                         p_tbl_3[t], exjp5_set[t], exjp6_set[t], p_tbl_4[t], p_cmbx_dep_1[t], exjp7_V_set[t],
-                        p_cmbx_dep_2[t], exjp9_V_set[t], exjp10_set[t], p_tbl_10[t], exjp0_set[t]/*, exjp18_set[t], exjp19_set[t], exjp20_set[t], exjp21_set[t]*/);
+                        p_cmbx_dep_2[t], exjp9_V_set[t], exjp10_set[t]/*, p_tbl_10[t], exjp0_set[t]/*, exjp18_set[t], exjp19_set[t], exjp20_set[t], exjp21_set[t]*/);
                 PanelScroll[t] = new ScrollPane(PanelSet[t]);
                 tabs[t].setContent(PanelScroll[t]);
 
                 PanelSet[t].getChildren().addAll(radioBtn_set[t], radioBtn_set_2[t], p_tbl_1[t], exjp1_set[t], exjp2_set[t], exjp3_set[t], p_okud_repform_lbl[t],  p_tbl_2[t],
                         p_cmbx_cog[t], exjp4_V_set[t],
                         p_tbl_3[t], exjp5_set[t], exjp6_set[t], p_tbl_4[t], p_cmbx_dep_1[t], exjp7_V_set[t],
-                        p_cmbx_dep_2[t], exjp9_V_set[t], exjp10_set[t], p_tbl_10[t], exjp0_set[t]/*, exjp18_set[t], exjp19_set[t], exjp20_set[t], exjp21_set[t]*/);
+                        p_cmbx_dep_2[t], exjp9_V_set[t], exjp10_set[t]/*, p_tbl_10[t], exjp0_set[t]/*, exjp18_set[t], exjp19_set[t], exjp20_set[t], exjp21_set[t]*/);
                 PanelScroll[t] = new ScrollPane(PanelSet[t]);
                 tabs[t].setContent(PanelScroll[t]);
             } else{
@@ -946,14 +963,14 @@ public class OK_Action {
                 PanelSet[t].getChildren().removeAll(radioBtn_set[t], radioBtn_set_2[t], p_tbl_1[t], exjp1_set[t], exjp2_set[t], exjp3_set[t], p_okud_repform_lbl[t],  p_tbl_2[t],
                         p_cmbx_cog[t], exjp4_V_set[t],
                         p_tbl_3[t], exjp5_set[t], exjp6_set[t], p_tbl_4[t], p_cmbx_dep_1[t], exjp7_V_set[t],
-                        p_cmbx_dep_2[t], exjp9_V_set[t], exjp10_set[t], p_tbl_10[t], exjp0_set[t]/*, exjp18_set[t], exjp19_set[t], exjp20_set[t], exjp21_set[t]*/);
+                        p_cmbx_dep_2[t], exjp9_V_set[t], exjp10_set[t]/*, p_tbl_10[t], exjp0_set[t]/*, exjp18_set[t], exjp19_set[t], exjp20_set[t], exjp21_set[t]*/);
                 PanelScroll[t] = new ScrollPane(PanelSet[t]);
                 tabs[t].setContent(PanelScroll[t]);
 
                 PanelSet[t].getChildren().addAll(radioBtn_set[t], radioBtn_set_2[t], p_tbl_1[t], exjp1_set[t], exjp2_set[t]/*, exjp3_set[t], p_okud_repform_lbl[t]*/,  p_tbl_2[t],
                         p_cmbx_cog[t], exjp4_V_set[t],
                         p_tbl_3[t], exjp5_set[t], exjp6_set[t], p_tbl_4[t], p_cmbx_dep_1[t], exjp7_V_set[t],
-                        p_cmbx_dep_2[t], exjp9_V_set[t], exjp10_set[t], p_tbl_10[t], exjp0_set[t]/*, exjp18_set[t], exjp19_set[t], exjp20_set[t], exjp21_set[t]*/);
+                        p_cmbx_dep_2[t], exjp9_V_set[t], exjp10_set[t]/*, p_tbl_10[t], exjp0_set[t]/*, exjp18_set[t], exjp19_set[t], exjp20_set[t], exjp21_set[t]*/);
                 PanelScroll[t] = new ScrollPane(PanelSet[t]);
                 tabs[t].setContent(PanelScroll[t]);
             } else{

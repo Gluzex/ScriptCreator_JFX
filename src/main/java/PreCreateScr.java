@@ -164,8 +164,19 @@ public class PreCreateScr {
     public void PreCreateScr_go(){
         for(int i=0;i<=count;){
             if(rep_or_code[i] == 0){
-                UFName[i] = Form_name_txtf[i].getText();
-                SC_data_miner.Form_name[i] = Form_name_txtf[i].getText();
+                String formName = "";
+                int ind1 = 0;
+                int ind2 = 0;
+                ind1 = Search_path_txtf[i].getText().indexOf("report[@name=");
+                if(ind1 == -1){
+                    ind1 = Search_path_txtf[i].getText().indexOf("reportView[@name=");
+                }
+                ind2 = Search_path_txtf[i].getText().lastIndexOf("]");
+                formName = Search_path_txtf[i].getText().substring(ind1+14, ind2-1);
+                //System.out.print("formName = " + formName + "\n");
+                UFName[i] = formName/*Form_name_txtf[i].getText()*/;
+                SC_data_miner.Form_cd[i] = Form_cd_txtf[i].getText();
+                SC_data_miner.Form_name[i] = formName/*Form_name_txtf[i].getText()*/;
                 SC_data_miner.Form_okud[i] = Form_okud_txtf[i].getText();
                 SC_data_miner.Form_okud2[i] = Form_okud2_txtf[i].getText();
                 SC_data_miner.Form_okud3[i] = Form_okud3_txtf[i].getText();
@@ -205,7 +216,7 @@ public class PreCreateScr {
                 UFName[i] = Form_name_txtf[i].getText();
                 SC_data_miner.Form_cd_name[i] = Form_cd_name_txtf[i].getText();
                 SC_data_miner.Form_cd[i] = Form_cd_txtf[i].getText();
-                SC_data_miner.Form_name[i] = Form_name_txtf[i].getText();
+                SC_data_miner.Form_name[i] = Form_cd_name_txtf[i].getText()/*Form_name_txtf[i].getText()*/;
                 SC_data_miner.Form_okud[i] = Form_okud_txtf[i].getText();
                 SC_data_miner.okud_form_cd[i] = Form_okud_txtf[i].getText();
                 SC_data_miner.Form_cd_cog[i]  = Form_cd_cog_txtf[i].getText();
@@ -239,10 +250,10 @@ public class PreCreateScr {
                 SC_data_miner.p_parent_type_ref_txtf[i] =  p_parent_type_ref_txtf[i].getText();
                 SC_data_miner.p_type_ref_txtf[i] =  p_type_ref_txtf[i].getText();
                 SC_data_miner.p_source_ref_txtf[i] = p_source_ref_txtf[i].getText();
-                System.out.print("2 p_parent_code_txtf[" + i + "].getText() = " + p_parent_code_txtf[i].getText() + "\n");
-                System.out.print("2 p_parent_type_ref_txtf[" + i + "].getText() = " + p_parent_type_ref_txtf[i].getText() + "\n");
-                System.out.print("SC_data_miner.p_parent_code_txtf[" + i + "] = " + SC_data_miner.p_parent_code_txtf[i] + "\n");
-                System.out.print("SC_data_miner.p_parent_type_ref_txtf[" + i + "] = " + SC_data_miner.p_parent_type_ref_txtf[i] + "\n");
+                //System.out.print("2 p_parent_code_txtf[" + i + "].getText() = " + p_parent_code_txtf[i].getText() + "\n");
+                //System.out.print("2 p_parent_type_ref_txtf[" + i + "].getText() = " + p_parent_type_ref_txtf[i].getText() + "\n");
+                //System.out.print("SC_data_miner.p_parent_code_txtf[" + i + "] = " + SC_data_miner.p_parent_code_txtf[i] + "\n");
+                //System.out.print("SC_data_miner.p_parent_type_ref_txtf[" + i + "] = " + SC_data_miner.p_parent_type_ref_txtf[i] + "\n");
             }
             //System.out.print("Form_cd_name_txtf[i].getText() = " + Form_cd_name_txtf[i].getText() + "\n");
             //System.out.print("Form_okud_txtf[" + i + "].getText() = " + Form_okud_txtf[i].getText()+ "\n");
