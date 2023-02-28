@@ -163,7 +163,7 @@ public class ScriptEXP {
                         "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                         "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                         "\n" +
@@ -176,7 +176,7 @@ public class ScriptEXP {
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.FLAG_IOD = S.FLAG_IOD,\n" +
-						"                                R.FLAG_PDN = S.FLAG_PDN,\n" +
+						"                                R.FLAG_PDN = S.FLAG_PDN\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.FLAG_IOD, R.FLAG_PDN)\n" +
                         "   VALUES (S.FORM_CD, S.FLAG_IOD, S.FLAG_PDN);" +
                         "\n" +
@@ -188,7 +188,7 @@ public class ScriptEXP {
 						"'"+ SC_data_miner.reason[0] +"'as REASON \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);" +
                         "\n" +
@@ -200,7 +200,7 @@ public class ScriptEXP {
 						"'"+ SC_data_miner.reason[0] +"'as REASON \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);" +
                         "\n" +
@@ -245,7 +245,7 @@ public class ScriptEXP {
                         "MERGE INTO REPORT_FORM_SRC R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
-                        "'"+ SC_data_miner.Reg_form_code[0] +"' as REG_FORM_CODE, \n" +
+                        "'"+ SC_data_miner.Reg_form_code[0] +"' as REG_FORM_CODE \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REG_FORM_CODE = S.REG_FORM_CODE\n" +
@@ -255,7 +255,7 @@ public class ScriptEXP {
                         "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
-                        "'"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE, \n" +
+                        "'"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -283,7 +283,7 @@ public class ScriptEXP {
                         "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                         "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                         "\n" +
@@ -296,7 +296,7 @@ public class ScriptEXP {
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.FLAG_IOD = S.FLAG_IOD,\n" +
-						"                                R.FLAG_PDN = S.FLAG_PDN,\n" +
+						"                                R.FLAG_PDN = S.FLAG_PDN\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.FLAG_IOD, R.FLAG_PDN)\n" +
                         "   VALUES (S.FORM_CD, S.FLAG_IOD, S.FLAG_PDN);" +
                         "\n" +
@@ -308,7 +308,7 @@ public class ScriptEXP {
 						"'"+ SC_data_miner.reason[0] +"'as REASON \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);" +
                         "\n" +
@@ -320,7 +320,7 @@ public class ScriptEXP {
 						"'"+ SC_data_miner.reason[0] +"'as REASON \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);" +
                         "\n" +
@@ -365,7 +365,7 @@ public class ScriptEXP {
                         "MERGE INTO REPORT_FORM_SRC R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
-                        "'"+ SC_data_miner.Reg_form_code[0] +"' as REG_FORM_CODE, \n" +
+                        "'"+ SC_data_miner.Reg_form_code[0] +"' as REG_FORM_CODE \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REG_FORM_CODE = S.REG_FORM_CODE\n" +
@@ -375,7 +375,7 @@ public class ScriptEXP {
                         "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
-                        "'"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE, \n" +
+                        "'"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -393,7 +393,7 @@ public class ScriptEXP {
                         "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                         "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                         "\n" + "commit;";
@@ -466,7 +466,7 @@ public class ScriptEXP {
                         "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                         "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                         "\n" +
@@ -479,7 +479,7 @@ public class ScriptEXP {
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.FLAG_IOD = S.FLAG_IOD,\n" +
-						"                                R.FLAG_PDN = S.FLAG_PDN,\n" +
+						"                                R.FLAG_PDN = S.FLAG_PDN\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.FLAG_IOD, R.FLAG_PDN)\n" +
                         "   VALUES (S.FORM_CD, S.FLAG_IOD, S.FLAG_PDN);" +
                         "\n" +
@@ -491,7 +491,7 @@ public class ScriptEXP {
 						"'"+ SC_data_miner.reason[0] +"'as REASON \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);" +
                         "\n" +
@@ -503,7 +503,7 @@ public class ScriptEXP {
 						"'"+ SC_data_miner.reason[0] +"'as REASON \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);" +
                         "\n" +
@@ -550,7 +550,7 @@ public class ScriptEXP {
                         "MERGE INTO REPORT_FORM_SRC R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
-                        "'"+ SC_data_miner.Reg_form_code[0] +"' as REG_FORM_CODE, \n" +
+                        "'"+ SC_data_miner.Reg_form_code[0] +"' as REG_FORM_CODE \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REG_FORM_CODE = S.REG_FORM_CODE\n" +
@@ -560,7 +560,7 @@ public class ScriptEXP {
                         "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
-                        "'"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE, \n" +
+                        "'"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -592,7 +592,7 @@ public class ScriptEXP {
                         "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                         "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                         "\n" +
@@ -605,7 +605,7 @@ public class ScriptEXP {
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.FLAG_IOD = S.FLAG_IOD,\n" +
-						"                                R.FLAG_PDN = S.FLAG_PDN,\n" +
+						"                                R.FLAG_PDN = S.FLAG_PDN\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.FLAG_IOD, R.FLAG_PDN)\n" +
                         "   VALUES (S.FORM_CD, S.FLAG_IOD, S.FLAG_PDN);" +
                         "\n" +
@@ -617,7 +617,7 @@ public class ScriptEXP {
 						"'"+ SC_data_miner.reason[0] +"'as REASON \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);" +
                         "\n" +
@@ -629,7 +629,7 @@ public class ScriptEXP {
 						"'"+ SC_data_miner.reason[0] +"'as REASON \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);" +
                         "\n" +
@@ -677,7 +677,7 @@ public class ScriptEXP {
                         "MERGE INTO REPORT_FORM_SRC R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
-                        "'"+ SC_data_miner.Reg_form_code[0] +"' as REG_FORM_CODE, \n" +
+                        "'"+ SC_data_miner.Reg_form_code[0] +"' as REG_FORM_CODE \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REG_FORM_CODE = S.REG_FORM_CODE\n" +
@@ -687,7 +687,7 @@ public class ScriptEXP {
                         "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
-                        "'"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE, \n" +
+                        "'"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -704,7 +704,7 @@ public class ScriptEXP {
                         "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                         "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                         "\n" + "commit;";
@@ -1005,7 +1005,7 @@ public class ScriptEXP {
                         "MERGE INTO REPORT_FORM_SRC R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
-                        "'"+ SC_data_miner.Reg_form_code[0] +"' as REG_FORM_CODE, \n" +
+                        "'"+ SC_data_miner.Reg_form_code[0] +"' as REG_FORM_CODE \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REG_FORM_CODE = S.REG_FORM_CODE\n" +
@@ -1015,7 +1015,7 @@ public class ScriptEXP {
                         "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
-                        "'"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE, \n" +
+                        "'"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -1065,7 +1065,7 @@ public class ScriptEXP {
                         "MERGE INTO REPORT_FORM_SRC R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
-                        "'"+ SC_data_miner.Reg_form_code[0] +"' as REG_FORM_CODE, \n" +
+                        "'"+ SC_data_miner.Reg_form_code[0] +"' as REG_FORM_CODE \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REG_FORM_CODE = S.REG_FORM_CODE\n" +
@@ -1075,7 +1075,7 @@ public class ScriptEXP {
                         "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
-                        "'"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE, \n" +
+                        "'"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -1172,7 +1172,7 @@ public class ScriptEXP {
                         "MERGE INTO REPORT_FORM_SRC R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
-                        "'"+ SC_data_miner.Reg_form_code[0] +"' as REG_FORM_CODE, \n" +
+                        "'"+ SC_data_miner.Reg_form_code[0] +"' as REG_FORM_CODE \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REG_FORM_CODE = S.REG_FORM_CODE\n" +
@@ -1182,7 +1182,7 @@ public class ScriptEXP {
                         "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
-                        "'"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE, \n" +
+                        "'"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -1233,7 +1233,7 @@ public class ScriptEXP {
                         "MERGE INTO REPORT_FORM_SRC R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
-                        "'"+ SC_data_miner.Reg_form_code[0] +"' as REG_FORM_CODE, \n" +
+                        "'"+ SC_data_miner.Reg_form_code[0] +"' as REG_FORM_CODE \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REG_FORM_CODE = S.REG_FORM_CODE\n" +
@@ -1243,7 +1243,7 @@ public class ScriptEXP {
                         "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
-                        "'"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE, \n" +
+                        "'"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -1656,7 +1656,7 @@ public class ScriptEXP {
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.FLAG_IOD = S.FLAG_IOD,\n" +
-						"                                R.FLAG_PDN = S.FLAG_PDN,\n" +
+						"                                R.FLAG_PDN = S.FLAG_PDN\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.FLAG_IOD, R.FLAG_PDN)\n" +
                         "   VALUES (S.FORM_CD, S.FLAG_IOD, S.FLAG_PDN);" +
                             "\n" +
@@ -1679,7 +1679,7 @@ public class ScriptEXP {
                                     "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
                                     "FROM dual) S\n" +
                                     "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
                                     "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                     "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                     "\n" +
@@ -1692,7 +1692,7 @@ public class ScriptEXP {
                                     "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
                                     "FROM dual) S\n" +
                                     "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
                                     "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                     "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                     "\n" +
@@ -1703,7 +1703,7 @@ public class ScriptEXP {
                                     "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
                                     "FROM dual) S\n" +
                                     "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
                                     "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                     "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                     "\n" +
@@ -1716,7 +1716,7 @@ public class ScriptEXP {
                                     "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
                                     "FROM dual) S\n" +
                                     "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
                                     "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                     "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                     "\n" +
@@ -1727,7 +1727,7 @@ public class ScriptEXP {
                                     "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
                                     "FROM dual) S\n" +
                                     "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
                                     "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                     "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                     "\n" +
@@ -1738,7 +1738,7 @@ public class ScriptEXP {
                                     "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
                                     "FROM dual) S\n" +
                                     "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
                                     "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                     "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                     "\n" +
@@ -1751,7 +1751,7 @@ public class ScriptEXP {
                                     "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
                                     "FROM dual) S\n" +
                                     "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
                                     "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                     "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                     "\n" +
@@ -1762,7 +1762,7 @@ public class ScriptEXP {
                                     "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
                                     "FROM dual) S\n" +
                                     "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
                                     "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                     "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                     "\n" +
@@ -1773,7 +1773,7 @@ public class ScriptEXP {
                                     "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
                                     "FROM dual) S\n" +
                                     "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
                                     "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                     "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                     "\n" +
@@ -1784,7 +1784,7 @@ public class ScriptEXP {
                                     "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
                                     "FROM dual) S\n" +
                                     "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
                                     "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                     "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                     "\n" +
@@ -1797,7 +1797,7 @@ public class ScriptEXP {
                                     "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
                                     "FROM dual) S\n" +
                                     "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
                                     "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                     "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                     "\n" +
@@ -1808,7 +1808,7 @@ public class ScriptEXP {
                                     "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
                                     "FROM dual) S\n" +
                                     "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
                                     "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                     "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                     "\n" +
@@ -1819,7 +1819,7 @@ public class ScriptEXP {
                                     "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
                                     "FROM dual) S\n" +
                                     "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
                                     "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                     "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                     "\n" +
@@ -1830,7 +1830,7 @@ public class ScriptEXP {
                                     "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
                                     "FROM dual) S\n" +
                                     "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
                                     "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                     "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                     "\n" +
@@ -1841,7 +1841,7 @@ public class ScriptEXP {
                                     "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
                                     "FROM dual) S\n" +
                                     "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
                                     "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                     "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                     "\n" +
@@ -1854,7 +1854,7 @@ public class ScriptEXP {
                                     "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
                                     "FROM dual) S\n" +
                                     "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
                                     "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                     "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                     "\n" +
@@ -1865,7 +1865,7 @@ public class ScriptEXP {
                                     "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
                                     "FROM dual) S\n" +
                                     "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
                                     "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                     "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                     "\n" +
@@ -1876,7 +1876,7 @@ public class ScriptEXP {
                                     "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
                                     "FROM dual) S\n" +
                                     "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
                                     "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                     "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                     "\n" +
@@ -1887,7 +1887,7 @@ public class ScriptEXP {
                                     "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
                                     "FROM dual) S\n" +
                                     "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
                                     "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                     "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                     "\n" +
@@ -1898,7 +1898,7 @@ public class ScriptEXP {
                                     "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
                                     "FROM dual) S\n" +
                                     "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
                                     "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                     "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                     "\n" +
@@ -1909,7 +1909,7 @@ public class ScriptEXP {
                                     "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
                                     "FROM dual) S\n" +
                                     "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
                                     "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                     "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                     "\n" +
@@ -1922,7 +1922,7 @@ public class ScriptEXP {
                                     "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
                                     "FROM dual) S\n" +
                                     "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
                                     "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                     "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                     "\n" +
@@ -1933,7 +1933,7 @@ public class ScriptEXP {
                                     "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
                                     "FROM dual) S\n" +
                                     "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
                                     "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                     "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                     "\n" +
@@ -1944,7 +1944,7 @@ public class ScriptEXP {
                                     "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
                                     "FROM dual) S\n" +
                                     "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
                                     "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                     "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                     "\n" +
@@ -1955,7 +1955,7 @@ public class ScriptEXP {
                                     "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
                                     "FROM dual) S\n" +
                                     "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
                                     "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                     "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                     "\n" +
@@ -1966,7 +1966,7 @@ public class ScriptEXP {
                                     "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
                                     "FROM dual) S\n" +
                                     "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
                                     "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                     "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                     "\n" +
@@ -1977,7 +1977,7 @@ public class ScriptEXP {
                                     "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
                                     "FROM dual) S\n" +
                                     "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
                                     "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                     "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                     "\n" +
@@ -1988,7 +1988,7 @@ public class ScriptEXP {
                                     "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
                                     "FROM dual) S\n" +
                                     "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
                                     "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                     "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                     "\n" +
@@ -2001,7 +2001,7 @@ public class ScriptEXP {
                                     "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
                                     "FROM dual) S\n" +
                                     "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
                                     "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                     "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                     "\n" +
@@ -2012,7 +2012,7 @@ public class ScriptEXP {
                                     "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
                                     "FROM dual) S\n" +
                                     "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
                                     "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                     "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                     "\n" +
@@ -2023,7 +2023,7 @@ public class ScriptEXP {
                                     "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
                                     "FROM dual) S\n" +
                                     "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
                                     "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                     "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                     "\n" +
@@ -2034,7 +2034,7 @@ public class ScriptEXP {
                                     "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
                                     "FROM dual) S\n" +
                                     "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
                                     "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                     "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                     "\n" +
@@ -2045,7 +2045,7 @@ public class ScriptEXP {
                                     "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
                                     "FROM dual) S\n" +
                                     "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
                                     "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                     "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                     "\n" +
@@ -2056,7 +2056,7 @@ public class ScriptEXP {
                                     "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
                                     "FROM dual) S\n" +
                                     "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
                                     "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                     "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                     "\n" +
@@ -2067,7 +2067,7 @@ public class ScriptEXP {
                                     "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
                                     "FROM dual) S\n" +
                                     "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
                                     "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                     "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                     "\n" +
@@ -2078,7 +2078,7 @@ public class ScriptEXP {
                                     "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
                                     "FROM dual) S\n" +
                                     "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
                                     "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                     "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                     "\n" +
@@ -2104,7 +2104,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);" +
                                     "\n" +
@@ -2118,7 +2118,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_OWNER R\n" +
@@ -2128,7 +2128,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);" +
                                     "\n" +
@@ -2142,7 +2142,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_OWNER R\n" +
@@ -2152,7 +2152,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_OWNER R\n" +
@@ -2162,7 +2162,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);" +
                                     "\n" +
@@ -2176,7 +2176,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_OWNER R\n" +
@@ -2186,7 +2186,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_OWNER R\n" +
@@ -2196,7 +2196,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_OWNER R\n" +
@@ -2206,7 +2206,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);" +
                                     "\n" +
@@ -2220,7 +2220,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_OWNER R\n" +
@@ -2230,7 +2230,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);" +
                                     "MERGE INTO REP_FORM_DEP_OWNER R\n" +
@@ -2240,7 +2240,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_OWNER R\n" +
@@ -2250,7 +2250,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_OWNER R\n" +
@@ -2260,7 +2260,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);" +
                                     "\n" +
@@ -2274,7 +2274,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_OWNER R\n" +
@@ -2284,7 +2284,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);" +
                                     "MERGE INTO REP_FORM_DEP_OWNER R\n" +
@@ -2294,7 +2294,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_OWNER R\n" +
@@ -2304,7 +2304,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_OWNER R\n" +
@@ -2314,7 +2314,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_OWNER R\n" +
@@ -2324,7 +2324,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);" +
                                     "\n" +
@@ -2338,7 +2338,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_OWNER R\n" +
@@ -2348,7 +2348,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);" +
                                     "MERGE INTO REP_FORM_DEP_OWNER R\n" +
@@ -2358,7 +2358,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_OWNER R\n" +
@@ -2368,7 +2368,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_OWNER R\n" +
@@ -2378,7 +2378,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_OWNER R\n" +
@@ -2388,7 +2388,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_OWNER R\n" +
@@ -2398,7 +2398,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);" +
                                     "\n" +
@@ -2412,7 +2412,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_OWNER R\n" +
@@ -2422,7 +2422,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);" +
                                     "MERGE INTO REP_FORM_DEP_OWNER R\n" +
@@ -2432,7 +2432,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_OWNER R\n" +
@@ -2442,7 +2442,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_OWNER R\n" +
@@ -2452,7 +2452,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_OWNER R\n" +
@@ -2462,7 +2462,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_OWNER R\n" +
@@ -2472,7 +2472,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_OWNER R\n" +
@@ -2482,7 +2482,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "\n" +
@@ -2509,7 +2509,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "\n" +
@@ -2523,7 +2523,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_USER R\n" +
@@ -2533,7 +2533,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "\n" +
@@ -2547,7 +2547,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_USER R\n" +
@@ -2557,7 +2557,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                    "MERGE INTO REP_FORM_DEP_USER R\n" +
@@ -2567,7 +2567,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "\n" +
@@ -2581,7 +2581,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_USER R\n" +
@@ -2591,7 +2591,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_USER R\n" +
@@ -2601,7 +2601,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_USER R\n" +
@@ -2611,7 +2611,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "\n" +
@@ -2625,7 +2625,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_USER R\n" +
@@ -2635,7 +2635,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_USER R\n" +
@@ -2645,7 +2645,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_USER R\n" +
@@ -2655,7 +2655,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_USER R\n" +
@@ -2665,7 +2665,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "\n" +
@@ -2679,7 +2679,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_USER R\n" +
@@ -2689,7 +2689,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_USER R\n" +
@@ -2699,7 +2699,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_USER R\n" +
@@ -2709,7 +2709,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_USER R\n" +
@@ -2719,7 +2719,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_USER R\n" +
@@ -2729,7 +2729,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "\n" +
@@ -2743,7 +2743,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_USER R\n" +
@@ -2753,7 +2753,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_USER R\n" +
@@ -2763,7 +2763,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_USER R\n" +
@@ -2773,7 +2773,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_USER R\n" +
@@ -2783,7 +2783,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_USER R\n" +
@@ -2793,7 +2793,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "INSERT INTO REP_FORM_DEP_USER\n" +
@@ -2810,7 +2810,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_USER R\n" +
@@ -2820,7 +2820,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_USER R\n" +
@@ -2830,7 +2830,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_USER R\n" +
@@ -2840,7 +2840,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_USER R\n" +
@@ -2850,7 +2850,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_USER R\n" +
@@ -2860,7 +2860,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_USER R\n" +
@@ -2870,7 +2870,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_USER R\n" +
@@ -2880,7 +2880,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "\n" +
@@ -3470,7 +3470,7 @@ public class ScriptEXP {
                     report_form_src_script = "MERGE INTO REPORT_FORM_SRC R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
-                        "'"+ SC_data_miner.Reg_form_code[0] +"' as REG_FORM_CODE, \n" +
+                        "'"+ SC_data_miner.Reg_form_code[0] +"' as REG_FORM_CODE \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REG_FORM_CODE = S.REG_FORM_CODE\n" +
@@ -3492,7 +3492,7 @@ public class ScriptEXP {
                             report_rep_subj_type_script = "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
-                        "'"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE, \n" +
+                        "'"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -3503,7 +3503,7 @@ public class ScriptEXP {
                             report_rep_subj_type_script = "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
-                        "'"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE, \n" +
+                        "'"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -3512,7 +3512,7 @@ public class ScriptEXP {
                                     "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
-                        "'"+ SC_data_miner.rep_subj_type2[0] +"' as REP_SUBJ_TYPE, \n" +
+                        "'"+ SC_data_miner.rep_subj_type2[0] +"' as REP_SUBJ_TYPE \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -3523,7 +3523,7 @@ public class ScriptEXP {
                             report_rep_subj_type_script = "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
-                        "'"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE, \n" +
+                        "'"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -3532,7 +3532,7 @@ public class ScriptEXP {
                                     "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
-                        "'"+ SC_data_miner.rep_subj_type2[0] +"' as REP_SUBJ_TYPE, \n" +
+                        "'"+ SC_data_miner.rep_subj_type2[0] +"' as REP_SUBJ_TYPE \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -3541,7 +3541,7 @@ public class ScriptEXP {
                                     "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
-                        "'"+ SC_data_miner.rep_subj_type3[0] +"' as REP_SUBJ_TYPE, \n" +
+                        "'"+ SC_data_miner.rep_subj_type3[0] +"' as REP_SUBJ_TYPE \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -3552,7 +3552,7 @@ public class ScriptEXP {
                             report_rep_subj_type_script = "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
-                        "'"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE, \n" +
+                        "'"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -3561,7 +3561,7 @@ public class ScriptEXP {
                                     "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
-                        "'"+ SC_data_miner.rep_subj_type2[0] +"' as REP_SUBJ_TYPE, \n" +
+                        "'"+ SC_data_miner.rep_subj_type2[0] +"' as REP_SUBJ_TYPE \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -3570,7 +3570,7 @@ public class ScriptEXP {
                                     "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
-                        "'"+ SC_data_miner.rep_subj_type3[0] +"' as REP_SUBJ_TYPE, \n" +
+                        "'"+ SC_data_miner.rep_subj_type3[0] +"' as REP_SUBJ_TYPE \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -3579,7 +3579,7 @@ public class ScriptEXP {
                                     "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
-                        "'"+ SC_data_miner.rep_subj_type4[0] +"' as REP_SUBJ_TYPE, \n" +
+                        "'"+ SC_data_miner.rep_subj_type4[0] +"' as REP_SUBJ_TYPE \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -3590,7 +3590,7 @@ public class ScriptEXP {
                             report_rep_subj_type_script = "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
-                        "'"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE, \n" +
+                        "'"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -3599,7 +3599,7 @@ public class ScriptEXP {
                                     "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
-                        "'"+ SC_data_miner.rep_subj_type2[0] +"' as REP_SUBJ_TYPE, \n" +
+                        "'"+ SC_data_miner.rep_subj_type2[0] +"' as REP_SUBJ_TYPE \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -3608,7 +3608,7 @@ public class ScriptEXP {
                                     "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
-                        "'"+ SC_data_miner.rep_subj_type3[0] +"' as REP_SUBJ_TYPE, \n" +
+                        "'"+ SC_data_miner.rep_subj_type3[0] +"' as REP_SUBJ_TYPE \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -3617,7 +3617,7 @@ public class ScriptEXP {
                                     "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
-                        "'"+ SC_data_miner.rep_subj_type4[0] +"' as REP_SUBJ_TYPE, \n" +
+                        "'"+ SC_data_miner.rep_subj_type4[0] +"' as REP_SUBJ_TYPE \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -3626,7 +3626,7 @@ public class ScriptEXP {
                                     "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
-                        "'"+ SC_data_miner.rep_subj_type5[0] +"' as REP_SUBJ_TYPE, \n" +
+                        "'"+ SC_data_miner.rep_subj_type5[0] +"' as REP_SUBJ_TYPE \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -3637,7 +3637,7 @@ public class ScriptEXP {
                             report_rep_subj_type_script = "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
-                        "'"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE, \n" +
+                        "'"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -3646,7 +3646,7 @@ public class ScriptEXP {
                                     "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
-                        "'"+ SC_data_miner.rep_subj_type2[0] +"' as REP_SUBJ_TYPE, \n" +
+                        "'"+ SC_data_miner.rep_subj_type2[0] +"' as REP_SUBJ_TYPE \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -3655,7 +3655,7 @@ public class ScriptEXP {
                                     "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
-                        "'"+ SC_data_miner.rep_subj_type3[0] +"' as REP_SUBJ_TYPE, \n" +
+                        "'"+ SC_data_miner.rep_subj_type3[0] +"' as REP_SUBJ_TYPE \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -3664,7 +3664,7 @@ public class ScriptEXP {
                                     "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
-                        "'"+ SC_data_miner.rep_subj_type4[0] +"' as REP_SUBJ_TYPE, \n" +
+                        "'"+ SC_data_miner.rep_subj_type4[0] +"' as REP_SUBJ_TYPE \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -3673,7 +3673,7 @@ public class ScriptEXP {
                                     "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
-                        "'"+ SC_data_miner.rep_subj_type5[0] +"' as REP_SUBJ_TYPE, \n" +
+                        "'"+ SC_data_miner.rep_subj_type5[0] +"' as REP_SUBJ_TYPE \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -3682,7 +3682,7 @@ public class ScriptEXP {
                                     "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
-                        "'"+ SC_data_miner.rep_subj_type6[0] +"' as REP_SUBJ_TYPE, \n" +
+                        "'"+ SC_data_miner.rep_subj_type6[0] +"' as REP_SUBJ_TYPE \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -3693,7 +3693,7 @@ public class ScriptEXP {
                             report_rep_subj_type_script = "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
-                        "'"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE, \n" +
+                        "'"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -3702,7 +3702,7 @@ public class ScriptEXP {
                                     "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
-                        "'"+ SC_data_miner.rep_subj_type2[0] +"' as REP_SUBJ_TYPE, \n" +
+                        "'"+ SC_data_miner.rep_subj_type2[0] +"' as REP_SUBJ_TYPE \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -3711,7 +3711,7 @@ public class ScriptEXP {
                                     "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
-                        "'"+ SC_data_miner.rep_subj_type3[0] +"' as REP_SUBJ_TYPE, \n" +
+                        "'"+ SC_data_miner.rep_subj_type3[0] +"' as REP_SUBJ_TYPE \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -3720,7 +3720,7 @@ public class ScriptEXP {
                                     "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
-                        "'"+ SC_data_miner.rep_subj_type4[0] +"' as REP_SUBJ_TYPE, \n" +
+                        "'"+ SC_data_miner.rep_subj_type4[0] +"' as REP_SUBJ_TYPE \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -3729,7 +3729,7 @@ public class ScriptEXP {
                                     "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
-                        "'"+ SC_data_miner.rep_subj_type5[0] +"' as REP_SUBJ_TYPE, \n" +
+                        "'"+ SC_data_miner.rep_subj_type5[0] +"' as REP_SUBJ_TYPE \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -3738,7 +3738,7 @@ public class ScriptEXP {
                                     "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
-                        "'"+ SC_data_miner.rep_subj_type6[0] +"' as REP_SUBJ_TYPE, \n" +
+                        "'"+ SC_data_miner.rep_subj_type6[0] +"' as REP_SUBJ_TYPE \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -3747,7 +3747,7 @@ public class ScriptEXP {
                                     "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
-                        "'"+ SC_data_miner.rep_subj_type7[0] +"' as REP_SUBJ_TYPE, \n" +
+                        "'"+ SC_data_miner.rep_subj_type7[0] +"' as REP_SUBJ_TYPE \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -3758,7 +3758,7 @@ public class ScriptEXP {
                             report_rep_subj_type_script = "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
-                        "'"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE, \n" +
+                        "'"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -3767,7 +3767,7 @@ public class ScriptEXP {
                                     "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
-                        "'"+ SC_data_miner.rep_subj_type2[0] +"' as REP_SUBJ_TYPE, \n" +
+                        "'"+ SC_data_miner.rep_subj_type2[0] +"' as REP_SUBJ_TYPE \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -3776,7 +3776,7 @@ public class ScriptEXP {
                                     "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
-                        "'"+ SC_data_miner.rep_subj_type3[0] +"' as REP_SUBJ_TYPE, \n" +
+                        "'"+ SC_data_miner.rep_subj_type3[0] +"' as REP_SUBJ_TYPE \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -3785,7 +3785,7 @@ public class ScriptEXP {
                                     "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
-                        "'"+ SC_data_miner.rep_subj_type4[0] +"' as REP_SUBJ_TYPE, \n" +
+                        "'"+ SC_data_miner.rep_subj_type4[0] +"' as REP_SUBJ_TYPE \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -3794,7 +3794,7 @@ public class ScriptEXP {
                                     "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
-                        "'"+ SC_data_miner.rep_subj_type5[0] +"' as REP_SUBJ_TYPE, \n" +
+                        "'"+ SC_data_miner.rep_subj_type5[0] +"' as REP_SUBJ_TYPE \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -3803,7 +3803,7 @@ public class ScriptEXP {
                                     "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
-                        "'"+ SC_data_miner.rep_subj_type6[0] +"' as REP_SUBJ_TYPE, \n" +
+                        "'"+ SC_data_miner.rep_subj_type6[0] +"' as REP_SUBJ_TYPE \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -3812,7 +3812,7 @@ public class ScriptEXP {
                                     "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
-                        "'"+ SC_data_miner.rep_subj_type7[0] +"' as REP_SUBJ_TYPE, \n" +
+                        "'"+ SC_data_miner.rep_subj_type7[0] +"' as REP_SUBJ_TYPE \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -3821,7 +3821,7 @@ public class ScriptEXP {
                                     "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
-                        "'"+ SC_data_miner.rep_subj_type8[0] +"' as REP_SUBJ_TYPE, \n" +
+                        "'"+ SC_data_miner.rep_subj_type8[0] +"' as REP_SUBJ_TYPE \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -4067,7 +4067,7 @@ public class ScriptEXP {
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.FLAG_IOD = S.FLAG_IOD,\n" +
-						"                                R.FLAG_PDN = S.FLAG_PDN,\n" +
+						"                                R.FLAG_PDN = S.FLAG_PDN\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.FLAG_IOD, R.FLAG_PDN)\n" +
                         "   VALUES (S.FORM_CD, S.FLAG_IOD, S.FLAG_PDN);" +
                             "\n" +
@@ -4089,7 +4089,7 @@ public class ScriptEXP {
                                     "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
                                     "FROM dual) S\n" +
                                     "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
                                     "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                     "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                     "\n" +
@@ -4102,7 +4102,7 @@ public class ScriptEXP {
                                     "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
                                     "FROM dual) S\n" +
                                     "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
                                     "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                     "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                     "\n" +
@@ -4113,7 +4113,7 @@ public class ScriptEXP {
                                     "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
                                     "FROM dual) S\n" +
                                     "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
                                     "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                     "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                     "\n" +
@@ -4126,7 +4126,7 @@ public class ScriptEXP {
                                     "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
                                     "FROM dual) S\n" +
                                     "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
                                     "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                     "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                     "\n" +
@@ -4137,7 +4137,7 @@ public class ScriptEXP {
                                     "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
                                     "FROM dual) S\n" +
                                     "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
                                     "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                     "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                     "\n" +
@@ -4148,7 +4148,7 @@ public class ScriptEXP {
                                     "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
                                     "FROM dual) S\n" +
                                     "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
                                     "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                     "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                     "\n" +
@@ -4161,7 +4161,7 @@ public class ScriptEXP {
                                     "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
                                     "FROM dual) S\n" +
                                     "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
                                     "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                     "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                     "\n" +
@@ -4172,7 +4172,7 @@ public class ScriptEXP {
                                     "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
                                     "FROM dual) S\n" +
                                     "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
                                     "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                     "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                     "\n" +
@@ -4183,7 +4183,7 @@ public class ScriptEXP {
                                     "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
                                     "FROM dual) S\n" +
                                     "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
                                     "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                     "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                     "\n" +
@@ -4194,7 +4194,7 @@ public class ScriptEXP {
                                     "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
                                     "FROM dual) S\n" +
                                     "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
                                     "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                     "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                     "\n" +
@@ -4207,7 +4207,7 @@ public class ScriptEXP {
                                     "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
                                     "FROM dual) S\n" +
                                     "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
                                     "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                     "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                     "\n" +
@@ -4218,7 +4218,7 @@ public class ScriptEXP {
                                     "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
                                     "FROM dual) S\n" +
                                     "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
                                     "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                     "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                     "\n" +
@@ -4229,7 +4229,7 @@ public class ScriptEXP {
                                     "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
                                     "FROM dual) S\n" +
                                     "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
                                     "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                     "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                     "\n" +
@@ -4240,7 +4240,7 @@ public class ScriptEXP {
                                     "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
                                     "FROM dual) S\n" +
                                     "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
                                     "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                     "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                     "\n" +
@@ -4251,7 +4251,7 @@ public class ScriptEXP {
                                     "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
                                     "FROM dual) S\n" +
                                     "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
                                     "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                     "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                     "\n" +
@@ -4264,7 +4264,7 @@ public class ScriptEXP {
                                     "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
                                     "FROM dual) S\n" +
                                     "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
                                     "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                     "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                     "\n" +
@@ -4275,7 +4275,7 @@ public class ScriptEXP {
                                     "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
                                     "FROM dual) S\n" +
                                     "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
                                     "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                     "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                     "\n" +
@@ -4286,7 +4286,7 @@ public class ScriptEXP {
                                     "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
                                     "FROM dual) S\n" +
                                     "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
                                     "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                     "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                     "\n" +
@@ -4297,7 +4297,7 @@ public class ScriptEXP {
                                     "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
                                     "FROM dual) S\n" +
                                     "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
                                     "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                     "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                     "\n" +
@@ -4308,7 +4308,7 @@ public class ScriptEXP {
                                     "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
                                     "FROM dual) S\n" +
                                     "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
                                     "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                     "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                     "\n" +
@@ -4319,7 +4319,7 @@ public class ScriptEXP {
                                     "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
                                     "FROM dual) S\n" +
                                     "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
                                     "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                     "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                     "\n" +
@@ -4332,7 +4332,7 @@ public class ScriptEXP {
                                     "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
                                     "FROM dual) S\n" +
                                     "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
                                     "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                     "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                     "\n" +
@@ -4343,7 +4343,7 @@ public class ScriptEXP {
                                     "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
                                     "FROM dual) S\n" +
                                     "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
                                     "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                     "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                     "\n" +
@@ -4354,7 +4354,7 @@ public class ScriptEXP {
                                     "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
                                     "FROM dual) S\n" +
                                     "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
                                     "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                     "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                     "\n" +
@@ -4365,7 +4365,7 @@ public class ScriptEXP {
                                     "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
                                     "FROM dual) S\n" +
                                     "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
                                     "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                     "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                     "\n" +
@@ -4376,7 +4376,7 @@ public class ScriptEXP {
                                     "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
                                     "FROM dual) S\n" +
                                     "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
                                     "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                     "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                     "\n" +
@@ -4387,7 +4387,7 @@ public class ScriptEXP {
                                     "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
                                     "FROM dual) S\n" +
                                     "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
                                     "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                     "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                     "\n" +
@@ -4398,7 +4398,7 @@ public class ScriptEXP {
                                     "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
                                     "FROM dual) S\n" +
                                     "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
                                     "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                     "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                     "\n" +
@@ -4411,7 +4411,7 @@ public class ScriptEXP {
                                     "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
                                     "FROM dual) S\n" +
                                     "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
                                     "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                     "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                     "\n" +
@@ -4422,7 +4422,7 @@ public class ScriptEXP {
                                     "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
                                     "FROM dual) S\n" +
                                     "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
                                     "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                     "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                     "\n" +
@@ -4433,7 +4433,7 @@ public class ScriptEXP {
                                     "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
                                     "FROM dual) S\n" +
                                     "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
                                     "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                     "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                     "\n" +
@@ -4444,7 +4444,7 @@ public class ScriptEXP {
                                     "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
                                     "FROM dual) S\n" +
                                     "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
                                     "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                     "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                     "\n" +
@@ -4455,7 +4455,7 @@ public class ScriptEXP {
                                     "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
                                     "FROM dual) S\n" +
                                     "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
                                     "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                     "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                     "\n" +
@@ -4466,7 +4466,7 @@ public class ScriptEXP {
                                     "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
                                     "FROM dual) S\n" +
                                     "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
                                     "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                     "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                     "\n" +
@@ -4477,7 +4477,7 @@ public class ScriptEXP {
                                     "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
                                     "FROM dual) S\n" +
                                     "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
                                     "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                     "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                     "\n" +
@@ -4488,7 +4488,7 @@ public class ScriptEXP {
                                     "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
                                     "FROM dual) S\n" +
                                     "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
                                     "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                     "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                     "\n" +
@@ -4513,7 +4513,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);" +
                                     "\n" +
@@ -4527,7 +4527,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_OWNER R\n" +
@@ -4537,7 +4537,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);" +
                                     "\n" +
@@ -4551,7 +4551,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_OWNER R\n" +
@@ -4561,7 +4561,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_OWNER R\n" +
@@ -4571,7 +4571,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);" +
                                     "\n" +
@@ -4585,7 +4585,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_OWNER R\n" +
@@ -4595,7 +4595,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_OWNER R\n" +
@@ -4605,7 +4605,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_OWNER R\n" +
@@ -4615,7 +4615,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);" +
                                     "\n" +
@@ -4629,7 +4629,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_OWNER R\n" +
@@ -4639,7 +4639,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);" +
                                     "MERGE INTO REP_FORM_DEP_OWNER R\n" +
@@ -4649,7 +4649,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_OWNER R\n" +
@@ -4659,7 +4659,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_OWNER R\n" +
@@ -4669,7 +4669,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);" +
                                     "\n" +
@@ -4683,7 +4683,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_OWNER R\n" +
@@ -4693,7 +4693,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);" +
                                     "MERGE INTO REP_FORM_DEP_OWNER R\n" +
@@ -4703,7 +4703,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_OWNER R\n" +
@@ -4713,7 +4713,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_OWNER R\n" +
@@ -4723,7 +4723,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_OWNER R\n" +
@@ -4733,7 +4733,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);" +
                                     "\n" +
@@ -4747,7 +4747,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_OWNER R\n" +
@@ -4757,7 +4757,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);" +
                                     "MERGE INTO REP_FORM_DEP_OWNER R\n" +
@@ -4767,7 +4767,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_OWNER R\n" +
@@ -4777,7 +4777,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_OWNER R\n" +
@@ -4787,7 +4787,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_OWNER R\n" +
@@ -4797,7 +4797,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_OWNER R\n" +
@@ -4807,7 +4807,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);" +
                                     "\n" +
@@ -4821,7 +4821,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_OWNER R\n" +
@@ -4831,7 +4831,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);" +
                                     "MERGE INTO REP_FORM_DEP_OWNER R\n" +
@@ -4841,7 +4841,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_OWNER R\n" +
@@ -4851,7 +4851,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_OWNER R\n" +
@@ -4861,7 +4861,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_OWNER R\n" +
@@ -4871,7 +4871,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_OWNER R\n" +
@@ -4881,7 +4881,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_OWNER R\n" +
@@ -4891,7 +4891,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "\n" +
@@ -4917,7 +4917,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "\n" +
@@ -4931,7 +4931,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_USER R\n" +
@@ -4941,7 +4941,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "\n" +
@@ -4955,7 +4955,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_USER R\n" +
@@ -4965,7 +4965,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                    "MERGE INTO REP_FORM_DEP_USER R\n" +
@@ -4975,7 +4975,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "\n" +
@@ -4989,7 +4989,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_USER R\n" +
@@ -4999,7 +4999,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_USER R\n" +
@@ -5009,7 +5009,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_USER R\n" +
@@ -5019,7 +5019,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "\n" +
@@ -5033,7 +5033,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_USER R\n" +
@@ -5043,7 +5043,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_USER R\n" +
@@ -5053,7 +5053,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_USER R\n" +
@@ -5063,7 +5063,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_USER R\n" +
@@ -5073,7 +5073,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "\n" +
@@ -5087,7 +5087,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_USER R\n" +
@@ -5097,7 +5097,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_USER R\n" +
@@ -5107,7 +5107,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_USER R\n" +
@@ -5117,7 +5117,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_USER R\n" +
@@ -5127,7 +5127,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_USER R\n" +
@@ -5137,7 +5137,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "\n" +
@@ -5151,7 +5151,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_USER R\n" +
@@ -5161,7 +5161,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_USER R\n" +
@@ -5171,7 +5171,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_USER R\n" +
@@ -5181,7 +5181,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_USER R\n" +
@@ -5191,7 +5191,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_USER R\n" +
@@ -5201,7 +5201,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "INSERT INTO REP_FORM_DEP_USER\n" +
@@ -5218,7 +5218,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_USER R\n" +
@@ -5228,7 +5228,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_USER R\n" +
@@ -5238,7 +5238,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_USER R\n" +
@@ -5248,7 +5248,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_USER R\n" +
@@ -5258,7 +5258,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_USER R\n" +
@@ -5268,7 +5268,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_USER R\n" +
@@ -5278,7 +5278,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "MERGE INTO REP_FORM_DEP_USER R\n" +
@@ -5288,7 +5288,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                     "\n" +
@@ -5870,7 +5870,7 @@ public class ScriptEXP {
                     report_form_src_script[0] = "MERGE INTO REPORT_FORM_SRC R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
-                        "'"+ SC_data_miner.Reg_form_code[0] +"' as REG_FORM_CODE, \n" +
+                        "'"+ SC_data_miner.Reg_form_code[0] +"' as REG_FORM_CODE \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REG_FORM_CODE = S.REG_FORM_CODE\n" +
@@ -5891,7 +5891,7 @@ public class ScriptEXP {
                             report_rep_subj_type_script[0] = "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
-                        "'"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE, \n" +
+                        "'"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -5902,7 +5902,7 @@ public class ScriptEXP {
                             report_rep_subj_type_script[0] = "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
-                        "'"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE, \n" +
+                        "'"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -5911,7 +5911,7 @@ public class ScriptEXP {
                                     "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
-                        "'"+ SC_data_miner.rep_subj_type2[0] +"' as REP_SUBJ_TYPE, \n" +
+                        "'"+ SC_data_miner.rep_subj_type2[0] +"' as REP_SUBJ_TYPE \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -5922,7 +5922,7 @@ public class ScriptEXP {
                             report_rep_subj_type_script[0] = "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
-                        "'"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE, \n" +
+                        "'"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -5931,7 +5931,7 @@ public class ScriptEXP {
                                     "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
-                        "'"+ SC_data_miner.rep_subj_type2[0] +"' as REP_SUBJ_TYPE, \n" +
+                        "'"+ SC_data_miner.rep_subj_type2[0] +"' as REP_SUBJ_TYPE \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -5940,7 +5940,7 @@ public class ScriptEXP {
                                     "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
-                        "'"+ SC_data_miner.rep_subj_type3[0] +"' as REP_SUBJ_TYPE, \n" +
+                        "'"+ SC_data_miner.rep_subj_type3[0] +"' as REP_SUBJ_TYPE \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -5951,7 +5951,7 @@ public class ScriptEXP {
                             report_rep_subj_type_script[0] = "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
-                        "'"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE, \n" +
+                        "'"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -5960,7 +5960,7 @@ public class ScriptEXP {
                                     "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
-                        "'"+ SC_data_miner.rep_subj_type2[0] +"' as REP_SUBJ_TYPE, \n" +
+                        "'"+ SC_data_miner.rep_subj_type2[0] +"' as REP_SUBJ_TYPE \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -5969,7 +5969,7 @@ public class ScriptEXP {
                                     "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
-                        "'"+ SC_data_miner.rep_subj_type3[0] +"' as REP_SUBJ_TYPE, \n" +
+                        "'"+ SC_data_miner.rep_subj_type3[0] +"' as REP_SUBJ_TYPE \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -5978,7 +5978,7 @@ public class ScriptEXP {
                                     "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
-                        "'"+ SC_data_miner.rep_subj_type4[0] +"' as REP_SUBJ_TYPE, \n" +
+                        "'"+ SC_data_miner.rep_subj_type4[0] +"' as REP_SUBJ_TYPE \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -5989,7 +5989,7 @@ public class ScriptEXP {
                             report_rep_subj_type_script[0] = "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
-                        "'"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE, \n" +
+                        "'"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -5998,7 +5998,7 @@ public class ScriptEXP {
                                     "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
-                        "'"+ SC_data_miner.rep_subj_type2[0] +"' as REP_SUBJ_TYPE, \n" +
+                        "'"+ SC_data_miner.rep_subj_type2[0] +"' as REP_SUBJ_TYPE \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -6007,7 +6007,7 @@ public class ScriptEXP {
                                     "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
-                        "'"+ SC_data_miner.rep_subj_type3[0] +"' as REP_SUBJ_TYPE, \n" +
+                        "'"+ SC_data_miner.rep_subj_type3[0] +"' as REP_SUBJ_TYPE \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -6016,7 +6016,7 @@ public class ScriptEXP {
                                     "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
-                        "'"+ SC_data_miner.rep_subj_type4[0] +"' as REP_SUBJ_TYPE, \n" +
+                        "'"+ SC_data_miner.rep_subj_type4[0] +"' as REP_SUBJ_TYPE \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -6025,7 +6025,7 @@ public class ScriptEXP {
                                     "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
-                        "'"+ SC_data_miner.rep_subj_type5[0] +"' as REP_SUBJ_TYPE, \n" +
+                        "'"+ SC_data_miner.rep_subj_type5[0] +"' as REP_SUBJ_TYPE \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -6036,7 +6036,7 @@ public class ScriptEXP {
                             report_rep_subj_type_script[0] = "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
-                        "'"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE, \n" +
+                        "'"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -6045,7 +6045,7 @@ public class ScriptEXP {
                                     "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
-                        "'"+ SC_data_miner.rep_subj_type2[0] +"' as REP_SUBJ_TYPE, \n" +
+                        "'"+ SC_data_miner.rep_subj_type2[0] +"' as REP_SUBJ_TYPE \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -6054,7 +6054,7 @@ public class ScriptEXP {
                                     "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
-                        "'"+ SC_data_miner.rep_subj_type3[0] +"' as REP_SUBJ_TYPE, \n" +
+                        "'"+ SC_data_miner.rep_subj_type3[0] +"' as REP_SUBJ_TYPE \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -6063,7 +6063,7 @@ public class ScriptEXP {
                                     "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
-                        "'"+ SC_data_miner.rep_subj_type4[0] +"' as REP_SUBJ_TYPE, \n" +
+                        "'"+ SC_data_miner.rep_subj_type4[0] +"' as REP_SUBJ_TYPE \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -6072,7 +6072,7 @@ public class ScriptEXP {
                                     "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
-                        "'"+ SC_data_miner.rep_subj_type5[0] +"' as REP_SUBJ_TYPE, \n" +
+                        "'"+ SC_data_miner.rep_subj_type5[0] +"' as REP_SUBJ_TYPE \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -6081,7 +6081,7 @@ public class ScriptEXP {
                                     "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
-                        "'"+ SC_data_miner.rep_subj_type6[0] +"' as REP_SUBJ_TYPE, \n" +
+                        "'"+ SC_data_miner.rep_subj_type6[0] +"' as REP_SUBJ_TYPE \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -6092,7 +6092,7 @@ public class ScriptEXP {
                             report_rep_subj_type_script[0] = "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
-                        "'"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE, \n" +
+                        "'"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -6101,7 +6101,7 @@ public class ScriptEXP {
                                     "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
-                        "'"+ SC_data_miner.rep_subj_type2[0] +"' as REP_SUBJ_TYPE, \n" +
+                        "'"+ SC_data_miner.rep_subj_type2[0] +"' as REP_SUBJ_TYPE \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -6110,7 +6110,7 @@ public class ScriptEXP {
                                     "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
-                        "'"+ SC_data_miner.rep_subj_type3[0] +"' as REP_SUBJ_TYPE, \n" +
+                        "'"+ SC_data_miner.rep_subj_type3[0] +"' as REP_SUBJ_TYPE \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -6119,7 +6119,7 @@ public class ScriptEXP {
                                     "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
-                        "'"+ SC_data_miner.rep_subj_type4[0] +"' as REP_SUBJ_TYPE, \n" +
+                        "'"+ SC_data_miner.rep_subj_type4[0] +"' as REP_SUBJ_TYPE \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -6128,7 +6128,7 @@ public class ScriptEXP {
                                     "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
-                        "'"+ SC_data_miner.rep_subj_type5[0] +"' as REP_SUBJ_TYPE, \n" +
+                        "'"+ SC_data_miner.rep_subj_type5[0] +"' as REP_SUBJ_TYPE \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -6137,7 +6137,7 @@ public class ScriptEXP {
                                     "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
-                        "'"+ SC_data_miner.rep_subj_type6[0] +"' as REP_SUBJ_TYPE, \n" +
+                        "'"+ SC_data_miner.rep_subj_type6[0] +"' as REP_SUBJ_TYPE \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -6146,7 +6146,7 @@ public class ScriptEXP {
                                     "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
-                        "'"+ SC_data_miner.rep_subj_type7[0] +"' as REP_SUBJ_TYPE, \n" +
+                        "'"+ SC_data_miner.rep_subj_type7[0] +"' as REP_SUBJ_TYPE \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -6157,7 +6157,7 @@ public class ScriptEXP {
                             report_rep_subj_type_script[0] = "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
-                        "'"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE, \n" +
+                        "'"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -6166,7 +6166,7 @@ public class ScriptEXP {
                                     "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
-                        "'"+ SC_data_miner.rep_subj_type2[0] +"' as REP_SUBJ_TYPE, \n" +
+                        "'"+ SC_data_miner.rep_subj_type2[0] +"' as REP_SUBJ_TYPE \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -6175,7 +6175,7 @@ public class ScriptEXP {
                                     "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
-                        "'"+ SC_data_miner.rep_subj_type3[0] +"' as REP_SUBJ_TYPE, \n" +
+                        "'"+ SC_data_miner.rep_subj_type3[0] +"' as REP_SUBJ_TYPE \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -6184,7 +6184,7 @@ public class ScriptEXP {
                                     "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
-                        "'"+ SC_data_miner.rep_subj_type4[0] +"' as REP_SUBJ_TYPE, \n" +
+                        "'"+ SC_data_miner.rep_subj_type4[0] +"' as REP_SUBJ_TYPE \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -6193,7 +6193,7 @@ public class ScriptEXP {
                                     "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
-                        "'"+ SC_data_miner.rep_subj_type5[0] +"' as REP_SUBJ_TYPE, \n" +
+                        "'"+ SC_data_miner.rep_subj_type5[0] +"' as REP_SUBJ_TYPE \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -6202,7 +6202,7 @@ public class ScriptEXP {
                                     "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
-                        "'"+ SC_data_miner.rep_subj_type6[0] +"' as REP_SUBJ_TYPE, \n" +
+                        "'"+ SC_data_miner.rep_subj_type6[0] +"' as REP_SUBJ_TYPE \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -6211,7 +6211,7 @@ public class ScriptEXP {
                                     "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
-                        "'"+ SC_data_miner.rep_subj_type7[0] +"' as REP_SUBJ_TYPE, \n" +
+                        "'"+ SC_data_miner.rep_subj_type7[0] +"' as REP_SUBJ_TYPE \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -6220,7 +6220,7 @@ public class ScriptEXP {
                                     "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
-                        "'"+ SC_data_miner.rep_subj_type8[0] +"' as REP_SUBJ_TYPE, \n" +
+                        "'"+ SC_data_miner.rep_subj_type8[0] +"' as REP_SUBJ_TYPE \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -6458,7 +6458,7 @@ public class ScriptEXP {
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.FLAG_IOD = S.FLAG_IOD,\n" +
-						"                                R.FLAG_PDN = S.FLAG_PDN,\n" +
+						"                                R.FLAG_PDN = S.FLAG_PDN\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.FLAG_IOD, R.FLAG_PDN)\n" +
                         "   VALUES (S.FORM_CD, S.FLAG_IOD, S.FLAG_PDN);" +
                                 "\n" +
@@ -6480,7 +6480,7 @@ public class ScriptEXP {
                                         "'"+ SC_data_miner.Form_cd[n] + "' as REP_FORM_CD \n" +
                                         "FROM dual) S\n" +
                                         "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                        "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                        "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
                                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                         "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                         "\n" +
@@ -6493,7 +6493,7 @@ public class ScriptEXP {
                                         "'"+ SC_data_miner.Form_cd[n] + "' as REP_FORM_CD \n" +
                                         "FROM dual) S\n" +
                                         "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                        "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                        "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
                                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                         "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                         "\n" +
@@ -6504,7 +6504,7 @@ public class ScriptEXP {
                                         "'"+ SC_data_miner.Form_cd[n] + "' as REP_FORM_CD \n" +
                                         "FROM dual) S\n" +
                                         "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                        "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                        "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
                                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                         "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                         "\n" +
@@ -6517,7 +6517,7 @@ public class ScriptEXP {
                                         "'"+ SC_data_miner.Form_cd[n] + "' as REP_FORM_CD \n" +
                                         "FROM dual) S\n" +
                                         "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                        "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                        "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
                                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                         "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                         "\n" +
@@ -6528,7 +6528,7 @@ public class ScriptEXP {
                                         "'"+ SC_data_miner.Form_cd[n] + "' as REP_FORM_CD \n" +
                                         "FROM dual) S\n" +
                                         "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                        "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                        "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
                                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                         "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                         "\n" +
@@ -6539,7 +6539,7 @@ public class ScriptEXP {
                                         "'"+ SC_data_miner.Form_cd[n] + "' as REP_FORM_CD \n" +
                                         "FROM dual) S\n" +
                                         "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                        "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                        "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
                                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                         "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                         "\n" +
@@ -6552,7 +6552,7 @@ public class ScriptEXP {
                                         "'"+ SC_data_miner.Form_cd[n] + "' as REP_FORM_CD \n" +
                                         "FROM dual) S\n" +
                                         "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                        "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                        "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
                                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                         "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                         "\n" +
@@ -6563,7 +6563,7 @@ public class ScriptEXP {
                                         "'"+ SC_data_miner.Form_cd[n] + "' as REP_FORM_CD \n" +
                                         "FROM dual) S\n" +
                                         "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                        "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                        "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
                                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                         "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                         "\n" +
@@ -6574,7 +6574,7 @@ public class ScriptEXP {
                                         "'"+ SC_data_miner.Form_cd[n] + "' as REP_FORM_CD \n" +
                                         "FROM dual) S\n" +
                                         "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                        "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                        "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
                                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                         "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                         "\n" +
@@ -6585,7 +6585,7 @@ public class ScriptEXP {
                                         "'"+ SC_data_miner.Form_cd[n] + "' as REP_FORM_CD \n" +
                                         "FROM dual) S\n" +
                                         "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                        "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                        "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
                                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                         "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                         "\n" +
@@ -6598,7 +6598,7 @@ public class ScriptEXP {
                                         "'"+ SC_data_miner.Form_cd[n] + "' as REP_FORM_CD \n" +
                                         "FROM dual) S\n" +
                                         "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                        "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                        "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
                                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                         "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                         "\n" +
@@ -6609,7 +6609,7 @@ public class ScriptEXP {
                                         "'"+ SC_data_miner.Form_cd[n] + "' as REP_FORM_CD \n" +
                                         "FROM dual) S\n" +
                                         "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                        "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                        "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
                                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                         "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                         "\n" +
@@ -6620,7 +6620,7 @@ public class ScriptEXP {
                                         "'"+ SC_data_miner.Form_cd[n] + "' as REP_FORM_CD \n" +
                                         "FROM dual) S\n" +
                                         "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                        "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                        "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
                                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                         "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                         "\n" +
@@ -6631,7 +6631,7 @@ public class ScriptEXP {
                                         "'"+ SC_data_miner.Form_cd[n] + "' as REP_FORM_CD \n" +
                                         "FROM dual) S\n" +
                                         "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                        "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                        "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
                                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                         "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                         "\n" +
@@ -6642,7 +6642,7 @@ public class ScriptEXP {
                                         "'"+ SC_data_miner.Form_cd[n] + "' as REP_FORM_CD \n" +
                                         "FROM dual) S\n" +
                                         "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                        "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                        "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
                                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                         "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                         "\n" +
@@ -6655,7 +6655,7 @@ public class ScriptEXP {
                                         "'"+ SC_data_miner.Form_cd[n] + "' as REP_FORM_CD \n" +
                                         "FROM dual) S\n" +
                                         "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                        "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                        "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
                                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                         "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                         "\n" +
@@ -6666,7 +6666,7 @@ public class ScriptEXP {
                                         "'"+ SC_data_miner.Form_cd[n] + "' as REP_FORM_CD \n" +
                                         "FROM dual) S\n" +
                                         "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                        "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                        "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
                                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                         "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                         "\n" +
@@ -6677,7 +6677,7 @@ public class ScriptEXP {
                                         "'"+ SC_data_miner.Form_cd[n] + "' as REP_FORM_CD \n" +
                                         "FROM dual) S\n" +
                                         "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                        "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                        "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
                                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                         "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                         "\n" +
@@ -6688,7 +6688,7 @@ public class ScriptEXP {
                                         "'"+ SC_data_miner.Form_cd[n] + "' as REP_FORM_CD \n" +
                                         "FROM dual) S\n" +
                                         "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                        "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                        "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
                                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                         "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                         "\n" +
@@ -6699,7 +6699,7 @@ public class ScriptEXP {
                                         "'"+ SC_data_miner.Form_cd[n] + "' as REP_FORM_CD \n" +
                                         "FROM dual) S\n" +
                                         "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                        "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                        "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
                                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                         "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                         "\n" +
@@ -6710,7 +6710,7 @@ public class ScriptEXP {
                                         "'"+ SC_data_miner.Form_cd[n] + "' as REP_FORM_CD \n" +
                                         "FROM dual) S\n" +
                                         "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                        "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                        "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
                                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                         "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                         "\n" +
@@ -6723,7 +6723,7 @@ public class ScriptEXP {
                                         "'"+ SC_data_miner.Form_cd[n] + "' as REP_FORM_CD \n" +
                                         "FROM dual) S\n" +
                                         "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                        "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                        "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
                                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                         "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                         "\n" +
@@ -6734,7 +6734,7 @@ public class ScriptEXP {
                                         "'"+ SC_data_miner.Form_cd[n] + "' as REP_FORM_CD \n" +
                                         "FROM dual) S\n" +
                                         "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                        "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                        "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
                                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                         "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                         "\n" +
@@ -6745,7 +6745,7 @@ public class ScriptEXP {
                                         "'"+ SC_data_miner.Form_cd[n] + "' as REP_FORM_CD \n" +
                                         "FROM dual) S\n" +
                                         "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                        "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                        "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
                                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                         "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                         "\n" +
@@ -6756,7 +6756,7 @@ public class ScriptEXP {
                                         "'"+ SC_data_miner.Form_cd[n] + "' as REP_FORM_CD \n" +
                                         "FROM dual) S\n" +
                                         "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                        "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                        "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
                                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                         "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                         "\n" +
@@ -6767,7 +6767,7 @@ public class ScriptEXP {
                                         "'"+ SC_data_miner.Form_cd[n] + "' as REP_FORM_CD \n" +
                                         "FROM dual) S\n" +
                                         "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                        "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                        "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
                                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                         "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                         "\n" +
@@ -6778,7 +6778,7 @@ public class ScriptEXP {
                                         "'"+ SC_data_miner.Form_cd[n] + "' as REP_FORM_CD \n" +
                                         "FROM dual) S\n" +
                                         "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                        "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                        "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
                                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                         "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                         "\n" +
@@ -6789,7 +6789,7 @@ public class ScriptEXP {
                                         "'"+ SC_data_miner.Form_cd[n] + "' as REP_FORM_CD \n" +
                                         "FROM dual) S\n" +
                                         "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                        "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                        "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
                                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                         "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                         "\n" +
@@ -6802,7 +6802,7 @@ public class ScriptEXP {
                                         "'"+ SC_data_miner.Form_cd[n] + "' as REP_FORM_CD \n" +
                                         "FROM dual) S\n" +
                                         "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                        "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                        "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
                                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                         "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                         "\n" +
@@ -6813,7 +6813,7 @@ public class ScriptEXP {
                                         "'"+ SC_data_miner.Form_cd[n] + "' as REP_FORM_CD \n" +
                                         "FROM dual) S\n" +
                                         "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                        "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                        "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
                                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                         "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                         "\n" +
@@ -6824,7 +6824,7 @@ public class ScriptEXP {
                                         "'"+ SC_data_miner.Form_cd[n] + "' as REP_FORM_CD \n" +
                                         "FROM dual) S\n" +
                                         "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                        "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                        "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
                                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                         "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                         "\n" +
@@ -6835,7 +6835,7 @@ public class ScriptEXP {
                                         "'"+ SC_data_miner.Form_cd[n] + "' as REP_FORM_CD \n" +
                                         "FROM dual) S\n" +
                                         "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                        "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                        "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
                                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                         "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                         "\n" +
@@ -6846,7 +6846,7 @@ public class ScriptEXP {
                                         "'"+ SC_data_miner.Form_cd[n] + "' as REP_FORM_CD \n" +
                                         "FROM dual) S\n" +
                                         "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                        "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                        "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
                                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                         "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                         "\n" +
@@ -6857,7 +6857,7 @@ public class ScriptEXP {
                                         "'"+ SC_data_miner.Form_cd[n] + "' as REP_FORM_CD \n" +
                                         "FROM dual) S\n" +
                                         "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                        "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                        "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
                                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                         "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                         "\n" +
@@ -6868,7 +6868,7 @@ public class ScriptEXP {
                                         "'"+ SC_data_miner.Form_cd[n] + "' as REP_FORM_CD \n" +
                                         "FROM dual) S\n" +
                                         "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                        "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                        "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
                                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                         "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                         "\n" +
@@ -6879,7 +6879,7 @@ public class ScriptEXP {
                                         "'"+ SC_data_miner.Form_cd[n] + "' as REP_FORM_CD \n" +
                                         "FROM dual) S\n" +
                                         "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                        "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD,\n" +
+                                        "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
                                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                         "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                         "\n" +
@@ -6904,7 +6904,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);" +
                                         "\n" +
@@ -6918,7 +6918,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                         "MERGE INTO REP_FORM_DEP_OWNER R\n" +
@@ -6928,7 +6928,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                         "\n" +
@@ -6942,7 +6942,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                         "MERGE INTO REP_FORM_DEP_OWNER R\n" +
@@ -6952,7 +6952,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                         "MERGE INTO REP_FORM_DEP_OWNER R\n" +
@@ -6962,7 +6962,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                         "\n" +
@@ -6976,7 +6976,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                         "MERGE INTO REP_FORM_DEP_OWNER R\n" +
@@ -6986,7 +6986,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                         "MERGE INTO REP_FORM_DEP_OWNER R\n" +
@@ -6996,7 +6996,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                         "MERGE INTO REP_FORM_DEP_OWNER R\n" +
@@ -7006,7 +7006,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                         "\n" +
@@ -7020,7 +7020,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                         "MERGE INTO REP_FORM_DEP_OWNER R\n" +
@@ -7030,7 +7030,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                         "MERGE INTO REP_FORM_DEP_OWNER R\n" +
@@ -7040,7 +7040,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                         "MERGE INTO REP_FORM_DEP_OWNER R\n" +
@@ -7050,7 +7050,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                         "MERGE INTO REP_FORM_DEP_OWNER R\n" +
@@ -7060,7 +7060,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                         "\n" +
@@ -7074,7 +7074,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                         "MERGE INTO REP_FORM_DEP_OWNER R\n" +
@@ -7084,7 +7084,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                         "MERGE INTO REP_FORM_DEP_OWNER R\n" +
@@ -7094,7 +7094,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                         "MERGE INTO REP_FORM_DEP_OWNER R\n" +
@@ -7104,7 +7104,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                         "MERGE INTO REP_FORM_DEP_OWNER R\n" +
@@ -7114,7 +7114,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                         "MERGE INTO REP_FORM_DEP_OWNER R\n" +
@@ -7124,7 +7124,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                         "\n" +
@@ -7138,7 +7138,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                         "MERGE INTO REP_FORM_DEP_OWNER R\n" +
@@ -7148,7 +7148,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                         "MERGE INTO REP_FORM_DEP_OWNER R\n" +
@@ -7158,7 +7158,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                         "MERGE INTO REP_FORM_DEP_OWNER R\n" +
@@ -7168,7 +7168,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                         "MERGE INTO REP_FORM_DEP_OWNER R\n" +
@@ -7178,7 +7178,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                         "MERGE INTO REP_FORM_DEP_OWNER R\n" +
@@ -7188,7 +7188,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                         "MERGE INTO REP_FORM_DEP_OWNER R\n" +
@@ -7198,7 +7198,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                         "\n" +
@@ -7212,7 +7212,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                         "MERGE INTO REP_FORM_DEP_OWNER R\n" +
@@ -7222,7 +7222,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                         "MERGE INTO REP_FORM_DEP_OWNER R\n" +
@@ -7232,7 +7232,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                         "MERGE INTO REP_FORM_DEP_OWNER R\n" +
@@ -7242,7 +7242,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                         "MERGE INTO REP_FORM_DEP_OWNER R\n" +
@@ -7252,7 +7252,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                         "MERGE INTO REP_FORM_DEP_OWNER R\n" +
@@ -7262,7 +7262,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                         "MERGE INTO REP_FORM_DEP_OWNER R\n" +
@@ -7272,7 +7272,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                         "MERGE INTO REP_FORM_DEP_OWNER R\n" +
@@ -7282,7 +7282,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                         "\n" +
@@ -7308,7 +7308,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                         "\n" +
@@ -7322,7 +7322,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                         "MERGE INTO REP_FORM_DEP_USER R\n" +
@@ -7332,7 +7332,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                         "\n" +
@@ -7346,7 +7346,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                         "MERGE INTO REP_FORM_DEP_USER R\n" +
@@ -7356,7 +7356,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                         "MERGE INTO REP_FORM_DEP_USER R\n" +
@@ -7366,7 +7366,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                         "\n" +
@@ -7380,7 +7380,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                         "MERGE INTO REP_FORM_DEP_USER R\n" +
@@ -7390,7 +7390,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                         "MERGE INTO REP_FORM_DEP_USER R\n" +
@@ -7400,7 +7400,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                         "MERGE INTO REP_FORM_DEP_USER R\n" +
@@ -7410,7 +7410,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                         "\n" +
@@ -7424,7 +7424,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                         "MERGE INTO REP_FORM_DEP_USER R\n" +
@@ -7434,7 +7434,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                         "MERGE INTO REP_FORM_DEP_USER R\n" +
@@ -7444,7 +7444,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                         "MERGE INTO REP_FORM_DEP_USER R\n" +
@@ -7454,7 +7454,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                         "MERGE INTO REP_FORM_DEP_USER R\n" +
@@ -7464,7 +7464,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                         "\n" +
@@ -7478,7 +7478,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                         "MERGE INTO REP_FORM_DEP_USER R\n" +
@@ -7488,7 +7488,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                         "MERGE INTO REP_FORM_DEP_USER R\n" +
@@ -7498,7 +7498,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                         "MERGE INTO REP_FORM_DEP_USER R\n" +
@@ -7508,7 +7508,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                         "MERGE INTO REP_FORM_DEP_USER R\n" +
@@ -7518,7 +7518,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                         "MERGE INTO REP_FORM_DEP_USER R\n" +
@@ -7528,7 +7528,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                         "\n" +
@@ -7542,7 +7542,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                         "MERGE INTO REP_FORM_DEP_USER R\n" +
@@ -7552,7 +7552,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                         "MERGE INTO REP_FORM_DEP_USER R\n" +
@@ -7562,7 +7562,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                         "MERGE INTO REP_FORM_DEP_USER R\n" +
@@ -7572,7 +7572,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                         "MERGE INTO REP_FORM_DEP_USER R\n" +
@@ -7582,7 +7582,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                         "MERGE INTO REP_FORM_DEP_USER R\n" +
@@ -7592,7 +7592,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                         "MERGE INTO REP_FORM_DEP_USER R\n" +
@@ -7602,7 +7602,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                         "\n" +
@@ -7616,7 +7616,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                         "MERGE INTO REP_FORM_DEP_USER R\n" +
@@ -7626,7 +7626,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                         "MERGE INTO REP_FORM_DEP_USER R\n" +
@@ -7636,7 +7636,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                         "MERGE INTO REP_FORM_DEP_USER R\n" +
@@ -7646,7 +7646,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                         "MERGE INTO REP_FORM_DEP_USER R\n" +
@@ -7656,7 +7656,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                         "MERGE INTO REP_FORM_DEP_USER R\n" +
@@ -7666,7 +7666,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                         "MERGE INTO REP_FORM_DEP_USER R\n" +
@@ -7676,7 +7676,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                         "MERGE INTO REP_FORM_DEP_USER R\n" +
@@ -7686,7 +7686,7 @@ public class ScriptEXP {
 						reason + " \n" +
                         " FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON,\n" +
+                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
                         "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
                                         "\n" +
@@ -8270,7 +8270,7 @@ public class ScriptEXP {
                         report_form_src_script[n] = "MERGE INTO REPORT_FORM_SRC R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n" +
-                        "'"+ SC_data_miner.Reg_form_code[n] +"' as REG_FORM_CODE, \n" +
+                        "'"+ SC_data_miner.Reg_form_code[n] +"' as REG_FORM_CODE \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE)\n" +
                         "   WHEN MATCHED THEN UPDATE SET R.REG_FORM_CODE = S.REG_FORM_CODE\n" +
@@ -8293,7 +8293,7 @@ public class ScriptEXP {
                                 report_rep_subj_type_script[n] = "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n" +
-                        "'"+ SC_data_miner.rep_subj_type[n] +"' as REP_SUBJ_TYPE, \n" +
+                        "'"+ SC_data_miner.rep_subj_type[n] +"' as REP_SUBJ_TYPE \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -8304,7 +8304,7 @@ public class ScriptEXP {
                                 report_rep_subj_type_script[n] = "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n" +
-                        "'"+ SC_data_miner.rep_subj_type[n] +"' as REP_SUBJ_TYPE, \n" +
+                        "'"+ SC_data_miner.rep_subj_type[n] +"' as REP_SUBJ_TYPE \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -8313,7 +8313,7 @@ public class ScriptEXP {
                                         "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n" +
-                        "'"+ SC_data_miner.rep_subj_type2[n] +"' as REP_SUBJ_TYPE, \n" +
+                        "'"+ SC_data_miner.rep_subj_type2[n] +"' as REP_SUBJ_TYPE \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -8324,7 +8324,7 @@ public class ScriptEXP {
                                 report_rep_subj_type_script[n] = "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n" +
-                        "'"+ SC_data_miner.rep_subj_type[n] +"' as REP_SUBJ_TYPE, \n" +
+                        "'"+ SC_data_miner.rep_subj_type[n] +"' as REP_SUBJ_TYPE \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -8333,7 +8333,7 @@ public class ScriptEXP {
                                         "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n" +
-                        "'"+ SC_data_miner.rep_subj_type2[n] +"' as REP_SUBJ_TYPE, \n" +
+                        "'"+ SC_data_miner.rep_subj_type2[n] +"' as REP_SUBJ_TYPE \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -8342,7 +8342,7 @@ public class ScriptEXP {
                                         "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n" +
-                        "'"+ SC_data_miner.rep_subj_type3[n] +"' as REP_SUBJ_TYPE, \n" +
+                        "'"+ SC_data_miner.rep_subj_type3[n] +"' as REP_SUBJ_TYPE \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -8353,7 +8353,7 @@ public class ScriptEXP {
                                 report_rep_subj_type_script[n] = "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n" +
-                        "'"+ SC_data_miner.rep_subj_type[n] +"' as REP_SUBJ_TYPE, \n" +
+                        "'"+ SC_data_miner.rep_subj_type[n] +"' as REP_SUBJ_TYPE \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -8362,7 +8362,7 @@ public class ScriptEXP {
                                         "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n" +
-                        "'"+ SC_data_miner.rep_subj_type2[n] +"' as REP_SUBJ_TYPE, \n" +
+                        "'"+ SC_data_miner.rep_subj_type2[n] +"' as REP_SUBJ_TYPE \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -8371,7 +8371,7 @@ public class ScriptEXP {
                                         "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n" +
-                        "'"+ SC_data_miner.rep_subj_type3[n] +"' as REP_SUBJ_TYPE, \n" +
+                        "'"+ SC_data_miner.rep_subj_type3[n] +"' as REP_SUBJ_TYPE \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -8380,7 +8380,7 @@ public class ScriptEXP {
                                         "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n" +
-                        "'"+ SC_data_miner.rep_subj_type4[n] +"' as REP_SUBJ_TYPE, \n" +
+                        "'"+ SC_data_miner.rep_subj_type4[n] +"' as REP_SUBJ_TYPE \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -8391,7 +8391,7 @@ public class ScriptEXP {
                                 report_rep_subj_type_script[n] = "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n" +
-                        "'"+ SC_data_miner.rep_subj_type[n] +"' as REP_SUBJ_TYPE, \n" +
+                        "'"+ SC_data_miner.rep_subj_type[n] +"' as REP_SUBJ_TYPE \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -8400,7 +8400,7 @@ public class ScriptEXP {
                                         "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n" +
-                        "'"+ SC_data_miner.rep_subj_type2[n] +"' as REP_SUBJ_TYPE, \n" +
+                        "'"+ SC_data_miner.rep_subj_type2[n] +"' as REP_SUBJ_TYPE \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -8409,7 +8409,7 @@ public class ScriptEXP {
                                         "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n" +
-                        "'"+ SC_data_miner.rep_subj_type3[n] +"' as REP_SUBJ_TYPE, \n" +
+                        "'"+ SC_data_miner.rep_subj_type3[n] +"' as REP_SUBJ_TYPE \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -8418,7 +8418,7 @@ public class ScriptEXP {
                                         "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n" +
-                        "'"+ SC_data_miner.rep_subj_type4[n] +"' as REP_SUBJ_TYPE, \n" +
+                        "'"+ SC_data_miner.rep_subj_type4[n] +"' as REP_SUBJ_TYPE \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -8427,7 +8427,7 @@ public class ScriptEXP {
                                         "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n" +
-                        "'"+ SC_data_miner.rep_subj_type5[n] +"' as REP_SUBJ_TYPE, \n" +
+                        "'"+ SC_data_miner.rep_subj_type5[n] +"' as REP_SUBJ_TYPE \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -8438,7 +8438,7 @@ public class ScriptEXP {
                                 report_rep_subj_type_script[n] = "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n" +
-                        "'"+ SC_data_miner.rep_subj_type[n] +"' as REP_SUBJ_TYPE, \n" +
+                        "'"+ SC_data_miner.rep_subj_type[n] +"' as REP_SUBJ_TYPE \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -8447,7 +8447,7 @@ public class ScriptEXP {
                                         "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n" +
-                        "'"+ SC_data_miner.rep_subj_type2[n] +"' as REP_SUBJ_TYPE, \n" +
+                        "'"+ SC_data_miner.rep_subj_type2[n] +"' as REP_SUBJ_TYPE \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -8456,7 +8456,7 @@ public class ScriptEXP {
                                         "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n" +
-                        "'"+ SC_data_miner.rep_subj_type3[n] +"' as REP_SUBJ_TYPE, \n" +
+                        "'"+ SC_data_miner.rep_subj_type3[n] +"' as REP_SUBJ_TYPE \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -8465,7 +8465,7 @@ public class ScriptEXP {
                                         "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n" +
-                        "'"+ SC_data_miner.rep_subj_type4[n] +"' as REP_SUBJ_TYPE, \n" +
+                        "'"+ SC_data_miner.rep_subj_type4[n] +"' as REP_SUBJ_TYPE \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -8474,7 +8474,7 @@ public class ScriptEXP {
                                         "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n" +
-                        "'"+ SC_data_miner.rep_subj_type5[n] +"' as REP_SUBJ_TYPE, \n" +
+                        "'"+ SC_data_miner.rep_subj_type5[n] +"' as REP_SUBJ_TYPE \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -8483,7 +8483,7 @@ public class ScriptEXP {
                                         "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n" +
-                        "'"+ SC_data_miner.rep_subj_type6[n] +"' as REP_SUBJ_TYPE, \n" +
+                        "'"+ SC_data_miner.rep_subj_type6[n] +"' as REP_SUBJ_TYPE \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -8494,7 +8494,7 @@ public class ScriptEXP {
                                 report_rep_subj_type_script[n] = "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n" +
-                        "'"+ SC_data_miner.rep_subj_type[n] +"' as REP_SUBJ_TYPE, \n" +
+                        "'"+ SC_data_miner.rep_subj_type[n] +"' as REP_SUBJ_TYPE \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -8503,7 +8503,7 @@ public class ScriptEXP {
                                         "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n" +
-                        "'"+ SC_data_miner.rep_subj_type2[n] +"' as REP_SUBJ_TYPE, \n" +
+                        "'"+ SC_data_miner.rep_subj_type2[n] +"' as REP_SUBJ_TYPE \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -8512,7 +8512,7 @@ public class ScriptEXP {
                                         "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n" +
-                        "'"+ SC_data_miner.rep_subj_type3[n] +"' as REP_SUBJ_TYPE, \n" +
+                        "'"+ SC_data_miner.rep_subj_type3[n] +"' as REP_SUBJ_TYPE \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -8521,7 +8521,7 @@ public class ScriptEXP {
                                         "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n" +
-                        "'"+ SC_data_miner.rep_subj_type4[n] +"' as REP_SUBJ_TYPE, \n" +
+                        "'"+ SC_data_miner.rep_subj_type4[n] +"' as REP_SUBJ_TYPE \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -8530,7 +8530,7 @@ public class ScriptEXP {
                                         "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n" +
-                        "'"+ SC_data_miner.rep_subj_type5[n] +"' as REP_SUBJ_TYPE, \n" +
+                        "'"+ SC_data_miner.rep_subj_type5[n] +"' as REP_SUBJ_TYPE \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -8539,7 +8539,7 @@ public class ScriptEXP {
                                         "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n" +
-                        "'"+ SC_data_miner.rep_subj_type6[n] +"' as REP_SUBJ_TYPE, \n" +
+                        "'"+ SC_data_miner.rep_subj_type6[n] +"' as REP_SUBJ_TYPE \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -8548,7 +8548,7 @@ public class ScriptEXP {
                                         "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n" +
-                        "'"+ SC_data_miner.rep_subj_type7[n] +"' as REP_SUBJ_TYPE, \n" +
+                        "'"+ SC_data_miner.rep_subj_type7[n] +"' as REP_SUBJ_TYPE \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -8559,7 +8559,7 @@ public class ScriptEXP {
                                 report_rep_subj_type_script[n] = "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n" +
-                        "'"+ SC_data_miner.rep_subj_type[n] +"' as REP_SUBJ_TYPE, \n" +
+                        "'"+ SC_data_miner.rep_subj_type[n] +"' as REP_SUBJ_TYPE \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -8568,7 +8568,7 @@ public class ScriptEXP {
                                         "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n" +
-                        "'"+ SC_data_miner.rep_subj_type2[n] +"' as REP_SUBJ_TYPE, \n" +
+                        "'"+ SC_data_miner.rep_subj_type2[n] +"' as REP_SUBJ_TYPE \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -8577,7 +8577,7 @@ public class ScriptEXP {
                                         "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n" +
-                        "'"+ SC_data_miner.rep_subj_type3[n] +"' as REP_SUBJ_TYPE, \n" +
+                        "'"+ SC_data_miner.rep_subj_type3[n] +"' as REP_SUBJ_TYPE \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -8586,7 +8586,7 @@ public class ScriptEXP {
                                         "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n" +
-                        "'"+ SC_data_miner.rep_subj_type4[n] +"' as REP_SUBJ_TYPE, \n" +
+                        "'"+ SC_data_miner.rep_subj_type4[n] +"' as REP_SUBJ_TYPE \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -8595,7 +8595,7 @@ public class ScriptEXP {
                                         "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n" +
-                        "'"+ SC_data_miner.rep_subj_type5[n] +"' as REP_SUBJ_TYPE, \n" +
+                        "'"+ SC_data_miner.rep_subj_type5[n] +"' as REP_SUBJ_TYPE \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -8604,7 +8604,7 @@ public class ScriptEXP {
                                         "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n" +
-                        "'"+ SC_data_miner.rep_subj_type6[n] +"' as REP_SUBJ_TYPE, \n" +
+                        "'"+ SC_data_miner.rep_subj_type6[n] +"' as REP_SUBJ_TYPE \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -8613,7 +8613,7 @@ public class ScriptEXP {
                                         "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n" +
-                        "'"+ SC_data_miner.rep_subj_type7[n] +"' as REP_SUBJ_TYPE, \n" +
+                        "'"+ SC_data_miner.rep_subj_type7[n] +"' as REP_SUBJ_TYPE \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
@@ -8622,7 +8622,7 @@ public class ScriptEXP {
                                         "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n" +
-                        "'"+ SC_data_miner.rep_subj_type8[n] +"' as REP_SUBJ_TYPE, \n" +
+                        "'"+ SC_data_miner.rep_subj_type8[n] +"' as REP_SUBJ_TYPE \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +

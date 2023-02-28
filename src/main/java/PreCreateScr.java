@@ -168,11 +168,13 @@ public class PreCreateScr {
                 int ind1 = 0;
                 int ind2 = 0;
                 ind1 = Search_path_txtf[i].getText().indexOf("report[@name=");
+                ind2 = Search_path_txtf[i].getText().lastIndexOf("]");
                 if(ind1 == -1){
                     ind1 = Search_path_txtf[i].getText().indexOf("reportView[@name=");
+                    formName = Search_path_txtf[i].getText().substring(ind1+18, ind2-1);
+                } else{
+                    formName = Search_path_txtf[i].getText().substring(ind1+14, ind2-1);
                 }
-                ind2 = Search_path_txtf[i].getText().lastIndexOf("]");
-                formName = Search_path_txtf[i].getText().substring(ind1+14, ind2-1);
                 //System.out.print("formName = " + formName + "\n");
                 UFName[i] = formName/*Form_name_txtf[i].getText()*/;
                 SC_data_miner.Form_cd[i] = Form_cd_txtf[i].getText();
