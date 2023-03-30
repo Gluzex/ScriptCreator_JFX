@@ -79,8 +79,8 @@ public class ScriptEXP {
                 } else{
                     SR_def[0] = SC_data_miner.p_source_ref_txtf[0];
                 }
-                System.out.print("TR_def[0] = " + TR_def[0] + "\n");
-                System.out.print("SR_def[0] = " + SR_def[0] + "\n");
+                //System.out.print("TR_def[0] = " + TR_def[0] + "\n");
+                //System.out.print("SR_def[0] = " + SR_def[0] + "\n");
 
             }
 
@@ -104,14 +104,81 @@ public class ScriptEXP {
                     } else{
                         SR_def[q] = SC_data_miner.p_source_ref_txtf[q];
                     }
-                    System.out.print("TR_def[" + q + "] = " + TR_def[q] + "\n");
-                    System.out.print("SR_def[" + q + "] = " + SR_def[q] + "\n");
+                    //System.out.print("TR_def[" + q + "] = " + TR_def[q] + "\n");
+                    //System.out.print("SR_def[" + q + "] = " + SR_def[q] + "\n");
                 }
             }
         }
         //System.out.print("chk = " + chk + "\n");
         //Все листы есть и все заполнены
         if(chk == 1){
+            for(int h=0; h<=SC_data_miner.Form_cd.length-1; h++){
+                //System.out.print("SC_data_miner.Form_cd.length = " + SC_data_miner.Form_cd.length + "\n");
+                //System.out.print("h = " + h + "\n");
+                if(SC_data_miner.Search_path[h] != null && !Objects.equals(SC_data_miner.Search_path[h], "") && !Objects.equals(SC_data_miner.Search_path[h], " ")){
+                    if(!SC_data_miner.Search_path[h].contains("/content/")){
+                        int coc = 0;
+                        for(int ut = 0; ut<=SC_data_miner.Search_path[h].lastIndexOf("'");){
+                            int u = SC_data_miner.Search_path[h].indexOf("'", ut);
+                            if(u == -1){
+                                break;
+                            } else {
+                                coc++;
+                                ut = u;
+                                ut++;
+                            }
+                        }
+                        //System.out.print("coc = " + coc + "\n");
+                        String[] subs = SC_data_miner.Search_path[h].split("'");
+                        SC_data_miner.Search_path[h] = subs[0];
+                        //System.out.print("Search_path["+ h +"] = " + Search_path[h] + "\n");
+                        for(int d =1; d<=coc; d++) {
+                            //System.out.print("d = " + d + "\n");
+                            SC_data_miner.Search_path[h] = SC_data_miner.Search_path[h] + "''" + subs[d];
+                        }
+                        //System.out.print("Search_path[" + h + "] = " + Search_path[h] + "\n");
+                        SC_data_miner.Search_path_for_ehd_acs[h] = "/content/folder[@name=''Приложение НИКА'']/folder[@name=''КО'']" + SC_data_miner.Search_path[h];
+                        SC_data_miner.Search_path[h] = "/content/folder[@name=''Приложение НИКА'']/folder[@name=''КО'']" + SC_data_miner.Search_path[h];
+                    } else {
+                        int coc = 0;
+                        //System.out.print("coc = " + coc + "\n");
+                        for(int ut = 0; ut<=SC_data_miner.Search_path[h].lastIndexOf("'");){
+                            int u = SC_data_miner.Search_path[h].indexOf("'", ut);
+                            if(u == -1){
+                                break;
+                            } else {
+                                coc++;
+                                ut = u;
+                                ut++;
+                            }
+                        }
+                        //System.out.print("coc = " + coc + "\n");
+                        String[] subs = SC_data_miner.Search_path[h].split("'");
+                        SC_data_miner.Search_path[h] = subs[0];
+                        for(int d =1; d<=coc; d++) {
+                            //System.out.print("subs[" + d + "] = " + subs[d] + "\n");
+                            SC_data_miner.Search_path[h] = SC_data_miner.Search_path[h] + "''" + subs[d];
+                            //System.out.print("Search_path[" + h + "] = " + SC_data_miner.Search_path[h] + "\n");
+                        }
+                        int u = 0;
+                        //System.out.print("vid[" + h + "] = " + vid[h] + "\n");
+                        switch (vid[h]){
+                            case 1:
+                                u = SC_data_miner.Search_path[h].indexOf("/folder[@name=''Нерегламентированные");
+                                //System.out.print("u = " + u + "\n");
+                                break;
+                            case 2:
+                                u = SC_data_miner.Search_path[h].indexOf("/folder[@name=''Регламентированные");
+                                //System.out.print("u = " + u + "\n");
+                                break;
+                        }
+                        //System.out.print("Search_path[" + h + "] = " + SC_data_miner.Search_path[h] + "\n");
+                        SC_data_miner.Search_path_for_ehd_acs[h] = "/content/folder[@name=''Приложение НИКА'']/folder[@name=''КО'']" + SC_data_miner.Search_path[h].substring(u);
+                        //System.out.print("Search_path_for_ehd_acs[" + h + "] = " + SC_data_miner.Search_path_for_ehd_acs[h] + "\n");
+                    }
+                }
+                //System.out.print("Search_path_for_ehd_acs[" + h + "] = " + Search_path_for_ehd_acs[h] + "\n");
+            }
             if(count == 0){
                 if(Objects.equals(TR_def[0], "cognos")){
                     techdb_code = SC_data_miner.Form_formal_code[0];
@@ -128,19 +195,533 @@ public class ScriptEXP {
                 } else {
                     pdn = "'"+ SC_data_miner.Flag_PDN[0] + "' as FLAG_PDN";
                 }
-                int l = SC_data_miner.Form_cd[0].length();
+                if(SC_data_miner.reason[0] == null || Objects.equals(SC_data_miner.reason[0], "") || Objects.equals(SC_data_miner.reason[0], " ")){
+                    reason = "null as REASON";
+                } else{
+                    reason = "'" + SC_data_miner.reason[0] + "' as REASON";
+                }
+                //int l = SC_data_miner.Form_cd[0].length();
                 //System.out.print("\nl = " + l + "\n");
-
                 if(SC_data_miner.Form_cd[0].startsWith("0409")){
                     okud_rep_form = "null as FORM_OKUD";
                     //System.out.print("\nokud_rep_form = " + okud_rep_form + "\n");
                     //System.out.print("SC_data_miner.Form_cd[0].startsWith(\"0409\") = " + SC_data_miner.Form_cd[0].startsWith("0409"));
                 } else {
-                    okud_rep_form = "'"+ SC_data_miner.Form_okud[0] + "' as FORM_OKUD";
-                    //System.out.print("\nokud_rep_form = " + okud_rep_form + "\n");
-                    //System.out.print("SC_data_miner.Form_cd[0].startsWith(\"0409\") = " + SC_data_miner.Form_cd[0].startsWith("0409"));
+                    if(SC_data_miner.Form_okud[0] == null || Objects.equals(SC_data_miner.Form_okud[0], "") || Objects.equals(SC_data_miner.Form_okud[0], " ")){
+                        okud_rep_form = "null as FORM_OKUD";
+                    } else{
+                        okud_rep_form = "'"+ SC_data_miner.Form_okud[0] + "' as FORM_OKUD";
+                        //System.out.print("\nokud_rep_form = " + okud_rep_form + "\n");
+                        //System.out.print("SC_data_miner.Form_cd[0].startsWith(\"0409\") = " + SC_data_miner.Form_cd[0].startsWith("0409"));
+                    }
                 }
+                if(SC_data_miner.Reg_form_code[0] == null || Objects.equals(SC_data_miner.Reg_form_code[0], "") || Objects.equals(SC_data_miner.Reg_form_code[0], " ")){
+                    SC_data_miner.Reg_form_code[0] = SC_data_miner.Form_cd[0];
+                }
+                String rep_form_script = "";
+                String rep_form_cognos_script = "";
+                String rep_form_oki_script = "";
+                String rep_form_dep_owner_script = "";
+                String rep_form_dep_user_script = "";
+                String reg_report_form_script = "";
+                String report_okud_code_script = "";
+                String report_form_src_script = "";
+                String report_rep_subj_type_script = "";
+                String ehd_acs_script = "";
+                String ehd_acs_script2 = "";
+
+                //System.out.print("SC_data_miner.Form_cd[0] = " + SC_data_miner.Form_cd[0] + "\n");
+                if((SC_data_miner.Form_cd_name[0]== null) || Objects.equals(SC_data_miner.Form_cd_name[0], "") || Objects.equals(SC_data_miner.Form_cd_name[0], " ")||
+                        (SC_data_miner.Form_cd[0]== null) || Objects.equals(SC_data_miner.Form_cd[0], "") || Objects.equals(SC_data_miner.Form_cd[0], " ")){
+                    rep_form_script = "--Warning: Не указаны данные для таблицы REP_FORM: ";
+                    if((SC_data_miner.Form_cd[0]== null) || Objects.equals(SC_data_miner.Form_cd[0], "") || Objects.equals(SC_data_miner.Form_cd[0], " ")){
+                            rep_form_script = rep_form_script + "Код доступа, ";
+                        }
+                    if((SC_data_miner.Form_cd_name[0]== null) || Objects.equals(SC_data_miner.Form_cd_name[0], "") || Objects.equals(SC_data_miner.Form_cd_name[0], " ")){
+                            rep_form_script = rep_form_script + "Наименование кода доступа.";
+                        }
+                    rep_form_script = rep_form_script + "\n\n";
+                } else {
+                    rep_form_script = "MERGE INTO REP_FORM R\n" +
+                            "   USING (SELECT \n" +
+                            "'" + SC_data_miner.Form_cd[0] + "' as FORM_CD,\n" +
+                            "'" + SC_data_miner.Form_name[0] + "' as FORM_NAME, \n" +
+                            okud_rep_form + "\n" +
+                            "FROM dual) S\n" +
+                            "   ON (R.FORM_CD = S.FORM_CD)\n" +
+                            "   WHEN MATCHED THEN UPDATE SET R.FORM_NAME = S.FORM_NAME,\n" +
+                            "                                R.FORM_OKUD = S.FORM_OKUD\n" +
+                            "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.FORM_NAME, R.FORM_OKUD)\n" +
+                            "   VALUES (S.FORM_CD, S.FORM_NAME, S.FORM_OKUD);" +
+                            "\n" +
+                            "\n" ;
+                }
+                if(Objects.equals(iod, "null as FLAG_IOD") || Objects.equals(pdn, "null as FLAG_PDN")){
+                    rep_form_oki_script = "--Warning: Не указаны данные для таблицы REP_FORM_OKI: ";
+                    if(Objects.equals(iod, "null as FLAG_IOD")){
+                        rep_form_oki_script = rep_form_oki_script + "Флаг ИОД, ";
+                    }
+                    if(Objects.equals(pdn, "null as FLAG_PDN")){
+                        rep_form_oki_script = rep_form_oki_script + "Флаг ПДН.";
+                    }
+                    rep_form_oki_script = rep_form_oki_script + "\n\n";
+                } else{
+                    rep_form_oki_script = "MERGE INTO REP_FORM_OKI R\n" +
+                            "   USING (SELECT \n" +
+                            "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n" +
+                            iod + ",  " +
+                            pdn +
+                            " FROM dual) S\n" +
+                            "   ON (R.FORM_CD = S.FORM_CD)\n" +
+                            "   WHEN MATCHED THEN UPDATE SET R.FLAG_IOD = S.FLAG_IOD,\n" +
+                            "                                R.FLAG_PDN = S.FLAG_PDN\n" +
+                            "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.FLAG_IOD, R.FLAG_PDN)\n" +
+                            "   VALUES (S.FORM_CD, S.FLAG_IOD, S.FLAG_PDN);" +
+                            "\n" +
+                            "\n" ;
+                }
+                //System.out.print("SC_data_miner.Form_cd_cog[0] = " + SC_data_miner.Form_cd_cog[0] + "\n");
+                if(SC_data_miner.Form_cd_cog[0] == null || Objects.equals(SC_data_miner.Form_cd_cog[0], "") || Objects.equals(SC_data_miner.Form_cd_cog[0], " ")){
+                    rep_form_cognos_script = "--Warning: Не указаны данные для таблицы REP_FORM_COGNOS: Код потока(Когнос)\n\n";
+                } else {
+                    int c = getCogcount();
+                    if(c==1){
+                        rep_form_cognos_script = "MERGE INTO REP_FORM_COGNOS R\n" +
+                                "   USING (SELECT \n" +
+                                "'"+ SC_data_miner.Form_cd_cog[0] +"' as FORM_CD, \n" +
+                                "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
+                                "FROM dual) S\n" +
+                                "   ON (R.FORM_CD = S.FORM_CD)\n" +
+                                "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
+                                "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
+                                "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
+                                "\n" +
+                                "\n";
+                    } else{
+                        rep_form_cognos_script = "MERGE INTO REP_FORM_COGNOS R\n" +
+                                "   USING (SELECT \n" +
+                                "'"+ SC_data_miner.Form_cd_cog[0] +"' as FORM_CD, \n" +
+                                "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
+                                "FROM dual) S\n" +
+                                "   ON (R.FORM_CD = S.FORM_CD)\n" +
+                                "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
+                                "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
+                                "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
+                                "\n" +
+                                "\n";
+                        for(int n=1;n<=c-1;n++){
+                            rep_form_cognos_script = rep_form_cognos_script +
+                                    "MERGE INTO REP_FORM_COGNOS R\n" +
+                                    "   USING (SELECT \n" +
+                                    "'"+ SC_data_miner.Form_cd_cog[n] +"' as FORM_CD, \n" +
+                                    "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
+                                    "FROM dual) S\n" +
+                                    "   ON (R.FORM_CD = S.FORM_CD)\n" +
+                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
+                                    "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
+                                    "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
+                                    "\n" +
+                                    "\n";
+                        }
+                    }
+                }
+                //System.out.print("SC_data_miner.Dep_name[0] = " + SC_data_miner.Dep_name[0] + "\n");
+                if(SC_data_miner.Dep_name[0] == null || Objects.equals(SC_data_miner.Dep_name[0], "") || Objects.equals(SC_data_miner.Dep_name[0], " ")){
+                    rep_form_dep_owner_script = "--Warning: Не указаны данные для таблицы REP_FORM_DEP_OWNER: Сокращенное наименование департамента для REP_FORM_DEP_OWNER\n\n";
+                } else {
+                    int c = getDepcount();
+                    if(c==1){
+                        rep_form_dep_owner_script = "MERGE INTO REP_FORM_DEP_OWNER R\n" +
+                                "   USING (SELECT \n" +
+                                "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n" +
+                                "'"+ SC_data_miner.Dep_u_name[0] +"' as DEP_NAME, \n" +
+                                reason + " \n" +
+                                " FROM dual) S\n" +
+                                "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                                "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
+                                "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                                "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
+                                "\n" +
+                                "\n";
+                    } else{
+                        rep_form_dep_owner_script = "MERGE INTO REP_FORM_DEP_OWNER R\n" +
+                                "   USING (SELECT \n" +
+                                "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n" +
+                                "'"+ SC_data_miner.Dep_u_name[0] +"' as DEP_NAME, \n" +
+                                reason + " \n" +
+                                " FROM dual) S\n" +
+                                "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                                "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
+                                "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                                "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
+                                "\n" +
+                                "\n";
+                        for(int n=1;n<=c-1;n++){
+                            rep_form_dep_owner_script = rep_form_dep_owner_script +
+                                    "MERGE INTO REP_FORM_DEP_OWNER R\n" +
+                                    "   USING (SELECT \n" +
+                                    "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n" +
+                                    "'"+ SC_data_miner.Dep_u_name[n] +"' as DEP_NAME, \n" +
+                                    reason + " \n" +
+                                    " FROM dual) S\n" +
+                                    "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                                    "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
+                                    "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                                    "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
+                                    "\n" +
+                                    "\n";
+                        }
+                    }
+                }
+                //System.out.print("SC_data_miner.Dep_u_name[0] = " + SC_data_miner.Dep_u_name[0] + "\n");
+                if(SC_data_miner.Dep_u_name[0] == null || Objects.equals(SC_data_miner.Dep_u_name[0], "") || Objects.equals(SC_data_miner.Dep_u_name[0], " ")){
+                    rep_form_dep_user_script = "--Warning: Не указаны данные для таблицы REP_FORM_DEP_USER: Сокращенное наименование департамента для REP_FORM_DEP_USER\n\n";
+                } else {
+                    int c = getDepucount();
+                    if(c==1){
+                        rep_form_dep_user_script = "MERGE INTO REP_FORM_DEP_USER R\n" +
+                                "   USING (SELECT \n" +
+                                "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n" +
+                                "'"+ SC_data_miner.Dep_u_name[0] +"' as DEP_NAME, \n" +
+                                reason + " \n" +
+                                " FROM dual) S\n" +
+                                "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                                "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
+                                "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                                "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
+                                "\n" +
+                                "\n";
+                    } else{
+                        rep_form_dep_user_script = "MERGE INTO REP_FORM_DEP_USER R\n" +
+                                "   USING (SELECT \n" +
+                                "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n" +
+                                "'"+ SC_data_miner.Dep_u_name[0] +"' as DEP_NAME, \n" +
+                                reason + " \n" +
+                                " FROM dual) S\n" +
+                                "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                                "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
+                                "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                                "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
+                                "\n" +
+                                "\n";
+                        for(int n=1;n<=c-1;n++){
+                            rep_form_dep_user_script = rep_form_dep_user_script +
+                                    "MERGE INTO REP_FORM_DEP_USER R\n" +
+                                    "   USING (SELECT \n" +
+                                    "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n" +
+                                    "'"+ SC_data_miner.Dep_u_name[n] +"' as DEP_NAME, \n" +
+                                    reason + " \n" +
+                                    " FROM dual) S\n" +
+                                    "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                                    "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
+                                    "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                                    "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
+                                    "\n" +
+                                    "\n";
+                        }
+                    }
+                }
+                //System.out.print("SC_data_miner.System_id[0] = " + SC_data_miner.System_id[0] + "\n");
+                //System.out.print("SC_data_miner.Security_role_name[0] = " + SC_data_miner.Security_role_name[0] + "\n");
+                //System.out.print("SC_data_miner.Security_role_path[0] = " + SC_data_miner.Security_role_path[0] + "\n");
+                //System.out.print("SC_data_miner.Search_path[0] = " + SC_data_miner.Search_path[0] + "\n");
+                //System.out.print("SC_data_miner.Form_formal_code[0] = " + SC_data_miner.Form_formal_code[0] + "\n");
+                //System.out.print("SC_data_miner.Desc[0] = " + SC_data_miner.Desc[0] + "\n");
+                if(SC_data_miner.System_id[0] == null || Objects.equals(SC_data_miner.System_id[0], "") || Objects.equals(SC_data_miner.System_id[0], " ") ||
+                        SC_data_miner.Security_role_name[0] == null || Objects.equals(SC_data_miner.Security_role_name[0], "") || Objects.equals(SC_data_miner.Security_role_name[0], " ") ||
+                        SC_data_miner.Security_role_path[0] == null || Objects.equals(SC_data_miner.Security_role_path[0], "") || Objects.equals(SC_data_miner.Security_role_path[0], " ") ||
+                        SC_data_miner.Search_path[0] == null || Objects.equals(SC_data_miner.Search_path[0], "") || Objects.equals(SC_data_miner.Search_path[0], " ") ||
+                        SC_data_miner.Form_formal_code[0] == null || Objects.equals(SC_data_miner.Form_formal_code[0], "") || Objects.equals(SC_data_miner.Form_formal_code[0], " ") ||
+                        SC_data_miner.Desc[0] == null || Objects.equals(SC_data_miner.Desc[0], "") || Objects.equals(SC_data_miner.Desc[0], " ")){
+                        reg_report_form_script = "--Warning: Не указаны данные для таблицы REG_REPORT_FORM: ";
+                        if(SC_data_miner.System_id[0] == null || Objects.equals(SC_data_miner.System_id[0], "") || Objects.equals(SC_data_miner.System_id[0], " ")){
+                            reg_report_form_script = reg_report_form_script + "System_id, ";
+                        }
+                        if(SC_data_miner.Security_role_name[0] == null || Objects.equals(SC_data_miner.Security_role_name[0], "") || Objects.equals(SC_data_miner.Security_role_name[0], " ")){
+                            reg_report_form_script = reg_report_form_script + "Security_role_name, ";
+                        }
+                        if(SC_data_miner.Security_role_path[0] == null || Objects.equals(SC_data_miner.Security_role_path[0], "") || Objects.equals(SC_data_miner.Security_role_path[0], " ")){
+                            reg_report_form_script = reg_report_form_script + "Security_role_path, ";
+                        }
+                        if(SC_data_miner.Search_path[0] == null || Objects.equals(SC_data_miner.Search_path[0], "") || Objects.equals(SC_data_miner.Search_path[0], " ")){
+                            reg_report_form_script = reg_report_form_script + "Полный путь отчета/папки(Search_path), ";
+                        }
+                        if(SC_data_miner.Form_formal_code[0] == null || Objects.equals(SC_data_miner.Form_formal_code[0], "") || Objects.equals(SC_data_miner.Form_formal_code[0], " ")){
+                            reg_report_form_script = reg_report_form_script + "Уникальный код отчета, ";
+                        }
+                        if(SC_data_miner.Desc[0] == null || Objects.equals(SC_data_miner.Desc[0], "") || Objects.equals(SC_data_miner.Desc[0], " ")){
+                            reg_report_form_script = reg_report_form_script + "Описание.";
+                        }
+                        reg_report_form_script = reg_report_form_script + "\n\n";
+                } else {
+                    reg_report_form_script = "MERGE INTO REG_REPORT_FORM R\n" +
+                            "   USING (SELECT \n" +
+                            "'"+ SC_data_miner.System_id[0] +"' as SYSTEM_ID, \n" +
+                            "'"+ SC_data_miner.Security_role_name[0] +"' as SECURITY_ROLE_NAME, \n" +
+                            "'"+ SC_data_miner.Security_role_path[0] +"' as SECURITY_ROLE_PATH, \n" +
+                            "'"+ SC_data_miner.Search_path[0] +"' as SEARCH_PATH, \n" +
+                            "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CODE, \n" +
+                            "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
+                            "'"+ SC_data_miner.Desc[0] +"' as DESCRIPTION, \n" +
+                            "" + iod + ", \n" +
+                            "" + pdn + "\n" +
+                            "FROM dual) S\n" +
+                            "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE)\n" +
+                            "   WHEN MATCHED THEN UPDATE SET R.SECURITY_ROLE_NAME = S.SECURITY_ROLE_NAME, \n" +
+                            "                                R.SECURITY_ROLE_PATH = S.SECURITY_ROLE_PATH,\n" +
+                            "                                R.SEARCH_PATH = S.SEARCH_PATH,\n" +
+                            "                                R.FORM_CODE = S.FORM_CODE,\n" +
+                            "                                R.DESCRIPTION = S.DESCRIPTION,\n" +
+                            "                                R.FLAG_IOD = S.FLAG_IOD,\n" +
+                            "                                R.FLAG_PDN = S.FLAG_PDN\n" +
+                            "   WHEN NOT MATCHED THEN INSERT (R.SYSTEM_ID, R.SECURITY_ROLE_NAME, R.SECURITY_ROLE_PATH, R.SEARCH_PATH, R.FORM_CODE, R.FORM_FORMAL_CODE, R.DESCRIPTION, R.FLAG_IOD, R.FLAG_PDN)\n" +
+                            "   VALUES (S.SYSTEM_ID, S.SECURITY_ROLE_NAME, S.SECURITY_ROLE_PATH, S.SEARCH_PATH, S.FORM_CODE, S.FORM_FORMAL_CODE, S.DESCRIPTION, S.FLAG_IOD, S.FLAG_PDN);\n" +
+                            "\n" +
+                            "\n";
+                }
+                //System.out.print("SC_data_miner.Form_okud[0] = " + SC_data_miner.Form_okud[0] + "\n");
+                if(SC_data_miner.Form_okud[0] == null  || Objects.equals(SC_data_miner.Form_okud[0], "") || Objects.equals(SC_data_miner.Form_okud[0], " ")){
+                    report_okud_code_script = "--Warning: Не указаны данные для таблицы REPORT_OKUD_CODE: ОКУД\n\n";
+                } else {
+                    int c = getOkudcount();
+                    if(c==1){
+                        report_okud_code_script = "MERGE INTO REPORT_OKUD_CODE R\n" +
+                                "   USING (SELECT \n" +
+                                "'" + SC_data_miner.Form_formal_code[0] + "' as FORM_FORMAL_CODE, \n" +
+                                "'" + SC_data_miner.Form_okud[0] + "' as OKUD_CODE, \n" +
+                                "'" + SC_data_miner.period[0] + "' as PERIOD, \n" +
+                                "null as FORM_CD \n" +
+                                "FROM dual) S\n" +
+                                "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
+                                "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
+                                "                                R.FORM_CD = S.FORM_CD\n" +
+                                "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.OKUD_CODE, R.PERIOD, R.FORM_CD)\n" +
+                                "   VALUES (S.FORM_FORMAL_CODE, S.OKUD_CODE, S.PERIOD, S.FORM_CD);\n\n" +
+                                "\n" +
+                                "\n";
+                    } else{
+                        report_okud_code_script = "MERGE INTO REPORT_OKUD_CODE R\n" +
+                                "   USING (SELECT \n" +
+                                "'" + SC_data_miner.Form_formal_code[0] + "' as FORM_FORMAL_CODE, \n" +
+                                "'" + SC_data_miner.Form_okud[0] + "' as OKUD_CODE, \n" +
+                                "'" + SC_data_miner.period[0] + "' as PERIOD, \n" +
+                                "null as FORM_CD \n" +
+                                "FROM dual) S\n" +
+                                "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
+                                "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
+                                "                                R.FORM_CD = S.FORM_CD\n" +
+                                "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.OKUD_CODE, R.PERIOD, R.FORM_CD)\n" +
+                                "   VALUES (S.FORM_FORMAL_CODE, S.OKUD_CODE, S.PERIOD, S.FORM_CD);\n\n" +
+                                "\n" +
+                                "\n";
+                        for(int n=1;n<=c-1;n++){
+                            report_okud_code_script = report_okud_code_script +
+                                    "MERGE INTO REPORT_OKUD_CODE R\n" +
+                                    "   USING (SELECT \n" +
+                                    "'" + SC_data_miner.Form_formal_code[0] + "' as FORM_FORMAL_CODE, \n" +
+                                    "'" + SC_data_miner.Form_okud[n] + "' as OKUD_CODE, \n" +
+                                    "'" + SC_data_miner.period[0] + "' as PERIOD, \n" +
+                                    "null as FORM_CD \n" +
+                                    "FROM dual) S\n" +
+                                    "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
+                                    "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
+                                    "                                R.FORM_CD = S.FORM_CD\n" +
+                                    "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.OKUD_CODE, R.PERIOD, R.FORM_CD)\n" +
+                                    "   VALUES (S.FORM_FORMAL_CODE, S.OKUD_CODE, S.PERIOD, S.FORM_CD);\n\n" +
+                                    "\n" +
+                                    "\n";
+                        }
+                    }
+
+                }
+                //System.out.print("SC_data_miner.Form_formal_code[0] = " + SC_data_miner.Form_formal_code[0] + "\n");
+                if(SC_data_miner.Form_cd[0] == null  || Objects.equals(SC_data_miner.Form_cd[0], "") || Objects.equals(SC_data_miner.Form_cd[0], " ") ||
+                        SC_data_miner.Form_formal_code[0] == null  || Objects.equals(SC_data_miner.Form_formal_code[0], "") || Objects.equals(SC_data_miner.Form_formal_code[0], " ")){
+
+                        report_form_src_script = "--Warning: Не указаны данные для таблицы REPORT_FORM_SRC: ";
+                        if(SC_data_miner.Form_cd[0] == null  || Objects.equals(SC_data_miner.Form_cd[0], "") || Objects.equals(SC_data_miner.Form_cd[0], " ")){
+                            report_form_src_script = report_form_src_script + "Код доступа, ";
+                        }
+                        if(SC_data_miner.Form_formal_code[0] == null  || Objects.equals(SC_data_miner.Form_formal_code[0], "") || Objects.equals(SC_data_miner.Form_formal_code[0], " ")){
+                            report_form_src_script = report_form_src_script + "Уникальный код отчета.";
+                        }
+                        report_form_src_script = report_form_src_script + "\n\n";
+                } else {
+                    report_form_src_script = "MERGE INTO REPORT_FORM_SRC R\n" +
+                            "   USING (SELECT \n" +
+                            "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
+                            "'"+ SC_data_miner.Reg_form_code[0] +"' as REG_FORM_CODE \n" +
+                            "FROM dual) S\n" +
+                            "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE)\n" +
+                            "   WHEN MATCHED THEN UPDATE SET R.REG_FORM_CODE = S.REG_FORM_CODE\n" +
+                            "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REG_FORM_CODE)\n" +
+                            "   VALUES (S.FORM_FORMAL_CODE, S.REG_FORM_CODE);" +
+                            "\n\n" ;
+                }
+                //System.out.print("SC_data_miner.rep_subj_type[0] = " + SC_data_miner.rep_subj_type[0] + "\n");
+                if(SC_data_miner.rep_subj_type[0] == null || Objects.equals(SC_data_miner.rep_subj_type[0], "") || Objects.equals(SC_data_miner.rep_subj_type[0], " ")){
+                    report_rep_subj_type_script = "--Warning: Не указаны данные для таблицы REPORT_REP_SUBJ_TYPE: Разрез\n\n";
+                } else {
+                    int c = getSubjcount();
+                    if(c==1){
+                        report_rep_subj_type_script = "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
+                                "   USING (SELECT \n" +
+                                "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
+                                "'"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE \n" +
+                                "FROM dual) S\n" +
+                                "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
+                                "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
+                                "   VALUES (S.FORM_FORMAL_CODE, S.REP_SUBJ_TYPE);" +
+                                "\n" +
+                                "\n";
+                    } else{
+                        report_rep_subj_type_script = "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
+                                "   USING (SELECT \n" +
+                                "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
+                                "'"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE \n" +
+                                "FROM dual) S\n" +
+                                "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
+                                "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
+                                "   VALUES (S.FORM_FORMAL_CODE, S.REP_SUBJ_TYPE);" +
+                                "\n" +
+                                "\n";
+                        for(int n=1;n<=c-1;n++){
+                            report_rep_subj_type_script = report_rep_subj_type_script +
+                                    "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
+                                    "   USING (SELECT \n" +
+                                    "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
+                                    "'"+ SC_data_miner.rep_subj_type[n] +"' as REP_SUBJ_TYPE \n" +
+                                    "FROM dual) S\n" +
+                                    "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
+                                    "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
+                                    "   VALUES (S.FORM_FORMAL_CODE, S.REP_SUBJ_TYPE);" +
+                                    "\n" +
+                                    "\n";
+                        }
+                    }
+                }
+                //System.out.print("SC_data_miner.Search_path[0] = " + SC_data_miner.Search_path[0] + "\n");
+                if(SC_data_miner.Search_path[0] == null || Objects.equals(SC_data_miner.Search_path[0], "") || Objects.equals(SC_data_miner.Search_path[0], " ")){
+                    ehd_acs_script = "--Warning: Не указаны данные для таблицы EHD_ACS_OBJECTS: Полный путь отчета/папки(Search_path)\n\n";
+                } else {
+                    ehd_acs_script = "MERGE INTO EHD_ACS_OBJECTS O\n" +
+                            "   USING (SELECT \n" +
+                            "'"+ FName_def[0] +"' as NAME,\n" +
+                            "   '"+ SC_data_miner.Form_formal_code[0] +"' as CODE,\n" +
+                            "  (select t.id from EHD_ACS_OBJECTS t where t.type_ref in ('forms','ko_ao','apl_ao','ko_av') and t.code='"+ SC_data_miner.Form_cd[0] +"') as PARENT_ID,\n" +
+                            "  '" + TR_def[0] + "' as TYPE_REF,\n" +
+                            "  '" + SR_def[0] + "' as SOURCE_REF,\n" +
+                            "  TO_DATE('" + format_sql.format(dateNow) + "', 'DD/MM/YY') as CREATE_DATE,\n" +
+                            "  null as UPDATE_DATE,\n" +
+                            "  '" + SC_data_miner.Search_path[0] + "' as SEARCH_PATH,\n" +
+                            "  null as FLAG_EXP\n" +
+                            "FROM dual) S\n" +
+                            "   ON (O.CODE = S.CODE AND O.TYPE_REF = S.TYPE_REF)\n" +
+                            "   WHEN MATCHED THEN UPDATE SET O.NAME = S.NAME,\n" +
+                            "                                O.PARENT_ID = S.PARENT_ID,\n" +
+                            "                                O.SOURCE_REF = S.SOURCE_REF,\n" +
+                            "                                O.SEARCH_PATH = S.SEARCH_PATH,\n" +
+                            "                                O.FLAG_EXP = S.FLAG_EXP\n" +
+                            "   WHEN NOT MATCHED THEN INSERT (O.NAME, O.CODE, O.PARENT_ID, O.TYPE_REF, O.SOURCE_REF, O.CREATE_DATE, O.UPDATE_DATE, O.SEARCH_PATH, O.FLAG_EXP)\n" +
+                            "   VALUES (S.NAME, S.CODE, S.PARENT_ID, S.TYPE_REF, S.SOURCE_REF, S.CREATE_DATE, S.UPDATE_DATE, S.SEARCH_PATH, S.FLAG_EXP);\n" + "commit;" ;
+                }
+                //System.out.print("SC_data_miner.p_parent_code_txtf[0] = " + SC_data_miner.p_parent_code_txtf[0] + "\n");
+                //System.out.print("SC_data_miner.p_parent_type_ref_txtf[0] = " + SC_data_miner.p_parent_type_ref_txtf[0] + "\n");
+                //System.out.print("SC_data_miner.p_type_ref_txtf[0] = " + SC_data_miner.p_type_ref_txtf[0] + "\n");
+                //System.out.print("SC_data_miner.p_source_ref_txtf[0] = " + SC_data_miner.p_source_ref_txtf[0] + "\n");
+                //System.out.print("SC_data_miner.Search_path[0] = " + SC_data_miner.Search_path[0] + "\n");
+                if(SC_data_miner.p_parent_code_txtf[0] == null || Objects.equals(SC_data_miner.p_parent_code_txtf[0], "") || Objects.equals(SC_data_miner.p_parent_code_txtf[0], " ") ||
+                        SC_data_miner.p_parent_type_ref_txtf[0] == null || Objects.equals(SC_data_miner.p_parent_type_ref_txtf[0], "") || Objects.equals(SC_data_miner.p_parent_type_ref_txtf[0], " ") ||
+                        SC_data_miner.p_type_ref_txtf[0] == null || Objects.equals(SC_data_miner.p_type_ref_txtf[0], "") || Objects.equals(SC_data_miner.p_type_ref_txtf[0], " ") ||
+                        SC_data_miner.p_source_ref_txtf[0] == null || Objects.equals(SC_data_miner.p_source_ref_txtf[0], "") || Objects.equals(SC_data_miner.p_source_ref_txtf[0], " ") ){
+                    ehd_acs_script2 = "--Warning: Не указаны данные для таблицы EHD_ACS_OBJECTS: ";
+                    if(SC_data_miner.p_parent_code_txtf[0] == null || Objects.equals(SC_data_miner.p_parent_code_txtf[0], "") || Objects.equals(SC_data_miner.p_parent_code_txtf[0], " ")){
+                        ehd_acs_script2 = ehd_acs_script2 + "p_parent_code, ";
+                    }
+                    if(SC_data_miner.p_parent_type_ref_txtf[0] == null || Objects.equals(SC_data_miner.p_parent_type_ref_txtf[0], "") || Objects.equals(SC_data_miner.p_parent_type_ref_txtf[0], " ")){
+                        ehd_acs_script2 = ehd_acs_script2 + "p_parent_type_ref, ";
+                    }
+                    if(SC_data_miner.p_type_ref_txtf[0] == null || Objects.equals(SC_data_miner.p_type_ref_txtf[0], "") || Objects.equals(SC_data_miner.p_type_ref_txtf[0], " ")){
+                        ehd_acs_script2 = ehd_acs_script2 + "p_type_ref, ";
+                    }
+                    if(SC_data_miner.p_source_ref_txtf[0] == null || Objects.equals(SC_data_miner.p_source_ref_txtf[0], "") || Objects.equals(SC_data_miner.p_source_ref_txtf[0], " ")){
+                        ehd_acs_script2 = ehd_acs_script2 + "p_source_ref. ";
+                    }
+                    ehd_acs_script2 = ehd_acs_script2 + "\n\n";
+                } else {
+                    /*if(rep_or_code[0] == 1){
+                        ehd_acs_script2 = "begin\n" +
+                                "utils.add_object_node\n" +
+                                "                            (p_name => '" + SC_data_miner.Form_name[0] + "'\n" +
+                                "                            ,p_code => '" + SC_data_miner.Form_cd[0] + "'\n" +
+                                "                            ,p_parent_code => '" + SC_data_miner.p_parent_code_txtf[0] + "' --родительский элемент (код доступа)\n" +
+                                "                            ,p_parent_type_ref =>'" + SC_data_miner.p_parent_type_ref_txtf[0] + "'\n" +
+                                "                            ,p_type_ref => '" + SC_data_miner.p_type_ref_txtf[0] + "'\n" +
+                                "                            ,p_source_ref => '" + SC_data_miner.p_source_ref_txtf[0] + "'\n" +
+                                ");\n" +
+                                "                    end;\n" +
+                                "/";
+                    } else{*/
+                        ehd_acs_script2 = "begin\n" +
+                                "utils.add_object_node\n" +
+                                "                            (p_name => '" + FName_def[0]/*SC_data_miner.Form_formal_code[n]*/ + "'\n" +
+                                "                            ,p_code => '" + SC_data_miner.Form_formal_code[0] /*SC_data_miner.Form_cd[n]*/ + "'\n" +
+                                "                            ,p_parent_code => '" + SC_data_miner.Form_cd[0] /*SC_data_miner.p_parent_code_txtf[n]*/ + "' --родительский элемент (код доступа)\n" +
+                                "                            ,p_parent_type_ref =>'" + SC_data_miner.p_parent_type_ref_txtf[0] + "'\n" +
+                                "                            ,p_type_ref => '" + SC_data_miner.p_type_ref_txtf[0] + "'\n" +
+                                "                            ,p_source_ref => '" + SC_data_miner.p_source_ref_txtf[0] + "'\n" +
+                                "                            ,p_search_path => '" + SC_data_miner.Search_path[0] + "'\n" +
+                                ");\n" +
+                                "                    end;\n" +
+                                "/";
+                    /*}*/
+                }
+
                 text[0] =  "--" + FName_def[0] +"\n" +
+                        "\n" +
+                        "--OAD_SECURITY\n" +
+                        "\n" +
+                        rep_form_script +
+                        rep_form_cognos_script +
+                        rep_form_oki_script +
+                        rep_form_dep_owner_script +
+                        rep_form_dep_user_script +
+                        reg_report_form_script +
+                        report_okud_code_script +
+                        report_form_src_script +
+                        report_rep_subj_type_script + "\n\n" + "commit;";
+                text[1] = "--" + FName_def[0] +"\n" +
+                        "\n" +
+                        "--DM_NIKA_KO\n" +
+                        "\n" +
+                        rep_form_script +
+                        rep_form_cognos_script +
+                        rep_form_oki_script +
+                        rep_form_dep_owner_script +
+                        rep_form_dep_user_script +
+                        reg_report_form_script +
+                        report_okud_code_script +
+                        report_form_src_script +
+                        report_rep_subj_type_script + "\n\n" + "commit;";;
+
+                text[2] = "--" + FName_def[0] +"\n" +
+                        "\n" +
+                        "--DM_NIKA_KO_DATA\n" +
+                        "\n" +
+                        rep_form_cognos_script + "\n\n" + "commit;";
+                // System.out.print("type[0] = " + type[0] + "\n");
+                if(type[0] == 0){
+                    text[3] = "--" + FName_def[0] +"\n" +
+                            "\n" +
+                            "--TechDB_EHD_ACS\n" +
+                            "\n" + ehd_acs_script + "\n\n" + "commit;" ;
+                } else if(type[0] == 1) {
+                    text[3] = "--" + FName_def[0] + "\n" +
+                            "\n" +
+                            "--TechDB_EHD_ACS\n" +
+                            "\n" + ehd_acs_script2 + "\n\n" + "commit;";
+                }
+                /*text[0] =  "--" + FName_def[0] +"\n" +
                         "\n" +
                         "--OAD_SECURITY\n" +
                         "\n" +
@@ -233,7 +814,7 @@ public class ScriptEXP {
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, \n" +
-						"'"+ SC_data_miner.period[0] +"'as PERIOD \n" +
+						"'"+ SC_data_miner.period[0] +"' as PERIOD, \n" +
 						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
@@ -260,8 +841,8 @@ public class ScriptEXP {
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
                         "   VALUES (S.FORM_FORMAL_CODE, S.REP_SUBJ_TYPE);" +
-                        "\n" + "commit;";
-                text[1] = "--" + FName_def[0] +"\n" +
+                        "\n" + "commit;";*/
+                /*text[1] = "--" + FName_def[0] +"\n" +
                         "\n" +
                         "--DM_NIKA_KO\n" +
                         "MERGE INTO REP_FORM R\n" +
@@ -353,7 +934,7 @@ public class ScriptEXP {
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, \n" +
-						"'"+ SC_data_miner.period[0] +"'as PERIOD \n" +
+						"'"+ SC_data_miner.period[0] +"' as PERIOD, \n" +
 						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
@@ -421,7 +1002,7 @@ public class ScriptEXP {
                         "                                O.FLAG_EXP = S.FLAG_EXP\n" +
                         "   WHEN NOT MATCHED THEN INSERT (O.NAME, O.CODE, O.PARENT_ID, O.TYPE_REF, O.SOURCE_REF, O.CREATE_DATE, O.UPDATE_DATE, O.SEARCH_PATH, O.FLAG_EXP)\n" +
                         "   VALUES (S.NAME, S.CODE, S.PARENT_ID, S.TYPE_REF, S.SOURCE_REF, S.CREATE_DATE, S.UPDATE_DATE, S.SEARCH_PATH, S.FLAG_EXP);\n" + "commit;" ;
-
+*/
             } else{
                 if(SC_data_miner.Flag_IOD[0] == null){
                     iod = "null as FLAG_IOD";
@@ -433,7 +1014,6 @@ public class ScriptEXP {
                 } else {
                     pdn = "'"+ SC_data_miner.Flag_PDN[0] + "' as FLAG_PDN";
                 }
-                int l = SC_data_miner.Form_cd[0].length();
                 if(SC_data_miner.Form_cd[0].startsWith("0409")){
                     okud_rep_form = "null as FORM_OKUD";
                     //System.out.print("\nokud_rep_form = " + okud_rep_form + "\n");
@@ -443,7 +1023,1041 @@ public class ScriptEXP {
                     //System.out.print("\nokud_rep_form = " + okud_rep_form + "\n");
                     //System.out.print("SC_data_miner.Form_cd[0].startsWith(\"0409\") = " + SC_data_miner.Form_cd[0].startsWith("0409"));
                 }
-                text[0] = "--" + FName_def[0] + "\n" +
+                if(SC_data_miner.reason[0] == null || Objects.equals(SC_data_miner.reason[0], "") || Objects.equals(SC_data_miner.reason[0], " ")){
+                    reason = "null as REASON";
+                } else{
+                    reason = "'" + SC_data_miner.reason[0] + "' as REASON";
+                }
+                if(SC_data_miner.Reg_form_code[0] == null || Objects.equals(SC_data_miner.Reg_form_code[0], "") || Objects.equals(SC_data_miner.Reg_form_code[0], " ")){
+                    SC_data_miner.Reg_form_code[0] = SC_data_miner.Form_cd[0];
+                }
+                String[] rep_form_script = new String[16];
+                String[] rep_form_cognos_script = new String[16];
+                String[] rep_form_oki_script = new String[16];
+                String[] rep_form_dep_owner_script = new String[16];
+                String[] rep_form_dep_user_script = new String[16];
+                String[] reg_report_form_script = new String[16];
+                String[] report_okud_code_script = new String[16];
+                String[] report_form_src_script = new String[16];
+                String[] report_rep_subj_type_script = new String[16];
+                String[] ehd_acs_script = new String[16];
+                String[] ehd_acs_script2 = new String[16];
+
+                if((SC_data_miner.Form_cd_name[0]== null) || Objects.equals(SC_data_miner.Form_cd_name[0], "") || Objects.equals(SC_data_miner.Form_cd_name[0], " ")||
+                        (SC_data_miner.Form_cd[0]== null) || Objects.equals(SC_data_miner.Form_cd[0], "") || Objects.equals(SC_data_miner.Form_cd[0], " ")){
+                        rep_form_script[0] = "--Warning: Не указаны данные для таблицы REP_FORM: ";
+                        if ((SC_data_miner.Form_cd[0] == null) || Objects.equals(SC_data_miner.Form_cd[0], "") || Objects.equals(SC_data_miner.Form_cd[0], " ")) {
+                            rep_form_script[0] = rep_form_script[0] + "Код доступа, ";
+                        }
+                        if ((SC_data_miner.Form_cd_name[0] == null) || Objects.equals(SC_data_miner.Form_cd_name[0], "") || Objects.equals(SC_data_miner.Form_cd_name[0], " ")) {
+                            rep_form_script[0] = rep_form_script[0] + "Наименование кода доступа.";
+                        }
+                        rep_form_script[0] = rep_form_script[0] + "\n\n";
+
+                } else {
+                    rep_form_script[0] = "MERGE INTO REP_FORM R\n" +
+                            "   USING (SELECT \n" +
+                            "'" + SC_data_miner.Form_cd[0] + "' as FORM_CD, \n" +
+                            "'" + SC_data_miner.Form_name[0] + "' as FORM_NAME, \n" +
+                            okud_rep_form + "\n" +
+                            "FROM dual) S\n" +
+                            "   ON (R.FORM_CD = S.FORM_CD)\n" +
+                            "   WHEN MATCHED THEN UPDATE SET R.FORM_NAME = S.FORM_NAME,\n" +
+                            "                                R.FORM_OKUD = S.FORM_OKUD\n" +
+                            "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.FORM_NAME, R.FORM_OKUD)\n" +
+                            "   VALUES (S.FORM_CD, S.FORM_NAME, S.FORM_OKUD);" +
+                            "\n" +
+                            "\n" ;
+                }
+                if(Objects.equals(iod, "null as FLAG_IOD") || Objects.equals(pdn, "null as FLAG_PDN")){
+                        rep_form_oki_script[0] = "--Warning: Не указаны данные для таблицы REP_FORM_OKI: ";
+                        if(Objects.equals(iod, "null as FLAG_IOD")){
+                            rep_form_oki_script[0] = rep_form_oki_script[0] + "Флаг ИОД, ";
+                        }
+                        if(Objects.equals(pdn, "null as FLAG_PDN")){
+                            rep_form_oki_script[0] = rep_form_oki_script[0] + "Флаг ПДН.";
+                        }
+                        rep_form_oki_script[0] = rep_form_oki_script[0] + "\n\n";
+                } else{
+                    rep_form_oki_script[0] = "MERGE INTO REP_FORM_OKI R\n" +
+                            "   USING (SELECT \n" +
+                            "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n" +
+                            iod + ",  " +
+                            pdn +
+                            " FROM dual) S\n" +
+                            "   ON (R.FORM_CD = S.FORM_CD)\n" +
+                            "   WHEN MATCHED THEN UPDATE SET R.FLAG_IOD = S.FLAG_IOD,\n" +
+                            "                                R.FLAG_PDN = S.FLAG_PDN\n" +
+                            "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.FLAG_IOD, R.FLAG_PDN)\n" +
+                            "   VALUES (S.FORM_CD, S.FLAG_IOD, S.FLAG_PDN);" +
+                            "\n" +
+                            "\n" ;
+                }
+                if(SC_data_miner.Form_cd_cog[0] == null || Objects.equals(SC_data_miner.Form_cd_cog[0], "") || Objects.equals(SC_data_miner.Form_cd_cog[0], " ")){
+                        rep_form_cognos_script[0] = "--Warning: Не указаны данные для таблицы REP_FORM_COGNOS: Код потока\n\n";
+                } else {
+                    int c = getCogcount();
+                    if(c==1){
+                        rep_form_cognos_script[0] = "MERGE INTO REP_FORM_COGNOS R\n" +
+                                "   USING (SELECT \n" +
+                                "'"+ SC_data_miner.Form_cd_cog[0] +"' as FORM_CD, \n" +
+                                "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
+                                "FROM dual) S\n" +
+                                "   ON (R.FORM_CD = S.FORM_CD)\n" +
+                                "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
+                                "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
+                                "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
+                                "\n" +
+                                "\n";
+                    } else{
+                        rep_form_cognos_script[0] = "MERGE INTO REP_FORM_COGNOS R\n" +
+                                "   USING (SELECT \n" +
+                                "'"+ SC_data_miner.Form_cd_cog[0] +"' as FORM_CD, \n" +
+                                "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
+                                "FROM dual) S\n" +
+                                "   ON (R.FORM_CD = S.FORM_CD)\n" +
+                                "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
+                                "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
+                                "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
+                                "\n" +
+                                "\n";
+                        for(int n=1;n<=c-1;n++){
+                            rep_form_cognos_script[0] = rep_form_cognos_script[0] +
+                                    "MERGE INTO REP_FORM_COGNOS R\n" +
+                                    "   USING (SELECT \n" +
+                                    "'"+ SC_data_miner.Form_cd_cog[n] +"' as FORM_CD, \n" +
+                                    "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
+                                    "FROM dual) S\n" +
+                                    "   ON (R.FORM_CD = S.FORM_CD)\n" +
+                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
+                                    "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
+                                    "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
+                                    "\n" +
+                                    "\n";
+                        }
+                    }
+                }
+                if(SC_data_miner.Dep_name[0] == null || Objects.equals(SC_data_miner.Dep_name[0], "") || Objects.equals(SC_data_miner.Dep_name[0], " ")){
+                        rep_form_dep_owner_script[0] = "--Warning: Не указаны данные для таблицы REP_FORM_DEP_OWNER: Сокращенное наименование департамента для REP_FORM_DEP_OWNER\n\n";
+                } else {
+                    int c = getDepcount();
+                    if(c==1){
+                        rep_form_dep_owner_script[0] = "MERGE INTO REP_FORM_DEP_OWNER R\n" +
+                                "   USING (SELECT \n" +
+                                "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n" +
+                                "'"+ SC_data_miner.Dep_u_name[0] +"' as DEP_NAME, \n" +
+                                reason + " \n" +
+                                " FROM dual) S\n" +
+                                "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                                "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
+                                "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                                "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
+                                "\n" +
+                                "\n";
+                    } else{
+                        rep_form_dep_owner_script[0] = "MERGE INTO REP_FORM_DEP_OWNER R\n" +
+                                "   USING (SELECT \n" +
+                                "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n" +
+                                "'"+ SC_data_miner.Dep_u_name[0] +"' as DEP_NAME, \n" +
+                                reason + " \n" +
+                                " FROM dual) S\n" +
+                                "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                                "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
+                                "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                                "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
+                                "\n" +
+                                "\n";
+                        for(int n=1;n<=c-1;n++){
+                            rep_form_dep_owner_script[0] = rep_form_dep_owner_script[0] +
+                                    "MERGE INTO REP_FORM_DEP_OWNER R\n" +
+                                    "   USING (SELECT \n" +
+                                    "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n" +
+                                    "'"+ SC_data_miner.Dep_u_name[n] +"' as DEP_NAME, \n" +
+                                    reason + " \n" +
+                                    " FROM dual) S\n" +
+                                    "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                                    "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
+                                    "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                                    "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
+                                    "\n" +
+                                    "\n";
+                        }
+                    }
+                }
+                if(SC_data_miner.Dep_u_name[0] == null || Objects.equals(SC_data_miner.Dep_u_name[0], "") || Objects.equals(SC_data_miner.Dep_u_name[0], " ")){
+                        rep_form_dep_user_script[0] = "--Warning: Не указаны данные для таблицы REP_FORM_DEP_USER: Сокращенное наименование департамента для REP_FORM_DEP_USER\n\n";
+                } else {
+                    int c = getDepucount();
+                    if(c==1){
+                        rep_form_dep_user_script[0] = "MERGE INTO REP_FORM_DEP_USER R\n" +
+                                "   USING (SELECT \n" +
+                                "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n" +
+                                "'"+ SC_data_miner.Dep_u_name[0] +"' as DEP_NAME, \n" +
+                                reason + " \n" +
+                                " FROM dual) S\n" +
+                                "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                                "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
+                                "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                                "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
+                                "\n" +
+                                "\n";
+                    } else{
+                        rep_form_dep_user_script[0] = "MERGE INTO REP_FORM_DEP_USER R\n" +
+                                "   USING (SELECT \n" +
+                                "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n" +
+                                "'"+ SC_data_miner.Dep_u_name[0] +"' as DEP_NAME, \n" +
+                                reason + " \n" +
+                                " FROM dual) S\n" +
+                                "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                                "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
+                                "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                                "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
+                                "\n" +
+                                "\n";
+                        for(int n=1;n<=c-1;n++){
+                            rep_form_dep_user_script[0] = rep_form_dep_user_script[0] +
+                                    "MERGE INTO REP_FORM_DEP_USER R\n" +
+                                    "   USING (SELECT \n" +
+                                    "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CD, \n" +
+                                    "'"+ SC_data_miner.Dep_u_name[n] +"' as DEP_NAME, \n" +
+                                    reason + " \n" +
+                                    " FROM dual) S\n" +
+                                    "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                                    "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
+                                    "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                                    "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
+                                    "\n" +
+                                    "\n";
+                        }
+                    }
+                }
+                if(SC_data_miner.System_id[0] == null || Objects.equals(SC_data_miner.System_id[0], "") || Objects.equals(SC_data_miner.System_id[0], " ") ||
+                        SC_data_miner.Security_role_name[0] == null || Objects.equals(SC_data_miner.Security_role_name[0], "") || Objects.equals(SC_data_miner.Security_role_name[0], " ") ||
+                        SC_data_miner.Security_role_path[0] == null || Objects.equals(SC_data_miner.Security_role_path[0], "") || Objects.equals(SC_data_miner.Security_role_path[0], " ") ||
+                        SC_data_miner.Search_path[0] == null || Objects.equals(SC_data_miner.Search_path[0], "") || Objects.equals(SC_data_miner.Search_path[0], " ") ||
+                        SC_data_miner.Form_formal_code[0] == null || Objects.equals(SC_data_miner.Form_formal_code[0], "") || Objects.equals(SC_data_miner.Form_formal_code[0], " ") ||
+                        SC_data_miner.Desc[0] == null || Objects.equals(SC_data_miner.Desc[0], "") || Objects.equals(SC_data_miner.Desc[0], " ")){
+                        reg_report_form_script[0] = "--Warning: Не указаны данные для таблицы REG_REPORT_FORM: ";
+                        if(SC_data_miner.System_id[0] == null || Objects.equals(SC_data_miner.System_id[0], "") || Objects.equals(SC_data_miner.System_id[0], " ")){
+                            reg_report_form_script[0] = reg_report_form_script[0] + "System_id, ";
+                        }
+                        if(SC_data_miner.Security_role_name[0] == null || Objects.equals(SC_data_miner.Security_role_name[0], "") || Objects.equals(SC_data_miner.Security_role_name[0], " ")){
+                            reg_report_form_script[0] = reg_report_form_script[0] + "Security_role_name, ";
+                        }
+                        if(SC_data_miner.Security_role_path[0] == null || Objects.equals(SC_data_miner.Security_role_path[0], "") || Objects.equals(SC_data_miner.Security_role_path[0], " ")){
+                            reg_report_form_script[0] = reg_report_form_script[0] + "Security_role_path, ";
+                        }
+                        if(SC_data_miner.Search_path[0] == null || Objects.equals(SC_data_miner.Search_path[0], "") || Objects.equals(SC_data_miner.Search_path[0], " ")){
+                            reg_report_form_script[0] = reg_report_form_script[0] + "Полный путь отчета/папки(Search_path), ";
+                        }
+                        if(SC_data_miner.Form_formal_code[0] == null || Objects.equals(SC_data_miner.Form_formal_code[0], "") || Objects.equals(SC_data_miner.Form_formal_code[0], " ")){
+                            reg_report_form_script[0] = reg_report_form_script[0] + "Уникальный код отчета, ";
+                        }
+                        if(SC_data_miner.Desc[0] == null || Objects.equals(SC_data_miner.Desc[0], "") || Objects.equals(SC_data_miner.Desc[0], " ")){
+                            reg_report_form_script[0] = reg_report_form_script[0] + "Описание.";
+                        }
+                        reg_report_form_script[0] = reg_report_form_script[0] + "\n\n";
+                } else {
+                    reg_report_form_script[0] = "MERGE INTO REG_REPORT_FORM R\n" +
+                            "   USING (SELECT \n" +
+                            "'"+ SC_data_miner.System_id[0] +"' as SYSTEM_ID, \n" +
+                            "'"+ SC_data_miner.Security_role_name[0] +"' as SECURITY_ROLE_NAME, \n" +
+                            "'"+ SC_data_miner.Security_role_path[0] +"' as SECURITY_ROLE_PATH, \n" +
+                            "'"+ SC_data_miner.Search_path[0] +"' as SEARCH_PATH, \n" +
+                            "'"+ SC_data_miner.Form_cd[0] +"' as FORM_CODE, \n" +
+                            "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
+                            "'"+ SC_data_miner.Desc[0] +"' as DESCRIPTION, \n" +
+                            "" + iod + ", \n" +
+                            "" + pdn + "\n" +
+                            "FROM dual) S\n" +
+                            "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE)\n" +
+                            "   WHEN MATCHED THEN UPDATE SET R.SECURITY_ROLE_NAME = S.SECURITY_ROLE_NAME, \n" +
+                            "                                R.SECURITY_ROLE_PATH = S.SECURITY_ROLE_PATH,\n" +
+                            "                                R.SEARCH_PATH = S.SEARCH_PATH,\n" +
+                            "                                R.FORM_CODE = S.FORM_CODE,\n" +
+                            "                                R.DESCRIPTION = S.DESCRIPTION,\n" +
+                            "                                R.FLAG_IOD = S.FLAG_IOD,\n" +
+                            "                                R.FLAG_PDN = S.FLAG_PDN\n" +
+                            "   WHEN NOT MATCHED THEN INSERT (R.SYSTEM_ID, R.SECURITY_ROLE_NAME, R.SECURITY_ROLE_PATH, R.SEARCH_PATH, R.FORM_CODE, R.FORM_FORMAL_CODE, R.DESCRIPTION, R.FLAG_IOD, R.FLAG_PDN)\n" +
+                            "   VALUES (S.SYSTEM_ID, S.SECURITY_ROLE_NAME, S.SECURITY_ROLE_PATH, S.SEARCH_PATH, S.FORM_CODE, S.FORM_FORMAL_CODE, S.DESCRIPTION, S.FLAG_IOD, S.FLAG_PDN);\n" +
+                            "\n" +
+                            "\n";
+                }
+                if(SC_data_miner.Form_okud[0] == null  || Objects.equals(SC_data_miner.Form_okud[0], "") || Objects.equals(SC_data_miner.Form_okud[0], " ")){
+                    report_okud_code_script[0] = "--Warning: Не указаны данные для таблицы REPORT_OKUD_CODE: ОКУД\n\n";
+                } else {
+                    int c = getOkudcount();
+                    if(c==1){
+                        report_okud_code_script[0] = "MERGE INTO REPORT_OKUD_CODE R\n" +
+                                "   USING (SELECT \n" +
+                                "'" + SC_data_miner.Form_formal_code[0] + "' as FORM_FORMAL_CODE, \n" +
+                                "'" + SC_data_miner.Form_okud[0] + "' as OKUD_CODE, \n" +
+                                "'" + SC_data_miner.period[0] + "' as PERIOD, \n" +
+                                "null as FORM_CD \n" +
+                                "FROM dual) S\n" +
+                                "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
+                                "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
+                                "                                R.FORM_CD = S.FORM_CD\n" +
+                                "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.OKUD_CODE, R.PERIOD, R.FORM_CD)\n" +
+                                "   VALUES (S.FORM_FORMAL_CODE, S.OKUD_CODE, S.PERIOD, S.FORM_CD);\n\n" +
+                                "\n" +
+                                "\n";
+                    } else{
+                        report_okud_code_script[0] = "MERGE INTO REPORT_OKUD_CODE R\n" +
+                                "   USING (SELECT \n" +
+                                "'" + SC_data_miner.Form_formal_code[0] + "' as FORM_FORMAL_CODE, \n" +
+                                "'" + SC_data_miner.Form_okud[0] + "' as OKUD_CODE, \n" +
+                                "'" + SC_data_miner.period[0] + "' as PERIOD, \n" +
+                                "null as FORM_CD \n" +
+                                "FROM dual) S\n" +
+                                "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
+                                "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
+                                "                                R.FORM_CD = S.FORM_CD\n" +
+                                "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.OKUD_CODE, R.PERIOD, R.FORM_CD)\n" +
+                                "   VALUES (S.FORM_FORMAL_CODE, S.OKUD_CODE, S.PERIOD, S.FORM_CD);\n\n" +
+                                "\n" +
+                                "\n";
+                        for(int n=1;n<=c-1;n++){
+                            report_okud_code_script[0] = report_okud_code_script[0] +
+                                    "MERGE INTO REPORT_OKUD_CODE R\n" +
+                                    "   USING (SELECT \n" +
+                                    "'" + SC_data_miner.Form_formal_code[0] + "' as FORM_FORMAL_CODE, \n" +
+                                    "'" + SC_data_miner.Form_okud[n] + "' as OKUD_CODE, \n" +
+                                    "'" + SC_data_miner.period[0] + "' as PERIOD, \n" +
+                                    "null as FORM_CD \n" +
+                                    "FROM dual) S\n" +
+                                    "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
+                                    "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
+                                    "                                R.FORM_CD = S.FORM_CD\n" +
+                                    "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.OKUD_CODE, R.PERIOD, R.FORM_CD)\n" +
+                                    "   VALUES (S.FORM_FORMAL_CODE, S.OKUD_CODE, S.PERIOD, S.FORM_CD);\n\n" +
+                                    "\n" +
+                                    "\n";
+                        }
+                    }
+                }
+                if(SC_data_miner.Form_cd[0] == null  || Objects.equals(SC_data_miner.Form_cd[0], "") || Objects.equals(SC_data_miner.Form_cd[0], " ") ||
+                        SC_data_miner.Form_formal_code[0] == null  || Objects.equals(SC_data_miner.Form_formal_code[0], "") || Objects.equals(SC_data_miner.Form_formal_code[0], " ")){
+                        report_form_src_script[0] = "--Warning: Не указаны данные для таблицы REPORT_FORM_SRC: ";
+                        if(SC_data_miner.Form_cd[0] == null  || Objects.equals(SC_data_miner.Form_cd[0], "") || Objects.equals(SC_data_miner.Form_cd[0], " ")){
+                            report_form_src_script[0] = report_form_src_script[0] + "Код доступа, ";
+                        }
+                        if(SC_data_miner.Form_formal_code[0] == null  || Objects.equals(SC_data_miner.Form_formal_code[0], "") || Objects.equals(SC_data_miner.Form_formal_code[0], " ")){
+                            report_form_src_script[0] = report_form_src_script[0] + "Уникальный код отчета.";
+                        }
+                        report_form_src_script[0] = report_form_src_script[0] + "\n\n";
+                } else {
+                    report_form_src_script[0] = "MERGE INTO REPORT_FORM_SRC R\n" +
+                            "   USING (SELECT \n" +
+                            "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
+                            "'"+ SC_data_miner.Reg_form_code[0] +"' as REG_FORM_CODE \n" +
+                            "FROM dual) S\n" +
+                            "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE)\n" +
+                            "   WHEN MATCHED THEN UPDATE SET R.REG_FORM_CODE = S.REG_FORM_CODE\n" +
+                            "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REG_FORM_CODE)\n" +
+                            "   VALUES (S.FORM_FORMAL_CODE, S.REG_FORM_CODE);" +
+                            "\n\n" ;
+                }
+                if(SC_data_miner.rep_subj_type[0] == null || Objects.equals(SC_data_miner.rep_subj_type[0], "") || Objects.equals(SC_data_miner.rep_subj_type[0], " ")){
+                        report_rep_subj_type_script[0] = "--Warning: Не указаны данные для таблицы REPORT_REP_SUBJ_TYPE: Разрез\n\n";
+                } else {
+                    int c = getSubjcount();
+                    if(c==1){
+                        report_rep_subj_type_script[0] = "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
+                                "   USING (SELECT \n" +
+                                "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
+                                "'"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE \n" +
+                                "FROM dual) S\n" +
+                                "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
+                                "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
+                                "   VALUES (S.FORM_FORMAL_CODE, S.REP_SUBJ_TYPE);" +
+                                "\n" +
+                                "\n";
+                    } else{
+                        report_rep_subj_type_script[0] = "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
+                                "   USING (SELECT \n" +
+                                "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
+                                "'"+ SC_data_miner.rep_subj_type[0] +"' as REP_SUBJ_TYPE \n" +
+                                "FROM dual) S\n" +
+                                "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
+                                "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
+                                "   VALUES (S.FORM_FORMAL_CODE, S.REP_SUBJ_TYPE);" +
+                                "\n" +
+                                "\n";
+                        for(int n=1;n<=c-1;n++){
+                            report_rep_subj_type_script[0] = report_rep_subj_type_script[0] +
+                                    "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
+                                    "   USING (SELECT \n" +
+                                    "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
+                                    "'"+ SC_data_miner.rep_subj_type[n] +"' as REP_SUBJ_TYPE \n" +
+                                    "FROM dual) S\n" +
+                                    "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
+                                    "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
+                                    "   VALUES (S.FORM_FORMAL_CODE, S.REP_SUBJ_TYPE);" +
+                                    "\n" +
+                                    "\n";
+                        }
+                    }
+                }
+                if(SC_data_miner.Search_path[0] == null || Objects.equals(SC_data_miner.Search_path[0], "") || Objects.equals(SC_data_miner.Search_path[0], " ")){
+                    ehd_acs_script[0] = "--Warning: Не указаны данные для таблицы EHD_ACS_OBJECTS: Полный путь отчета/папки(Search_path)\n\n";
+                } else {
+                    ehd_acs_script[0] = "MERGE INTO EHD_ACS_OBJECTS O\n" +
+                            "   USING (SELECT \n" +
+                            "'"+ FName_def[0] +"' as NAME,\n" +
+                            "   '"+ SC_data_miner.Form_formal_code[0] +"' as CODE,\n" +
+                            "  (select t.id from EHD_ACS_OBJECTS t where t.type_ref in ('forms','ko_ao','apl_ao','ko_av') and t.code='"+ SC_data_miner.Form_cd[0] +"') as PARENT_ID,\n" +
+                            "  '" + TR_def[0] + "' as TYPE_REF,\n" +
+                            "  '" + SR_def[0] + "' as SOURCE_REF,\n" +
+                            "  TO_DATE('" + format_sql.format(dateNow) + "', 'DD/MM/YY') as CREATE_DATE,\n" +
+                            "  null as UPDATE_DATE,\n" +
+                            "  '" + SC_data_miner.Search_path[0] + "' as SEARCH_PATH,\n" +
+                            "  null as FLAG_EXP\n" +
+                            "FROM dual) S\n" +
+                            "   ON (O.CODE = S.CODE AND O.TYPE_REF = S.TYPE_REF)\n" +
+                            "   WHEN MATCHED THEN UPDATE SET O.NAME = S.NAME,\n" +
+                            "                                O.PARENT_ID = S.PARENT_ID,\n" +
+                            "                                O.SOURCE_REF = S.SOURCE_REF,\n" +
+                            "                                O.SEARCH_PATH = S.SEARCH_PATH,\n" +
+                            "                                O.FLAG_EXP = S.FLAG_EXP\n" +
+                            "   WHEN NOT MATCHED THEN INSERT (O.NAME, O.CODE, O.PARENT_ID, O.TYPE_REF, O.SOURCE_REF, O.CREATE_DATE, O.UPDATE_DATE, O.SEARCH_PATH, O.FLAG_EXP)\n" +
+                            "   VALUES (S.NAME, S.CODE, S.PARENT_ID, S.TYPE_REF, S.SOURCE_REF, S.CREATE_DATE, S.UPDATE_DATE, S.SEARCH_PATH, S.FLAG_EXP);\n" + "commit;" ;
+                }
+                if(SC_data_miner.p_parent_code_txtf[0] == null || Objects.equals(SC_data_miner.p_parent_code_txtf[0], "") || Objects.equals(SC_data_miner.p_parent_code_txtf[0], " ") ||
+                        SC_data_miner.p_parent_type_ref_txtf[0] == null || Objects.equals(SC_data_miner.p_parent_type_ref_txtf[0], "") || Objects.equals(SC_data_miner.p_parent_type_ref_txtf[0], " ") ||
+                        SC_data_miner.p_type_ref_txtf[0] == null || Objects.equals(SC_data_miner.p_type_ref_txtf[0], "") || Objects.equals(SC_data_miner.p_type_ref_txtf[0], " ") ||
+                        SC_data_miner.p_source_ref_txtf[0] == null || Objects.equals(SC_data_miner.p_source_ref_txtf[0], "") || Objects.equals(SC_data_miner.p_source_ref_txtf[0], " ") //||
+                    /*SC_data_miner.Search_path[0] == null || Objects.equals(SC_data_miner.Search_path[0], "") || Objects.equals(SC_data_miner.Search_path[0], " ")*/){
+                    ehd_acs_script2[0] = "--Warning: Не указаны данные для таблицы EHD_ACS_OBJECTS: ";
+                    if(SC_data_miner.p_parent_code_txtf[0] == null || Objects.equals(SC_data_miner.p_parent_code_txtf[0], "") || Objects.equals(SC_data_miner.p_parent_code_txtf[0], " ")){
+                        ehd_acs_script2[0] = ehd_acs_script2[0] + "p_parent_code, ";
+                    }
+                    if(SC_data_miner.p_parent_type_ref_txtf[0] == null || Objects.equals(SC_data_miner.p_parent_type_ref_txtf[0], "") || Objects.equals(SC_data_miner.p_parent_type_ref_txtf[0], " ")){
+                        ehd_acs_script2[0] = ehd_acs_script2[0] + "p_parent_type_ref, ";
+                    }
+                    if(SC_data_miner.p_type_ref_txtf[0] == null || Objects.equals(SC_data_miner.p_type_ref_txtf[0], "") || Objects.equals(SC_data_miner.p_type_ref_txtf[0], " ")){
+                        ehd_acs_script2[0] = ehd_acs_script2[0] + "p_type_ref, ";
+                    }
+                    if(SC_data_miner.p_source_ref_txtf[0] == null || Objects.equals(SC_data_miner.p_source_ref_txtf[0], "") || Objects.equals(SC_data_miner.p_source_ref_txtf[0], " ")){
+                        ehd_acs_script2[0] = ehd_acs_script2[0] + "p_source_ref. ";
+                    }
+                    ehd_acs_script2[0] = ehd_acs_script2[0] + "\n\n";
+                } else {
+                    //System.out.print("\n" + "rep_or_code[0] = " + rep_or_code[0]);
+                    if(rep_or_code[0] == 1){
+                        ehd_acs_script2[0] = "begin\n" +
+                                "utils.add_object_node\n" +
+                                "                            (p_name => '" + SC_data_miner.Form_name[0] + "'\n" +
+                                "                            ,p_code => '" + SC_data_miner.Form_cd[0] + "'\n" +
+                                "                            ,p_parent_code => '" + SC_data_miner.p_parent_code_txtf[0] + "' --родительский элемент (код доступа)\n" +
+                                "                            ,p_parent_type_ref =>'" + SC_data_miner.p_parent_type_ref_txtf[0] + "'\n" +
+                                "                            ,p_type_ref => '" + SC_data_miner.p_type_ref_txtf[0] + "'\n" +
+                                "                            ,p_source_ref => '" + SC_data_miner.p_source_ref_txtf[0] + "'\n" +
+                                ");\n" +
+                                "                    end;\n" +
+                                "/";
+                        //System.out.print("\n" + "ehd_acs_script2[0] = " + ehd_acs_script2[0]);
+                    } else{
+                        ehd_acs_script2[0] = "begin\n" +
+                                "utils.add_object_node\n" +
+                                "                            (p_name => '" + FName_def[0]/*SC_data_miner.Form_formal_code[n]*/ + "'\n" +
+                                "                            ,p_code => '" + SC_data_miner.Form_formal_code[0] /*SC_data_miner.Form_cd[n]*/ + "'\n" +
+                                "                            ,p_parent_code => '" + SC_data_miner.Form_cd[0] /*SC_data_miner.p_parent_code_txtf[n]*/ + "' --родительский элемент (код доступа)\n" +
+                                "                            ,p_parent_type_ref =>'" + SC_data_miner.p_parent_type_ref_txtf[0] + "'\n" +
+                                "                            ,p_type_ref => '" + SC_data_miner.p_type_ref_txtf[0] + "'\n" +
+                                "                            ,p_source_ref => '" + SC_data_miner.p_source_ref_txtf[0] + "'\n" +
+                                "                            ,p_search_path => '" + SC_data_miner.Search_path[0] + "'\n" +
+                                ");\n" +
+                                "                    end;\n" +
+                                "/";
+                        //System.out.print("\n" + "ehd_acs_script2[0] = " + ehd_acs_script2[0]);
+                    }
+                }
+
+                text[0] =  "--" + FName_def[0] +"\n" +
+                        "\n" +
+                        "--OAD_SECURITY\n" +
+                        "\n" +
+                        rep_form_script[0] +
+                        rep_form_cognos_script[0] +
+                        rep_form_oki_script[0] +
+                        rep_form_dep_owner_script[0] +
+                        rep_form_dep_user_script[0] +
+                        reg_report_form_script[0] +
+                        report_okud_code_script[0] +
+                        report_form_src_script[0] +
+                        report_rep_subj_type_script[0] + "\n\ncommit;";
+                text[1] = "--" + FName_def[0] +"\n" +
+                        "\n" +
+                        "--DM_NIKA_KO\n" +
+                        "\n" +
+                        rep_form_script[0] +
+                        rep_form_cognos_script[0] +
+                        rep_form_oki_script[0] +
+                        rep_form_dep_owner_script[0] +
+                        rep_form_dep_user_script[0] +
+                        reg_report_form_script[0] +
+                        report_okud_code_script[0] +
+                        report_form_src_script[0] +
+                        report_rep_subj_type_script[0] + "\n\ncommit;";;
+
+                text[2] = "--" + FName_def[0] +"\n" +
+                        "\n" +
+                        "--DM_NIKA_KO_DATA\n" +
+                        "\n" +
+                        rep_form_cognos_script[0] + "\n\n" + "commit;";
+
+                System.out.print("\n" + "type[0] = " + type[0]);
+                if(type[0] == 0){
+                    text[3] = "--" + FName_def[0] +"\n" +
+                            "\n" +
+                            "--TechDB_EHD_ACS\n" +
+                            "\n" + ehd_acs_script[0] ;
+                } else if(type[0] == 1){
+                    text[3] = "--" + FName_def[0] +"\n" +
+                            "\n" +
+                            "--TechDB_EHD_ACS\n" +
+                            "\n" + ehd_acs_script2[0] ;
+                }
+                for(int n = 1; n<=count; n++){
+                    if(SC_data_miner.Flag_IOD[n] == null || Objects.equals(SC_data_miner.Flag_IOD[n], "") || Objects.equals(SC_data_miner.Flag_IOD[n], " ")){
+                        iod = "null as FLAG_IOD";
+                    } else {
+                        iod = "'"+ SC_data_miner.Flag_IOD[n] + "' as FLAG_IOD";
+                    }
+                    if(SC_data_miner.Flag_PDN[n] == null || Objects.equals(SC_data_miner.Flag_PDN[n], "") || Objects.equals(SC_data_miner.Flag_PDN[n], " ")){
+                        pdn = "null as FLAG_PDN";
+                    } else {
+                        pdn = "'"+ SC_data_miner.Flag_PDN[n] + "' as FLAG_PDN";
+                    }
+                    if(SC_data_miner.reason[n] == null || Objects.equals(SC_data_miner.reason[n], "") || Objects.equals(SC_data_miner.reason[n], " ")){
+                        reason = "null as REASON";
+                    } else{
+                        reason = "'" + SC_data_miner.reason[n] + "' as REASON";
+                    }
+                    if (SC_data_miner.Form_cd[n] == null){
+                        if(rep_or_code[n] == 1){
+                            SC_data_miner.Form_cd[n] = SC_data_miner.Form_cd[n];
+                        }
+                    }
+                    //System.out.print("SC_data_miner.Form_okud[" + n + "] = " + SC_data_miner.Form_okud[n] + "\n");
+                    if(SC_data_miner.Form_cd[n].startsWith("0409")){
+                        okud_rep_form = "null as FORM_OKUD";
+                        //System.out.print("\nokud_rep_form = " + okud_rep_form + "\n");
+                        //System.out.print("SC_data_miner.Form_cd[" + n + "].startsWith(\"0409\") = " + SC_data_miner.Form_cd[n].startsWith("0409") + "\n");
+                    } else {
+                        if(SC_data_miner.Form_okud[n] == null || Objects.equals(SC_data_miner.Form_okud[n], "") || Objects.equals(SC_data_miner.Form_okud[n], " ")){
+                            for(int y = n; y<=count;){
+                                if (SC_data_miner.Form_okud[y] == null || Objects.equals(SC_data_miner.Form_okud[y], "") || Objects.equals(SC_data_miner.Form_okud[y], " ")){
+                                    y++;
+                                } else{
+                                    if(type[y] == 0){
+                                        okud_rep_form = "'"+ SC_data_miner.Form_okud[y] + "' as FORM_OKUD";
+                                        break;
+                                    } else{
+                                        y++;
+                                    }
+                                }
+                            }
+                            if(okud_rep_form == null || Objects.equals(okud_rep_form, "") || Objects.equals(okud_rep_form, " ")){
+                                okud_rep_form = "null as FORM_OKUD";
+                            }
+                            //System.out.print("\nokud_rep_form = " + okud_rep_form + "\n");
+                            //System.out.print("SC_data_miner.Form_cd[n].startsWith(\"0409\") = " + SC_data_miner.Form_cd[n].startsWith("0409"));
+                        } else{
+                            okud_rep_form = "'"+ SC_data_miner.Form_okud[n] + "' as FORM_OKUD";
+                            //System.out.print("\nokud_rep_form = " + okud_rep_form + "\n");
+                            //System.out.print("SC_data_miner.Form_cd[" + n + "].startsWith(\"0409\") = " + SC_data_miner.Form_cd[n].startsWith("0409"));
+                        }
+                    }
+                    if(SC_data_miner.Reg_form_code[n] == null || Objects.equals(SC_data_miner.Reg_form_code[n], "") || Objects.equals(SC_data_miner.Reg_form_code[n], " ")){
+                        SC_data_miner.Reg_form_code[n] = SC_data_miner.Form_cd[n];
+                    }
+
+                    if((SC_data_miner.Form_cd_name[n]== null) || Objects.equals(SC_data_miner.Form_cd_name[n], "") || Objects.equals(SC_data_miner.Form_cd_name[n], " ")||
+                            (SC_data_miner.Form_cd[n]== null) || Objects.equals(SC_data_miner.Form_cd[n], "") || Objects.equals(SC_data_miner.Form_cd[n], " ")){
+                        rep_form_script[n] = "--Warning: Не указаны данные для таблицы REP_FORM: ";
+                        if ((SC_data_miner.Form_cd[n] == null) || Objects.equals(SC_data_miner.Form_cd[n], "") || Objects.equals(SC_data_miner.Form_cd[n], " ")) {
+                            rep_form_script[n] = rep_form_script[n] + "Код доступа, ";
+                        }
+                        if ((SC_data_miner.Form_cd_name[n] == null) || Objects.equals(SC_data_miner.Form_cd_name[n], "") || Objects.equals(SC_data_miner.Form_cd_name[n], " ")) {
+                            rep_form_script[n] = rep_form_script[n] + "Наименование кода доступа.";
+                        }
+                        rep_form_script[n] = rep_form_script[n] + "\n\n";
+
+                    } else {
+                        rep_form_script[n] = "MERGE INTO REP_FORM R\n" +
+                                "   USING (SELECT \n" +
+                                "'" + SC_data_miner.Form_cd[n] + "' as FORM_CD, \n" +
+                                "'" + SC_data_miner.Form_name[n] + "' as FORM_NAME, \n" +
+                                okud_rep_form + "\n" +
+                                "FROM dual) S\n" +
+                                "   ON (R.FORM_CD = S.FORM_CD)\n" +
+                                "   WHEN MATCHED THEN UPDATE SET R.FORM_NAME = S.FORM_NAME,\n" +
+                                "                                R.FORM_OKUD = S.FORM_OKUD\n" +
+                                "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.FORM_NAME, R.FORM_OKUD)\n" +
+                                "   VALUES (S.FORM_CD, S.FORM_NAME, S.FORM_OKUD);" +
+                                "\n" +
+                                "\n" ;
+                    }
+                    if(Objects.equals(iod, "null as FLAG_IOD") || Objects.equals(pdn, "null as FLAG_PDN")){
+                        rep_form_oki_script[n] = "--Warning: Не указаны данные для таблицы REP_FORM_OKI: ";
+                        if(Objects.equals(iod, "null as FLAG_IOD")){
+                            rep_form_oki_script[n] = rep_form_oki_script[n] + "Флаг ИОД, ";
+                        }
+                        if(Objects.equals(pdn, "null as FLAG_PDN")){
+                            rep_form_oki_script[n] = rep_form_oki_script[n] + "Флаг ПДН.";
+                        }
+                        rep_form_oki_script[n] = rep_form_oki_script[n] + "\n\n";
+                    } else{
+                        rep_form_oki_script[n] = "MERGE INTO REP_FORM_OKI R\n" +
+                                "   USING (SELECT \n" +
+                                "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n" +
+                                iod + ",  " +
+                                pdn +
+                                " FROM dual) S\n" +
+                                "   ON (R.FORM_CD = S.FORM_CD)\n" +
+                                "   WHEN MATCHED THEN UPDATE SET R.FLAG_IOD = S.FLAG_IOD,\n" +
+                                "                                R.FLAG_PDN = S.FLAG_PDN\n" +
+                                "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.FLAG_IOD, R.FLAG_PDN)\n" +
+                                "   VALUES (S.FORM_CD, S.FLAG_IOD, S.FLAG_PDN);" +
+                                "\n" +
+                                "\n" ;
+                    }
+                    if(SC_data_miner.Form_cd_cog[n] == null || Objects.equals(SC_data_miner.Form_cd_cog[n], "") || Objects.equals(SC_data_miner.Form_cd_cog[n], " ")){
+                        rep_form_cognos_script[n] = "--Warning: Не указаны данные для таблицы REP_FORM_COGNOS: Код потока\n\n";
+                    } else {
+                        int c = getCogcount();
+                        if(c==1){
+                            rep_form_cognos_script[n] = "MERGE INTO REP_FORM_COGNOS R\n" +
+                                    "   USING (SELECT \n" +
+                                    "'"+ SC_data_miner.Form_cd_cog[n] +"' as FORM_CD, \n" +
+                                    "'"+ SC_data_miner.Form_cd[n] + "' as REP_FORM_CD \n" +
+                                    "FROM dual) S\n" +
+                                    "   ON (R.FORM_CD = S.FORM_CD)\n" +
+                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
+                                    "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
+                                    "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
+                                    "\n" +
+                                    "\n";
+                        } else{
+                            rep_form_cognos_script[n] = "MERGE INTO REP_FORM_COGNOS R\n" +
+                                    "   USING (SELECT \n" +
+                                    "'"+ SC_data_miner.Form_cd_cog[n] +"' as FORM_CD, \n" +
+                                    "'"+ SC_data_miner.Form_cd[n] + "' as REP_FORM_CD \n" +
+                                    "FROM dual) S\n" +
+                                    "   ON (R.FORM_CD = S.FORM_CD)\n" +
+                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
+                                    "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
+                                    "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
+                                    "\n" +
+                                    "\n";
+                            for(int i=1;i<=c-1;i++){
+                                rep_form_cognos_script[n] = rep_form_cognos_script[n] +
+                                        "MERGE INTO REP_FORM_COGNOS R\n" +
+                                        "   USING (SELECT \n" +
+                                        "'"+ SC_data_miner.Form_cd_cog[n] +"' as FORM_CD, \n" +
+                                        "'"+ SC_data_miner.Form_cd[n] + "' as REP_FORM_CD \n" +
+                                        "FROM dual) S\n" +
+                                        "   ON (R.FORM_CD = S.FORM_CD)\n" +
+                                        "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
+                                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
+                                        "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
+                                        "\n" +
+                                        "\n";
+                            }
+                        }
+                    }
+                    if(SC_data_miner.Dep_name[n] == null || Objects.equals(SC_data_miner.Dep_name[n], "") || Objects.equals(SC_data_miner.Dep_name[n], " ")){
+                        rep_form_dep_owner_script[n] = "--Warning: Не указаны данные для таблицы REP_FORM_DEP_OWNER: Сокращенное наименование департамента для REP_FORM_DEP_OWNER\n\n";
+                    } else {
+                        int c = getDepcount();
+                        if(c==1){
+                            rep_form_dep_owner_script[n] = "MERGE INTO REP_FORM_DEP_OWNER R\n" +
+                                    "   USING (SELECT \n" +
+                                    "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n" +
+                                    "'"+ SC_data_miner.Dep_u_name[n] +"' as DEP_NAME, \n" +
+                                    reason + " \n" +
+                                    " FROM dual) S\n" +
+                                    "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                                    "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
+                                    "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                                    "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
+                                    "\n" +
+                                    "\n";
+                        } else{
+                            rep_form_dep_owner_script[n] = "MERGE INTO REP_FORM_DEP_OWNER R\n" +
+                                    "   USING (SELECT \n" +
+                                    "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n" +
+                                    "'"+ SC_data_miner.Dep_u_name[n] +"' as DEP_NAME, \n" +
+                                    reason + " \n" +
+                                    " FROM dual) S\n" +
+                                    "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                                    "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
+                                    "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                                    "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
+                                    "\n" +
+                                    "\n";
+                            for(int i=1;i<=c-1;i++){
+                                rep_form_dep_owner_script[n] = rep_form_dep_owner_script[n] +
+                                        "MERGE INTO REP_FORM_DEP_OWNER R\n" +
+                                        "   USING (SELECT \n" +
+                                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n" +
+                                        "'"+ SC_data_miner.Dep_u_name[n] +"' as DEP_NAME, \n" +
+                                        reason + " \n" +
+                                        " FROM dual) S\n" +
+                                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
+                                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
+                                        "\n" +
+                                        "\n";
+                            }
+                        }
+                    }
+                    if(SC_data_miner.Dep_u_name[n] == null || Objects.equals(SC_data_miner.Dep_u_name[n], "") || Objects.equals(SC_data_miner.Dep_u_name[n], " ")){
+                        rep_form_dep_user_script[n] = "--Warning: Не указаны данные для таблицы REP_FORM_DEP_USER: Сокращенное наименование департамента для REP_FORM_DEP_USER\n\n";
+                    } else {
+                        int c = getDepucount();
+                        if(c==1){
+                            rep_form_dep_user_script[n] = "MERGE INTO REP_FORM_DEP_USER R\n" +
+                                    "   USING (SELECT \n" +
+                                    "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n" +
+                                    "'"+ SC_data_miner.Dep_u_name[n] +"' as DEP_NAME, \n" +
+                                    reason + " \n" +
+                                    " FROM dual) S\n" +
+                                    "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                                    "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
+                                    "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                                    "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
+                                    "\n" +
+                                    "\n";
+                        } else{
+                            rep_form_dep_user_script[n] = "MERGE INTO REP_FORM_DEP_USER R\n" +
+                                    "   USING (SELECT \n" +
+                                    "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n" +
+                                    "'"+ SC_data_miner.Dep_u_name[n] +"' as DEP_NAME, \n" +
+                                    reason + " \n" +
+                                    " FROM dual) S\n" +
+                                    "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                                    "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
+                                    "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                                    "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
+                                    "\n" +
+                                    "\n";
+                            for(int i=1;i<=c-1;i++){
+                                rep_form_dep_user_script[n] = rep_form_dep_user_script[n] +
+                                        "MERGE INTO REP_FORM_DEP_USER R\n" +
+                                        "   USING (SELECT \n" +
+                                        "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CD, \n" +
+                                        "'"+ SC_data_miner.Dep_u_name[n] +"' as DEP_NAME, \n" +
+                                        reason + " \n" +
+                                        " FROM dual) S\n" +
+                                        "   ON (R.FORM_CD = S.FORM_CD AND R.DEP_NAME = S.DEP_NAME)\n" +
+                                        "   WHEN MATCHED THEN UPDATE SET R.REASON = S.REASON \n" +
+                                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.DEP_NAME, R.REASON)\n" +
+                                        "   VALUES (S.FORM_CD, S.DEP_NAME, S.REASON);\n\n" +
+                                        "\n" +
+                                        "\n";
+                            }
+                        }
+                    }
+                    if(SC_data_miner.System_id[n] == null || Objects.equals(SC_data_miner.System_id[n], "") || Objects.equals(SC_data_miner.System_id[n], " ") ||
+                            SC_data_miner.Security_role_name[n] == null || Objects.equals(SC_data_miner.Security_role_name[n], "") || Objects.equals(SC_data_miner.Security_role_name[n], " ") ||
+                            SC_data_miner.Security_role_path[n] == null || Objects.equals(SC_data_miner.Security_role_path[n], "") || Objects.equals(SC_data_miner.Security_role_path[n], " ") ||
+                            SC_data_miner.Search_path[n] == null || Objects.equals(SC_data_miner.Search_path[n], "") || Objects.equals(SC_data_miner.Search_path[n], " ") ||
+                            SC_data_miner.Form_formal_code[n] == null || Objects.equals(SC_data_miner.Form_formal_code[n], "") || Objects.equals(SC_data_miner.Form_formal_code[n], " ") ||
+                            SC_data_miner.Desc[n] == null || Objects.equals(SC_data_miner.Desc[n], "") || Objects.equals(SC_data_miner.Desc[n], " ")){
+                        reg_report_form_script[n] = "--Warning: Не указаны данные для таблицы REG_REPORT_FORM: ";
+                        if(SC_data_miner.System_id[n] == null || Objects.equals(SC_data_miner.System_id[n], "") || Objects.equals(SC_data_miner.System_id[n], " ")){
+                            reg_report_form_script[n] = reg_report_form_script[n] + "System_id, ";
+                        }
+                        if(SC_data_miner.Security_role_name[n] == null || Objects.equals(SC_data_miner.Security_role_name[n], "") || Objects.equals(SC_data_miner.Security_role_name[n], " ")){
+                            reg_report_form_script[n] = reg_report_form_script[n] + "Security_role_name, ";
+                        }
+                        if(SC_data_miner.Security_role_path[n] == null || Objects.equals(SC_data_miner.Security_role_path[n], "") || Objects.equals(SC_data_miner.Security_role_path[n], " ")){
+                            reg_report_form_script[n] = reg_report_form_script[n] + "Security_role_path, ";
+                        }
+                        if(SC_data_miner.Search_path[n] == null || Objects.equals(SC_data_miner.Search_path[n], "") || Objects.equals(SC_data_miner.Search_path[n], " ")){
+                            reg_report_form_script[n] = reg_report_form_script[n] + "Полный путь отчета/папки(Search_path), ";
+                        }
+                        if(SC_data_miner.Form_formal_code[n] == null || Objects.equals(SC_data_miner.Form_formal_code[n], "") || Objects.equals(SC_data_miner.Form_formal_code[n], " ")){
+                            reg_report_form_script[n] = reg_report_form_script[n] + "Уникальный код отчета, ";
+                        }
+                        if(SC_data_miner.Desc[n] == null || Objects.equals(SC_data_miner.Desc[n], "") || Objects.equals(SC_data_miner.Desc[n], " ")){
+                            reg_report_form_script[n] = reg_report_form_script[n] + "Описание.";
+                        }
+                        reg_report_form_script[n] = reg_report_form_script[n] + "\n\n";
+                    } else {
+                        reg_report_form_script[n] = "MERGE INTO REG_REPORT_FORM R\n" +
+                                "   USING (SELECT \n" +
+                                "'"+ SC_data_miner.System_id[n] +"' as SYSTEM_ID, \n" +
+                                "'"+ SC_data_miner.Security_role_name[n] +"' as SECURITY_ROLE_NAME, \n" +
+                                "'"+ SC_data_miner.Security_role_path[n] +"' as SECURITY_ROLE_PATH, \n" +
+                                "'"+ SC_data_miner.Search_path[n] +"' as SEARCH_PATH, \n" +
+                                "'"+ SC_data_miner.Form_cd[n] +"' as FORM_CODE, \n" +
+                                "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n" +
+                                "'"+ SC_data_miner.Desc[n] +"' as DESCRIPTION, \n" +
+                                "" + iod + ", \n" +
+                                "" + pdn + "\n" +
+                                "FROM dual) S\n" +
+                                "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE)\n" +
+                                "   WHEN MATCHED THEN UPDATE SET R.SECURITY_ROLE_NAME = S.SECURITY_ROLE_NAME, \n" +
+                                "                                R.SECURITY_ROLE_PATH = S.SECURITY_ROLE_PATH,\n" +
+                                "                                R.SEARCH_PATH = S.SEARCH_PATH,\n" +
+                                "                                R.FORM_CODE = S.FORM_CODE,\n" +
+                                "                                R.DESCRIPTION = S.DESCRIPTION,\n" +
+                                "                                R.FLAG_IOD = S.FLAG_IOD,\n" +
+                                "                                R.FLAG_PDN = S.FLAG_PDN\n" +
+                                "   WHEN NOT MATCHED THEN INSERT (R.SYSTEM_ID, R.SECURITY_ROLE_NAME, R.SECURITY_ROLE_PATH, R.SEARCH_PATH, R.FORM_CODE, R.FORM_FORMAL_CODE, R.DESCRIPTION, R.FLAG_IOD, R.FLAG_PDN)\n" +
+                                "   VALUES (S.SYSTEM_ID, S.SECURITY_ROLE_NAME, S.SECURITY_ROLE_PATH, S.SEARCH_PATH, S.FORM_CODE, S.FORM_FORMAL_CODE, S.DESCRIPTION, S.FLAG_IOD, S.FLAG_PDN);\n" +
+                                "\n" +
+                                "\n";
+                    }
+                    if(SC_data_miner.Form_okud[n] == null  || Objects.equals(SC_data_miner.Form_okud[n], "") || Objects.equals(SC_data_miner.Form_okud[n], " ")){
+                        report_okud_code_script[n] = "--Warning: Не указаны данные для таблицы REPORT_OKUD_CODE: ОКУД\n\n";
+                    } else {
+                        int c = getOkudcount();
+                        if(c==1){
+                            report_okud_code_script[n] = "MERGE INTO REPORT_OKUD_CODE R\n" +
+                                    "   USING (SELECT \n" +
+                                    "'" + SC_data_miner.Form_formal_code[n] + "' as FORM_FORMAL_CODE, \n" +
+                                    "'" + SC_data_miner.Form_okud[n] + "' as OKUD_CODE, \n" +
+                                    "'" + SC_data_miner.period[n] + "' as PERIOD, \n" +
+                                    "null as FORM_CD \n" +
+                                    "FROM dual) S\n" +
+                                    "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
+                                    "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
+                                    "                                R.FORM_CD = S.FORM_CD\n" +
+                                    "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.OKUD_CODE, R.PERIOD, R.FORM_CD)\n" +
+                                    "   VALUES (S.FORM_FORMAL_CODE, S.OKUD_CODE, S.PERIOD, S.FORM_CD);\n\n" +
+                                    "\n" +
+                                    "\n";
+                        } else{
+                            report_okud_code_script[n] = "MERGE INTO REPORT_OKUD_CODE R\n" +
+                                    "   USING (SELECT \n" +
+                                    "'" + SC_data_miner.Form_formal_code[n] + "' as FORM_FORMAL_CODE, \n" +
+                                    "'" + SC_data_miner.Form_okud[n] + "' as OKUD_CODE, \n" +
+                                    "'" + SC_data_miner.period[n] + "' as PERIOD, \n" +
+                                    "null as FORM_CD \n" +
+                                    "FROM dual) S\n" +
+                                    "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
+                                    "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
+                                    "                                R.FORM_CD = S.FORM_CD\n" +
+                                    "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.OKUD_CODE, R.PERIOD, R.FORM_CD)\n" +
+                                    "   VALUES (S.FORM_FORMAL_CODE, S.OKUD_CODE, S.PERIOD, S.FORM_CD);\n\n" +
+                                    "\n" +
+                                    "\n";
+                            for(int i=1;i<=c-1;i++){
+                                report_okud_code_script[n] = report_okud_code_script[n] +
+                                        "MERGE INTO REPORT_OKUD_CODE R\n" +
+                                        "   USING (SELECT \n" +
+                                        "'" + SC_data_miner.Form_formal_code[n] + "' as FORM_FORMAL_CODE, \n" +
+                                        "'" + SC_data_miner.Form_okud[n] + "' as OKUD_CODE, \n" +
+                                        "'" + SC_data_miner.period[n] + "' as PERIOD, \n" +
+                                        "null as FORM_CD \n" +
+                                        "FROM dual) S\n" +
+                                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
+                                        "   WHEN MATCHED THEN UPDATE SET R.PERIOD = S.PERIOD, \n" +
+                                        "                                R.FORM_CD = S.FORM_CD\n" +
+                                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.OKUD_CODE, R.PERIOD, R.FORM_CD)\n" +
+                                        "   VALUES (S.FORM_FORMAL_CODE, S.OKUD_CODE, S.PERIOD, S.FORM_CD);\n\n" +
+                                        "\n" +
+                                        "\n";
+                            }
+                        }
+                    }
+                    if(SC_data_miner.Form_cd[n] == null  || Objects.equals(SC_data_miner.Form_cd[n], "") || Objects.equals(SC_data_miner.Form_cd[n], " ") ||
+                            SC_data_miner.Form_formal_code[n] == null  || Objects.equals(SC_data_miner.Form_formal_code[n], "") || Objects.equals(SC_data_miner.Form_formal_code[n], " ")){
+                        report_form_src_script[n] = "--Warning: Не указаны данные для таблицы REPORT_FORM_SRC: ";
+                        if(SC_data_miner.Form_cd[n] == null  || Objects.equals(SC_data_miner.Form_cd[n], "") || Objects.equals(SC_data_miner.Form_cd[n], " ")){
+                            report_form_src_script[n] = report_form_src_script[n] + "Код доступа, ";
+                        }
+                        if(SC_data_miner.Form_formal_code[n] == null  || Objects.equals(SC_data_miner.Form_formal_code[n], "") || Objects.equals(SC_data_miner.Form_formal_code[n], " ")){
+                            report_form_src_script[n] = report_form_src_script[n] + "Уникальный код отчета.";
+                        }
+                        report_form_src_script[n] = report_form_src_script[n] + "\n\n";
+                    } else {
+                        report_form_src_script[n] = "MERGE INTO REPORT_FORM_SRC R\n" +
+                                "   USING (SELECT \n" +
+                                "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n" +
+                                "'"+ SC_data_miner.Reg_form_code[n] +"' as REG_FORM_CODE \n" +
+                                "FROM dual) S\n" +
+                                "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE)\n" +
+                                "   WHEN MATCHED THEN UPDATE SET R.REG_FORM_CODE = S.REG_FORM_CODE\n" +
+                                "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REG_FORM_CODE)\n" +
+                                "   VALUES (S.FORM_FORMAL_CODE, S.REG_FORM_CODE);" +
+                                "\n\n" ;
+                    }
+                    if(SC_data_miner.rep_subj_type[n] == null || Objects.equals(SC_data_miner.rep_subj_type[n], "") || Objects.equals(SC_data_miner.rep_subj_type[n], " ")){
+                        report_rep_subj_type_script[n] = "--Warning: Не указаны данные для таблицы REPORT_REP_SUBJ_TYPE: Разрез\n\n";
+                    } else {
+                        int c = getSubjcount();
+                        if(c==1){
+                            report_rep_subj_type_script[n] = "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
+                                    "   USING (SELECT \n" +
+                                    "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n" +
+                                    "'"+ SC_data_miner.rep_subj_type[n] +"' as REP_SUBJ_TYPE \n" +
+                                    "FROM dual) S\n" +
+                                    "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
+                                    "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
+                                    "   VALUES (S.FORM_FORMAL_CODE, S.REP_SUBJ_TYPE);" +
+                                    "\n" +
+                                    "\n";
+                        } else{
+                            report_rep_subj_type_script[n] = "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
+                                    "   USING (SELECT \n" +
+                                    "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n" +
+                                    "'"+ SC_data_miner.rep_subj_type[n] +"' as REP_SUBJ_TYPE \n" +
+                                    "FROM dual) S\n" +
+                                    "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
+                                    "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
+                                    "   VALUES (S.FORM_FORMAL_CODE, S.REP_SUBJ_TYPE);" +
+                                    "\n" +
+                                    "\n";
+                            for(int i=1;i<=c-1;i++){
+                                report_rep_subj_type_script[n] = report_rep_subj_type_script[n] +
+                                        "MERGE INTO REPORT_REP_SUBJ_TYPE R\n" +
+                                        "   USING (SELECT \n" +
+                                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n" +
+                                        "'"+ SC_data_miner.rep_subj_type[n] +"' as REP_SUBJ_TYPE \n" +
+                                        "FROM dual) S\n" +
+                                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE AND R.REP_SUBJ_TYPE = S.REP_SUBJ_TYPE)\n" +
+                                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REP_SUBJ_TYPE)\n" +
+                                        "   VALUES (S.FORM_FORMAL_CODE, S.REP_SUBJ_TYPE);" +
+                                        "\n" +
+                                        "\n";
+                            }
+                        }
+                    }
+                    if(SC_data_miner.Search_path[n] == null || Objects.equals(SC_data_miner.Search_path[n], "") || Objects.equals(SC_data_miner.Search_path[n], " ")){
+                        ehd_acs_script[n] = "--Warning: Не указаны данные для таблицы EHD_ACS_OBJECTS: Полный путь отчета/папки(Search_path)\n\n";
+                    } else {
+                        ehd_acs_script[n] = "MERGE INTO EHD_ACS_OBJECTS O\n" +
+                                "   USING (SELECT \n" +
+                                "'"+ FName_def[n] +"' as NAME,\n" +
+                                "   '"+ SC_data_miner.Form_formal_code[n] +"' as CODE,\n" +
+                                "  (select t.id from EHD_ACS_OBJECTS t where t.type_ref in ('forms','ko_ao','apl_ao','ko_av') and t.code='"+ SC_data_miner.Form_cd[n] +"') as PARENT_ID,\n" +
+                                "  '" + TR_def[n] + "' as TYPE_REF,\n" +
+                                "  '" + SR_def[n] + "' as SOURCE_REF,\n" +
+                                "  TO_DATE('" + format_sql.format(dateNow) + "', 'DD/MM/YY') as CREATE_DATE,\n" +
+                                "  null as UPDATE_DATE,\n" +
+                                "  '" + SC_data_miner.Search_path[n] + "' as SEARCH_PATH,\n" +
+                                "  null as FLAG_EXP\n" +
+                                "FROM dual) S\n" +
+                                "   ON (O.CODE = S.CODE AND O.TYPE_REF = S.TYPE_REF)\n" +
+                                "   WHEN MATCHED THEN UPDATE SET O.NAME = S.NAME,\n" +
+                                "                                O.PARENT_ID = S.PARENT_ID,\n" +
+                                "                                O.SOURCE_REF = S.SOURCE_REF,\n" +
+                                "                                O.SEARCH_PATH = S.SEARCH_PATH,\n" +
+                                "                                O.FLAG_EXP = S.FLAG_EXP\n" +
+                                "   WHEN NOT MATCHED THEN INSERT (O.NAME, O.CODE, O.PARENT_ID, O.TYPE_REF, O.SOURCE_REF, O.CREATE_DATE, O.UPDATE_DATE, O.SEARCH_PATH, O.FLAG_EXP)\n" +
+                                "   VALUES (S.NAME, S.CODE, S.PARENT_ID, S.TYPE_REF, S.SOURCE_REF, S.CREATE_DATE, S.UPDATE_DATE, S.SEARCH_PATH, S.FLAG_EXP);\n" + "commit;" ;
+                    }
+                    if(SC_data_miner.p_parent_code_txtf[n] == null || Objects.equals(SC_data_miner.p_parent_code_txtf[n], "") || Objects.equals(SC_data_miner.p_parent_code_txtf[n], " ") ||
+                            SC_data_miner.p_parent_type_ref_txtf[n] == null || Objects.equals(SC_data_miner.p_parent_type_ref_txtf[n], "") || Objects.equals(SC_data_miner.p_parent_type_ref_txtf[n], " ") ||
+                            SC_data_miner.p_type_ref_txtf[n] == null || Objects.equals(SC_data_miner.p_type_ref_txtf[n], "") || Objects.equals(SC_data_miner.p_type_ref_txtf[n], " ") ||
+                            SC_data_miner.p_source_ref_txtf[n] == null || Objects.equals(SC_data_miner.p_source_ref_txtf[n], "") || Objects.equals(SC_data_miner.p_source_ref_txtf[n], " ") //||
+                        /*SC_data_miner.Search_path[n] == null || Objects.equals(SC_data_miner.Search_path[n], "") || Objects.equals(SC_data_miner.Search_path[n], " ")*/){
+                        ehd_acs_script2[n] = "--Warning: Не указаны данные для таблицы EHD_ACS_OBJECTS: ";
+                        if(SC_data_miner.p_parent_code_txtf[n] == null || Objects.equals(SC_data_miner.p_parent_code_txtf[n], "") || Objects.equals(SC_data_miner.p_parent_code_txtf[n], " ")){
+                            ehd_acs_script2[n] = ehd_acs_script2[n] + "p_parent_code, ";
+                        }
+                        if(SC_data_miner.p_parent_type_ref_txtf[n] == null || Objects.equals(SC_data_miner.p_parent_type_ref_txtf[n], "") || Objects.equals(SC_data_miner.p_parent_type_ref_txtf[n], " ")){
+                            ehd_acs_script2[n] = ehd_acs_script2[n] + "p_parent_type_ref, ";
+                        }
+                        if(SC_data_miner.p_type_ref_txtf[n] == null || Objects.equals(SC_data_miner.p_type_ref_txtf[n], "") || Objects.equals(SC_data_miner.p_type_ref_txtf[n], " ")){
+                            ehd_acs_script2[n] = ehd_acs_script2[n] + "p_type_ref, ";
+                        }
+                        if(SC_data_miner.p_source_ref_txtf[n] == null || Objects.equals(SC_data_miner.p_source_ref_txtf[n], "") || Objects.equals(SC_data_miner.p_source_ref_txtf[n], " ")){
+                            ehd_acs_script2[n] = ehd_acs_script2[n] + "p_source_ref. ";
+                        }
+                        ehd_acs_script2[n] = ehd_acs_script2[n] + "\n\n";
+                    } else {
+                        //System.out.print("\n" + "rep_or_code[n] = " + rep_or_code[n]);
+                        if(rep_or_code[n] == 1){
+                            ehd_acs_script2[n] = "begin\n" +
+                                    "utils.add_object_node\n" +
+                                    "                            (p_name => '" + SC_data_miner.Form_name[n] + "'\n" +
+                                    "                            ,p_code => '" + SC_data_miner.Form_cd[n] + "'\n" +
+                                    "                            ,p_parent_code => '" + SC_data_miner.p_parent_code_txtf[n] + "' --родительский элемент (код доступа)\n" +
+                                    "                            ,p_parent_type_ref =>'" + SC_data_miner.p_parent_type_ref_txtf[n] + "'\n" +
+                                    "                            ,p_type_ref => '" + SC_data_miner.p_type_ref_txtf[n] + "'\n" +
+                                    "                            ,p_source_ref => '" + SC_data_miner.p_source_ref_txtf[n] + "'\n" +
+                                    ");\n" +
+                                    "                    end;\n" +
+                                    "/";
+                            //System.out.print("\n" + "ehd_acs_script2[n] = " + ehd_acs_script2[n]);
+                        } else{
+                            ehd_acs_script2[n] = "begin\n" +
+                                    "utils.add_object_node\n" +
+                                    "                            (p_name => '" + FName_def[n]/*SC_data_miner.Form_formal_code[n]*/ + "'\n" +
+                                    "                            ,p_code => '" + SC_data_miner.Form_formal_code[n] /*SC_data_miner.Form_cd[n]*/ + "'\n" +
+                                    "                            ,p_parent_code => '" + SC_data_miner.Form_cd[n] /*SC_data_miner.p_parent_code_txtf[n]*/ + "' --родительский элемент (код доступа)\n" +
+                                    "                            ,p_parent_type_ref =>'" + SC_data_miner.p_parent_type_ref_txtf[n] + "'\n" +
+                                    "                            ,p_type_ref => '" + SC_data_miner.p_type_ref_txtf[n] + "'\n" +
+                                    "                            ,p_source_ref => '" + SC_data_miner.p_source_ref_txtf[n] + "'\n" +
+                                    "                            ,p_search_path => '" + SC_data_miner.Search_path[n] + "'\n" +
+                                    ");\n" +
+                                    "                    end;\n" +
+                                    "/";
+                            //System.out.print("\n" + "ehd_acs_script2[n] = " + ehd_acs_script2[n]);
+                        }
+                    }
+                    
+                    text[0] = text[0] + "\n" +
+                            "\n" +
+                            "--" + FName_def[n] + "\n" +
+                            "\n" +
+                            rep_form_script[n] + "\n\n" +
+                            rep_form_cognos_script[n] + "\n\n" +
+                            rep_form_oki_script[n] + "\n\n" +
+                            rep_form_dep_owner_script[n] + "\n\n" +
+                            rep_form_dep_user_script[n] + "\n\n" +
+                            reg_report_form_script[n] + "\n\n" +
+                            report_okud_code_script[n] + "\n\n" +
+                            report_form_src_script[n] + "\n\n" +
+                            report_rep_subj_type_script[n] + "\n\n" +
+                            "commit;";
+                    text[1] = text[1] + "\n" +
+                            "--" + FName_def[n] + "\n" +
+                            "\n" +
+                            rep_form_script[n] + "\n\n" +
+                            rep_form_cognos_script[n] + "\n\n" +
+                            rep_form_oki_script[n] + "\n\n" +
+                            rep_form_dep_owner_script[n] + "\n\n" +
+                            rep_form_dep_user_script[n] + "\n\n" +
+                            reg_report_form_script[n] + "\n\n" +
+                            report_okud_code_script[n] + "\n\n" +
+                            report_form_src_script[n] + "\n\n" +
+                            report_rep_subj_type_script[n] + "\n\n" +
+                            "commit;";
+
+                    text[2] = text[2] + "\n" +
+                            "--" + FName_def[0] +"\n" +
+                            "\n" +
+                            "--DM_NIKA_KO_DATA\n" +
+                            "\n" +
+                            rep_form_cognos_script[n] + "\n\n" + "commit;";
+
+                    System.out.print("\n" + "type[" + n + "] = " + type[n]);
+                    if(type[n] == 0){
+                        text[3] = text[3] + "\n" +
+                                "\n" +
+                                "--" + FName_def[n] + "\n" +
+                                "\n" +
+                                ehd_acs_script[n] + "\n\n";
+                    } else if(type[n] == 1){
+                        text[3] = text[3] + "\n" +
+                                "\n" +
+                                "--" + FName_def[n] +"\n" +
+                                "\n" +
+                                "--TechDB_EHD_ACS\n" +
+                                "\n" +
+                                ehd_acs_script2[n] + "\n\n";
+                    }
+                }
+                /*text[0] = "--" + FName_def[0] + "\n" +
                         "\n" +
                         "--OAD_SECURITY\n" +
                         "\n" +
@@ -537,7 +2151,7 @@ public class ScriptEXP {
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, \n" +
-						"'"+ SC_data_miner.period[0] +"'as PERIOD \n" +
+						"'"+ SC_data_miner.period[0] +"' as PERIOD, \n" +
 						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
@@ -663,7 +2277,7 @@ public class ScriptEXP {
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, \n" +
-						"'"+ SC_data_miner.period[0] +"'as PERIOD \n" +
+						"'"+ SC_data_miner.period[0] +"' as PERIOD, \n" +
 						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
@@ -945,7 +2559,7 @@ public class ScriptEXP {
                                     "                                O.FLAG_EXP = S.FLAG_EXP\n" +
                                     "   WHEN NOT MATCHED THEN INSERT (O.NAME, O.CODE, O.PARENT_ID, O.TYPE_REF, O.SOURCE_REF, O.CREATE_DATE, O.UPDATE_DATE, O.SEARCH_PATH, O.FLAG_EXP)\n" +
                                     "   VALUES (S.NAME, S.CODE, S.PARENT_ID, S.TYPE_REF, S.SOURCE_REF, S.CREATE_DATE, S.UPDATE_DATE, S.SEARCH_PATH, S.FLAG_EXP);\n" + "commit;";
-                        }
+                        }*/
             }
         } else if(chk==2 || chk==0){//Есть только 3 листа
             if(count == 0){
@@ -993,7 +2607,7 @@ public class ScriptEXP {
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, \n" +
-						"'"+ SC_data_miner.period[0] +"'as PERIOD \n" +
+						"'"+ SC_data_miner.period[0] +"' as PERIOD, \n" +
 						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
@@ -1053,7 +2667,7 @@ public class ScriptEXP {
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, \n" +
-						"'"+ SC_data_miner.period[0] +"'as PERIOD \n" +
+						"'"+ SC_data_miner.period[0] +"' as PERIOD, \n" +
 						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
@@ -1159,7 +2773,7 @@ public class ScriptEXP {
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, \n" +
-						"'"+ SC_data_miner.period[0] +"'as PERIOD \n" +
+						"'"+ SC_data_miner.period[0] +"' as PERIOD, \n" +
 						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
@@ -1220,7 +2834,7 @@ public class ScriptEXP {
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, \n" +
-						"'"+ SC_data_miner.period[0] +"'as PERIOD \n" +
+						"'"+ SC_data_miner.period[0] +"' as PERIOD, \n" +
 						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
@@ -1474,7 +3088,7 @@ public class ScriptEXP {
             }
         } else if (chk == 3){//Руной режим
             count = count_manual;
-            for(int x=0; x<= SC_data_miner.Form_formal_code.length-1; x++){
+            /*for(int x=0; x<= SC_data_miner.Form_formal_code.length-1; x++){
                 //System.out.print("Search_path[" + x + "] = " + Search_path[x] + "\n");
                 if(SC_data_miner.Search_path[x] != null){
                     if(SC_data_miner.Search_path[x].contains("Нерегламентированные отчеты")){
@@ -1488,7 +3102,7 @@ public class ScriptEXP {
                 } else
                     SC_data_miner.Security_role_path[x] = "-";
                 //System.out.print("Security_role_path[" + x + "] = " + Security_role_path[x] + "\n");
-            }
+            }*/
             for(int h=0; h<=SC_data_miner.Form_cd.length-1; h++){
                 //System.out.print("SC_data_miner.Form_cd.length = " + SC_data_miner.Form_cd.length + "\n");
                 //System.out.print("h = " + h + "\n");
@@ -2969,7 +4583,7 @@ public class ScriptEXP {
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, \n" +
-						"'"+ SC_data_miner.period[0] +"'as PERIOD \n" +
+						"'"+ SC_data_miner.period[0] +"' as PERIOD, \n" +
 						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
@@ -2984,7 +4598,7 @@ public class ScriptEXP {
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, \n" +
-						"'"+ SC_data_miner.period[0] +"'as PERIOD \n" +
+						"'"+ SC_data_miner.period[0] +"' as PERIOD, \n" +
 						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
@@ -3012,7 +4626,7 @@ public class ScriptEXP {
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, \n" +
-						"'"+ SC_data_miner.period[0] +"'as PERIOD \n" +
+						"'"+ SC_data_miner.period[0] +"' as PERIOD, \n" +
 						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
@@ -3053,7 +4667,7 @@ public class ScriptEXP {
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, \n" +
-						"'"+ SC_data_miner.period[0] +"'as PERIOD \n" +
+						"'"+ SC_data_miner.period[0] +"' as PERIOD, \n" +
 						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
@@ -3107,7 +4721,7 @@ public class ScriptEXP {
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, \n" +
-						"'"+ SC_data_miner.period[0] +"'as PERIOD \n" +
+						"'"+ SC_data_miner.period[0] +"' as PERIOD, \n" +
 						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
@@ -3174,7 +4788,7 @@ public class ScriptEXP {
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, \n" +
-						"'"+ SC_data_miner.period[0] +"'as PERIOD \n" +
+						"'"+ SC_data_miner.period[0] +"' as PERIOD, \n" +
 						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
@@ -3254,7 +4868,7 @@ public class ScriptEXP {
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, \n" +
-						"'"+ SC_data_miner.period[0] +"'as PERIOD \n" +
+						"'"+ SC_data_miner.period[0] +"' as PERIOD, \n" +
 						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
@@ -3347,7 +4961,7 @@ public class ScriptEXP {
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, \n" +
-						"'"+ SC_data_miner.period[0] +"'as PERIOD \n" +
+						"'"+ SC_data_miner.period[0] +"' as PERIOD, \n" +
 						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
@@ -3476,7 +5090,7 @@ public class ScriptEXP {
                         "   WHEN MATCHED THEN UPDATE SET R.REG_FORM_CODE = S.REG_FORM_CODE\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REG_FORM_CODE)\n" +
                         "   VALUES (S.FORM_FORMAL_CODE, S.REG_FORM_CODE);" +
-                            "\n" ;
+                            "\n\n" ;
                 }
                 //System.out.print("SC_data_miner.rep_subj_type[0] = " + SC_data_miner.rep_subj_type[0] + "\n");
                 if(SC_data_miner.rep_subj_type[0] == null || Objects.equals(SC_data_miner.rep_subj_type[0], "") || Objects.equals(SC_data_miner.rep_subj_type[0], " ")){
@@ -3895,9 +5509,9 @@ public class ScriptEXP {
                     } else{
                         ehd_acs_script2 = "begin\n" +
                                 "utils.add_object_node\n" +
-                                "                            (p_name => '" + SC_data_miner.Form_name[0] + "'\n" +
-                                "                            ,p_code => '" + SC_data_miner.Form_cd[0] + "'\n" +
-                                "                            ,p_parent_code => '" + SC_data_miner.p_parent_code_txtf[0] + "' --родительский элемент (код доступа)\n" +
+                                "                            (p_name => '" + FName_def[0]/*SC_data_miner.Form_formal_code[n]*/ + "'\n" +
+                                "                            ,p_code => '" + SC_data_miner.Form_formal_code[0] /*SC_data_miner.Form_cd[n]*/ + "'\n" +
+                                "                            ,p_parent_code => '" + SC_data_miner.Form_cd[0] /*SC_data_miner.p_parent_code_txtf[n]*/ + "' --родительский элемент (код доступа)\n" +
                                 "                            ,p_parent_type_ref =>'" + SC_data_miner.p_parent_type_ref_txtf[0] + "'\n" +
                                 "                            ,p_type_ref => '" + SC_data_miner.p_type_ref_txtf[0] + "'\n" +
                                 "                            ,p_source_ref => '" + SC_data_miner.p_source_ref_txtf[0] + "'\n" +
@@ -5370,7 +6984,7 @@ public class ScriptEXP {
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, \n" +
-						"'"+ SC_data_miner.period[0] +"'as PERIOD \n" +
+						"'"+ SC_data_miner.period[0] +"' as PERIOD, \n" +
 						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
@@ -5385,7 +6999,7 @@ public class ScriptEXP {
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, \n" +
-						"'"+ SC_data_miner.period[0] +"'as PERIOD \n" +
+						"'"+ SC_data_miner.period[0] +"' as PERIOD, \n" +
 						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
@@ -5413,7 +7027,7 @@ public class ScriptEXP {
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, \n" +
-						"'"+ SC_data_miner.period[0] +"'as PERIOD \n" +
+						"'"+ SC_data_miner.period[0] +"' as PERIOD, \n" +
 						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
@@ -5454,7 +7068,7 @@ public class ScriptEXP {
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, \n" +
-						"'"+ SC_data_miner.period[0] +"'as PERIOD \n" +
+						"'"+ SC_data_miner.period[0] +"' as PERIOD, \n" +
 						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
@@ -5508,7 +7122,7 @@ public class ScriptEXP {
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, \n" +
-						"'"+ SC_data_miner.period[0] +"'as PERIOD \n" +
+						"'"+ SC_data_miner.period[0] +"' as PERIOD, \n" +
 						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
@@ -5575,7 +7189,7 @@ public class ScriptEXP {
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, \n" +
-						"'"+ SC_data_miner.period[0] +"'as PERIOD \n" +
+						"'"+ SC_data_miner.period[0] +"' as PERIOD, \n" +
 						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
@@ -5655,7 +7269,7 @@ public class ScriptEXP {
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, \n" +
-						"'"+ SC_data_miner.period[0] +"'as PERIOD \n" +
+						"'"+ SC_data_miner.period[0] +"' as PERIOD, \n" +
 						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
@@ -5748,7 +7362,7 @@ public class ScriptEXP {
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud[0] +"' as OKUD_CODE, \n" +
-						"'"+ SC_data_miner.period[0] +"'as PERIOD \n" +
+						"'"+ SC_data_miner.period[0] +"' as PERIOD, \n" +
 						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
@@ -5876,7 +7490,7 @@ public class ScriptEXP {
                         "   WHEN MATCHED THEN UPDATE SET R.REG_FORM_CODE = S.REG_FORM_CODE\n" +
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REG_FORM_CODE)\n" +
                         "   VALUES (S.FORM_FORMAL_CODE, S.REG_FORM_CODE);" +
-                            "\n" ;
+                            "\n\n" ;
                 }
                 if(SC_data_miner.rep_subj_type[0] == null || Objects.equals(SC_data_miner.rep_subj_type[0], "") || Objects.equals(SC_data_miner.rep_subj_type[0], " ")){
                     if(rep_or_code[0] == 1){
@@ -6291,9 +7905,9 @@ public class ScriptEXP {
                     } else{
                         ehd_acs_script2[0] = "begin\n" +
                                 "utils.add_object_node\n" +
-                                "                            (p_name => '" + SC_data_miner.Form_name[0] + "'\n" +
-                                "                            ,p_code => '" + SC_data_miner.Form_cd[0] + "'\n" +
-                                "                            ,p_parent_code => '" + SC_data_miner.p_parent_code_txtf[0] + "' --родительский элемент (код доступа)\n" +
+                                "                            (p_name => '" + FName_def[0]/*SC_data_miner.Form_formal_code[n]*/ + "'\n" +
+                                "                            ,p_code => '" + SC_data_miner.Form_formal_code[0] /*SC_data_miner.Form_cd[n]*/ + "'\n" +
+                                "                            ,p_parent_code => '" + SC_data_miner.Form_cd[0] /*SC_data_miner.p_parent_code_txtf[n]*/ + "' --родительский элемент (код доступа)\n" +
                                 "                            ,p_parent_type_ref =>'" + SC_data_miner.p_parent_type_ref_txtf[0] + "'\n" +
                                 "                            ,p_type_ref => '" + SC_data_miner.p_type_ref_txtf[0] + "'\n" +
                                 "                            ,p_source_ref => '" + SC_data_miner.p_source_ref_txtf[0] + "'\n" +
@@ -7770,7 +9384,7 @@ public class ScriptEXP {
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud[n] +"' as OKUD_CODE, \n" +
-						"'"+ SC_data_miner.period[n] +"'as PERIOD \n" +
+						"'"+ SC_data_miner.period[n] +"' as PERIOD, \n" +
 						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
@@ -7785,7 +9399,7 @@ public class ScriptEXP {
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud[n] +"' as OKUD_CODE, \n" +
-						"'"+ SC_data_miner.period[n] +"'as PERIOD \n" +
+						"'"+ SC_data_miner.period[n] +"' as PERIOD, \n" +
 						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
@@ -7813,7 +9427,7 @@ public class ScriptEXP {
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud[n] +"' as OKUD_CODE, \n" +
-						"'"+ SC_data_miner.period[n] +"'as PERIOD \n" +
+						"'"+ SC_data_miner.period[n] +"' as PERIOD, \n" +
 						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
@@ -7854,7 +9468,7 @@ public class ScriptEXP {
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud[n] +"' as OKUD_CODE, \n" +
-						"'"+ SC_data_miner.period[n] +"'as PERIOD \n" +
+						"'"+ SC_data_miner.period[n] +"' as PERIOD, \n" +
 						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
@@ -7908,7 +9522,7 @@ public class ScriptEXP {
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud[n] +"' as OKUD_CODE, \n" +
-						"'"+ SC_data_miner.period[n] +"'as PERIOD \n" +
+						"'"+ SC_data_miner.period[n] +"' as PERIOD, \n" +
 						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
@@ -7975,7 +9589,7 @@ public class ScriptEXP {
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud[n] +"' as OKUD_CODE, \n" +
-						"'"+ SC_data_miner.period[n] +"'as PERIOD \n" +
+						"'"+ SC_data_miner.period[n] +"' as PERIOD, \n" +
 						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
@@ -8055,7 +9669,7 @@ public class ScriptEXP {
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud[n] +"' as OKUD_CODE, \n" +
-						"'"+ SC_data_miner.period[n] +"'as PERIOD \n" +
+						"'"+ SC_data_miner.period[n] +"' as PERIOD, \n" +
 						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
@@ -8148,7 +9762,7 @@ public class ScriptEXP {
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud[n] +"' as OKUD_CODE, \n" +
-						"'"+ SC_data_miner.period[n] +"'as PERIOD \n" +
+						"'"+ SC_data_miner.period[n] +"' as PERIOD, \n" +
 						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
@@ -8693,9 +10307,9 @@ public class ScriptEXP {
                         } else{
                             ehd_acs_script2[n] = "begin\n" +
                                     "utils.add_object_node\n" +
-                                    "                            (p_name => '" + SC_data_miner.Form_name[n] + "'\n" +
-                                    "                            ,p_code => '" + SC_data_miner.Form_cd[n] + "'\n" +
-                                    "                            ,p_parent_code => '" + SC_data_miner.p_parent_code_txtf[n] + "' --родительский элемент (код доступа)\n" +
+                                    "                            (p_name => '" + FName_def[n]/*SC_data_miner.Form_formal_code[n]*/ + "'\n" +
+                                    "                            ,p_code => '" + SC_data_miner.Form_formal_code[n] /*SC_data_miner.Form_cd[n]*/ + "'\n" +
+                                    "                            ,p_parent_code => '" + SC_data_miner.Form_cd[n] /*SC_data_miner.p_parent_code_txtf[n]*/ + "' --родительский элемент (код доступа)\n" +
                                     "                            ,p_parent_type_ref =>'" + SC_data_miner.p_parent_type_ref_txtf[n] + "'\n" +
                                     "                            ,p_type_ref => '" + SC_data_miner.p_type_ref_txtf[n] + "'\n" +
                                     "                            ,p_source_ref => '" + SC_data_miner.p_source_ref_txtf[n] + "'\n" +
@@ -8868,4 +10482,65 @@ public class ScriptEXP {
             fos.close();
         }
     }
+    public int getCogcount(){
+        int cogcount = 0;
+        for(int x = 0; x<=SC_data_miner.Form_cd_cog.length; x++){
+            if(SC_data_miner.Form_cd_cog[x] != null || Objects.equals(SC_data_miner.Form_cd_cog[x], "") || Objects.equals(SC_data_miner.Form_cd_cog[x], " ")){
+                cogcount++;
+            } else{
+                break;
+            }
+        }
+        return cogcount;
+    }
+
+    public int getDepcount(){
+        int depcount = 0;
+        for(int x = 0; x<=SC_data_miner.Dep_name.length; x++){
+            if(SC_data_miner.Dep_name[x] != null || Objects.equals(SC_data_miner.Dep_name[x], "") || Objects.equals(SC_data_miner.Dep_name[x], " ")){
+                depcount++;
+            } else{
+                break;
+            }
+        }
+        return depcount;
+    }
+
+    public int getDepucount(){
+        int depucount = 0;
+        for(int x = 0; x<=SC_data_miner.Dep_u_name.length; x++){
+            if(SC_data_miner.Dep_u_name[x] != null || Objects.equals(SC_data_miner.Dep_u_name[x], "") || Objects.equals(SC_data_miner.Dep_u_name[x], " ")){
+                depucount++;
+            } else{
+                break;
+            }
+        }
+        return depucount;
+    }
+
+    public int getOkudcount(){
+        int okudcount = 0;
+        for(int x = 0; x<=SC_data_miner.Form_okud.length; x++){
+            if(SC_data_miner.Form_okud[x] != null || Objects.equals(SC_data_miner.Form_okud[x], "") || Objects.equals(SC_data_miner.Form_okud[x], " ")){
+                okudcount++;
+            } else{
+                break;
+            }
+        }
+        return okudcount;
+    }
+
+    public int getSubjcount(){
+        int subjcount = 0;
+        for(int x = 0; x<=SC_data_miner.rep_subj_type.length; x++){
+            if(SC_data_miner.rep_subj_type[x] != null || Objects.equals(SC_data_miner.rep_subj_type[x], "") || Objects.equals(SC_data_miner.rep_subj_type[x], " ")){
+                subjcount++;
+            } else{
+                break;
+            }
+        }
+        return subjcount;
+    }
 }
+
+
