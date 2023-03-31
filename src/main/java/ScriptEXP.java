@@ -4611,7 +4611,7 @@ public class ScriptEXP {
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud2[0] +"' as OKUD_CODE, \n" +
-						"'"+ SC_data_miner.period2[0] +"'as PERIOD \n" +
+						"'"+ SC_data_miner.period2[0] +"'as PERIOD, \n" +
 						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
@@ -4639,7 +4639,7 @@ public class ScriptEXP {
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud2[0] +"' as OKUD_CODE, \n" +
-						"'"+ SC_data_miner.period2[0] +"'as PERIOD \n" +
+						"'"+ SC_data_miner.period2[0] +"'as PERIOD, \n" +
 						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
@@ -4652,7 +4652,7 @@ public class ScriptEXP {
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud3[0] +"' as OKUD_CODE, \n" +
-						"'"+ SC_data_miner.period3[0] +"'as PERIOD \n" +
+						"'"+ SC_data_miner.period3[0] +"'as PERIOD, \n" +
 						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
@@ -4680,7 +4680,7 @@ public class ScriptEXP {
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud2[0] +"' as OKUD_CODE, \n" +
-						"'"+ SC_data_miner.period2[0] +"'as PERIOD \n" +
+						"'"+ SC_data_miner.period2[0] +"'as PERIOD, \n" +
 						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
@@ -4693,7 +4693,7 @@ public class ScriptEXP {
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud3[0] +"' as OKUD_CODE, \n" +
-						"'"+ SC_data_miner.period3[0] +"'as PERIOD \n" +
+						"'"+ SC_data_miner.period3[0] +"'as PERIOD, \n" +
 						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
@@ -4706,7 +4706,7 @@ public class ScriptEXP {
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud4[0] +"' as OKUD_CODE, \n" +
-						"'"+ SC_data_miner.period4[0] +"'as PERIOD \n" +
+						"'"+ SC_data_miner.period4[0] +"'as PERIOD, \n" +
 						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
@@ -4734,7 +4734,7 @@ public class ScriptEXP {
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud2[0] +"' as OKUD_CODE, \n" +
-						"'"+ SC_data_miner.period2[0] +"'as PERIOD \n" +
+						"'"+ SC_data_miner.period2[0] +"'as PERIOD, \n" +
 						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
@@ -4747,7 +4747,7 @@ public class ScriptEXP {
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud3[0] +"' as OKUD_CODE, \n" +
-						"'"+ SC_data_miner.period3[0] +"'as PERIOD \n" +
+						"'"+ SC_data_miner.period3[0] +"'as PERIOD, \n" +
 						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
@@ -4760,7 +4760,7 @@ public class ScriptEXP {
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud4[0] +"' as OKUD_CODE, \n" +
-						"'"+ SC_data_miner.period4[0] +"'as PERIOD \n" +
+						"'"+ SC_data_miner.period4[0] +"'as PERIOD, \n" +
 						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
@@ -4773,7 +4773,7 @@ public class ScriptEXP {
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud5[0] +"' as OKUD_CODE, \n" +
-						"'"+ SC_data_miner.period5[0] +"'as PERIOD \n" +
+						"'"+ SC_data_miner.period5[0] +"'as PERIOD, \n" +
 						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
@@ -4801,7 +4801,7 @@ public class ScriptEXP {
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud2[0] +"' as OKUD_CODE, \n" +
-						"'"+ SC_data_miner.period2[0] +"'as PERIOD \n" +
+						"'"+ SC_data_miner.period2[0] +"'as PERIOD, \n" +
 						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
@@ -4814,7 +4814,7 @@ public class ScriptEXP {
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud3[0] +"' as OKUD_CODE, \n" +
-						"'"+ SC_data_miner.period3[0] +"'as PERIOD \n" +
+						"'"+ SC_data_miner.period3[0] +"'as PERIOD, \n" +
 						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
@@ -4827,7 +4827,7 @@ public class ScriptEXP {
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud4[0] +"' as OKUD_CODE, \n" +
-						"'"+ SC_data_miner.period4[0] +"'as PERIOD \n" +
+						"'"+ SC_data_miner.period4[0] +"'as PERIOD, \n" +
 						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
@@ -4840,7 +4840,7 @@ public class ScriptEXP {
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud5[0] +"' as OKUD_CODE, \n" +
-						"'"+ SC_data_miner.period5[0] +"'as PERIOD \n" +
+						"'"+ SC_data_miner.period5[0] +"'as PERIOD, \n" +
 						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
@@ -4853,7 +4853,7 @@ public class ScriptEXP {
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud6[0] +"' as OKUD_CODE, \n" +
-						"'"+ SC_data_miner.period6[0] +"'as PERIOD \n" +
+						"'"+ SC_data_miner.period6[0] +"'as PERIOD, \n" +
 						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
@@ -4881,7 +4881,7 @@ public class ScriptEXP {
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud2[0] +"' as OKUD_CODE, \n" +
-						"'"+ SC_data_miner.period2[0] +"'as PERIOD \n" +
+						"'"+ SC_data_miner.period2[0] +"'as PERIOD, \n" +
 						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
@@ -4894,7 +4894,7 @@ public class ScriptEXP {
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud3[0] +"' as OKUD_CODE, \n" +
-						"'"+ SC_data_miner.period3[0] +"'as PERIOD \n" +
+						"'"+ SC_data_miner.period3[0] +"'as PERIOD, \n" +
 						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
@@ -4907,7 +4907,7 @@ public class ScriptEXP {
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud4[0] +"' as OKUD_CODE, \n" +
-						"'"+ SC_data_miner.period4[0] +"'as PERIOD \n" +
+						"'"+ SC_data_miner.period4[0] +"'as PERIOD, \n" +
 						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
@@ -4920,7 +4920,7 @@ public class ScriptEXP {
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud5[0] +"' as OKUD_CODE, \n" +
-						"'"+ SC_data_miner.period5[0] +"'as PERIOD \n" +
+						"'"+ SC_data_miner.period5[0] +"'as PERIOD, \n" +
 						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
@@ -4933,7 +4933,7 @@ public class ScriptEXP {
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud6[0] +"' as OKUD_CODE, \n" +
-						"'"+ SC_data_miner.period6[0] +"'as PERIOD \n" +
+						"'"+ SC_data_miner.period6[0] +"'as PERIOD, \n" +
 						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
@@ -4946,7 +4946,7 @@ public class ScriptEXP {
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud7[0] +"' as OKUD_CODE, \n" +
-						"'"+ SC_data_miner.period7[0] +"'as PERIOD \n" +
+						"'"+ SC_data_miner.period7[0] +"'as PERIOD, \n" +
 						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
@@ -4974,7 +4974,7 @@ public class ScriptEXP {
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud2[0] +"' as OKUD_CODE, \n" +
-						"'"+ SC_data_miner.period2[0] +"'as PERIOD \n" +
+						"'"+ SC_data_miner.period2[0] +"'as PERIOD, \n" +
 						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
@@ -4987,7 +4987,7 @@ public class ScriptEXP {
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud3[0] +"' as OKUD_CODE, \n" +
-						"'"+ SC_data_miner.period3[0] +"'as PERIOD \n" +
+						"'"+ SC_data_miner.period3[0] +"'as PERIOD, \n" +
 						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
@@ -5000,7 +5000,7 @@ public class ScriptEXP {
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud4[0] +"' as OKUD_CODE, \n" +
-						"'"+ SC_data_miner.period4[0] +"'as PERIOD \n" +
+						"'"+ SC_data_miner.period4[0] +"'as PERIOD, \n" +
 						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
@@ -5013,7 +5013,7 @@ public class ScriptEXP {
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud5[0] +"' as OKUD_CODE, \n" +
-						"'"+ SC_data_miner.period5[0] +"'as PERIOD \n" +
+						"'"+ SC_data_miner.period5[0] +"'as PERIOD, \n" +
 						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
@@ -5026,7 +5026,7 @@ public class ScriptEXP {
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud6[0] +"' as OKUD_CODE, \n" +
-						"'"+ SC_data_miner.period6[0] +"'as PERIOD \n" +
+						"'"+ SC_data_miner.period6[0] +"'as PERIOD, \n" +
 						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
@@ -5039,7 +5039,7 @@ public class ScriptEXP {
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud7[0] +"' as OKUD_CODE, \n" +
-						"'"+ SC_data_miner.period7[0] +"'as PERIOD \n" +
+						"'"+ SC_data_miner.period7[0] +"'as PERIOD, \n" +
 						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
@@ -5052,7 +5052,7 @@ public class ScriptEXP {
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud8[0] +"' as OKUD_CODE, \n" +
-						"'"+ SC_data_miner.period8[0] +"'as PERIOD \n" +
+						"'"+ SC_data_miner.period8[0] +"'as PERIOD, \n" +
 						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
@@ -7012,7 +7012,7 @@ public class ScriptEXP {
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud2[0] +"' as OKUD_CODE, \n" +
-						"'"+ SC_data_miner.period2[0] +"'as PERIOD \n" +
+						"'"+ SC_data_miner.period2[0] +"'as PERIOD, \n" +
 						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
@@ -7040,7 +7040,7 @@ public class ScriptEXP {
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud2[0] +"' as OKUD_CODE, \n" +
-						"'"+ SC_data_miner.period2[0] +"'as PERIOD \n" +
+						"'"+ SC_data_miner.period2[0] +"'as PERIOD, \n" +
 						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
@@ -7053,7 +7053,7 @@ public class ScriptEXP {
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud3[0] +"' as OKUD_CODE, \n" +
-						"'"+ SC_data_miner.period3[0] +"'as PERIOD \n" +
+						"'"+ SC_data_miner.period3[0] +"'as PERIOD, \n" +
 						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
@@ -7081,7 +7081,7 @@ public class ScriptEXP {
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud2[0] +"' as OKUD_CODE, \n" +
-						"'"+ SC_data_miner.period2[0] +"'as PERIOD \n" +
+						"'"+ SC_data_miner.period2[0] +"'as PERIOD, \n" +
 						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
@@ -7094,7 +7094,7 @@ public class ScriptEXP {
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud3[0] +"' as OKUD_CODE, \n" +
-						"'"+ SC_data_miner.period3[0] +"'as PERIOD \n" +
+						"'"+ SC_data_miner.period3[0] +"'as PERIOD, \n" +
 						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
@@ -7107,7 +7107,7 @@ public class ScriptEXP {
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud4[0] +"' as OKUD_CODE, \n" +
-						"'"+ SC_data_miner.period4[0] +"'as PERIOD \n" +
+						"'"+ SC_data_miner.period4[0] +"'as PERIOD, \n" +
 						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
@@ -7135,7 +7135,7 @@ public class ScriptEXP {
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud2[0] +"' as OKUD_CODE, \n" +
-						"'"+ SC_data_miner.period2[0] +"'as PERIOD \n" +
+						"'"+ SC_data_miner.period2[0] +"'as PERIOD, \n" +
 						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
@@ -7148,7 +7148,7 @@ public class ScriptEXP {
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud3[0] +"' as OKUD_CODE, \n" +
-						"'"+ SC_data_miner.period3[0] +"'as PERIOD \n" +
+						"'"+ SC_data_miner.period3[0] +"'as PERIOD, \n" +
 						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
@@ -7161,7 +7161,7 @@ public class ScriptEXP {
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud4[0] +"' as OKUD_CODE, \n" +
-						"'"+ SC_data_miner.period4[0] +"'as PERIOD \n" +
+						"'"+ SC_data_miner.period4[0] +"'as PERIOD, \n" +
 						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
@@ -7174,7 +7174,7 @@ public class ScriptEXP {
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud5[0] +"' as OKUD_CODE, \n" +
-						"'"+ SC_data_miner.period5[0] +"'as PERIOD \n" +
+						"'"+ SC_data_miner.period5[0] +"'as PERIOD, \n" +
 						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
@@ -7202,7 +7202,7 @@ public class ScriptEXP {
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud2[0] +"' as OKUD_CODE, \n" +
-						"'"+ SC_data_miner.period2[0] +"'as PERIOD \n" +
+						"'"+ SC_data_miner.period2[0] +"'as PERIOD, \n" +
 						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
@@ -7215,7 +7215,7 @@ public class ScriptEXP {
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud3[0] +"' as OKUD_CODE, \n" +
-						"'"+ SC_data_miner.period3[0] +"'as PERIOD \n" +
+						"'"+ SC_data_miner.period3[0] +"'as PERIOD, \n" +
 						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
@@ -7228,7 +7228,7 @@ public class ScriptEXP {
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud4[0] +"' as OKUD_CODE, \n" +
-						"'"+ SC_data_miner.period4[0] +"'as PERIOD \n" +
+						"'"+ SC_data_miner.period4[0] +"'as PERIOD, \n" +
 						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
@@ -7241,7 +7241,7 @@ public class ScriptEXP {
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud5[0] +"' as OKUD_CODE, \n" +
-						"'"+ SC_data_miner.period5[0] +"'as PERIOD \n" +
+						"'"+ SC_data_miner.period5[0] +"'as PERIOD, \n" +
 						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
@@ -7254,7 +7254,7 @@ public class ScriptEXP {
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud6[0] +"' as OKUD_CODE, \n" +
-						"'"+ SC_data_miner.period6[0] +"'as PERIOD \n" +
+						"'"+ SC_data_miner.period6[0] +"'as PERIOD, \n" +
 						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
@@ -7282,7 +7282,7 @@ public class ScriptEXP {
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud2[0] +"' as OKUD_CODE, \n" +
-						"'"+ SC_data_miner.period2[0] +"'as PERIOD \n" +
+						"'"+ SC_data_miner.period2[0] +"'as PERIOD, \n" +
 						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
@@ -7295,7 +7295,7 @@ public class ScriptEXP {
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud3[0] +"' as OKUD_CODE, \n" +
-						"'"+ SC_data_miner.period3[0] +"'as PERIOD \n" +
+						"'"+ SC_data_miner.period3[0] +"'as PERIOD, \n" +
 						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
@@ -7308,7 +7308,7 @@ public class ScriptEXP {
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud4[0] +"' as OKUD_CODE, \n" +
-						"'"+ SC_data_miner.period4[0] +"'as PERIOD \n" +
+						"'"+ SC_data_miner.period4[0] +"'as PERIOD, \n" +
 						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
@@ -7321,7 +7321,7 @@ public class ScriptEXP {
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud5[0] +"' as OKUD_CODE, \n" +
-						"'"+ SC_data_miner.period5[0] +"'as PERIOD \n" +
+						"'"+ SC_data_miner.period5[0] +"'as PERIOD, \n" +
 						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
@@ -7334,7 +7334,7 @@ public class ScriptEXP {
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud6[0] +"' as OKUD_CODE, \n" +
-						"'"+ SC_data_miner.period6[0] +"'as PERIOD \n" +
+						"'"+ SC_data_miner.period6[0] +"'as PERIOD, \n" +
 						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
@@ -7347,7 +7347,7 @@ public class ScriptEXP {
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud7[0] +"' as OKUD_CODE, \n" +
-						"'"+ SC_data_miner.period7[0] +"'as PERIOD \n" +
+						"'"+ SC_data_miner.period7[0] +"'as PERIOD, \n" +
 						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
@@ -7375,7 +7375,7 @@ public class ScriptEXP {
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud2[0] +"' as OKUD_CODE, \n" +
-						"'"+ SC_data_miner.period2[0] +"'as PERIOD \n" +
+						"'"+ SC_data_miner.period2[0] +"'as PERIOD, \n" +
 						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
@@ -7388,7 +7388,7 @@ public class ScriptEXP {
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud3[0] +"' as OKUD_CODE, \n" +
-						"'"+ SC_data_miner.period3[0] +"'as PERIOD \n" +
+						"'"+ SC_data_miner.period3[0] +"'as PERIOD, \n" +
 						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
@@ -7401,7 +7401,7 @@ public class ScriptEXP {
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud4[0] +"' as OKUD_CODE, \n" +
-						"'"+ SC_data_miner.period4[0] +"'as PERIOD \n" +
+						"'"+ SC_data_miner.period4[0] +"'as PERIOD, \n" +
 						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
@@ -7414,7 +7414,7 @@ public class ScriptEXP {
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud5[0] +"' as OKUD_CODE, \n" +
-						"'"+ SC_data_miner.period5[0] +"'as PERIOD \n" +
+						"'"+ SC_data_miner.period5[0] +"'as PERIOD, \n" +
 						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
@@ -7427,7 +7427,7 @@ public class ScriptEXP {
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud6[0] +"' as OKUD_CODE, \n" +
-						"'"+ SC_data_miner.period6[0] +"'as PERIOD \n" +
+						"'"+ SC_data_miner.period6[0] +"'as PERIOD, \n" +
 						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
@@ -7440,7 +7440,7 @@ public class ScriptEXP {
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud7[0] +"' as OKUD_CODE, \n" +
-						"'"+ SC_data_miner.period7[0] +"'as PERIOD \n" +
+						"'"+ SC_data_miner.period7[0] +"'as PERIOD, \n" +
 						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
@@ -7453,7 +7453,7 @@ public class ScriptEXP {
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud8[0] +"' as OKUD_CODE, \n" +
-						"'"+ SC_data_miner.period8[0] +"'as PERIOD \n" +
+						"'"+ SC_data_miner.period8[0] +"'as PERIOD, \n" +
 						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
@@ -9412,7 +9412,7 @@ public class ScriptEXP {
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud2[n] +"' as OKUD_CODE, \n" +
-						"'"+ SC_data_miner.period2[n] +"'as PERIOD \n" +
+						"'"+ SC_data_miner.period2[n] +"'as PERIOD, \n" +
 						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
@@ -9440,7 +9440,7 @@ public class ScriptEXP {
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud2[n] +"' as OKUD_CODE, \n" +
-						"'"+ SC_data_miner.period2[n] +"'as PERIOD \n" +
+						"'"+ SC_data_miner.period2[n] +"'as PERIOD, \n" +
 						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
@@ -9453,7 +9453,7 @@ public class ScriptEXP {
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud3[n] +"' as OKUD_CODE, \n" +
-						"'"+ SC_data_miner.period3[n] +"'as PERIOD \n" +
+						"'"+ SC_data_miner.period3[n] +"'as PERIOD, \n" +
 						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
@@ -9481,7 +9481,7 @@ public class ScriptEXP {
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud2[n] +"' as OKUD_CODE, \n" +
-						"'"+ SC_data_miner.period2[n] +"'as PERIOD \n" +
+						"'"+ SC_data_miner.period2[n] +"'as PERIOD, \n" +
 						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
@@ -9494,7 +9494,7 @@ public class ScriptEXP {
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud3[n] +"' as OKUD_CODE, \n" +
-						"'"+ SC_data_miner.period3[n] +"'as PERIOD \n" +
+						"'"+ SC_data_miner.period3[n] +"'as PERIOD, \n" +
 						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
@@ -9507,7 +9507,7 @@ public class ScriptEXP {
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud4[n] +"' as OKUD_CODE, \n" +
-						"'"+ SC_data_miner.period4[n] +"'as PERIOD \n" +
+						"'"+ SC_data_miner.period4[n] +"'as PERIOD, \n" +
 						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
@@ -9535,7 +9535,7 @@ public class ScriptEXP {
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud2[n] +"' as OKUD_CODE, \n" +
-						"'"+ SC_data_miner.period2[n] +"'as PERIOD \n" +
+						"'"+ SC_data_miner.period2[n] +"'as PERIOD, \n" +
 						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
@@ -9548,7 +9548,7 @@ public class ScriptEXP {
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud3[n] +"' as OKUD_CODE, \n" +
-						"'"+ SC_data_miner.period3[n] +"'as PERIOD \n" +
+						"'"+ SC_data_miner.period3[n] +"'as PERIOD, \n" +
 						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
@@ -9561,7 +9561,7 @@ public class ScriptEXP {
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud4[n] +"' as OKUD_CODE, \n" +
-						"'"+ SC_data_miner.period4[n] +"'as PERIOD \n" +
+						"'"+ SC_data_miner.period4[n] +"'as PERIOD, \n" +
 						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
@@ -9574,7 +9574,7 @@ public class ScriptEXP {
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud5[n] +"' as OKUD_CODE, \n" +
-						"'"+ SC_data_miner.period5[n] +"'as PERIOD \n" +
+						"'"+ SC_data_miner.period5[n] +"'as PERIOD, \n" +
 						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
@@ -9602,7 +9602,7 @@ public class ScriptEXP {
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud2[n] +"' as OKUD_CODE, \n" +
-						"'"+ SC_data_miner.period2[n] +"'as PERIOD \n" +
+						"'"+ SC_data_miner.period2[n] +"'as PERIOD, \n" +
 						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
@@ -9615,7 +9615,7 @@ public class ScriptEXP {
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud3[n] +"' as OKUD_CODE, \n" +
-						"'"+ SC_data_miner.period3[n] +"'as PERIOD \n" +
+						"'"+ SC_data_miner.period3[n] +"'as PERIOD, \n" +
 						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
@@ -9628,7 +9628,7 @@ public class ScriptEXP {
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud4[n] +"' as OKUD_CODE, \n" +
-						"'"+ SC_data_miner.period4[n] +"'as PERIOD \n" +
+						"'"+ SC_data_miner.period4[n] +"'as PERIOD, \n" +
 						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
@@ -9641,7 +9641,7 @@ public class ScriptEXP {
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud5[n] +"' as OKUD_CODE, \n" +
-						"'"+ SC_data_miner.period5[n] +"'as PERIOD \n" +
+						"'"+ SC_data_miner.period5[n] +"'as PERIOD, \n" +
 						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
@@ -9654,7 +9654,7 @@ public class ScriptEXP {
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud6[n] +"' as OKUD_CODE, \n" +
-						"'"+ SC_data_miner.period6[n] +"'as PERIOD \n" +
+						"'"+ SC_data_miner.period6[n] +"'as PERIOD, \n" +
 						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
@@ -9682,7 +9682,7 @@ public class ScriptEXP {
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud2[n] +"' as OKUD_CODE, \n" +
-						"'"+ SC_data_miner.period2[n] +"'as PERIOD \n" +
+						"'"+ SC_data_miner.period2[n] +"'as PERIOD, \n" +
 						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
@@ -9695,7 +9695,7 @@ public class ScriptEXP {
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud3[n] +"' as OKUD_CODE, \n" +
-						"'"+ SC_data_miner.period3[n] +"'as PERIOD \n" +
+						"'"+ SC_data_miner.period3[n] +"'as PERIOD, \n" +
 						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
@@ -9708,7 +9708,7 @@ public class ScriptEXP {
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud4[n] +"' as OKUD_CODE, \n" +
-						"'"+ SC_data_miner.period4[n] +"'as PERIOD \n" +
+						"'"+ SC_data_miner.period4[n] +"'as PERIOD, \n" +
 						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
@@ -9721,7 +9721,7 @@ public class ScriptEXP {
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud5[n] +"' as OKUD_CODE, \n" +
-						"'"+ SC_data_miner.period5[n] +"'as PERIOD \n" +
+						"'"+ SC_data_miner.period5[n] +"'as PERIOD, \n" +
 						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
@@ -9734,7 +9734,7 @@ public class ScriptEXP {
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud6[n] +"' as OKUD_CODE, \n" +
-						"'"+ SC_data_miner.period6[n] +"'as PERIOD \n" +
+						"'"+ SC_data_miner.period6[n] +"'as PERIOD, \n" +
 						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
@@ -9747,7 +9747,7 @@ public class ScriptEXP {
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud7[n] +"' as OKUD_CODE, \n" +
-						"'"+ SC_data_miner.period7[n] +"'as PERIOD \n" +
+						"'"+ SC_data_miner.period7[n] +"'as PERIOD, \n" +
 						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
@@ -9775,7 +9775,7 @@ public class ScriptEXP {
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud2[n] +"' as OKUD_CODE, \n" +
-						"'"+ SC_data_miner.period2[n] +"'as PERIOD \n" +
+						"'"+ SC_data_miner.period2[n] +"'as PERIOD, \n" +
 						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
@@ -9788,7 +9788,7 @@ public class ScriptEXP {
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud3[n] +"' as OKUD_CODE, \n" +
-						"'"+ SC_data_miner.period3[n] +"'as PERIOD \n" +
+						"'"+ SC_data_miner.period3[n] +"'as PERIOD, \n" +
 						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
@@ -9801,7 +9801,7 @@ public class ScriptEXP {
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud4[n] +"' as OKUD_CODE, \n" +
-						"'"+ SC_data_miner.period4[n] +"'as PERIOD \n" +
+						"'"+ SC_data_miner.period4[n] +"'as PERIOD, \n" +
 						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
@@ -9814,7 +9814,7 @@ public class ScriptEXP {
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud5[n] +"' as OKUD_CODE, \n" +
-						"'"+ SC_data_miner.period5[n] +"'as PERIOD \n" +
+						"'"+ SC_data_miner.period5[n] +"'as PERIOD, \n" +
 						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
@@ -9827,7 +9827,7 @@ public class ScriptEXP {
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud6[n] +"' as OKUD_CODE, \n" +
-						"'"+ SC_data_miner.period6[n] +"'as PERIOD \n" +
+						"'"+ SC_data_miner.period6[n] +"'as PERIOD, \n" +
 						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
@@ -9840,7 +9840,7 @@ public class ScriptEXP {
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud7[n] +"' as OKUD_CODE, \n" +
-						"'"+ SC_data_miner.period7[n] +"'as PERIOD \n" +
+						"'"+ SC_data_miner.period7[n] +"'as PERIOD, \n" +
 						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
@@ -9853,7 +9853,7 @@ public class ScriptEXP {
                         "   USING (SELECT \n" +
                         "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n" +
                         "'"+ SC_data_miner.Form_okud8[n] +"' as OKUD_CODE, \n" +
-						"'"+ SC_data_miner.period8[n] +"'as PERIOD \n" +
+						"'"+ SC_data_miner.period8[n] +"'as PERIOD, \n" +
 						"null as FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE and R.OKUD_CODE = S.OKUD_CODE)\n" +
