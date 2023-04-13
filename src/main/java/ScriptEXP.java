@@ -292,7 +292,6 @@ public class ScriptEXP {
                                 "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
                                 "FROM dual) S\n" +
                                 "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
                                 "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                 "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                 "\n" +
@@ -304,7 +303,6 @@ public class ScriptEXP {
                                 "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
                                 "FROM dual) S\n" +
                                 "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
                                 "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                 "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                 "\n" +
@@ -317,7 +315,6 @@ public class ScriptEXP {
                                     "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
                                     "FROM dual) S\n" +
                                     "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
                                     "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                     "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                     "\n" +
@@ -744,7 +741,7 @@ public class ScriptEXP {
                         "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
+                        
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                         "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                         "\n" +
@@ -864,7 +861,7 @@ public class ScriptEXP {
                         "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
+                        
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                         "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                         "\n" +
@@ -974,7 +971,7 @@ public class ScriptEXP {
                         "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
+                        
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                         "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                         "\n" + "commit;";
@@ -1104,7 +1101,7 @@ public class ScriptEXP {
                                 "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
                                 "FROM dual) S\n" +
                                 "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
+                                
                                 "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                 "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                 "\n" +
@@ -1116,7 +1113,7 @@ public class ScriptEXP {
                                 "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
                                 "FROM dual) S\n" +
                                 "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
+                                
                                 "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                 "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                 "\n" +
@@ -1129,7 +1126,7 @@ public class ScriptEXP {
                                     "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
                                     "FROM dual) S\n" +
                                     "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
+                                    
                                     "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                     "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                     "\n" +
@@ -1635,7 +1632,6 @@ public class ScriptEXP {
                                     "'"+ SC_data_miner.Form_cd[n] + "' as REP_FORM_CD \n" +
                                     "FROM dual) S\n" +
                                     "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
                                     "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                     "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                     "\n" +
@@ -1647,7 +1643,7 @@ public class ScriptEXP {
                                     "'"+ SC_data_miner.Form_cd[n] + "' as REP_FORM_CD \n" +
                                     "FROM dual) S\n" +
                                     "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
+                                    
                                     "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                     "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                     "\n" +
@@ -1660,7 +1656,7 @@ public class ScriptEXP {
                                         "'"+ SC_data_miner.Form_cd[n] + "' as REP_FORM_CD \n" +
                                         "FROM dual) S\n" +
                                         "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                        "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
+                                        
                                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                         "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                         "\n" +
@@ -2080,7 +2076,7 @@ public class ScriptEXP {
                         "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
+                        
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                         "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                         "\n" +
@@ -2206,7 +2202,7 @@ public class ScriptEXP {
                         "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
+                        
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                         "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                         "\n" +
@@ -2318,7 +2314,7 @@ public class ScriptEXP {
                         "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
                         "FROM dual) S\n" +
                         "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
+                        
                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                         "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                         "\n" + "commit;";
@@ -3293,7 +3289,7 @@ public class ScriptEXP {
                                     "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
                                     "FROM dual) S\n" +
                                     "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
+                                    
                                     "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                     "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                     "\n" +
@@ -3306,7 +3302,7 @@ public class ScriptEXP {
                                     "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
                                     "FROM dual) S\n" +
                                     "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
+                                    
                                     "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                     "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                     "\n" +
@@ -3317,7 +3313,7 @@ public class ScriptEXP {
                                     "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
                                     "FROM dual) S\n" +
                                     "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
+                                    
                                     "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                     "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                     "\n" +
@@ -3330,7 +3326,7 @@ public class ScriptEXP {
                                     "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
                                     "FROM dual) S\n" +
                                     "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
+                                    
                                     "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                     "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                     "\n" +
@@ -3341,7 +3337,7 @@ public class ScriptEXP {
                                     "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
                                     "FROM dual) S\n" +
                                     "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
+                                    
                                     "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                     "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                     "\n" +
@@ -3352,7 +3348,7 @@ public class ScriptEXP {
                                     "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
                                     "FROM dual) S\n" +
                                     "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
+                                    
                                     "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                     "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                     "\n" +
@@ -3365,7 +3361,7 @@ public class ScriptEXP {
                                     "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
                                     "FROM dual) S\n" +
                                     "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
+                                    
                                     "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                     "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                     "\n" +
@@ -3376,7 +3372,7 @@ public class ScriptEXP {
                                     "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
                                     "FROM dual) S\n" +
                                     "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
+                                    
                                     "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                     "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                     "\n" +
@@ -3387,7 +3383,7 @@ public class ScriptEXP {
                                     "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
                                     "FROM dual) S\n" +
                                     "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
+                                    
                                     "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                     "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                     "\n" +
@@ -3398,7 +3394,7 @@ public class ScriptEXP {
                                     "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
                                     "FROM dual) S\n" +
                                     "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
+                                    
                                     "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                     "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                     "\n" +
@@ -3411,7 +3407,7 @@ public class ScriptEXP {
                                     "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
                                     "FROM dual) S\n" +
                                     "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
+                                    
                                     "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                     "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                     "\n" +
@@ -3422,7 +3418,7 @@ public class ScriptEXP {
                                     "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
                                     "FROM dual) S\n" +
                                     "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
+                                    
                                     "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                     "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                     "\n" +
@@ -3433,7 +3429,7 @@ public class ScriptEXP {
                                     "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
                                     "FROM dual) S\n" +
                                     "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
+                                    
                                     "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                     "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                     "\n" +
@@ -3444,7 +3440,7 @@ public class ScriptEXP {
                                     "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
                                     "FROM dual) S\n" +
                                     "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
+                                    
                                     "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                     "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                     "\n" +
@@ -3455,7 +3451,7 @@ public class ScriptEXP {
                                     "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
                                     "FROM dual) S\n" +
                                     "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
+                                    
                                     "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                     "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                     "\n" +
@@ -3468,7 +3464,7 @@ public class ScriptEXP {
                                     "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
                                     "FROM dual) S\n" +
                                     "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
+                                    
                                     "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                     "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                     "\n" +
@@ -3479,7 +3475,7 @@ public class ScriptEXP {
                                     "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
                                     "FROM dual) S\n" +
                                     "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
+                                    
                                     "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                     "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                     "\n" +
@@ -3490,7 +3486,7 @@ public class ScriptEXP {
                                     "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
                                     "FROM dual) S\n" +
                                     "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
+                                    
                                     "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                     "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                     "\n" +
@@ -3501,7 +3497,7 @@ public class ScriptEXP {
                                     "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
                                     "FROM dual) S\n" +
                                     "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
+                                    
                                     "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                     "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                     "\n" +
@@ -3512,7 +3508,7 @@ public class ScriptEXP {
                                     "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
                                     "FROM dual) S\n" +
                                     "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
+                                    
                                     "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                     "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                     "\n" +
@@ -3523,7 +3519,7 @@ public class ScriptEXP {
                                     "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
                                     "FROM dual) S\n" +
                                     "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
+                                    
                                     "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                     "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                     "\n" +
@@ -3536,7 +3532,7 @@ public class ScriptEXP {
                                     "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
                                     "FROM dual) S\n" +
                                     "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
+                                    
                                     "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                     "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                     "\n" +
@@ -3547,7 +3543,7 @@ public class ScriptEXP {
                                     "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
                                     "FROM dual) S\n" +
                                     "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
+                                    
                                     "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                     "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                     "\n" +
@@ -3558,7 +3554,7 @@ public class ScriptEXP {
                                     "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
                                     "FROM dual) S\n" +
                                     "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
+                                    
                                     "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                     "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                     "\n" +
@@ -3569,7 +3565,7 @@ public class ScriptEXP {
                                     "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
                                     "FROM dual) S\n" +
                                     "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
+                                    
                                     "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                     "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                     "\n" +
@@ -3580,7 +3576,7 @@ public class ScriptEXP {
                                     "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
                                     "FROM dual) S\n" +
                                     "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
+                                    
                                     "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                     "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                     "\n" +
@@ -3591,7 +3587,7 @@ public class ScriptEXP {
                                     "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
                                     "FROM dual) S\n" +
                                     "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
+                                    
                                     "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                     "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                     "\n" +
@@ -3602,7 +3598,7 @@ public class ScriptEXP {
                                     "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
                                     "FROM dual) S\n" +
                                     "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
+                                    
                                     "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                     "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                     "\n" +
@@ -3615,7 +3611,7 @@ public class ScriptEXP {
                                     "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
                                     "FROM dual) S\n" +
                                     "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
+                                    
                                     "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                     "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                     "\n" +
@@ -3626,7 +3622,7 @@ public class ScriptEXP {
                                     "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
                                     "FROM dual) S\n" +
                                     "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
+                                    
                                     "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                     "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                     "\n" +
@@ -3637,7 +3633,7 @@ public class ScriptEXP {
                                     "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
                                     "FROM dual) S\n" +
                                     "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
+                                    
                                     "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                     "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                     "\n" +
@@ -3648,7 +3644,7 @@ public class ScriptEXP {
                                     "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
                                     "FROM dual) S\n" +
                                     "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
+                                    
                                     "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                     "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                     "\n" +
@@ -3659,7 +3655,7 @@ public class ScriptEXP {
                                     "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
                                     "FROM dual) S\n" +
                                     "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
+                                    
                                     "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                     "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                     "\n" +
@@ -3670,7 +3666,7 @@ public class ScriptEXP {
                                     "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
                                     "FROM dual) S\n" +
                                     "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
+                                    
                                     "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                     "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                     "\n" +
@@ -3681,7 +3677,7 @@ public class ScriptEXP {
                                     "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
                                     "FROM dual) S\n" +
                                     "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
+                                    
                                     "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                     "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                     "\n" +
@@ -3692,7 +3688,7 @@ public class ScriptEXP {
                                     "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
                                     "FROM dual) S\n" +
                                     "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
+                                    
                                     "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                     "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                     "\n" +
@@ -5703,7 +5699,7 @@ public class ScriptEXP {
                                     "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
                                     "FROM dual) S\n" +
                                     "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
+                                    
                                     "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                     "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                     "\n" +
@@ -5716,7 +5712,7 @@ public class ScriptEXP {
                                     "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
                                     "FROM dual) S\n" +
                                     "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
+                                    
                                     "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                     "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                     "\n" +
@@ -5727,7 +5723,7 @@ public class ScriptEXP {
                                     "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
                                     "FROM dual) S\n" +
                                     "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
+                                    
                                     "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                     "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                     "\n" +
@@ -5740,7 +5736,7 @@ public class ScriptEXP {
                                     "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
                                     "FROM dual) S\n" +
                                     "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
+                                    
                                     "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                     "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                     "\n" +
@@ -5751,7 +5747,7 @@ public class ScriptEXP {
                                     "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
                                     "FROM dual) S\n" +
                                     "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
+                                    
                                     "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                     "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                     "\n" +
@@ -5762,7 +5758,7 @@ public class ScriptEXP {
                                     "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
                                     "FROM dual) S\n" +
                                     "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
+                                    
                                     "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                     "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                     "\n" +
@@ -5775,7 +5771,7 @@ public class ScriptEXP {
                                     "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
                                     "FROM dual) S\n" +
                                     "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
+                                    
                                     "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                     "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                     "\n" +
@@ -5786,7 +5782,7 @@ public class ScriptEXP {
                                     "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
                                     "FROM dual) S\n" +
                                     "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
+                                    
                                     "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                     "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                     "\n" +
@@ -5797,7 +5793,7 @@ public class ScriptEXP {
                                     "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
                                     "FROM dual) S\n" +
                                     "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
+                                    
                                     "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                     "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                     "\n" +
@@ -5808,7 +5804,7 @@ public class ScriptEXP {
                                     "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
                                     "FROM dual) S\n" +
                                     "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
+                                    
                                     "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                     "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                     "\n" +
@@ -5821,7 +5817,7 @@ public class ScriptEXP {
                                     "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
                                     "FROM dual) S\n" +
                                     "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
+                                    
                                     "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                     "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                     "\n" +
@@ -5832,7 +5828,7 @@ public class ScriptEXP {
                                     "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
                                     "FROM dual) S\n" +
                                     "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
+                                    
                                     "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                     "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                     "\n" +
@@ -5843,7 +5839,7 @@ public class ScriptEXP {
                                     "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
                                     "FROM dual) S\n" +
                                     "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
+                                    
                                     "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                     "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                     "\n" +
@@ -5854,7 +5850,7 @@ public class ScriptEXP {
                                     "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
                                     "FROM dual) S\n" +
                                     "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
+                                    
                                     "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                     "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                     "\n" +
@@ -5865,7 +5861,7 @@ public class ScriptEXP {
                                     "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
                                     "FROM dual) S\n" +
                                     "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
+                                    
                                     "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                     "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                     "\n" +
@@ -5878,7 +5874,7 @@ public class ScriptEXP {
                                     "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
                                     "FROM dual) S\n" +
                                     "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
+                                    
                                     "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                     "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                     "\n" +
@@ -5889,7 +5885,7 @@ public class ScriptEXP {
                                     "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
                                     "FROM dual) S\n" +
                                     "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
+                                    
                                     "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                     "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                     "\n" +
@@ -5900,7 +5896,7 @@ public class ScriptEXP {
                                     "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
                                     "FROM dual) S\n" +
                                     "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
+                                    
                                     "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                     "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                     "\n" +
@@ -5911,7 +5907,7 @@ public class ScriptEXP {
                                     "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
                                     "FROM dual) S\n" +
                                     "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
+                                    
                                     "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                     "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                     "\n" +
@@ -5922,7 +5918,7 @@ public class ScriptEXP {
                                     "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
                                     "FROM dual) S\n" +
                                     "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
+                                    
                                     "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                     "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                     "\n" +
@@ -5933,7 +5929,7 @@ public class ScriptEXP {
                                     "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
                                     "FROM dual) S\n" +
                                     "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
+                                    
                                     "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                     "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                     "\n" +
@@ -5946,7 +5942,7 @@ public class ScriptEXP {
                                     "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
                                     "FROM dual) S\n" +
                                     "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
+                                    
                                     "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                     "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                     "\n" +
@@ -5957,7 +5953,7 @@ public class ScriptEXP {
                                     "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
                                     "FROM dual) S\n" +
                                     "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
+                                    
                                     "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                     "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                     "\n" +
@@ -5968,7 +5964,7 @@ public class ScriptEXP {
                                     "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
                                     "FROM dual) S\n" +
                                     "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
+                                    
                                     "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                     "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                     "\n" +
@@ -5979,7 +5975,7 @@ public class ScriptEXP {
                                     "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
                                     "FROM dual) S\n" +
                                     "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
+                                    
                                     "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                     "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                     "\n" +
@@ -5990,7 +5986,7 @@ public class ScriptEXP {
                                     "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
                                     "FROM dual) S\n" +
                                     "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
+                                    
                                     "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                     "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                     "\n" +
@@ -6001,7 +5997,7 @@ public class ScriptEXP {
                                     "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
                                     "FROM dual) S\n" +
                                     "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
+                                    
                                     "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                     "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                     "\n" +
@@ -6012,7 +6008,7 @@ public class ScriptEXP {
                                     "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
                                     "FROM dual) S\n" +
                                     "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
+                                    
                                     "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                     "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                     "\n" +
@@ -6025,7 +6021,7 @@ public class ScriptEXP {
                                     "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
                                     "FROM dual) S\n" +
                                     "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
+                                    
                                     "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                     "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                     "\n" +
@@ -6036,7 +6032,7 @@ public class ScriptEXP {
                                     "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
                                     "FROM dual) S\n" +
                                     "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
+                                    
                                     "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                     "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                     "\n" +
@@ -6047,7 +6043,7 @@ public class ScriptEXP {
                                     "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
                                     "FROM dual) S\n" +
                                     "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
+                                    
                                     "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                     "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                     "\n" +
@@ -6058,7 +6054,7 @@ public class ScriptEXP {
                                     "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
                                     "FROM dual) S\n" +
                                     "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
+                                    
                                     "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                     "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                     "\n" +
@@ -6069,7 +6065,7 @@ public class ScriptEXP {
                                     "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
                                     "FROM dual) S\n" +
                                     "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
+                                    
                                     "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                     "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                     "\n" +
@@ -6080,7 +6076,7 @@ public class ScriptEXP {
                                     "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
                                     "FROM dual) S\n" +
                                     "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
+                                    
                                     "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                     "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                     "\n" +
@@ -6091,7 +6087,7 @@ public class ScriptEXP {
                                     "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
                                     "FROM dual) S\n" +
                                     "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
+                                    
                                     "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                     "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                     "\n" +
@@ -6102,7 +6098,7 @@ public class ScriptEXP {
                                     "'"+ SC_data_miner.Form_cd[0] + "' as REP_FORM_CD \n" +
                                     "FROM dual) S\n" +
                                     "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                    "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
+                                    
                                     "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                     "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                     "\n" +
@@ -8094,7 +8090,7 @@ public class ScriptEXP {
                                         "'"+ SC_data_miner.Form_cd[n] + "' as REP_FORM_CD \n" +
                                         "FROM dual) S\n" +
                                         "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                        "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
+                                        
                                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                         "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                         "\n" +
@@ -8107,7 +8103,7 @@ public class ScriptEXP {
                                         "'"+ SC_data_miner.Form_cd[n] + "' as REP_FORM_CD \n" +
                                         "FROM dual) S\n" +
                                         "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                        "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
+                                        
                                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                         "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                         "\n" +
@@ -8118,7 +8114,7 @@ public class ScriptEXP {
                                         "'"+ SC_data_miner.Form_cd[n] + "' as REP_FORM_CD \n" +
                                         "FROM dual) S\n" +
                                         "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                        "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
+                                        
                                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                         "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                         "\n" +
@@ -8131,7 +8127,7 @@ public class ScriptEXP {
                                         "'"+ SC_data_miner.Form_cd[n] + "' as REP_FORM_CD \n" +
                                         "FROM dual) S\n" +
                                         "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                        "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
+                                        
                                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                         "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                         "\n" +
@@ -8142,7 +8138,7 @@ public class ScriptEXP {
                                         "'"+ SC_data_miner.Form_cd[n] + "' as REP_FORM_CD \n" +
                                         "FROM dual) S\n" +
                                         "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                        "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
+                                        
                                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                         "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                         "\n" +
@@ -8153,7 +8149,7 @@ public class ScriptEXP {
                                         "'"+ SC_data_miner.Form_cd[n] + "' as REP_FORM_CD \n" +
                                         "FROM dual) S\n" +
                                         "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                        "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
+                                        
                                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                         "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                         "\n" +
@@ -8166,7 +8162,7 @@ public class ScriptEXP {
                                         "'"+ SC_data_miner.Form_cd[n] + "' as REP_FORM_CD \n" +
                                         "FROM dual) S\n" +
                                         "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                        "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
+                                        
                                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                         "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                         "\n" +
@@ -8177,7 +8173,7 @@ public class ScriptEXP {
                                         "'"+ SC_data_miner.Form_cd[n] + "' as REP_FORM_CD \n" +
                                         "FROM dual) S\n" +
                                         "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                        "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
+                                        
                                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                         "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                         "\n" +
@@ -8188,7 +8184,7 @@ public class ScriptEXP {
                                         "'"+ SC_data_miner.Form_cd[n] + "' as REP_FORM_CD \n" +
                                         "FROM dual) S\n" +
                                         "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                        "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
+                                        
                                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                         "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                         "\n" +
@@ -8199,7 +8195,7 @@ public class ScriptEXP {
                                         "'"+ SC_data_miner.Form_cd[n] + "' as REP_FORM_CD \n" +
                                         "FROM dual) S\n" +
                                         "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                        "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
+                                        
                                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                         "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                         "\n" +
@@ -8212,7 +8208,7 @@ public class ScriptEXP {
                                         "'"+ SC_data_miner.Form_cd[n] + "' as REP_FORM_CD \n" +
                                         "FROM dual) S\n" +
                                         "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                        "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
+                                        
                                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                         "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                         "\n" +
@@ -8223,7 +8219,7 @@ public class ScriptEXP {
                                         "'"+ SC_data_miner.Form_cd[n] + "' as REP_FORM_CD \n" +
                                         "FROM dual) S\n" +
                                         "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                        "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
+                                        
                                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                         "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                         "\n" +
@@ -8234,7 +8230,7 @@ public class ScriptEXP {
                                         "'"+ SC_data_miner.Form_cd[n] + "' as REP_FORM_CD \n" +
                                         "FROM dual) S\n" +
                                         "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                        "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
+                                        
                                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                         "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                         "\n" +
@@ -8245,7 +8241,7 @@ public class ScriptEXP {
                                         "'"+ SC_data_miner.Form_cd[n] + "' as REP_FORM_CD \n" +
                                         "FROM dual) S\n" +
                                         "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                        "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
+                                        
                                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                         "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                         "\n" +
@@ -8256,7 +8252,7 @@ public class ScriptEXP {
                                         "'"+ SC_data_miner.Form_cd[n] + "' as REP_FORM_CD \n" +
                                         "FROM dual) S\n" +
                                         "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                        "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
+                                        
                                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                         "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                         "\n" +
@@ -8269,7 +8265,7 @@ public class ScriptEXP {
                                         "'"+ SC_data_miner.Form_cd[n] + "' as REP_FORM_CD \n" +
                                         "FROM dual) S\n" +
                                         "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                        "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
+                                        
                                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                         "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                         "\n" +
@@ -8280,7 +8276,7 @@ public class ScriptEXP {
                                         "'"+ SC_data_miner.Form_cd[n] + "' as REP_FORM_CD \n" +
                                         "FROM dual) S\n" +
                                         "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                        "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
+                                        
                                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                         "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                         "\n" +
@@ -8291,7 +8287,7 @@ public class ScriptEXP {
                                         "'"+ SC_data_miner.Form_cd[n] + "' as REP_FORM_CD \n" +
                                         "FROM dual) S\n" +
                                         "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                        "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
+                                        
                                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                         "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                         "\n" +
@@ -8302,7 +8298,7 @@ public class ScriptEXP {
                                         "'"+ SC_data_miner.Form_cd[n] + "' as REP_FORM_CD \n" +
                                         "FROM dual) S\n" +
                                         "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                        "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
+                                        
                                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                         "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                         "\n" +
@@ -8313,7 +8309,7 @@ public class ScriptEXP {
                                         "'"+ SC_data_miner.Form_cd[n] + "' as REP_FORM_CD \n" +
                                         "FROM dual) S\n" +
                                         "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                        "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
+                                        
                                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                         "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                         "\n" +
@@ -8324,7 +8320,7 @@ public class ScriptEXP {
                                         "'"+ SC_data_miner.Form_cd[n] + "' as REP_FORM_CD \n" +
                                         "FROM dual) S\n" +
                                         "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                        "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
+                                        
                                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                         "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                         "\n" +
@@ -8337,7 +8333,7 @@ public class ScriptEXP {
                                         "'"+ SC_data_miner.Form_cd[n] + "' as REP_FORM_CD \n" +
                                         "FROM dual) S\n" +
                                         "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                        "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
+                                        
                                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                         "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                         "\n" +
@@ -8348,7 +8344,7 @@ public class ScriptEXP {
                                         "'"+ SC_data_miner.Form_cd[n] + "' as REP_FORM_CD \n" +
                                         "FROM dual) S\n" +
                                         "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                        "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
+                                        
                                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                         "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                         "\n" +
@@ -8359,7 +8355,7 @@ public class ScriptEXP {
                                         "'"+ SC_data_miner.Form_cd[n] + "' as REP_FORM_CD \n" +
                                         "FROM dual) S\n" +
                                         "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                        "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
+                                        
                                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                         "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                         "\n" +
@@ -8370,7 +8366,7 @@ public class ScriptEXP {
                                         "'"+ SC_data_miner.Form_cd[n] + "' as REP_FORM_CD \n" +
                                         "FROM dual) S\n" +
                                         "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                        "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
+                                        
                                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                         "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                         "\n" +
@@ -8381,7 +8377,7 @@ public class ScriptEXP {
                                         "'"+ SC_data_miner.Form_cd[n] + "' as REP_FORM_CD \n" +
                                         "FROM dual) S\n" +
                                         "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                        "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
+                                        
                                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                         "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                         "\n" +
@@ -8392,7 +8388,7 @@ public class ScriptEXP {
                                         "'"+ SC_data_miner.Form_cd[n] + "' as REP_FORM_CD \n" +
                                         "FROM dual) S\n" +
                                         "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                        "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
+                                        
                                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                         "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                         "\n" +
@@ -8403,7 +8399,7 @@ public class ScriptEXP {
                                         "'"+ SC_data_miner.Form_cd[n] + "' as REP_FORM_CD \n" +
                                         "FROM dual) S\n" +
                                         "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                        "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
+                                        
                                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                         "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                         "\n" +
@@ -8416,7 +8412,7 @@ public class ScriptEXP {
                                         "'"+ SC_data_miner.Form_cd[n] + "' as REP_FORM_CD \n" +
                                         "FROM dual) S\n" +
                                         "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                        "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
+                                        
                                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                         "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                         "\n" +
@@ -8427,7 +8423,7 @@ public class ScriptEXP {
                                         "'"+ SC_data_miner.Form_cd[n] + "' as REP_FORM_CD \n" +
                                         "FROM dual) S\n" +
                                         "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                        "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
+                                        
                                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                         "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                         "\n" +
@@ -8438,7 +8434,7 @@ public class ScriptEXP {
                                         "'"+ SC_data_miner.Form_cd[n] + "' as REP_FORM_CD \n" +
                                         "FROM dual) S\n" +
                                         "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                        "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
+                                        
                                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                         "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                         "\n" +
@@ -8449,7 +8445,7 @@ public class ScriptEXP {
                                         "'"+ SC_data_miner.Form_cd[n] + "' as REP_FORM_CD \n" +
                                         "FROM dual) S\n" +
                                         "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                        "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
+                                        
                                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                         "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                         "\n" +
@@ -8460,7 +8456,7 @@ public class ScriptEXP {
                                         "'"+ SC_data_miner.Form_cd[n] + "' as REP_FORM_CD \n" +
                                         "FROM dual) S\n" +
                                         "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                        "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
+                                        
                                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                         "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                         "\n" +
@@ -8471,7 +8467,7 @@ public class ScriptEXP {
                                         "'"+ SC_data_miner.Form_cd[n] + "' as REP_FORM_CD \n" +
                                         "FROM dual) S\n" +
                                         "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                        "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
+                                        
                                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                         "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                         "\n" +
@@ -8482,7 +8478,7 @@ public class ScriptEXP {
                                         "'"+ SC_data_miner.Form_cd[n] + "' as REP_FORM_CD \n" +
                                         "FROM dual) S\n" +
                                         "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                        "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
+                                        
                                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                         "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                         "\n" +
@@ -8493,7 +8489,7 @@ public class ScriptEXP {
                                         "'"+ SC_data_miner.Form_cd[n] + "' as REP_FORM_CD \n" +
                                         "FROM dual) S\n" +
                                         "   ON (R.FORM_CD = S.FORM_CD)\n" +
-                                        "   WHEN MATCHED THEN UPDATE SET R.REP_FORM_CD = S.REP_FORM_CD \n" +
+                                        
                                         "   WHEN NOT MATCHED THEN INSERT (R.FORM_CD, R.REP_FORM_CD)\n" +
                                         "   VALUES (S.FORM_CD, S.REP_FORM_CD);" +
                                         "\n" +
