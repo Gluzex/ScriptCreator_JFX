@@ -544,15 +544,13 @@ public class ScriptEXP {
                         }
                         report_form_src_script = report_form_src_script + "\n\n";
                 } else {
-                    report_form_src_script = "MERGE INTO REPORT_FORM_SRC R\n" +
-                            "   USING (SELECT \n" +
+                    report_form_src_script = "INSERT into REPORT_FORM_SRC\n" +
+                            "SELECT\n" +
                             "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                             "'"+ SC_data_miner.Reg_form_code[0] +"' as REG_FORM_CODE \n" +
-                            "FROM dual) S\n" +
-                            "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE)\n" +
-                            "   WHEN MATCHED THEN UPDATE SET R.REG_FORM_CODE = S.REG_FORM_CODE\n" +
-                            "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REG_FORM_CODE)\n" +
-                            "   VALUES (S.FORM_FORMAL_CODE, S.REG_FORM_CODE);" +
+                            "FROM dual\n" +
+                            "minus\n" +
+                            "SELECT FORM_FORMAL_CODE, REG_FORM_CODE FROM REPORT_FORM_SRC;"+
                             "\n\n" ;
                 }
                 //System.out.print("SC_data_miner.rep_subj_type[0] = " + SC_data_miner.rep_subj_type[0] + "\n");
@@ -1344,15 +1342,13 @@ public class ScriptEXP {
                         }
                         report_form_src_script[0] = report_form_src_script[0] + "\n\n";
                 } else {
-                    report_form_src_script[0] = "MERGE INTO REPORT_FORM_SRC R\n" +
-                            "   USING (SELECT \n" +
+                    report_form_src_script[0] = "INSERT into REPORT_FORM_SRC\n" +
+                            "SELECT\n" +
                             "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
                             "'"+ SC_data_miner.Reg_form_code[0] +"' as REG_FORM_CODE \n" +
-                            "FROM dual) S\n" +
-                            "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE)\n" +
-                            "   WHEN MATCHED THEN UPDATE SET R.REG_FORM_CODE = S.REG_FORM_CODE\n" +
-                            "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REG_FORM_CODE)\n" +
-                            "   VALUES (S.FORM_FORMAL_CODE, S.REG_FORM_CODE);" +
+                            "FROM dual\n" +
+                            "minus\n" +
+                            "SELECT FORM_FORMAL_CODE, REG_FORM_CODE FROM REPORT_FORM_SRC;"+
                             "\n\n" ;
                 }
                 if(SC_data_miner.rep_subj_type[0] == null || Objects.equals(SC_data_miner.rep_subj_type[0], "") || Objects.equals(SC_data_miner.rep_subj_type[0], " ")){
@@ -1874,15 +1870,13 @@ public class ScriptEXP {
                         }
                         report_form_src_script[n] = report_form_src_script[n] + "\n\n";
                     } else {
-                        report_form_src_script[n] = "MERGE INTO REPORT_FORM_SRC R\n" +
-                                "   USING (SELECT \n" +
+                        report_form_src_script[n] = "INSERT into REPORT_FORM_SRC\n" +
+                                "SELECT\n" +
                                 "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n" +
                                 "'"+ SC_data_miner.Reg_form_code[n] +"' as REG_FORM_CODE \n" +
-                                "FROM dual) S\n" +
-                                "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE)\n" +
-                                "   WHEN MATCHED THEN UPDATE SET R.REG_FORM_CODE = S.REG_FORM_CODE\n" +
-                                "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REG_FORM_CODE)\n" +
-                                "   VALUES (S.FORM_FORMAL_CODE, S.REG_FORM_CODE);" +
+                                "FROM dual\n" +
+                                "minus\n" +
+                                "SELECT FORM_FORMAL_CODE, REG_FORM_CODE FROM REPORT_FORM_SRC;"+
                                 "\n\n" ;
                     }
                     if(SC_data_miner.rep_subj_type[n] == null || Objects.equals(SC_data_miner.rep_subj_type[n], "") || Objects.equals(SC_data_miner.rep_subj_type[n], " ")){
@@ -5077,15 +5071,13 @@ public class ScriptEXP {
                         report_form_src_script = report_form_src_script + "\n\n";
                     }
                 } else {
-                    report_form_src_script = "MERGE INTO REPORT_FORM_SRC R\n" +
-                        "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
-                        "'"+ SC_data_miner.Reg_form_code[0] +"' as REG_FORM_CODE \n" +
-                        "FROM dual) S\n" +
-                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REG_FORM_CODE = S.REG_FORM_CODE\n" +
-                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REG_FORM_CODE)\n" +
-                        "   VALUES (S.FORM_FORMAL_CODE, S.REG_FORM_CODE);" +
+                    report_form_src_script = "INSERT into REPORT_FORM_SRC\n" +
+                            "SELECT\n" +
+                            "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
+                            "'"+ SC_data_miner.Reg_form_code[0] +"' as REG_FORM_CODE \n" +
+                            "FROM dual\n" +
+                            "minus\n" +
+                            "SELECT FORM_FORMAL_CODE, REG_FORM_CODE FROM REPORT_FORM_SRC;"+
                             "\n\n" ;
                 }
                 //System.out.print("SC_data_miner.rep_subj_type[0] = " + SC_data_miner.rep_subj_type[0] + "\n");
@@ -7477,15 +7469,13 @@ public class ScriptEXP {
                         report_form_src_script[0] = report_form_src_script[0] + "\n\n";
                     }
                 } else {
-                    report_form_src_script[0] = "MERGE INTO REPORT_FORM_SRC R\n" +
-                        "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
-                        "'"+ SC_data_miner.Reg_form_code[0] +"' as REG_FORM_CODE \n" +
-                        "FROM dual) S\n" +
-                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REG_FORM_CODE = S.REG_FORM_CODE\n" +
-                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REG_FORM_CODE)\n" +
-                        "   VALUES (S.FORM_FORMAL_CODE, S.REG_FORM_CODE);" +
+                    report_form_src_script[0] = "INSERT into REPORT_FORM_SRC\n" +
+                            "SELECT\n" +
+                            "'"+ SC_data_miner.Form_formal_code[0] +"' as FORM_FORMAL_CODE, \n" +
+                            "'"+ SC_data_miner.Reg_form_code[0] +"' as REG_FORM_CODE \n" +
+                            "FROM dual\n" +
+                            "minus\n" +
+                            "SELECT FORM_FORMAL_CODE, REG_FORM_CODE FROM REPORT_FORM_SRC;"+
                             "\n\n" ;
                 }
                 if(SC_data_miner.rep_subj_type[0] == null || Objects.equals(SC_data_miner.rep_subj_type[0], "") || Objects.equals(SC_data_miner.rep_subj_type[0], " ")){
@@ -9877,16 +9867,14 @@ public class ScriptEXP {
                             report_form_src_script[n] = report_form_src_script[n] + "\n\n";
                         }
                     } else {
-                        report_form_src_script[n] = "MERGE INTO REPORT_FORM_SRC R\n" +
-                        "   USING (SELECT \n" +
-                        "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n" +
-                        "'"+ SC_data_miner.Reg_form_code[n] +"' as REG_FORM_CODE \n" +
-                        "FROM dual) S\n" +
-                        "   ON (R.FORM_FORMAL_CODE = S.FORM_FORMAL_CODE)\n" +
-                        "   WHEN MATCHED THEN UPDATE SET R.REG_FORM_CODE = S.REG_FORM_CODE\n" +
-                        "   WHEN NOT MATCHED THEN INSERT (R.FORM_FORMAL_CODE, R.REG_FORM_CODE)\n" +
-                        "   VALUES (S.FORM_FORMAL_CODE, S.REG_FORM_CODE);" +
-                                "\n" ;
+                        report_form_src_script[n] = "INSERT into REPORT_FORM_SRC\n" +
+                                "SELECT\n" +
+                                "'"+ SC_data_miner.Form_formal_code[n] +"' as FORM_FORMAL_CODE, \n" +
+                                "'"+ SC_data_miner.Reg_form_code[n] +"' as REG_FORM_CODE \n" +
+                                "FROM dual\n" +
+                                "minus\n" +
+                                "SELECT FORM_FORMAL_CODE, REG_FORM_CODE FROM REPORT_FORM_SRC;"+
+                                "\n\n" ;
                     }
                     if(SC_data_miner.rep_subj_type[n] == null || Objects.equals(SC_data_miner.rep_subj_type[n], "") || Objects.equals(SC_data_miner.rep_subj_type[n], " ")){
                         if(rep_or_code[n] == 1){
